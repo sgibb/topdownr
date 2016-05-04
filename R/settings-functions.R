@@ -5,12 +5,14 @@
   modifyList(default, dots)
 }
 
+#' @export
 defaultMs1Settings <- function(...) {
   .defaultSettings(..., default=list(FirstMass=550, LastMass=1200,
                                      Microscans=10),
                    validFun=.validMs1Tags)
 }
 
+#' @export
 defaultMs2Settings <- function(...) {
   .defaultSettings(..., default=list(IsolationWindow=5, MaxITTimeInMS=150,
                                      OrbitrapResolution="R60K",
