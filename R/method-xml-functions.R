@@ -71,31 +71,33 @@
   xml <- .xmlMethodModification()
   xml <- .xmlScanTemplates(xml, ms1, ms2, massList)
 
-  # 1 and 2 are the two template scans
-  order <- (1L:nrow(times)) + 2L
-  times$id <- 1:nrow(times) - 1L
-  times$sources <- ifelse(times$type == "MS1", 0L, 1L)
+  nr <- nrow(times)
+  times$id <- (1:nr) - 1
   times$ms2idx[times$type == "MS2"] <- 1:nrow(ms2)
 
+  # 1 and 2 are the two template scans
   ## copy templates
-  for (i in seq(along=order)) {
-    xml <- .xmlCopyAndAppendExperiment(xml,
-                                       order=order[i],
-                                       source=times$sources[i])
+  for (i in 3:nr) {
+    xml <- .xmlCopyAndAppendExperiment(xml, order=i,
+                                       source=as.numeric(times$type[i] == "MS2"))
   }
 
-  order <- order[length(order)] + 1L
-  xml <- .xmlModification(xml, order=order, close=FALSE)
-
-  for (i in 1:nrow(times)) {
-    if (times$type[i] == "MS1") {
-      xml <- .xmlExperiment(xml, index=times$id[i], close=FALSE)
+  ## change start/end times
+  for (i in 1:nr) {
+    xml <- .xmlModification(xml, order=i + nr, close=FALSE)
+    xml <- .xmlExperiment(xml, index=times$id[i], close=FALSE)
       xml <- .xmlListToTags(xml, as.list(times[i, c("StartTime", "EndTime")]))
-      xml$closeTag()
-    } else {
+    xml$closeTag()
+    xml$closeTag()
+  }
+
+  ## modify templates
+  xml <- .xmlModification(xml, order=2 * nr + 1, close=FALSE)
+  for (i in 1:nr) {
+    if (times$type[i] == "MS2") {
       xml <- .xmlScan(xml, index=times$id[i], type="TMSnScan",
-                      settings=c(as.list(times[i, c("StartTime", "EndTime")]),
-                                 ms2[times$ms2idx[i],]))
+                      settings=ms2[times$ms2idx[i],
+                                   colnames(ms2) %in% .validMs2Tags()])
     }
   }
 
@@ -187,7 +189,7 @@
   xml$closeTag()
 
   xml <- .xmlModification(xml, order=2L, close=FALSE)
-    xml <- .xmlScan(xml, index=1L, settings=ms2Settings,
+    xml <- .xmlScan(xml, index=1L, settings=ms2Settings[, colnames(ms2Settings) %in% .validMs2Tags()],
                     type="TMSnScan", close=!length(massList))
     if (length(massList)) {
       xml <- .xmlMassList(xml, massList)
