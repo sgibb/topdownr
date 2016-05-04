@@ -14,7 +14,8 @@ defaultMs1Settings <- function(...) {
 
 #' @export
 defaultMs2Settings <- function(...) {
-  .defaultSettings(..., default=list(IsolationWindow=5, MaxITTimeInMS=150,
+  .defaultSettings(..., default=list(ActivationType="ETD",
+                                     IsolationWindow=5, MaxITTimeInMS=150,
                                      OrbitrapResolution="R60K",
                                      Microscans=20),
                    validFun=.validMs2Tags)
