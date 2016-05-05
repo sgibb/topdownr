@@ -9,5 +9,7 @@
 #' @keywords package
 #'
 #' @importFrom XML saveXML xmlTree
+#' @importFrom tools file_path_sans_ext
+#' @importFrom utils txtProgressBar setTxtProgressBar
 #'
 NULL
