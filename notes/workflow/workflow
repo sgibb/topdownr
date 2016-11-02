@@ -7,8 +7,10 @@ graph TD
     sh --> txt["convoluted spectrum (.txt)"]
     xcalibur --> con["convoluted spectrum (.raw)"]
     con --> xtract(Xtract)
+    xtract --> mono["monotopic spectrum"]
     xtract --> logfiles["log file(s)"]
-    xtract -- Collect log files --> mono["monotopic spectrum"]
+    xtract --> slf["`topdown::splitLogFile`"]
+    slf --> logfiles
   end
     txt --> td2
     logfiles --> td2(topdown)
@@ -18,7 +20,7 @@ graph TD
     classDef thermo fill:#f0f0f0,stroke:#aa0000
     classDef files fill:#ffffff,stroke:#000000
     classDef foreign fill:#f0f0f0,stroke:#0000aa
-    class td,td2 tdstyle
+    class td,td2,slf tdstyle
     class xcalibur,xtract thermo
     class raw,txt,con,mono,logfiles files
     class sh foreign
