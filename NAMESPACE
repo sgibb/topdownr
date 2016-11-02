@@ -3,6 +3,7 @@
 export(createTngFusionMethFiles)
 export(defaultMs1Settings)
 export(defaultMs2Settings)
+export(splitLogFile)
 export(writeMethodXmls)
 importFrom(XML,saveXML)
 importFrom(XML,xmlTree)
