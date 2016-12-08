@@ -2,6 +2,7 @@
 % Please edit documentation in R/splitLogFiles-functions.R
 \name{splitLogFile}
 \alias{splitLogFile}
+\title{Split Log files.}
 \usage{
 splitLogFile(file, idletime = 20L, sleep = 0.1, verbose = interactive())
 }
@@ -13,5 +14,9 @@ splitLogFile(file, idletime = 20L, sleep = 0.1, verbose = interactive())
 \item{sleep}{time to sleep before next check}
 
 \item{verbose}{verbose output?}
+}
+\description{
+This function watches a Xtract logfile and split it into individual spectra
+files.
 }
 

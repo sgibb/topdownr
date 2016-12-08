@@ -1,10 +1,15 @@
+#' Split Log files.
+#'
+#' This function watches a Xtract logfile and split it into individual spectra
+#' files.
+#'
 #' @param file file to watch
 #' @param idletime time to wait for file changes
 #' @param sleep time to sleep before next check
 #' @param verbose verbose output?
 #' @export
 splitLogFile <- function(file, idletime=20L, sleep=0.1,
-                          verbose=interactive()) {
+                         verbose=interactive()) {
   startTime <- proc.time()[3L]
   mTime <- 0L
 
