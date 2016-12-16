@@ -20,7 +20,7 @@
   end <- seq(duration, by=duration, length.out=n)
 
   type <- rep_len(rep.int(c("MS1", "MS2"), times=c(1L, nMs2perMs1)), n)
-  data.frame(type=type, StartTime=start, EndTime=end)
+  data.frame(type=type, StartTimeMin=start, EndTimeMin=end)
 }
 
 .replaceZeroETDReactionTime <- function(x) {
@@ -86,7 +86,7 @@
   for (i in 1:nr) {
     xml <- .xmlModification(xml, order=i + nr, close=FALSE)
     xml <- .xmlExperiment(xml, index=times$id[i], close=FALSE)
-      xml <- .xmlListToTags(xml, as.list(times[i, c("StartTime", "EndTime")]))
+      xml <- .xmlListToTags(xml, as.list(times[i, c("StartTimeMin", "EndTimeMin")]))
     xml$closeTag()
     xml$closeTag()
   }
