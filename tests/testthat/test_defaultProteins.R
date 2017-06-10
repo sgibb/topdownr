@@ -7,7 +7,7 @@ test_that("defaultProteins", {
   expect_equal(defaultProteins$h2a,
                matrix(c(609.21, 700.45, 823.95, 10, 10, 10),
                       ncol=2, dimnames=list(c(), c("mass", "z"))))
-}
+})
 
 test_that(".mzMatrix", {
   m <- matrix(c(100, 200, 300, 10, 10, 10),
