@@ -15,8 +15,8 @@
 #' @noRd
 #' @example
 #' library("topdown")
-#' topdown:::massLabel(c(750, 1000), c(1, 100))
-massLabel <- function(x, id, divisor=10000L) {
+#' topdown:::.massLabel(c(750, 1000), c(1, 100))
+.massLabel <- function(x, id, divisor=10000L) {
   if (any(log10(divisor) <= log10(id) + 1L)) {
     stop(sQuote("divisor"), " has to be at least two digits more than ",
          sQuote("id"))
@@ -24,12 +24,38 @@ massLabel <- function(x, id, divisor=10000L) {
   round(x, digits=1L) + id/divisor
 }
 
-### old
+#' Create settings for MS2 experiments
+#' @param ms2Settings list of MS2 settings, e.g. by defaultMs2Settings()
+#' @param replications integer, how often replicate the settings
+#' @return data.frame
+#' @noRd
 .ms2Experiments <- function(ms2Settings, replications=2L) {
-  ms2Settings <- modifyList(ms2Settings, list(replication=1:replications))
+  ms2Settings <- modifyList(ms2Settings, list(replication=1L:replications))
   expand.grid(ms2Settings, stringsAsFactors=FALSE)
 }
 
+#' Change ETD settings for MS2 experiments
+#' @param x data.frame, generated from .ms2Experiments
+#' @return data.frame
+#' @seealso https://github.com/sgibb/topdown/issues/9
+#' @noRd
+.replaceZeroETDReactionTime <- function(x) {
+  col <- grep("ETDReactionTime", colnames(x))
+  if (length(col)) {
+    isZero <- x[, col] == 0L
+    activationType <- toupper(gsub("^ET", "", x$ETDSupplementalActivation[isZero]))
+    x$ActivationType[isZero] <- activationType
+    x$CollisionEnergy[isZero] <- x$ETDSupplementalActivationEnergy[isZero]
+    x[isZero, grepl("^ETD", colnames(x))] <- NA
+  }
+  x
+}
+
+#' Split MS2 experiment data.frame
+#' @param x data.frame, from .ms2Experiments
+#' @param cols character, colnames used to split
+#' @return list with multiple (splitted) data.frame(s)
+#' @noRd
 .groupExperimentsBy <- function(x, cols=c("replication")) {
   if (length(cols) > 1L) {
     f <- interaction(as.list(x[, cols]))
@@ -50,20 +76,7 @@ massLabel <- function(x, id, divisor=10000L) {
   data.frame(type=type, StartTimeMin=start, EndTimeMin=end)
 }
 
-.replaceZeroETDReactionTime <- function(x) {
-  col <- grep("ETDReactionTime", colnames(x))
-  if (length(col)) {
-    isZero <- x[, col] == 0
-    x$ActivationType[isZero] <- toupper(
-                                  substr(x$ETDSupplementalActivation[isZero],
-                                         3, 5))
-    x$CIDCollisionEnergy[isZero] <- x$ETDSupplementalActivationEnergy[isZero]
-    x[isZero, grepl("^ETD", colnames(x))] <- NA
-  }
-  x
-}
-
-## could use `seq` to for ordered output
+## could use `seq` too for ordered output
 .resample <- function(x, fun=sample) {
   fun <- match.fun(fun)
   x[fun(nrow(x)),]
