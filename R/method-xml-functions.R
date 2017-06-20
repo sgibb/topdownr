@@ -139,28 +139,42 @@
 
 #' noRd
 .xmlTag <- function(name, value=character(), attrs=character(), close=TRUE,
-                    intend=0L, file) {
-  intend <- paste0(rep(" ", times=intend))
+                    indention=0L, file) {
+  indention <- paste0(rep(" ", times=indention))
 
   if (length(attrs)) {
     attrs <- paste0(" ", names(attrs), "=\"", attrs, "\"")
   }
   if (length(value) && close) {
-    cat0(intend, "<", name, attrs, ">", value, "</", name, ">", file=file)
+    cat0(indention, "<", name, attrs, ">", value, "</", name, ">\n", file=file)
   } else if (!length(value) && close) {
-    cat0(intend, "<", name, attrs, "/>", file=file)
+    cat0(indention, "<", name, attrs, "/>\n", file=file)
   } else {
-    cat0(intend, "<", name, attrs, ">", value, file=file)
+    cat0(indention, "<", name, attrs, ">", value, "\n", file=file)
   }
 }
 
 #' noRd
-.xmlTagClose <- function(name, intend=0L, file) {
-  cat0(paste0(rep(" ", times=intend)), "</", name, ">\n", file=file)
+.xmlTagClose <- function(name, indention=0L, file) {
+  cat0(paste0(rep(" ", times=indention)), "</", name, ">\n", file=file)
 }
 
+#' @param x list, named
+#' @param indention indention
+#' @param file filename
 #' noRd
-.writeMethodXml <- function(file, encoding="utf-8") {
+.xmlListToTags <- function(x, indention=0L, file) {
+  invisible(mapply(.xmlTag, name=names(x), value=x,
+                   MoreArgs=list(indention=indention, file=file),
+                   SIMPLIFY=FALSE, USE.NAMES=FALSE))
+}
+
+#' Write method.xml file.
+#' @param x list, modifications to be written
+#' @param file filename
+#' @param encoding file encoding
+#' noRd
+.writeMethodXml <- function(x, file, encoding="utf-8") {
   ## stop if file isn't writeable
   if (file.exists(file) && file.access(file, 2) != 0) {
     stop("No permissions to write into ", sQuote(file), "!")
@@ -179,10 +193,27 @@
                                          Family="Calcium",
                                          Type="SL"), close=FALSE)
 
-   ## TODO: test for valid MS1 and MS2 tags
+  ## First MS1 scan
+  .xmlFullMsScan(x$ms1, file=file)
 
   .xmlTagClose("MethodModifications")
 }
+
+#' Full MS Scan tag
+#' @param x MS1 settings
+#' @noRd
+.xmlFullMsScan <- function(x, file) {
+  .xmlTag("Modification", attrs=c(Order=1), close=FALSE, file=file)
+  .xmlTag("Experiment", attrs=c(ExperimentIndex=0), close=FALSE, indention=2L,
+          file=file)
+  .xmlTag("FullMSScan", close=FALSE, indention=4L, file=file)
+  .xmlListToTags(x, indention=6L, file=file)
+  .xmlTagClose("FullMSScan", indention=4L, file=file)
+  .xmlTagClose("Experiment", indention=2L, file=file)
+  .xmlTagClose("Modification", file=file)
+}
+
+
 
 
 #' Build MS2 experiments data.frame
@@ -190,7 +221,6 @@
 .ms2ExperimentsWithTimes <- function(ms2Settings, replications=2,
                            groupBy=c("replication",
                                      "ETDReactionTime"),
-                           massList=NULL,
                            nMs2perMs1=10, duration=0.5,
                            randomise=TRUE) {
 
@@ -212,6 +242,7 @@
        ms2=ms2Experiments,
        times=times)
 }
+
 
 .toMethodModificationXml <- function(ms1, ms2, times, massList) {
   xml <- .xmlMethodModification()
@@ -301,11 +332,6 @@
     xml$closeTag() # Scan
     xml$closeTag() # Experiment
   }
-  xml
-}
-
-.xmlListToTags <- function(xml, l) {
-  mapply(xml$addTag, name=names(l), value=l, SIMPLIFY=FALSE, USE.NAMES=FALSE)
   xml
 }
 

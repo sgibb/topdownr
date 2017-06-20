@@ -94,7 +94,7 @@ test_that(".xmlTag", {
   expect_output(topdown:::.xmlTag("foo", file=""), "<foo/>")
   expect_output(topdown:::.xmlTag("foo", value="bar", file=""),
                 "<foo>bar</foo>")
-  expect_output(topdown:::.xmlTag("foo", value="bar", intend=2, file=""),
+  expect_output(topdown:::.xmlTag("foo", value="bar", indention=2, file=""),
                 "  <foo>bar</foo>")
   expect_output(topdown:::.xmlTag("foo", value="bar", close=FALSE, file=""),
                 "<foo>bar")
@@ -108,5 +108,24 @@ test_that(".xmlTag", {
 
 test_that(".xmlTagClose", {
   expect_output(topdown:::.xmlTagClose("foo", file=""), "</foo>")
-  expect_output(topdown:::.xmlTagClose("foo", intend=2, file=""), "  </foo>")
+  expect_output(topdown:::.xmlTagClose("foo", indention=2, file=""), "  </foo>")
+})
+
+test_that(".xmlListToTags", {
+  l <- list(foo="bar", x=1, y=2)
+  expect_output(topdown:::.xmlListToTags(l, file=""),
+                "<foo>bar</foo>\n<x>1</x>\n<y>2</y>")
+})
+
+test_that(".xmlFullMsScan", {
+  expect_output(topdown:::.xmlFullMsScan(list(FirstMass=100, LastMass=200),
+                                         file=""),
+                paste0("<Modification Order=\"1\">\n",
+                       "  <Experiment ExperimentIndex=\"0\">\n",
+                       "    <FullMSScan>\n",
+                       "      <FirstMass>100</FirstMass>\n",
+                       "      <LastMass>200</LastMass>\n",
+                       "    </FullMSScan>\n",
+                       "  </Experiment>\n",
+                       "</Modification>"))
 })
