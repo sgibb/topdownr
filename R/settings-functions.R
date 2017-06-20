@@ -33,8 +33,7 @@ defaultMs1Settings <- function(...) {
                    default=list(FirstMass=400,
                                 LastMass=1200,
                                 Microscans=10),
-                   valid=c("FirstMass", "LastMass", "Microscans",
-                           "MaxITTimeInMS", "AgcTarget"))
+                   valid=.validMs1Tags())
 }
 
 #' Settings for MS2 parameters.
@@ -62,10 +61,5 @@ defaultMs2Settings <- function(...) {
       MaxITTimeInMS=200,
       Microscans=40,
       OrbitrapResolution="R120K"),
-    valid=c("ActivationType", "IsolationWindow", "EnableMultiplexIons",
-            "EnableMSXIds", "MaxNoOfMultiplexIons", "OrbitrapResolution",
-            "AgcTarget", "MinAgcTarget", "MaxITTimeInMS", "Microscans",
-            "ETDReactionTime", "ETDReagentTarget",
-            "MaximumETDReagentInjectionTime", "UseInternalCalibratedETD",
-            "ETDSupplementalActivationEnergy", "ETDSupplementalActivation"))
+    valid=.validMs2Tags())
 }

@@ -114,6 +114,23 @@
   x[fun(nrow(x)),]
 }
 
+#' Valid XML MS1 tags
+#' @noRd
+.validMs1Tags <- function() {
+  c("FirstMass", "LastMass", "Microscans", "MaxITTimeInMS", "AgcTarget")
+}
+
+#' Valid XML MS2 tags
+#' @noRd
+.validMs2Tags <- function() {
+  c("ActivationType", "IsolationWindow", "EnableMultiplexIons",
+    "EnableMSXIds", "MaxNoOfMultiplexIons", "OrbitrapResolution",
+    "AgcTarget", "MinAgcTarget", "MaxITTimeInMS", "Microscans",
+    "ETDReactionTime", "ETDReagentTarget",
+    "MaximumETDReagentInjectionTime", "UseInternalCalibratedETD",
+    "ETDSupplementalActivationEnergy", "ETDSupplementalActivation")
+}
+
 #' XML writing functions
 #' @noRd
 .xmlHeader <- function(file, encoding="utf-8") {
