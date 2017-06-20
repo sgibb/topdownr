@@ -82,3 +82,31 @@ test_that(".resample", {
   expect_equal(topdown:::.resample(x), x[c(10, 5:3, 9:8, 1:2, 6:7),])
   expect_equal(topdown:::.resample(x, seq), x)
 })
+
+test_that(".xmlHeader", {
+  expect_output(topdown:::.xmlHeader(file=""),
+                "<\\?xml version=\"1\\.0\" encoding=\"utf-8\"\\?>")
+  expect_output(topdown:::.xmlHeader(file="", encoding="utf-16"),
+                "<\\?xml version=\"1\\.0\" encoding=\"utf-16\"\\?>")
+})
+
+test_that(".xmlTag", {
+  expect_output(topdown:::.xmlTag("foo", file=""), "<foo/>")
+  expect_output(topdown:::.xmlTag("foo", value="bar", file=""),
+                "<foo>bar</foo>")
+  expect_output(topdown:::.xmlTag("foo", value="bar", intend=2, file=""),
+                "  <foo>bar</foo>")
+  expect_output(topdown:::.xmlTag("foo", value="bar", close=FALSE, file=""),
+                "<foo>bar")
+  expect_output(topdown:::.xmlTag("foo", attrs=c(bar=1), file=""),
+                "<foo bar=\"1\"/>")
+  expect_output(topdown:::.xmlTag("foo", attrs=c(bar=1), close=FALSE, file=""),
+                "<foo bar=\"1\">")
+  expect_output(topdown:::.xmlTag("foo", value="bar", attrs=c(x=1, y=2), file=""),
+                "<foo x=\"1\" y=\"2\">bar</foo>")
+})
+
+test_that(".xmlTagClose", {
+  expect_output(topdown:::.xmlTagClose("foo", file=""), "</foo>")
+  expect_output(topdown:::.xmlTagClose("foo", intend=2, file=""), "  </foo>")
+})

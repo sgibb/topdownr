@@ -114,7 +114,63 @@
   x[fun(nrow(x)),]
 }
 
-.modifications <- function(ms1Settings, ms2Settings, replications=2,
+#' XML writing functions
+#' @noRd
+.xmlHeader <- function(file, encoding="utf-8") {
+  cat0("<?xml version=\"1.0\" encoding=\"", encoding, "\"?>\n", file=file)
+}
+
+#' noRd
+.xmlTag <- function(name, value=character(), attrs=character(), close=TRUE,
+                    intend=0L, file) {
+  intend <- paste0(rep(" ", times=intend))
+
+  if (length(attrs)) {
+    attrs <- paste0(" ", names(attrs), "=\"", attrs, "\"")
+  }
+  if (length(value) && close) {
+    cat0(intend, "<", name, attrs, ">", value, "</", name, ">", file=file)
+  } else if (!length(value) && close) {
+    cat0(intend, "<", name, attrs, "/>", file=file)
+  } else {
+    cat0(intend, "<", name, attrs, ">", value, file=file)
+  }
+}
+
+#' noRd
+.xmlTagClose <- function(name, intend=0L, file) {
+  cat0(paste0(rep(" ", times=intend)), "</", name, ">\n", file=file)
+}
+
+#' noRd
+.writeMethodXml <- function(file, encoding="utf-8") {
+  ## stop if file isn't writeable
+  if (file.exists(file) && file.access(file, 2) != 0) {
+    stop("No permissions to write into ", sQuote(file), "!")
+  }
+
+  ## file handle
+  f <- file(file, open="wt", encoding=encoding)
+  on.exit(close(f))
+
+  ## header
+  .xmlHeader(file=f, encoding=encoding)
+
+  ## MethodModifications frame
+  .xmlTag("MethodModifications", attrs=c(Version=1,
+                                         Model="OrbitrapFusion",
+                                         Family="Calcium",
+                                         Type="SL"), close=FALSE)
+
+   ## TODO: test for valid MS1 and MS2 tags
+
+  .xmlTagClose("MethodModifications")
+}
+
+
+#' Build MS2 experiments data.frame
+#' @param
+.ms2ExperimentsWithTimes <- function(ms2Settings, replications=2,
                            groupBy=c("replication",
                                      "ETDReactionTime"),
                            massList=NULL,
