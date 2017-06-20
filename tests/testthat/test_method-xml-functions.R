@@ -10,12 +10,35 @@ test_that(".massLabel", {
 })
 
 test_that(".ms2Experiments", {
-  expect_equal(topdown:::.ms2Experiments(list(A=1:2, B="FOO")),
-               data.frame(A=c(1:2, 1:2), B="FOO", replication=c(1, 1, 2, 2),
-                          stringsAsFactors=FALSE), check.attributes=FALSE)
-  expect_equal(topdown:::.ms2Experiments(list(A=1:2, B="FOO"), replication=1),
-               data.frame(A=1:2, B="FOO", replication=1,
-                          stringsAsFactors=FALSE), check.attributes=FALSE)
+  expect_equal(topdown:::.ms2Experiments(list(A=1:2, B="FOO"), groupBy=character(),
+                                         replication=1, randomise=FALSE),
+               list(data.frame(A=1:2, B="FOO", replication=1,
+                               stringsAsFactors=FALSE)), check.attributes=FALSE)
+  expect_equal(topdown:::.ms2Experiments(list(A=1:2, B="FOO"), groupBy=character(),
+                                         randomise=FALSE),
+               list(data.frame(A=c(1:2, 1:2), B="FOO", replication=c(1, 1, 2, 2),
+                               stringsAsFactors=FALSE)), check.attributes=FALSE)
+  set.seed(2017) # set.seed(2017); sample(4) # 4 2 1 3
+  expect_equal(topdown:::.ms2Experiments(list(A=1:2, B="FOO"), groupBy=character(),
+                                         randomise=TRUE),
+               list(data.frame(A=c(2, 2, 1, 1), B="FOO", replication=c(2, 1, 1, 2),
+                               stringsAsFactors=FALSE)), check.attributes=FALSE)
+  expect_equal(topdown:::.ms2Experiments(list(A=1:2, B="FOO"), groupBy=c("A"),
+                                         randomise=FALSE),
+               list("1"=data.frame(A=1, B="FOO", replication=1:2,
+                                   stringsAsFactors=FALSE),
+                    "2"=data.frame(A=2, B="FOO", replication=1:2,
+                                   stringsAsFactors=FALSE)), check.attributes=FALSE)
+  expect_equal(topdown:::.ms2Experiments(list(A=1:2, B="FOO"), groupBy=c("A", "replication"),
+                                         randomise=FALSE),
+               list("1.1"=data.frame(A=1, B="FOO", replication=1,
+                                     stringsAsFactors=FALSE),
+                    "2.1"=data.frame(A=2, B="FOO", replication=1,
+                                     stringsAsFactors=FALSE),
+                    "1.2"=data.frame(A=1, B="FOO", replication=2,
+                                     stringsAsFactors=FALSE),
+                    "2.2"=data.frame(A=2, B="FOO", replication=2,
+                                     stringsAsFactors=FALSE)), check.attributes=FALSE)
 })
 
 test_that(".replaceZeroETDReactionTime", {
@@ -39,4 +62,23 @@ test_that(".groupExperimentsBy", {
   expect_equal(topdown:::.groupExperimentsBy(x, "LE"), split(x, x$LE))
   expect_equal(topdown:::.groupExperimentsBy(x, c("ID", "LE")),
                split(x, interaction(as.list(x[, c("ID", "LE")]))))
+})
+
+test_that(".startEndTime", {
+  r <- data.frame(Type=c("MS1", rep("MS2", 12), "MS1", rep("MS2", 8)),
+                  StartTimeMin=seq(0.02, by=0.8, length.out=22),
+                  EndTimeMin=seq(0.8, by=0.8, length.out=22),
+                  stringsAsFactors=FALSE)
+  expect_equal(topdown:::.startEndTime(nMs2=20, nMs2perMs1=12, duration=0.8, gap=0.02),
+               r)
+  expect_warning(topdown:::.startEndTime(nMs2=201, nMs2perMs1=2),
+                 "More than 300 experiments")
+})
+
+test_that(".resample", {
+  x <- data.frame(A=LETTERS[1:10],
+                  B=1:10)
+  set.seed(2017) # set.seed(2017); sample(10); # 10  5  4  3  9  8  1  2  6  7
+  expect_equal(topdown:::.resample(x), x[c(10, 5:3, 9:8, 1:2, 6:7),])
+  expect_equal(topdown:::.resample(x, seq), x)
 })

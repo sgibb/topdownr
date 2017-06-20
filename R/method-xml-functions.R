@@ -26,12 +26,25 @@
 
 #' Create settings for MS2 experiments
 #' @param ms2Settings list of MS2 settings, e.g. by defaultMs2Settings()
+#' @param groupBy character, colnames used for grouping
 #' @param replications integer, how often replicate the settings
+#' @parma randomise logical, randomise experiments
 #' @return data.frame
 #' @noRd
-.ms2Experiments <- function(ms2Settings, replications=2L) {
+.ms2Experiments <- function(ms2Settings, groupBy=c("replication", "ETDReactionTime"),
+                            replications=2L, randomise=TRUE) {
   ms2Settings <- modifyList(ms2Settings, list(replication=1L:replications))
-  expand.grid(ms2Settings, stringsAsFactors=FALSE)
+  experiments <- expand.grid(ms2Settings, stringsAsFactors=FALSE)
+  experiments <- .replaceZeroETDReactionTime(experiments)
+  if (length(groupBy)) {
+    experiments <- .groupExperimentsBy(experiments, groupBy)
+  } else {
+    experiments <- list(experiments)
+  }
+  if (randomise) {
+    experiments <- lapply(experiments, .resample)
+  }
+  experiments
 }
 
 #' Change ETD settings for MS2 experiments
@@ -54,7 +67,7 @@
 #' Split MS2 experiment data.frame
 #' @param x data.frame, from .ms2Experiments
 #' @param cols character, colnames used to split
-#' @return list with multiple (splitted) data.frame(s)
+#' @return list
 #' @noRd
 .groupExperimentsBy <- function(x, cols=c("replication")) {
   if (length(cols) > 1L) {
@@ -65,18 +78,37 @@
   split(x, f)
 }
 
-.startEndTime <- function(nMs2, nMs2perMs1=9, duration=0.5, gap=0.01) {
-  nMs1 <- ceiling(nMs2 * 1/nMs2perMs1)
+#' Calculate Start/End time of each scan
+#' @param nMs2 integer, number of MS2 scans
+#' @param nMs2perMs1 integer, number of MS2 scans for each MS1 scan
+#' @param duration double, duration of scan in minutes
+#' @param gap double, pause between two scans in minutes
+#' @return data.frame with columns type (type of scan), start and end times in
+#' minutes
+.startEndTime <- function(nMs2, nMs2perMs1=9L, duration=0.5, gap=0.01) {
+  nMs1 <- ceiling(nMs2 * 1L/nMs2perMs1)
   n <- nMs2 + nMs1
+
+  if (n > 300) {
+    warning("More than 300 experiments might cause the MS device ",
+            "to become unresponsive. Choose other ", sQuote("groupBy"),
+            " parameters to reduce number of experiments per file.")
+  }
 
   start <- seq(gap, by=duration, length.out=n)
   end <- seq(duration, by=duration, length.out=n)
 
   type <- rep_len(rep.int(c("MS1", "MS2"), times=c(1L, nMs2perMs1)), n)
-  data.frame(type=type, StartTimeMin=start, EndTimeMin=end)
+  data.frame(Type=type, StartTimeMin=start, EndTimeMin=end,
+             stringsAsFactors=FALSE)
 }
 
-## could use `seq` too for ordered output
+#' Resample rows (Experiments) in a data.frame
+#' @param x data.frame
+#' @param fun function to apply on the number of rows, e.g. use `seq` to do
+#' nothing
+#' @return reordered data.frame
+#' @noRd
 .resample <- function(x, fun=sample) {
   fun <- match.fun(fun)
   x[fun(nrow(x)),]
@@ -91,7 +123,9 @@
 
   ms2Experiments <- .ms2Experiments(ms2Settings, replications)
   ms2Experiments <- .replaceZeroETDReactionTime(ms2Experiments)
-  ms2Experiments <- .groupExperimentsBy(ms2Experiments, groupBy)
+  if (length(groupBy)) {
+    ms2Experiments <- .groupExperimentsBy(ms2Experiments, groupBy)
+  }
   times <- .startEndTime(max(sapply(ms2Experiments, nrow)), nMs2perMs1)
   if (nrow(times) > 300) {
     warning("More than 300 experiments might cause the MS device ",
@@ -103,8 +137,7 @@
   }
   list(ms1=ms1Settings,
        ms2=ms2Experiments,
-       times=times,
-       massList=massList)
+       times=times)
 }
 
 .toMethodModificationXml <- function(ms1, ms2, times, massList) {
