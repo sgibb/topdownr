@@ -172,9 +172,13 @@
 
 #' @param x list, named
 #' @param indention integer, number of spaces used for indention
+#' @param na.rm should NAs be removed?
 #' @param file filename
 #' noRd
-.xmlListToTags <- function(x, indention=0L, file) {
+.xmlListToTags <- function(x, indention=0L, na.rm=TRUE, file) {
+  if (na.rm) {
+    x <- x[!is.na(x)]
+  }
   invisible(mapply(.xmlTag, name=names(x), value=x,
                    MoreArgs=list(indention=indention, file=file),
                    SIMPLIFY=FALSE, USE.NAMES=FALSE))

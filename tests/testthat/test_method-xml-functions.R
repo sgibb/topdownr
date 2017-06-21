@@ -112,9 +112,13 @@ test_that(".xmlTagClose", {
 })
 
 test_that(".xmlListToTags", {
-  l <- list(foo="bar", x=1, y=2)
+  l <- list(foo="bar", x=1, y=2, z=NA)
   expect_output(topdown:::.xmlListToTags(l, file=""),
                 "<foo>bar</foo>\n<x>1</x>\n<y>2</y>")
+  expect_output(topdown:::.xmlListToTags(l, indention=2, file=""),
+                "  <foo>bar</foo>\n  <x>1</x>\n  <y>2</y>")
+  expect_output(topdown:::.xmlListToTags(l, na.rm=FALSE, file=""),
+                "<foo>bar</foo>\n<x>1</x>\n<y>2</y>\n<z>NA</z>")
 })
 
 test_that(".xmlFullMsScan", {
