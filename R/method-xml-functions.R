@@ -207,11 +207,27 @@
   ## First MS1 scan
   .xmlFullMsScan(x$ms1, file=file)
 
+  n <- nrow(x$times)
+
+  ## Copy experiments
+  for (i in 3L:n) {
+    .xmlCopyAndAppendExperiment(order=i - 1L,
+                                src=as.integer(x$times$Type[i] == "MS2"))
+  }
+
+  ## Start/EndTime
+  for (i in 1L:n) {
+    .xmlStartEndTime(order=n + i - 1L,
+                     times=x$times[i, c("StartTimeMin", "EndTimeMin")],
+                     file=file)
+  }
+
   .xmlTagClose("MethodModifications")
 }
 
 #' Full MS Scan tag
 #' @param x MS1 settings
+#' @param file filename
 #' @noRd
 .xmlFullMsScan <- function(x, file) {
   .xmlTag("Modification", attrs=c(Order=1), close=FALSE, file=file)
@@ -221,6 +237,31 @@
   .xmlListToTags(x, indention=6L, file=file)
   .xmlTagClose("FullMSScan", indention=4L, file=file)
   .xmlTagClose("Experiment", indention=2L, file=file)
+  .xmlTagClose("Modification", file=file)
+}
+
+#' Copy and AppendExperiment tag
+#' @param order integer, number of experiments
+#' @param src integer, source experiment index
+#' @param file filename
+#' @noRd
+.xmlCopyAndAppendExperiment <- function(order, src, file) {
+  .xmlTag("Modification", attrs=c(Order=order), close=FALSE, file=file)
+  .xmlTag("CopyAndAppendExperiment", attrs=c(SourceExperimentIndex=src),
+          indention=2L, file=file)
+  .xmlTagClose("Modification", file=file)
+}
+
+#' Start/EndTimeMin tag
+#' @param order integer, number of experiments
+#' @param times double, named vector with times
+#' @param file filename
+#' @noRd
+.xmlStartEndTime <- function(order, times, file) {
+  stopifnot(length(times) == 2)
+  .xmlTag("Modification", attrs=c(Order=order), close=FALSE, file=file)
+  .xmlListToTags(setNames(times, c("StartTimeMin", "EndTimeMin")),
+                 indention=2, file=file)
   .xmlTagClose("Modification", file=file)
 }
 
@@ -263,7 +304,6 @@
   times$id <- (1:nr) - 1
   times$ms2idx[times$type == "MS2"] <- 1:nrow(ms2)
 
-  # 1 and 2 are the two template scans
   ## copy templates
   for (i in 3:nr) {
     xml <- .xmlCopyAndAppendExperiment(xml, order=i,
@@ -294,28 +334,6 @@
   xml
 }
 
-.xmlCopyAndAppendExperiment <- function(xml, order, source) {
-  xml <- .xmlModification(xml, order=order, close=FALSE)
-  xml$addTag("CopyAndAppendExperiment", attrs=c(SourceExperimentIndex=source))
-  xml$closeTag()
-  xml
-}
-
-.xmlMethodModification <- function(Model="OrbitrapFusion", Family="Calcium",
-                                   Type="SL") {
-  xml <- withCallingHandlers(xmlTree("MethodModifications",
-                                     attrs=c(Version=1,
-                                             Model="OrbitrapFusion",
-                                             Family="Calcium",
-                                             Type="SL")),
-                             warning=function(w) {
-                               if (any(grepl("empty XML", w))) {
-                                 invokeRestart("muffleWarning")
-                               }
-                             })
-  xml
-}
-
 .xmlModification <- function(xml, order, ...) {
   xml$addTag("Modification", attrs=c(Order=order), ...)
   xml
@@ -323,13 +341,6 @@
 
 .xmlExperiment <- function(xml, index, ...) {
   xml$addTag("Experiment", attrs=c(ExperimentIndex=index), ...)
-  xml
-}
-
-.xmlCopyAndAppendExperiment <- function(xml, order, source) {
-  xml <- .xmlModification(xml, order=order, close=FALSE)
-  xml$addTag("CopyAndAppendExperiment", attrs=c(SourceExperimentIndex=source))
-  xml$closeTag()
   xml
 }
 

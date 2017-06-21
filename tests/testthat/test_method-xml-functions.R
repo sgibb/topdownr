@@ -129,3 +129,20 @@ test_that(".xmlFullMsScan", {
                        "  </Experiment>\n",
                        "</Modification>"))
 })
+
+test_that(".xmlCopyAndAppendExperiment", {
+  expect_output(topdown:::.xmlCopyAndAppendExperiment(order=2, src=1, file=""),
+                paste0("<Modification Order=\"2\">\n",
+                       "  <CopyAndAppendExperiment SourceExperimentIndex=\"1\"/>\n",
+                       "</Modification>"))
+})
+
+test_that(".xmlCopyAndAppendExperiment", {
+  expect_error(topdown:::.xmlStartEndTime(order=2, times=1, file=""))
+  expect_error(topdown:::.xmlStartEndTime(order=2, times=1:3, file=""))
+  expect_output(topdown:::.xmlStartEndTime(order=2, times=1:2, file=""),
+                paste0("<Modification Order=\"2\">\n",
+                       "  <StartTimeMin>1</StartTimeMin>\n",
+                       "  <EndTimeMin>2</EndTimeMin>\n",
+                       "</Modification>"))
+})
