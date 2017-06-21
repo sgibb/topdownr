@@ -132,11 +132,19 @@
 }
 
 #' XML writing functions
+#' @param file filename
+#' @param encoding file encoding
 #' @noRd
 .xmlHeader <- function(file, encoding="utf-8") {
   cat0("<?xml version=\"1.0\" encoding=\"", encoding, "\"?>\n", file=file)
 }
 
+#' @param name character, tag name
+#' @param value tag value
+#' @param attrs named vector, names == attribute names
+#' @param close logical, should the tag be closed
+#' @param indention integer, number of spaces used for indention
+#' @param file filename
 #' noRd
 .xmlTag <- function(name, value=character(), attrs=character(), close=TRUE,
                     indention=0L, file) {
@@ -154,13 +162,16 @@
   }
 }
 
+#' @param name character, tag name
+#' @param indention integer, number of spaces used for indention
+#' @param file filename
 #' noRd
 .xmlTagClose <- function(name, indention=0L, file) {
   cat0(paste0(rep(" ", times=indention)), "</", name, ">\n", file=file)
 }
 
 #' @param x list, named
-#' @param indention indention
+#' @param indention integer, number of spaces used for indention
 #' @param file filename
 #' noRd
 .xmlListToTags <- function(x, indention=0L, file) {
@@ -379,6 +390,8 @@ writeMethodXmls <- function(ms1Settings, ms2Settings, replications=2,
                             massList=NULL,
                             nMs2perMs1=10, duration=0.5,
                             randomise=TRUE, pattern="method_%s.xml") {
+
+  ## TODO: test for valid ms1 and ms2 tags before creating files
 
   mods <- .modifications(ms1Settings=ms1Settings,
                          ms2Settings=ms2Settings,
