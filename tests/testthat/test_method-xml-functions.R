@@ -31,13 +31,13 @@ test_that(".ms2Experiments", {
                                    stringsAsFactors=FALSE)), check.attributes=FALSE)
   expect_equal(topdown:::.ms2Experiments(list(A=1:2, B="FOO"), groupBy=c("A", "replication"),
                                          randomise=FALSE),
-               list("1.1"=data.frame(A=1, B="FOO", replication=1,
+               list("1:1"=data.frame(A=1, B="FOO", replication=1,
                                      stringsAsFactors=FALSE),
-                    "2.1"=data.frame(A=2, B="FOO", replication=1,
+                    "1:2"=data.frame(A=1, B="FOO", replication=2,
                                      stringsAsFactors=FALSE),
-                    "1.2"=data.frame(A=1, B="FOO", replication=2,
+                    "2:1"=data.frame(A=2, B="FOO", replication=1,
                                      stringsAsFactors=FALSE),
-                    "2.2"=data.frame(A=2, B="FOO", replication=2,
+                    "2:2"=data.frame(A=2, B="FOO", replication=2,
                                      stringsAsFactors=FALSE)), check.attributes=FALSE)
 })
 
@@ -58,10 +58,14 @@ test_that(".replaceZeroETDReactionTime", {
 })
 
 test_that(".groupExperimentsBy", {
-  x <- data.frame(ID=1:2, LE=rep(LETTERS[1:4], each=2), stringsAsFactors=FALSE)
+  x <- data.frame(ID=1:2, LE=rep(LETTERS[1:4], each=2), na=rep(c(1, NA), 4),
+                  stringsAsFactors=FALSE)
   expect_equal(topdown:::.groupExperimentsBy(x, "LE"), split(x, x$LE))
   expect_equal(topdown:::.groupExperimentsBy(x, c("ID", "LE")),
-               split(x, interaction(as.list(x[, c("ID", "LE")]))))
+               split(x, interaction(as.list(x[, c("ID", "LE")]),
+                                    sep=":", lex.order=TRUE)))
+  expect_equal(topdown:::.groupExperimentsBy(x, c("ID", "na")),
+               setNames(split(x, x$ID), c("1:1", "2:NA")))
 })
 
 test_that(".startEndTime", {

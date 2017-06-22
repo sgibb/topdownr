@@ -71,7 +71,8 @@
 #' @noRd
 .groupExperimentsBy <- function(x, cols=c("replication")) {
   if (length(cols) > 1L) {
-    f <- interaction(as.list(x[, cols]))
+    ## `interaction` doesn't handle NA values, so use `paste` instead
+    f <- do.call(paste, c(x[, cols], sep=":"))
   } else {
     f <- x[, cols]
   }
