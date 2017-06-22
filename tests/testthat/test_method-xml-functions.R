@@ -138,6 +138,38 @@ test_that(".xmlFullMsScan", {
                        "</Modification>"))
 })
 
+test_that(".xmlTMSnScan", {
+  expect_output(topdown:::.xmlTMSnScan(data.frame(OrbitrapResolution="R120K",
+                                                  ActivationType="CID",
+                                                  CollisionEnergy=5,
+                                                  stringsAsFactors=FALSE),
+                                       mz=c(100, 120),
+                                       z=2:3,
+                                       order=3,
+                                       idx=2,
+                                       file=""),
+                paste0("<Modification Order=\"3\">\n",
+                       "  <Experiment ExperimentIndex=\"2\">\n",
+                       "    <TMSnScan>\n",
+                       "      <OrbitrapResolution>R120K</OrbitrapResolution>\n",
+                       "      <ActivationType>CID</ActivationType>\n",
+                       "      <MassList CollisionEnergyCID=\"true\">\n",
+                       "        <MassListRecord>\n",
+                       "          <MOverZ>100</MOverZ>\n",
+                       "          <Z>2</Z>\n",
+                       "          <CollisionEnergyCID>5</CollisionEnergyCID>\n",
+                       "        </MassListRecord>\n",
+                       "        <MassListRecord>\n",
+                       "          <MOverZ>120</MOverZ>\n",
+                       "          <Z>3</Z>\n",
+                       "          <CollisionEnergyCID>5</CollisionEnergyCID>\n",
+                       "        </MassListRecord>\n",
+                       "      </MassList>\n",
+                       "    </TMSnScan>\n",
+                       "  </Experiment>\n",
+                       "</Modification>"))
+})
+
 test_that(".xmlCopyAndAppendExperiment", {
   expect_output(topdown:::.xmlCopyAndAppendExperiment(order=2, src=1, file=""),
                 paste0("<Modification Order=\"2\">\n",
@@ -145,7 +177,7 @@ test_that(".xmlCopyAndAppendExperiment", {
                        "</Modification>"))
 })
 
-test_that(".xmlCopyAndAppendExperiment", {
+test_that(".xmlStartEndTime", {
   expect_error(topdown:::.xmlStartEndTime(order=2, times=1, file=""))
   expect_error(topdown:::.xmlStartEndTime(order=2, times=1:3, file=""))
   expect_output(topdown:::.xmlStartEndTime(order=2, times=1:2, file=""),
@@ -153,4 +185,103 @@ test_that(".xmlCopyAndAppendExperiment", {
                        "  <StartTimeMin>1</StartTimeMin>\n",
                        "  <EndTimeMin>2</EndTimeMin>\n",
                        "</Modification>"))
+})
+
+test_that(".xmlMassList", {
+  expect_output(topdown:::.xmlMassList(c(100, 120), 2:3, file=""),
+                paste0("<MassList>\n",
+                       "  <MassListRecord>\n",
+                       "    <MOverZ>100</MOverZ>\n",
+                       "    <Z>2</Z>\n",
+                       "  </MassListRecord>\n",
+                       "  <MassListRecord>\n",
+                       "    <MOverZ>120</MOverZ>\n",
+                       "    <Z>3</Z>\n",
+                       "  </MassListRecord>\n",
+                       "</MassList>"))
+  expect_output(topdown:::.xmlMassList(c(100, 120), 14:15, file=""),
+                paste0("<MassList>\n",
+                       "  <MassListRecord>\n",
+                       "    <MOverZ>100</MOverZ>\n",
+                       "    <Z>10</Z>\n",
+                       "  </MassListRecord>\n",
+                       "  <MassListRecord>\n",
+                       "    <MOverZ>120</MOverZ>\n",
+                       "    <Z>10</Z>\n",
+                       "  </MassListRecord>\n",
+                       "</MassList>"))
+  expect_output(topdown:::.xmlMassList(c(100, 120, 140), 2:4,
+                                       indention=2, file=""),
+                paste0("  <MassList>\n",
+                       "    <MassListRecord>\n",
+                       "      <MOverZ>100</MOverZ>\n",
+                       "      <Z>2</Z>\n",
+                       "    </MassListRecord>\n",
+                       "    <MassListRecord>\n",
+                       "      <MOverZ>120</MOverZ>\n",
+                       "      <Z>3</Z>\n",
+                       "    </MassListRecord>\n",
+                       "    <MassListRecord>\n",
+                       "      <MOverZ>140</MOverZ>\n",
+                       "      <Z>4</Z>\n",
+                       "    </MassListRecord>\n",
+                       "  </MassList>"))
+  expect_output(topdown:::.xmlMassList(c(100, 120), 2:3, 30, type="CID", file=""),
+                paste0("<MassList CollisionEnergyCID=\"true\">\n",
+                       "  <MassListRecord>\n",
+                       "    <MOverZ>100</MOverZ>\n",
+                       "    <Z>2</Z>\n",
+                       "    <CollisionEnergyCID>30</CollisionEnergyCID>\n",
+                       "  </MassListRecord>\n",
+                       "  <MassListRecord>\n",
+                       "    <MOverZ>120</MOverZ>\n",
+                       "    <Z>3</Z>\n",
+                       "    <CollisionEnergyCID>30</CollisionEnergyCID>\n",
+                       "  </MassListRecord>\n",
+                       "</MassList>"))
+  expect_output(topdown:::.xmlMassList(c(100, 120), 2:3, 50, type="HCD", file=""),
+                paste0("<MassList CollisionEnergyHCD=\"true\">\n",
+                       "  <MassListRecord>\n",
+                       "    <MOverZ>100</MOverZ>\n",
+                       "    <Z>2</Z>\n",
+                       "    <CollisionEnergyHCD>50</CollisionEnergyHCD>\n",
+                       "  </MassListRecord>\n",
+                       "  <MassListRecord>\n",
+                       "    <MOverZ>120</MOverZ>\n",
+                       "    <Z>3</Z>\n",
+                       "    <CollisionEnergyHCD>50</CollisionEnergyHCD>\n",
+                       "  </MassListRecord>\n",
+                       "</MassList>"))
+})
+
+test_that(".xmlMassListRecord", {
+  expect_output(topdown:::.xmlMassListRecord(100, 3, file=""),
+                paste0("<MassListRecord>\n",
+                       "  <MOverZ>100</MOverZ>\n",
+                       "  <Z>3</Z>\n",
+                       "</MassListRecord>"))
+  expect_output(topdown:::.xmlMassListRecord(100, 13, file=""),
+                paste0("<MassListRecord>\n",
+                       "  <MOverZ>100</MOverZ>\n",
+                       "  <Z>10</Z>\n",
+                       "</MassListRecord>"))
+  expect_output(topdown:::.xmlMassListRecord(100, 3, indention=2, file=""),
+                paste0("  <MassListRecord>\n",
+                       "    <MOverZ>100</MOverZ>\n",
+                       "    <Z>3</Z>\n",
+                       "  </MassListRecord>"))
+  expect_output(topdown:::.xmlMassListRecord(20, 5, energy=30, type="CID",
+                                             file=""),
+                paste0("<MassListRecord>\n",
+                       "  <MOverZ>20</MOverZ>\n",
+                       "  <Z>5</Z>\n",
+                       "  <CollisionEnergyCID>30</CollisionEnergyCID>\n",
+                       "</MassListRecord>"))
+  expect_output(topdown:::.xmlMassListRecord(20, 5, energy=50, type="HCD",
+                                             file=""),
+                paste0("<MassListRecord>\n",
+                       "  <MOverZ>20</MOverZ>\n",
+                       "  <Z>5</Z>\n",
+                       "  <CollisionEnergyHCD>50</CollisionEnergyHCD>\n",
+                       "</MassListRecord>"))
 })

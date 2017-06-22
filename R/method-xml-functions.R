@@ -186,11 +186,16 @@
 }
 
 #' Write method.xml file.
-#' @param x list, modifications to be written
+#' @param ms1 list, ms1 settings
+#' @param ms2 data.frame, ms2 experiment settings
+#' @param times data.frame, experiment times
+#' @param massList matrix, 2 columns (mz, z)
+#' @param massLabeling logical, should mz values modified to used as labels?
 #' @param file filename
 #' @param encoding file encoding
 #' noRd
-.writeMethodXml <- function(x, file, encoding="utf-8") {
+.writeMethodXml <- function(ms1, ms2, times, massList, massLabeling=TRUE,
+                            file, encoding="utf-8") {
   ## stop if file isn't writeable
   if (file.exists(file) && file.access(file, 2) != 0) {
     stop("No permissions to write into ", sQuote(file), "!")
@@ -207,27 +212,41 @@
   .xmlTag("MethodModifications", attrs=c(Version=1,
                                          Model="OrbitrapFusion",
                                          Family="Calcium",
-                                         Type="SL"), close=FALSE)
+                                         Type="SL"), close=FALSE, file=f)
 
   ## First MS1 scan
-  .xmlFullMsScan(x$ms1, file=file)
+  .xmlFullMsScan(ms1, file=f)
 
-  n <- nrow(x$times)
+  n <- nrow(times)
 
   ## Copy experiments
   for (i in 3L:n) {
     .xmlCopyAndAppendExperiment(order=i - 1L,
-                                src=as.integer(x$times$Type[i] == "MS2"))
+                                src=as.integer(times$Type[i] == "MS2"),
+                                file=f)
   }
 
   ## Start/EndTime
   for (i in 1L:n) {
     .xmlStartEndTime(order=n + i - 1L,
-                     times=x$times[i, c("StartTimeMin", "EndTimeMin")],
-                     file=file)
+                     times=c(times[i, c("StartTimeMin", "EndTimeMin")]),
+                     file=f)
   }
 
-  .xmlTagClose("MethodModifications")
+  ## mass labeling
+  nms2 <- nrow(ms2)
+  mz <- replicate(nms2, massList[, 1L])
+  if (massLabeling) {
+    mz <- .massLabel(mz, id=rep(1L:nms2, each=nrow(mz)))
+  }
+
+  ## TMSn scans
+  for (i in 1L:nms2) {
+    .xmlTMSnScan(ms2[i, ], mz=mz[, i], z=massList[, 2L],
+                 order=2L * n + i - 1L, idx=i, file=f)
+  }
+
+  .xmlTagClose("MethodModifications", file=f)
 }
 
 #' Full MS Scan tag
@@ -241,6 +260,28 @@
   .xmlTag("FullMSScan", close=FALSE, indention=4L, file=file)
   .xmlListToTags(x, indention=6L, file=file)
   .xmlTagClose("FullMSScan", indention=4L, file=file)
+  .xmlTagClose("Experiment", indention=2L, file=file)
+  .xmlTagClose("Modification", file=file)
+}
+
+#' TMSn Scan tag
+#' @param x data.frame, with one row, MS2 settings
+#' @param mz double
+#' @param z double
+#' @param order integer, modification order
+#' @param idx integer, experiment index
+#' @param file filename
+#' @noRd
+.xmlTMSnScan <- function(x, mz, z, order, idx, file) {
+  .xmlTag("Modification", attrs=c(Order=order), close=FALSE, file=file)
+  .xmlTag("Experiment", attrs=c(ExperimentIndex=idx), close=FALSE,
+          indention=2L, file=file)
+  .xmlTag("TMSnScan", close=FALSE, indention=4L, file=file)
+  .xmlListToTags(c(x[, !grepl("CollisionEnergy", colnames(x))]), indention=6L,
+                 file=file)
+  .xmlMassList(mz=mz, z=z, energy=x$CollisionEnergy, type=x$ActivationType,
+               indention=6L, file=file)
+  .xmlTagClose("TMSnScan", indention=4L, file=file)
   .xmlTagClose("Experiment", indention=2L, file=file)
   .xmlTagClose("Modification", file=file)
 }
@@ -270,134 +311,51 @@
   .xmlTagClose("Modification", file=file)
 }
 
-
-
-
-#' Build MS2 experiments data.frame
-#' @param
-.ms2ExperimentsWithTimes <- function(ms2Settings, replications=2,
-                           groupBy=c("replication",
-                                     "ETDReactionTime"),
-                           nMs2perMs1=10, duration=0.5,
-                           randomise=TRUE) {
-
-  ms2Experiments <- .ms2Experiments(ms2Settings, replications)
-  ms2Experiments <- .replaceZeroETDReactionTime(ms2Experiments)
-  if (length(groupBy)) {
-    ms2Experiments <- .groupExperimentsBy(ms2Experiments, groupBy)
-  }
-  times <- .startEndTime(max(sapply(ms2Experiments, nrow)), nMs2perMs1)
-  if (nrow(times) > 300) {
-    warning("More than 300 experiments might cause the MS device ",
-            "to become unresponsive. Choose other ", sQuote("groupBy"),
-            " parameters to reduce number of experiments per file.")
-  }
-  if (randomise) {
-    ms2Experiments <- lapply(ms2Experiments, .resample)
-  }
-  list(ms1=ms1Settings,
-       ms2=ms2Experiments,
-       times=times)
-}
-
-
-.toMethodModificationXml <- function(ms1, ms2, times, massList) {
-  xml <- .xmlMethodModification()
-  xml <- .xmlScanTemplates(xml, ms1, ms2, massList)
-
-  nr <- nrow(times)
-  times$id <- (1:nr) - 1
-  times$ms2idx[times$type == "MS2"] <- 1:nrow(ms2)
-
-  ## copy templates
-  for (i in 3:nr) {
-    xml <- .xmlCopyAndAppendExperiment(xml, order=i,
-                                       source=as.numeric(times$type[i] == "MS2"))
-  }
-
-  ## change start/end times
-  for (i in 1:nr) {
-    xml <- .xmlModification(xml, order=i + nr, close=FALSE)
-    xml <- .xmlExperiment(xml, index=times$id[i], close=FALSE)
-      xml <- .xmlListToTags(xml, as.list(times[i, c("StartTimeMin", "EndTimeMin")]))
-    xml$closeTag()
-    xml$closeTag()
-  }
-
-  ## modify templates
-  xml <- .xmlModification(xml, order=2 * nr + 1, close=FALSE)
-  for (i in 1:nr) {
-    if (times$type[i] == "MS2") {
-      xml <- .xmlScan(xml, index=times$id[i], type="TMSnScan",
-                      settings=ms2[times$ms2idx[i],
-                                   colnames(ms2) %in% .validMs2Tags()])
-    }
-  }
-
-  xml$closeTag()
-
-  xml
-}
-
-.xmlModification <- function(xml, order, ...) {
-  xml$addTag("Modification", attrs=c(Order=order), ...)
-  xml
-}
-
-.xmlExperiment <- function(xml, index, ...) {
-  xml$addTag("Experiment", attrs=c(ExperimentIndex=index), ...)
-  xml
-}
-
-.xmlScan <- function(xml, index, settings, type=c("FullMSScan", "TMSnScan"),
-                     close=TRUE) {
+#' MassList tag
+#' @param mz double
+#' @param z double
+#' @param energy double, length=1
+#' @param type activation type
+#' @param indention integer, number of spaces used for indention
+#' @param file filename
+.xmlMassList <- function(mz, z, energy=0L, type=c("ETD", "HCD", "CID"),
+                         indention=0L, file) {
   type <- match.arg(type)
-  xml <- .xmlExperiment(xml, index=index, close=FALSE)
-    xml$addTag(type, close=FALSE)
-    xml <- .xmlListToTags(xml, settings)
-  if (close) {
-    xml$closeTag() # Scan
-    xml$closeTag() # Experiment
+  if (type != "ETD") {
+    .xmlTag("MassList", attrs=setNames("true", paste0("CollisionEnergy", type)),
+            close=FALSE, indention=indention, file=file)
+  } else {
+    .xmlTag("MassList", close=FALSE, indention=indention, file=file)
   }
-  xml
+  for (i in seq(along=mz)) {
+    .xmlMassListRecord(mz=mz[i], z=z[i], energy=energy, type=type,
+                       indention=indention + 2L, file=file)
+  }
+  .xmlTagClose("MassList", indention=indention, file=file)
 }
 
-.xmlMassList <- function(xml, l) {
-  xml$addTag("MassList", close=FALSE)
-    lapply(l, .xmlMassListRecord, xml=xml)
-  xml$closeTag()
-  xml
+#' MassListRecord tag
+#' @param mz double, length=1
+#' @param z double, length=1
+#' @param energy double, length=1
+#' @param type activation type
+#' @param indention integer, number of spaces used for indention
+#' @param file filename
+.xmlMassListRecord <- function(mz, z, energy=0L, type=c("ETD", "HCD", "CID"),
+                               indention=0L, file) {
+  type <- match.arg(type)
+  .xmlTag("MassListRecord", close=FALSE, indention=indention, file=file)
+  .xmlTag("MOverZ", value=mz, indention=indention + 2L, file=file)
+  ## z == 10 is the maximal allowed charge state
+  .xmlTag("Z", value=min(z, 10L), indention=indention + 2L, file=file)
+  if (type != "ETD") {
+    .xmlTag(paste0("CollisionEnergy", type), value=energy,
+            indention=indention + 2L, file=file)
+  }
+  .xmlTagClose("MassListRecord", indention=indention, file=file)
 }
 
-.xmlMassListRecord <- function(xml, r) {
-  xml$addTag("MassListRecord", close=FALSE)
-    for (i in 1:nrow(r)) {
-      xml$addTag("MOverZ", r[i, "mass"], sep="")
-      ## z == 10 is the maximal allowed charge state
-      xml$addTag("Z", min(r[i, "z"], 10L), sep="")
-    }
-  xml$closeTag()
-  xml
-}
 
-.xmlScanTemplates <- function(xml, ms1Settings, ms2Settings,
-                              massList=list()) {
-  xml <- .xmlModification(xml, order=1L, close=FALSE)
-    xml <- .xmlScan(xml, index=0L, settings=ms1Settings,
-                    type="FullMSScan")
-  xml$closeTag()
-
-  xml <- .xmlModification(xml, order=2L, close=FALSE)
-    xml <- .xmlScan(xml, index=1L, settings=ms2Settings[, colnames(ms2Settings) %in% .validMs2Tags()],
-                    type="TMSnScan", close=!length(massList))
-    if (length(massList)) {
-      xml <- .xmlMassList(xml, massList)
-      xml$closeTag() # TMSnScan
-      xml$closeTag() # Experiment
-    }
-  xml$closeTag()
-  xml
-}
 
 #'@export
 writeMethodXmls <- function(ms1Settings, ms2Settings, replications=2,
