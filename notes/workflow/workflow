@@ -1,6 +1,8 @@
 graph TD
   subgraph Windows
-    td(topdown) -- Create XML files for different fragmentation conditions --> exp[Run the MS2 Experiment]
+    td(topdown) -- Create XML files for different fragmentation conditions --> tng("`topdown::createTngFusionMethFiles`")
+    tng --> xmlchanger(XmlMethodChanger)
+    xmlchanger -- Convert XML to .meth files --> exp[Run the MS2 Experiment]
     exp --> raw[Raw file]
     raw --> xcalibur(Xcalibur)
     raw --> sh(ScanHeadsman)
@@ -20,7 +22,7 @@ graph TD
     classDef thermo fill:#f0f0f0,stroke:#aa0000
     classDef files fill:#ffffff,stroke:#000000
     classDef foreign fill:#f0f0f0,stroke:#0000aa
-    class td,td2,slf tdstyle
-    class xcalibur,xtract thermo
+    class tng,td,td2,slf tdstyle
+    class xmlchanger,xcalibur,xtract thermo
     class raw,txt,con,mono,logfiles files
     class sh foreign
