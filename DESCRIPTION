@@ -7,9 +7,8 @@ Authors@R: c(person("Sebastian", "Gibb", role=c("aut", "cre"), email="mail@sebas
 Description: What the package does (one paragraph).
 Depends:
     R (>= 3.2.4)
-Imports: XML
 License: GPL (>= 3)
 URL: https://github.com/sgibb/topdown/
 BugReports: https://github.com/sgibb/topdown/issues/
 LazyData: true
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
