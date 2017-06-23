@@ -28,7 +28,7 @@
 #' @param ms2Settings list of MS2 settings, e.g. by defaultMs2Settings()
 #' @param groupBy character, colnames used for grouping
 #' @param replications integer, how often replicate the settings
-#' @parma randomise logical, randomise experiments
+#' @param randomise logical, randomise experiments
 #' @return data.frame
 #' @noRd
 .ms2Experiments <- function(ms2Settings, groupBy=c("replication", "ETDReactionTime"),
@@ -86,6 +86,7 @@
 #' @param gap double, pause between two scans in minutes
 #' @return data.frame with columns type (type of scan), start and end times in
 #' minutes
+#' @noRd
 .startEndTime <- function(nMs2, nMs2perMs1=9L, duration=0.5, gap=0.01) {
   nMs1 <- ceiling(nMs2 * 1L/nMs2perMs1)
   n <- nMs2 + nMs1
@@ -146,7 +147,7 @@
 #' @param close logical, should the tag be closed
 #' @param indention integer, number of spaces used for indention
 #' @param file filename
-#' noRd
+#' @noRd
 .xmlTag <- function(name, value=character(), attrs=character(), close=TRUE,
                     indention=0L, file) {
   indention <- paste0(rep(" ", times=indention))
@@ -166,7 +167,7 @@
 #' @param name character, tag name
 #' @param indention integer, number of spaces used for indention
 #' @param file filename
-#' noRd
+#' @noRd
 .xmlTagClose <- function(name, indention=0L, file) {
   cat0(paste0(rep(" ", times=indention)), "</", name, ">\n", file=file)
 }
@@ -175,7 +176,7 @@
 #' @param indention integer, number of spaces used for indention
 #' @param na.rm should NAs be removed?
 #' @param file filename
-#' noRd
+#' @noRd
 .xmlListToTags <- function(x, indention=0L, na.rm=TRUE, file) {
   if (na.rm) {
     x <- x[!is.na(x)]
@@ -189,12 +190,12 @@
 #' @param ms1 list, ms1 settings
 #' @param ms2 data.frame, ms2 experiment settings
 #' @param times data.frame, experiment times
-#' @param massList matrix, 2 columns (mz, z)
+#' @param mz matrix, 2 columns (mass, z)
 #' @param massLabeling logical, should mz values modified to used as labels?
 #' @param file filename
 #' @param encoding file encoding
-#' noRd
-.writeMethodXml <- function(ms1, ms2, times, massList, massLabeling=TRUE,
+#' @noRd
+.writeMethodXml <- function(ms1, ms2, times, mz, massLabeling=TRUE,
                             file, encoding="utf-8") {
   ## stop if file isn't writeable
   if (file.exists(file) && file.access(file, 2) != 0) {
@@ -235,14 +236,15 @@
 
   ## mass labeling
   nms2 <- nrow(ms2)
-  mz <- replicate(nms2, massList[, 1L])
+  mass <- replicate(nms2, mz[, 1L, drop=FALSE], simplify=FALSE)
+  mass <- do.call(cbind, mass)
   if (massLabeling) {
-    mz <- .massLabel(mz, id=rep(1L:nms2, each=nrow(mz)))
+    mass <- .massLabel(mass, id=rep(1L:nms2, each=nrow(mass)))
   }
 
   ## TMSn scans
   for (i in 1L:nms2) {
-    .xmlTMSnScan(ms2[i, ], mz=mz[, i], z=massList[, 2L],
+    .xmlTMSnScan(ms2[i, ], mz=mass[, i], z=mz[, 2L],
                  order=2L * n + i - 1L, idx=i, file=f)
   }
 
@@ -318,6 +320,7 @@
 #' @param type activation type
 #' @param indention integer, number of spaces used for indention
 #' @param file filename
+#' @noRd
 .xmlMassList <- function(mz, z, energy=0L, type=c("ETD", "HCD", "CID"),
                          indention=0L, file) {
   type <- match.arg(type)
@@ -341,6 +344,7 @@
 #' @param type activation type
 #' @param indention integer, number of spaces used for indention
 #' @param file filename
+#' @noRd
 .xmlMassListRecord <- function(mz, z, energy=0L, type=c("ETD", "HCD", "CID"),
                                indention=0L, file) {
   type <- match.arg(type)
@@ -355,31 +359,130 @@
   .xmlTagClose("MassListRecord", indention=indention, file=file)
 }
 
-
-
-#'@export
-writeMethodXmls <- function(ms1Settings, ms2Settings, replications=2,
+#' Create Orbitrap Fusion method.xml files.
+#'
+#' This function is used to create Orbitrap Fusion method files from
+#' all combinations of a user-given set of MS1 and MS2 settings.
+#'
+#' @param ms1Settings \code{list}, named list of MS1 settings.
+#' @param ms2Settings \code{list}, named list of MS2 settings.
+#' @param groupBy \code{character}, split files by \code{groupBy} entries.
+#' @param replications \code{integer}, number of replications of experiments.
+#' @param mz \code{matrix}, two columns (column 1: \emph{mass}, column 2:
+#' \emph{z}).
+#' @param massLabeling \code{logical}, should \emph{mz} values used for ID
+#' labeling?
+#' @param nMs2perMs1 \code{integer}, how many MS2 scans should be run after a
+#' MS1 scan?
+#' @param duration \code{double}, how long should the scan be?
+#' @param randomise \code{logical}, should the MS2 scan settings randomised?
+#' @param pattern \code{character}, file name pattern for the method.xml files.
+#'
+#' @details
+#' \itemize{
+#'  \item{ms1Settings:}{A \code{list} of MS1 settings. This have to be a named
+#'  \code{list}. Valid MS1 settings are:
+#'    \code{c("FirstMass", "LastMass", "Microscans", "MaxITTimeInMS",
+#'    "AgcTarget")}}
+#'  \item{ms2Settings:}{A \code{list} of MS2 settings. This have to be a named
+#'  \code{list}. Valid MS2 settings are:
+#'    \code{c("ActivationType", "IsolationWindow", "EnableMultiplexIons",
+#'            "EnableMSXIds", "MaxNoOfMultiplexIons", "OrbitrapResolution",
+#'            "AgcTarget", "MinAgcTarget", "MaxITTimeInMS", "Microscans",
+#'            "ETDReactionTime", "ETDReagentTarget",
+#'            "MaximumETDReagentInjectionTime", "UseInternalCalibratedETD",
+#'            "ETDSupplementalActivationEnergy", "ETDSupplementalActivation")}}
+#'  \item{groupBy:}{The \code{groupBy} parameter is used to split methods into
+#'  different files. Valid entries are all settings that could be used in
+#'  \code{ms2Settings} and \code{"replication"}).}
+#'  \item{massLabeling:}{The Orbitrap Fusion devices seems not to respect the
+#'  start and end times of the runs given in the method.xml files. That's why it
+#'  is nearly impossible to identify the run with its conditions based on the
+#'  timings. If \code{massLabeling} is \code{TRUE} (default) the mass values given
+#'  in \code{mz} are rounded to the first decimal place and the second to fourth
+#'  decimal place is used as numeric identifier.}
+#'  \item{pattern:}{The file name pattern used to name different method files.
+#'  It must contain a \code{"\%s"} that is replaced by the conditions defined in
+#'  \code{groupby}. }
+#' }
+#'
+#' @return An invisivble \code{list} with the MS1, MS2, runtimes and mz is
+#'  returned.
+#' @author Sebastian Gibb \email{mail@@sebasitangibb.de}, Pavel V. Shliaha
+#' \email{pavels@@bmb.sdu.dk}
+#'
+#' @examples
+#' \dontrun{
+#' library("topdown")
+#'
+#' writeMethodXmls(defaultMs1Settings(FirstMass=100),
+#'                 defaultMs2Settings(),
+#'                 groupBy=c("replication", "ETDReactionTime"),
+#'                 replications=4,
+#'                 pattern="method_firstmass_100_%s.xml")
+#' }
+#'
+#' @export
+writeMethodXmls <- function(ms1Settings, ms2Settings,
                             groupBy=c("replication",
                                       "ETDReactionTime"),
-                            massList=NULL,
+                            replications=2,
+                            mz, massLabeling=TRUE,
                             nMs2perMs1=10, duration=0.5,
                             randomise=TRUE, pattern="method_%s.xml") {
 
-  ## TODO: test for valid ms1 and ms2 tags before creating files
-
-  mods <- .modifications(ms1Settings=ms1Settings,
-                         ms2Settings=ms2Settings,
-                         replications=replications,
-                         groupBy=groupBy, massList=massList,
-                         nMs2perMs1=nMs2perMs1, duration=duration,
-                         randomise=randomise)
-
-  files <- sprintf(pattern, names(mods$ms2))
-
-  for (i in seq(along=mods$ms2)) {
-    cat(saveXML(.toMethodModificationXml(ms1=mods$ms1, ms2=mods$ms2[[i]],
-                                         times=mods$times,
-                                         massList=mods$massList),
-                encoding="utf8"), file=files[i])
+  if (length(names(ms1Settings)) != length(ms1Settings)) {
+    stop(sQuote("ms1Settings"), " has to be a named list.")
   }
+  if (!any(names(ms1Settings) %in% .validMs1Tags())) {
+    stop(sQuote(names(ms1Settings)[!names(ms1Settings) %in% .validMs1Tags()]),
+         " is/are no valid MS1 tag(s).\n",
+         "Valid tags are: ", paste0(.validMs1Tags(), collapse=", "))
+  }
+
+  if (length(names(ms2Settings)) != length(ms2Settings)) {
+    stop(sQuote("ms2Settings"), " has to be a named list.")
+  }
+  if (!any(names(ms2Settings) %in% .validMs2Tags())) {
+    stop(sQuote(names(ms2Settings)[!names(ms2Settings) %in% .validMs2Tags()]),
+         " is/are no valid MS2 tag(s).\n",
+         "Valid tags are: ", paste0(.validMs2Tags(), collapse=", "))
+  }
+
+  if (!all(groupBy %in% c(names(ms2Settings), "replication"))) {
+    stop("Items of ", sQuote("groupBy"), " have to be one or more of: ",
+         paste0(c(.validMs2Tags(), "replications"), collapse=", "))
+  }
+
+  if (!is.matrix(mz)) {
+    stop(sQuote("mz"), " has to be a matrix.")
+  }
+
+  if (ncol(mz) != 2) {
+    stop(sQuote("mz"), " has to be a matrix with two columns (mass, z).")
+  }
+
+  if (nrow(mz) < 1) {
+    stop(sQuote("mz"), " has to have at least one row.")
+  }
+
+  if (!grepl("%s", pattern)) {
+    stop(sQuote("pattern"), " has to contain '%s' to be replaced by the ",
+         "grouping condition.")
+  }
+
+  ms2Experiments <- .ms2Experiments(ms2Settings=ms2Settings,
+                                    groupBy=groupBy,
+                                    replications=replications,
+                                    randomise=randomise)
+  times <- .startEndTime(nMs2=max(vapply(ms2Experiments, nrow, double(1L))),
+                         nMs2perMs1=nMs2perMs1, duration=duration)
+
+  files <- sprintf(pattern, names(ms2Experiments))
+
+  for (i in seq(along=ms2Experiments)) {
+    .writeMethodXml(ms1=ms1Settings, ms2=ms2Experiments[[i]], times=times,
+                    mz=mz, massLabeling=massLabeling, file=files[i])
+  }
+  invisible(list(ms1=ms1Settings, ms2=ms2Experiments, times=times, mz=mz))
 }

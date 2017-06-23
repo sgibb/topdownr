@@ -285,3 +285,109 @@ test_that(".xmlMassListRecord", {
                        "  <CollisionEnergyHCD>50</CollisionEnergyHCD>\n",
                        "</MassListRecord>"))
 })
+
+test_that("writeMethodXmls", {
+  expect_error(topdown:::writeMethodXmls(list(1:3)),
+               ".*ms1Settings.* has to be a named list")
+  expect_error(topdown:::writeMethodXmls(list(foo=1:3)),
+               "is/are no valid MS1 tag")
+  expect_error(topdown:::writeMethodXmls(defaultMs1Settings(), list(1:3)),
+               ".*ms2Settings.* has to be a named list")
+  expect_error(topdown:::writeMethodXmls(defaultMs1Settings(), list(foo=1:3)),
+               "is/are no valid MS2 tag")
+  expect_error(topdown:::writeMethodXmls(defaultMs1Settings(),
+                                         defaultMs2Settings(),
+                                         groupBy="foo"),
+               "Items of .*groupBy.* have to be one or more of:")
+  expect_error(topdown:::writeMethodXmls(defaultMs1Settings(),
+                                         defaultMs2Settings(),
+                                         mz=1),
+               ".*mz.* has to be a matrix")
+  expect_error(topdown:::writeMethodXmls(defaultMs1Settings(),
+                                         defaultMs2Settings(),
+                                         mz=cbind(1:3, 1:3, 1:3)),
+               ".*mz.* has to be a matrix with two columns")
+  expect_error(topdown:::writeMethodXmls(defaultMs1Settings(),
+                                         defaultMs2Settings(),
+                                         mz=matrix(nrow=0, ncol=2)),
+               ".*mz.* has to have at least one row")
+  expect_error(topdown:::writeMethodXmls(defaultMs1Settings(),
+                                         defaultMs2Settings(),
+                                         mz=cbind(1:3, 1:3),
+                                         pattern="foo.xml"),
+               " has to contain '%s' to be replaced")
+
+  xml <- c('<?xml version="1.0" encoding="utf-8"?>',
+           '<MethodModifications Version="1" Model="OrbitrapFusion" Family="Calcium" Type="SL">',
+           '<Modification Order="1">',
+           '  <Experiment ExperimentIndex="0">',
+           '    <FullMSScan>',
+           '      <FirstMass>100</FirstMass>',
+           '    </FullMSScan>',
+           '  </Experiment>',
+           '</Modification>',
+           '<Modification Order="2">',
+           '  <CopyAndAppendExperiment SourceExperimentIndex="1"/>',
+           '</Modification>',
+           '<Modification Order="3">',
+           '  <StartTimeMin>0.01</StartTimeMin>',
+           '  <EndTimeMin>0.5</EndTimeMin>',
+           '</Modification>',
+           '<Modification Order="4">',
+           '  <StartTimeMin>0.51</StartTimeMin>',
+           '  <EndTimeMin>1</EndTimeMin>',
+           '</Modification>',
+           '<Modification Order="5">',
+           '  <StartTimeMin>1.01</StartTimeMin>',
+           '  <EndTimeMin>1.5</EndTimeMin>',
+           '</Modification>',
+           '<Modification Order="6">',
+           '  <Experiment ExperimentIndex="1">',
+           '    <TMSnScan>',
+           '      <ActivationType>ETD</ActivationType>',
+           '      <AgcTarget>10000</AgcTarget>',
+           '      <ETDReactionTime>10</ETDReactionTime>',
+           '      <replication>1</replication>',
+           '      <MassList>',
+           '        <MassListRecord>',
+           '          <MOverZ>100.0001</MOverZ>',
+           '          <Z>2</Z>',
+           '        </MassListRecord>',
+           '      </MassList>',
+           '    </TMSnScan>',
+           '  </Experiment>',
+           '</Modification>',
+           '<Modification Order="7">',
+           '  <Experiment ExperimentIndex="2">',
+           '    <TMSnScan>',
+           '      <ActivationType>ETD</ActivationType>',
+           '      <AgcTarget>20000</AgcTarget>',
+           '      <ETDReactionTime>10</ETDReactionTime>',
+           '      <replication>1</replication>',
+           '      <MassList>',
+           '        <MassListRecord>',
+           '          <MOverZ>100.0002</MOverZ>',
+           '          <Z>2</Z>',
+           '        </MassListRecord>',
+           '      </MassList>',
+           '    </TMSnScan>',
+           '  </Experiment>',
+           '</Modification>',
+           '</MethodModifications>')
+
+  tdir <- tempdir()
+  writeMethodXmls(list(FirstMass=100),
+                  list(ActivationType="ETD",
+                       AgcTarget=c(10000, 20000),
+                       ETDReactionTime=c(10, 20)),
+                  groupBy="ETDReactionTime",
+                  replications=1,
+                  mz=cbind(100, 2),
+                  randomise=FALSE,
+                  pattern=file.path(tdir, "method_%s.xml"))
+
+  expect_equal(readLines(file.path(tdir, "method_10.xml")), xml)
+  expect_equal(readLines(file.path(tdir, "method_20.xml")),
+               gsub("<ETDReactionTime>10", "<ETDReactionTime>20", xml))
+  unlink(list.files(tdir, pattern="method.*\\.xml$", full.names=TRUE))
+})

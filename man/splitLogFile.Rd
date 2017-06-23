@@ -19,4 +19,3 @@ splitLogFile(file, idletime = 20L, sleep = 0.1, verbose = interactive())
 This function watches a Xtract logfile and split it into individual spectra
 files.
 }
-
