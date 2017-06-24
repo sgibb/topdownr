@@ -279,8 +279,8 @@
   .xmlTag("Experiment", attrs=c(ExperimentIndex=idx), close=FALSE,
           indention=2L, file=file)
   .xmlTag("TMSnScan", close=FALSE, indention=4L, file=file)
-  .xmlListToTags(c(x[, !grepl("CollisionEnergy", colnames(x))]), indention=6L,
-                 file=file)
+  .xmlListToTags(c(x[, !grepl("^CollisionEnergy$|^replication$",
+                              colnames(x))]), indention=6L, file=file)
   .xmlMassList(mz=mz, z=z, energy=x$CollisionEnergy, type=x$ActivationType,
                indention=6L, file=file)
   .xmlTagClose("TMSnScan", indention=4L, file=file)
