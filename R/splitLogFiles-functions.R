@@ -45,17 +45,17 @@ splitLogFile <- function(file, idletime=20L, sleep=0.1,
   f <- file(file, "rb")
   on.exit(close(f))
   seek(f, where=size-n)
-  pattern == readChar(f, n)
+  pattern == readChar(f, nchars=n)
 }
 
 #' fetch the scan number
 #' @param file file name
-#' @param nchar read the first nchar characters
+#' @param nchars read the first nchars characters
 #' @noRd
-.scanNumber <- function(file, nchar=1024L) {
+.scanNumber <- function(file, nchars=1024L) {
   f <- file(file, "rb")
   on.exit(close(f))
-  ch <- readChar(f, nchar=nchar)
+  ch <- readChar(f, nchars=nchars)
   rx <- regexpr("(?<=Scan=\")\\d+", ch, perl=TRUE)
   as.double(regmatches(ch, rx))
 }
