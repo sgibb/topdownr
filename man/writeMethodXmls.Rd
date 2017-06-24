@@ -7,7 +7,7 @@
 writeMethodXmls(ms1Settings, ms2Settings, groupBy = c("replication",
   "ETDReactionTime"), replications = 2, mz, massLabeling = TRUE,
   nMs2perMs1 = 10, duration = 0.5, randomise = TRUE,
-  pattern = "method_\%s.xml")
+  pattern = "method_\%s.xml", verbose = interactive())
 }
 \arguments{
 \item{ms1Settings}{\code{list}, named list of MS1 settings.}
@@ -32,6 +32,8 @@ MS1 scan?}
 \item{randomise}{\code{logical}, should the MS2 scan settings randomised?}
 
 \item{pattern}{\code{character}, file name pattern for the method.xml files.}
+
+\item{verbose}{\code{logical}, verbose output?}
 }
 \value{
 An invisivble \code{list} with the MS1, MS2, runtimes and mz is
