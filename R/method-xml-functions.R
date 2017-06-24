@@ -229,9 +229,8 @@
 
   ## Start/EndTime
   for (i in 1L:n) {
-    .xmlStartEndTime(order=n + i - 1L,
-                     times=c(times[i, c("StartTimeMin", "EndTimeMin")]),
-                     file=f)
+    .xmlStartEndTime(times=c(times[i, c("StartTimeMin", "EndTimeMin")]),
+                     order=n + i - 1L, idx=i - 1L, file=f)
   }
 
   ## mass labeling
@@ -301,15 +300,19 @@
 }
 
 #' Start/EndTimeMin tag
-#' @param order integer, number of experiments
 #' @param times double, named vector with times
+#' @param order integer, number of experiments
+#' @param idx integer, experiment index
 #' @param file filename
 #' @noRd
-.xmlStartEndTime <- function(order, times, file) {
-  stopifnot(length(times) == 2)
+.xmlStartEndTime <- function(times, order, idx, file) {
+  stopifnot(length(times) == 2L)
   .xmlTag("Modification", attrs=c(Order=order), close=FALSE, file=file)
+  .xmlTag("Experiment", attrs=c(ExperimentIndex=idx), close=FALSE,
+          indention=2L, file=file)
   .xmlListToTags(setNames(times, c("StartTimeMin", "EndTimeMin")),
-                 indention=2, file=file)
+                 indention=4L, file=file)
+  .xmlTagClose("Experiment", indention=2L, file=file)
   .xmlTagClose("Modification", file=file)
 }
 
