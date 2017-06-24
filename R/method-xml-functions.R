@@ -377,6 +377,7 @@
 #' @param duration \code{double}, how long should the scan be?
 #' @param randomise \code{logical}, should the MS2 scan settings randomised?
 #' @param pattern \code{character}, file name pattern for the method.xml files.
+#' @param verbose \code{logical}, verbose output?
 #'
 #' @details
 #' \itemize{
@@ -429,7 +430,8 @@ writeMethodXmls <- function(ms1Settings, ms2Settings,
                             replications=2,
                             mz, massLabeling=TRUE,
                             nMs2perMs1=10, duration=0.5,
-                            randomise=TRUE, pattern="method_%s.xml") {
+                            randomise=TRUE, pattern="method_%s.xml",
+                            verbose=interactive()) {
 
   if (length(names(ms1Settings)) != length(ms1Settings)) {
     stop(sQuote("ms1Settings"), " has to be a named list.")
@@ -475,14 +477,23 @@ writeMethodXmls <- function(ms1Settings, ms2Settings,
                                     groupBy=groupBy,
                                     replications=replications,
                                     randomise=randomise)
-  times <- .startEndTime(nMs2=max(vapply(ms2Experiments, nrow, double(1L))),
+
+  .msg(verbose, "Generated ", sum(.nrows(ms2Experiments)),
+       " MS2 experiments splitted into ", length(ms2Experiments), " groups.")
+
+  times <- .startEndTime(nMs2=max(.nrows(ms2Experiments)),
                          nMs2perMs1=nMs2perMs1, duration=duration)
 
-  files <- sprintf(pattern, names(ms2Experiments))
+  .msg(verbose, "That are ", nrow(times), " MS1/MS2 experiments per file with ",
+       "a scan time of ", times$EndTimeMin[nrow(times)], " minutes.")
+
+  files <- sprintf(pattern, gsub(":", "_", names(ms2Experiments)))
 
   for (i in seq(along=ms2Experiments)) {
+    .msg(verbose, sprintf("%02d/%02d %s", i, length(files), files[i]))
     .writeMethodXml(ms1=ms1Settings, ms2=ms2Experiments[[i]], times=times,
                     mz=mz, massLabeling=massLabeling, file=files[i])
   }
+
   invisible(list(ms1=ms1Settings, ms2=ms2Experiments, times=times, mz=mz))
 }

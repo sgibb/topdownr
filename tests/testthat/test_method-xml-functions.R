@@ -376,18 +376,30 @@ test_that("writeMethodXmls", {
            '</MethodModifications>')
 
   tdir <- tempdir()
-  writeMethodXmls(list(FirstMass=100),
-                  list(ActivationType="ETD",
-                       AgcTarget=c(10000, 20000),
-                       ETDReactionTime=c(10, 20)),
-                  groupBy="ETDReactionTime",
-                  replications=1,
-                  mz=cbind(100, 2),
-                  randomise=FALSE,
-                  pattern=file.path(tdir, "method_%s.xml"))
+  expect_silent(writeMethodXmls(list(FirstMass=100),
+                                list(ActivationType="ETD",
+                                     AgcTarget=c(10000, 20000),
+                                     ETDReactionTime=c(10, 20)),
+                                groupBy="ETDReactionTime",
+                                replications=1,
+                                mz=cbind(100, 2),
+                                randomise=FALSE,
+                                pattern=file.path(tdir, "method_%s.xml"),
+                                verbose=FALSE))
 
   expect_equal(readLines(file.path(tdir, "method_10.xml")), xml)
   expect_equal(readLines(file.path(tdir, "method_20.xml")),
                gsub("<ETDReactionTime>10", "<ETDReactionTime>20", xml))
+
+  expect_message(writeMethodXmls(list(FirstMass=100),
+                                 list(ActivationType="ETD",
+                                      AgcTarget=c(10000, 20000),
+                                      ETDReactionTime=c(10, 20)),
+                                 groupBy="ETDReactionTime",
+                                 replications=1,
+                                 mz=cbind(100, 2),
+                                 randomise=FALSE,
+                                 pattern=file.path(tdir, "method_%s.xml"),
+                                 verbose=TRUE))
   unlink(list.files(tdir, pattern="method.*\\.xml$", full.names=TRUE))
 })
