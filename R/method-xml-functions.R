@@ -1,4 +1,4 @@
-#' Create Mass Label
+#' Create mass label
 #'
 #' Identifying the experiments by the running time/order is complicated.
 #' Sometimes the instrument records a new run with the same settings which moves
@@ -30,7 +30,6 @@
 #' @param replications integer, how often replicate the settings
 #' @param randomise logical, randomise experiments
 #' @return data.frame
-#' @importFrom utils modifyList
 #' @noRd
 .ms2Experiments <- function(ms2Settings, groupBy=c("replication", "ETDReactionTime"),
                             replications=2L, randomise=TRUE) {
@@ -305,7 +304,6 @@
 #' @param order integer, number of experiments
 #' @param times double, named vector with times
 #' @param file filename
-#' @importFrom stats setNames
 #' @noRd
 .xmlStartEndTime <- function(order, times, file) {
   stopifnot(length(times) == 2)
@@ -322,7 +320,6 @@
 #' @param type activation type
 #' @param indention integer, number of spaces used for indention
 #' @param file filename
-#' @importFrom stats setNames
 #' @noRd
 .xmlMassList <- function(mz, z, energy=0L, type=c("ETD", "HCD", "CID"),
                          indention=0L, file) {

@@ -1,6 +1,19 @@
+#' Create meth files from xml templates
+#'
+#' This function calls \sQuote{XmlMethodChanger.exe} on all given xml
+#' files generated with \code{\link{writeMethodXmls}}.
+#' It works only on Windows.
+#'
+#' @param template \code{character}, path to template meth file.
+#' @param xml \code{character}, vector of path to xml files.
+#' @param executable \code{character}, path to the
+#'  \sQuote{XmlMethodChanger.exe} executable.
+#' @param verbose \code{logical}, if \code{TRUE} a progress bar is shown.
+#' @return Nothing. Used for its side effects.
+#' @seealso \code{\link{writeMethodXmls}}
 #' @export
-createTngFusionMethFiles <- function(templateMeth,
-                                     modificationXml=list.files(pattern=".*\\.xml$"),
+createTngFusionMethFiles <- function(template,
+                                     xml=list.files(pattern=".*\\.xml$"),
                                      executable="XmlMethodChanger.exe",
                                      verbose=interactive()) {
   if (.Platform$OS.type != "windows") {
@@ -9,18 +22,17 @@ createTngFusionMethFiles <- function(templateMeth,
   if (!file.exists(executable)) {
     stop(sQuote(executable), " not found!")
   }
-  if (!file.exists(templateMeth)) {
-    stop(sQuote(templateMeth), " not found!")
+  if (!file.exists(template)) {
+    stop(sQuote(template), " not found!")
   }
 
   if (verbose) {
-    pb <- txtProgressBar(0, length(modificationXml))
+    pb <- txtProgressBar(0L, length(xml))
   }
 
-  for (i in seq(along=modificationXml)) {
-    .xmlMethodChanger(executable, templateMeth,
-                      .swapExtension(modificationXml[i]),
-                      modificationXml[i])
+  for (i in seq(along=xml)) {
+    .xmlMethodChanger(executable, template,
+                      .swapExtension(xml[i]), xml[i])
     if (verbose) {
       setTxtProgressBar(pb, i)
     }

@@ -8,7 +8,8 @@
 #' @references \url{https://github.com/sgibb/topdown/}
 #' @keywords package
 #'
+#' @importFrom stats setNames
 #' @importFrom tools file_path_sans_ext
-#' @importFrom utils txtProgressBar setTxtProgressBar
+#' @importFrom utils modifyList txtProgressBar setTxtProgressBar
 #'
 NULL
