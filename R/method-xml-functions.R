@@ -1,29 +1,3 @@
-#' Create mass label
-#'
-#' Identifying the experiments by the running time/order is complicated.
-#' Sometimes the instrument records a new run with the same settings which moves
-#' all indicies. Same is true for the start times.
-#'
-#' We modify the target mass slightly by rounding to one decimal place and use
-#' the second to fourth (default) to encode the id. Subsequently it is possible
-#' to find the results by their individual mass.
-#'
-#' @param x double, original mass
-#' @param id double, run id
-#' @param divisor double, divisor (determines which decimal place
-#' @return double, mass label (id encoded in the second to fourth decimal place)
-#' @noRd
-#' @example
-#' library("topdown")
-#' topdown:::.massLabel(c(750, 1000), c(1, 100))
-.massLabel <- function(x, id, divisor=10000L) {
-  if (any(log10(divisor) <= log10(id) + 1L)) {
-    stop(sQuote("divisor"), " has to be at least two digits more than ",
-         sQuote("id"))
-  }
-  round(x, digits=1L) + id/divisor
-}
-
 #' Create settings for MS2 experiments
 #' @param ms2Settings list of MS2 settings, e.g. by defaultMs2Settings()
 #' @param groupBy character, colnames used for grouping
