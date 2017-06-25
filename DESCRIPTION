@@ -2,11 +2,14 @@ Package: topdown
 Title: What the Package Does (one line, title case)
 Version: 0.1
 Authors@R: c(person("Sebastian", "Gibb", role=c("aut", "cre"), email="mail@sebastiangibb.de"),
-             person("Pavel", "Shliaha", role=c("aut"),
-             email="pavels@bmb.sdu.dk"))
+             person("Pavel", "Shliaha", role=c("aut"), email="pavels@bmb.sdu.dk"))
 Description: What the package does (one paragraph).
 Depends:
-    R (>= 3.2.4)
+    R (>= 3.2.4),
+    MSnbase (>= 2.3.3),
+    ProtGenerics (>= 1.6.0)
+Imports:
+    data.table (>= 1.10.4)
 Suggests:
     testthat
 License: GPL (>= 3)

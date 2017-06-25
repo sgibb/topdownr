@@ -66,7 +66,7 @@ cat0 <- function(...) {
 #' @param x character
 #' @return double
 #' @noRd
-.targetMassListToMz <- function(x) {
+.targetedMassListToMz <- function(x) {
   stopifnot(is.character(x))
   trunc(as.double(gsub("^.*mz=([^ ]+) z.*$", "\\1", x)) * 10L) / 10L
 }
