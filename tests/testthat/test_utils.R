@@ -39,3 +39,11 @@ test_that(".targetedMassListToMz", {
                                                  "(mz=933.99 z=3 name=)")),
                c(1000.1, 933.9))
 })
+
+test_that(".filterStringToId", {
+  expect_error(topdown:::.filterStringToId(1:3))
+  expect_equal(topdown:::.filterStringToId(
+    c("FTMS + p NSI sa Full ms2 560.6219@etd50.00@cid7.00 [160.0000-2000.0000]",
+      "FTMS + p NSI Full ms2 560.6010@hcd35.00 [160.0000-2000.0000]")),
+               c(219, 10))
+})

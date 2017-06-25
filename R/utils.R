@@ -5,6 +5,18 @@ cat0 <- function(...) {
   cat(..., sep="", append=TRUE)
 }
 
+#' The ScanHeadsMan output for the header information contains a column
+#' FilterString with the format "FTMS + p NSI Full ms2 [0-9]+\.[0-9]+@hcd35.00
+#' [xxx-yyy]". This function converts this format to the ID stored in the mass
+#' label.
+#' @param x character
+#' @return double
+#' @noRd
+.filterStringToId <- function(x) {
+  stopifnot(is.character(x))
+  .massLabelToId(as.double(gsub("^.*ms2 ([^@]+)\\@.*$", "\\1", x)))
+}
+
 #' Create mass label
 #'
 #' Identifying the experiments by the running time/order is complicated.
