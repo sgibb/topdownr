@@ -8,12 +8,12 @@
 #' @references \url{https://github.com/sgibb/topdown/}
 #' @keywords package
 #'
+#' @import data.table
+#' @import MSnbase
+#'
 #' @importFrom stats setNames
 #' @importFrom tools file_ext file_path_sans_ext
 #' @importFrom utils modifyList txtProgressBar setTxtProgressBar
 #'
 #' @importFrom ProtGenerics spectra
-#' @importFrom data.table fread
-#' @import MSnbase
-#'
 NULL

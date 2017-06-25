@@ -75,6 +75,8 @@
   ## drop MS1
   d <- d[MSLevel == 2L,]
 
+  d[is.na(d)] <- 0L
+
   d[, ConditionId := .I]
   d[, Mz := .targetedMassListToMz(TargetedMassList)]
   d[, File := basename(file)]
@@ -98,6 +100,16 @@
 
   ## drop MS1
   d <- d[MSOrder == 2L,]
+
+  d[Activation1 == "ETD", ETDActivation := Energy1]
+  d[Activation1 == "CID", CIDActivation := Energy1]
+  d[Activation2 == "CID", CIDActivation := Energy2]
+  d[Activation1 == "HCD", HCDActivation := Energy1]
+  d[Activation2 == "HCD", HCDActivation := Energy2]
+
+  d[is.na(d)] <- 0L
+
+  d[, ConditionId := .filterStringToId(FilterString)]
 
   d[, File := basename(file)]
 }
