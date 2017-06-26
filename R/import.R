@@ -123,3 +123,18 @@
 .readMSData2 <- function(files, verbose=interactive()) {
   readMSData2(files, msLevel.=2, verbose=verbose)
 }
+
+#' Merge ScanCondition and HeaderInformation
+#'
+#' @param sc data.table, scan conditions
+#' @param hi data.table, header information
+#' @return data.table
+#' @noRd
+.mergeScanConditionAndHeaderInformation <- function(sc, hi) {
+  stopifnot(is(sc, "data.table"))
+  stopifnot(is(hi, "data.table"))
+  sc[, File := gsub("\\.experiments.csv$", "", File)]
+  hi[, File := gsub("\\.txt$", "", File)]
+  merge(sc, hi, by=c("File", "ConditionId"), all.y=TRUE,
+        suffixes=c(".ScanCondition", ".HeaderInformation"))
+}

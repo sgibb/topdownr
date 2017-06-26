@@ -64,3 +64,17 @@ test_that(".readScanHeadsTable", {
   expect_equal(h$File, rep(basename(fn), 3))
   unlink(fn)
 })
+
+test_that(".mergeScanConditionAndHeaderInformation", {
+  sc <- data.table(FOO=1:3, ConditionId=c(1:2, 1), Both=1,
+                   File=c("foo.experiments.csv", "foo.experiments.csv",
+                          "bar.experiments.csv"))
+  hi <- data.table(BAR=1:5, ConditionId=c(1, 1, 2, 2, 1), Both=2,
+                   File=c("bar.txt", "bar.txt", "bar.txt", "foo.txt", "foo.txt"))
+  r <- data.table(File=c(rep("bar", 3), rep("foo", 2)),
+                  ConditionId=c(1, 1, 2, 1, 2), FOO=c(3, 3, NA, 1, 2),
+                  Both.ScanCondition=c(1, 1, NA, 1, 1), BAR=c(1:3, 5:4),
+                  Both.HeaderInformation=2)
+  setkeyv(r, c("File", "ConditionId"))
+  expect_equal(topdown:::.mergeScanConditionAndHeaderInformation(sc, hi), r)
+})
