@@ -8,7 +8,7 @@ author:
 package: topdown
 abstract: >
   This vignette describes the setup and basic functionality
-  of the 'synapter' package.
+  of the 'topdown' package.
 output:
   BiocStyle::html_document2:
     toc_float: true
@@ -39,7 +39,7 @@ suppressPackageStartupMessages(library("BiocStyle"))
 1. Install the workstation by running `OrbitrapFusionLumosWorkstation.exe`.
 2. Run `C:\Thermo\Instruments\TNG\OrbitrapFusionLumos\2.1\System\programs\TNGInstrumentConfigControl.exe`,
    set *Optional Ion Source* to *ETD and Internal Calibration*, click *Apply* and *OK* (you could ignore the *restart your instrument* message).
-3. Replace `C:\Thermo\Instruments\TNG\OrbitrapFusionLumos\2.1\System\programs\Thermo.TNG.Calcium.MethodXML.dll` with `Thermo.TNG.Calcium.MethodXML.dll`.
+3. Replace `C:\Thermo\Instruments\TNG\OrbitrapFusionLumos\2.1\System\programs\Thermo.TNG.Calcium.MethodXML.dll` by `Thermo.TNG.Calcium.MethodXML.dll`.
 
 ```{r sessioninfo}
 sessionInfo()
