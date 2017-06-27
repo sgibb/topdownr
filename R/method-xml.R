@@ -211,14 +211,15 @@
   nms2 <- nrow(ms2)
   mass <- replicate(nms2, mz[, 1L, drop=FALSE], simplify=FALSE)
   mass <- do.call(cbind, mass)
+  ids <- which(times$Type == "MS2") - 1L # experiment index starts at zero
   if (massLabeling) {
-    mass <- .massLabel(mass, id=rep(1L:nms2, each=nrow(mass)))
+    mass <- .massLabel(mass, id=rep(ids, each=nrow(mass)))
   }
 
   ## TMSn scans
   for (i in 1L:nms2) {
     .xmlTMSnScan(ms2[i, ], mz=mass[, i], z=mz[, 2L],
-                 order=2L * n + i - 1L, idx=i, file=f)
+                 order=2L * n + i - 1L, idx=ids[i], file=f)
   }
 
   .xmlTagClose("MethodModifications", file=f)
