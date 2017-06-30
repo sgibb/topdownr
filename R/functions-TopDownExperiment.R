@@ -60,6 +60,24 @@ TopDownExperiment <- function(sequence, path, pattern,
              key=c("SpectrumId", "FragmentId", "MzId"))
 }
 
+#' Filter by fragment id.
+#'
+#' @param object TopDownExperiment object
+#' @param id double, fragment id
+#' @return subsetted object
+#' @noRd
+.filterFragmentId <- function(object, id) {
+  atab <- assignmentTable(object)[FragmentId %in% id, ]
+
+  object@msnExp <- .subsetMSnExpSpectra(msnExp(object), atab$SpectrumId,
+                                        atab$MzId)
+  object@assignmentTable <- atab
+
+  if (validObject(object)) {
+    object
+  }
+}
+
 #' Filter by fragment type.
 #'
 #' @param object TopDownExperiment object
@@ -75,16 +93,7 @@ TopDownExperiment <- function(sequence, path, pattern,
          paste0(dQuote(type[!type %in% utypes]), collapse=", "),
          " is not valid!")
   }
-  fid <- .fragmentId(object)[types %in% type]
-  atab <- assignmentTable(object)[FragmentId %in% fid, ]
-
-  object@msnExp <- .subsetMSnExpSpectra(msnExp(object), atab$SpectrumId,
-                                        atab$MzId)
-  object@assignmentTable <- atab
-
-  if (validObject(object)) {
-    object
-  }
+  .filterFragmentId(object, .fragmentId(object)[types %in% type])
 }
 
 #' Get fragment ID.

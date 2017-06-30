@@ -14,6 +14,7 @@ expect_equal_TDE <- function(object, expected, ..., proc=FALSE, index=FALSE,
   expect_equal(object, expected, ..., info=info, label=label)
 }
 
+## basic TDE
 e <- new.env()
 e$F1.S1 <- new("Spectrum2", mz=c(1, 3, 5), intensity=c(5, 3, 1),
                acquisitionNum=1L, fromFile=1L)
@@ -55,6 +56,26 @@ td <- new("TopDownExperiment",
           sequence="ACE", msnExp=mse,
           fragmentTable=ftab, assignmentTable=atab)
 
+## filtered TDE
+f <- new.env()
+f$F1.S1 <- e$F1.S1
+f$F1.S2 <- new("Spectrum2", mz=5, intensity=9,
+               acquisitionNum=2L, fromFile=1L)
+f$F1.S3 <- new("Spectrum2", mz=c(3, 5), intensity=c(9, 5),
+               acquisitionNum=3L, fromFile=1L)
+atabf <- data.table(SpectrumId=c(1, 1, 1, 2, 3, 3),
+                    FragmentId=c(1:3,
+                                 3,
+                                 2:3),
+                    MzId=c(1:3,
+                           1,
+                           1:2), key=c("SpectrumId", "FragmentId", "MzId"))
+msf <- mse
+msf@assayData <- f
+tdf <- new("TopDownExperiment",
+           sequence="ACE", msnExp=msf,
+           fragmentTable=ftab, assignmentTable=atabf)
+
 test_that(".filterFragmentType", {
   expect_error(topdown:::.filterFragmentType(td, c("b", "J", "D")),
                "Type .*J.*, .*D.* is not valid")
@@ -64,29 +85,14 @@ test_that("assignmentTable", {
   expect_equal(topdown:::assignmentTable(td), atab)
 })
 
+test_that(".filterFragmentId", {
+  expect_equal_TDE(topdown:::.filterFragmentId(td, 1:5), td)
+  expect_equal_TDE(topdown:::.filterFragmentId(td, 1:3), tdf)
+})
+
 test_that(".filterFragmentType", {
   expect_equal_TDE(topdown:::.filterFragmentType(td, c("b", "c")), td)
-
-  r <- new.env()
-  r$F1.S1 <- e$F1.S1
-  r$F1.S2 <- new("Spectrum2", mz=5, intensity=9,
-                 acquisitionNum=2L, fromFile=1L)
-  r$F1.S3 <- new("Spectrum2", mz=c(3, 5), intensity=c(9, 5),
-                 acquisitionNum=3L, fromFile=1L)
-  atabr <- data.table(SpectrumId=c(1, 1, 1, 2, 3, 3),
-                      FragmentId=c(1:3,
-                                   3,
-                                   2:3),
-                      MzId=c(1:3,
-                             1,
-                             1:2), key=c("SpectrumId", "FragmentId", "MzId"))
-  msr <- mse
-  msr@assayData <- r
-  tdr <- new("TopDownExperiment",
-             sequence="ACE", msnExp=msr,
-             fragmentTable=ftab, assignmentTable=atabr)
-
-  expect_equal_TDE(topdown:::.filterFragmentType(td, "b"), tdr)
+  expect_equal_TDE(topdown:::.filterFragmentType(td, "b"), tdf)
 })
 
 test_that("fragmentTable", {
