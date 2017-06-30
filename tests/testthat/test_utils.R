@@ -12,6 +12,12 @@ test_that(".filterStringToId", {
                c(219, 10))
 })
 
+test_that(".formatNames", {
+  expect_equal(topdown:::.formatNames(c("Monoisotopic M/Z", "SPS Mass 2",
+                                        "RT (min)", "MSLevel")),
+               c("MonoisotopicMz", "SpsMass2", "RtMin", "MSLevel"))
+})
+
 test_that(".massLabel", {
   expect_equal(topdown:::.massLabel(c(750, 1000.76), c(1, 245)),
                c(750.0001, 1000.8245))

@@ -17,6 +17,22 @@ cat0 <- function(...) {
   .massLabelToId(as.double(gsub("^.*ms2 ([^@]+)\\@.*$", "\\1", x)))
 }
 
+#' Create (nearly) CamelCase names. Could not correct "AGC" to "Agc".
+#' @param x character
+#' @return character
+.formatNames <- function(x) {
+  x <- gsub("[[:punct:]]+", "", x)
+  unlist(lapply(strsplit(x, " "), function(s) {
+    if (length(s) == 1L) {
+      # don't convert already camelcased strings
+      paste0(toupper(substring(s, 1L, 1L)), substring(s, 2L), collapse="")
+    } else {
+      paste0(toupper(substring(s, 1L, 1L)), tolower(substring(s, 2L)),
+             collapse="")
+    }
+  }))
+}
+
 #' Create mass label
 #'
 #' Identifying the experiments by the running time/order is complicated.

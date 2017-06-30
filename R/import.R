@@ -67,6 +67,7 @@
 .readExperimentCsv <- function(file, verbose=interactive()) {
   stopifnot(file_ext(file) == "csv")
   d <- fread(file, showProgress=verbose)
+  colnames(d) <- .formatNames(colnames(d))
 
   .msg(verbose, "Reading ", nrow(d), " experiment conditions from file ",
        basename(file))
@@ -93,6 +94,7 @@
 .readScanHeadsTable <- function(file, verbose=interactive()) {
   stopifnot(file_ext(file) == "txt")
   d <- fread(file, showProgress=verbose)
+  colnames(d) <- .formatNames(colnames(d))
 
   .msg(verbose, "Reading ", nrow(d), " header information from file ",
        basename(file))
