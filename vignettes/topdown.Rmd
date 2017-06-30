@@ -48,6 +48,16 @@ suppressPackageStartupMessages(library("BiocStyle"))
 **TODO:**: has to be easier and more user-friendly:
 Download and compile https://github.com/thermofisherlsms/meth-modifications
 
+## Setup Operating System
+
+In order to use `XMLMethodChanger` the operating system has to use the `.` (dot)
+as decimal mark and the `,` (comma) as digit group separator (one thousand dot
+two should be formated as `1,000.2`).
+
+In *Windows 7* the settings are located at `Windows Control Panel > Region and Language > Formats`.
+Choose *English (USA)* here or use the *Additional settings* button to change it
+manually.
+
 ```{r sessioninfo}
 sessionInfo()
 ```
