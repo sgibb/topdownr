@@ -76,11 +76,6 @@ tdf <- new("TopDownExperiment",
            sequence="ACE", msnExp=msf,
            fragmentTable=ftab, assignmentTable=atabf)
 
-test_that(".filterFragmentType", {
-  expect_error(topdown:::.filterFragmentType(td, c("b", "J", "D")),
-               "Type .*J.*, .*D.* is not valid")
-})
-
 test_that("assignmentTable", {
   expect_equal(topdown:::assignmentTable(td), atab)
 })
@@ -90,7 +85,17 @@ test_that(".filterFragmentId", {
   expect_equal_TDE(topdown:::.filterFragmentId(td, 1:3), tdf)
 })
 
+test_that(".filterFragmentIon", {
+  expect_error(topdown:::.filterFragmentIon(td, c("b", "J", "D")),
+               "Ion\\(s\\) .*b.*, .*J.*, .*D.* not found")
+  expect_equal_TDE(topdown:::.filterFragmentIon(td, paste0(c("b", "c"),
+                                                           c(1:2, 2:1))), td)
+  expect_equal_TDE(topdown:::.filterFragmentIon(td, paste0("b", 1:2)), tdf)
+})
+
 test_that(".filterFragmentType", {
+  expect_error(topdown:::.filterFragmentType(td, c("b", "J", "D")),
+               "Type\\(s\\) .*J.*, .*D.* not found")
   expect_equal_TDE(topdown:::.filterFragmentType(td, c("b", "c")), td)
   expect_equal_TDE(topdown:::.filterFragmentType(td, "b"), tdf)
 })

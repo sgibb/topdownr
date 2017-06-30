@@ -78,6 +78,24 @@ TopDownExperiment <- function(sequence, path, pattern,
   }
 }
 
+#' Filter by fragment ion.
+#'
+#' @param object TopDownExperiment object
+#' @param ion character, fragment ion
+#' @return subsetted object
+#' @noRd
+.filterFragmentIon <- function(object, ion) {
+  # seems to be faster than ftab[,unique(ion)]
+  ions <- .fragmentIons(object)
+  uIons <- unique(ions)
+  if (!all(ion %in% uIons)) {
+    stop("Ion(s) ",
+         paste0(dQuote(ion[!ion %in% uIons]), collapse=", "),
+         " not found!")
+  }
+  .filterFragmentId(object, .fragmentId(object)[ions %in% ion])
+}
+
 #' Filter by fragment type.
 #'
 #' @param object TopDownExperiment object
@@ -87,11 +105,11 @@ TopDownExperiment <- function(sequence, path, pattern,
 .filterFragmentType <- function(object, type) {
   # seems to be faster than ftab[,unique(type)]
   types <- .fragmentTypes(object)
-  utypes <- unique(types)
-  if (!all(type %in% utypes)) {
-    stop("Type ",
-         paste0(dQuote(type[!type %in% utypes]), collapse=", "),
-         " is not valid!")
+  uTypes <- unique(types)
+  if (!all(type %in% uTypes)) {
+    stop("Type(s) ",
+         paste0(dQuote(type[!type %in% uTypes]), collapse=", "),
+         " not found!")
   }
   .filterFragmentId(object, .fragmentId(object)[types %in% type])
 }
@@ -102,6 +120,14 @@ TopDownExperiment <- function(sequence, path, pattern,
 #' @return numeric
 .fragmentId <- function(object) {
   fragmentTable(object)$FragmentId
+}
+
+#' Get fragment ions.
+#'
+#' @param object
+#' @return character
+.fragmentIons <- function(object) {
+  fragmentTable(object)$ion
 }
 
 #' Get fragment types.
