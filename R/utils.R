@@ -82,3 +82,18 @@ cat0 <- function(...) {
   stopifnot(is.character(x))
   trunc(as.double(gsub("^.*mz=([^ ]+) z.*$", "\\1", x)) * 10L) / 10L
 }
+
+#' TopDown file extensions.
+#' @param type character, which file ext
+#' @return regexp for file extensions
+#' @noRd
+.topDownFileExtRx <- function(type=c("cmt", "csv", "mzml", "txt", "raw",
+                                     "all")) {
+  type <- match.arg(type)
+  ext <- c(csv="experiments\\.csv", mzml="mz[Mm][Ll]", raw="raw", txt="txt")
+  sel <- switch(type,
+                "all" = seq_along(ext),
+                "cmt" = c("csv", "mzml", "txt"),
+                type)
+  paste0("\\.", ext[sel], "$", collapse="|")
+}

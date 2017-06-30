@@ -21,9 +21,8 @@
 #' @noRd
 .listTopDownFiles <- function(path, pattern=".*") {
   files <- list.files(path,
-                      pattern=paste0("(", pattern, ")",
-                                     c("\\.mzML$", "\\.experiments\\.csv$",
-                                       "\\.txt$"), collapse="|"),
+                      pattern=paste0(pattern, "(",
+                                     .topDownFileExtRx("cmt"), ")"),
                       full.names=TRUE)
   split(files, file_ext(files))
 }
@@ -133,8 +132,8 @@
 .mergeScanConditionAndHeaderInformation <- function(sc, hi) {
   stopifnot(is(sc, "data.table"))
   stopifnot(is(hi, "data.table"))
-  sc[, File := gsub("\\.experiments.csv$", "", File)]
-  hi[, File := gsub("\\.txt$", "", File)]
+  sc[, File := gsub(.topDownFileExtRx("csv"), "", File)]
+  hi[, File := gsub(.topDownFileExtRx("txt"), "", File)]
   merge(sc, hi, by=c("File", "ConditionId"), all.y=TRUE,
         suffixes=c(".ScanCondition", ".HeaderInformation"))
 }

@@ -4,6 +4,14 @@ test_that("cat0", {
   expect_output(topdown:::cat0("foo", "bar"), "foobar")
 })
 
+test_that(".filterStringToId", {
+  expect_error(topdown:::.filterStringToId(1:3))
+  expect_equal(topdown:::.filterStringToId(
+    c("FTMS + p NSI sa Full ms2 560.6219@etd50.00@cid7.00 [160.0000-2000.0000]",
+      "FTMS + p NSI Full ms2 560.6010@hcd35.00 [160.0000-2000.0000]")),
+               c(219, 10))
+})
+
 test_that(".massLabel", {
   expect_equal(topdown:::.massLabel(c(750, 1000.76), c(1, 245)),
                c(750.0001, 1000.8245))
@@ -40,10 +48,18 @@ test_that(".targetedMassListToMz", {
                c(1000.1, 933.9))
 })
 
-test_that(".filterStringToId", {
-  expect_error(topdown:::.filterStringToId(1:3))
-  expect_equal(topdown:::.filterStringToId(
-    c("FTMS + p NSI sa Full ms2 560.6219@etd50.00@cid7.00 [160.0000-2000.0000]",
-      "FTMS + p NSI Full ms2 560.6010@hcd35.00 [160.0000-2000.0000]")),
-               c(219, 10))
+test_that(".topDownFileExtRx", {
+  expect_error(topdown:::.topDownFileExtRx("foo"))
+  expect_equal(topdown:::.topDownFileExtRx(),
+               "\\.experiments\\.csv$|\\.mz[Mm][Ll]$|\\.txt$")
+  expect_equal(topdown:::.topDownFileExtRx("all"),
+               "\\.experiments\\.csv$|\\.mz[Mm][Ll]$|\\.raw$|\\.txt$")
+  expect_equal(topdown:::.topDownFileExtRx("cmt"),
+               "\\.experiments\\.csv$|\\.mz[Mm][Ll]$|\\.txt$")
+  expect_equal(topdown:::.topDownFileExtRx("csv"),
+               "\\.experiments\\.csv$")
+  expect_equal(topdown:::.topDownFileExtRx("mzml"),
+               "\\.mz[Mm][Ll]$")
+  expect_equal(topdown:::.topDownFileExtRx("txt"),
+               "\\.txt$")
 })
