@@ -77,9 +77,10 @@
 
   d[is.na(d)] <- 0L
 
-  d[, ConditionId := .I]
+  ## as.integer sometimes changes the numeric to one value up/down
+  d[, ConditionId := as.double(.I)]
   d[, Mz := .targetedMassListToMz(TargetedMassList)]
-  d[, File := basename(file)]
+  d[, File := gsub(.topDownFileExtRx("csv"), "", basename(file))]
 }
 
 #' Read ScanHeadMans header (txt) output.
@@ -110,9 +111,10 @@
 
   d[is.na(d)] <- 0L
 
-  d[, ConditionId := .filterStringToId(FilterString)]
+  ## as.integer sometimes changes the numeric to one value up/down
+  d[, ConditionId := as.double(.filterStringToId(FilterString))]
 
-  d[, File := basename(file)]
+  d[, File := gsub(.topDownFileExtRx("txt"), "", basename(file))]
 }
 
 #' Read MS2 Spectra (mzML)
@@ -134,8 +136,30 @@
 .mergeScanConditionAndHeaderInformation <- function(sc, hi) {
   stopifnot(is(sc, "data.table"))
   stopifnot(is(hi, "data.table"))
-  sc[, File := gsub(.topDownFileExtRx("csv"), "", File)]
-  hi[, File := gsub(.topDownFileExtRx("txt"), "", File)]
   merge(sc, hi, by=c("File", "ConditionId"), all.y=TRUE,
         suffixes=c(".ScanCondition", ".HeaderInformation"))
+}
+
+#' Merge spectra and ScanConditions/HeaderInformation (into featureData slot)
+#' @param msnexp MSnExp
+#' @param header data.table, header information
+#' @return modified MSnExp
+.mergeSpectraAndHeaderInformation <- function(msnexp, hi) {
+  fd <- fData(msnexp)
+  fd$File <- gsub(.topDownFileExtRx("mzml"), "",
+                  basename(fileNames(msnexp))[fromFile(msnexp)])
+  fd$Scan <- acquisitionNum(msnexp)
+  m <- merge(fd, as.data.frame(hi), sort=FALSE)
+  ## row.names are needed for fData<-
+  sel <- match(m$spectrum, fd$spectrum)
+  if (!length(sel)) {
+    stop("The spectra and the header information have nothing in common.")
+  }
+  msnexp <- msnexp[sel]
+  rownames(m) <- rownames(fd)[sel]
+  fData(msnexp) <- m[, !grepl("^File$", colnames(m))]
+
+  if(validObject(msnexp)) {
+    return(msnexp)
+  }
 }

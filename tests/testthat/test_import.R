@@ -35,7 +35,7 @@ test_that(".readExperimentCsv", {
   expect_equal(e$NaColumn, rep(0, 2))
   expect_equal(e$ConditionId, 1:2)
   expect_equal(e$Mz, rep(933.1, 2))
-  expect_equal(e$File, rep(basename(fn), 2))
+  expect_equal(e$File, rep(gsub("\\.experiments.csv", "", basename(fn)), 2))
   unlink(fn)
 })
 
@@ -61,20 +61,44 @@ test_that(".readScanHeadsTable", {
   expect_equal(h$CIDActivation, c(0, 20, 20))
   expect_equal(h$HCDActivation, c(30, 0, 10))
   expect_equal(h$ConditionId, c(1, 7, 9))
-  expect_equal(h$File, rep(basename(fn), 3))
+  expect_equal(h$File, rep(gsub("\\.txt$", "", basename(fn)), 3))
   unlink(fn)
 })
 
 test_that(".mergeScanConditionAndHeaderInformation", {
   sc <- data.table(FOO=1:3, ConditionId=c(1:2, 1), Both=1,
-                   File=c("foo.experiments.csv", "foo.experiments.csv",
-                          "bar.experiments.csv"))
+                   File=c("foo", "foo", "bar"))
   hi <- data.table(BAR=1:5, ConditionId=c(1, 1, 2, 2, 1), Both=2,
-                   File=c("bar.txt", "bar.txt", "bar.txt", "foo.txt", "foo.txt"))
+                   File=c("bar", "bar", "bar", "foo", "foo"))
   r <- data.table(File=c(rep("bar", 3), rep("foo", 2)),
                   ConditionId=c(1, 1, 2, 1, 2), FOO=c(3, 3, NA, 1, 2),
                   Both.ScanCondition=c(1, 1, NA, 1, 1), BAR=c(1:3, 5:4),
                   Both.HeaderInformation=2)
   setkeyv(r, c("File", "ConditionId"))
   expect_equal(topdown:::.mergeScanConditionAndHeaderInformation(sc, hi), r)
+})
+
+test_that(".mergeSpectraAndHeaderInformation", {
+   e <- new.env()
+   e$s1 <- new("Spectrum2", mz=1:5, intensity=c(1:3, 2:1),
+               acquisitionNum=1L, fromFile=1L)
+   e$s2 <- new("Spectrum2", mz=3, intensity=3,
+               acquisitionNum=2L, fromFile=1L)
+   fd <- data.frame(x=1:2,
+                    fileIdx=rep(1, 2),
+                    spectrum=1:2,
+                    row.names=c("s1", "s2"))
+   hi <- data.frame(File="foo", Scan=1:2, y=3:4, row.names=c("s1", "s2"))
+   pd <- new("MSnProcess", files="foo.mzML")
+   msx <- new("MSnExp", assayData=e,
+              featureData=new("AnnotatedDataFrame", data=fd),
+              processingData=pd)
+  r <- fd
+  r$Scan <- 1:2
+  r$y <- 3:4
+  r <- r[, c("Scan", "x", "fileIdx", "spectrum", "y")]
+  expect_error(topdown:::.mergeSpectraAndHeaderInformation(msx,
+                data.frame(File=rep("bar.mzML", 3), Scan=101:103)),
+               "nothing in common")
+  expect_equal(fData(topdown:::.mergeSpectraAndHeaderInformation(msx, hi)), r)
 })
