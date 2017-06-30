@@ -89,10 +89,9 @@ test_that(".mergeSpectraAndHeaderInformation", {
                     spectrum=1:2,
                     row.names=c("s1", "s2"))
    hi <- data.frame(File="foo", Scan=1:2, y=3:4, row.names=c("s1", "s2"))
-   pd <- new("MSnProcess", files="foo.mzML")
    msx <- new("MSnExp", assayData=e,
               featureData=new("AnnotatedDataFrame", data=fd),
-              processingData=pd)
+              processingData=new("MSnProcess", files="foo.mzML"))
   r <- fd
   r$Scan <- 1:2
   r$y <- 3:4

@@ -30,12 +30,7 @@ TopDownExperiment <- function(sequence, path, pattern,
 
   new("TopDownExperiment",
       sequence=sequence,
-      assayData=msnexp@assayData,
-      phenoData=msnexp@phenoData,
-      featureData=msnexp@featureData,
-      processingData=msnexp@processingData,
-      experimentData=msnexp@experimentData,
-      .cache=msnexp@.cache,
+      msnExp=msnexp,
       fragmentTable=ftab,
       assignmentTable=atab,
       ...)
