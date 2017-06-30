@@ -34,12 +34,19 @@ suppressPackageStartupMessages(library("BiocStyle"))
 
 # Introduction
 
-# Setup the *Thermo Software*
+# Setup
+
+## Setup the *Thermo Software*
 
 1. Install the workstation by running `OrbitrapFusionLumosWorkstation.exe`.
 2. Run `C:\Thermo\Instruments\TNG\OrbitrapFusionLumos\2.1\System\programs\TNGInstrumentConfigControl.exe`,
    set *Optional Ion Source* to *ETD and Internal Calibration*, click *Apply* and *OK* (you could ignore the *restart your instrument* message).
 3. Replace `C:\Thermo\Instruments\TNG\OrbitrapFusionLumos\2.1\System\programs\Thermo.TNG.Calcium.MethodXML.dll` by `Thermo.TNG.Calcium.MethodXML.dll`.
+
+## Setup XMLMethodChanger
+
+**TODO:**: has to be easier and more user-friendly:
+Download and compile https://github.com/thermofisherlsms/meth-modifications
 
 ```{r sessioninfo}
 sessionInfo()
