@@ -1,0 +1,15 @@
+setClass("TopDownExperiment",
+  slots=c(name="character",
+          sequence="character",
+          fragmentTable="data.table",
+          assignmentTable="data.table"),
+  contains=c("OnDiskMSnExp"),
+  prototype=prototype(new("VersionedBiobase",
+                          versions=c(classVersion("OnDiskMSnExp"),
+                                     TopDownExperiment="0.0.1")),
+                      name=character(),
+                      sequence=character(),
+                      fragmentTable=data.table(),
+                      assignmentTable=data.table()
+  )
+)
