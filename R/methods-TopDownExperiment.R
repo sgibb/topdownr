@@ -1,22 +1,47 @@
+#' Accessor for assignmentTable, not exported yet
+#' @param object TopDownExperiment
+#' @return data.table
+#' @noRd
+setMethod("assignmentTable", "TopDownExperiment", function(object) {
+  object@assignmentTable
+})
+
+#' Accessor for fragmentTable, not exported yet
+#' @param object TopDownExperiment
+#' @return data.table
+#' @noRd
+setMethod("fragmentTable", "TopDownExperiment", function(object) {
+  object@fragmentTable
+})
+
+#' Accessor for msnExp
+#' @param object TopDownExperiment
+#' @return data.table
+#' @export
+#' @noRd
+setMethod("msnExp", "TopDownExperiment", function(object) {
+  object@msnExp
+})
+
+#' @param object TopDownExperiment
+#' @noRd
 setMethod("show", "TopDownExperiment", function(object) {
   cat("TopDown Experiment data (\"", class(object), "\")\n", sep="")
-
-  cat("dim:", dim(object), "\n")
 
   if (nchar(object@sequence)) {
     cat("Amino acid sequence:", object@sequence, "\n")
   }
 
-  if (nrow(object@fragmentTable)) {
-    cat("Number of theoretical Fragments:", nrow(object@fragmentTable), "\n")
+  if (nrow(fragmentTable(object))) {
+    cat("Number of theoretical Fragments:", nrow(fragmentTable(object)), "\n")
     cat("Fragment types: ",
-        paste0(sort(unique(object@fragmentTable$type)), collapse=", "), "\n")
+        paste0(sort(unique(.fragmentTypes(object))), collapse=", "), "\n")
   }
 
-  if (nrow(object@assignmentTable)) {
+  if (nrow(assignmentTable(object))) {
     cat("Number of Spectra-Fragment-Assignments:",
-        nrow(object@assignmentTable), "\n")
+        nrow(assignmentTable(object)), "\n")
   }
-
-  callNextMethod(object)
+  invisible(NULL)
 })
+

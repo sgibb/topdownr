@@ -36,7 +36,7 @@ TopDownExperiment <- function(sequence, path, pattern,
       ...)
 }
 
-#' create assignment table / match peaks
+#' Create assignment table/match peaks.
 #'
 #' @param msnexp MSnExp object
 #' @param ftab data.table, theoreticalFragmentTable fragments
@@ -50,9 +50,55 @@ TopDownExperiment <- function(sequence, path, pattern,
   .msg(verbose, "Looking for fragments in spectra")
   a <- spectrapply(msnexp, function(s) {
     i <- MSnbase:::matchPeaks(s, y=ftab$mz, tolerance=tolerance)
-    i[!is.na(i)]
+    notNA <- !is.na(i)
+    list(FragId=i[notNA], MzId=which(notNA))
   }, ...)
-  data.table(SpectrumId=rep.int(as.double(fData(msnexp)$spectrum), lengths(a)),
-             FragmentId=as.double(unlist(a)),
-             key=c("SpectrumId", "FragmentId"))
+  n <- vapply(a, function(aa)length(aa[[1L]]), double(1L))
+  data.table(SpectrumId=rep.int(as.double(fData(msnexp)$spectrum), n),
+             FragmentId=as.double(unlist(lapply(a, "[[", "FragId"))),
+             MzId=as.double(unlist(lapply(a, "[[", "MzId"))),
+             key=c("SpectrumId", "FragmentId", "MzId"))
+}
+
+#' Filter by fragment type.
+#'
+#' @param object TopDownExperiment object
+#' @param type character, fragment type
+#' @return subsetted object
+#' @noRd
+.filterFragmentType <- function(object, type) {
+  # seems to be faster than ftab[,unique(type)]
+  types <- .fragmentTypes(object)
+  utypes <- unique(types)
+  if (!all(type %in% utypes)) {
+    stop("Type ",
+         paste0(dQuote(type[!type %in% utypes]), collapse=", "),
+         " is not valid!")
+  }
+  fid <- .fragmentId(object)[types %in% type]
+  atab <- assignmentTable(object)[FragmentId %in% fid, ]
+
+  object@msnExp <- .subsetMSnExpSpectra(msnExp(object), atab$SpectrumId,
+                                        atab$MzId)
+  object@assignmentTable <- atab
+
+  if (validObject(object)) {
+    object
+  }
+}
+
+#' Get fragment ID.
+#'
+#' @param object
+#' @return numeric
+.fragmentId <- function(object) {
+  fragmentTable(object)$FragmentId
+}
+
+#' Get fragment types.
+#'
+#' @param object
+#' @return character
+.fragmentTypes <- function(object) {
+  fragmentTable(object)$type
 }
