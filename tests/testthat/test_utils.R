@@ -9,7 +9,7 @@ test_that(".filterStringToId", {
   expect_equal(topdown:::.filterStringToId(
     c("FTMS + p NSI sa Full ms2 560.6219@etd50.00@cid7.00 [160.0000-2000.0000]",
       "FTMS + p NSI Full ms2 560.6010@hcd35.00 [160.0000-2000.0000]")),
-               c(219, 10))
+               c(219L, 10L))
 })
 
 test_that(".formatNames", {
@@ -23,16 +23,17 @@ test_that(".massLabel", {
                c(750.0001, 1000.8245))
   expect_equal(topdown:::.massLabel(c(750, 1000.76), c(1, 245), divisor=1e5),
                c(750.00001, 1000.80245))
+  expect_equal(topdown:::.massLabel(1, 1:999),
+               as.double(sprintf("1.%04d", 1:999)))
   expect_error(topdown:::.massLabel(c(750, 1000.76), c(1, 245), divisor=1e3),
                "at least two digits more than")
 })
 
 test_that(".massLabelToId", {
   expect_equal(topdown:::.massLabelToId(c("750.0001", "1000.8245")), c(1, 245))
-  expect_equal(topdown:::.massLabelToId(c(750.0001, 1000.8245)), c(1, 245))
-  expect_equal(topdown:::.massLabelToId(topdown:::.massLabel(c(750, 1000.76),
-                                                             c(1, 245))),
-                                        c(1, 245))
+  expect_equal(topdown:::.massLabelToId(c("750.001", "1000.824"), 2), c(1, 24))
+  expect_equal(topdown:::.massLabelToId(sprintf("1000.%04d", 1:999)),
+               c(1:999))
 })
 
 test_that(".msg", {

@@ -77,8 +77,7 @@
 
   d[is.na(d)] <- 0L
 
-  ## as.integer sometimes changes the numeric to one value up/down
-  d[, ConditionId := as.double(.I)]
+  d[, ConditionId := as.integer(.I)]
   d[, Mz := .targetedMassListToMz(TargetedMassList)]
   d[, File := gsub(.topDownFileExtRx("csv"), "", basename(file))]
 }
@@ -132,8 +131,7 @@
 
   d[is.na(d)] <- 0L
 
-  ## as.integer sometimes changes the numeric to one value up/down
-  d[, ConditionId := as.double(.filterStringToId(FilterString))]
+  d[, ConditionId := as.integer(.filterStringToId(FilterString))]
 
   d[, File := gsub(.topDownFileExtRx("txt"), "", basename(file))]
 }

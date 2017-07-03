@@ -14,7 +14,7 @@ cat0 <- function(...) {
 #' @noRd
 .filterStringToId <- function(x) {
   stopifnot(is.character(x))
-  .massLabelToId(as.double(gsub("^.*ms2 ([^@]+)\\@.*$", "\\1", x)))
+  .massLabelToId(gsub("^.*ms2 ([^@]+)\\@.*$", "\\1", x))
 }
 
 #' Create (nearly) CamelCase names. Could not correct "AGC" to "Agc".
@@ -63,13 +63,18 @@ cat0 <- function(...) {
 
 #' Extract ID from mass labels
 #'
-#' @param x double, mass label
-#' @param multiplicator double, (determines which decimal place)
+#' @param x character, mass label
+#' @param idDigits integer, number of digits behind the decimal place that
+#' store id information (not mass information) from the last one (e.g. 3 if
+#' the id is 123 and the mz is 900.0123)
 #' @seealso \code{\link{.massLabel}}
 #' @noRd
-.massLabelToId <- function(x, multiplicator=10000L) {
-  x <- as.double(x)
-  (x - round(x, 1)) * multiplicator
+.massLabelToId <- function(x, idDigits=3L) {
+  # was the following before, but results in round errors ("7" becomes 6L)
+  # x <- as.double(x)
+  # as.integer((x - round(x, 1L)) * multiplicator)
+  n <- nchar(x)
+  as.integer(substring(x, n - idDigits + 1L, n))
 }
 
 #' verbose output
