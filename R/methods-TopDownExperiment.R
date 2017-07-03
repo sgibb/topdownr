@@ -14,15 +14,6 @@ setMethod("fragmentTable", "TopDownExperiment", function(object) {
   object@fragmentTable
 })
 
-#' Accessor for msnExp
-#' @param object TopDownExperiment
-#' @return data.table
-#' @export
-#' @noRd
-setMethod("msnExp", "TopDownExperiment", function(object) {
-  object@msnExp
-})
-
 #' @param object TopDownExperiment
 #' @noRd
 setMethod("show", "TopDownExperiment", function(object) {
