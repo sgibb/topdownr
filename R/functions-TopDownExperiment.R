@@ -17,6 +17,9 @@ TopDownExperiment <- function(sequence, path, pattern=".*",
                               neutralLoss=defaultNeutralLoss(),
                               tolerance=10e-6,
                               verbose=interactive(), ...) {
+  if (file.exists(sequence)) {
+    sequence <- .readFasta(sequence, verbose)
+  }
   tdf <- .readTopDownFiles(path=path, pattern=pattern, verbose=verbose)
   header <- .mergeScanConditionAndHeaderInformation(tdf$ScanConditions,
                                                     tdf$HeaderInformation)

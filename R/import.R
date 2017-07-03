@@ -83,6 +83,27 @@
   d[, File := gsub(.topDownFileExtRx("csv"), "", basename(file))]
 }
 
+#' Read fasta file.
+#'
+#' Stupid fasta reader, ignores comments, and keeps just the first sequence.
+#'
+#' @param file character, filename
+#' @param verbose logical, verbose output?
+#' @return character
+#' @noRd
+.readFasta <- function(file, verbose=interactive()) {
+  .msg(verbose, "Reading sequence from fasta file ", basename(file))
+  l <- readLines(file)
+  s <- l[!startsWith(l, ">")]
+  if (!length(s) || !nzchar(s)) {
+    stop("No sequence found.")
+  }
+  if (length(s) > 1) {
+    warning("Multiple sequences found, using the first one.")
+  }
+  s[1L]
+}
+
 #' Read ScanHeadMans header (txt) output.
 #'
 #' 1 row per scan (could have more rows than experiment.csv, because multiple

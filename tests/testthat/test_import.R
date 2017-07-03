@@ -39,6 +39,20 @@ test_that(".readExperimentCsv", {
   unlink(fn)
 })
 
+test_that(".readFasta", {
+  fn <- paste0(tempfile(), ".fasta")
+  writeLines(c("> FOOBAR", "Sequence"), fn)
+  expect_message(s <- topdown:::.readFasta(fn, verbose=TRUE),
+                 "Reading sequence from fasta file")
+  expect_equal(s, "Sequence")
+  writeLines(c("> FOOBAR", "> Sequence"), fn)
+  expect_error(topdown:::.readFasta(fn), "No sequence found")
+  writeLines(c("FOOBAR", "Sequence"), fn)
+  expect_warning(s <- topdown:::.readFasta(fn), "Multiple sequences found")
+  expect_equal(s, "FOOBAR")
+  unlink(fn)
+})
+
 test_that(".readScanHeadsTable", {
   fn <- paste0(tempfile(), ".txt")
   d <- data.frame(MSOrder=c(1, 2, 2, 2),
