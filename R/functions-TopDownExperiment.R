@@ -11,7 +11,7 @@
 #' @param verbose logical, verbose output?
 #' @return TopDownExperiment object.
 #' @export
-TopDownExperiment <- function(sequence, path, pattern,
+TopDownExperiment <- function(sequence, path, pattern=".*",
                               type=c("a", "b", "c", "x", "y", "z"),
                               modifications=c(C=57.02146),
                               neutralLoss=defaultNeutralLoss(),
@@ -28,12 +28,18 @@ TopDownExperiment <- function(sequence, path, pattern,
   atab <- .assignmentTable(msnexp, ftab, tolerance=tolerance,
                            verbose=verbose, ...)
 
-  new("TopDownExperiment",
-      sequence=sequence,
-      msnExp=msnexp,
-      fragmentTable=ftab,
-      assignmentTable=atab,
-      ...)
+  td <- new("TopDownExperiment",
+            sequence=sequence,
+            msnExp=msnexp,
+            fragmentTable=ftab,
+            assignmentTable=atab,
+            ...)
+  ## remove all intensity values without corresponding fragments
+  td <- .filterFragmentId(td, ftab$FragmentId)
+
+  if (validObject(td)) {
+    td
+  }
 }
 
 #' Create assignment table/match peaks.

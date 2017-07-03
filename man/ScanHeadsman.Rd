@@ -4,13 +4,13 @@
 \alias{runScanHeadsman}
 \title{Create .csv/.txt files from raw files}
 \usage{
-runScanHeadsman(executable = "ScanHeadsman.exe", path = ".")
+runScanHeadsman(path = ".", executable = "ScanHeadsman.exe")
 }
 \arguments{
+\item{path}{\code{character}, path to the directory containing the raw files.}
+
 \item{executable}{\code{character}, path to the
 \sQuote{ScanHeadsman.exe} executable.}
-
-\item{path}{\code{character}, path to the directory containing the raw files.}
 }
 \value{
 Nothing. Used for its side effects.

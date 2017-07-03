@@ -1,15 +1,12 @@
 setClass("TopDownExperiment",
   slots=c(name="character",
           sequence="character",
-          msnExp="MSnExp",
           fragmentTable="data.table",
           assignmentTable="data.table"),
-  contains=c("VersionedBiobase"),
-  prototype=prototype(new("VersionedBiobase",
-                          versions=c(TopDownExperiment="0.0.1")),
+  contains=c("MSnExp"),
+  prototype=prototype(new("MSnExp"),
                       name=character(),
                       sequence=character(),
-                      msnExp=new("MSnExp"),
                       fragmentTable=data.table(),
                       assignmentTable=data.table()
   )
