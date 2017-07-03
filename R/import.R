@@ -145,7 +145,7 @@
 #' @return MSnExp
 #' @noRd
 .readMSData2 <- function(files, verbose=interactive()) {
-  readMSData(files, msLevel.=2, verbose=verbose)
+  readMSData2(files, msLevel.=2, verbose=verbose)
 }
 
 #' Merge ScanCondition and HeaderInformation
