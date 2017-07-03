@@ -3,8 +3,8 @@ context("TopDownExperiment")
 expect_equal_TDE <- function(object, expected, ..., proc=FALSE, index=FALSE,
                              info=NULL, label=NULL) {
   if (!proc) {
-    object@msnExp@processingData <-
-      expected@msnExp@processingData <-
+    object@processingData <-
+      expected@processingData <-
         new("MSnProcess")
   }
   if (!index) {
@@ -62,8 +62,8 @@ test_that("[", {
   td1 <- new("TopDownExperiment",
              assayData=e1,
              sequence="ACE",
-             featureData=new("AnnotatedDataFrame", data=fd[1,]),
-             phenoData=new("NAnnotatedDataFrame", data=pd[1,]),
+             featureData=new("AnnotatedDataFrame", data=fd[1,,drop=FALSE]),
+             phenoData=new("NAnnotatedDataFrame", data=pd[1,,drop=FALSE]),
              experimentData=expdata,
              processingData=new("MSnProcess", files="foo.mzML"),
              fragmentTable=ftab, assignmentTable=atab[1:3,])
