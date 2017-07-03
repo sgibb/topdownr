@@ -2,9 +2,13 @@
 % Please edit documentation in R/windows.R
 \name{createTngFusionMethFiles}
 \alias{createTngFusionMethFiles}
+\alias{runXmlMethodChanger}
 \title{Create meth files from xml templates}
 \usage{
 createTngFusionMethFiles(template, xml = list.files(pattern = ".*\\\\.xml$"),
+  executable = "XmlMethodChanger.exe", verbose = interactive())
+
+runXmlMethodChanger(template, xml = list.files(pattern = ".*\\\\.xml$"),
   executable = "XmlMethodChanger.exe", verbose = interactive())
 }
 \arguments{
@@ -24,6 +28,10 @@ Nothing. Used for its side effects.
 This function calls \sQuote{XmlMethodChanger.exe} on all given xml
 files generated with \code{\link{writeMethodXmls}}.
 It works only on Windows.
+}
+\references{
+XmlMethodChanger source code:
+\url{https://github.com/thermofisherlsms/meth-modifications}
 }
 \seealso{
 \code{\link{writeMethodXmls}}
