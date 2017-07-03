@@ -88,6 +88,15 @@ cat0 <- function(...) {
   vapply(x, nrow, double(1L))
 }
 
+#' swap file extensions
+#' @param x character, file name
+#' @param ext character, new extension
+#' @return character
+#' @noRd
+.swapFileExt <- function(x, ext="meth") {
+  paste(file_path_sans_ext(x), ext, sep=".")
+}
+
 #' The ScanHeadsMan output for the scan conditons contains a column
 #' TargetedMassList with the format "(mz=[0-9]+\.[0-9]+ z=[0-9]+ name=)". This
 #' function converts this format to truncated (one decimal place) mz values.

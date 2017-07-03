@@ -47,6 +47,11 @@ test_that(".nrows", {
                                      matrix(nrow=3, ncol=2))), 2:3)
 })
 
+test_that(".swapFileExt", {
+  expect_equal(topdown:::.swapFileExt("foo.xml"), "foo.meth")
+  expect_equal(topdown:::.swapFileExt("foo.xml", "bar"), "foo.bar")
+})
+
 test_that(".targetedMassListToMz", {
   expect_error(topdown:::.targetedMassListToMz(1:3))
   expect_equal(topdown:::.targetedMassListToMz(c("(mz=1000.12 z=2 name=foo)",
