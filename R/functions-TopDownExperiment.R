@@ -29,13 +29,15 @@ TopDownExperiment <- function(sequence, path, pattern=".*",
                            verbose=verbose, ...)
 
   td <- new("TopDownExperiment",
+            assayData=assayData(msnexp),
+            featureData=featureData(msnexp),
+            phenoData=phenoData(msnexp),
+            experimentData=experimentData(msnexp),
+            processingData=processingData(msnexp),
             sequence=sequence,
-            msnExp=msnexp,
             fragmentTable=ftab,
             assignmentTable=atab,
             ...)
-  ## remove all intensity values without corresponding fragments
-  td <- .filterFragmentId(td, ftab$FragmentId)
 
   if (validObject(td)) {
     td
@@ -60,7 +62,7 @@ TopDownExperiment <- function(sequence, path, pattern=".*",
     list(FragId=i[notNA], MzId=which(notNA))
   }, ...)
   n <- .vapply1d(a, function(aa)length(aa[[1L]]))
-  data.table(SpectrumId=rep.int(as.double(fData(msnexp)$spectrum), n),
+  data.table(SpectrumId=rep.int(featureNames(msnexp), n),
              FragmentId=as.double(unlist(lapply(a, "[[", "FragId"))),
              MzId=as.double(unlist(lapply(a, "[[", "MzId"))),
              key=c("SpectrumId", "FragmentId", "MzId"))
