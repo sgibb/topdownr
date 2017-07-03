@@ -60,60 +60,6 @@ TopDownExperiment <- function(sequence, path, pattern,
              key=c("SpectrumId", "FragmentId", "MzId"))
 }
 
-#' Filter by fragment id.
-#'
-#' @param object TopDownExperiment object
-#' @param id double, fragment id
-#' @return subsetted object
-#' @noRd
-.filterFragmentId <- function(object, id) {
-  atab <- assignmentTable(object)[FragmentId %in% id, ]
-
-  object@msnExp <- .subsetMSnExpSpectra(msnExp(object), atab$SpectrumId,
-                                        atab$MzId)
-  object@assignmentTable <- atab
-
-  if (validObject(object)) {
-    object
-  }
-}
-
-#' Filter by fragment ion.
-#'
-#' @param object TopDownExperiment object
-#' @param ion character, fragment ion
-#' @return subsetted object
-#' @noRd
-.filterFragmentIon <- function(object, ion) {
-  # seems to be faster than ftab[,unique(ion)]
-  ions <- .fragmentIons(object)
-  uIons <- unique(ions)
-  if (!all(ion %in% uIons)) {
-    stop("Ion(s) ",
-         paste0(dQuote(ion[!ion %in% uIons]), collapse=", "),
-         " not found!")
-  }
-  .filterFragmentId(object, .fragmentId(object)[ions %in% ion])
-}
-
-#' Filter by fragment type.
-#'
-#' @param object TopDownExperiment object
-#' @param type character, fragment type
-#' @return subsetted object
-#' @noRd
-.filterFragmentType <- function(object, type) {
-  # seems to be faster than ftab[,unique(type)]
-  types <- .fragmentTypes(object)
-  uTypes <- unique(types)
-  if (!all(type %in% uTypes)) {
-    stop("Type(s) ",
-         paste0(dQuote(type[!type %in% uTypes]), collapse=", "),
-         " not found!")
-  }
-  .filterFragmentId(object, .fragmentId(object)[types %in% type])
-}
-
 #' Get fragment ID.
 #'
 #' @param object

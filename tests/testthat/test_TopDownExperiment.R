@@ -47,57 +47,17 @@ atab <- data.table(SpectrumId=rep(1:3, each=3),
                    MzId=c(1:3,
                           1:3,
                           1:3), key=c("SpectrumId", "FragmentId", "MzId"))
-mse <- new("MSnExp", assayData=e,
-           featureData=new("AnnotatedDataFrame", data=fd),
-           phenoData=new("NAnnotatedDataFrame", data=pd),
-           experimentData=expdata,
-           processingData=new("MSnProcess", files="foo.mzML"))
 td <- new("TopDownExperiment",
-          sequence="ACE", msnExp=mse,
+          assayData=e,
+          sequence="ACE",
+          featureData=new("AnnotatedDataFrame", data=fd),
+          phenoData=new("NAnnotatedDataFrame", data=pd),
+          experimentData=expdata,
+          processingData=new("MSnProcess", files="foo.mzML"),
           fragmentTable=ftab, assignmentTable=atab)
-
-## filtered TDE
-f <- new.env()
-f$F1.S1 <- e$F1.S1
-f$F1.S2 <- new("Spectrum2", mz=5, intensity=9,
-               acquisitionNum=2L, fromFile=1L)
-f$F1.S3 <- new("Spectrum2", mz=c(3, 5), intensity=c(9, 5),
-               acquisitionNum=3L, fromFile=1L)
-atabf <- data.table(SpectrumId=c(1, 1, 1, 2, 3, 3),
-                    FragmentId=c(1:3,
-                                 3,
-                                 2:3),
-                    MzId=c(1:3,
-                           1,
-                           1:2), key=c("SpectrumId", "FragmentId", "MzId"))
-msf <- mse
-msf@assayData <- f
-tdf <- new("TopDownExperiment",
-           sequence="ACE", msnExp=msf,
-           fragmentTable=ftab, assignmentTable=atabf)
 
 test_that("assignmentTable", {
   expect_equal(topdown:::assignmentTable(td), atab)
-})
-
-test_that(".filterFragmentId", {
-  expect_equal_TDE(topdown:::.filterFragmentId(td, 1:5), td)
-  expect_equal_TDE(topdown:::.filterFragmentId(td, 1:3), tdf)
-})
-
-test_that(".filterFragmentIon", {
-  expect_error(topdown:::.filterFragmentIon(td, c("b", "J", "D")),
-               "Ion\\(s\\) .*b.*, .*J.*, .*D.* not found")
-  expect_equal_TDE(topdown:::.filterFragmentIon(td, paste0(c("b", "c"),
-                                                           c(1:2, 2:1))), td)
-  expect_equal_TDE(topdown:::.filterFragmentIon(td, paste0("b", 1:2)), tdf)
-})
-
-test_that(".filterFragmentType", {
-  expect_error(topdown:::.filterFragmentType(td, c("b", "J", "D")),
-               "Type\\(s\\) .*J.*, .*D.* not found")
-  expect_equal_TDE(topdown:::.filterFragmentType(td, c("b", "c")), td)
-  expect_equal_TDE(topdown:::.filterFragmentType(td, "b"), tdf)
 })
 
 test_that("fragmentTable", {
@@ -110,8 +70,4 @@ test_that(".fragmentId", {
 
 test_that(".fragmentTypes", {
   expect_equal(topdown:::.fragmentTypes(td), c("b", "b", "b", "c", "c"))
-})
-
-test_that("msnExp", {
-  expect_equal(msnExp(td), mse)
 })
