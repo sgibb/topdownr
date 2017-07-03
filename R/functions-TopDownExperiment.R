@@ -73,24 +73,27 @@ TopDownExperiment <- function(sequence, path, pattern=".*",
 
 #' Get fragment ID.
 #'
-#' @param object
+#' @param object TopDownExperiment
 #' @return numeric
+#' @noRd
 .fragmentId <- function(object) {
   fragmentTable(object)$FragmentId
 }
 
 #' Get fragment ions.
 #'
-#' @param object
+#' @param object TopDownExperiment
 #' @return character
+#' @noRd
 .fragmentIons <- function(object) {
   fragmentTable(object)$ion
 }
 
 #' Get fragment types.
 #'
-#' @param object
+#' @param object TopDownExperiment
 #' @return character
+#' @noRd
 .fragmentTypes <- function(object) {
   fragmentTable(object)$type
 }

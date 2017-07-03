@@ -20,6 +20,7 @@ cat0 <- function(...) {
 #' Create (nearly) CamelCase names. Could not correct "AGC" to "Agc".
 #' @param x character
 #' @return character
+#' @noRd
 .formatNames <- function(x) {
   x <- gsub("[[:punct:]]+", "", x)
   unlist(lapply(strsplit(x, " "), function(s) {

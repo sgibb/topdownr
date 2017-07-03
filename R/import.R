@@ -165,6 +165,7 @@
 #' @param msnexp MSnExp
 #' @param header data.table, header information
 #' @return modified MSnExp
+#' @noRd
 .mergeSpectraAndHeaderInformation <- function(msnexp, hi) {
   fd <- fData(msnexp)
   fd$File <- gsub(.topDownFileExtRx("mzml"), "",
