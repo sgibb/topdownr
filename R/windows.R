@@ -71,8 +71,7 @@ runXmlMethodChanger <- createTngFusionMethFiles
 #' @references ScanHeadsman source code:
 #' \url{https://bitbucket.org/caetera/scanheadsman}
 #' @export
-runScanHeadsman <- function(executable="ScanHeadsman.exe",
-                            path=".") {
+runScanHeadsman <- function(path=".", executable="ScanHeadsman.exe") {
   if (.Platform$OS.type != "windows") {
     stop("This function works only on Windows.")
   }
