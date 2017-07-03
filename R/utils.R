@@ -85,7 +85,7 @@ cat0 <- function(...) {
 #' @noRd
 .nrows <- function(x) {
   stopifnot(is.list(x))
-  vapply(x, nrow, double(1L))
+  .vapply1d(x, nrow)
 }
 
 #' swap file extensions
@@ -121,4 +121,10 @@ cat0 <- function(...) {
                 "cmt" = c("csv", "mzml", "txt"),
                 type)
   paste0("\\.", ext[sel], "$", collapse="|")
+}
+
+#' wrapper around vapply for FUN.VALUE=double(1L)
+#' @noRd
+.vapply1d <- function(X, FUN, ..., USE.NAMES=FALSE) {
+  vapply(X=X, FUN=FUN, FUN.VALUE=NA_real_, ..., USE.NAMES=USE.NAMES)
 }

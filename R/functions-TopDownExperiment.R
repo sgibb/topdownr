@@ -53,7 +53,7 @@ TopDownExperiment <- function(sequence, path, pattern,
     notNA <- !is.na(i)
     list(FragId=i[notNA], MzId=which(notNA))
   }, ...)
-  n <- vapply(a, function(aa)length(aa[[1L]]), double(1L))
+  n <- .vapply1d(a, function(aa)length(aa[[1L]]))
   data.table(SpectrumId=rep.int(as.double(fData(msnexp)$spectrum), n),
              FragmentId=as.double(unlist(lapply(a, "[[", "FragId"))),
              MzId=as.double(unlist(lapply(a, "[[", "MzId"))),
