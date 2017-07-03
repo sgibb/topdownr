@@ -19,7 +19,7 @@ setMethod("[", "TopDownExperiment", function(x, i, j="missing", ...,
   }
 
   fn <- featureNames(x)[i]
-  x@assignmentTable <- assignmentTable(x)[SpectrumId == fn,]
+  x@assignmentTable <- assignmentTable(x)[SpectrumId %in% fn,]
 
   callNextMethod()
 })

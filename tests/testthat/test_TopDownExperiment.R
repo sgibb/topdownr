@@ -59,15 +59,30 @@ td <- new("TopDownExperiment",
 test_that("[", {
   e1 <- new.env()
   e1$F1.S1 <- e$F1.S1
+  e12 <- new.env()
+  e12$F1.S1 <- e$F1.S1
+  e12$F1.S2 <- e$F1.S2
   td1 <- new("TopDownExperiment",
              assayData=e1,
              sequence="ACE",
              featureData=new("AnnotatedDataFrame", data=fd[1,,drop=FALSE]),
-             phenoData=new("NAnnotatedDataFrame", data=pd[1,,drop=FALSE]),
+             phenoData=new("NAnnotatedDataFrame", data=pd),
              experimentData=expdata,
              processingData=new("MSnProcess", files="foo.mzML"),
              fragmentTable=ftab, assignmentTable=atab[1:3,])
+  td12 <- new("TopDownExperiment",
+              assayData=e12,
+              sequence="ACE",
+              featureData=new("AnnotatedDataFrame", data=fd[1:2,,drop=FALSE]),
+              phenoData=new("NAnnotatedDataFrame", data=pd),
+              experimentData=expdata,
+              processingData=new("MSnProcess", files="foo.mzML"),
+              fragmentTable=ftab, assignmentTable=atab[1:6,])
+
   expect_equal_TDE(td[1], td1)
+  expect_equal_TDE(td[c(TRUE, FALSE, FALSE)], td1)
+  expect_equal_TDE(td[1:2], td12)
+  expect_equal_TDE(td[c(TRUE, TRUE, FALSE)], td12)
 })
 
 test_that("assignmentTable", {
