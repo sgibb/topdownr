@@ -67,7 +67,7 @@ test_that(".startEndTime", {
   expect_equal(topdown:::.startEndTime(nMs2=20, nMs2perMs1=12, duration=0.8, gap=0.02),
                r)
   expect_warning(topdown:::.startEndTime(nMs2=201, nMs2perMs1=2),
-                 "More than 300 experiments")
+                 "More than 150 experiments")
 })
 
 test_that(".resample", {

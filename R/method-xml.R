@@ -65,8 +65,8 @@
   nMs1 <- ceiling(nMs2 * 1L/nMs2perMs1)
   n <- nMs2 + nMs1
 
-  if (n > 300) {
-    warning("More than 300 experiments might cause the MS device ",
+  if (n > 150) {
+    warning("More than 150 experiments might cause the MS device ",
             "to become unresponsive. Choose other ", sQuote("groupBy"),
             " parameters to reduce number of experiments per file.")
   }
