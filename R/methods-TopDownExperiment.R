@@ -46,13 +46,17 @@ setMethod("show", "TopDownExperiment", function(object) {
   cat("TopDown Experiment data (\"", class(object), "\").\n", sep="")
 
   if (nchar(object@sequence)) {
-    cat("Amino acid sequence:", object@sequence, "\n")
+    prefix <- sprintf("Amino acid sequence (%d):", nchar(object@sequence))
+    cat(prefix, .snippet(object@sequence, getOption("width") - nchar(prefix)),
+        "\n")
   }
 
   if (nrow(fragmentTable(object))) {
     cat("Number of theoretical Fragments:", nrow(fragmentTable(object)), "\n")
-    cat("Fragment types: ",
-        paste0(sort(unique(.fragmentTypes(object))), collapse=", "), "\n")
+    fragments <- sort(unique(.fragmentTypes(object)))
+    prefix <- sprintf("Fragment types (%d):", length(fragments))
+    cat(prefix, .snippet(paste0(fragments, collapse=", "),
+                         getOption("width") - nchar(prefix)), "\n")
   }
 
   if (nrow(assignmentTable(object))) {

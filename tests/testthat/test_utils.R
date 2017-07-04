@@ -48,6 +48,16 @@ test_that(".nrows", {
                                      matrix(nrow=3, ncol=2))), 2:3)
 })
 
+test_that(".snippet", {
+  L <- paste0(LETTERS[1:26], collapse="")
+  l <- paste0(letters[1:26], collapse="")
+  expect_equal(topdown:::.snippet(L, 100), L)
+  expect_equal(topdown:::.snippet(L, 10), "ABCD...XYZ")
+  expect_equal(topdown:::.snippet(L, 11), "ABCD...WXYZ")
+  expect_equal(topdown:::.snippet(c(l, L), 10), c("abcd...xyz", "ABCD...XYZ"))
+  expect_equal(topdown:::.snippet(c(l, L), 11), c("abcd...wxyz", "ABCD...WXYZ"))
+})
+
 test_that(".swapFileExt", {
   expect_equal(topdown:::.swapFileExt("foo.xml"), "foo.meth")
   expect_equal(topdown:::.swapFileExt("foo.xml", "bar"), "foo.bar")

@@ -94,6 +94,18 @@ cat0 <- function(...) {
   .vapply1d(x, nrow)
 }
 
+#' shortend string to width and place "..." in the middle
+#' @param x character
+#' @param width number of letters allowed/width of terminal
+#' @return character
+#' @noRd
+.snippet <- function(x, width=getOption("width")) {
+  nc <- nchar(x)
+  w <- (width - 2L:3L) %/% 2L
+  ifelse(nc <= width, x, paste0(substring(x, 1L, w[1L]), "...",
+                                substring(x, nc - w[2L] + 1L, nc)))
+}
+
 #' swap file extensions
 #' @param x character, file name
 #' @param ext character, new extension
