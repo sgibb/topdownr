@@ -13,7 +13,7 @@
   if (length(groupBy)) {
     experiments <- .groupExperimentsBy(experiments, groupBy)
   } else {
-    experiments <- list(experiments)
+    experiments <- list(experiment=experiments)
   }
   if (randomise) {
     experiments <- lapply(experiments, .resample)
