@@ -3,11 +3,14 @@
 setMethod("[", "TopDownExperiment", function(x, i, j="missing", ...,
                                              drop="missing") {
 
-  if (!(is.logical(i) | is.numeric(i))) {
-    stop("subsetting works only with numeric or logical")
+  if (!(is.logical(i) | is.numeric(i) | is.character(i))) {
+    stop("subsetting works only with numeric, logical or character")
   }
   if (length(x) < length(i)) {
     stop("subscript out of bounds")
+  }
+  if (is.character(i)) {
+    i <- unique(match(i, featureNames(x)))
   }
   if (anyNA(i)) {
     stop("subscript out of bounds")
@@ -17,7 +20,6 @@ setMethod("[", "TopDownExperiment", function(x, i, j="missing", ...,
       stop("subscript out of bounds")
     }
   }
-
   fn <- featureNames(x)[i]
   x@assignmentTable <- assignmentTable(x)[SpectrumId %in% fn,]
 

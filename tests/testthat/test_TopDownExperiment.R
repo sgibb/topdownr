@@ -80,8 +80,10 @@ test_that("[", {
               fragmentTable=ftab, assignmentTable=atab[1:6,])
 
   expect_equal_TDE(td[1], td1)
+  expect_equal_TDE(td["F1.S1"], td1)
   expect_equal_TDE(td[c(TRUE, FALSE, FALSE)], td1)
   expect_equal_TDE(td[1:2], td12)
+  expect_equal_TDE(td[c("F1.S1", "F1.S2")], td12)
   expect_equal_TDE(td[c(TRUE, TRUE, FALSE)], td12)
 })
 
