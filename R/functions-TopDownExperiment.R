@@ -54,7 +54,6 @@ TopDownExperiment <- function(path, pattern=".*",
   td <- .logmsg(td, msg)
   .msg(verbose, msg)
 
-  .msg(verbose, "Validating object.")
   if (validObject(td)) {
     td
   }
