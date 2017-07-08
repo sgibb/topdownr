@@ -10,13 +10,16 @@ test_that(".fileExists", {
 
 test_that(".listTopDownFiles", {
   fns <- tempfile(pattern=c("fileA_", "fileB_"))
+  fasta <- paste(tempfile(pattern=c("file")), "fasta", sep=".")
   fns <- paste(rep(fns, each=3), c("experiments.csv", "mzML", "txt"), sep=".")
   r <- split(fns, c("csv", "mzML", "txt"))
-  file.create(fns)
+  r$fasta <- fasta
+  r <- r[order(names(r))]
+  file.create(c(fasta, fns))
   expect_equal(topdown:::.listTopDownFiles(tempdir()), r)
   expect_equal(topdown:::.listTopDownFiles(tempdir(), pattern="^fileA_.*"),
-               lapply(r, "[", 1L))
-  unlink(fns)
+               lapply(r[names(r) != "fasta"], "[", 1L))
+  unlink(c(fasta, fns))
 })
 
 test_that(".readExperimentCsv", {

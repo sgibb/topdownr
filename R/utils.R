@@ -130,13 +130,14 @@ cat0 <- function(...) {
 #' @param type character, which file ext
 #' @return regexp for file extensions
 #' @noRd
-.topDownFileExtRx <- function(type=c("cmt", "csv", "mzml", "txt", "raw",
-                                     "all")) {
+.topDownFileExtRx <- function(type=c("cfmt", "csv", "fasta", "mzml", "txt",
+                                     "raw", "all")) {
   type <- match.arg(type)
-  ext <- c(csv="experiments\\.csv", mzml="mz[Mm][Ll]", raw="raw", txt="txt")
+  ext <- c(csv="experiments\\.csv", fasta="fasta", mzml="mz[Mm][Ll]",
+           raw="raw", txt="txt")
   sel <- switch(type,
                 "all" = seq_along(ext),
-                "cmt" = c("csv", "mzml", "txt"),
+                "cfmt" = c("csv", "fasta", "mzml", "txt"),
                 type)
   paste0("\\.", ext[sel], "$", collapse="|")
 }

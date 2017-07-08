@@ -1,6 +1,5 @@
 #' TopDownExperiment
 #'
-#' @param sequence \code{character}, amino acid sequence.
 #' @param path \code{character}, path to top down files.
 #' @param pattern \code{character}, pattern for file names.
 #' @param type character, type of fragments (should be some more than in
@@ -11,16 +10,16 @@
 #' @param verbose logical, verbose output?
 #' @return TopDownExperiment object.
 #' @export
-TopDownExperiment <- function(sequence, path, pattern=".*",
+TopDownExperiment <- function(path, pattern=".*",
                               type=c("a", "b", "c", "x", "y", "z"),
                               modifications=c(C=57.02146),
                               neutralLoss=defaultNeutralLoss(),
                               tolerance=10e-6,
                               verbose=interactive(), ...) {
-  if (file.exists(sequence)) {
-    sequence <- .readFasta(sequence, verbose)
-  }
   tdf <- .readTopDownFiles(path=path, pattern=pattern, verbose=verbose)
+
+  sequence <- tdf$fasta
+
   header <- .mergeScanConditionAndHeaderInformation(tdf$ScanConditions,
                                                     tdf$HeaderInformation)
   msnexp <- .mergeSpectraAndHeaderInformation(tdf$MSnExp, header)

@@ -73,11 +73,11 @@ test_that(".targetedMassListToMz", {
 test_that(".topDownFileExtRx", {
   expect_error(topdown:::.topDownFileExtRx("foo"))
   expect_equal(topdown:::.topDownFileExtRx(),
-               "\\.experiments\\.csv$|\\.mz[Mm][Ll]$|\\.txt$")
+               "\\.experiments\\.csv$|\\.fasta$|\\.mz[Mm][Ll]$|\\.txt$")
   expect_equal(topdown:::.topDownFileExtRx("all"),
-               "\\.experiments\\.csv$|\\.mz[Mm][Ll]$|\\.raw$|\\.txt$")
-  expect_equal(topdown:::.topDownFileExtRx("cmt"),
-               "\\.experiments\\.csv$|\\.mz[Mm][Ll]$|\\.txt$")
+               "\\.experiments\\.csv$|\\.fasta$|\\.mz[Mm][Ll]$|\\.raw$|\\.txt$")
+  expect_equal(topdown:::.topDownFileExtRx("cfmt"),
+               "\\.experiments\\.csv$|\\.fasta$|\\.mz[Mm][Ll]$|\\.txt$")
   expect_equal(topdown:::.topDownFileExtRx("csv"),
                "\\.experiments\\.csv$")
   expect_equal(topdown:::.topDownFileExtRx("mzml"),

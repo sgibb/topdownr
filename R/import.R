@@ -11,6 +11,7 @@
 #' List TopDown files
 #'
 #' List all TopDown files:
+#'  - .fasta (peptide sequence)
 #'  - .mzML (spectra)
 #'  - .experiments.csv (fragmentation conditions)
 #'  - .txt (header information)
@@ -22,7 +23,7 @@
 .listTopDownFiles <- function(path, pattern=".*") {
   files <- list.files(path,
                       pattern=paste0(pattern, "(",
-                                     .topDownFileExtRx("cmt"), ")"),
+                                     .topDownFileExtRx("cfmt"), ")"),
                       full.names=TRUE)
   split(files, file_ext(files))
 }
@@ -30,6 +31,7 @@
 #' Read TopDown files.
 #'
 #' Read all TopDown files:
+#'  - .fasta (peptide sequence)
 #'  - .mzML (spectra)
 #'  - .experiments.csv (fragmentation conditions)
 #'  - .txt (header information)
@@ -43,17 +45,18 @@
   files <- .listTopDownFiles(path, pattern=pattern)
 
   if (any(lengths(files)) == 0L) {
-    stop("Could not found any ",
-         paste0(c("experiments.csv", "mzML", "txt")[lengths(files) == 0L],
-                collapse=" or "), " files!")
+    ext <- c("experiments.csv", "fasta", "mzML", "txt")
+    stop("Could not found any ", paste0(ext[lengths(files) == 0L],
+                                        collapse=" or "), " files!")
   }
 
+  fasta <- .readFasta(files$fasta, verbose=verbose)
   mzml <- .readMSData2(files$mzML, verbose=verbose)
   csv <- do.call(rbind, lapply(files$csv, .readExperimentCsv,
                                verbose=verbose))
   txt <- do.call(rbind, lapply(files$txt, .readScanHeadsTable,
                                verbose=verbose))
-  list(MSnExp=mzml, ScanConditions=csv, HeaderInformation=txt)
+  list(fasta=fasta, MSnExp=mzml, ScanConditions=csv, HeaderInformation=txt)
 }
 
 #' Read ScanHeadMans method (experiments.csv) output.
