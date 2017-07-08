@@ -28,51 +28,83 @@ TopDownExperiment <- function(path, pattern=".*",
   header <- .mergeScanConditionAndHeaderInformation(tdf$ScanConditions,
                                                     tdf$HeaderInformation)
   msnexp <- .mergeSpectraAndHeaderInformation(tdf$MSnExp, header)
+  msnexp@processingData@processing <- character()
+
+  msnexp <- .logmsg(msnexp, "Data loaded.")
 
   ftab <- .calculateFragments(sequence, type=type, modifications=modifications,
                               neutralLoss=neutralLoss, verbose=verbose)
 
-  atab <- .assignmentTable(msnexp, ftab, tolerance=tolerance,
-                           verbose=verbose, ...)
+  m <- .matchFragments(msnexp, ftab, tolerance=tolerance, verbose=verbose, ...)
 
   td <- new("TopDownExperiment",
-            assayData=assayData(msnexp),
+            assayData=m$assayData,
             featureData=featureData(msnexp),
             phenoData=phenoData(msnexp),
             experimentData=experimentData(msnexp),
             processingData=processingData(msnexp),
             sequence=sequence,
             fragmentTable=ftab,
-            assignmentTable=atab,
+            assignmentTable=m$assignmentTable,
             ...)
+
+  pc <- c(sum(peaksCount(td)), sum(peaksCount(msnexp)))
+  msg <- sprintf("Fragment matching: %d/%d (%d %%) peaks kept.",
+                 pc[1L], pc[2L], round(pc[1L]/pc[2L] * 100L))
+  td <- .logmsg(td, msg)
+  .msg(verbose, msg)
 
   if (validObject(td)) {
     td
   }
 }
 
-#' Create assignment table/match peaks.
+#' Look for fragment/mz matching.
+#'
+#' Removes non-matching peaks and creates assignment table.
 #'
 #' @param msnexp MSnExp object
 #' @param ftab data.table, theoreticalFragmentTable fragments
 #' @param tolerance double, tolerance to match peaks
 #' @param verbose logical, verbose output?
 #' @param \ldots further arguments passed to MSnbase::spectrapply
-#' @return data.table
+#' @return list, new assayData (environment) and assignmentTable (data.table)
 #' @noRd
-.assignmentTable <- function(msnexp, ftab, tolerance=25e-6,
-                             verbose=interactive(), ...) {
+.matchFragments <- function(msnexp, ftab, tolerance=25e-6,
+                            verbose=interactive(), ...) {
   .msg(verbose, "Looking for fragments in spectra")
-  a <- spectrapply(msnexp, function(s) {
-    i <- MSnbase:::matchPeaks(s, y=ftab$mz, tolerance=tolerance)
-    notNA <- !is.na(i)
-    list(FragId=i[notNA], MzId=which(notNA))
-  }, ...)
-  n <- .vapply1d(a, function(aa)length(aa[[1L]]))
-  data.table(SpectrumId=rep.int(featureNames(msnexp), n),
-             FragmentId=as.double(unlist(lapply(a, "[[", "FragId"))),
-             MzId=as.double(unlist(lapply(a, "[[", "MzId"))),
-             key=c("SpectrumId", "FragmentId", "MzId"))
+
+  if (verbose) {
+    pb <- txtProgressBar(min=0L, max=length(msnexp), style=3L)
+    on.exit(close(pb))
+    i <- 0L
+  }
+
+  newAssay <- new.env(parent=emptyenv())
+  fragId <- vector(mode="list", length=length(msnexp))
+  names(fragId) <- featureNames(msnexp)
+  oldAssay <- assayData(msnexp)
+
+  for (specName in featureNames(msnexp)) {
+    if (verbose) {
+      i <- i + 1L
+      setTxtProgressBar(pb, i)
+    }
+    sp <- get(specName, oldAssay)
+    m <- MSnbase:::matchPeaks(sp, y=ftab$mz, tolerance=tolerance)
+    notNA <- which(!is.na(m))
+    sp <- .subsetSpectrum2(sp, notNA)
+    fragId[[specName]] <- m[notNA]
+    assign(specName, sp, newAssay)
+  }
+
+  d <- data.table(SpectrumId=rep.int(featureNames(msnexp), lengths(fragId)),
+                  FragmentId=as.double(unlist(fragId)),
+                  key=c("SpectrumId", "FragmentId"))
+  d[, MzId:=seq_len(.N), by=SpectrumId]
+  setkey(d, SpectrumId, FragmentId, MzId)
+
+  list(assayData=newAssay, assignmentTable=d)
 }
 
 #' Get fragment ID.
@@ -101,3 +133,19 @@ TopDownExperiment <- function(path, pattern=".*",
 .fragmentTypes <- function(object) {
   fragmentTable(object)$type
 }
+
+#' Add log message.
+#'
+#' @param object TopDownExperiment
+#' @param msg character, log message
+#' @return TopDownExperiment
+#' @noRd
+.logmsg <- function(object, msg, date=TRUE) {
+  if (date) {
+    msg <- paste0("[", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "] ", msg)
+  }
+  object@processingData@processing <-
+    c(object@processingData@processing, msg)
+  object
+}
+

@@ -85,8 +85,32 @@ test_that("[", {
   expect_equal_TDE(td[c(TRUE, TRUE, FALSE)], td12)
 })
 
-test_that("assignmentTable", {
-  expect_equal(topdown:::assignmentTable(td), atab)
+test_that(".matchFragments", {
+  ## do nothing
+  expect_equal(topdown:::.matchFragments(td, ftab, verbose=FALSE),
+               list(assayData=assayData(td), assignmentTable=atab))
+
+  eb <- new.env()
+  eb$F1.S1 <- e$F1.S1
+  eb$F1.S2 <- new("Spectrum2", mz=5, intensity=9,
+                  acquisitionNum=2L, fromFile=1L)
+  eb$F1.S3 <- new("Spectrum2", mz=c(3, 5), intensity=c(9, 5),
+                  acquisitionNum=3L, fromFile=1L)
+  ftabb <- data.table(mz=c(1, 3, 5),
+                      ion=c("b1", "b1", "b2"),
+                      type=c("b", "b", "b"),
+                      pos=c(1, 1, 2),
+                      z=1, FragmentId=1:3, key="FragmentId")
+  atabb <- data.table(SpectrumId=paste0("F1.S", rep(1:3, c(3, 1, 2))),
+                      FragmentId=c(1:3,
+                                   3,
+                                   2:3),
+                      MzId=c(1:3,
+                             1,
+                             1:2), key=c("SpectrumId", "FragmentId", "MzId"))
+
+  expect_equal(topdown:::.matchFragments(td, ftabb, verbose=FALSE),
+               list(assayData=eb, assignmentTable=atabb))
 })
 
 test_that("fragmentTable", {
@@ -99,4 +123,11 @@ test_that(".fragmentId", {
 
 test_that(".fragmentTypes", {
   expect_equal(topdown:::.fragmentTypes(td), c("b", "b", "b", "c", "c"))
+})
+
+test_that(".logmsg", {
+  expect_equal(topdown:::.logmsg(td, "foo",
+                                 date=FALSE)@processingData@processing[1], "foo")
+  expect_equal(topdown:::.logmsg(td, "foo")@processingData@processing[1],
+               paste0("[", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "] foo"))
 })
