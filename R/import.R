@@ -38,10 +38,12 @@
 #'
 #' @param path character, file path
 #' @param pattern character, filename pattern
+#' @param onDisk logical, return MSnExp or (if TRUE) OnDiskMSnExp
 #' @param verbose logical, verbose output?
 #' @return list (splitted by file extension) with file path
 #' @noRd
-.readTopDownFiles <- function(path, pattern=".*", verbose=interactive()) {
+.readTopDownFiles <- function(path, pattern=".*", onDisk=FALSE,
+                              verbose=interactive()) {
   files <- .listTopDownFiles(path, pattern=pattern)
 
   if (any(lengths(files)) == 0L) {
@@ -51,7 +53,7 @@
   }
 
   fasta <- .readFasta(files$fasta, verbose=verbose)
-  mzml <- .readMSData2(files$mzML, verbose=verbose)
+  mzml <- .readMSData(files$mzML, onDisk=onDisk, verbose=verbose)
   csv <- do.call(rbind, lapply(files$csv, .readExperimentCsv,
                                verbose=verbose))
   txt <- do.call(rbind, lapply(files$txt, .readScanHeadsTable,
@@ -142,11 +144,16 @@
 #' Read MS2 Spectra (mzML)
 #'
 #' @param file character, filename
+#' @param onDisk logical, return MSnExp or (if TRUE) OnDiskMSnExp
 #' @param verbose logical, verbose output?
 #' @return MSnExp
 #' @noRd
-.readMSData2 <- function(files, verbose=interactive()) {
-  readMSData2(files, msLevel.=2, verbose=verbose)
+.readMSData <- function(files, onDisk=FALSE, verbose=interactive()) {
+  if (onDisk) {
+    readMSData2(files, msLevel.=2L, verbose=verbose)
+  } else {
+    readMSData(files, msLevel.=2L, verbose=verbose)
+  }
 }
 
 #' Merge ScanCondition and HeaderInformation

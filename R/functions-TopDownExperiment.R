@@ -7,6 +7,9 @@
 #' @param modification modifications (see MSnbase::calculateFragments)
 #' @param neutralLoss neutral loss (see MSnbase::calculateFragments)
 #' @param tolerance double, tolerance to match peaks
+#' @param onDisk logical, use \code{\linkS4class{MSnExp}} (\code{FALSE},
+#' default) or \code{\linkS4class{OnDiskMSnExp}} (\code{TRUE}) for spectra
+#' storage.
 #' @param verbose logical, verbose output?
 #' @return TopDownExperiment object.
 #' @export
@@ -15,8 +18,10 @@ TopDownExperiment <- function(path, pattern=".*",
                               modifications=c(C=57.02146),
                               neutralLoss=defaultNeutralLoss(),
                               tolerance=10e-6,
+                              onDisk=FALSE,
                               verbose=interactive(), ...) {
-  tdf <- .readTopDownFiles(path=path, pattern=pattern, verbose=verbose)
+  tdf <- .readTopDownFiles(path=path, pattern=pattern, onDisk=onDisk,
+                           verbose=verbose)
 
   sequence <- tdf$fasta
 
