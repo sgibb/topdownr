@@ -407,7 +407,8 @@ test_that("writeMethodXmls", {
                                  replications=1,
                                  mz=cbind(100, 2),
                                  randomise=FALSE,
-                                 pattern=file.path(tdir, "method_%s.xml")))
+                                 pattern=file.path(tdir, "method_%s.xml"),
+                                 verbose=TRUE))
 
   xml <- c('<?xml version="1.0" encoding="utf-8"?>',
            '<MethodModifications Version="1" Model="OrbitrapFusion" Family="Calcium" Type="SL">',
