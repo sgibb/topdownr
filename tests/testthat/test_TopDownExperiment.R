@@ -131,3 +131,19 @@ test_that(".logmsg", {
   expect_equal(topdown:::.logmsg(td, "foo")@processingData@processing[1],
                paste0("[", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "] foo"))
 })
+
+test_that(".validateTopDownExperiment", {
+  expect_true(topdown:::.validateTopDownExperiment(td))
+  expect_true(validObject(td))
+  td@assignmentTable$SpectrumId <- paste0("F2.S", 1:9)
+  expect_error(validObject(td),
+               "IDs in assignment table don't match feature names.")
+  td@assignmentTable <- atab
+  td@assignmentTable$MzId <- 1:9
+  expect_error(validObject(td),
+               "Mismatch in spectra and assignment table's peak indices.")
+  td@assignmentTable <- atab
+  td@assignmentTable$FragmentId <- 1:9
+  expect_error(validObject(td),
+               "Mismatch in fragment and assignment table's fragment indices.")
+})

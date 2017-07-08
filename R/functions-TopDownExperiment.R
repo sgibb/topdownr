@@ -54,6 +54,7 @@ TopDownExperiment <- function(path, pattern=".*",
   td <- .logmsg(td, msg)
   .msg(verbose, msg)
 
+  .msg(verbose, "Validating object.")
   if (validObject(td)) {
     td
   }
@@ -72,7 +73,7 @@ TopDownExperiment <- function(path, pattern=".*",
 #' @noRd
 .matchFragments <- function(msnexp, ftab, tolerance=25e-6,
                             verbose=interactive(), ...) {
-  .msg(verbose, "Looking for fragments in spectra")
+  .msg(verbose, "Looking for fragments in spectra.")
 
   if (verbose) {
     pb <- txtProgressBar(min=0L, max=length(msnexp), style=3L)
@@ -149,3 +150,28 @@ TopDownExperiment <- function(path, pattern=".*",
   object
 }
 
+#' Validate TopDownExperiment
+#'
+#' @param object TopDownExperiment
+.validateTopDownExperiment <- function(object) {
+  msg <- character()
+
+  if (!all(object@assignmentTable$SpectrumId %in% featureNames(object))) {
+    msg <- c(msg, "IDs in assignment table don't match feature names.")
+  }
+
+  if (any(unlist(lapply(peaksCount(object), seq_len), use.names=FALSE) !=
+          object@assignmentTable$MzId)) {
+    msg <- c(msg, "Mismatch in spectra and assignment table's peak indices.")
+  }
+
+  if (!all(object@assignmentTable$FragmentId %in% object@fragmentTable$FragmentId)) {
+    msg <- c(msg, "Mismatch in fragment and assignment table's fragment indices.")
+  }
+
+  if (length(msg)) {
+    msg
+  } else {
+    TRUE
+  }
+}

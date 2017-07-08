@@ -8,6 +8,6 @@ setClass("TopDownExperiment",
                       name=character(),
                       sequence=character(),
                       fragmentTable=data.table(),
-                      assignmentTable=data.table()
-  )
+                      assignmentTable=data.table()),
+  validity=function(object).validateTopDownExperiment(object)
 )
