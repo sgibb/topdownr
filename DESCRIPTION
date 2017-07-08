@@ -6,6 +6,7 @@ Authors@R: c(person("Sebastian", "Gibb", role=c("aut", "cre"), email="mail@sebas
 Description: What the package does (one paragraph).
 Depends:
     R (>= 3.2.4),
+    methods,
     MSnbase (>= 2.3.8),
     ProtGenerics (>= 1.6.0)
 Imports:
