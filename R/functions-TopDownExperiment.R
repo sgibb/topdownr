@@ -4,7 +4,7 @@
 #' @param pattern \code{character}, pattern for file names.
 #' @param type character, type of fragments (should be some more than in
 #' MSnbase)
-#' @param modification modifications (see MSnbase::calculateFragments)
+#' @param modifications modifications (see MSnbase::calculateFragments)
 #' @param neutralLoss neutral loss (see MSnbase::calculateFragments)
 #' @param tolerance double, tolerance to match peaks
 #' @param onDisk logical, use \code{\linkS4class{MSnExp}} (\code{FALSE},
@@ -59,6 +59,113 @@ TopDownExperiment <- function(path, pattern=".*",
   }
 }
 
+#' Filter by fragment id.
+#'
+#' @param object TopDownExperiment object
+#' @param id double, fragment id
+#' @return subsetted object
+#' @noRd
+.filterFragmentId <- function(object, id) {
+  atab <- assignmentTable(object)[FragmentId %in% id, ]
+  if (!nrow(atab)) {
+    stop("Selecting would result in an empty object. No subsetting applied.")
+  }
+  object <- .subsetMSnExpSpectra(object, atab$SpectrumId, atab$MzId)
+  object@assignmentTable <- .updateAssignmentTableMzId(atab)
+
+  if (validObject(object)) {
+    object
+  }
+}
+
+#' Filter by fragment ion or type.
+#'
+#' @param object TopDownExperiment object
+#' @param ion character, fragment ion
+#' @return subsetted object
+#' @noRd
+.filterFragmentIonOrType <- function(object, ion) {
+  # seems to be faster than ftab[,unique(ion)]
+  ions <- .fragmentIons(object)
+  types <- .fragmentTypes(object)
+  u <- unique(c(ions, types))
+  if (!all(ion %in% u)) {
+    stop("Ion(s)/Type(s) ",
+         paste0(dQuote(ion[!ion %in% u]), collapse=", "),
+         " not found!")
+  }
+  .filterFragmentId(object, .fragmentId(object)[ions %in% ion | types %in% ion])
+}
+
+#' Filter by fragment pos.
+#'
+#' @param object TopDownExperiment object
+#' @param pos integer, fragment/bound position
+#' @return subsetted object
+#' @noRd
+.filterFragmentPos <- function(object, pos) {
+  # seems to be faster than ftab[,unique(pos)]
+  positions <- .fragmentPos(object)
+  uPos <- unique(positions)
+  if (!all(pos %in% uPos)) {
+    stop("Position(s) ",
+         paste0(dQuote(pos[!pos %in% uPos]), collapse=", "),
+         " not found!")
+  }
+  .filterFragmentId(object, .fragmentId(object)[positions %in% pos])
+}
+
+#' Get fragment ID.
+#'
+#' @param object TopDownExperiment
+#' @return numeric
+#' @noRd
+.fragmentId <- function(object) {
+  fragmentTable(object)$FragmentId
+}
+
+#' Get fragment ions.
+#'
+#' @param object TopDownExperiment
+#' @return character
+#' @noRd
+.fragmentIons <- function(object) {
+  fragmentTable(object)$ion
+}
+
+#' Get fragment positions.
+#'
+#' @param object TopDownExperiment
+#' @return integer
+#' @noRd
+.fragmentPos <- function(object) {
+  fragmentTable(object)$pos
+}
+
+#' Get fragment types.
+#'
+#' @param object TopDownExperiment
+#' @return character
+#' @noRd
+.fragmentTypes <- function(object) {
+  fragmentTable(object)$type
+}
+
+#' Add log message.
+#'
+#' @param object TopDownExperiment
+#' @param msg character, log message
+#' @return TopDownExperiment
+#' @noRd
+.logmsg <- function(object, msg, date=TRUE) {
+  if (date) {
+    msg <- paste0("[", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "] ", msg)
+  }
+  object@processingData@processing <-
+    c(object@processingData@processing, msg)
+  object
+}
+
 #' Look for fragment/mz matching.
 #'
 #' Removes non-matching peaks and creates assignment table.
@@ -101,57 +208,16 @@ TopDownExperiment <- function(path, pattern=".*",
   d <- data.table(SpectrumId=rep.int(featureNames(msnexp), lengths(fragId)),
                   FragmentId=as.double(unlist(fragId)),
                   key=c("SpectrumId", "FragmentId"))
-  d[, MzId:=seq_len(.N), by=SpectrumId]
-  setkey(d, SpectrumId, FragmentId, MzId)
+  d <- .updateAssignmentTableMzId(d)
 
   list(assayData=newAssay, assignmentTable=d)
-}
-
-#' Get fragment ID.
-#'
-#' @param object TopDownExperiment
-#' @return numeric
-#' @noRd
-.fragmentId <- function(object) {
-  fragmentTable(object)$FragmentId
-}
-
-#' Get fragment ions.
-#'
-#' @param object TopDownExperiment
-#' @return character
-#' @noRd
-.fragmentIons <- function(object) {
-  fragmentTable(object)$ion
-}
-
-#' Get fragment types.
-#'
-#' @param object TopDownExperiment
-#' @return character
-#' @noRd
-.fragmentTypes <- function(object) {
-  fragmentTable(object)$type
-}
-
-#' Add log message.
-#'
-#' @param object TopDownExperiment
-#' @param msg character, log message
-#' @return TopDownExperiment
-#' @noRd
-.logmsg <- function(object, msg, date=TRUE) {
-  if (date) {
-    msg <- paste0("[", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "] ", msg)
-  }
-  object@processingData@processing <-
-    c(object@processingData@processing, msg)
-  object
 }
 
 #' Validate TopDownExperiment
 #'
 #' @param object TopDownExperiment
+#' @return TRUE (if valid) else character with msg what was incorrect
+#' @noRd
 .validateTopDownExperiment <- function(object) {
   msg <- character()
 

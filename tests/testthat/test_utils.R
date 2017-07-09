@@ -85,3 +85,22 @@ test_that(".topDownFileExtRx", {
   expect_equal(topdown:::.topDownFileExtRx("txt"),
                "\\.txt$")
 })
+
+test_that(".updateAssignmentTableMzId", {
+  atab <- data.table(SpectrumId=paste0("F1.S", rep(1:3, each=3)),
+                     FragmentId=c(1:3,
+                                  3:5,
+                                  2:3, 5),
+                     MzId=c(1:3,
+                            1:3,
+                            1:3), key=c("SpectrumId", "FragmentId", "MzId"))
+  atab2 <- data.table(SpectrumId=paste0("F1.S", rep(1:3, each=2)),
+                      FragmentId=c(1, 3,
+                                   3, 5,
+                                   2, 5),
+                      MzId=c(1:2,
+                             1:2,
+                             1:2), key=c("SpectrumId", "FragmentId", "MzId"))
+  expect_equal(topdown:::.updateAssignmentTableMzId(atab), atab)
+  expect_equal(topdown:::.updateAssignmentTableMzId(atab[MzId!=2,]), atab2)
+})

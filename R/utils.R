@@ -128,7 +128,7 @@ cat0 <- function(...) {
 
 #' TopDown file extensions.
 #' @param type character, which file ext
-#' @return regexp for file extensions
+#' @return character, regexp for file extensions
 #' @noRd
 .topDownFileExtRx <- function(type=c("cfmt", "csv", "fasta", "mzml", "txt",
                                      "raw", "all")) {
@@ -140,6 +140,18 @@ cat0 <- function(...) {
                 "cfmt" = c("csv", "fasta", "mzml", "txt"),
                 type)
   paste0("\\.", ext[sel], "$", collapse="|")
+}
+
+#' Update assignmentTable MzId values.
+#' Because of the initial removal of non-matching peaks, each subsetting will
+#' result in an mz index 1:n. This function regenerates the MzId column.
+#' @param x assignmentTable
+#' @return data.table, updated MzId column
+#' @noRd
+.updateAssignmentTableMzId <- function(x) {
+  x[, MzId:=seq_len(.N), by=SpectrumId]
+  setkey(x, SpectrumId, FragmentId, MzId)
+  x
 }
 
 #' wrapper around vapply for FUN.VALUE=double(1L)

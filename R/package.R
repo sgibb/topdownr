@@ -9,6 +9,7 @@
 #' @keywords package
 #'
 #' @import data.table
+#' @import methods
 #' @import MSnbase
 #'
 #' @importFrom stats setNames
