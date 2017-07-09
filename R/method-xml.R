@@ -11,7 +11,7 @@
   experiments <- expand.grid(ms2Settings, stringsAsFactors=FALSE)
   experiments <- .replaceZeroETDReactionTime(experiments)
   if (length(groupBy)) {
-    experiments <- .groupExperimentsBy(experiments, groupBy)
+    experiments <- .groupBy(experiments, groupBy)
   } else {
     experiments <- list(experiment=experiments)
   }
@@ -36,21 +36,6 @@
     x[isZero, grepl("^ETD", colnames(x))] <- NA
   }
   x
-}
-
-#' Split MS2 experiment data.frame
-#' @param x data.frame, from .ms2Experiments
-#' @param cols character, colnames used to split
-#' @return list
-#' @noRd
-.groupExperimentsBy <- function(x, cols=c("replication")) {
-  if (length(cols) > 1L) {
-    ## `interaction` doesn't handle NA values, so use `paste` instead
-    f <- do.call(paste, c(x[, cols], sep=":"))
-  } else {
-    f <- x[, cols]
-  }
-  split(x, f)
 }
 
 #' Calculate Start/End time of each scan
