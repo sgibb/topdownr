@@ -184,3 +184,9 @@ cat0 <- function(...) {
 .vapply1d <- function(X, FUN, ..., USE.NAMES=FALSE) {
   vapply(X=X, FUN=FUN, FUN.VALUE=NA_real_, ..., USE.NAMES=USE.NAMES)
 }
+
+#' wrapper around vapply for FUN.VALUE=logical(1L)
+#' @noRd
+.vapply1l <- function(X, FUN, ..., USE.NAMES=FALSE) {
+  vapply(X=X, FUN=FUN, FUN.VALUE=NA, ..., USE.NAMES=USE.NAMES)
+}
