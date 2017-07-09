@@ -39,15 +39,25 @@ cat0 <- function(...) {
 #' @param cols character, colnames used to split
 #' @return list
 #' @noRd
-.groupBy <- function(x, cols=c("replication")) {
+.groupBy <- function(x, cols) {
+  split(x, .groupByLabels(x, cols))
+}
+
+#' Create group labels from data.frame columns
+#' @param x data.frame, e.g. from .ms2Experiments
+#' @param cols character, colnames used to split
+#' @return list
+#' @noRd
+.groupByLabels <- function(x, cols) {
   if (length(cols) > 1L) {
     ## `interaction` doesn't handle NA values, so use `paste` instead
-    f <- do.call(paste, c(x[, cols], sep=":"))
+    do.call(paste, c(x[, cols], sep=":"))
   } else {
-    f <- x[, cols]
+    as.character(x[, cols])
   }
-  split(x, f)
 }
+
+
 
 #' Create mass label
 #'

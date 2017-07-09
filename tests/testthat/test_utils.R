@@ -29,6 +29,16 @@ test_that(".groupBy", {
                setNames(split(x, x$ID), c("1:1", "2:NA")))
 })
 
+test_that(".groupByLabels", {
+  x <- data.frame(ID=1:2, LE=rep(LETTERS[1:4], each=2), na=rep(c(1, NA), 4),
+                  stringsAsFactors=FALSE)
+  expect_equal(topdown:::.groupByLabels(x, "LE"), x$LE)
+  expect_equal(topdown:::.groupByLabels(x, c("ID", "LE")),
+               paste(1:2, rep(LETTERS[1:4], each=2), sep=":"))
+  expect_equal(topdown:::.groupByLabels(x, c("ID", "na")),
+               paste(rep(1:2, 4), rep(c(1, NA), 4), sep=":"))
+})
+
 test_that(".massLabel", {
   expect_equal(topdown:::.massLabel(c(750, 1000.76), c(1, 245)),
                c(750.0001, 1000.8245))
