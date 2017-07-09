@@ -23,7 +23,11 @@ setMethod("[", "TopDownExperiment", function(x, i, j="missing", ...,
   fn <- featureNames(x)[i]
   x@assignmentTable <- assignmentTable(x)[SpectrumId %in% fn,]
 
-  callNextMethod()
+  ## overwrite MSnbase log msg
+  processing <- object@processingData@processing
+  object <- callNextMethod()
+  object@processingData@processing <- processing
+  object
 })
 
 #' Accessor for assignmentTable, not exported yet
