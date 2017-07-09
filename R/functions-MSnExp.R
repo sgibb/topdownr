@@ -13,5 +13,7 @@
     mapply(.subsetSpectrum2,
            object=mget(featureNames(msnexp), assayData(msnexp)),
            i=split(mzId, spectrumId), SIMPLIFY=FALSE))
+
+  lockEnvironment(msnexp@assayData, bindings=TRUE)
   msnexp
 }
