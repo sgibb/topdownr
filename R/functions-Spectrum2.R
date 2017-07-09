@@ -1,3 +1,32 @@
+#' aggregate MSnbase::Spectrum2 objects
+#'
+#' @param mz list, of mz values
+#' @param int list, of intensity values
+#' @param atab data.table, assignment table
+#' @param ftab data.table, fragment table
+#' @return subset of Spectrum2
+#' @noRd
+.aggregateSpectra <- function(mz, int, atab, ftab) {
+  stopifnot(all(names(mz) == names(int)))
+  stopifnot(all(atab$SpectrumId %in% names(mz)))
+  stopifnot(all(lengths(mz) == lengths(int)))
+  stopifnot(sum(lengths(mz)) == nrow(atab))
+  m <- i <- matrix(NA_real_, nrow=nrow(ftab), ncol=length(mz),
+                   dimnames=list(ftab$ions, names(mz)))
+  coord <- cbind(atab$FragmentId, match(atab$SpectrumId, names(mz)))
+  m[coord] <- unlist(mz)
+  i[coord] <- unlist(int)
+  mz <- rowMeans(m, na.rm=TRUE)
+  int <- rowMeans(i, na.rm=TRUE)
+  nan <- is.nan(mz)
+
+  s <- new("Spectrum2", mz=mz[!nan], intensity=int[!nan])
+
+  if (validObject(s)) {
+    return(s)
+  }
+}
+
 #' Subset MSnbase::Spectrum2 objects
 #'
 #' @param object Spectrum2 object
