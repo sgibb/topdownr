@@ -2,11 +2,13 @@
 #'
 #' @param mz list, of mz values
 #' @param int list, of intensity values
+#' @param rt double, of rtime values
 #' @param atab data.table, assignment table
 #' @param ftab data.table, fragment table
+#' @param \ldots arguments passed to new
 #' @return subset of Spectrum2
 #' @noRd
-.aggregateSpectra <- function(mz, int, atab, ftab) {
+.aggregateSpectra <- function(mz, int, rt, atab, ftab, ...) {
   stopifnot(all(names(mz) == names(int)))
   stopifnot(all(atab$SpectrumId %in% names(mz)))
   stopifnot(all(lengths(mz) == lengths(int)))
@@ -18,9 +20,10 @@
   i[coord] <- unlist(int)
   mz <- rowMeans(m, na.rm=TRUE)
   int <- rowMeans(i, na.rm=TRUE)
+  rt <- mean(rt, na.rm=TRUE)
   nan <- is.nan(mz)
 
-  s <- new("Spectrum2", mz=mz[!nan], intensity=int[!nan])
+  s <- new("Spectrum2", mz=mz[!nan], intensity=int[!nan], rt=rt, ...)
 
   if (validObject(s)) {
     return(s)

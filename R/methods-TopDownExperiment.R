@@ -25,7 +25,7 @@ setMethod("[", "TopDownExperiment", function(x, i, j="missing", ...,
   }
   d0 <- dim(x)
   fn <- featureNames(x)[i]
-  x@assignmentTable <- assignmentTable(x)[SpectrumId %in% fn,]
+  x@assignmentTable <- copy(assignmentTable(x)[SpectrumId %in% fn,])
 
   ## overwrite MSnbase log msg (and duplicated log by TDE subsetting if j is
   ## given)
@@ -46,10 +46,98 @@ setMethod("[", "TopDownExperiment", function(x, i, j="missing", ...,
 
   d1 <- dim(x)
   x@processingData@processing <- processing
-  x <- .logmsg(x, paste0("Subset [", d0[1L], ";", d0[2L], "] to [",
-                                     d1[1L], ";", d1[2L], "]."))
+  x <- .logmsg(x, paste0("Subsetted [", d0[1L], ";", d0[2L], "] to [",
+                                        d1[1L], ";", d1[2L], "]."))
 
   x
+})
+
+#' aggregate TopDownExperiment objects
+#' @param x TopDownExperiment
+#' @param by character, fvarLabels used for aggregation
+#' @param verbose logical, verbose output?
+#' @return TopDownExperiment
+#' @noRd
+setMethod("aggregate", "TopDownExperiment", function(x,
+  by=c("Mz", "AGCTarget", "ETDReagentTarget", "ETDActivation", "CIDActivation",
+       "HCDActivation", "SupplementalActivationCE", "SupplementalActivation"),
+  ..., verbose=interactive()) {
+
+  if (!(all(by %in% fvarLabels(x)))) {
+    stop(by[!by %in% fvarLabels(x)], " is/are not present in 'fvarLabels(x)'.")
+  }
+
+  fd <- as(featureData(x), "data.frame")
+  group <- .groupByLabels(fd, by)
+
+  .msg(verbose, "Aggregating featureData.")
+
+  fd <- .aggregateDataFrame(fd, f=group,
+                            ignoreCols=c("Scan", "spectrum", "ConditionId", "File"))
+  mz <- split(mz(x), group)
+  int <- split(intensity(x), group)
+  rtm <- split(rtime(x), group)
+  fns <- split(featureNames(x), group)
+  newFns <- MSnbase:::formatFileSpectrumNames(0L, seq_along(mz),
+                                              nSpectra=length(mz), nFiles=0L)
+
+  if (verbose) {
+    message("Aggregating spectra.")
+    pb <- txtProgressBar(min=0L, max=length(fns), style=3L)
+  }
+
+  atab <- copy(x@assignmentTable)
+  newAssay <- new.env(parent=emptyenv())
+
+  for (i in seq(along=fns)) {
+    if (verbose) {
+      setTxtProgressBar(pb, i)
+    }
+    assign(newFns[i],
+           .aggregateSpectra(mz[[i]], int[[i]], rt=rtm[[i]],
+                             atab[SpectrumId %in% fns[[i]],],
+                             fragmentTable(x), acquisitionNum=i, fromFile=1L),
+           newAssay)
+    atab[SpectrumId %in% fns[[i]], SpectrumId := newFns[i]]
+  }
+
+  if (verbose) {
+    close(pb)
+  }
+
+  atab[, MzId := NULL]
+  setorder(atab, SpectrumId, FragmentId)
+  atab <- unique(atab)
+  atab <- .updateAssignmentTableMzId(atab)
+
+  lockEnvironment(newAssay, bindings=TRUE)
+
+  rownames(fd) <- newFns
+  fdata <- new("AnnotatedDataFrame", data=fd)
+
+  pd <- data.frame(sampleNames="aggregated")
+  rownames(pd) <- pd$sampleNames
+  pdata <- new("NAnnotatedDataFrame", data=pd)
+
+  .msg(verbose, "Creating aggregated object.")
+
+  td <- new("TopDownExperiment",
+            assayData=newAssay,
+            featureData=fdata,
+            phenoData=pdata,
+            experimentData=experimentData(x),
+            processingData=processingData(x),
+            sequence=x@sequence,
+            assignmentTable=atab,
+            fragmentTable=fragmentTable(x))
+
+  d <- c(dim(x), dim(td))
+  td <- .logmsg(td, paste0("Aggregated [", d[1L], ";", d[2L], "] to [",
+                                           d[3L], ";", d[4L], "]."))
+
+  if (validObject(td)) {
+    td
+  }
 })
 
 #' Accessor for assignmentTable, not exported yet

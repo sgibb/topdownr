@@ -3,7 +3,9 @@ context("Spectrum2")
 test_that(".aggregateSpectra", {
   mz <- list(A=1:5, B=1:3, C=3:4)
   int <- list(A=5:1, B=3:1, C=4:3)
-  r <- new("Spectrum2", mz=1:5, intensity=c(4, 3, 8/3, 5/2, 1))
+  rt <- 1:3
+  r <- new("Spectrum2", mz=1:5, intensity=c(4, 3, 8/3, 5/2, 1), rt=2,
+           fromFile=1L, acquisitionNum=2L)
 
   ftab <- data.table(mz=1:7,
                      ion=c("a1", "a2", "b1", "b2", "c1", "c2", "c3"),
@@ -18,11 +20,13 @@ test_that(".aggregateSpectra", {
                             1:3,
                             1:2), key=c("SpectrumId", "FragmentId", "MzId"))
 
-  expect_error(topdown:::.aggregateSpectra(unname(mz), int, atab, ftab))
-  expect_error(topdown:::.aggregateSpectra(mz, int, atab[1:3,], ftab))
-  expect_error(topdown:::.aggregateSpectra(mz[1], int, atab, ftab))
-  expect_error(topdown:::.aggregateSpectra(mz, list(A=3:4, B=1:3, C=1:5), atab, ftab))
-  expect_equal(topdown:::.aggregateSpectra(mz, int, atab, ftab), r)
+  expect_error(topdown:::.aggregateSpectra(unname(mz), int, rt, atab, ftab))
+  expect_error(topdown:::.aggregateSpectra(mz, int, rt, atab[1:3,], ftab))
+  expect_error(topdown:::.aggregateSpectra(mz[1], int, rt, atab, ftab))
+  expect_error(topdown:::.aggregateSpectra(mz, list(A=3:4, B=1:3, C=1:5), rt,
+                                           atab, ftab))
+  expect_equal(topdown:::.aggregateSpectra(mz, int, rt, atab, ftab,
+                                           acquisitionNum=2L, fromFile=1L), r)
 })
 
 test_that(".subsetSpectrum2", {

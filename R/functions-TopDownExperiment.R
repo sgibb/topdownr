@@ -49,7 +49,7 @@ TopDownExperiment <- function(path, pattern=".*",
             ...)
 
   pc <- c(sum(peaksCount(td)), sum(peaksCount(msnexp)))
-  msg <- sprintf("Fragment matching: %d/%d (%d %%) peaks kept.",
+  msg <- sprintf("Fragments matched: %d/%d (%d %%) peaks kept.",
                  pc[1L], pc[2L], round(pc[1L]/pc[2L] * 100L))
   td <- .logmsg(td, msg)
   .msg(verbose, msg)
@@ -205,6 +205,8 @@ TopDownExperiment <- function(path, pattern=".*",
     assign(specName, sp, newAssay)
   }
 
+  lockEnvironment(newAssay, bindings=TRUE)
+
   d <- data.table(SpectrumId=rep.int(featureNames(msnexp), lengths(fragId)),
                   FragmentId=as.double(unlist(fragId)),
                   key=c("SpectrumId", "FragmentId"))
@@ -232,6 +234,10 @@ TopDownExperiment <- function(path, pattern=".*",
 
   if (!all(object@assignmentTable$FragmentId %in% object@fragmentTable$FragmentId)) {
     msg <- c(msg, "Mismatch in fragment and assignment table's fragment indices.")
+  }
+
+  if (is.unsorted(object@fragmentTable$mz)) {
+    msg <- c(msg, "Mz values have to be sorted in the fragment table.")
   }
 
   if (length(msg)) {
