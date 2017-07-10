@@ -18,6 +18,15 @@ test_that(".formatNames", {
                c("MonoisotopicMz", "SpsMass2", "RtMin", "MSLevel"))
 })
 
+test_that(".fragmentationMethod", {
+  d <- expand.grid(ETDActivation=0:1,
+                   CIDActivation=0:1,
+                   HCDActivation=0:1)
+  expect_error(topdown:::.fragmentationMethod(cbind(d, foo=1L)))
+  expect_equal(topdown:::.fragmentationMethod(d),
+               c("None", "ETD", "CID", "ETcid", "HCD", "EThcd", "HCD/CID", "All"))
+})
+
 test_that(".groupBy", {
   x <- data.frame(ID=1:2, LE=rep(LETTERS[1:4], each=2), na=rep(c(1, NA), 4),
                   stringsAsFactors=FALSE)

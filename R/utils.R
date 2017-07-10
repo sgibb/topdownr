@@ -34,6 +34,18 @@ cat0 <- function(...) {
   }))
 }
 
+#' Get fragmentation method from {ETD,CID,HCD}Activation
+#' @param x data.frame/matrix, 3 columns (ETD,CID,HCD)
+#' @return vector, fragmentation method
+#' @noRd
+.fragmentationMethod <- function(x) {
+  methods <- c("None", "ETD", "CID", "ETcid", "HCD", "EThcd", "HCD/CID", "All")
+  v <- c(ETDActivation=1L, CIDActivation=2L, HCDActivation=4L)
+  stopifnot(all(colnames(x) %in% names(v)))
+  x <- x[, names(v)]
+  apply(x, 1L, function(i)methods[sum(v[as.logical(i)]) + 1L])
+}
+
 #' Split list/data.frame
 #' @param x data.frame, e.g. from .ms2Experiments
 #' @param cols character, colnames used to split
