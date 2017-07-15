@@ -7,10 +7,11 @@ Description: What the package does (one paragraph).
 Depends:
     R (>= 3.2.4),
     methods,
-    MSnbase (>= 2.3.8),
-    ProtGenerics (>= 1.6.0)
+    MSnbase (>= 2.3.8)
 Imports:
-    data.table (>= 1.10.4)
+    Biostrings (>= 2.42.1),
+    IRanges (>= 2.8.2),
+    Matrix (>= 1.2.10)
 Suggests:
     knitr,
     testthat,
