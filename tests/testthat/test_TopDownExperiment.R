@@ -244,6 +244,9 @@ test_that(".logmsg", {
                paste0("[", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "] foo"))
 })
 
+test_that(".ncbMap", {
+})
+
 test_that(".validateTopDownExperiment", {
   expect_true(topdown:::.validateTopDownExperiment(td))
   expect_true(validObject(td))

@@ -215,6 +215,40 @@ TopDownExperiment <- function(path, pattern=".*",
   list(assayData=newAssay, assignmentTable=d)
 }
 
+#' NCB (N-/C-term, both) map
+#'
+#' @param ftab data.table, fragmentation table
+#' @param atab data.table, assignment table
+#' @param fd data.frame, featureData
+#' @return matrix
+#' @noRd
+.ncbMatrices <- function(ftab, atab, fd) {
+  acol <- c("ETDActivation", "CIDActivation", "HCDActivation")
+  stopifnot(all(acol %in% colnames(fd)))
+  p <- 1L:max(ftab$pos)
+  fd$FragmentationCondition <- apply(fd[, acol], 1L, paste0, collapse=":")
+  fd$FragmentationMethod <- .fragmentationMethod(fd[, acol])
+  d <- merge(atab, ftab[, .(FragmentId, type, pos)], by="FragmentId")
+  ## turn a, b, c into N (1L) and x, y, z into C (2L)
+  d[, c("FragmentationCondition", "FragmentationMethod") :=
+       fd[SpectrumId, c("FragmentationCondition", "FragmentationMethod")]]
+
+  l <- lapply(split(d, d$FragmentationMethod), .ncbMatrix, nrow=max(ftab$pos))
+}
+
+.ncbMatrix <- function(dd, nrow) {
+  uc <- unique(dd$FragmentationCondition)
+  m <- matrix(0L, nrow=nrow, ncol=length(uc), dimnames=list(1L:nrow, uc))
+  ## N
+  dN <- dd[type %in% c("a", "b", "c"), .(pos, FragmentationCondition)]
+  m[trimws(as.matrix(dN))] <- 1L
+  ## C
+  dC <- dd[type %in% c("x", "y", "z"), .(pos, FragmentationCondition)]
+  mC <- trimws(as.matrix(dC))
+  m[mC] <- m[mC] + 2L
+  m
+}
+
 #' Validate TopDownExperiment
 #'
 #' @param object TopDownExperiment

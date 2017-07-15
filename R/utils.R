@@ -69,8 +69,6 @@ cat0 <- function(...) {
   }
 }
 
-
-
 #' Create mass label
 #'
 #' Identifying the experiments by the running time/order is complicated.
