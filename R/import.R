@@ -71,20 +71,21 @@
 #' @noRd
 .readExperimentCsv <- function(file, verbose=interactive()) {
   stopifnot(file_ext(file) == "csv")
-  d <- fread(file, showProgress=verbose)
+  d <- read.csv(file, stringsAsFactors=FALSE)
   colnames(d) <- .formatNames(colnames(d))
 
-  .msg(verbose, "Reading ", nrow(d), " experiment conditions from file ",
+  .msg(verbose, "Read ", nrow(d), " experiment conditions from file ",
        basename(file))
 
   ## drop MS1
-  d <- d[MSLevel == 2L,]
+  d <- d[d$MSLevel == 2L,]
 
   d[is.na(d)] <- 0L
 
-  d[, ConditionId := as.integer(.I)]
-  d[, Mz := .targetedMassListToMz(TargetedMassList)]
-  d[, File := gsub(.topDownFileExtRx("csv"), "", basename(file))]
+  d$ConditionId <- seq_len(nrow(d))
+  d$Mz <- .targetedMassListToMz(d$TargetedMassList)
+  d$File <- gsub(.topDownFileExtRx("csv"), "", basename(file))
+  d
 }
 
 #' Read fasta file.
@@ -96,16 +97,12 @@
 #' @return character
 #' @noRd
 .readFasta <- function(file, verbose=interactive()) {
-  .msg(verbose, "Reading sequence from fasta file ", basename(file))
-  l <- readLines(file)
-  s <- l[!startsWith(l, ">")]
-  if (!length(s) || !nzchar(s)) {
+  aa <- readAAStringSet(file, nrec=1L, use.names=FALSE)[[1L]]
+  .msg(verbose, "Read sequence from fasta file ", basename(file))
+  if (!length(aa)) {
     stop("No sequence found.")
   }
-  if (length(s) > 1) {
-    warning("Multiple sequences found, using the first one.")
-  }
-  s[1L]
+  aa
 }
 
 #' Read ScanHeadMans header (txt) output.
@@ -163,8 +160,8 @@
 #' @return data.table
 #' @noRd
 .mergeScanConditionAndHeaderInformation <- function(sc, hi) {
-  stopifnot(is(sc, "data.table"))
-  stopifnot(is(hi, "data.table"))
+  stopifnot(is(sc, "data.frame"))
+  stopifnot(is(hi, "data.frame"))
   merge(sc, hi, by=c("File", "ConditionId"), all.y=TRUE,
         suffixes=c(".ScanCondition", ".HeaderInformation"))
 }

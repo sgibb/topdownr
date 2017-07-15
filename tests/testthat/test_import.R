@@ -30,7 +30,7 @@ test_that(".readExperimentCsv", {
                   stringsAsFactors=FALSE)
   write.csv(d, file=fn, row.names=FALSE)
   expect_message(e <- topdown:::.readExperimentCsv(fn, verbose=TRUE),
-                 "Reading 3 experiment conditions from file")
+                 "Read 3 experiment conditions from file")
   expect_equal(colnames(e),
                c("MSLevel", "NaColumn", "TargetedMassList", "ConditionId",
                  "Mz", "File"))
@@ -46,13 +46,10 @@ test_that(".readFasta", {
   fn <- paste0(tempfile(), ".fasta")
   writeLines(c("> FOOBAR", "Sequence"), fn)
   expect_message(s <- topdown:::.readFasta(fn, verbose=TRUE),
-                 "Reading sequence from fasta file")
-  expect_equal(s, "Sequence")
+                 "Read sequence from fasta file")
+  expect_equal(s, AAString("Sequence"))
   writeLines(c("> FOOBAR", "> Sequence"), fn)
   expect_error(topdown:::.readFasta(fn), "No sequence found")
-  writeLines(c("FOOBAR", "Sequence"), fn)
-  expect_warning(s <- topdown:::.readFasta(fn), "Multiple sequences found")
-  expect_equal(s, "FOOBAR")
   unlink(fn)
 })
 
@@ -68,7 +65,7 @@ test_that(".readScanHeadsTable", {
                   stringsAsFactors=FALSE)
   write.csv(d, file=fn, row.names=FALSE)
   expect_message(h <- topdown:::.readScanHeadsTable(fn, verbose=TRUE),
-                 "Reading 4 header information from file")
+                 "Read 4 header information from file")
   expect_equal(colnames(h),
                c("MSOrder", "FilterString", "Activation1", "Activation2",
                  "Energy1", "Energy2", "ETDActivation", "CIDActivation",
@@ -83,15 +80,14 @@ test_that(".readScanHeadsTable", {
 })
 
 test_that(".mergeScanConditionAndHeaderInformation", {
-  sc <- data.table(FOO=1:3, ConditionId=c(1:2, 1), Both=1,
+  sc <- data.frame(FOO=1:3, ConditionId=c(1:2, 1), Both=1,
                    File=c("foo", "foo", "bar"))
-  hi <- data.table(BAR=1:5, ConditionId=c(1, 1, 2, 2, 1), Both=2,
+  hi <- data.frame(BAR=1:5, ConditionId=c(1, 1, 2, 2, 1), Both=2,
                    File=c("bar", "bar", "bar", "foo", "foo"))
-  r <- data.table(File=c(rep("bar", 3), rep("foo", 2)),
+  r <- data.frame(File=c(rep("bar", 3), rep("foo", 2)),
                   ConditionId=c(1, 1, 2, 1, 2), FOO=c(3, 3, NA, 1, 2),
                   Both.ScanCondition=c(1, 1, NA, 1, 1), BAR=c(1:3, 5:4),
                   Both.HeaderInformation=2)
-  setkeyv(r, c("File", "ConditionId"))
   expect_equal(topdown:::.mergeScanConditionAndHeaderInformation(sc, hi), r)
 })
 
