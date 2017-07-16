@@ -2,7 +2,7 @@
 FragmentViews <- function(sequence, mass, type, z=1L,
                           start=NULL, end=NULL, width=NULL, names=NULL) {
   v <- Views(AAString(sequence), start=start, end=end, width=width, names=names)
-  d <- DataFrame(mass=mass, type=Rle(factor(type)), z=Rle(z))
+  d <- DataFrame(mass=mass, type=factor(type), z=Rle(z))
   elementMetadata(v) <- d
   new("FragmentViews", v[order(d$mass)])
 }

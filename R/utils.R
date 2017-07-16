@@ -5,6 +5,15 @@ cat0 <- function(...) {
   cat(..., sep="", append=TRUE)
 }
 
+#' Convert DataFrame columns to Rle
+#' @param x DataFrame
+#' @noRd
+.colsToRle <- function(x) {
+  toConvert <- .vapply1l(x, function(xx)length(unique(xx)) < nrow(x) / 4L)
+  x[toConvert] <- lapply(x[toConvert], Rle)
+  x
+}
+
 #' The ScanHeadsMan output for the header information contains a column
 #' FilterString with the format "FTMS + p NSI Full ms2 [0-9]+\.[0-9]+@hcd35.00
 #' [xxx-yyy]". This function converts this format to the ID stored in the mass
@@ -67,6 +76,15 @@ cat0 <- function(...) {
   } else {
     as.character(x[, cols])
   }
+}
+
+#' Add log message.
+#'
+#' @param msg character, log message
+#' @return msg with date string added
+#' @noRd
+.logmsg <- function(msg) {
+  paste0("[", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "] ", msg)
 }
 
 #' Create mass label
@@ -175,18 +193,6 @@ cat0 <- function(...) {
                 "cfmt" = c("csv", "fasta", "mzml", "txt"),
                 type)
   paste0("\\.", ext[sel], "$", collapse="|")
-}
-
-#' Update assignmentTable MzId values.
-#' Because of the initial removal of non-matching peaks, each subsetting will
-#' result in an mz index 1:n. This function regenerates the MzId column.
-#' @param x assignmentTable
-#' @return data.table, updated MzId column
-#' @noRd
-.updateAssignmentTableMzId <- function(x) {
-  x[, MzId:=seq_len(.N), by=SpectrumId]
-  setkey(x, SpectrumId, FragmentId, MzId)
-  x
 }
 
 #' wrapper around vapply for FUN.VALUE=double(1L)

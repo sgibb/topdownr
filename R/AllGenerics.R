@@ -1,6 +1,0 @@
-setGeneric("assignmentTable", function(object)
-           standardGeneric("assignmentTable"))
-setGeneric("fragmentTable", function(object)
-           standardGeneric("fragmentTable"))
-setGeneric("msnExp", function(object)
-           standardGeneric("msnExp"))

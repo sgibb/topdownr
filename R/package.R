@@ -12,8 +12,10 @@
 #' @import Biostrings
 #' @import IRanges
 #' @import Matrix
-#' @import MSnbase
+#' @import S4Vectors
 #'
+#' @importFrom mzR openMSfile close header peaks
+#' @importFrom MSnbase calculateFragments
 #' @importFrom stats setNames
 #' @importFrom tools file_ext file_path_sans_ext
 #' @importFrom utils modifyList txtProgressBar setTxtProgressBar

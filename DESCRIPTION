@@ -11,7 +11,9 @@ Depends:
 Imports:
     Biostrings (>= 2.42.1),
     IRanges (>= 2.8.2),
-    Matrix (>= 1.2.10)
+    Matrix (>= 1.2.10),
+    mzR (>= 2.11.5),
+    S4Vectors (>= 0.12.2)
 Suggests:
     knitr,
     testthat,

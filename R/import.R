@@ -148,16 +148,40 @@
 #' Read MS2 Spectra (mzML)
 #'
 #' @param file character, filename
-#' @param onDisk logical, return MSnExp or (if TRUE) OnDiskMSnExp
+#' @param fmass double, fragment mass
+#' @param \ldots further arguments passed to .matchFragments
 #' @param verbose logical, verbose output?
-#' @return MSnExp
+#' @return list (with data.frame for header and sparseMatrix with intensity
+#' values)
 #' @noRd
-.readMSData <- function(files, onDisk=FALSE, verbose=interactive()) {
-  if (onDisk) {
-    readMSData2(files, msLevel.=2L, verbose=verbose)
-  } else {
-    readMSData(files, msLevel.=2L, verbose=verbose)
+.readMzMl <- function(file, scans, fmass, ..., verbose=interactive()) {
+  .msg(verbose, "Reading spectra information from file ", basename(file),
+       appendLF=FALSE)
+
+  fh <- openMSfile(file)
+  on.exit(close(fh))
+
+  hd <- header(fh)
+  i <- which(hd$msLevel == 2L & hd$acquisitionNum %in% scans)
+  hd <- hd[i, !grepl("seqNum", colnames(hd), fixed=TRUE), drop=FALSE]
+  colnames(hd)[grepl("acquisitionNum", colnames(hd), fixed=TRUE)] <- "Scan"
+  hd$File <- gsub(.topDownFileExtRx("mzml"), "", basename(file))
+
+  nr <- nrow(hd)
+  m <- Matrix(0L, nrow=length(fmass), ncol=nr, sparse=TRUE)
+
+  for (j in seq_along(i)) {
+    k <- .matchFragments(peaks(fh, i[j])[, 1L], fmass, ...)
+    notNA <- !is.na(k)
+    if (sum(notNA)) {
+      m[k[notNA], j] <- peaks(fh, i[j])[notNA, 2L]
+    }
   }
+
+  .msg(verbose, sprintf(" (%02.1f%%)",
+                        round(sum(m != 0L)/sum(hd$peaksCount) * 100, 1L)))
+
+  list(hd=hd, m=m)
 }
 
 #' Merge ScanCondition and HeaderInformation

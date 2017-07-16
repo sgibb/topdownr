@@ -4,6 +4,12 @@ test_that("cat0", {
   expect_output(topdown:::cat0("foo", "bar"), "foobar")
 })
 
+test_that("cat0", {
+  d <- DataFrame(a=1:10, b=rep(1, 10), c=rep(c("foo", "bar"), each=5))
+  r <- DataFrame(a=1:10, b=Rle(rep(1, 10)), c=Rle(rep(c("foo", "bar"), each=5)))
+  expect_equal(topdown:::.colsToRle(d), r)
+})
+
 test_that(".filterStringToId", {
   expect_error(topdown:::.filterStringToId(1:3))
   expect_equal(topdown:::.filterStringToId(
@@ -46,6 +52,11 @@ test_that(".groupByLabels", {
                paste(1:2, rep(LETTERS[1:4], each=2), sep=":"))
   expect_equal(topdown:::.groupByLabels(x, c("ID", "na")),
                paste(rep(1:2, 4), rep(c(1, NA), 4), sep=":"))
+})
+
+test_that(".logmsg", {
+  expect_equal(topdown:::.logmsg("foo"),
+               paste0("[", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "] foo"))
 })
 
 test_that(".massLabel", {
@@ -114,23 +125,4 @@ test_that(".topDownFileExtRx", {
                "\\.mz[Mm][Ll]$")
   expect_equal(topdown:::.topDownFileExtRx("txt"),
                "\\.txt$")
-})
-
-test_that(".updateAssignmentTableMzId", {
-  atab <- data.table(SpectrumId=paste0("F1.S", rep(1:3, each=3)),
-                     FragmentId=c(1:3,
-                                  3:5,
-                                  2:3, 5),
-                     MzId=c(1:3,
-                            1:3,
-                            1:3), key=c("SpectrumId", "FragmentId", "MzId"))
-  atab2 <- data.table(SpectrumId=paste0("F1.S", rep(1:3, each=2)),
-                      FragmentId=c(1, 3,
-                                   3, 5,
-                                   2, 5),
-                      MzId=c(1:2,
-                             1:2,
-                             1:2), key=c("SpectrumId", "FragmentId", "MzId"))
-  expect_equal(topdown:::.updateAssignmentTableMzId(atab), atab)
-  expect_equal(topdown:::.updateAssignmentTableMzId(atab[MzId!=2,]), atab2)
 })
