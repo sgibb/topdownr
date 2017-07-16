@@ -28,39 +28,6 @@
   split(files, file_ext(files))
 }
 
-#' Read TopDown files.
-#'
-#' Read all TopDown files:
-#'  - .fasta (peptide sequence)
-#'  - .mzML (spectra)
-#'  - .experiments.csv (fragmentation conditions)
-#'  - .txt (header information)
-#'
-#' @param path character, file path
-#' @param pattern character, filename pattern
-#' @param onDisk logical, return MSnExp or (if TRUE) OnDiskMSnExp
-#' @param verbose logical, verbose output?
-#' @return list (splitted by file extension) with file path
-#' @noRd
-.readTopDownFiles <- function(path, pattern=".*", onDisk=FALSE,
-                              verbose=interactive()) {
-  files <- .listTopDownFiles(path, pattern=pattern)
-
-  if (any(lengths(files)) == 0L) {
-    ext <- c("experiments.csv", "fasta", "mzML", "txt")
-    stop("Could not found any ", paste0(ext[lengths(files) == 0L],
-                                        collapse=" or "), " files!")
-  }
-
-  fasta <- .readFasta(files$fasta, verbose=verbose)
-  mzml <- .readMSData(files$mzML, onDisk=onDisk, verbose=verbose)
-  csv <- do.call(rbind, lapply(files$csv, .readExperimentCsv,
-                               verbose=verbose))
-  txt <- do.call(rbind, lapply(files$txt, .readScanHeadsTable,
-                               verbose=verbose))
-  list(fasta=fasta, MSnExp=mzml, ScanConditions=csv, HeaderInformation=txt)
-}
-
 #' Read ScanHeadMans method (experiments.csv) output.
 #'
 #' 1 row per condition
