@@ -68,6 +68,14 @@ test_that(".groupByLabels", {
                paste(rep(1:2, 4), rep(c(1, NA), 4), sep=":"))
 })
 
+test_that(".hft", {
+  expect_equal(topdown:::.hft(letters[1:6]), letters[1:6])
+  expect_equal(topdown:::.hft(letters[1:26]),
+               c("a", "b", "c", "...", "x", "y", "z"))
+  expect_equal(topdown:::.hft(letters[1:26], fill=NULL, n=4),
+               c("a", "b", "c", "d", "w", "x", "y", "z"))
+})
+
 test_that(".logmsg", {
   expect_equal(topdown:::.logmsg("foo"),
                paste0("[", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "] foo"))

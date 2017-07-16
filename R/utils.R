@@ -99,6 +99,21 @@ cat0 <- function(...) {
   }
 }
 
+#' head/fill/tail of vector elements (e.g. for printing)
+#'
+#' @param x vector
+#' @param fill character, or NULL
+#' @param n integer
+#' @return vector, head(x, n), fill, tail(x, n)
+#' @noRd
+.hft <- function(x, fill="...", n=3) {
+  if (length(x) <= 2 * n) {
+    x
+  } else {
+    c(head(x, n), fill, tail(x, n))
+  }
+}
+
 #' Add log message.
 #'
 #' @param msg character, log message
@@ -179,6 +194,7 @@ cat0 <- function(...) {
 .snippet <- function(x, width=getOption("width")) {
   nc <- nchar(x)
   w <- (width - 2L:3L) %/% 2L
+
   ifelse(nc <= width, x, paste0(substring(x, 1L, w[1L]), "...",
                                 substring(x, nc - w[2L] + 1L, nc)))
 }

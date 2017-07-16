@@ -79,20 +79,17 @@ setMethod("show", "TopDownSet", function(object) {
     cat("- - - Fragment data - - -\n")
     cat("Number of theoretical fragments:", length(object@rowViews), "\n")
     fragments <- fragmentType(object)
-    prefix <- sprintf("Theoretical fragment types (%d):", nlevels(fragments))
-    cat(prefix, .snippet(paste0(levels(fragments), collapse=", "),
-                         getOption("width") - nchar(prefix)), "\n")
+    cat0("Theoretical fragment types (", nlevels(fragments), "): ",
+         paste0(.hft(levels(fragments), n=5), collapse=", "), "\n")
     mass <- range(fragmentMass(object))
-    cat(sprintf("Theoretical mass range: [%.2f;%.2f]\n",
-                mass[1L], mass[2L]))
+    cat(sprintf("Theoretical mass range: [%.2f;%.2f]\n", mass[1L], mass[2L]))
   }
 
   if (nrow(object@colData)) {
     cat("- - - Condition data - - -\n")
     cat("Number of conditions:", nrow(object@colData), "\n")
-    prefix <- sprintf("Condition variables (%d):", ncol(object@colData))
-    cat(prefix, .snippet(paste0(colnames(object@colData), collapse=", "),
-                         getOption("width") - nchar(prefix)), "\n")
+    cat0("Condition variables (", ncol(object@colData), "): ",
+         paste0(.hft(colnames(object@colData), n=2), collapse=", "), "\n")
   }
 
   if (all(dim(object))) {
