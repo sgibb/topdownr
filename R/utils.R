@@ -49,7 +49,7 @@ cat0 <- function(...) {
 #' @return character
 #' @noRd
 .formatNames <- function(x) {
-  x <- gsub("[[:punct:]]+", "", x)
+  x <- gsub("[[:punct:]]+", " ", x)
   unlist(lapply(strsplit(x, " "), function(s) {
     if (length(s) == 1L) {
       # don't convert already camelcased strings

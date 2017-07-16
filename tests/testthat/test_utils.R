@@ -32,8 +32,10 @@ test_that(".filterStringToId", {
 
 test_that(".formatNames", {
   expect_equal(topdown:::.formatNames(c("Monoisotopic M/Z", "SPS Mass 2",
-                                        "RT (min)", "MSLevel")),
-               c("MonoisotopicMz", "SpsMass2", "RtMin", "MSLevel"))
+                                        "RT (min)", "MSLevel",
+                                        "Multi.Inject.Info", "RF.Comp...ppm")),
+               c("MonoisotopicMZ", "SpsMass2", "RtMin", "MSLevel",
+                 "MultiInjectInfo", "RfCompPpm"))
 })
 
 test_that(".fragmentationMethod", {
