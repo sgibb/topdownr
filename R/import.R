@@ -95,8 +95,7 @@
   # TODO: somehow the FilterString doesn't always contains the right mass label.
   # For now we just take the first non-duplicated (unique) condition
   # disabled: d$ConditionId <- as.integer(.filterStringToId(d$FilterString))
-  d <- d[!duplicated(d$FilterString),]
-  d$ConditionId <- seq_len(nrow(d))
+  d$ConditionId <- cumsum(!duplicated(d$FilterString))
 
   d[is.na(d)] <- 0L
 
@@ -165,11 +164,11 @@
 }
 
 #' Merge spectra and ScanConditions/HeaderInformation (into featureData slot)
+#'
 #' @param mzml data.frame, header from mzML files
 #' @param scdm data.frame, header from ScanHeadsman
 #' @return merged data.frame
 #' @noRd
 .mergeSpectraAndHeaderInformation <- function(mzml, scdm) {
-  m <- merge(mzml, scdm, sort=FALSE)
-  m[, !grepl("^File$", colnames(m))]
+  merge(mzml, scdm, sort=FALSE)
 }

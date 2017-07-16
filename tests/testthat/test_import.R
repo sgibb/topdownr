@@ -55,30 +55,31 @@ test_that(".readFasta", {
 
 test_that(".readScanHeadsTable", {
   fn <- paste0(tempfile(), ".txt")
-  d <- data.frame(MSOrder=c(1, 2, 2, 2),
+  d <- data.frame(MSOrder=c(1, 2, 2, 2, 2),
                   FilterString=c("ms2 100.0001@etd", "ms2 100.0001@hcd",
-                                 "ms2 100.0007@cid", "ms2 100.0009@hcd"),
-                  Activation1=c("ETD", "ETD", "HCD", "CID"),
-                  Activation2=c(NA, "HCD", "CID", "HCD"),
-                  Energy1=c(10, 50, NA, 20),
-                  Energy2=c(NA, 30, 20, 10),
+                                 "ms2 100.0001@hcd", "ms2 100.0007@cid",
+                                 "ms2 100.0009@hcd"),
+                  Activation1=c("ETD", "ETD", "ETD", "HCD", "CID"),
+                  Activation2=c(NA, "HCD", "HCD", "CID", "HCD"),
+                  Energy1=c(10, 50, 50, NA, 20),
+                  Energy2=c(NA, 30, 30, 20, 10),
                   stringsAsFactors=FALSE)
   write.csv(d, file=fn, row.names=FALSE)
   expect_message(h <- topdown:::.readScanHeadsTable(fn, verbose=TRUE),
-                 "Reading 4 header information from file")
+                 "Reading 5 header information from file")
   expect_equal(colnames(h),
                c("MSOrder", "FilterString", "Activation1", "Activation2",
                  "Energy1", "Energy2", "ConditionId",
                  "ETDActivation", "CIDActivation", "HCDActivation", "File"))
-  expect_equal(h$MSOrder, rep(2, 3))
-  expect_equal(h$ETDActivation, c(50, 0, 0))
-  expect_equal(h$CIDActivation, c(0, 20, 20))
-  expect_equal(h$HCDActivation, c(30, 0, 10))
+  expect_equal(h$MSOrder, rep(2, 4))
+  expect_equal(h$ETDActivation, c(50, 50, 0, 0))
+  expect_equal(h$CIDActivation, c(0, 0, 20, 20))
+  expect_equal(h$HCDActivation, c(30, 30, 0, 10))
   # TODO: FilterStrings are not unique in .experiment.csv files
   # see issue #14
   #expect_equal(h$ConditionId, c(1, 7, 9))
-  expect_equal(h$ConditionId, 1:3)
-  expect_equal(h$File, rep(gsub("\\.txt$", "", basename(fn)), 3))
+  expect_equal(h$ConditionId, c(1, 1:3))
+  expect_equal(h$File, rep(gsub("\\.txt$", "", basename(fn)), 4))
   unlink(fn)
 })
 
@@ -96,10 +97,10 @@ test_that(".mergeScanConditionAndHeaderInformation", {
 
 test_that(".mergeSpectraAndHeaderInformation", {
   fd <- data.frame(x=1:2, Scan=1:2, File="foo", spectrum=1:2)
-  hi <- data.frame(File="foo", Scan=1:2, y=3:4)
+  hi <- data.frame(File="foo", Scan=1:2, y=3:4, stringsAsFactors=FALSE)
   r <- fd
   r$Scan <- 1:2
   r$y <- 3:4
-  r <- r[, c("Scan", "x", "spectrum", "y")]
+  r <- r[, c("Scan", "File", "x", "spectrum", "y")]
   expect_equal(topdown:::.mergeSpectraAndHeaderInformation(fd, hi), r)
 })
