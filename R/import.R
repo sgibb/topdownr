@@ -67,14 +67,14 @@
 #'
 #' @param file character, filename
 #' @param verbose logical, verbose output?
-#' @return data.table
+#' @return data.frame
 #' @noRd
 .readExperimentCsv <- function(file, verbose=interactive()) {
   stopifnot(file_ext(file) == "csv")
   d <- read.csv(file, stringsAsFactors=FALSE)
   colnames(d) <- .formatNames(colnames(d))
 
-  .msg(verbose, "Read ", nrow(d), " experiment conditions from file ",
+  .msg(verbose, "Reading ", nrow(d), " experiment conditions from file ",
        basename(file))
 
   ## drop MS1
@@ -98,7 +98,7 @@
 #' @noRd
 .readFasta <- function(file, verbose=interactive()) {
   aa <- readAAStringSet(file, nrec=1L, use.names=FALSE)[[1L]]
-  .msg(verbose, "Read sequence from fasta file ", basename(file))
+  .msg(verbose, "Reading sequence from fasta file ", basename(file))
   if (!length(aa)) {
     stop("No sequence found.")
   }
@@ -112,30 +112,37 @@
 #'
 #' @param file character, filename
 #' @param verbose logical, verbose output?
-#' @return data.table
+#' @return data.frame
 #' @noRd
 .readScanHeadsTable <- function(file, verbose=interactive()) {
   stopifnot(file_ext(file) == "txt")
-  d <- fread(file, showProgress=verbose)
+  d <- read.csv(file, stringsAsFactors=FALSE)
   colnames(d) <- .formatNames(colnames(d))
 
   .msg(verbose, "Reading ", nrow(d), " header information from file ",
        basename(file))
 
   ## drop MS1
-  d <- d[MSOrder == 2L,]
+  d <- d[d$MSOrder == 2L,]
 
-  d[Activation1 == "ETD", ETDActivation := Energy1]
-  d[Activation1 == "CID", CIDActivation := Energy1]
-  d[Activation2 == "CID", CIDActivation := Energy2]
-  d[Activation1 == "HCD", HCDActivation := Energy1]
-  d[Activation2 == "HCD", HCDActivation := Energy2]
+  # TODO: somehow the FilterString doesn't always contains the right mass label.
+  # For now we just take the first non-duplicated (unique) condition
+  # disabled: d$ConditionId <- as.integer(.filterStringToId(d$FilterString))
+  d <- d[!duplicated(d$FilterString),]
+  d$ConditionId <- seq_len(nrow(d))
 
   d[is.na(d)] <- 0L
 
-  d[, ConditionId := as.integer(.filterStringToId(FilterString))]
+  d$ETDActivation[d$Activation1 == "ETD"] <- d$Energy1[d$Activation1 == "ETD"]
+  d$CIDActivation[d$Activation1 == "CID"] <- d$Energy1[d$Activation1 == "CID"]
+  d$CIDActivation[d$Activation2 == "CID"] <- d$Energy2[d$Activation2 == "CID"]
+  d$HCDActivation[d$Activation1 == "HCD"] <- d$Energy1[d$Activation1 == "HCD"]
+  d$HCDActivation[d$Activation2 == "HCD"] <- d$Energy2[d$Activation2 == "HCD"]
 
-  d[, File := gsub(.topDownFileExtRx("txt"), "", basename(file))]
+  d[is.na(d)] <- 0L
+
+  d$File <- gsub(.topDownFileExtRx("txt"), "", basename(file))
+  d
 }
 
 #' Read MS2 Spectra (mzML)
@@ -155,9 +162,9 @@
 
 #' Merge ScanCondition and HeaderInformation
 #'
-#' @param sc data.table, scan conditions
-#' @param hi data.table, header information
-#' @return data.table
+#' @param sc data.frame, scan conditions
+#' @param hi data.frame, header information
+#' @return data.frame
 #' @noRd
 .mergeScanConditionAndHeaderInformation <- function(sc, hi) {
   stopifnot(is(sc, "data.frame"))
@@ -167,26 +174,11 @@
 }
 
 #' Merge spectra and ScanConditions/HeaderInformation (into featureData slot)
-#' @param msnexp MSnExp
-#' @param header data.table, header information
-#' @return modified MSnExp
+#' @param mzml data.frame, header from mzML files
+#' @param scdm data.frame, header from ScanHeadsman
+#' @return merged data.frame
 #' @noRd
-.mergeSpectraAndHeaderInformation <- function(msnexp, hi) {
-  fd <- fData(msnexp)
-  fd$File <- gsub(.topDownFileExtRx("mzml"), "",
-                  basename(fileNames(msnexp))[fromFile(msnexp)])
-  fd$Scan <- acquisitionNum(msnexp)
-  m <- merge(fd, as.data.frame(hi), sort=FALSE)
-  ## row.names are needed for fData<-
-  sel <- match(m$spectrum, fd$spectrum)
-  if (!length(sel)) {
-    stop("The spectra and the header information have nothing in common.")
-  }
-  msnexp <- msnexp[sel]
-  rownames(m) <- rownames(fd)[sel]
-  fData(msnexp) <- m[, !grepl("^File$", colnames(m))]
-
-  if(validObject(msnexp)) {
-    return(msnexp)
-  }
+.mergeSpectraAndHeaderInformation <- function(mzml, scdm) {
+  m <- merge(mzml, scdm, sort=FALSE)
+  m[, !grepl("^File$", colnames(m))]
 }
