@@ -5,6 +5,7 @@
 #' @param ignoreCols character, column names that won't be part of the returned
 #' data.frame
 #' @return data.frame
+#' @noRd
 .aggregateDataFrame <- function(x, f, ignoreCols=character(), na.rm=TRUE) {
 
   x <- x[, !colnames(x) %in% ignoreCols]
