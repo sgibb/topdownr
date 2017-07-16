@@ -4,10 +4,22 @@ test_that("cat0", {
   expect_output(topdown:::cat0("foo", "bar"), "foobar")
 })
 
-test_that("cat0", {
+test_that(".colsToRle", {
   d <- DataFrame(a=1:10, b=rep(1, 10), c=rep(c("foo", "bar"), each=5))
   r <- DataFrame(a=1:10, b=Rle(rep(1, 10)), c=Rle(rep(c("foo", "bar"), each=5)))
   expect_equal(topdown:::.colsToRle(d), r)
+})
+
+test_that(".droplevels", {
+  d <- DataFrame(a=1:10, b=factor(rep(1, 10)),
+                 c=Rle(rep(c("foo", "bar"), each=5)),
+                 d=Rle(factor(rep(c("foo", "bar"), each=5))),
+                 e=factor(rep(1:2, each=5)))
+  r <- DataFrame(a=1:5, b=factor(rep(1, 5)),
+                 c=Rle(rep("foo", 5)),
+                 d=Rle(factor(rep("foo", 5))),
+                 e=factor(rep(1, 5)))
+  expect_equal(topdown:::.droplevels(d[1:5,]), r)
 })
 
 test_that(".filterStringToId", {
@@ -97,6 +109,53 @@ test_that(".snippet", {
   expect_equal(topdown:::.snippet(L, 11), "ABCD...WXYZ")
   expect_equal(topdown:::.snippet(c(l, L), 10), c("abcd...xyz", "ABCD...XYZ"))
   expect_equal(topdown:::.snippet(c(l, L), 11), c("abcd...wxyz", "ABCD...WXYZ"))
+})
+
+test_that(".subset", {
+  expect_error(topdown:::.subset(1:2, 10, letters[1:2]))
+  expect_error(topdown:::.subset(c(1, NA, 2), 10, letters[1:10]),
+               "'NA' is not supported")
+  expect_error(topdown:::.subset(list(foo=1:10), 10, letters[1:10]),
+               "Unknown")
+  expect_equal(topdown:::.subset(1:2, 10, letters[1:10]), 1:2)
+  expect_equal(topdown:::.subset(c(TRUE, TRUE, rep(FALSE, 8)), 10,
+                                 letters[1:10]), 1:2)
+  expect_equal(topdown:::.subset(c("a", "b"), 10, letters[1:10]), 1:2)
+})
+
+test_that(".subsetByCharacter", {
+  expect_error(topdown:::.subsetByCharacter(1:2, LETTERS[1:2]))
+  expect_error(topdown:::.subsetByCharacter(letters[1:2], TRUE))
+  expect_error(topdown:::.subsetByCharacter(letters[1:2], LETTERS[1:2]),
+               "Subscript out of bound: 'a', 'b'")
+  expect_equal(topdown:::.subsetByCharacter(letters[1:2], letters[4:1]), 4:3)
+  expect_equal(topdown:::.subsetByCharacter(letters[1:2]), integer())
+})
+
+test_that(".subsetByLogical", {
+  expect_error(topdown:::.subsetByLogical(1:2, 10))
+  expect_error(topdown:::.subsetByLogical(TRUE, TRUE))
+  expect_error(topdown:::.subsetByLogical("foo", 10))
+  expect_equal(topdown:::.subsetByLogical(TRUE, 10), 1:10)
+  expect_equal(topdown:::.subsetByLogical(c(TRUE, FALSE), 10),
+               seq(1, 10, by=2))
+  expect_equal(topdown:::.subsetByLogical(rep(TRUE, 10), 10), 1:10)
+  expect_equal(topdown:::.subsetByLogical(rep(TRUE, 12), 10), 1:10)
+})
+
+test_that(".subsetByNumeric", {
+  expect_error(topdown:::.subsetByNumeric(TRUE, 10))
+  expect_error(topdown:::.subsetByNumeric(1:10, TRUE))
+  expect_error(topdown:::.subsetByNumeric("foo", 10))
+  expect_error(topdown:::.subsetByNumeric(c(-1, 3, 12), 10),
+               "Subscript out of bound: '-1', '12'")
+  expect_equal(topdown:::.subsetByNumeric(1:10, 20), 1:10)
+})
+
+test_that(".subsetFiles", {
+  expect_equal(topdown:::.subsetFiles(
+                c("foo.experiments.csv", "foo.mzML", "bar.txt"), "foo"),
+               c(TRUE, TRUE, FALSE))
 })
 
 test_that(".swapFileExt", {

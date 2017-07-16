@@ -7,13 +7,12 @@ Description: What the package does (one paragraph).
 Depends:
     R (>= 3.2.4),
     methods,
-    MSnbase (>= 2.3.8)
-Imports:
     Biostrings (>= 2.42.1),
-    IRanges (>= 2.8.2),
-    Matrix (>= 1.2.10),
-    mzR (>= 2.11.5),
     S4Vectors (>= 0.12.2)
+Imports:
+    Matrix (>= 1.2.10),
+    MSnbase (>= 2.3.8),
+    mzR (>= 2.11.5)
 Suggests:
     knitr,
     testthat,

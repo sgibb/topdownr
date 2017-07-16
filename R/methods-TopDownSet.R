@@ -1,8 +1,50 @@
 #' @param x TopDownSet
 #' @noRd
-setMethod("[", "TopDownSet", function(x, i, j="missing", ...,
-                                             drop="missing") {
-  stop("NOT IMPLEMENTED YET")
+setMethod("[", c("TopDownSet", "ANY", "ANY"), function(x, i, j, ...,
+                                                       drop=FALSE) {
+  d0 <- dim(x)
+  dn <- dimnames(x)
+
+  if (missing(i)) {
+    i <- seq_len(d0[1L])
+  }
+
+  if (is.character(i)) {
+    ii <- .subset(dn[[1L]] %in% i | as.character(fragmentType(x)) %in% i,
+                  d0[1L], dn[[1L]])
+  } else {
+    ii <- .subset(i, d0[1L], dn[[1L]])
+  }
+
+  if (is.unsorted(ii)) {
+    warning("It is not possible to change the row order.")
+    ii <- sort(ii)
+  }
+
+  if (missing(j)) {
+    j <- seq_len(d0[2L])
+  }
+  jj <- .subset(j, d0[2L], dn[[2L]])
+
+  if (drop) {
+    warning("'drop' is ignored.")
+  }
+
+  x@assays <- x@assays[ii, jj, drop=FALSE]
+  x@colData <- .droplevels(x@colData[jj, ])
+  x@rowViews <- x@rowViews[ii, ]
+  x@rowViews@elementMetadata <- .droplevels(x@rowViews@elementMetadata)
+  isFasta <- grepl(.topDownFileExtRx("fasta"), x@files)
+  x@files <- x@files[.subsetFiles(x@files, unique(x@colData$File)) | isFasta]
+
+  d1 <- dim(x)
+
+  x <- .tdsLogMsg(x, paste0("Subsetted [", d0[1L], ";", d0[2L], "] to [",
+                                           d1[1L], ";", d1[2L], "]."))
+
+  if (validObject(x)) {
+    x
+  }
 })
 
 #' @param object TopDownSet
@@ -25,11 +67,11 @@ setMethod("show", "TopDownSet", function(object) {
   cat(sprintf("%s object (%.2f Mb)\n",
               class(object), object.size(object) / 1024L^2L))
 
-  if (nchar(object@rowViews@subject)) {
+  if (length(object@rowViews)) {
     cat("- - - Protein data - - -\n")
     prefix <- sprintf("Amino acid sequence (%d):",
                       nchar(object@rowViews@subject))
-    cat(prefix, .snippet(object@rowViews@subject,
+    cat(prefix, .snippet(as.character(object@rowViews@subject),
                          getOption("width") - nchar(prefix)), "\n")
   }
 
@@ -55,9 +97,14 @@ setMethod("show", "TopDownSet", function(object) {
 
   if (all(dim(object))) {
     cat("- - - Intensity data - - -\n")
-    cat(sprintf("Size of array: %dx%d (%.2f%% != 0)\n", nrow(object@assays),
-        ncol(object@assays), mean(object@assays != 0L) * 100L))
-    intensity <- range(object@assays@x)
+    cat(sprintf("Size of array: %dx%d (%.2f%% != 0)\n",
+                nrow(object@assays), ncol(object@assays),
+                length(object@assays@x) / length(object@assays) * 100L))
+    if (length(object@assays@x)) {
+      intensity <- range(object@assays@x)
+    } else {
+      intensity <- c(-NA, NA)
+    }
     cat(sprintf("Intensity range: [%.2f;%.2f]\n", intensity[1L], intensity[2L]))
   }
 

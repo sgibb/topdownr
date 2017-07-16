@@ -1,4 +1,5 @@
 #' cat0, cat with sep="", similar to paste0
+#'
 #' @param \ldots arguments passed to cat
 #' @noRd
 cat0 <- function(...) {
@@ -6,7 +7,9 @@ cat0 <- function(...) {
 }
 
 #' Convert DataFrame columns to Rle
+#'
 #' @param x DataFrame
+#' @return DataFrame
 #' @noRd
 .colsToRle <- function(x) {
   toConvert <- .vapply1l(x, function(xx)length(unique(xx)) < nrow(x) / 4L)
@@ -14,10 +17,24 @@ cat0 <- function(...) {
   x
 }
 
+#' droplevels for Rle/factor columns
+#'
+#' @param x DataFrame
+#' @return DataFrame
+#' @noRd
+.droplevels <- function(x) {
+  isFactorColumn <- .vapply1l(x, function(column) {
+     is.factor(column) || (is(column, "Rle") && is.factor(runValue(column)))
+  })
+  x[isFactorColumn] <- droplevels(x[isFactorColumn])
+  x
+}
+
 #' The ScanHeadsMan output for the header information contains a column
 #' FilterString with the format "FTMS + p NSI Full ms2 [0-9]+\.[0-9]+@hcd35.00
 #' [xxx-yyy]". This function converts this format to the ID stored in the mass
 #' label.
+#'
 #' @param x character
 #' @return double
 #' @noRd
@@ -27,6 +44,7 @@ cat0 <- function(...) {
 }
 
 #' Create (nearly) CamelCase names. Could not correct "AGC" to "Agc".
+#'
 #' @param x character
 #' @return character
 #' @noRd
@@ -44,6 +62,7 @@ cat0 <- function(...) {
 }
 
 #' Get fragmentation method from {ETD,CID,HCD}Activation
+#'
 #' @param x data.frame/matrix, 3 columns (ETD,CID,HCD)
 #' @return vector, fragmentation method
 #' @noRd
@@ -56,6 +75,7 @@ cat0 <- function(...) {
 }
 
 #' Split list/data.frame
+#'
 #' @param x data.frame, e.g. from .ms2Experiments
 #' @param cols character, colnames used to split
 #' @return list
@@ -65,6 +85,7 @@ cat0 <- function(...) {
 }
 
 #' Create group labels from data.frame columns
+#'
 #' @param x data.frame, e.g. from .ms2Experiments
 #' @param cols character, colnames used to split
 #' @return list
@@ -131,6 +152,7 @@ cat0 <- function(...) {
 }
 
 #' verbose output
+#'
 #' @param \ldots arguments passed to message
 #' @noRd
 .msg <- function(verbose, ...) {
@@ -140,6 +162,7 @@ cat0 <- function(...) {
 }
 
 #' similar to lengths but for rows
+#'
 #' @param x list of data.frames/matrices
 #' @noRd
 .nrows <- function(x) {
@@ -148,6 +171,7 @@ cat0 <- function(...) {
 }
 
 #' shortend string to width and place "..." in the middle
+#'
 #' @param x character
 #' @param width number of letters allowed/width of terminal
 #' @return character
@@ -159,7 +183,90 @@ cat0 <- function(...) {
                                 substring(x, nc - w[2L] + 1L, nc)))
 }
 
+#' normalize subset (turn logical, numeric and character to numeric)
+#'
+#' @param i ANY, subset
+#' @param n integer, length of the original object
+#' @param nms character, names of the orignal object
+#' @return logical, vector of length n
+#' @noRd
+.subset <- function(i, n, nms=NULL) {
+  if (anyNA(i)) {
+    stop("Subsetting by 'NA' is not supported.")
+  }
+  stopifnot(is.null(nms) || length(nms) == n)
+  switch(class(i),
+         "character" = .subsetByCharacter(i, nms),
+         "logical" = .subsetByLogical(i, n),
+         "integer" = ,
+         "double" = ,
+         "numeric" = .subsetByNumeric(i, n),
+         stop("Unknown index class."))
+}
+
+#' subset by character
+#'
+#' @param i character, subset
+#' @param nms character, names of the orignal object
+#' @return numeric
+#' @noRd
+.subsetByCharacter <- function(i, nms=NULL) {
+  if (is.null(nms)) {
+    return(integer())
+  }
+  stopifnot(is.character(i))
+  stopifnot(is.character(nms))
+
+  ii <- match(i, nms)
+  if (anyNA(ii)) {
+    stop("Subscript out of bound: ", paste0("'", i[is.na(ii)], "'",
+                                            collapse=", "))
+  }
+  ii
+}
+
+#' subset by logical
+#'
+#' @param i logical, subset
+#' @param n integer, length
+#' @return numeric
+#' @noRd
+.subsetByLogical <- function(i, n) {
+  stopifnot(is.logical(i))
+  stopifnot(is.numeric(n))
+
+  which(rep_len(i, n))
+}
+
+#' subset by numeric
+#'
+#' @param i numeric, subset
+#' @param n integer, length
+#' @return numeric
+#' @noRd
+.subsetByNumeric <- function(i, n) {
+  stopifnot(is.numeric(i))
+  stopifnot(is.numeric(n))
+
+  if (any(n < i | i < 0L)) {
+    stop("Subscript out of bound: ", paste0("'", i[n < i | i < 0L], "'",
+                                            collapse=", "))
+  }
+  i
+}
+
+#' subset filenames
+#'
+#' @param files character, filenames
+#' @param selFiles character, selectedFiles, basename without extension
+#' @return character
+#' @noRd
+.subsetFiles <- function(files, selFiles) {
+  gsub(.topDownFileExtRx("cfmt"), "", files) %in% selFiles
+}
+
 #' swap file extensions
+#'
 #' @param x character, file name
 #' @param ext character, new extension
 #' @return character
@@ -171,6 +278,7 @@ cat0 <- function(...) {
 #' The ScanHeadsMan output for the scan conditons contains a column
 #' TargetedMassList with the format "(mz=[0-9]+\.[0-9]+ z=[0-9]+ name=)". This
 #' function converts this format to truncated (one decimal place) mz values.
+#'
 #' @param x character
 #' @return double
 #' @noRd
@@ -180,17 +288,19 @@ cat0 <- function(...) {
 }
 
 #' TopDown file extensions.
+#'
 #' @param type character, which file ext
 #' @return character, regexp for file extensions
 #' @noRd
-.topDownFileExtRx <- function(type=c("cfmt", "csv", "fasta", "mzml", "txt",
-                                     "raw", "all")) {
+.topDownFileExtRx <- function(type=c("cfmt", "cmt", "csv", "fasta", "mzml",
+                                     "txt", "raw", "all")) {
   type <- match.arg(type)
   ext <- c(csv="experiments\\.csv", fasta="fasta", mzml="mz[Mm][Ll]",
            raw="raw", txt="txt")
   sel <- switch(type,
                 "all" = seq_along(ext),
                 "cfmt" = c("csv", "fasta", "mzml", "txt"),
+                "cmt" = c("csv", "mzml", "txt"),
                 type)
   paste0("\\.", ext[sel], "$", collapse="|")
 }

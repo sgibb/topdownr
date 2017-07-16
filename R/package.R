@@ -9,14 +9,14 @@
 #' @keywords package
 #'
 #' @import methods
-#' @import Biostrings
-#' @import IRanges
-#' @import Matrix
 #' @import S4Vectors
+#' @import Biostrings
+#' @importClassesFrom Matrix Matrix dgCMatrix
+#' @importFrom Matrix Matrix sparseMatrix
 #'
 #' @importFrom mzR openMSfile close header peaks
-#' @importFrom MSnbase calculateFragments
+#' @importFrom MSnbase calculateFragments defaultNeutralLoss
 #' @importFrom stats setNames
 #' @importFrom tools file_ext file_path_sans_ext
-#' @importFrom utils modifyList txtProgressBar setTxtProgressBar
+#' @importFrom utils modifyList txtProgressBar setTxtProgressBar object.size read.csv
 NULL

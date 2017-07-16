@@ -85,9 +85,22 @@ fragmentMass <- function(object) {
 }
 
 #' @noRd
+fragmentNames <- function(object) {
+  .isTopDownSet(object)
+  names(object@rowViews)
+}
+
+#' @noRd
 fragmentType <- function(object) {
   .isTopDownSet(object)
   elementMetadata(object@rowViews)$type
+}
+
+#' @noRd
+.tdsLogMsg <- function(object, msg) {
+  .isTopDownSet(object)
+  object@processing <- c(object@processing, .logmsg(msg))
+  object
 }
 
 #' Validate TopDownSet
