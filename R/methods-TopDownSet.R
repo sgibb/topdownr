@@ -47,6 +47,36 @@ setMethod("[", c("TopDownSet", "ANY", "ANY"), function(x, i, j, ...,
   }
 })
 
+#' @param x TopDownSet
+#' @noRd
+setMethod("[[", c("TopDownSet", "ANY", "ANY"), function(x, i, j, ...,
+                                                        drop=TRUE) {
+  d <- dim(x)
+  dn <- dimnames(x)
+
+  if (missing(i)) {
+    i <- seq_len(d[1L])
+  }
+
+  if (is.character(i)) {
+    ii <- .subset(dn[[1L]] %in% i | as.character(fragmentType(x)) %in% i,
+                  d[1L], dn[[1L]])
+  } else {
+    ii <- .subset(i, d[1L], dn[[1L]])
+  }
+
+  if (is.unsorted(ii)) {
+    warning("It is not possible to change the row order.")
+    ii <- sort(ii)
+  }
+
+  if (missing(j)) {
+    j <- seq_len(d[2L])
+  }
+  jj <- .subset(j, d[2L], dn[[2L]])
+  x@assay[ii, jj, drop=drop]
+})
+
 #' @param object TopDownSet
 #' @return numeric
 #' @noRd
