@@ -153,10 +153,10 @@ test_that(".ncbMap", {
                       "foo.txt"),
               processing="[2017-07-16 14:00:00] Data created.")
 
-  r <- sparseMatrix(i=rep(1:3, c(3, 3, 2)),
-                    j=c(1:3, 1:2, 5, 2, 4),
-                    x=rep(1:2, c(6, 2)),
-                    dims=c(3, 5))
+  r <- sparseMatrix(i=rep(1:2, c(3, 4)),
+                    j=c(1:3, 1:2, 4:5),
+                    x=c(rep(1, 4), 3:1),
+                    dims=c(2, 5))
 
   r1 <- sparseMatrix(i=c(1:2, 1, 1:2),
                      j=c(1, 1, 2, 3, 3),

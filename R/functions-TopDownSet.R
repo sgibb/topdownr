@@ -107,15 +107,15 @@ fragmentType <- function(object) {
 .ncbMap <- function(object, nterm=c("a", "b", "c"), cterm=c("x", "y", "z")) {
   .isTopDownSet(object)
 
-  fv <- object@rowViews
+  w <- width(object@rowViews)
   mn <- mc <- object@assay
   selN <- fragmentType(object) %in% nterm
   selC <- fragmentType(object) %in% cterm
   mn[!selN,] <- 0L
   mc[!selC,] <- 0L
 
-  mn <- as(.colSumsGroup(mn, start(fv)) > 0L, "dgCMatrix")
-  mc <- as(.colSumsGroup(mc, start(fv)) > 0L, "dgCMatrix")
+  mn <- as(.colSumsGroup(mn, w) > 0L, "dgCMatrix")
+  mc <- as(.colSumsGroup(mc, max(w) + 1L - w) > 0L, "dgCMatrix")
   mc@x[] <- 2
   mn + mc
 }
