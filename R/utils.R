@@ -6,30 +6,6 @@ cat0 <- function(...) {
   cat(..., sep="", append=TRUE)
 }
 
-#' Convert DataFrame columns to Rle
-#'
-#' @param x DataFrame
-#' @return DataFrame
-#' @noRd
-.colsToRle <- function(x) {
-  toConvert <- .vapply1l(x, function(xx)length(unique(xx)) < nrow(x) / 4L)
-  x[toConvert] <- lapply(x[toConvert], Rle)
-  x
-}
-
-#' droplevels for Rle/factor columns
-#'
-#' @param x DataFrame
-#' @return DataFrame
-#' @noRd
-.droplevels <- function(x) {
-  isFactorColumn <- .vapply1l(x, function(column) {
-     is.factor(column) || (is(column, "Rle") && is.factor(runValue(column)))
-  })
-  x[isFactorColumn] <- droplevels(x[isFactorColumn])
-  x
-}
-
 #' The ScanHeadsMan output for the header information contains a column
 #' FilterString with the format "FTMS + p NSI Full ms2 [0-9]+\.[0-9]+@hcd35.00
 #' [xxx-yyy]". This function converts this format to the ID stored in the mass
@@ -319,6 +295,12 @@ cat0 <- function(...) {
                 "cmt" = c("csv", "mzml", "txt"),
                 type)
   paste0("\\.", ext[sel], "$", collapse="|")
+}
+
+#' wrapper around vapply for FUN.VALUE=logical(1L)
+#' @noRd
+.vapply1c <- function(X, FUN, ..., USE.NAMES=FALSE) {
+  vapply(X=X, FUN=FUN, FUN.VALUE=NA_character_, ..., USE.NAMES=USE.NAMES)
 }
 
 #' wrapper around vapply for FUN.VALUE=double(1L)

@@ -4,24 +4,6 @@ test_that("cat0", {
   expect_output(topdown:::cat0("foo", "bar"), "foobar")
 })
 
-test_that(".colsToRle", {
-  d <- DataFrame(a=1:10, b=rep(1, 10), c=rep(c("foo", "bar"), each=5))
-  r <- DataFrame(a=1:10, b=Rle(rep(1, 10)), c=Rle(rep(c("foo", "bar"), each=5)))
-  expect_equal(topdown:::.colsToRle(d), r)
-})
-
-test_that(".droplevels", {
-  d <- DataFrame(a=1:10, b=factor(rep(1, 10)),
-                 c=Rle(rep(c("foo", "bar"), each=5)),
-                 d=Rle(factor(rep(c("foo", "bar"), each=5))),
-                 e=factor(rep(1:2, each=5)))
-  r <- DataFrame(a=1:5, b=factor(rep(1, 5)),
-                 c=Rle(rep("foo", 5)),
-                 d=Rle(factor(rep("foo", 5))),
-                 e=factor(rep(1, 5)))
-  expect_equal(topdown:::.droplevels(d[1:5,]), r)
-})
-
 test_that(".filterStringToId", {
   expect_error(topdown:::.filterStringToId(1:3))
   expect_equal(topdown:::.filterStringToId(
