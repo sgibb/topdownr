@@ -69,6 +69,8 @@ Additionally you would need Thermo's *MS File Reader* which could be downloaded
 free of charge (but you have to register) from the Thermo FlexNet website:
 https://thermo.flexnetoperations.com/
 
+*ScanHeadsman* was created by Vladimir Gorshkov.
+
 ```{r sessioninfo}
 sessionInfo()
 ```
