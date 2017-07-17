@@ -59,8 +59,9 @@ test_that(".hft", {
 })
 
 test_that(".logmsg", {
-  expect_equal(topdown:::.logmsg("foo"),
-               paste0("[", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "] foo"))
+  expect_true(grepl(paste("^\\[20[0-9]{2}-[01][0-9]-[0-3][0-9]",
+                          "[0-2][0-9]:[0-5][0-9]:[0-5][0-9]\\]",
+                          "foo$"), topdown:::.logmsg("foo")))
 })
 
 test_that(".massLabel", {
