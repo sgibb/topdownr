@@ -49,14 +49,16 @@ readTopDownFiles <- function(path, pattern=".*",
                                tolerance=tolerance),
                  SIMPLIFY=FALSE)
 
-  assay <- do.call(cbind, lapply(mzml, "[[", "m"))
-
   mzmlHeader <- do.call(rbind, lapply(mzml, "[[", "hd"))
 
   scanHeadsman <- .mergeScanConditionAndHeaderInformation(scanConditions,
                                                           headerInformation)
 
   header <- .mergeSpectraAndHeaderInformation(mzmlHeader, scanHeadsman)
+
+  assay <- do.call(cbind, lapply(mzml, "[[", "m"))
+  dimnames(assay) <- list(names(fragmentViews),
+                          rownames(header))
 
   new("TopDownSet",
       rowViews=fragmentViews,
@@ -136,8 +138,18 @@ fragmentType <- function(object) {
     msg <- c(msg, "Mismatch between fragment data in 'rowViews' and 'assays'.")
   }
 
+  if (any(rownames(object@assays) != names(object@rowViews))) {
+    msg <- c(msg,
+             "Mismatch between fragment names in 'rowViews' and 'assays'.")
+  }
+
   if (ncol(object@assays) != nrow(object@colData)) {
     msg <- c(msg, "Mismatch between condition data in 'colData' and 'assays'.")
+  }
+
+  if (any(colnames(object@assays) != rownames(object@colData))) {
+    msg <- c(msg,
+             "Mismatch between condition names in 'colData' and 'assays'.")
   }
 
   if (length(msg)) {

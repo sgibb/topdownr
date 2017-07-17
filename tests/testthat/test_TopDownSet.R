@@ -186,7 +186,14 @@ test_that(".validateTopDownSet", {
   tdn@assays <- tdn@assays[1,,drop=FALSE]
   expect_error(validObject(tdn), "Mismatch between fragment data")
   tdn <- tds
+  rownames(tdn@assays) <- seq_len(nrow(tdn@assays))
+  expect_error(validObject(tdn), "Mismatch between fragment names")
+  tdn <- tds
   tdn@assays <- tdn@assays[,1,drop=FALSE]
   expect_error(validObject(tdn), "Mismatch between condition data")
   expect_true(validObject(tds))
+  tdn <- tds
+  rownames(tdn@colData) <- seq_len(nrow(tdn@colData))
+  colnames(tdn@assays) <- rev(seq_len(ncol(tdn@assays)))
+  expect_error(validObject(tdn), "Mismatch between condition names")
 })
