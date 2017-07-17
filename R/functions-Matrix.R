@@ -10,6 +10,20 @@
   sparseMatrix(i=seq_along(x), j=x, x=1L)
 }
 
+#' colSums groupwise, similar to rowsum but for sparceMatrices
+#'
+#' @param x Matrix
+#' @param group group
+#' @param ... further arguments passed to rowMeans
+#' @return sparseMatrix
+#' @noRd
+.colSumsGroup <- function(x, group) {
+  stopifnot(is(x, "Matrix"))
+  stopifnot(nrow(x) == length(group))
+  mm <- .createMaskMatrix(group)
+  t(mm) %*% x
+}
+
 #' rowMeans groupwise, similar to rowsum but for sparceMatrices
 #'
 #' @param x Matrix
@@ -23,19 +37,5 @@
   m <- (x %*% mm)
   m@x <-m@x / ((x != 0L) %*% mm)@x
   m
-}
-
-#' colSums groupwise, similar to rowsum but for sparceMatrices
-#'
-#' @param x Matrix
-#' @param group group
-#' @param ... further arguments passed to rowMeans
-#' @return sparseMatrix
-#' @noRd
-.colSumsGroup <- function(x, group) {
-  stopifnot(is(x, "Matrix"))
-  stopifnot(nrow(x) == length(group))
-  mm <- .createMaskMatrix(group)
-  t(mm) %*% x
 }
 
