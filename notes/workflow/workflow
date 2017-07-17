@@ -20,7 +20,7 @@ fCsv -->  td(`topdown::readTopDownFiles`)
 fTxt --> td
 fMzMl --> td
 fFasta -- Predict fragments  --> td
-td -- Link method/scan header table/deconvulted spectra/fragments --> tds(TopDownSet)
+td -- Link method/scan header tables/deconvulted spectra/fragments --> tds(TopDownSet)
 tds -.-> analysis(Further Analysis)
 
 classDef topdownClass fill:#2D882D,stroke:#004400
