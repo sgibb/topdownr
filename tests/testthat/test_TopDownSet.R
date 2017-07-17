@@ -16,7 +16,7 @@ tds <- new("TopDownSet",
                                   names=c("c1", "c2", "x1")),
            colData=DataFrame(Scan=1:5, File=Rle(c(rep("foo", 3),
                                                   "bar", "bar"))),
-           assays=sparseMatrix(i=c(1:2, 1:3, 1, 3, 2),
+           assay=sparseMatrix(i=c(1:2, 1:3, 1, 3, 2),
                                j=rep(1:5, c(2, 3, 1, 1, 1)),
                                x=2:9),
            files=c("bar.experiments.csv", "foo.experiments.csv",
@@ -31,7 +31,7 @@ test_that("[", {
                                      names=c("c1", "c2")),
              colData=DataFrame(Scan=1:5, File=Rle(c(rep("foo", 3),
                                                     "bar", "bar"))),
-             assays=sparseMatrix(i=rep(1:2, 3),
+             assay=sparseMatrix(i=rep(1:2, 3),
                                  j=rep(c(1:3, 5), c(2, 2, 1, 1)),
                                  x=c(2:5, 7, 9)),
             files=c("bar.experiments.csv", "foo.experiments.csv",
@@ -43,7 +43,7 @@ test_that("[", {
                                       start=1, width=1, names="c1"),
               colData=DataFrame(Scan=1:5, File=Rle(c(rep("foo", 3),
                                                      "bar", "bar"))),
-              assays=sparseMatrix(i=rep(1, 3),
+              assay=sparseMatrix(i=rep(1, 3),
                                   j=1:3,
                                   x=c(2, 4, 7),
                                   dims=c(1, 5)),
@@ -58,7 +58,7 @@ test_that("[", {
                                      start=1:3, width=c(1:2, 1),
                                      names=c("c1", "c2", "x1")),
               colData=DataFrame(Scan=1:3, File=Rle(rep("foo", 3))),
-              assays=sparseMatrix(i=c(1:2, 1:3, 1),
+              assay=sparseMatrix(i=c(1:2, 1:3, 1),
                                   j=rep(1:3, c(2, 3, 1)),
                                   x=2:7),
               files=c("foo.experiments.csv", "foo.fasta", "foo.mzML",
@@ -80,7 +80,7 @@ test_that("aggregate", {
                                     start=1:3, width=c(1:2, 1),
                                     names=c("c1", "c2", "x1")),
              colData=DataFrame(Scan=c(1, 4), File=Rle(c("foo", "bar"))),
-             assays=sparseMatrix(i=c(1:3, 2:3),
+             assay=sparseMatrix(i=c(1:3, 2:3),
                                  j=rep(1:2, 3:2),
                                  x=c(13/3, 4, 6, 9, 8)),
              files=c("foo.fasta"),
@@ -127,7 +127,7 @@ test_that(".ncbMap", {
                                      width=c(1:2, 3, 3, 1),
                                      names=c("c1", "c2", "x3", "y3", "z1_")),
               colData=DataFrame(Scan=1:4),
-              assays=sparseMatrix(i=c(1:2, 3:4, 1:4, 5),
+              assay=sparseMatrix(i=c(1:2, 3:4, 1:4, 5),
                                   j=rep(1:4, c(2, 2, 4, 1)),
                                   x=rep(9, 9)),
               files=c("foo.experiments.csv", "foo.fasta", "foo.mzML",
@@ -168,7 +168,7 @@ test_that("show", {
                         "\\[2017-07-16 14:00:00\\] Data created. "),
                       collapse="\n"))
   tdn <- tds
-  tdn@assays <- Matrix(0, nrow=3, ncol=5, sparse=TRUE)
+  tdn@assay <- Matrix(0, nrow=3, ncol=5, sparse=TRUE)
   expect_output(show(tdn),
                 paste(c("Size of array: 3x5 \\(0\\.00% != 0\\)",
                         "Intensity range: \\[NA;NA\\]"),
@@ -183,17 +183,17 @@ test_that(".tdsLogMsg", {
 
 test_that(".validateTopDownSet", {
   tdn <- tds
-  tdn@assays <- tdn@assays[1,,drop=FALSE]
+  tdn@assay <- tdn@assay[1,,drop=FALSE]
   expect_error(validObject(tdn), "Mismatch between fragment data")
   tdn <- tds
-  rownames(tdn@assays) <- seq_len(nrow(tdn@assays))
+  rownames(tdn@assay) <- seq_len(nrow(tdn@assay))
   expect_error(validObject(tdn), "Mismatch between fragment names")
   tdn <- tds
-  tdn@assays <- tdn@assays[,1,drop=FALSE]
+  tdn@assay <- tdn@assay[,1,drop=FALSE]
   expect_error(validObject(tdn), "Mismatch between condition data")
   expect_true(validObject(tds))
   tdn <- tds
   rownames(tdn@colData) <- seq_len(nrow(tdn@colData))
-  colnames(tdn@assays) <- rev(seq_len(ncol(tdn@assays)))
+  colnames(tdn@assay) <- rev(seq_len(ncol(tdn@assay)))
   expect_error(validObject(tdn), "Mismatch between condition names")
 })

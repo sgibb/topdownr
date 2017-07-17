@@ -63,7 +63,7 @@ readTopDownFiles <- function(path, pattern=".*",
   new("TopDownSet",
       rowViews=fragmentViews,
       colData=.colsToRle(as(header, "DataFrame")),
-      assays=assay,
+      assay=assay,
       files=basename(unlist(unname(files))),
       processing=.logmsg("Data loaded."))
 }
@@ -107,7 +107,7 @@ fragmentType <- function(object) {
   .isTopDownSet(object)
 
   fv <- object@rowViews
-  mn <- mc <- object@assays
+  mn <- mc <- object@assay
   selN <- fragmentType(object) %in% nterm
   selC <- fragmentType(object) %in% cterm
   mn[!selN,] <- 0L
@@ -134,22 +134,22 @@ fragmentType <- function(object) {
 .validateTopDownSet <- function(object) {
   msg <- character()
 
-  if (nrow(object@assays) != length(object@rowViews)) {
-    msg <- c(msg, "Mismatch between fragment data in 'rowViews' and 'assays'.")
+  if (nrow(object@assay) != length(object@rowViews)) {
+    msg <- c(msg, "Mismatch between fragment data in 'rowViews' and 'assay'.")
   }
 
-  if (any(rownames(object@assays) != names(object@rowViews))) {
+  if (any(rownames(object@assay) != names(object@rowViews))) {
     msg <- c(msg,
-             "Mismatch between fragment names in 'rowViews' and 'assays'.")
+             "Mismatch between fragment names in 'rowViews' and 'assay'.")
   }
 
-  if (ncol(object@assays) != nrow(object@colData)) {
-    msg <- c(msg, "Mismatch between condition data in 'colData' and 'assays'.")
+  if (ncol(object@assay) != nrow(object@colData)) {
+    msg <- c(msg, "Mismatch between condition data in 'colData' and 'assay'.")
   }
 
-  if (any(colnames(object@assays) != rownames(object@colData))) {
+  if (any(colnames(object@assay) != rownames(object@colData))) {
     msg <- c(msg,
-             "Mismatch between condition names in 'colData' and 'assays'.")
+             "Mismatch between condition names in 'colData' and 'assay'.")
   }
 
   if (length(msg)) {

@@ -30,7 +30,7 @@ setMethod("[", c("TopDownSet", "ANY", "ANY"), function(x, i, j, ...,
     warning("'drop' is ignored.")
   }
 
-  x@assays <- x@assays[ii, jj, drop=FALSE]
+  x@assay <- x@assay[ii, jj, drop=FALSE]
   x@colData <- .droplevels(x@colData[jj, ])
   x@rowViews <- x@rowViews[ii, ]
   x@rowViews@elementMetadata <- .droplevels(x@rowViews@elementMetadata)
@@ -65,7 +65,7 @@ setMethod("aggregate", "TopDownSet", function(x,
   }
 
   groups <- .groupByLabels(as.data.frame(x@colData), by)
-  x@assays <- .rowMeansGroup(x@assays, groups)
+  x@assay <- .rowMeansGroup(x@assay, groups)
   x@colData <- .aggregateDataFrame(x@colData, groups,
                                    ignoreNumCols=c("Scan", "ConditionId"))
   ## now meaningless
@@ -85,7 +85,7 @@ setMethod("aggregate", "TopDownSet", function(x,
 #' @return numeric
 #' @noRd
 setMethod("dim", "TopDownSet", function(x) {
-  dim(x@assays)
+  dim(x@assay)
 })
 
 #' @param object TopDownSet
@@ -129,10 +129,10 @@ setMethod("show", "TopDownSet", function(object) {
   if (all(dim(object))) {
     cat("- - - Intensity data - - -\n")
     cat(sprintf("Size of array: %dx%d (%.2f%% != 0)\n",
-                nrow(object@assays), ncol(object@assays),
-                length(object@assays@x) / length(object@assays) * 100L))
-    if (length(object@assays@x)) {
-      intensity <- range(object@assays@x)
+                nrow(object@assay), ncol(object@assay),
+                length(object@assay@x) / length(object@assay) * 100L))
+    if (length(object@assay@x)) {
+      intensity <- range(object@assay@x)
     } else {
       intensity <- c(-NA, NA)
     }
