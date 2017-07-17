@@ -13,14 +13,26 @@
 #'
 #' @param x Matrix
 #' @param group group
-#' @param ... further arguments passed to rowMeans
 #' @return sparseMatrix
-.rowMeansGroup <- function(x, group, ...) {
+.rowMeansGroup <- function(x, group) {
   stopifnot(is(x, "Matrix"))
   stopifnot(ncol(x) == length(group))
   mm <- .createMaskMatrix(group)
   m <- (x %*% mm)
   m@x <-m@x / ((x != 0L) %*% mm)@x
   m
+}
+
+#' colSums groupwise, similar to rowsum but for sparceMatrices
+#'
+#' @param x Matrix
+#' @param group group
+#' @param ... further arguments passed to rowMeans
+#' @return sparseMatrix
+.colSumsGroup <- function(x, group) {
+  stopifnot(is(x, "Matrix"))
+  stopifnot(nrow(x) == length(group))
+  mm <- .createMaskMatrix(group)
+  t(mm) %*% x
 }
 
