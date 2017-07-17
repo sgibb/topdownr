@@ -2,6 +2,7 @@
 #'
 #' @param x character/numeric, group identifier
 #' @return sparseMatrix with group masked
+#' @noRd
 .createMaskMatrix <- function(x) {
   if (!is.numeric(x)) {
     x <- match(x, unique(x))
@@ -14,6 +15,7 @@
 #' @param x Matrix
 #' @param group group
 #' @return sparseMatrix
+#' @noRd
 .rowMeansGroup <- function(x, group) {
   stopifnot(is(x, "Matrix"))
   stopifnot(ncol(x) == length(group))
@@ -29,6 +31,7 @@
 #' @param group group
 #' @param ... further arguments passed to rowMeans
 #' @return sparseMatrix
+#' @noRd
 .colSumsGroup <- function(x, group) {
   stopifnot(is(x, "Matrix"))
   stopifnot(nrow(x) == length(group))
