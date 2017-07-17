@@ -6,7 +6,7 @@ test_that(".aggregateDataFrame", {
   r <- data.frame(id=c(1, 3), col1=c(1.5, 3.5), col2=c(5.5, 7.5),
                   col3=LETTERS[c(1, 3)],
                   stringsAsFactors=FALSE, row.names=letters[c(1, 3)])
-  expect_equal(topdown:::.aggregateDataFrame(d, list(rep(1:2, each=2)),
+  expect_equal(topdown:::.aggregateDataFrame(d, rep(1:2, each=2),
                                              ignoreNumCols="id"), r)
 })
 

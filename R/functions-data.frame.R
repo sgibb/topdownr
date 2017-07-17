@@ -12,16 +12,18 @@
   fun <- match.fun(fun)
 
   cn <- colnames(x)
-  rn <- rownames(x)
 
-  isNumCol <- .vapply1l(x, is.numeric) & !cn %in% ignoreNumCols
+  isNumCol <- .vapply1l(x, function(column) {
+     is.numeric(column) || (is(column, "Rle") && is.numeric(runValue(column)))
+  }) & !cn %in% ignoreNumCols
 
-  rn <- .vapply1c(split(rn, f), "[", 1L)
-  nonNum <- aggregate(x[, !isNumCol, drop=FALSE], by=f, FUN="[[", 1L,
-                      drop=FALSE, simplify=TRUE)
-  num <- aggregate(x[, isNumCol, drop=FALSE], by=f, FUN=fun, na.rm=na.rm,
-                   drop=FALSE, simplify=TRUE)
-  cbind(nonNum, num, stringsAsFactors=FALSE, row.names=rn)[, cn]
+  nonNum <- x[!duplicated(f), !isNumCol, drop=FALSE]
+  rn <- rownames(nonNum)
+  num <- aggregate(x[, isNumCol, drop=FALSE], by=list(f), FUN=fun, na.rm=na.rm,
+                   drop=FALSE)
+  x <- .colsToRle(cbind(nonNum, num)[, cn])
+  rownames(x) <- rn
+  x
 }
 
 #' Convert DataFrame columns to Rle

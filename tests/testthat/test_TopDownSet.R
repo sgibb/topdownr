@@ -73,6 +73,23 @@ test_that("[", {
   expect_warning(tds[1, drop=TRUE], "'drop' is ignored")
 })
 
+test_that("aggregate", {
+  tda <- new("TopDownSet",
+             rowViews=FragmentViews("ACE", mass=1:3 * 100,
+                                    type=c("c", "c", "x"),
+                                    start=1:3, width=c(1:2, 1),
+                                    names=c("c1", "c2", "x1")),
+             colData=DataFrame(Scan=c(1, 4), File=Rle(c("foo", "bar"))),
+             assays=sparseMatrix(i=c(1:3, 2:3),
+                                 j=rep(1:2, 3:2),
+                                 x=c(13/3, 4, 6, 9, 8)),
+             files=c("foo.fasta"),
+             processing=c("[2017-07-16 14:00:00] Data created.",
+                          "[2017-07-16 14:00:01] Aggregated [3;5] to [3;2]."))
+
+  expect_equal_TDS(aggregate(tds, by="File"), tda)
+})
+
 test_that("dim", {
   expect_equal(dim(tds), c(3, 5))
 })

@@ -50,6 +50,40 @@ setMethod("[", c("TopDownSet", "ANY", "ANY"), function(x, i, j, ...,
 #' @param object TopDownSet
 #' @return numeric
 #' @noRd
+setMethod("aggregate", "TopDownSet", function(x,
+                                              by=c("Mz", "AGCTarget",
+                                                   "ETDReagentTarget",
+                                                   "ETDActivation",
+                                                   "CIDActivation",
+                                                   "HCDActivation",
+                                                   "SupplementalActivationCE",
+                                                   "SupplementalActivation")) {
+  d0 <- dim(x)
+
+  if (!(all(by %in% colnames(x@colData)))) {
+    stop(by[!by %in% colnames(x@colData)], " is/are not present in 'colData(x)'.")
+  }
+
+  groups <- .groupByLabels(as.data.frame(x@colData), by)
+  x@assays <- .rowMeansGroup(x@assays, groups)
+  x@colData <- .aggregateDataFrame(x@colData, groups,
+                                   ignoreNumCols=c("Scan", "ConditionId"))
+  ## now meaningless
+  x@files <- x@files[grepl(.topDownFileExtRx("fasta"), x@files)]
+
+  d1 <- dim(x)
+
+  x <- .tdsLogMsg(x, paste0("Aggregated [", d0[1L], ";", d0[2L], "] to [",
+                                            d1[1L], ";", d1[2L], "]."))
+
+  if (validObject(x)) {
+    x
+  }
+})
+
+#' @param object TopDownSet
+#' @return numeric
+#' @noRd
 setMethod("dim", "TopDownSet", function(x) {
   dim(x@assays)
 })
