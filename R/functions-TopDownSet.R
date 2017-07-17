@@ -96,6 +96,27 @@ fragmentType <- function(object) {
   elementMetadata(object@rowViews)$type
 }
 
+#' Create NCB Map (N-/C-terminal, or both)
+#'
+#' @param object TopDownSet
+#' @return Matrix, Nterm == 1, Cterm == 2, both == 3
+#' @noRd
+.ncbMap <- function(object, nterm=c("a", "b", "c"), cterm=c("x", "y", "z")) {
+  .isTopDownSet(object)
+
+  fv <- object@rowViews
+  mn <- mc <- object@assays
+  selN <- fragmentType(object) %in% nterm
+  selC <- fragmentType(object) %in% cterm
+  mn[!selN,] <- 0L
+  mc[!selC,] <- 0L
+
+  mn <- as(.colSumsGroup(mn, start(fv)) > 0L, "dgCMatrix")
+  mc <- as(.colSumsGroup(mc, start(fv)) > 0L, "dgCMatrix")
+  mc@x[] <- 2
+  mn + mc
+}
+
 #' @noRd
 .tdsLogMsg <- function(object, msg) {
   .isTopDownSet(object)

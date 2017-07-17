@@ -119,6 +119,34 @@ test_that(".isTopDownSet", {
   expect_error(topdown:::.isTopDownSet(1L), "has to be an 'TopDownSet' object")
 })
 
+test_that(".ncbMap", {
+  tds1 <- new("TopDownSet",
+              rowViews=FragmentViews("ACE", mass=1:5 * 100,
+                                     type=c("c", "c", "x", "y", "z_"),
+                                     start=c(1:2, 1, 1, 3),
+                                     width=c(1:2, 3, 3, 1),
+                                     names=c("c1", "c2", "x3", "y3", "z1_")),
+              colData=DataFrame(Scan=1:4),
+              assays=sparseMatrix(i=c(1:2, 3:4, 1:4, 5),
+                                  j=rep(1:4, c(2, 2, 4, 1)),
+                                  x=rep(9, 9)),
+              files=c("foo.experiments.csv", "foo.fasta", "foo.mzML",
+                      "foo.txt"),
+              processing="[2017-07-16 14:00:00] Data created.")
+
+  r <- sparseMatrix(i=rep(1:3, c(3, 3, 2)),
+                    j=c(1:3, 1:2, 5, 2, 4),
+                    x=rep(1:2, c(6, 2)),
+                    dims=c(3, 5))
+
+  r1 <- sparseMatrix(i=c(1:2, 1, 1:2),
+                     j=c(1, 1, 2, 3, 3),
+                     x=c(1, 1, 2, 3, 1),
+                     dims=c(3, 4))
+  expect_equal(topdown:::.ncbMap(tds), r)
+  expect_equal(topdown:::.ncbMap(tds1), r1)
+})
+
 test_that("show", {
   expect_output(show(new("TopDownSet")),
                 "TopDownSet object \\([0-9]\\.[0-9]+ Mb\\)")
