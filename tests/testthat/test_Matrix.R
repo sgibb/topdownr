@@ -7,10 +7,19 @@ test_that(".rowMeansGroup", {
   r <- sparseMatrix(i=c(1:4),
                     j=c(1, 2, 1, 2),
                     x=c(3, 8, 13, 18))
-  r2 <- sparseMatrix(i=rep(1:10, 2),
-                     j=rep(1:2, each=10),
-                     x=c(seq(0.5, 10, by=0.5)))
+  r2 <- sparseMatrix(i=1:10,
+                     j=rep(1:2, each=5),
+                     x=6:15)
+  expect_error(topdown:::.rowMeansGroup(matrix(1:10, ncol=2), group=1:2))
   expect_error(topdown:::.rowMeansGroup(m, group=1:2))
   expect_equal(topdown:::.rowMeansGroup(m, group=rep(1:2, each=5)), r)
-  expect_equal(topdown:::.rowMeansGroup(t(m), group=rep(1:2, each=2)), r2)
+  expect_equal(topdown:::.rowMeansGroup(t(m), group=rep(1:2, 2)), r2)
+})
+
+test_that(".createMaskMatrix", {
+  r1 <- sparseMatrix(i=1:10, j=rep(1:5, 2), x=1)
+  r2 <- sparseMatrix(i=1:10, j=rep(1:2, each=5), x=1)
+  expect_equal(topdown:::.createMaskMatrix(rep(1:5, 2)), r1)
+  expect_equal(topdown:::.createMaskMatrix(rep(letters[1:5], 2)), r1)
+  expect_equal(topdown:::.createMaskMatrix(rep(1:2, each=5)), r2)
 })

@@ -1,3 +1,14 @@
+#' mask matrix for matrix multiplication in .rowMeansGroup
+#'
+#' @param x character/numeric, group identifier
+#' @return sparseMatrix with group masked
+.createMaskMatrix <- function(x) {
+  if (!is.numeric(x)) {
+    x <- match(x, unique(x))
+  }
+  sparseMatrix(i=seq_along(x), j=x, x=1L)
+}
+
 #' rowMeans groupwise, similar to rowsum but for sparceMatrices
 #'
 #' @param x Matrix
@@ -5,11 +16,11 @@
 #' @param ... further arguments passed to rowMeans
 #' @return sparseMatrix
 .rowMeansGroup <- function(x, group, ...) {
+  stopifnot(is(x, "Matrix"))
   stopifnot(ncol(x) == length(group))
-  j <- seq_len(ncol(x))
-  l <- lapply(split(j, group), function(jj) {
-    as(Matrix::rowMeans(x[, jj, drop=FALSE], na.rm=TRUE, sparseResult=TRUE),
-       "sparseMatrix")
-  })
-  do.call(cbind, l)
+  mm <- .createMaskMatrix(group)
+  m <- (x %*% mm)
+  m@x <-m@x / ((x != 0L) %*% mm)@x
+  m
 }
+
