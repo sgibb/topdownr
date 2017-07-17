@@ -24,6 +24,15 @@ test_that(".colSumsGroup", {
   expect_equal(topdown:::.colSumsGroup(t(m), group=rep(1:2, each=5)), r2)
 })
 
+test_that(".m2rect", {
+  m <- sparseMatrix(i=rep(1:2, each=5), j=1:10, x=1:10)
+  r <- cbind(xleft=rep(c(-0.5, 0.5), each=5), ybottom=seq(-0.5, 8.5, by=1),
+             xright=rep(c(0.5, 1.5), each=5), ytop=seq(0.5, 9.5, by=1),
+             col=1:10)
+  expect_error(topdown:::.m2rect(matrix(1:10, nrow=2)))
+  expect_equal(topdown:::.m2rect(m), r)
+})
+
 test_that(".rowMeansGroup", {
   m <- sparseMatrix(i=rep(1:4, each=5),
                     j=rep(1:10, 2),
