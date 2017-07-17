@@ -13,6 +13,7 @@
 #' @param onDisk logical, return MSnExp or (if TRUE) OnDiskMSnExp
 #' @param verbose logical, verbose output?
 #' @return list (splitted by file extension) with file path
+#' @export
 #' @noRd
 readTopDownFiles <- function(path, pattern=".*",
                              type=c("a", "b", "c", "x", "y", "z"),

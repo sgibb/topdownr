@@ -82,6 +82,30 @@ setMethod("aggregate", "TopDownSet", function(x,
 })
 
 #' @param object TopDownSet
+#' @return Matrix
+#' @export
+#' @noRd
+setMethod("assayData", "TopDownSet", function(object) {
+  object@assay
+})
+
+#' @param object TopDownSet
+#' @return DataFrame
+#' @export
+#' @noRd
+setMethod("colData", "TopDownSet", function(object, ...) {
+  object@colData
+})
+
+#' @param object TopDownSet
+#' @return DataFrame
+#' @export
+#' @noRd
+setMethod("conditionData", "TopDownSet", function(object, ...) {
+  colData(object)
+})
+
+#' @param object TopDownSet
 #' @return numeric
 #' @noRd
 setMethod("dim", "TopDownSet", function(x) {
@@ -93,6 +117,22 @@ setMethod("dim", "TopDownSet", function(x) {
 #' @noRd
 setMethod("dimnames", "TopDownSet", function(x) {
   list(names(x@rowViews), row.names(x@colData))
+})
+
+#' @param object TopDownSet
+#' @return FragmentViews
+#' @export
+#' @noRd
+setMethod("fragmentViews", "TopDownSet", function(object, ...) {
+  rowViews(object)
+})
+
+#' @param object TopDownSet
+#' @return FragmentViews
+#' @export
+#' @noRd
+setMethod("rowViews", "TopDownSet", function(object, ...) {
+  object@rowViews
 })
 
 #' @param object TopDownExperiment
@@ -146,4 +186,3 @@ setMethod("show", "TopDownSet", function(object) {
 
   invisible(NULL)
 })
-

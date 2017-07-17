@@ -90,6 +90,14 @@ test_that("aggregate", {
   expect_equal_TDS(aggregate(tds, by="File"), tda)
 })
 
+test_that("accessors", {
+  expect_equal(assayData(tds), tds@assay)
+  expect_equal(colData(tds), tds@colData)
+  expect_equal(conditionData(tds), colData(tds))
+  expect_equal(fragmentViews(tds), rowViews(tds))
+  expect_equal(rowViews(tds), tds@rowViews)
+})
+
 test_that("dim", {
   expect_equal(dim(tds), c(3, 5))
 })

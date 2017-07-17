@@ -13,6 +13,7 @@
 #' @import Biostrings
 #' @importClassesFrom Matrix Matrix dgCMatrix
 #' @importFrom Matrix Matrix sparseMatrix
+#' @importFrom Biobase assayData
 #'
 #' @importFrom mzR openMSfile close header peaks
 #' @importFrom MSnbase calculateFragments defaultNeutralLoss
