@@ -125,8 +125,16 @@ setMethod("assayData", "TopDownSet", function(object) {
 #' @return DataFrame
 #' @export
 #' @noRd
-setMethod("colData", "TopDownSet", function(object, ...) {
+setMethod("colData", "TopDownSet", function(object) {
   object@colData
+})
+
+#' @param x TopDownSet
+#' @return TopDownSet
+#' @noRd
+setReplaceMethod("colData", "TopDownSet", function(object, ..., value) {
+  object@colData <- value
+  object
 })
 
 #' @param object TopDownSet
@@ -135,6 +143,15 @@ setMethod("colData", "TopDownSet", function(object, ...) {
 #' @noRd
 setMethod("conditionData", "TopDownSet", function(object, ...) {
   colData(object)
+})
+
+#' @param object TopDownSet
+#' @return TopDownSet
+#' @export
+#' @noRd
+setReplaceMethod("conditionData", "TopDownSet", function(object, ..., value) {
+  colData(object) <- value
+  object
 })
 
 #' @param object TopDownSet
@@ -155,7 +172,7 @@ setMethod("dimnames", "TopDownSet", function(x) {
 #' @return FragmentViews
 #' @export
 #' @noRd
-setMethod("fragmentViews", "TopDownSet", function(object, ...) {
+setMethod("fragmentData", "TopDownSet", function(object, ...) {
   rowViews(object)
 })
 

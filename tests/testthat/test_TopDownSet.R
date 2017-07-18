@@ -78,6 +78,32 @@ test_that("[[ and $", {
   expect_equal(tds[[1]], 1:5)
   expect_equal(tds[["Scan"]], 1:5)
   expect_equal(tds$Scan, 1:5)
+  tdn <- tds
+  tdn$Scan <- 11:15
+  expect_equal(tdn$Scan, 11:15)
+  tdn[["Scan"]] <- 1:5
+  expect_equal(tdn$Scan, 1:5)
+  tdn$Scan[1:3] <- 11:13
+  expect_equal(tdn$Scan, c(11:13, 4:5))
+  tdn$Scan[1:3] <- 11:13
+  expect_equal(tdn$Scan, c(11:13, 4:5))
+})
+
+test_that("accessors", {
+  expect_equal(assayData(tds), tds@assay)
+  expect_equal(colData(tds), tds@colData)
+  expect_equal(conditionData(tds), colData(tds))
+  expect_equal(fragmentData(tds), rowViews(tds))
+  expect_equal(rowViews(tds), tds@rowViews)
+})
+
+test_that("accessors<-", {
+  tdn <- tds
+  colData(tdn)[["Scan"]] <- 11:15
+  expect_equal(colData(tdn)$Scan, 11:15)
+  tdn <- tds
+  conditionData(tdn)[["Scan"]] <- 11:15
+  expect_equal(conditionData(tdn)$Scan, 11:15)
 })
 
 test_that("aggregate", {
@@ -94,15 +120,8 @@ test_that("aggregate", {
              processing=c("[2017-07-16 14:00:00] Data created.",
                           "[2017-07-16 14:00:01] Aggregated [3;5] to [3;2]."))
 
+  expect_error(aggregate(tds, by="FooBar"), "not present in 'colData\\(x\\)'")
   expect_equal_TDS(aggregate(tds, by="File"), tda)
-})
-
-test_that("accessors", {
-  expect_equal(assayData(tds), tds@assay)
-  expect_equal(colData(tds), tds@colData)
-  expect_equal(conditionData(tds), colData(tds))
-  expect_equal(fragmentViews(tds), rowViews(tds))
-  expect_equal(rowViews(tds), tds@rowViews)
 })
 
 test_that("dim", {
