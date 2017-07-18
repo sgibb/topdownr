@@ -49,32 +49,34 @@ setMethod("[", c("TopDownSet", "ANY", "ANY"),
 
 #' @param x TopDownSet
 #' @noRd
-setMethod("[[", c("TopDownSet", "ANY", "ANY"), function(x, i, j, ...,
-                                                        drop=TRUE) {
-  d <- dim(x)
-  dn <- dimnames(x)
+setMethod("[[", c("TopDownSet", "ANY", "missing"), function(x, i, j, ...) {
+  colData(x)[[i, ...]]
+})
 
-  if (missing(i)) {
-    i <- seq_len(d[1L])
-  }
+#' @param x TopDownSet
+#' @noRd
+setReplaceMethod("[[", c("TopDownSet", "ANY", "missing"),
+                 function(x, i, j, ..., value) {
+    colData(x)[[i, ...]] <- value
+    x
+})
 
-  if (is.character(i)) {
-    ii <- .subset(dn[[1L]] %in% i | as.character(fragmentType(x)) %in% i,
-                  d[1L], dn[[1L]])
-  } else {
-    ii <- .subset(i, d[1L], dn[[1L]])
-  }
+#' @param x TopDownSet
+#' @noRd
+.DollarNames.TopDownSet <- function(x, pattern="")
+    grep(pattern, names(colData(x)), value=TRUE)
 
-  if (is.unsorted(ii)) {
-    warning("It is not possible to change the row order.")
-    ii <- sort(ii)
-  }
+#' @param x TopDownSet
+#' @noRd
+setMethod("$", "TopDownSet", function(x, name) {
+    colData(x)[[name]]
+})
 
-  if (missing(j)) {
-    j <- seq_len(d[2L])
-  }
-  jj <- .subset(j, d[2L], dn[[2L]])
-  x@assay[ii, jj, drop=drop]
+#' @param x TopDownSet
+#' @noRd
+setReplaceMethod("$", "TopDownSet", function(x, name, value) {
+    colData(x)[[name]] <- value
+    x
 })
 
 #' @param object TopDownSet

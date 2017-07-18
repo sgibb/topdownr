@@ -74,15 +74,10 @@ test_that("[", {
   expect_warning(tds[1, drop=TRUE], "'drop' is ignored")
 })
 
-test_that("[[", {
-  expect_equal(tds[[1, 1]], 2)
-  expect_equal(tds[["c1", 1]], 2)
-  expect_equal(tds[[1,]], c(2, 4, 7, 0, 0))
-  expect_equal(tds[["c1"]], c(2, 4, 7, 0, 0))
-  expect_equal(tds[[1, , drop=FALSE]],
-               sparseMatrix(i=rep(1, 3), j=1:3, x=c(2, 4, 7), dims=c(1, 5)))
-  expect_equal(tds[["c"]], sparseMatrix(i=rep(1:2, each=3), j=c(1:3, 1:2, 5),
-                                        x=c(2, 4, 7, 3, 5, 9)))
+test_that("[[ and $", {
+  expect_equal(tds[[1]], 1:5)
+  expect_equal(tds[["Scan"]], 1:5)
+  expect_equal(tds$Scan, 1:5)
 })
 
 test_that("aggregate", {
