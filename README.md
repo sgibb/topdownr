@@ -13,4 +13,4 @@ Devel: [![build devel](http://bioconductor.org/shields/build/devel/bioc/topdown.
 
 ## workflow
 
-![workflow](notes/workflow/workflow.png)
+![workflow](vignettes/images/workflow/workflow.png)
