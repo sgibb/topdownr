@@ -37,7 +37,8 @@ readTopDownFiles <- function(path, pattern=".*",
   fragmentViews <- .calculateFragments(sequence=sequence,
                                        type=type,
                                        modifications=modifications,
-                                       neutralLoss=neutralLoss)
+                                       neutralLoss=neutralLoss,
+                                       verbose=verbose)
 
   scanConditions <- do.call(rbind, lapply(files$txt, .readScanHeadsTable,
                                           verbose=verbose))
