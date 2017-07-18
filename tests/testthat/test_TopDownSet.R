@@ -181,6 +181,11 @@ test_that(".ncbMap", {
   expect_equal(topdown:::.ncbMap(tds1), r1)
 })
 
+test_that("readTopDownFiles", {
+  expect_error(readTopDownFiles(".", pattern="FOOBAR"),
+               "Could not found any experiments.csv, fasta, mzML, txt files!")
+})
+
 test_that("show", {
   expect_output(show(new("TopDownSet")),
                 "TopDownSet object \\([0-9]\\.[0-9]+ Mb\\)")

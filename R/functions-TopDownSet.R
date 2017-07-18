@@ -24,10 +24,12 @@ readTopDownFiles <- function(path, pattern=".*",
 
   files <- .listTopDownFiles(path, pattern=pattern)
 
-  if (any(lengths(files)) == 0L) {
+  if (!length(files) || any(lengths(files) == 0L)) {
     ext <- c("experiments.csv", "fasta", "mzML", "txt")
-    stop("Could not found any ", paste0(ext[lengths(files) == 0L],
-                                        collapse=" or "), " files!")
+    if (length(files)) {
+      ext <- ext[lengths(files) == 0L]
+    }
+    stop("Could not found any ", paste0(ext, collapse=", "), " files!")
   }
 
   sequence <- .readFasta(files$fasta, verbose=verbose)
