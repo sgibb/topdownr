@@ -99,7 +99,7 @@ setMethod("aggregate", "TopDownSet", function(x,
   groups <- .groupByLabels(as.data.frame(x@colData), by)
   x@assay <- .rowMeansGroup(x@assay, groups)
   x@colData <- .aggregateDataFrame(x@colData, groups,
-                                   ignoreNumCols=c("Scan", "ConditionId"))
+                                   ignoreNumCols=c("Scan", "Condition"))
   ## now meaningless
   x@files <- x@files[grepl(.topDownFileExtRx("fasta"), x@files)]
 

@@ -32,11 +32,11 @@ test_that(".readExperimentCsv", {
   expect_message(e <- topdown:::.readExperimentCsv(fn, verbose=TRUE),
                  "Reading 3 experiment conditions from file")
   expect_equal(colnames(e),
-               c("MSLevel", "NaColumn", "TargetedMassList", "ConditionId",
+               c("MSLevel", "NaColumn", "TargetedMassList", "Condition",
                  "Mz", "File"))
   expect_equal(e$MSLevel, rep(2, 2))
   expect_equal(e$NaColumn, rep(0, 2))
-  expect_equal(e$ConditionId, 1:2)
+  expect_equal(e$Condition, 1:2)
   expect_equal(e$Mz, rep(933.1, 2))
   expect_equal(e$File, rep(gsub("\\.experiments.csv", "", basename(fn)), 2))
   unlink(fn)
@@ -69,7 +69,7 @@ test_that(".readScanHeadsTable", {
                  "Reading 5 header information from file")
   expect_equal(colnames(h),
                c("MSOrder", "FilterString", "Activation1", "Activation2",
-                 "Energy1", "Energy2", "ConditionId",
+                 "Energy1", "Energy2", "Condition",
                  "ETDActivation", "CIDActivation", "HCDActivation", "File"))
   expect_equal(h$MSOrder, rep(2, 4))
   expect_equal(h$ETDActivation, c(50, 50, 0, 0))
@@ -77,19 +77,19 @@ test_that(".readScanHeadsTable", {
   expect_equal(h$HCDActivation, c(30, 30, 0, 10))
   # TODO: FilterStrings are not unique in .experiment.csv files
   # see issue #14
-  #expect_equal(h$ConditionId, c(1, 7, 9))
-  expect_equal(h$ConditionId, c(1, 1:3))
+  #expect_equal(h$Condition, c(1, 7, 9))
+  expect_equal(h$Condition, c(1, 1:3))
   expect_equal(h$File, rep(gsub("\\.txt$", "", basename(fn)), 4))
   unlink(fn)
 })
 
 test_that(".mergeScanConditionAndHeaderInformation", {
-  sc <- data.frame(FOO=1:3, ConditionId=c(1:2, 1), Both=1,
+  sc <- data.frame(FOO=1:3, Condition=c(1:2, 1), Both=1,
                    File=c("foo", "foo", "bar"))
-  hi <- data.frame(BAR=1:5, ConditionId=c(1, 1, 2, 2, 1), Both=2,
+  hi <- data.frame(BAR=1:5, Condition=c(1, 1, 2, 2, 1), Both=2,
                    File=c("bar", "bar", "bar", "foo", "foo"))
   r <- data.frame(File=c(rep("bar", 3), rep("foo", 2)),
-                  ConditionId=c(1, 1, 2, 1, 2), FOO=c(3, 3, NA, 1, 2),
+                  Condition=c(1, 1, 2, 1, 2), FOO=c(3, 3, NA, 1, 2),
                   Both.ScanCondition=c(1, 1, NA, 1, 1), BAR=c(1:3, 5:4),
                   Both.HeaderInformation=2)
   expect_equal(topdown:::.mergeScanConditionAndHeaderInformation(sc, hi), r)

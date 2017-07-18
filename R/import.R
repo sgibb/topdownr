@@ -49,7 +49,7 @@
 
   d[is.na(d)] <- 0L
 
-  d$ConditionId <- seq_len(nrow(d))
+  d$Condition <- seq_len(nrow(d))
   d$Mz <- .targetedMassListToMz(d$TargetedMassList)
   d$File <- gsub(.topDownFileExtRx("csv"), "", basename(file))
   d
@@ -94,8 +94,8 @@
 
   # TODO: somehow the FilterString doesn't always contains the right mass label.
   # For now we just take the first non-duplicated (unique) condition
-  # disabled: d$ConditionId <- as.integer(.filterStringToId(d$FilterString))
-  d$ConditionId <- cumsum(!duplicated(d$FilterString))
+  # disabled: d$Condition <- as.integer(.filterStringToId(d$FilterString))
+  d$Condition <- cumsum(!duplicated(d$FilterString))
 
   d[is.na(d)] <- 0L
 
@@ -159,7 +159,7 @@
 .mergeScanConditionAndHeaderInformation <- function(sc, hi) {
   stopifnot(is(sc, "data.frame"))
   stopifnot(is(hi, "data.frame"))
-  merge(sc, hi, by=c("File", "ConditionId"), all.y=TRUE,
+  merge(sc, hi, by=c("File", "Condition"), all.y=TRUE,
         suffixes=c(".ScanCondition", ".HeaderInformation"))
 }
 
