@@ -69,6 +69,7 @@ test_that("[", {
   expect_equal_TDS(tds["c",], tdsc)
   expect_equal_TDS(tds["c1"], tdsc1)
   expect_equal_TDS(tds[,1:3], tdsf)
+  expect_equal_TDS(tds[,Rle(1:3, rep(1, 3))], tdsf)
   expect_warning(tds[3:1,], "row order")
   expect_warning(tds[1, drop=TRUE], "'drop' is ignored")
 })

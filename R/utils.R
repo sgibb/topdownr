@@ -183,6 +183,9 @@ cat0 <- function(...) {
 #' @return logical, vector of length n
 #' @noRd
 .subset <- function(i, n, nms=NULL) {
+  ## use decode to turn Rle into native vectors, does nothing if i is already a
+  ## native vector
+  i <- decode(i)
   if (anyNA(i)) {
     stop("Subsetting by 'NA' is not supported.")
   }

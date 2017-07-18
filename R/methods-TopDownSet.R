@@ -1,7 +1,7 @@
 #' @param x TopDownSet
 #' @noRd
-setMethod("[", c("TopDownSet", "ANY", "ANY"), function(x, i, j, ...,
-                                                       drop=FALSE) {
+setMethod("[", c("TopDownSet", "ANY", "ANY"),
+          function(x, i, j, ..., drop=FALSE) {
   d0 <- dim(x)
   dn <- dimnames(x)
 

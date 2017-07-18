@@ -111,6 +111,7 @@ test_that(".subset", {
   expect_error(topdown:::.subset(list(foo=1:10), 10, letters[1:10]),
                "Unknown")
   expect_equal(topdown:::.subset(1:2, 10, letters[1:10]), 1:2)
+  expect_equal(topdown:::.subset(Rle(1:2, c(1, 1)), 10, letters[1:10]), 1:2)
   expect_equal(topdown:::.subset(c(TRUE, TRUE, rep(FALSE, 8)), 10,
                                  letters[1:10]), 1:2)
   expect_equal(topdown:::.subset(c("a", "b"), 10, letters[1:10]), 1:2)
