@@ -123,9 +123,9 @@ fragmentType <- function(object) {
 }
 
 #' @noRd
-.tdsLogMsg <- function(object, msg) {
+.tdsLogMsg <- function(object, ...) {
   .isTopDownSet(object)
-  object@processing <- c(object@processing, .logmsg(msg))
+  object@processing <- c(object@processing, .logmsg(...))
   object
 }
 

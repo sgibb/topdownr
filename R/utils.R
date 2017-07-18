@@ -92,11 +92,11 @@ cat0 <- function(...) {
 
 #' Add log message.
 #'
-#' @param msg character, log message
+#' @param ... arguments passed to paste0
 #' @return msg with date string added
 #' @noRd
-.logmsg <- function(msg) {
-  paste0("[", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "] ", msg)
+.logmsg <- function(...) {
+  paste0("[", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "] ", ...)
 }
 
 #' Create mass label

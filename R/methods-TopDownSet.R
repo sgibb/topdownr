@@ -39,8 +39,8 @@ setMethod("[", c("TopDownSet", "ANY", "ANY"),
 
   d1 <- dim(x)
 
-  x <- .tdsLogMsg(x, paste0("Subsetted [", d0[1L], ";", d0[2L], "] to [",
-                                           d1[1L], ";", d1[2L], "]."))
+  x <- .tdsLogMsg(x, "Subsetted [", d0[1L], ";", d0[2L], "] to [",
+                                    d1[1L], ";", d1[2L], "].")
 
   if (validObject(x)) {
     x
@@ -106,8 +106,8 @@ setMethod("aggregate", "TopDownSet",
 
   d1 <- dim(x)
 
-  x <- .tdsLogMsg(x, paste0("Aggregated [", d0[1L], ";", d0[2L], "] to [",
-                                            d1[1L], ";", d1[2L], "]."))
+  x <- .tdsLogMsg(x, "Aggregated [", d0[1L], ";", d0[2L], "] to [",
+                                     d1[1L], ";", d1[2L], "].")
 
   if (validObject(x)) {
     x

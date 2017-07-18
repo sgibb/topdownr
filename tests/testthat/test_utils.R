@@ -59,9 +59,11 @@ test_that(".hft", {
 })
 
 test_that(".logmsg", {
-  expect_true(grepl(paste("^\\[20[0-9]{2}-[01][0-9]-[0-3][0-9]",
-                          "[0-2][0-9]:[0-5][0-9]:[0-5][0-9]\\]",
-                          "foo$"), topdown:::.logmsg("foo")))
+  rxDate <-paste("^\\[20[0-9]{2}-[01][0-9]-[0-3][0-9]",
+                 "[0-2][0-9]:[0-5][0-9]:[0-5][0-9]\\]")
+
+  expect_true(grepl(paste(rxDate, "foo$"), topdown:::.logmsg("foo")))
+  expect_true(grepl(paste(rxDate, "foobar$"), topdown:::.logmsg("foo", "bar")))
 })
 
 test_that(".massLabel", {
