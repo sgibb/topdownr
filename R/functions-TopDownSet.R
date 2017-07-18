@@ -63,12 +63,15 @@ readTopDownFiles <- function(path, pattern=".*",
   dimnames(assay) <- list(names(fragmentViews),
                           rownames(header))
 
+
   new("TopDownSet",
       rowViews=fragmentViews,
       colData=.colsToRle(as(header, "DataFrame")),
       assay=assay,
       files=basename(unlist(unname(files))),
-      processing=.logmsg("Data loaded."))
+      tolerance=tolerance,
+      processing=.logmsg("Data loaded (tolerance: ",
+                         round(tolerance/1e-6, 1L) , " ppm)."))
 }
 
 #' Test for TopDownSet class

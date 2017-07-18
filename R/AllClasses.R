@@ -9,11 +9,13 @@ setClass("TopDownSet",
           colData="DataFrame",
           assay="Matrix",
           files="character",
+          tolerance="numeric",
           processing="character"),
   prototype=prototype(rowViews=new("FragmentViews"),
                       colData=new("DataFrame"),
                       assay=new("dgCMatrix"),
                       files=character(),
+                      tolerance=double(),
                       processing=character()),
   validity=function(object).validateTopDownSet(object)
 )
