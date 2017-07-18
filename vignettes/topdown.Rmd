@@ -13,6 +13,7 @@ output:
   BiocStyle::html_document2:
     toc_float: true
     tidy: TRUE
+bibliography: topdown.bib
 vignette: >
   %\VignetteIndexEntry{TopDown}
   %\VignetteEngine{knitr::rmarkdown}
@@ -70,6 +71,10 @@ free of charge (but you have to register) from the Thermo FlexNet website:
 https://thermo.flexnetoperations.com/
 
 *ScanHeadsman* was created by Vladimir Gorshkov.
+
+# The `TopDownSet`
+
+![TopDownSet anatomy, image adopted from [@SummarizedExperiment].](images/TopDownSet.svg)
 
 ```{r sessioninfo}
 sessionInfo()
