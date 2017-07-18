@@ -131,6 +131,7 @@ setMethod("colData", "TopDownSet", function(object) {
 
 #' @param x TopDownSet
 #' @return TopDownSet
+#' @export
 #' @noRd
 setReplaceMethod("colData", "TopDownSet", function(object, ..., value) {
   object@colData <- value

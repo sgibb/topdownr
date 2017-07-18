@@ -31,6 +31,7 @@
 #' @param height double
 #' @return matrix with coords (xleft, ybottom, xright, ytop) (row index is x,
 #' col index is y), and color
+#' @noRd
 .m2rect <- function(x, width=1L, height=1L) {
   stopifnot(is(x, "Matrix"))
   dp <- diff(x@p)

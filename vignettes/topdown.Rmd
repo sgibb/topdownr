@@ -35,6 +35,10 @@ suppressPackageStartupMessages(library("BiocStyle"))
 
 # Introduction
 
+## The `topdown` workflow
+
+![topdown workflow](images/workflow/workflow.png)
+
 # Setup
 
 ## Setup the Thermo Software
