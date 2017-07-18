@@ -120,8 +120,9 @@ test_that("aggregate", {
              processing=c("[2017-07-16 14:00:00] Data created.",
                           "[2017-07-16 14:00:01] Aggregated [3;5] to [3;2]."))
 
-  expect_error(aggregate(tds, by="FooBar"), "not present in 'colData\\(x\\)'")
-  expect_equal_TDS(aggregate(tds, by="File"), tda)
+  expect_error(aggregate(tds, by="FooBar"), "must be a list")
+  expect_equal_TDS(aggregate(tds, by=list(tds$File)), tda)
+  expect_equal_TDS(aggregate(tds, by=list(rep(1:2, c(3, 2)))), tda)
 })
 
 test_that("dim", {

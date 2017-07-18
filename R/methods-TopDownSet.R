@@ -81,23 +81,23 @@ setReplaceMethod("$", "TopDownSet", function(x, name, value) {
 })
 
 #' @param object TopDownSet
-#' @return numeric
+#' @return TopDownSet
 #' @noRd
-setMethod("aggregate", "TopDownSet", function(x,
-                                              by=c("Mz", "AGCTarget",
-                                                   "ETDReagentTarget",
-                                                   "ETDActivation",
-                                                   "CIDActivation",
-                                                   "HCDActivation",
-                                                   "SupplementalActivationCE",
-                                                   "SupplementalActivation")) {
+setMethod("aggregate", "TopDownSet",
+          function(x, by=colData(x)[, c("Mz", "AGCTarget",
+                                        "ETDReagentTarget",
+                                        "ETDActivation",
+                                        "CIDActivation",
+                                        "HCDActivation",
+                                        "SupplementalActivationCE",
+                                        "SupplementalActivation")]) {
   d0 <- dim(x)
 
-  if (!(all(by %in% colnames(x@colData)))) {
-    stop(by[!by %in% colnames(x@colData)], " is/are not present in 'colData(x)'.")
+  if (!is.list(by) && !is.data.frame(by) && !inherits(by, "DataFrame")) {
+    stop("'by' must be a list or a data.frame!")
   }
-
-  groups <- .groupByLabels(as.data.frame(x@colData), by)
+  by <- as.data.frame(by)
+  groups <- .groupByLabels(by, names(by))
   x@assay <- .rowMeansGroup(x@assay, groups)
   x@colData <- .aggregateDataFrame(x@colData, groups,
                                    ignoreNumCols=c("Scan", "Condition"))
