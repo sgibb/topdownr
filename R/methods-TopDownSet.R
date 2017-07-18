@@ -58,7 +58,9 @@ setMethod("[[", c("TopDownSet", "ANY", "missing"), function(x, i, j, ...) {
 setReplaceMethod("[[", c("TopDownSet", "ANY", "missing"),
                  function(x, i, j, ..., value) {
     colData(x)[[i, ...]] <- value
-    x
+    if (validObject(x)) {
+      x
+    }
 })
 
 #' @param x TopDownSet
@@ -136,7 +138,9 @@ setMethod("colData", "TopDownSet", function(object) {
 #' @noRd
 setReplaceMethod("colData", "TopDownSet", function(object, ..., value) {
   object@colData <- value
-  object
+  if (validObject(object)) {
+    object
+  }
 })
 
 #' @param object TopDownSet
@@ -153,7 +157,9 @@ setMethod("conditionData", "TopDownSet", function(object, ...) {
 #' @noRd
 setReplaceMethod("conditionData", "TopDownSet", function(object, ..., value) {
   colData(object) <- value
-  object
+  if (validObject(object)) {
+    object
+  }
 })
 
 #' @param object TopDownSet
