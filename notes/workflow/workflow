@@ -6,7 +6,7 @@ subgraph Windows
    fMeth --Run the MS experiment --> fRaw>.raw files]
    fRaw -- Extract information about scans --> tdsh(`topdown::runScanHeadsman`)
    tdsh --> sh(ScanHeadsman.exe)
-   sh -- Method tables --> fCsv>.experiment.csv files]
+   sh -- Method tables --> fCsv>.experiments.csv files]
    sh -- Scan header tables --> fTxt>.txt files]
    fRaw --> thxcal(Xcalibur/Xtract)
    thxcal -- Charge state deconvultion --> fMzMl>.mzML files]
