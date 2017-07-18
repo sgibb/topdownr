@@ -300,12 +300,6 @@ cat0 <- function(...) {
   paste0("\\.", ext[sel], "$", collapse="|")
 }
 
-#' wrapper around vapply for FUN.VALUE=logical(1L)
-#' @noRd
-.vapply1c <- function(X, FUN, ..., USE.NAMES=FALSE) {
-  vapply(X=X, FUN=FUN, FUN.VALUE=NA_character_, ..., USE.NAMES=USE.NAMES)
-}
-
 #' wrapper around vapply for FUN.VALUE=double(1L)
 #' @noRd
 .vapply1d <- function(X, FUN, ..., USE.NAMES=FALSE) {
