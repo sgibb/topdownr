@@ -63,6 +63,7 @@ setReplaceMethod("[[", c("TopDownSet", "ANY", "missing"),
 
 #' @param x TopDownSet
 #' @noRd
+#' @export
 .DollarNames.TopDownSet <- function(x, pattern="")
     grep(pattern, names(colData(x)), value=TRUE)
 
