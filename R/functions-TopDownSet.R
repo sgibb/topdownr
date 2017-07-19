@@ -10,7 +10,12 @@
 #'
 #' @param path character, file path
 #' @param pattern character, filename pattern
-#' @param onDisk logical, return MSnExp or (if TRUE) OnDiskMSnExp
+#' @param type character, type of fragments
+#' @param modification vector, modifications applied
+#' @param neutralLoss list, neutral loss applied
+#' @param tolerance double, matching tolerance
+#' @param dropNonInformativeColumns logical, should columns with just one
+#' identical value across all runs be removed?
 #' @param verbose logical, verbose output?
 #' @return list (splitted by file extension) with file path
 #' @export
@@ -20,6 +25,7 @@ readTopDownFiles <- function(path, pattern=".*",
                              modifications=c(C=57.02146),
                              neutralLoss=defaultNeutralLoss(),
                              tolerance=10e-6,
+                             dropNonInformativeColumns=TRUE,
                              verbose=interactive(), ...) {
 
   files <- .listTopDownFiles(path, pattern=pattern)
@@ -60,10 +66,13 @@ readTopDownFiles <- function(path, pattern=".*",
 
   header <- .mergeSpectraAndHeaderInformation(mzmlHeader, scanHeadsman)
 
+  if (dropNonInformativeColumns) {
+    header <- .dropNonInformativeColumns(header)
+  }
+
   assay <- do.call(cbind, lapply(mzml, "[[", "m"))
   dimnames(assay) <- list(names(fragmentViews),
                           rownames(header))
-
 
   new("TopDownSet",
       rowViews=fragmentViews,

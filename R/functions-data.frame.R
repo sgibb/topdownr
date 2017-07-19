@@ -49,3 +49,12 @@
   x[isFactorColumn] <- droplevels(x[isFactorColumn])
   x
 }
+
+#' Drop non informative columns (all rows are identical)
+#'
+#' @param x data.frame/DataFrame
+#' @return x, without columns that are identical
+#' @noRd
+.dropNonInformativeColumns <- function(x) {
+  x[, !.vapply1l(x, .allIdentical), drop=FALSE]
+}

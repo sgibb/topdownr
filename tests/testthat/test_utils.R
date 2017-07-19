@@ -1,5 +1,10 @@
 context("utils")
 
+test_that(".allIdentical", {
+  expect_true(topdown:::.allIdentical(rep(1L, 3)))
+  expect_false(topdown:::.allIdentical(1:3))
+})
+
 test_that("cat0", {
   expect_output(topdown:::cat0("foo", "bar"), "foobar")
 })

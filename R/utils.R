@@ -1,3 +1,13 @@
+#' Test whether all values in a vector are identical
+#' (all(x[1] == x) is slower than unique)
+#'
+#' @param x vector
+#' @return logical, TRUE/FALSE
+#' @noRd
+.allIdentical <- function(x) {
+  isTRUE(length(unique(x)) == 1L)
+}
+
 #' cat0, cat with sep="", similar to paste0
 #'
 #' @param \ldots arguments passed to cat
