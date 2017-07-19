@@ -133,6 +133,14 @@ test_that("dimnames", {
   expect_equal(dimnames(tds), list(c("c1", "c2", "x1"), NULL))
 })
 
+test_that("filterIntensity", {
+  tdl <- tds
+  tdl@assay <- sparseMatrix(i=c(1, 3, 2), j=3:5, x=7:9)
+  tdl@processing <- c(tdl@processing,
+                      "[2017-07-16 14:00:02] 5 intensity values < 7 filtered.")
+  expect_equal_TDS(filterIntensity(tds, 7), tdl)
+})
+
 test_that("fragmentMass", {
   expect_error(fragmentMass(1L), "has to be an 'TopDownSet' object")
   expect_equal(fragmentMass(tds), 1:3 * 100)

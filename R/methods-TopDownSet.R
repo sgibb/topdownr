@@ -185,6 +185,21 @@ setMethod("fragmentData", "TopDownSet", function(object, ...) {
 })
 
 #' @param object TopDownSet
+#' @param minIntensity double, remove fragments with intensity below minIntensity
+#' @return TopDownSet
+#' @export
+#' @noRd
+setMethod("filterIntensity", "TopDownSet", function(object, minIntensity) {
+  n0 <- nnzero(object@assay)
+  object@assay <- drop0(object@assay,
+                        tol=minIntensity - 10L * .Machine$double.eps,
+                        is.Csparse=TRUE)
+  n1 <- nnzero(object@assay)
+  .tdsLogMsg(object, n0 - n1, " intensity values < ",
+             minIntensity, " filtered.")
+})
+
+#' @param object TopDownSet
 #' @return FragmentViews
 #' @export
 #' @noRd
@@ -227,7 +242,7 @@ setMethod("show", "TopDownSet", function(object) {
     cat("- - - Intensity data - - -\n")
     cat(sprintf("Size of array: %dx%d (%.2f%% != 0)\n",
                 nrow(object@assay), ncol(object@assay),
-                length(object@assay@x) / length(object@assay) * 100L))
+                nnzero(object@assay) / length(object@assay) * 100L))
     if (length(object@assay@x)) {
       intensity <- range(object@assay@x)
     } else {
