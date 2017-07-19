@@ -12,6 +12,7 @@
 #' @param pattern character, filename pattern
 #' @param type character, type of fragments
 #' @param modification vector, modifications applied
+#' @param adducts data.frame, with 3 columns mass, name, to
 #' @param neutralLoss list, neutral loss applied
 #' @param tolerance double, matching tolerance
 #' @param dropNonInformativeColumns logical, should columns with just one
@@ -23,6 +24,7 @@
 readTopDownFiles <- function(path, pattern=".*",
                              type=c("a", "b", "c", "x", "y", "z"),
                              modifications=c(C=57.02146),
+                             adducts=data.frame(),
                              neutralLoss=defaultNeutralLoss(),
                              tolerance=10e-6,
                              dropNonInformativeColumns=TRUE,
@@ -44,6 +46,7 @@ readTopDownFiles <- function(path, pattern=".*",
                                        type=type,
                                        modifications=modifications,
                                        neutralLoss=neutralLoss,
+                                       adducts=adducts,
                                        verbose=verbose)
 
   scanConditions <- do.call(rbind, lapply(files$txt, .readScanHeadsTable,
