@@ -31,6 +31,11 @@ test_that(".formatNames", {
                  "MultiInjectInfo", "RfCompPpm"))
 })
 
+test_that(".formatNumbers", {
+  expect_equal(topdown:::.formatNumbers(1:10), sprintf("%02d", 1:10))
+  expect_equal(topdown:::.formatNumbers(c(1, 100)), sprintf("%03d", c(1, 100)))
+})
+
 test_that(".fragmentationMethod", {
   d <- expand.grid(ETDActivation=0:1,
                    CIDActivation=0:1,
@@ -99,6 +104,12 @@ test_that(".msg", {
   expect_message(topdown:::.msg(TRUE, "foobar"), "foobar")
   expect_message(topdown:::.msg(TRUE, "foo", "bar"), "foobar")
   expect_silent(topdown:::.msg(FALSE, "foobar"))
+})
+
+test_that(".ndigits", {
+  expect_equal(topdown:::.ndigits(rep(10^(1:6), each=2) - c(0, 1)),
+               rep(2:7, each=2) - c(0, 1))
+  expect_equal(topdown:::.ndigits(-c(1, 10)), 1:2)
 })
 
 test_that(".nrows", {

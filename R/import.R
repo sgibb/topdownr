@@ -107,6 +107,13 @@
 
   d[is.na(d)] <- 0L
 
+  d$Activation <- .fragmentationMethod(d[, paste0(c("ETD", "CID", "HCD"),
+                                                  "Activation")])
+
+  d$ActivationString <- paste(.formatNumbers(d$ETDActivation),
+                              .formatNumbers(d$CIDActivation),
+                              .formatNumbers(d$HCDActivation), sep=":")
+
   d$File <- gsub(.topDownFileExtRx("txt"), "", basename(file))
   d
 }

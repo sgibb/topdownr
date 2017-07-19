@@ -60,6 +60,14 @@ cat0 <- function(...) {
   }))
 }
 
+#' Convert number to string and prepend zeros
+#'
+#' @param x double
+#' @return character
+.formatNumbers <- function(x) {
+  sprintf(paste0("%0", .ndigits(max(x)), "d"), x)
+}
+
 #' Get fragmentation method from {ETD,CID,HCD}Activation
 #'
 #' @param x data.frame/matrix, 3 columns (ETD,CID,HCD)
@@ -173,6 +181,14 @@ cat0 <- function(...) {
   if (verbose) {
     message(...)
   }
+}
+
+#' number of digits
+#'
+#' @param x double
+#' @return integer
+.ndigits <- function(x) {
+  trunc(log10(abs(x)) + 1)
 }
 
 #' similar to lengths but for rows

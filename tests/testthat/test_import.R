@@ -70,7 +70,8 @@ test_that(".readScanHeadsTable", {
   expect_equal(colnames(h),
                c("MSOrder", "FilterString", "Activation1", "Activation2",
                  "Energy1", "Energy2", "Condition",
-                 "ETDActivation", "CIDActivation", "HCDActivation", "File"))
+                 "ETDActivation", "CIDActivation", "HCDActivation",
+                 "Activation", "ActivationString", "File"))
   expect_equal(h$MSOrder, rep(2, 4))
   expect_equal(h$ETDActivation, c(50, 50, 0, 0))
   expect_equal(h$CIDActivation, c(0, 0, 20, 20))
