@@ -57,29 +57,29 @@ setMethod("[[", c("TopDownSet", "ANY", "missing"), function(x, i, j, ...) {
 #' @noRd
 setReplaceMethod("[[", c("TopDownSet", "ANY", "missing"),
                  function(x, i, j, ..., value) {
-    colData(x)[[i, ...]] <- value
-    if (validObject(x)) {
-      x
-    }
+  colData(x)[[i, ...]] <- value
+  if (validObject(x)) {
+    x
+  }
 })
 
 #' @param x TopDownSet
 #' @noRd
 #' @export
 .DollarNames.TopDownSet <- function(x, pattern="")
-    grep(pattern, names(colData(x)), value=TRUE)
+  grep(pattern, names(colData(x)), value=TRUE)
 
 #' @param x TopDownSet
 #' @noRd
 setMethod("$", "TopDownSet", function(x, name) {
-    colData(x)[[name]]
+  colData(x)[[name]]
 })
 
 #' @param x TopDownSet
 #' @noRd
 setReplaceMethod("$", "TopDownSet", function(x, name, value) {
-    colData(x)[[name]] <- value
-    x
+  colData(x)[[name]] <- value
+  x
 })
 
 #' @param object TopDownSet
