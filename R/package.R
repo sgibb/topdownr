@@ -12,7 +12,7 @@
 #' @import S4Vectors
 #' @import Biostrings
 #' @importClassesFrom Matrix Matrix dgCMatrix
-#' @importFrom Matrix Matrix sparseMatrix
+#' @importFrom Matrix Matrix sparseMatrix nnzero
 #' @importFrom Biobase assayData
 #'
 #' @importFrom mzR openMSfile close header peaks

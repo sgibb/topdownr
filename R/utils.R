@@ -64,6 +64,7 @@ cat0 <- function(...) {
 #'
 #' @param x double
 #' @return character
+#' @noRd
 .formatNumbers <- function(x) {
   sprintf(paste0("%0", .ndigits(max(x)), "d"), x)
 }
@@ -187,6 +188,7 @@ cat0 <- function(...) {
 #'
 #' @param x double
 #' @return integer
+#' @noRd
 .ndigits <- function(x) {
   trunc(log10(abs(x)) + 1)
 }
