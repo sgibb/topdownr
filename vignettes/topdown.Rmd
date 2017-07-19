@@ -24,6 +24,7 @@ vignette: >
 
 ```{r environment, echo=FALSE}
 suppressPackageStartupMessages(library("topdown"))
+suppressPackageStartupMessages(library("topdowndata"))
 suppressPackageStartupMessages(library("BiocStyle"))
 ```
 
@@ -76,9 +77,105 @@ https://thermo.flexnetoperations.com/
 
 *ScanHeadsman* was created by Vladimir Gorshkov.
 
-# The `TopDownSet`
+# Working with `topdown`
+
+```{r load_package}
+library("topdown")
+```
+
+## Importing files
+
+The example files are provided in the `topdowndata` package. For a full
+analysis you need a `.fasta` file with the protein sequence, the
+`.experiments.csv` files containing the method information, the `.txt` files
+containing the scan header information and the `.mzML` files with the
+deconvulted spectra.
+
+```{r list_files, eval=-1, echo=1, comment=NA}
+list.files(topdowndata::h2aPath())
+lapply(topdown:::.listTopDownFiles(topdowndata::h2aPath()), function(x) {
+         c(head(x, 2), "...")
+})
+```
+
+All these files have to be in a directory. You could import them via
+`readTopDownFiles`:
+
+```{r import_files}
+library("topdown")
+
+tds <- readTopDownFiles(topdowndata::h2aPath())
+tds
+```
+
+## The `TopDownSet` anatomy
 
 ![TopDownSet anatomy, image adopted from [@SummarizedExperiment].](images/TopDownSet.svg)
+
+The `TopDownSet` contains the following components: *Fragment data*, *Condition
+data*, *Assay data*.
+
+### Fragment data
+
+```{r rowViews}
+fragmentData(tds)
+```
+
+Fragment data contains one `AAString` (the protein sequence) and an `IRanges`
+object that stores the `start`, `end` (and `width`) values of the fragments.
+Additionally it has a `DataFrame` for the `mass`, `type` and `z` information
+of each fragment.
+
+(*Implementation detail:* the fragment data are represented by an
+`FragmentViews` object that is an overloaded `XStringViews` object.)
+
+### Condition data
+
+```{r colData}
+conditionData(tds)[, 1:5]
+```
+
+Condition data is a `DataFrame` that contains the combined header information
+for each MS run (combined from method (`.experiments.csv` files)/scan header
+(`.txt` files) table and metadata from the `.mzML` files).
+
+### Assay data
+
+```{r assayData}
+assayData(tds)[810:819, 1:10]
+```
+
+Assay data is a `sparseMatrix` where the rows correspond to the fragments,
+the columns to the runs/conditions and the entries to the intensity values.
+A `sparseMatrix` is similar to the classic `matrix` in *R* but stores just
+the values that are different from zero.
+
+## Subsetting a `TopDownSet`
+
+A `TopDownSet` could be subsetted by the fragment and the condition data.
+
+```{r subsetting}
+# select the first 100 fragments
+tds[1:100]
+
+# select all "c" fragments
+tds["c"]
+
+# select just the 100. "c" fragment
+tds["c100"]
+
+# select all "a" and "b" fragments but just the first 100 "c"
+tds[c("a", "b", paste0("c", 1:100))]
+
+# select condition/run 1 to 10
+tds[, 1:10]
+
+# select all conditions from one file
+tds[, tds$File == "h2a_560_ETDReagentTarget_1e+06_1"]
+
+# select all "c" fragments from a single file
+tds["c", tds$File == "h2a_560_ETDReagentTarget_1e+06_1"]
+```
 
 ```{r sessioninfo}
 sessionInfo()
