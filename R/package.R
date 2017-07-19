@@ -19,5 +19,5 @@
 #' @importFrom MSnbase calculateFragments defaultNeutralLoss
 #' @importFrom stats setNames
 #' @importFrom tools file_ext file_path_sans_ext
-#' @importFrom utils modifyList txtProgressBar setTxtProgressBar object.size read.csv
+#' @importFrom utils modifyList txtProgressBar setTxtProgressBar object.size read.csv .DollarNames
 NULL
