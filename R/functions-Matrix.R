@@ -24,6 +24,26 @@
   t(mm) %*% x
 }
 
+#' drop0 but row-wise with length(tol) == nrow(x)
+#'
+#' @param x dgCMatrix
+#' @param tol sparseVector/double, length==nrow(x), less than
+#' @return dgCMatrix
+#' @noRd
+.drop0rowLe <- function(x, tol) {
+  stopifnot(is(x, "dgCMatrix"))
+  stopifnot(length(tol) == nrow(x))
+  x@x[x@x <= as.vector(tol)[x@i + 1L]] <- 0L
+  drop0(x, tol=0L, is.Csparse=TRUE)
+}
+
+.drop0rowLt <- function(x, tol) {
+  stopifnot(is(x, "dgCMatrix"))
+  stopifnot(length(tol) == nrow(x))
+  x@x[x@x < as.vector(tol)[x@i + 1L]] <- 0L
+  drop0(x, tol=0L, is.Csparse=TRUE)
+}
+
 #' calculate rect coordinates for a Matrix
 #'
 #' @param x Matrix
@@ -37,6 +57,18 @@
   dp <- diff(x@p)
   y <- rep(seq_along(dp), dp) - 1L
   cbind(xleft=x@i, ybottom=y, xright=x@i + width, ytop=y + height, col=x@x)
+}
+
+#' rowMax row-wise maximum, similar to apply(x, 1, max) but faster on
+#' sparseMatrix
+#'
+#' @param x dgCMatrix
+#' @return sparseVector
+#' @noRd
+.rowMax <- function(x) {
+  stopifnot(is(x, "dgCMatrix"))
+  sparseVector(.vapply1d(split(x@x, x@i), max),
+               i=sort.int(unique(x@i)) + 1L, length=nrow(x))
 }
 
 #' rowMeans groupwise, similar to rowsum but for sparceMatrices

@@ -28,5 +28,6 @@ if (is.null(getGeneric("conditionData<-"))) {
 }
 if (is.null(getGeneric("filterIntensity"))) {
   setGeneric("filterIntensity",
-             function(object, minIntensity)standardGeneric("filterIntensity"))
+             function(object, threshold, ...)
+               standardGeneric("filterIntensity"))
 }

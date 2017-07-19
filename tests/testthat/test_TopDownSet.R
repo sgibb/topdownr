@@ -138,7 +138,14 @@ test_that("filterIntensity", {
   tdl@assay <- sparseMatrix(i=c(1, 3, 2), j=3:5, x=7:9)
   tdl@processing <- c(tdl@processing,
                       "[2017-07-16 14:00:02] 5 intensity values < 7 filtered.")
-  expect_equal_TDS(filterIntensity(tds, 7), tdl)
+  expect_error(filterIntensity(tds, 1:2), "length one")
+  expect_error(filterIntensity(tds, "c"), "numeric")
+  expect_error(filterIntensity(tds, 2), "between 0 and 1")
+  expect_error(filterIntensity(tds, -1), "between 0 and 1")
+  expect_equal_TDS(filterIntensity(tds, 7, relative=FALSE), tdl)
+  tdl@processing[2L] <-
+    "[2017-07-16 14:00:02] 5 intensity values < 0.8 (relative) filtered."
+  expect_equal_TDS(filterIntensity(tds, 0.8), tdl)
 })
 
 test_that("fragmentMass", {

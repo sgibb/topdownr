@@ -185,18 +185,33 @@ setMethod("fragmentData", "TopDownSet", function(object, ...) {
 })
 
 #' @param object TopDownSet
-#' @param minIntensity double, remove fragments with intensity below minIntensity
+#' @param threshold double, remove fragments with intensity below threshold
+#' @param relative logical, relativ to max in fragments
 #' @return TopDownSet
 #' @export
 #' @noRd
-setMethod("filterIntensity", "TopDownSet", function(object, minIntensity) {
+setMethod("filterIntensity", "TopDownSet",
+          function(object, threshold, relative=TRUE) {
+  if (!is.numeric(threshold) || !length(threshold) == 1L) {
+    stop("'threshold' has to be a 'numeric' of length one.")
+  }
+
   n0 <- nnzero(object@assay)
-  object@assay <- drop0(object@assay,
-                        tol=minIntensity - 10L * .Machine$double.eps,
-                        is.Csparse=TRUE)
+
+  if (relative) {
+    if (1L < threshold || threshold < 0L) {
+      stop("'threshold hast to be between 0 and 1.")
+    }
+    object@assay <- .drop0rowLt(object@assay,
+                                tol=.rowMax(object@assay) * threshold)
+  } else {
+    object@assay <- drop0(object@assay,
+                          tol=threshold - 10L * .Machine$double.eps,
+                          is.Csparse=TRUE)
+  }
   n1 <- nnzero(object@assay)
   .tdsLogMsg(object, n0 - n1, " intensity values < ",
-             minIntensity, " filtered.")
+             threshold, if (relative) { " (relative)" }, " filtered.")
 })
 
 #' @param object TopDownSet
