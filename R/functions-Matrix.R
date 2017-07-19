@@ -36,9 +36,7 @@
   stopifnot(is(x, "Matrix"))
   dp <- diff(x@p)
   y <- rep(seq_along(dp), dp) - 1L
-  w2 <- width / 2L
-  h2 <- height / 2L
-  cbind(xleft=x@i - w2, ybottom=y - h2, xright=x@i + w2, ytop=y + h2, col=x@x)
+  cbind(xleft=x@i, ybottom=y, xright=x@i + width, ytop=y + height, col=x@x)
 }
 
 #' rowMeans groupwise, similar to rowsum but for sparceMatrices
