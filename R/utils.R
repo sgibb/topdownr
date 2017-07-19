@@ -6,6 +6,19 @@ cat0 <- function(...) {
   cat(..., sep="", append=TRUE)
 }
 
+#' file extension
+#'
+#' @param x character, file path
+#' @param compression logical, if TRUE gz, bz2, xz is removed
+#' @return character
+#' @noRd
+.fileExt <- function(x, compression=TRUE) {
+  if (compression) {
+    x <- sub("[.](gz|bz2|xz|zip)$", "", x)
+  }
+  file_ext(x)
+}
+
 #' The ScanHeadsMan output for the header information contains a column
 #' FilterString with the format "FTMS + p NSI Full ms2 [0-9]+\.[0-9]+@hcd35.00
 #' [xxx-yyy]". This function converts this format to the ID stored in the mass
@@ -297,7 +310,7 @@ cat0 <- function(...) {
                 "cfmt" = c("csv", "fasta", "mzml", "txt"),
                 "cmt" = c("csv", "mzml", "txt"),
                 type)
-  paste0("\\.", ext[sel], "$", collapse="|")
+  paste0("\\.", ext[sel], "(\\.(gz|bz2|xz|zip))?$", collapse="|")
 }
 
 #' wrapper around vapply for FUN.VALUE=double(1L)

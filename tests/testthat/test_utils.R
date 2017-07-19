@@ -4,6 +4,12 @@ test_that("cat0", {
   expect_output(topdown:::cat0("foo", "bar"), "foobar")
 })
 
+test_that(".fileExt", {
+  f <- c("foo.bar", "foo.bar.gz")
+  expect_equal(topdown:::.fileExt(f), c("bar", "bar"))
+  expect_equal(topdown:::.fileExt(f, compression=FALSE), c("bar", "gz"))
+})
+
 test_that(".filterStringToId", {
   expect_error(topdown:::.filterStringToId(1:3))
   expect_equal(topdown:::.filterStringToId(
@@ -167,17 +173,19 @@ test_that(".targetedMassListToMz", {
 })
 
 test_that(".topDownFileExtRx", {
+  ext <- c("experiments\\.csv", "fasta", "mz[Mm][Ll]", "raw", "txt")
+  gz <- "(\\.(gz|bz2|xz|zip))?$"
   expect_error(topdown:::.topDownFileExtRx("foo"))
   expect_equal(topdown:::.topDownFileExtRx(),
-               "\\.experiments\\.csv$|\\.fasta$|\\.mz[Mm][Ll]$|\\.txt$")
+               paste0("\\.", ext[-4], gz, collapse="|"))
   expect_equal(topdown:::.topDownFileExtRx("all"),
-               "\\.experiments\\.csv$|\\.fasta$|\\.mz[Mm][Ll]$|\\.raw$|\\.txt$")
+               paste0("\\.", ext, gz, collapse="|"))
   expect_equal(topdown:::.topDownFileExtRx("cfmt"),
-               "\\.experiments\\.csv$|\\.fasta$|\\.mz[Mm][Ll]$|\\.txt$")
+               paste0("\\.", ext[-4], gz, collapse="|"))
   expect_equal(topdown:::.topDownFileExtRx("csv"),
-               "\\.experiments\\.csv$")
+               paste0("\\.", ext[1], gz, collapse="|"))
   expect_equal(topdown:::.topDownFileExtRx("mzml"),
-               "\\.mz[Mm][Ll]$")
+               paste0("\\.", ext[3], gz, collapse="|"))
   expect_equal(topdown:::.topDownFileExtRx("txt"),
-               "\\.txt$")
+               paste0("\\.", ext[5], gz, collapse="|"))
 })

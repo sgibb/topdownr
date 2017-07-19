@@ -29,7 +29,7 @@ readTopDownFiles <- function(path, pattern=".*",
     if (length(files)) {
       ext <- ext[lengths(files) == 0L]
     }
-    stop("Could not found any ", paste0(ext, collapse=", "), " files!")
+    stop("Could not find any ", paste0(ext, collapse=", "), " files!")
   }
 
   sequence <- .readFasta(files$fasta, verbose=verbose)

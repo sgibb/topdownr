@@ -25,7 +25,7 @@
                       pattern=paste0(pattern, "(",
                                      .topDownFileExtRx("cfmt"), ")"),
                       full.names=TRUE)
-  split(files, file_ext(files))
+  split(files, .fileExt(files))
 }
 
 #' Read ScanHeadMans method (experiments.csv) output.
@@ -37,7 +37,7 @@
 #' @return data.frame
 #' @noRd
 .readExperimentCsv <- function(file, verbose=interactive()) {
-  stopifnot(file_ext(file) == "csv")
+  stopifnot(.fileExt(file) == "csv")
   d <- read.csv(file, stringsAsFactors=FALSE)
   colnames(d) <- .formatNames(colnames(d))
 
@@ -82,7 +82,7 @@
 #' @return data.frame
 #' @noRd
 .readScanHeadsTable <- function(file, verbose=interactive()) {
-  stopifnot(file_ext(file) == "txt")
+  stopifnot(.fileExt(file) == "txt")
   d <- read.csv(file, stringsAsFactors=FALSE)
   colnames(d) <- .formatNames(colnames(d))
 

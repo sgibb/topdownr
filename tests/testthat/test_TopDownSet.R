@@ -184,7 +184,7 @@ test_that(".ncbMap", {
 
 test_that("readTopDownFiles", {
   expect_error(readTopDownFiles(".", pattern="FOOBAR"),
-               "Could not found any experiments.csv, fasta, mzML, txt files!")
+               "Could not find any experiments.csv, fasta, mzML, txt files!")
 })
 
 test_that("show", {
