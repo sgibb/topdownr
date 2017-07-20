@@ -45,7 +45,7 @@ The FragmentViews class is a basic container for storing a set of views
 it keeps information about mass, type and charge of the fragments.
 }
 \details{
-FragmentViews is inherits \link[Biostrings:XStringViews-class]{Biostrings::XStringViews}.
+FragmentViews extends \link[Biostrings:XStringViews-class]{Biostrings::XStringViews}.
 In short it combines an \link[IRanges:IRanges-class]{IRanges::IRanges} object to store start/end
 location on a sequence, an \link[Biostrings:AAString]{Biostrings::AAString} object.
 }
