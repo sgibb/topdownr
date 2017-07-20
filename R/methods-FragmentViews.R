@@ -1,5 +1,7 @@
+#' @rdname FragmentViews-class
 #' @param object FragmentViews
-#' @noRd
+#' @aliases show,FragmentViews-method
+#' @export
 setMethod("show", "FragmentViews", function(object) {
   cat0(class(object), " on a ", length(subject(object)), "-letter sequence:\n")
   cat0("  ", .snippet(as.character(subject(object)),

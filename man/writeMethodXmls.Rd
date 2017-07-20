@@ -37,7 +37,7 @@ MS1 scan?}
 }
 \value{
 An invisivble \code{list} with the MS1, MS2, runtimes and mz is
- returned.
+returned.
 }
 \description{
 This function is used to create Orbitrap Fusion method files from
@@ -45,30 +45,30 @@ all combinations of a user-given set of MS1 and MS2 settings.
 }
 \details{
 \itemize{
- \item{ms1Settings:}{A \code{list} of MS1 settings. This have to be a named
- \code{list}. Valid MS1 settings are:
-   \code{c("FirstMass", "LastMass", "Microscans", "MaxITTimeInMS",
+\item{ms1Settings:}{A \code{list} of MS1 settings. This have to be a named
+\code{list}. Valid MS1 settings are:
+\code{c("FirstMass", "LastMass", "Microscans", "MaxITTimeInMS",
    "AgcTarget")}}
- \item{ms2Settings:}{A \code{list} of MS2 settings. This have to be a named
- \code{list}. Valid MS2 settings are:
-   \code{c("ActivationType", "IsolationWindow", "EnableMultiplexIons",
+\item{ms2Settings:}{A \code{list} of MS2 settings. This have to be a named
+\code{list}. Valid MS2 settings are:
+\code{c("ActivationType", "IsolationWindow", "EnableMultiplexIons",
            "EnableMSXIds", "MaxNoOfMultiplexIons", "OrbitrapResolution",
            "AgcTarget", "MinAgcTarget", "MaxITTimeInMS", "Microscans",
            "ETDReactionTime", "ETDReagentTarget",
            "MaximumETDReagentInjectionTime", "UseInternalCalibratedETD",
            "ETDSupplementalActivationEnergy", "ETDSupplementalActivation")}}
- \item{groupBy:}{The \code{groupBy} parameter is used to split methods into
- different files. Valid entries are all settings that could be used in
- \code{ms2Settings} and \code{"replication"}).}
- \item{massLabeling:}{The Orbitrap Fusion devices seems not to respect the
- start and end times of the runs given in the method.xml files. That's why it
- is nearly impossible to identify the run with its conditions based on the
- timings. If \code{massLabeling} is \code{TRUE} (default) the mass values given
- in \code{mz} are rounded to the first decimal place and the second to fourth
- decimal place is used as numeric identifier.}
- \item{pattern:}{The file name pattern used to name different method files.
- It must contain a \code{"\%s"} that is replaced by the conditions defined in
- \code{groupby}. }
+\item{groupBy:}{The \code{groupBy} parameter is used to split methods into
+different files. Valid entries are all settings that could be used in
+\code{ms2Settings} and \code{"replication"}).}
+\item{massLabeling:}{The Orbitrap Fusion devices seems not to respect the
+start and end times of the runs given in the method.xml files. That's why it
+is nearly impossible to identify the run with its conditions based on the
+timings. If \code{massLabeling} is \code{TRUE} (default) the mass values given
+in \code{mz} are rounded to the first decimal place and the second to fourth
+decimal place is used as numeric identifier.}
+\item{pattern:}{The file name pattern used to name different method files.
+It must contain a \code{"\%s"} that is replaced by the conditions defined in
+\code{groupby}. }
 }
 }
 \examples{
