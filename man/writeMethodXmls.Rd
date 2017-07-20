@@ -10,19 +10,19 @@ writeMethodXmls(ms1Settings, ms2Settings, groupBy = c("replication",
   pattern = "method_\%s.xml", verbose = interactive())
 }
 \arguments{
-\item{ms1Settings}{\code{list}, named list of MS1 settings.}
+\item{ms1Settings}{\code{list}, named list of MS1 settings, see e.g.
+\code{\link[=defaultMs1Settings]{defaultMs1Settings()}}.}
 
-\item{ms2Settings}{\code{list}, named list of MS2 settings.}
+\item{ms2Settings}{\code{list}, named list of MS2 settings, see e.g.
+\code{\link[=defaultMs2Settings]{defaultMs2Settings()}}.}
 
 \item{groupBy}{\code{character}, split files by \code{groupBy} entries.}
 
 \item{replications}{\code{integer}, number of replications of experiments.}
 
-\item{mz}{\code{matrix}, two columns (column 1: \emph{mass}, column 2:
-\emph{z}).}
+\item{mz}{\code{matrix}, two columns (column 1: \emph{mass}, column 2: \emph{z}).}
 
-\item{massLabeling}{\code{logical}, should \emph{mz} values used for ID
-labeling?}
+\item{massLabeling}{\code{logical}, should \emph{mz} values used for ID labeling?}
 
 \item{nMs2perMs1}{\code{integer}, how many MS2 scans should be run after a
 MS1 scan?}
@@ -36,8 +36,7 @@ MS1 scan?}
 \item{verbose}{\code{logical}, verbose output?}
 }
 \value{
-An invisivble \code{list} with the MS1, MS2, runtimes and mz is
-returned.
+An invisivble \code{list} with the MS1, MS2, runtimes and mz.
 }
 \description{
 This function is used to create Orbitrap Fusion method files from
@@ -45,30 +44,24 @@ all combinations of a user-given set of MS1 and MS2 settings.
 }
 \details{
 \itemize{
-\item{ms1Settings:}{A \code{list} of MS1 settings. This have to be a named
-\code{list}. Valid MS1 settings are:
-\code{c("FirstMass", "LastMass", "Microscans", "MaxITTimeInMS",
-   "AgcTarget")}}
-\item{ms2Settings:}{A \code{list} of MS2 settings. This have to be a named
-\code{list}. Valid MS2 settings are:
-\code{c("ActivationType", "IsolationWindow", "EnableMultiplexIons",
-           "EnableMSXIds", "MaxNoOfMultiplexIons", "OrbitrapResolution",
-           "AgcTarget", "MinAgcTarget", "MaxITTimeInMS", "Microscans",
-           "ETDReactionTime", "ETDReagentTarget",
-           "MaximumETDReagentInjectionTime", "UseInternalCalibratedETD",
-           "ETDSupplementalActivationEnergy", "ETDSupplementalActivation")}}
-\item{groupBy:}{The \code{groupBy} parameter is used to split methods into
+\item \code{ms1Settings}: A \code{list} of MS1 settings. This has to be a named \code{list}.
+Valid MS1 settings are:
+\code{c("FirstMass", "LastMass", "Microscans", "MaxITTimeInMS", "AgcTarget")}
+\item \code{ms2Settings}: A \code{list} of MS2 settings. This has to be a named \code{list}.
+Valid MS2 settings are:
+\code{c("ActivationType", "IsolationWindow", "EnableMultiplexIons", "EnableMSXIds", "MaxNoOfMultiplexIons", "OrbitrapResolution", "AgcTarget", "MinAgcTarget", "MaxITTimeInMS", "Microscans", "ETDReactionTime", "ETDReagentTarget", "MaximumETDReagentInjectionTime", "UseInternalCalibratedETD", "ETDSupplementalActivationEnergy", "ETDSupplementalActivation")}
+\item \code{groupBy}: The \code{groupBy} parameter is used to split methods into
 different files. Valid entries are all settings that could be used in
-\code{ms2Settings} and \code{"replication"}).}
-\item{massLabeling:}{The Orbitrap Fusion devices seems not to respect the
+\code{ms2Settings} and \code{"replication"}.
+\item \code{massLabeling}: The Orbitrap Fusion devices seems not to respect the
 start and end times of the runs given in the method.xml files. That's why it
 is nearly impossible to identify the run with its conditions based on the
 timings. If \code{massLabeling} is \code{TRUE} (default) the mass values given
 in \code{mz} are rounded to the first decimal place and the second to fourth
-decimal place is used as numeric identifier.}
-\item{pattern:}{The file name pattern used to name different method files.
-It must contain a \code{"\%s"} that is replaced by the conditions defined in
-\code{groupby}. }
+decimal place is used as numeric identifier.
+\item \code{pattern}: The file name pattern used to name different method files.
+It must contain a \code{"\\\%s"} that is replaced by the conditions defined in
+\code{groupBy}.
 }
 }
 \examples{
@@ -81,9 +74,11 @@ writeMethodXmls(defaultMs1Settings(FirstMass=100),
                 replications=4,
                 pattern="method_firstmass_100_\%s.xml")
 }
-
+}
+\seealso{
+\code{\link[=defaultMs1Settings]{defaultMs1Settings()}}, \code{\link[=defaultMs2Settings]{defaultMs2Settings()}}
 }
 \author{
-Sebastian Gibb \email{mail@sebasitangibb.de}, Pavel V. Shliaha
+Sebastian Gibb \email{mail@sebastiangibb.de}, Pavel V. Shliaha
 \email{pavels@bmb.sdu.dk}
 }

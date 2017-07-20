@@ -1,9 +1,9 @@
 #' Internal default function to define default values.
 #'
-#' @param \ldots named arguments that should be overwritten
-#' @param default named list of default arguments
-#' @param valid character vector that contains valid tags
-#' @return list with default/modified settings
+#' @param \ldots named arguments that should be overwritten.
+#' @param default `list`, named, default arguments.
+#' @param valid `character`, containing valid tags.
+#' @return `list` with default/modified settings
 #' @noRd
 .defaultSettings <- function(..., default, valid) {
   dots <- list(...)
@@ -15,15 +15,18 @@
   modifyList(default, dots)
 }
 
-#' Settings for MS1 parameters.
+#' Settings for MS1/2 parameters.
 #'
-#' @param \ldots named arguments that should be overwritten
-#' @return named \code{list} of settings
+#' This functions create the default settings for [writeMethodXmls()].
+#'
+#' @param \ldots named arguments that should be overwritten.
+#' @return A named `list` of settings.
+#' @rdname defaultMsSettings
 #' @export
 #' @examples
 #' library("topdown")
 #'
-#' # all default settings
+#' # all default MS1 settings
 #' defaultMs1Settings()
 #'
 #' # overwrite FirstMass and set AgcTarget
@@ -36,15 +39,12 @@ defaultMs1Settings <- function(...) {
                    valid=.validMs1Tags())
 }
 
-#' Settings for MS2 parameters.
+#' @rdname defaultMsSettings
 #'
-#' @param \ldots named arguments that should be overwritten
-#' @return named \code{list} of settings
 #' @export
 #' @examples
-#' library("topdown")
 #'
-#' # all default settings
+#' # all default MS2 settings
 #' defaultMs2Settings()
 #'
 #' # overwrite AgcTarget

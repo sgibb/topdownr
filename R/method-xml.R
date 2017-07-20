@@ -1,9 +1,10 @@
 #' Create settings for MS2 experiments
-#' @param ms2Settings list of MS2 settings, e.g. by defaultMs2Settings()
-#' @param groupBy character, colnames used for grouping
-#' @param replications integer, how often replicate the settings
-#' @param randomise logical, randomise experiments
-#' @return data.frame
+#'
+#' @param ms2Settings `list` of MS2 settings, e.g. by [defaultMs2Settings()].
+#' @param groupBy `character`, colnames used for grouping.
+#' @param replications `integer`, how often replicate the settings?
+#' @param randomise `logical`, should experiments be randomised?
+#' @return `data.frame`
 #' @noRd
 .ms2Experiments <- function(ms2Settings, groupBy=c("replication", "ETDReactionTime"),
                             replications=2L, randomise=TRUE) {
@@ -22,8 +23,9 @@
 }
 
 #' Change ETD settings for MS2 experiments
-#' @param x data.frame, generated from .ms2Experiments
-#' @return data.frame
+#'
+#' @param x `data.frame`, generated from [.ms2Experiments()].
+#' @return `data.frame`
 #' @seealso https://github.com/sgibb/topdown/issues/9
 #' @noRd
 .replaceZeroETDReactionTime <- function(x) {
@@ -39,12 +41,13 @@
 }
 
 #' Calculate Start/End time of each scan
-#' @param nMs2 integer, number of MS2 scans
-#' @param nMs2perMs1 integer, number of MS2 scans for each MS1 scan
-#' @param duration double, duration of scan in minutes
-#' @param gap double, pause between two scans in minutes
-#' @return data.frame with columns type (type of scan), start and end times in
-#' minutes
+#'
+#' @param nMs2 `integer`, number of MS2 scans.
+#' @param nMs2perMs1 `integer`, number of MS2 scans for each MS1 scan.
+#' @param duration `double`, duration of scan in minutes.
+#' @param gap `double`, pause between two scans in minutes.
+#' @return `data.frame` with columns type (type of scan), start and end times
+#' in minutes
 #' @noRd
 .startEndTime <- function(nMs2, nMs2perMs1=9L, duration=0.5, gap=0.01) {
   nMs1 <- ceiling(nMs2 * 1L/nMs2perMs1)
@@ -65,10 +68,11 @@
 }
 
 #' Resample rows (Experiments) in a data.frame
-#' @param x data.frame
-#' @param fun function to apply on the number of rows, e.g. use `seq` to do
-#' nothing
-#' @return reordered data.frame
+#'
+#' @param x `data.frame`
+#' @param fun `function`, to apply on the number of rows, e.g. use `seq` to do
+#' nothing.
+#' @return reordered `data.frame`
 #' @noRd
 .resample <- function(x, fun=sample) {
   fun <- match.fun(fun)
@@ -76,12 +80,16 @@
 }
 
 #' Valid XML MS1 tags
+#'
+#' @return `character`, of valid MS1 tags
 #' @noRd
 .validMs1Tags <- function() {
   c("FirstMass", "LastMass", "Microscans", "MaxITTimeInMS", "AgcTarget")
 }
 
 #' Valid XML MS2 tags
+#'
+#' @return `character`, of valid MS2 tags
 #' @noRd
 .validMs2Tags <- function() {
   c("ActivationType", "IsolationWindow", "EnableMultiplexIons",
@@ -93,19 +101,20 @@
 }
 
 #' XML writing functions
-#' @param file filename
-#' @param encoding file encoding
+#'
+#' @param file `character`, filename
+#' @param encoding `character`, file encoding
 #' @noRd
 .xmlHeader <- function(file, encoding="utf-8") {
   cat0("<?xml version=\"1.0\" encoding=\"", encoding, "\"?>\n", file=file)
 }
 
-#' @param name character, tag name
-#' @param value tag value
-#' @param attrs named vector, names == attribute names
-#' @param close logical, should the tag be closed
-#' @param indention integer, number of spaces used for indention
-#' @param file filename
+#' @param name `character`, tag name.
+#' @param value `character`/`double`, tag value.
+#' @param attrs named vector, names == attribute names.
+#' @param close `logical, should the tag be closed.
+#' @param indention `integer`, number of spaces used for indention.
+#' @param file `character`, filename.
 #' @noRd
 .xmlTag <- function(name, value=character(), attrs=character(), close=TRUE,
                     indention=0L, file) {
@@ -123,18 +132,18 @@
   }
 }
 
-#' @param name character, tag name
-#' @param indention integer, number of spaces used for indention
-#' @param file filename
+#' @param name `character`, tag name.
+#' @param indention `integer`, number of spaces used for indention.
+#' @param file `character`, filename.
 #' @noRd
 .xmlTagClose <- function(name, indention=0L, file) {
   cat0(paste0(rep(" ", times=indention)), "</", name, ">\n", file=file)
 }
 
-#' @param x list, named
-#' @param indention integer, number of spaces used for indention
-#' @param na.rm should NAs be removed?
-#' @param file filename
+#' @param x `list`, named.
+#' @param indention `integer`, number of spaces used for indention.
+#' @param na.rm `logical`, should `NA`s be removed?
+#' @param file `character`, filename.
 #' @noRd
 .xmlListToTags <- function(x, indention=0L, na.rm=TRUE, file) {
   if (na.rm) {
@@ -146,13 +155,14 @@
 }
 
 #' Write method.xml file.
-#' @param ms1 list, ms1 settings
-#' @param ms2 data.frame, ms2 experiment settings
-#' @param times data.frame, experiment times
-#' @param mz matrix, 2 columns (mass, z)
-#' @param massLabeling logical, should mz values modified to used as labels?
-#' @param file filename
-#' @param encoding file encoding
+#'
+#' @param ms1 `list`, ms1 settings.
+#' @param ms2 `data.frame`, ms2 experiment settings.
+#' @param times `data.frame`, experiment times.
+#' @param mz `matrix`, 2 columns (mass, z).
+#' @param massLabeling `logical`, should mz values modified to used as labels?
+#' @param file `character`, filename.
+#' @param encoding `character`, file encoding.
 #' @noRd
 .writeMethodXml <- function(ms1, ms2, times, mz, massLabeling=TRUE,
                             file, encoding="utf-8") {
@@ -211,8 +221,9 @@
 }
 
 #' Full MS Scan tag
-#' @param x MS1 settings
-#' @param file filename
+#'
+#' @param x `list`, MS1 settings.
+#' @param file `character`, filename.
 #' @noRd
 .xmlFullMsScan <- function(x, file) {
   .xmlTag("Modification", attrs=c(Order=1), close=FALSE, file=file)
@@ -226,12 +237,13 @@
 }
 
 #' TMSn Scan tag
-#' @param x data.frame, with one row, MS2 settings
-#' @param mz double
-#' @param z double
-#' @param order integer, modification order
-#' @param idx integer, experiment index
-#' @param file filename
+#'
+#' @param x `data.frame`, with one row, MS2 settings.
+#' @param mz `double`, mass value.
+#' @param z `double`, charge state.
+#' @param order `integer`, modification order.
+#' @param idx `integer`, experiment index.
+#' @param file `character`, filename.
 #' @noRd
 .xmlTMSnScan <- function(x, mz, z, order, idx, file) {
   .xmlTag("Modification", attrs=c(Order=order), close=FALSE, file=file)
@@ -248,9 +260,10 @@
 }
 
 #' Copy and AppendExperiment tag
-#' @param order integer, number of experiments
-#' @param src integer, source experiment index
-#' @param file filename
+#'
+#' @param order `integer`, number of experiments.
+#' @param src `integer`, source experiment index.
+#' @param file `character`, filename.
 #' @noRd
 .xmlCopyAndAppendExperiment <- function(order, src, file) {
   .xmlTag("Modification", attrs=c(Order=order), close=FALSE, file=file)
@@ -260,10 +273,11 @@
 }
 
 #' Start/EndTimeMin tag
-#' @param times double, named vector with times
-#' @param order integer, number of experiments
-#' @param idx integer, experiment index
-#' @param file filename
+#'
+#' @param times `double`, named vector with times.
+#' @param order `integer`, number of experiments.
+#' @param idx `integer`, experiment index.
+#' @param file `character`, filename.
 #' @noRd
 .xmlStartEndTime <- function(times, order, idx, file) {
   stopifnot(length(times) == 2L)
@@ -277,12 +291,13 @@
 }
 
 #' MassList tag
-#' @param mz double
-#' @param z double
-#' @param energy double, length=1
-#' @param type activation type
-#' @param indention integer, number of spaces used for indention
-#' @param file filename
+#'
+#' @param mz `double`, mass values.
+#' @param z `double`, charge state.
+#' @param energy `double`, length=1, energy value.
+#' @param type `character`, activation type.
+#' @param indention `integer`, number of spaces used for indention.
+#' @param file `character`, filename.
 #' @noRd
 .xmlMassList <- function(mz, z, energy=0L, type=c("ETD", "HCD", "CID"),
                          indention=0L, file) {
@@ -301,12 +316,13 @@
 }
 
 #' MassListRecord tag
-#' @param mz double, length=1
-#' @param z double, length=1
-#' @param energy double, length=1
-#' @param type activation type
-#' @param indention integer, number of spaces used for indention
-#' @param file filename
+#'
+#' @param mz `double`, length=1, mass value.
+#' @param z `double`, length=1, charge value.
+#' @param energy `double`, length=1, energy value.
+#' @param type `character`, activation type.
+#' @param indention `integer`, number of spaces used for indention.
+#' @param file `character`, filename.
 #' @noRd
 .xmlMassListRecord <- function(mz, z, energy=0L, type=c("ETD", "HCD", "CID"),
                                indention=0L, file) {
@@ -327,54 +343,50 @@
 #' This function is used to create Orbitrap Fusion method files from
 #' all combinations of a user-given set of MS1 and MS2 settings.
 #'
-#' @param ms1Settings \code{list}, named list of MS1 settings.
-#' @param ms2Settings \code{list}, named list of MS2 settings.
-#' @param groupBy \code{character}, split files by \code{groupBy} entries.
-#' @param replications \code{integer}, number of replications of experiments.
-#' @param mz \code{matrix}, two columns (column 1: \emph{mass}, column 2:
-#' \emph{z}).
-#' @param massLabeling \code{logical}, should \emph{mz} values used for ID
-#' labeling?
-#' @param nMs2perMs1 \code{integer}, how many MS2 scans should be run after a
+#' @param ms1Settings `list`, named list of MS1 settings, see e.g.
+#' [defaultMs1Settings()].
+#' @param ms2Settings `list`, named list of MS2 settings, see e.g.
+#' [defaultMs2Settings()].
+#' @param groupBy `character`, split files by `groupBy` entries.
+#' @param replications `integer`, number of replications of experiments.
+#' @param mz `matrix`, two columns (column 1: *mass*, column 2: *z*).
+#' @param massLabeling `logical`, should *mz* values used for ID labeling?
+#' @param nMs2perMs1 `integer`, how many MS2 scans should be run after a
 #' MS1 scan?
-#' @param duration \code{double}, how long should the scan be?
-#' @param randomise \code{logical}, should the MS2 scan settings randomised?
-#' @param pattern \code{character}, file name pattern for the method.xml files.
-#' @param verbose \code{logical}, verbose output?
+#' @param duration `double`, how long should the scan be?
+#' @param randomise `logical`, should the MS2 scan settings randomised?
+#' @param pattern `character`, file name pattern for the method.xml files.
+#' @param verbose `logical`, verbose output?
 #'
 #' @details
-#' \itemize{
-#'  \item{ms1Settings:}{A \code{list} of MS1 settings. This have to be a named
-#'  \code{list}. Valid MS1 settings are:
-#'    \code{c("FirstMass", "LastMass", "Microscans", "MaxITTimeInMS",
-#'    "AgcTarget")}}
-#'  \item{ms2Settings:}{A \code{list} of MS2 settings. This have to be a named
-#'  \code{list}. Valid MS2 settings are:
-#'    \code{c("ActivationType", "IsolationWindow", "EnableMultiplexIons",
-#'            "EnableMSXIds", "MaxNoOfMultiplexIons", "OrbitrapResolution",
-#'            "AgcTarget", "MinAgcTarget", "MaxITTimeInMS", "Microscans",
-#'            "ETDReactionTime", "ETDReagentTarget",
-#'            "MaximumETDReagentInjectionTime", "UseInternalCalibratedETD",
-#'            "ETDSupplementalActivationEnergy", "ETDSupplementalActivation")}}
-#'  \item{groupBy:}{The \code{groupBy} parameter is used to split methods into
+#' * `ms1Settings`: A `list` of MS1 settings. This has to be a named `list`.
+#'   Valid MS1 settings are:
+#'   `c("FirstMass", "LastMass", "Microscans", "MaxITTimeInMS", "AgcTarget")`
+#' * `ms2Settings`: A `list` of MS2 settings. This has to be a named `list`.
+#'   Valid MS2 settings are:
+#'   `c("ActivationType", "IsolationWindow", "EnableMultiplexIons",
+#'      "EnableMSXIds", "MaxNoOfMultiplexIons", "OrbitrapResolution",
+#'      "AgcTarget", "MinAgcTarget", "MaxITTimeInMS", "Microscans",
+#'      "ETDReactionTime", "ETDReagentTarget",
+#'      "MaximumETDReagentInjectionTime", "UseInternalCalibratedETD",
+#'      "ETDSupplementalActivationEnergy", "ETDSupplementalActivation")`
+#' * `groupBy`: The `groupBy` parameter is used to split methods into
 #'  different files. Valid entries are all settings that could be used in
-#'  \code{ms2Settings} and \code{"replication"}).}
-#'  \item{massLabeling:}{The Orbitrap Fusion devices seems not to respect the
+#'  `ms2Settings` and `"replication"`.
+#' * `massLabeling`: The Orbitrap Fusion devices seems not to respect the
 #'  start and end times of the runs given in the method.xml files. That's why it
 #'  is nearly impossible to identify the run with its conditions based on the
-#'  timings. If \code{massLabeling} is \code{TRUE} (default) the mass values given
-#'  in \code{mz} are rounded to the first decimal place and the second to fourth
-#'  decimal place is used as numeric identifier.}
-#'  \item{pattern:}{The file name pattern used to name different method files.
-#'  It must contain a \code{"\%s"} that is replaced by the conditions defined in
-#'  \code{groupby}. }
-#' }
+#'  timings. If `massLabeling` is `TRUE` (default) the mass values given
+#'  in `mz` are rounded to the first decimal place and the second to fourth
+#'  decimal place is used as numeric identifier.
+#' * `pattern`: The file name pattern used to name different method files.
+#'  It must contain a `"\\%s"` that is replaced by the conditions defined in
+#'  `groupBy`.
 #'
-#' @return An invisivble \code{list} with the MS1, MS2, runtimes and mz is
-#'  returned.
-#' @author Sebastian Gibb \email{mail@@sebasitangibb.de}, Pavel V. Shliaha
+#' @return An invisivble `list` with the MS1, MS2, runtimes and mz.
+#' @seealso [defaultMs1Settings()], [defaultMs2Settings()]
+#' @author Sebastian Gibb \email{mail@@sebastiangibb.de}, Pavel V. Shliaha
 #' \email{pavels@@bmb.sdu.dk}
-#'
 #' @examples
 #' \dontrun{
 #' library("topdown")
@@ -385,7 +397,6 @@
 #'                 replications=4,
 #'                 pattern="method_firstmass_100_%s.xml")
 #' }
-#'
 #' @export
 writeMethodXmls <- function(ms1Settings, ms2Settings,
                             groupBy=c("replication",
