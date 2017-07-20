@@ -29,3 +29,9 @@ experimental mz values to the theoretical fragments.}
 \item{\code{processing}}{\code{character}, log messages.}
 }}
 
+\seealso{
+\linkS4class{FragmentViews}
+}
+\author{
+Sebastian Gibb \email{mail@sebastiangibb.de}
+}

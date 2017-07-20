@@ -20,7 +20,8 @@ writeMethodXmls(ms1Settings, ms2Settings, groupBy = c("replication",
 
 \item{replications}{\code{integer}, number of replications of experiments.}
 
-\item{mz}{\code{matrix}, two columns (column 1: \emph{mass}, column 2: \emph{z}).}
+\item{mz}{\code{matrix}, two columns (column 1: \emph{mass}, column 2: \emph{z}), see e.g.
+\code{\link[=defaultProteins]{defaultProteins()}}.}
 
 \item{massLabeling}{\code{logical}, should \emph{mz} values used for ID labeling?}
 
@@ -68,15 +69,16 @@ It must contain a \code{"\\\%s"} that is replaced by the conditions defined in
 \dontrun{
 library("topdown")
 
-writeMethodXmls(defaultMs1Settings(FirstMass=100),
+writeMethodXmls(defaultMs1Settings(FirstMass=400),
                 defaultMs2Settings(),
+                mz=defaultProteins("h2a"),
                 groupBy=c("replication", "ETDReactionTime"),
                 replications=4,
-                pattern="method_firstmass_100_\%s.xml")
+                pattern="method_firstmass_400_\%s.xml")
 }
 }
 \seealso{
-\code{\link[=defaultMs1Settings]{defaultMs1Settings()}}, \code{\link[=defaultMs2Settings]{defaultMs2Settings()}}
+\code{\link[=defaultMs1Settings]{defaultMs1Settings()}}, \code{\link[=defaultMs2Settings]{defaultMs2Settings()}}, \code{\link[=defaultProteins]{defaultProteins()}}
 }
 \author{
 Sebastian Gibb \email{mail@sebastiangibb.de}, Pavel V. Shliaha

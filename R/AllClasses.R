@@ -32,6 +32,9 @@ setClass("FragmentViews",
 #' @slot tolerance `double`, tolerance in *ppm* that were used for matching the
 #' experimental mz values to the theoretical fragments.
 #' @slot processing `character`, log messages.
+#'
+#' @seealso [FragmentViews-class]
+#' @author Sebastian Gibb \email{mail@@sebastiangibb.de}
 setClass("TopDownSet",
   slots=c(rowViews="FragmentViews",
           colData="DataFrame",
