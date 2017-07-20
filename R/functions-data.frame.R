@@ -1,10 +1,9 @@
-#' aggregate data.frame (combine numeric columns by \code{fun}, and take the
+#' aggregate data.frame (combine numeric columns by fun, and take the
 #' first row for non-numeric columns
 #'
 #' @param x data.frame
 #' @param f character, grouping value
-#' @param ignoreNumCols character, column names that won't be aggregated by
-#' \code{fun}
+#' @param ignoreNumCols character, column names that won't be aggregated by fun
 #' @param fun function, aggregation function
 #' @return data.frame
 #' @noRd

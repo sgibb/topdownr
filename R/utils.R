@@ -145,7 +145,7 @@ cat0 <- function(...) {
 #' @param id double, run id
 #' @param divisor double, divisor (determines which decimal place)
 #' @return double, mass label (id encoded in the second to fourth decimal place)
-#' @seealso \code{\link{.massLabelToId}}
+#' @seealso [.massLabelToId()]
 #' @noRd
 #' @example
 #' library("topdown")
@@ -164,7 +164,7 @@ cat0 <- function(...) {
 #' @param idDigits integer, number of digits behind the decimal place that
 #' store id information (not mass information) from the last one (e.g. 3 if
 #' the id is 123 and the mz is 900.0123)
-#' @seealso \code{\link{.massLabel}}
+#' @seealso [.massLabel()]
 #' @noRd
 .massLabelToId <- function(x, idDigits=3L) {
   # was the following before, but results in round errors ("7" becomes 6L)
