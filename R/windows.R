@@ -1,20 +1,26 @@
 #' Create meth files from xml templates
 #'
-#' This function calls \sQuote{XmlMethodChanger.exe} on all given xml
-#' files generated with \code{\link{writeMethodXmls}}.
+#' This function calls `XmlMethodChanger.exe` on all given xml files generated
+#' with [writeMethodXmls()].
 #' It works only on Windows.
 #'
-#' @param template \code{character}, path to template meth file.
-#' @param xml \code{character}, vector of path to xml files.
-#' @param executable \code{character}, path to the
-#'  \sQuote{XmlMethodChanger.exe} executable.
-#' @param verbose \code{logical}, if \code{TRUE} a progress bar is shown.
+#' @param template `character`, path to template `.meth` file.
+#' @param xml `character`, vector of path to `.xml` files.
+#' @param executable `character`, path to the `XmlMethodChanger.exe`
+#' executable.
+#' @param verbose `logical`, if `TRUE` a progress bar is shown.
 #' @return Nothing. Used for its side effects.
-#' @seealso \code{\link{writeMethodXmls}}
+#' @seealso [writeMethodXmls()]
 #' @references XmlMethodChanger source code:
-#' \url{https://github.com/thermofisherlsms/meth-modifications}
+#' https://github.com/thermofisherlsms/meth-modifications/
 #' @rdname XmlMethodChanger
 #' @export
+#' @examples
+#' \dontrun{
+#' runXmlMethodChanger(templateMeth="TMS2IndependentTemplate240Extended.meth",
+#'                     modificationXml=list.files(pattern="^method.*\\.xml$"),
+#'                     executable="..\\XmlMethodChanger.exe")
+#' }
 createTngFusionMethFiles <- function(template,
                                      xml=list.files(pattern=".*\\.xml$"),
                                      executable="XmlMethodChanger.exe",
@@ -58,19 +64,23 @@ runXmlMethodChanger <- createTngFusionMethFiles
 
 #' Create .csv/.txt files from raw files
 #'
-#' This function calls \sQuote{ScanHeadsman.exe} on a given directory containing
-#' RAW files.
+#' This function calls `ScanHeadsman.exe` on a given directory containing
+#' `.raw` files. `ScanHeadsman.exe` extracts the method and scan header data
+#' into `.experiments.csv` and `.txt` files, respectively.
 #' It works only on Windows.
 #'
-#' @param executable \code{character}, path to the
-#'  \sQuote{ScanHeadsman.exe} executable.
-#' @param path \code{character}, path to the directory containing the raw files.
+#' @param executable `character`, path to the `ScanHeadsman.exe` executable.
+#' @param path `character`, path to the directory containing the `.raw` files.
 #' @return Nothing. Used for its side effects.
-#' @seealso \code{\link{XmlMethodChanger}}
+#' @seealso [runXmlMethodChanger()]
 #' @rdname ScanHeadsman
 #' @references ScanHeadsman source code:
-#' \url{https://bitbucket.org/caetera/scanheadsman}
+#' https://bitbucket.org/caetera/scanheadsman
 #' @export
+#' @examples
+#' \dontrun{
+#' runScanHeadsman("raw", executable="..\\ScanHeadsman.exe")
+#' }
 runScanHeadsman <- function(path=".", executable="ScanHeadsman.exe") {
   if (.Platform$OS.type != "windows") {
     stop("This function works only on Windows.")

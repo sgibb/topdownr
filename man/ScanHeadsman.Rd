@@ -7,23 +7,28 @@
 runScanHeadsman(path = ".", executable = "ScanHeadsman.exe")
 }
 \arguments{
-\item{path}{\code{character}, path to the directory containing the raw files.}
+\item{path}{\code{character}, path to the directory containing the \code{.raw} files.}
 
-\item{executable}{\code{character}, path to the
-\sQuote{ScanHeadsman.exe} executable.}
+\item{executable}{\code{character}, path to the \code{ScanHeadsman.exe} executable.}
 }
 \value{
 Nothing. Used for its side effects.
 }
 \description{
-This function calls \sQuote{ScanHeadsman.exe} on a given directory containing
-RAW files.
+This function calls \code{ScanHeadsman.exe} on a given directory containing
+\code{.raw} files. \code{ScanHeadsman.exe} extracts the method and scan header data
+into \code{.experiments.csv} and \code{.txt} files, respectively.
 It works only on Windows.
+}
+\examples{
+\dontrun{
+runScanHeadsman("raw", executable="..\\\\ScanHeadsman.exe")
+}
 }
 \references{
 ScanHeadsman source code:
-\url{https://bitbucket.org/caetera/scanheadsman}
+https://bitbucket.org/caetera/scanheadsman
 }
 \seealso{
-\code{\link{XmlMethodChanger}}
+\code{\link[=runXmlMethodChanger]{runXmlMethodChanger()}}
 }

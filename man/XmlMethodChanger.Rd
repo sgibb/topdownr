@@ -12,12 +12,12 @@ runXmlMethodChanger(template, xml = list.files(pattern = ".*\\\\.xml$"),
   executable = "XmlMethodChanger.exe", verbose = interactive())
 }
 \arguments{
-\item{template}{\code{character}, path to template meth file.}
+\item{template}{\code{character}, path to template \code{.meth} file.}
 
-\item{xml}{\code{character}, vector of path to xml files.}
+\item{xml}{\code{character}, vector of path to \code{.xml} files.}
 
-\item{executable}{\code{character}, path to the
-\sQuote{XmlMethodChanger.exe} executable.}
+\item{executable}{\code{character}, path to the \code{XmlMethodChanger.exe}
+executable.}
 
 \item{verbose}{\code{logical}, if \code{TRUE} a progress bar is shown.}
 }
@@ -25,14 +25,21 @@ runXmlMethodChanger(template, xml = list.files(pattern = ".*\\\\.xml$"),
 Nothing. Used for its side effects.
 }
 \description{
-This function calls \sQuote{XmlMethodChanger.exe} on all given xml
-files generated with \code{\link{writeMethodXmls}}.
+This function calls \code{XmlMethodChanger.exe} on all given xml files generated
+with \code{\link[=writeMethodXmls]{writeMethodXmls()}}.
 It works only on Windows.
+}
+\examples{
+\dontrun{
+runXmlMethodChanger(templateMeth="TMS2IndependentTemplate240Extended.meth",
+                    modificationXml=list.files(pattern="^method.*\\\\.xml$"),
+                    executable="..\\\\XmlMethodChanger.exe")
+}
 }
 \references{
 XmlMethodChanger source code:
-\url{https://github.com/thermofisherlsms/meth-modifications}
+https://github.com/thermofisherlsms/meth-modifications/
 }
 \seealso{
-\code{\link{writeMethodXmls}}
+\code{\link[=writeMethodXmls]{writeMethodXmls()}}
 }
