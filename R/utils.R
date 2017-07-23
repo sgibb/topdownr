@@ -2,7 +2,7 @@
 #' (all(x[1] == x) is slower than unique)
 #'
 #' @param x vector
-#' @return logical, TRUE/FALSE
+#' @return `logical`, TRUE/FALSE
 #' @noRd
 .allIdentical <- function(x) {
   isTRUE(length(unique(x)) == 1L)
@@ -18,9 +18,9 @@ cat0 <- function(...) {
 
 #' file extension
 #'
-#' @param x character, file path
-#' @param compression logical, if TRUE gz, bz2, xz is removed
-#' @return character
+#' @param x `character`, file path
+#' @param compression `logical`, if TRUE gz, bz2, xz is removed
+#' @return `character`
 #' @noRd
 .fileExt <- function(x, compression=TRUE) {
   if (compression) {
@@ -34,8 +34,8 @@ cat0 <- function(...) {
 #' [xxx-yyy]". This function converts this format to the ID stored in the mass
 #' label.
 #'
-#' @param x character
-#' @return double
+#' @param x `character`
+#' @return `double`
 #' @noRd
 .filterStringToId <- function(x) {
   stopifnot(is.character(x))
@@ -44,8 +44,8 @@ cat0 <- function(...) {
 
 #' Create (nearly) CamelCase names. Could not correct "AGC" to "Agc".
 #'
-#' @param x character
-#' @return character
+#' @param x `character`
+#' @return `character`
 #' @noRd
 .formatNames <- function(x) {
   x <- gsub("[[:punct:]]+", " ", x)
@@ -62,8 +62,8 @@ cat0 <- function(...) {
 
 #' Convert number to string and prepend zeros
 #'
-#' @param x double
-#' @return character
+#' @param x `double`
+#' @return `character`
 #' @noRd
 .formatNumbers <- function(x) {
   sprintf(paste0("%0", .ndigits(max(x)), "d"), x)
@@ -71,8 +71,8 @@ cat0 <- function(...) {
 
 #' Get fragmentation method from {ETD,CID,HCD}Activation
 #'
-#' @param x data.frame/matrix, 3 columns (ETD,CID,HCD)
-#' @return vector, fragmentation method
+#' @param x `data.frame`/`matrix`, 3 columns (ETD,CID,HCD)
+#' @return `character`, fragmentation method
 #' @noRd
 .fragmentationMethod <- function(x) {
   methods <- c("None", "ETD", "CID", "ETcid", "HCD", "EThcd", "HCD/CID", "All")
@@ -84,9 +84,9 @@ cat0 <- function(...) {
 
 #' Split list/data.frame
 #'
-#' @param x data.frame, e.g. from .ms2Experiments
-#' @param cols character, colnames used to split
-#' @return list
+#' @param x `data.frame`, e.g. from .ms2Experiments
+#' @param cols `character`, colnames used to split
+#' @return `list`
 #' @noRd
 .groupBy <- function(x, cols) {
   split(x, .groupByLabels(x, cols))
@@ -94,9 +94,9 @@ cat0 <- function(...) {
 
 #' Create group labels from data.frame columns
 #'
-#' @param x data.frame, e.g. from .ms2Experiments
-#' @param cols character, colnames used to split
-#' @return list
+#' @param x `data.frame`, e.g. from .ms2Experiments
+#' @param cols `character`, colnames used to split
+#' @return `list`
 #' @noRd
 .groupByLabels <- function(x, cols) {
   if (length(cols) > 1L) {
@@ -110,9 +110,9 @@ cat0 <- function(...) {
 #' head/fill/tail of vector elements (e.g. for printing)
 #'
 #' @param x vector
-#' @param fill character, or NULL
-#' @param n integer
-#' @return vector, head(x, n), fill, tail(x, n)
+#' @param fill `character`, or NULL
+#' @param n `integer`
+#' @return vector, `c(head(x, n), fill, tail(x, n))`
 #' @noRd
 .hft <- function(x, fill="...", n=3) {
   if (length(x) <= 2 * n) {
@@ -124,7 +124,7 @@ cat0 <- function(...) {
 
 #' Add log message.
 #'
-#' @param ... arguments passed to paste0
+#' @param ... arguments passed to `paste0`
 #' @return msg with date string added
 #' @noRd
 .logmsg <- function(...) {
@@ -141,10 +141,10 @@ cat0 <- function(...) {
 #' the second to fourth (default) to encode the id. Subsequently it is possible
 #' to find the results by their individual mass.
 #'
-#' @param x double, original mass
-#' @param id double, run id
-#' @param divisor double, divisor (determines which decimal place)
-#' @return double, mass label (id encoded in the second to fourth decimal place)
+#' @param x `double`, original mass
+#' @param id `double`, run id
+#' @param divisor `double`, divisor (determines which decimal place)
+#' @return `double`, mass label (id encoded in the second to fourth decimal place)
 #' @seealso [.massLabelToId()]
 #' @noRd
 #' @example
@@ -160,8 +160,8 @@ cat0 <- function(...) {
 
 #' Extract ID from mass labels
 #'
-#' @param x character, mass label
-#' @param idDigits integer, number of digits behind the decimal place that
+#' @param x `character`, mass label
+#' @param idDigits `integer`, number of digits behind the decimal place that
 #' store id information (not mass information) from the last one (e.g. 3 if
 #' the id is 123 and the mz is 900.0123)
 #' @seealso [.massLabel()]
@@ -176,7 +176,7 @@ cat0 <- function(...) {
 
 #' verbose output
 #'
-#' @param \ldots arguments passed to message
+#' @param \ldots arguments passed to `message`
 #' @noRd
 .msg <- function(verbose, ...) {
   if (verbose) {
@@ -186,8 +186,8 @@ cat0 <- function(...) {
 
 #' number of digits
 #'
-#' @param x double
-#' @return integer
+#' @param x `double`
+#' @return `integer`
 #' @noRd
 .ndigits <- function(x) {
   trunc(log10(abs(x)) + 1)
@@ -195,7 +195,7 @@ cat0 <- function(...) {
 
 #' similar to lengths but for rows
 #'
-#' @param x list of data.frames/matrices
+#' @param x `list` of `data.frames`/`matrices`
 #' @noRd
 .nrows <- function(x) {
   stopifnot(is.list(x))
@@ -204,9 +204,9 @@ cat0 <- function(...) {
 
 #' shortend string to width and place "..." in the middle
 #'
-#' @param x character
+#' @param x `character`
 #' @param width number of letters allowed/width of terminal
-#' @return character
+#' @return `character`
 #' @noRd
 .snippet <- function(x, width=getOption("width")) {
   nc <- nchar(x)
@@ -216,12 +216,12 @@ cat0 <- function(...) {
                                 substring(x, nc - w[2L] + 1L, nc)))
 }
 
-#' normalize subset (turn logical, numeric and character to numeric)
+#' normalize subset (turn `logical`, `numeric` and `character` to `numeric`)
 #'
 #' @param i ANY, subset
-#' @param n integer, length of the original object
-#' @param nms character, names of the orignal object
-#' @return logical, vector of length n
+#' @param n `integer`, length of the original object
+#' @param nms `character`, names of the orignal object
+#' @return `logical`, vector of length n
 #' @noRd
 .subset <- function(i, n, nms=NULL) {
   ## use decode to turn Rle into native vectors, does nothing if i is already a
@@ -240,11 +240,11 @@ cat0 <- function(...) {
          stop("Unknown index class."))
 }
 
-#' subset by character
+#' subset by `character`
 #'
-#' @param i character, subset
-#' @param nms character, names of the orignal object
-#' @return numeric
+#' @param i `character`, subset
+#' @param nms `character`, names of the orignal object
+#' @return `numeric`
 #' @noRd
 .subsetByCharacter <- function(i, nms=NULL) {
   if (is.null(nms)) {
@@ -261,11 +261,11 @@ cat0 <- function(...) {
   ii
 }
 
-#' subset by logical
+#' subset by `logical`
 #'
-#' @param i logical, subset
-#' @param n integer, length
-#' @return numeric
+#' @param i `logical`, subset
+#' @param n `integer`, length
+#' @return `numeric`
 #' @noRd
 .subsetByLogical <- function(i, n) {
   stopifnot(is.logical(i))
@@ -274,11 +274,11 @@ cat0 <- function(...) {
   which(rep_len(i, n))
 }
 
-#' subset by numeric
+#' subset by `numeric`
 #'
-#' @param i numeric, subset
-#' @param n integer, length
-#' @return numeric
+#' @param i `numeric`, subset
+#' @param n `integer`, length
+#' @return `numeric`
 #' @noRd
 .subsetByNumeric <- function(i, n) {
   stopifnot(is.numeric(i))
@@ -293,9 +293,9 @@ cat0 <- function(...) {
 
 #' subset filenames
 #'
-#' @param files character, filenames
-#' @param selFiles character, selectedFiles, basename without extension
-#' @return character
+#' @param files `character`, filenames
+#' @param selFiles `character`, selectedFiles, basename without extension
+#' @return `character`
 #' @noRd
 .subsetFiles <- function(files, selFiles) {
   gsub(.topDownFileExtRx("cfmt"), "", files) %in% selFiles
@@ -303,9 +303,9 @@ cat0 <- function(...) {
 
 #' swap file extensions
 #'
-#' @param x character, file name
-#' @param ext character, new extension
-#' @return character
+#' @param x `character`, file name
+#' @param ext `character`, new extension
+#' @return `character`
 #' @noRd
 .swapFileExt <- function(x, ext="meth") {
   paste(file_path_sans_ext(x), ext, sep=".")
@@ -315,8 +315,8 @@ cat0 <- function(...) {
 #' TargetedMassList with the format "(mz=[0-9]+\.[0-9]+ z=[0-9]+ name=)". This
 #' function converts this format to truncated (one decimal place) mz values.
 #'
-#' @param x character
-#' @return double
+#' @param x `character`
+#' @return `double`
 #' @noRd
 .targetedMassListToMz <- function(x) {
   stopifnot(is.character(x))
@@ -325,8 +325,8 @@ cat0 <- function(...) {
 
 #' TopDown file extensions.
 #'
-#' @param type character, which file ext
-#' @return character, regexp for file extensions
+#' @param type `character`, which file ext
+#' @return `character`, regexp for file extensions
 #' @noRd
 .topDownFileExtRx <- function(type=c("cfmt", "cmt", "csv", "fasta", "mzml",
                                      "txt", "raw", "all")) {
