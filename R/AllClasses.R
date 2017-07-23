@@ -21,6 +21,10 @@ setClass("FragmentViews",
 #' The TopDownSet class is a container for a whole top-down proteomics
 #' experiment.
 #'
+#' @details
+#' See `vignette("TopDown", package="topdown")` for a detailed example how to
+#' work with `TopDownSet` objects.
+#'
 #' @slot rowViews [FragmentViews-class], information about fragments
 #' (name, type, sequence, mass, charge), see [FragmentViews-class] for details.
 #' @slot colData [S4Vectors::DataFrame-class], information about the MS2

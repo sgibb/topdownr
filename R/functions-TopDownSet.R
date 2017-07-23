@@ -1,31 +1,63 @@
-#' Read TopDown files.
+#' @describeIn TopDownSet-class Constructor/Read top-down files.
 #'
-#' Read all TopDown files:
-#'  - .fasta (peptide sequence)
-#'  - .mzML (spectra)
-#'  - .experiments.csv (fragmentation conditions)
-#'  - .txt (header information)
+#' It creates an [TopDownSet-class] object and is its only constructor.
 #'
-#' This is the regular \code{\linkS4class{TopDownSet}} constructor.
+#' @details
 #'
-#' @param path character, file path
-#' @param pattern character, filename pattern
-#' @param type character, type of fragments
-#' @param modification vector, modifications applied
-#' @param adducts data.frame, with 3 columns mass, name, to
-#' @param neutralLoss list, neutral loss applied
-#' @param tolerance double, matching tolerance
+#' `readTopDownFiles` reads and processes all top-down files, namely:
+#' * `.fasta` (protein sequence)
+#' * `.mzML` (spectra)
+#' * `.experiments.csv` (method/fragmentation conditions)
+#' * `.txt` (scan header information)
+#'
+#' `adducts`: *Thermo's Xtract* allows some mistakes in deisotoping, mostly it
+#' allows `+/- C13-C12` and `+/- H+`. The `adducts` argument takes a
+#' `data.frame` with the `mass` to add, the `name` that should assign to these
+#' new fragments and an information `to` whom the modification should be
+#' applied, e.g. for `H+` on `z`, `data.frame(mass=1.008, name="zpH", to="z")`.
+#'
+#' *Please note:* The `adducts` are added to the output of
+#' [MSnbase::calculateFragments()]. That has some limitations, e.g.
+#' neutral loss calculation could not be done in [topdown-package]. If neutral
+#' loss should be applied on adducts you have to create additional rows, e.g.:
+#' `data.frame(mass=c(1.008, 1.008), name=c("cpH", "cpH_"), to=c("c", "c_"))`.
+#'
+#' @param path `character`, path to directory that contains the top-down files.
+#' @param pattern `character`, a filename pattern, the default `.*` means all
+#' files.
+#' @param type `character`, type of fragments, currently *a-c* and *x-z* are
+#' supported, see [MSnbase::calulateFragments()] for details.
+#' @param modification `double`, named vector with modifications that should be
+#' applied. The name hast to be an amino acid that should be replaced, see
+#' [MSnbase::calulateFragments()] for details.
+#' @param adducts `data.frame`, with 3 columns, namely: mass, name, to, see
+#' details section.
+#' @param neutralLoss `list`, neutral loss that should be applied, see
+#' [MSnbase::calulateFragments()] and [MSnbase::defaultNeutralLoss()] for
+#' details.
+#' @param tolerance double, tolerance in *ppm* that is used to match the
+#' theoretical fragments with the observed ones.
 #' @param dropNonInformativeColumns logical, should columns with just one
 #' identical value across all runs be removed?
 #' @param verbose logical, verbose output?
-#' @return list (splitted by file extension) with file path
+#' @return A `TopDownSet` object.
 #' @export
-#' @noRd
+#' @seealso [MSnbase::calulateFragments()], [MSnbase::defaultNeutralLoss()]
+#' @examples
+#' library("topdown")
+#'
+#' if (require("topdowndata")) {
+#'   # add H+ to z and no neutral loss of water
+#'   tds <- readTopDownFiles(topdowndata::h2aPath(),
+#'                           adducts=data.frame(mass=1.008, name="zpH", to="z"),
+#'                           neutralLoss=MSnbase::defaultNeutralLoss(water=NULL),
+#'                           tolerance=25e-6)
+#' }
 readTopDownFiles <- function(path, pattern=".*",
                              type=c("a", "b", "c", "x", "y", "z"),
                              modifications=c(C=57.02146),
                              adducts=data.frame(),
-                             neutralLoss=defaultNeutralLoss(),
+                             neutralLoss=MSnbase::defaultNeutralLoss(),
                              tolerance=10e-6,
                              dropNonInformativeColumns=TRUE,
                              verbose=interactive(), ...) {
@@ -90,7 +122,7 @@ readTopDownFiles <- function(path, pattern=".*",
 #' Test for TopDownSet class
 #'
 #' @param object object to test
-#' @return TRUE if object is a TopDownSet otherwise fails with an error
+#' @return `TRUE` if object is a TopDownSet otherwise fails with an error
 #' @noRd
 .isTopDownSet <- function(object) {
   if (!isTRUE(is(object, "TopDownSet"))) {
@@ -148,7 +180,7 @@ fragmentType <- function(object) {
 #' Validate TopDownSet
 #'
 #' @param object TopDownSet
-#' @return TRUE (if valid) else character with msg what was incorrect
+#' @return `TRUE` (if valid) else character with msg what was incorrect
 #' @noRd
 .validateTopDownSet <- function(object) {
   msg <- character()

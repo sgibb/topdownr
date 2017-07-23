@@ -1,4 +1,10 @@
-#' @param x TopDownSet
+#' @param x [TopDownSet-class]
+#' @param i `numeric`, `logical` or `character`, subsetting on fragment data,
+#' names (`c("a1", "b1", "c1", "c2", "c3")`) and types (`c("c", "x")`) are
+#' supported.
+#' @param j `numeric` or `logical`, subsetting based on condition data.
+#' @param \ldots currently ignored.
+#' @param drop `logical`, currently ignored.
 #' @noRd
 setMethod("[", c("TopDownSet", "ANY", "ANY"),
           function(x, i, j, ..., drop=FALSE) {
@@ -47,7 +53,11 @@ setMethod("[", c("TopDownSet", "ANY", "ANY"),
   }
 })
 
-#' @param x TopDownSet
+#' @param x [TopDownSet-class]
+#' @param i `numeric`, `logical` or `character`, subsetting based on condition
+#' data.
+#' @param j currently ignored.
+#' @param \ldots currently ignored.
 #' @noRd
 setMethod("[[", c("TopDownSet", "ANY", "missing"), function(x, i, j, ...) {
   colData(x)[[i, ...]]
