@@ -10,7 +10,18 @@
 Release: [![build release](http://bioconductor.org/shields/build/release/bioc/topdown.svg)](http://bioconductor.org/checkResults/release/bioc-LATEST/topdown/)
 Devel: [![build devel](http://bioconductor.org/shields/build/devel/bioc/topdown.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/topdown/)
 
+## Install packages in `R`
 
-## workflow
+```r
+devtools::install_github(c("sgibb/topdown", "sgibb/topdowndata"),
+                         auth_token="aacd4f502a2036427fb97b35ca5e98fb8028f195",
+                         quick=TRUE)
+```
 
-![workflow](vignettes/images/workflow/workflow.png)
+## Contribution
+
+See [CONTRIBUTING.md)](CONTRIBUTING.md).
+
+## Support
+
+See [SUPPORT.md)](SUPPORT.md).
