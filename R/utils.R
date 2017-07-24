@@ -52,7 +52,7 @@ cat0 <- function(...) {
 #' FTMS + p NSI Full ms2 1162.0009@hcd28.00 [100.0000-2000.0000]
 #' FTMS + p NSI Full ms2 1162.0009@cid35.00 [100.0000-2000.0000]
 #'
-#' @pavel-shliaha finds out, that the skip is never larger than 1, never more
+#' pavel-shliaha finds out, that the skip is never larger than 1, never more
 #' than 1 in a row and both is possible 1, 2, 2, 4 and 1, 3, 3, 4.
 #'
 #' In general it seems that the fix is as easy as ensuring that the FilterString
