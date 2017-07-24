@@ -105,7 +105,8 @@ if (require("topdowndata")) {
   # add H+ to z and no neutral loss of water
   tds <- readTopDownFiles(topdowndata::h2aPath(),
                           adducts=data.frame(mass=1.008, name="zpH", to="z"),
-                          neutralLoss=MSnbase::defaultNeutralLoss(water=NULL),
+                          neutralLoss=MSnbase::defaultNeutralLoss(
+                           disableWaterLoss=c("Cterm", "D", "E", "S", "T")),
                           tolerance=25e-6)
 }
 }

@@ -50,7 +50,8 @@
 #'   # add H+ to z and no neutral loss of water
 #'   tds <- readTopDownFiles(topdowndata::h2aPath(),
 #'                           adducts=data.frame(mass=1.008, name="zpH", to="z"),
-#'                           neutralLoss=MSnbase::defaultNeutralLoss(water=NULL),
+#'                           neutralLoss=MSnbase::defaultNeutralLoss(
+#'                            disableWaterLoss=c("Cterm", "D", "E", "S", "T")),
 #'                           tolerance=25e-6)
 #' }
 readTopDownFiles <- function(path, pattern=".*",
@@ -131,18 +132,30 @@ readTopDownFiles <- function(path, pattern=".*",
   TRUE
 }
 
+#' Get fragment mass
+#'
+#' @param object `TopDownSet`
+#' @return `double`
 #' @noRd
 fragmentMass <- function(object) {
   .isTopDownSet(object)
   elementMetadata(object@rowViews)$mass
 }
 
+#' Get fragment names
+#'
+#' @param object `TopDownSet`
+#' @return `character`
 #' @noRd
 fragmentNames <- function(object) {
   .isTopDownSet(object)
   names(object@rowViews)
 }
 
+#' Get fragment types
+#'
+#' @param object `TopDownSet`
+#' @return `character`
 #' @noRd
 fragmentType <- function(object) {
   .isTopDownSet(object)
@@ -151,8 +164,8 @@ fragmentType <- function(object) {
 
 #' Create NCB Map (N-/C-terminal, or both)
 #'
-#' @param object TopDownSet
-#' @return Matrix, Nterm == 1, Cterm == 2, both == 3
+#' @param object `TopDownSet`
+#' @return `Matrix`, Nterm == 1, Cterm == 2, both == 3
 #' @noRd
 .ncbMap <- function(object, nterm=c("a", "b", "c"), cterm=c("x", "y", "z")) {
   .isTopDownSet(object)
@@ -170,6 +183,10 @@ fragmentType <- function(object) {
   mn + mc
 }
 
+#' Add log message.
+#'
+#' @param object `TopDownSet`
+#' @return `TopDownSet`
 #' @noRd
 .tdsLogMsg <- function(object, ...) {
   .isTopDownSet(object)
@@ -177,9 +194,9 @@ fragmentType <- function(object) {
   object
 }
 
-#' Validate TopDownSet
+#' Validate `TopDownSet`
 #'
-#' @param object TopDownSet
+#' @param object `TopDownSet`
 #' @return `TRUE` (if valid) else character with msg what was incorrect
 #' @noRd
 .validateTopDownSet <- function(object) {
