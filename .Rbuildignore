@@ -1,4 +1,7 @@
+^LICENSE$
+^CONTRIBUTING\.md$
 ^README\.md$
+^SUPPORT\.md$
 ^\.git$
 ^\.gitignore$
 ^\.travis.yml$
