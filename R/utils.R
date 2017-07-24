@@ -29,7 +29,7 @@ cat0 <- function(...) {
   file_ext(x)
 }
 
-#' The ScanHeadsMan output for the header information contains a column
+#' The ScanHeadsman output for the header information contains a column
 #' FilterString with the format "FTMS + p NSI Full ms2 [0-9]+\.[0-9]+@hcd35.00
 #' [xxx-yyy]". This function converts this format to the ID stored in the mass
 #' label.
@@ -40,6 +40,43 @@ cat0 <- function(...) {
 .filterStringToId <- function(x) {
   stopifnot(is.character(x))
   .massLabelToId(gsub("^.*ms2 ([^@]+)\\@.*$", "\\1", x))
+}
+
+#' Ensure unique, increasing ids in FilterStrings
+#'
+#' The ScanHeadsman output ocntains some FilterStrings that have wrong IDs (the
+#' id from the previous or next run), e.g.:
+#'
+#' FTMS + p NSI Full ms2 1162.0007@cid28.00 [100.0000-2000.0000]
+#' FTMS + p NSI Full ms2 1162.0009@hcd28.00 [100.0000-2000.0000]
+#' FTMS + p NSI Full ms2 1162.0009@hcd28.00 [100.0000-2000.0000]
+#' FTMS + p NSI Full ms2 1162.0009@cid35.00 [100.0000-2000.0000]
+#'
+#' @pavel-shliaha finds out, that the skip is never larger than 1, never more
+#' than 1 in a row and both is possible 1, 2, 2, 4 and 1, 3, 3, 4.
+#'
+#' In general it seems that the fix is as easy as ensuring that the FilterString
+#' ids following a sequence.
+#'
+#' See the following issues for details:
+#' - https://github.com/sgibb/topdown/issues/14
+#' - https://github.com/sgibb/topdown/issues/25
+#'
+#' TODO: replace this with a better approach if we understand why some ID are
+#' skipped.
+#'
+#' @param x `character`, FilterString
+#' @return `character`, fixed FilterString with equal length as `x`
+#' @noRd
+.fixFilterStringId <- function(x) {
+  ufs <- unique(x)
+  ids <- .filterStringToId(ufs)
+  pos <- regexpr("[0-9]{3}@", ufs)
+  i <- match(x, ufs)
+  substr(x, pos[i], pos[i] + 3L) <- sprintf("%03d@",
+                                            seq(from=ids[1L],
+                                                length.out=length(ufs)))[i]
+  x
 }
 
 #' Create (nearly) CamelCase names. Could not correct "AGC" to "Agc".

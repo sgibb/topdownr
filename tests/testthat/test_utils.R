@@ -23,6 +23,21 @@ test_that(".filterStringToId", {
                c(219L, 10L))
 })
 
+test_that(".fixFilterStringId", {
+  fs <- c("FTMS + p NSI Full ms2 162.0004@cid28.00 [100.0000-2000.0000]",
+          "FTMS + p NSI Full ms2 162.0004@hcd28.00 [100.0000-2000.0000]",
+          "FTMS + p NSI Full ms2 162.0004@hcd28.00 [100.0000-2000.0000]",
+          "FTMS + p NSI Full ms2 162.0006@cid35.00 [100.0000-2000.0000]",
+          "FTMS + p NSI Full ms2 1162.0007@cid28.00 [100.0000-2000.0000]",
+          "FTMS + p NSI Full ms2 1162.0009@hcd28.00 [100.0000-2000.0000]",
+          "FTMS + p NSI Full ms2 1162.0009@hcd28.00 [100.0000-2000.0000]",
+          "FTMS + p NSI Full ms2 1162.0009@cid35.00 [100.0000-2000.0000]")
+  ffs <- fs
+  ffs[2:3] <- "FTMS + p NSI Full ms2 162.0005@hcd28.00 [100.0000-2000.0000]"
+  ffs[6:7] <- "FTMS + p NSI Full ms2 1162.0008@hcd28.00 [100.0000-2000.0000]"
+  expect_equal(topdown:::.fixFilterStringId(fs), ffs)
+})
+
 test_that(".formatNames", {
   expect_equal(topdown:::.formatNames(c("Monoisotopic M/Z", "SPS Mass 2",
                                         "RT (min)", "MSLevel",
