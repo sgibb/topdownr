@@ -95,6 +95,11 @@
   # TODO: somehow the FilterString doesn't always contains the right mass label.
   # For now we just take the first non-duplicated (unique) condition
   # disabled: d$Condition <- as.integer(.filterStringToId(d$FilterString))
+  #
+  # See the following issues for details:
+  # - https://github.com/sgibb/topdown/issues/14
+  # - https://github.com/sgibb/topdown/issues/25
+  d$FilterString <- .fixFilterStringId(d$FilterString)
   d$Condition <- cumsum(!duplicated(d$FilterString))
 
   d[is.na(d)] <- 0L
