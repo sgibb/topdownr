@@ -20,8 +20,8 @@ devtools::install_github(c("sgibb/topdown", "sgibb/topdowndata"),
 
 ## Contribution
 
-See [CONTRIBUTING.md)](CONTRIBUTING.md).
+See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Support
 
-See [SUPPORT.md)](SUPPORT.md).
+See [SUPPORT.md](SUPPORT.md).
