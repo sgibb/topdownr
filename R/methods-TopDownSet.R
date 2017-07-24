@@ -63,7 +63,7 @@ setMethod("[[", c("TopDownSet", "ANY", "missing"), function(x, i, j, ...) {
   colData(x)[[i, ...]]
 })
 
-#' @param x TopDownSet
+#' @param x `TopDownSet`
 #' @noRd
 setReplaceMethod("[[", c("TopDownSet", "ANY", "missing"),
                  function(x, i, j, ..., value) {
@@ -73,27 +73,27 @@ setReplaceMethod("[[", c("TopDownSet", "ANY", "missing"),
   }
 })
 
-#' @param x TopDownSet
+#' @param x `TopDownSet`
 #' @noRd
 #' @export
 .DollarNames.TopDownSet <- function(x, pattern="")
   grep(pattern, names(colData(x)), value=TRUE)
 
-#' @param x TopDownSet
+#' @param x `TopDownSet`
 #' @noRd
 setMethod("$", "TopDownSet", function(x, name) {
   colData(x)[[name]]
 })
 
-#' @param x TopDownSet
+#' @param x `TopDownSet`
 #' @noRd
 setReplaceMethod("$", "TopDownSet", function(x, name, value) {
   colData(x)[[name]] <- value
   x
 })
 
-#' @param object TopDownSet
-#' @return TopDownSet
+#' @param object `TopDownSet`
+#' @return `TopDownSet`
 #' @noRd
 setMethod("aggregate", "TopDownSet",
           function(x, by=colData(x)[, c("Mz", "AGCTarget",
@@ -126,24 +126,24 @@ setMethod("aggregate", "TopDownSet",
   }
 })
 
-#' @param object TopDownSet
-#' @return Matrix
+#' @param object `TopDownSet`
+#' @return `Matrix`
 #' @export
 #' @noRd
 setMethod("assayData", "TopDownSet", function(object) {
   object@assay
 })
 
-#' @param object TopDownSet
-#' @return DataFrame
+#' @param object `TopDownSet`
+#' @return `DataFrame`
 #' @export
 #' @noRd
 setMethod("colData", "TopDownSet", function(object) {
   object@colData
 })
 
-#' @param x TopDownSet
-#' @return TopDownSet
+#' @param x `TopDownSet`
+#' @return `TopDownSet`
 #' @export
 #' @noRd
 setReplaceMethod("colData", "TopDownSet", function(object, ..., value) {
@@ -153,16 +153,16 @@ setReplaceMethod("colData", "TopDownSet", function(object, ..., value) {
   }
 })
 
-#' @param object TopDownSet
-#' @return DataFrame
+#' @param object `TopDownSet`
+#' @return `DataFrame`
 #' @export
 #' @noRd
 setMethod("conditionData", "TopDownSet", function(object, ...) {
   colData(object)
 })
 
-#' @param object TopDownSet
-#' @return TopDownSet
+#' @param object `TopDownSet`
+#' @return `TopDownSet`
 #' @export
 #' @noRd
 setReplaceMethod("conditionData", "TopDownSet", function(object, ..., value) {
@@ -172,32 +172,32 @@ setReplaceMethod("conditionData", "TopDownSet", function(object, ..., value) {
   }
 })
 
-#' @param object TopDownSet
-#' @return numeric
+#' @param object `TopDownSet`
+#' @return `numeric`
 #' @noRd
 setMethod("dim", "TopDownSet", function(x) {
   dim(x@assay)
 })
 
-#' @param object TopDownSet
-#' @return list
+#' @param object `TopDownSet`
+#' @return `list`
 #' @noRd
 setMethod("dimnames", "TopDownSet", function(x) {
   list(names(x@rowViews), row.names(x@colData))
 })
 
-#' @param object TopDownSet
-#' @return FragmentViews
+#' @param object `TopDownSet`
+#' @return `FragmentViews`
 #' @export
 #' @noRd
 setMethod("fragmentData", "TopDownSet", function(object, ...) {
   rowViews(object)
 })
 
-#' @param object TopDownSet
-#' @param threshold double, remove fragments with intensity below threshold
-#' @param relative logical, relativ to max in fragments
-#' @return TopDownSet
+#' @param object `TopDownSet`
+#' @param threshold `double`, remove fragments with intensity below threshold
+#' @param relative `logical`, relativ to max in fragments
+#' @return `TopDownSet`
 #' @export
 #' @noRd
 setMethod("filterIntensity", "TopDownSet",
@@ -224,15 +224,27 @@ setMethod("filterIntensity", "TopDownSet",
              threshold, if (relative) { " (relative)" }, " filtered.")
 })
 
-#' @param object TopDownSet
-#' @return FragmentViews
+#' @param object `TopDownSet`
+#' @return `TopDownSet`
+#' @export
+#' @noRd
+setMethod("normalize", "TopDownSet",
+          function(object, ...) {
+  object@assay <- .normaliseRows(object@assay)
+  .tdsLogMsg(object, "Fragment intensity values normalized.")
+})
+
+
+
+#' @param object `TopDownSet`
+#' @return `FragmentViews`
 #' @export
 #' @noRd
 setMethod("rowViews", "TopDownSet", function(object, ...) {
   object@rowViews
 })
 
-#' @param object TopDownExperiment
+#' @param object `TopDownSet`
 #' @noRd
 setMethod("show", "TopDownSet", function(object) {
   cat(sprintf("%s object (%.2f Mb)\n",

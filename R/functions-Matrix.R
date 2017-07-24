@@ -59,6 +59,18 @@
   cbind(xleft=x@i, ybottom=y, xright=x@i + width, ytop=y + height, col=x@x)
 }
 
+#' normalise (row-wise scale) to 0:1
+#'
+#' @param x `dgCMatrix`
+#' @return `dgCMatrix`
+#' @noRd
+.normaliseRows <- function(x) {
+  stopifnot(is(x, "dgCMatrix"))
+  scale <- .rowMax(x)
+  x@x <- x@x / scale[x@i + 1L]
+  x
+}
+
 #' rowMax row-wise maximum, similar to apply(x, 1, max) but faster on
 #' sparseMatrix
 #'

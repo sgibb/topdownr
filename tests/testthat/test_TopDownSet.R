@@ -197,6 +197,16 @@ test_that(".ncbMap", {
   expect_equal(topdown:::.ncbMap(tds1), r1)
 })
 
+test_that("normalize", {
+  tdn <- tds
+  tdn@assay <- sparseMatrix(i=c(1:2, 1:3, 1, 3, 2),
+                            j=rep(1:5, c(2, 3, 1, 1, 1)),
+                            x=2:9/c(7, 9, 7, 9, 8, 7, 8, 9))
+  tdn@processing <- c(tdn@processing,
+                      "[2017-07-16 14:00:02] Fragment intensity values normalized.")
+  expect_equal_TDS(normalize(tds), tdn)
+})
+
 test_that("readTopDownFiles", {
   expect_error(readTopDownFiles(".", pattern="FOOBAR"),
                "Could not find any experiments.csv, fasta, mzML, txt files!")
