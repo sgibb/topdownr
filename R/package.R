@@ -9,8 +9,9 @@
 #' @keywords package
 #'
 #' @import methods
-#' @import S4Vectors
+#' @import BiocGenerics
 #' @import Biostrings
+#' @import S4Vectors
 #' @importClassesFrom Matrix Matrix dgCMatrix
 #' @importFrom Matrix Matrix sparseMatrix sparseVector nnzero drop0
 #' @importFrom Biobase assayData

@@ -7,6 +7,7 @@ Description: What the package does (one paragraph).
 Depends:
     R (>= 3.2.4),
     methods,
+    BiocGenerics (>= 0.20.0),
     Biostrings (>= 2.42.1),
     S4Vectors (>= 0.12.2)
 Imports:

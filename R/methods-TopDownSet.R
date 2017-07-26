@@ -234,8 +234,6 @@ setMethod("normalize", "TopDownSet",
   .tdsLogMsg(object, "Fragment intensity values normalized.")
 })
 
-
-
 #' @param object `TopDownSet`
 #' @return `FragmentViews`
 #' @export

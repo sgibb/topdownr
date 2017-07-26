@@ -31,8 +31,3 @@ if (is.null(getGeneric("filterIntensity"))) {
              function(object, threshold, ...)
                standardGeneric("filterIntensity"))
 }
-if (is.null(getGeneric("normalize"))) {
-  setGeneric("normalize",
-             function(object, ...)standardGeneric("normalize"))
-}
-
