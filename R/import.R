@@ -144,6 +144,7 @@
   hd <- hd[i, !grepl("seqNum", colnames(hd), fixed=TRUE), drop=FALSE]
   colnames(hd)[grepl("acquisitionNum", colnames(hd), fixed=TRUE)] <- "Scan"
   hd$File <- gsub(.topDownFileExtRx("mzml"), "", basename(file))
+  colnames(hd) <- .formatNames(colnames(hd))
 
   nr <- nrow(hd)
   m <- Matrix(0L, nrow=length(fmass), ncol=nr, sparse=TRUE)
@@ -157,7 +158,7 @@
   }
 
   .msg(verbose, sprintf(" (%02.1f%%)",
-                        round(sum(m != 0L)/sum(hd$peaksCount) * 100, 1L)))
+                        round(sum(m != 0L)/sum(hd$PeaksCount) * 100, 1L)))
 
   list(hd=hd, m=m)
 }
@@ -182,5 +183,6 @@
 #' @return merged data.frame
 #' @noRd
 .mergeSpectraAndHeaderInformation <- function(mzml, scdm) {
-  merge(mzml, scdm, sort=FALSE)
+  merge(mzml, scdm, sort=FALSE, by=c("File", "Scan"),
+        suffixes=c(".SpectraInformation", ".HeaderInformation"))
 }

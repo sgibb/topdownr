@@ -99,7 +99,7 @@ readTopDownFiles <- function(path, pattern=".*",
                  scans=split(scanConditions$Scan, scanConditions$File),
                  MoreArgs=list(fmass=elementMetadata(fragmentViews)$mass,
                                tolerance=tolerance, verbose=verbose),
-                 SIMPLIFY=FALSE)
+                 SIMPLIFY=FALSE, USE.NAMES=FALSE)
 
   mzmlHeader <- do.call(rbind, lapply(mzml, "[[", "hd"))
 
