@@ -14,7 +14,7 @@ Imports:
     Biobase,
     Matrix (>= 1.2.10),
     MSnbase (>= 2.3.8),
-    mzR (>= 2.11.5)
+    mzR (>= 2.11.4)
 Suggests:
     topdowndata,
     knitr,
