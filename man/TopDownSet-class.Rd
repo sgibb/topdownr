@@ -9,7 +9,9 @@
 readTopDownFiles(path, pattern = ".*", type = c("a", "b", "c", "x", "y",
   "z"), modifications = c(C = 57.02146), adducts = data.frame(),
   neutralLoss = MSnbase::defaultNeutralLoss(), tolerance = 1e-05,
-  dropNonInformativeColumns = TRUE, verbose = interactive(), ...)
+  dropNonInformativeColumns = TRUE, sampleColumns = c("Mz", "AGCTarget",
+  "ETDReagentTarget", "ETDActivation", "CIDActivation", "HCDActivation"),
+  verbose = interactive())
 }
 \arguments{
 \item{path}{\code{character}, path to directory that contains the top-down files.}
@@ -20,6 +22,10 @@ files.}
 \item{type}{\code{character}, type of fragments, currently \emph{a-c} and \emph{x-z} are
 supported, see \code{\link[MSnbase:calulateFragments]{MSnbase::calulateFragments()}} for details.}
 
+\item{modifications}{\code{double}, named vector with modifications that should be
+applied. The name hast to be an amino acid that should be replaced, see
+\code{\link[MSnbase:calulateFragments]{MSnbase::calulateFragments()}} for details.}
+
 \item{adducts}{\code{data.frame}, with 3 columns, namely: mass, name, to, see
 details section.}
 
@@ -27,17 +33,17 @@ details section.}
 \code{\link[MSnbase:calulateFragments]{MSnbase::calulateFragments()}} and \code{\link[MSnbase:defaultNeutralLoss]{MSnbase::defaultNeutralLoss()}} for
 details.}
 
-\item{tolerance}{double, tolerance in \emph{ppm} that is used to match the
+\item{tolerance}{\code{double}, tolerance in \emph{ppm} that is used to match the
 theoretical fragments with the observed ones.}
 
 \item{dropNonInformativeColumns}{logical, should columns with just one
 identical value across all runs be removed?}
 
-\item{verbose}{logical, verbose output?}
+\item{sampleColumns}{\code{character}, column names of the \code{\link[=colData]{colData()}} used to
+define a sample (technical replicate). This is used to add the \code{Sample}
+column (used for easier aggregation, etc.).}
 
-\item{modification}{\code{double}, named vector with modifications that should be
-applied. The name hast to be an amino acid that should be replaced, see
-\code{\link[MSnbase:calulateFragments]{MSnbase::calulateFragments()}} for details.}
+\item{verbose}{\code{logical}, verbose output?}
 }
 \value{
 A \code{TopDownSet} object.

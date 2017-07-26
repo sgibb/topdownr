@@ -63,6 +63,7 @@ test_that(".fragmentationMethod", {
 test_that(".groupBy", {
   x <- data.frame(ID=1:2, LE=rep(LETTERS[1:4], each=2), na=rep(c(1, NA), 4),
                   stringsAsFactors=FALSE)
+  expect_error(topdown:::.groupBy(1:10, "LE"))
   expect_equal(topdown:::.groupBy(x, "LE"), split(x, x$LE))
   expect_equal(topdown:::.groupBy(x, c("ID", "LE")),
                split(x, interaction(as.list(x[, c("ID", "LE")]),
@@ -74,11 +75,21 @@ test_that(".groupBy", {
 test_that(".groupByLabels", {
   x <- data.frame(ID=1:2, LE=rep(LETTERS[1:4], each=2), na=rep(c(1, NA), 4),
                   stringsAsFactors=FALSE)
+  expect_error(topdown:::.groupByLabels(1:10, "LE"))
   expect_equal(topdown:::.groupByLabels(x, "LE"), x$LE)
   expect_equal(topdown:::.groupByLabels(x, c("ID", "LE")),
                paste(1:2, rep(LETTERS[1:4], each=2), sep=":"))
   expect_equal(topdown:::.groupByLabels(x, c("ID", "na")),
                paste(rep(1:2, 4), rep(c(1, NA), 4), sep=":"))
+})
+
+test_that(".groupId", {
+  x <- data.frame(ID=1:2, LE=rep(LETTERS[1:4], each=4),
+                  stringsAsFactors=FALSE)
+  expect_error(topdown:::.groupId(1:10, "LE"))
+  expect_equal(topdown:::.groupId(x, "LE"), rep(1:4, each=4))
+  expect_equal(topdown:::.groupId(x, c("ID", "LE")),
+               rep(1:2, 8) + rep(seq(0, 6, by=2), each=4))
 })
 
 test_that(".hft", {

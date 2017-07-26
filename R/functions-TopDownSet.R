@@ -27,7 +27,7 @@
 #' files.
 #' @param type `character`, type of fragments, currently *a-c* and *x-z* are
 #' supported, see [MSnbase::calulateFragments()] for details.
-#' @param modification `double`, named vector with modifications that should be
+#' @param modifications `double`, named vector with modifications that should be
 #' applied. The name hast to be an amino acid that should be replaced, see
 #' [MSnbase::calulateFragments()] for details.
 #' @param adducts `data.frame`, with 3 columns, namely: mass, name, to, see
@@ -35,11 +35,14 @@
 #' @param neutralLoss `list`, neutral loss that should be applied, see
 #' [MSnbase::calulateFragments()] and [MSnbase::defaultNeutralLoss()] for
 #' details.
-#' @param tolerance double, tolerance in *ppm* that is used to match the
+#' @param tolerance `double`, tolerance in *ppm* that is used to match the
 #' theoretical fragments with the observed ones.
 #' @param dropNonInformativeColumns logical, should columns with just one
 #' identical value across all runs be removed?
-#' @param verbose logical, verbose output?
+#' @param sampleColumns `character`, column names of the [colData()] used to
+#' define a sample (technical replicate). This is used to add the `Sample`
+#' column (used for easier aggregation, etc.).
+#' @param verbose `logical`, verbose output?
 #' @return A `TopDownSet` object.
 #' @export
 #' @seealso [MSnbase::calulateFragments()], [MSnbase::defaultNeutralLoss()]
@@ -61,7 +64,10 @@ readTopDownFiles <- function(path, pattern=".*",
                              neutralLoss=MSnbase::defaultNeutralLoss(),
                              tolerance=10e-6,
                              dropNonInformativeColumns=TRUE,
-                             verbose=interactive(), ...) {
+                             sampleColumns=c("Mz", "AGCTarget", "ETDReagentTarget",
+                                             "ETDActivation", "CIDActivation",
+                                             "HCDActivation"),
+                             verbose=interactive()) {
 
   files <- .listTopDownFiles(path, pattern=pattern)
 
@@ -101,6 +107,7 @@ readTopDownFiles <- function(path, pattern=".*",
                                                           headerInformation)
 
   header <- .mergeSpectraAndHeaderInformation(mzmlHeader, scanHeadsman)
+  header$Sample <- .groupId(header, cols=sampleColumns)
 
   if (dropNonInformativeColumns) {
     header <- .dropNonInformativeColumns(header)

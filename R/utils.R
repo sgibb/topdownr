@@ -136,12 +136,26 @@ cat0 <- function(...) {
 #' @return `list`
 #' @noRd
 .groupByLabels <- function(x, cols) {
+  stopifnot(is.data.frame(x))
   if (length(cols) > 1L) {
     ## `interaction` doesn't handle NA values, so use `paste` instead
     do.call(paste, c(x[, cols], sep=":"))
   } else {
     as.character(x[, cols])
   }
+}
+
+#' Create group id
+#'
+#' @param x `data.frame`
+#' @param cols `character`, colnames used for grouping
+#' @return `integer`
+#' @noRd
+.groupId <- function(x, cols) {
+  stopifnot(is.data.frame(x))
+  groups <- .groupByLabels(x, cols)
+  ugroups <- unique(groups)
+  match(groups, ugroups)
 }
 
 #' head/fill/tail of vector elements (e.g. for printing)

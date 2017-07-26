@@ -96,13 +96,7 @@ setReplaceMethod("$", "TopDownSet", function(x, name, value) {
 #' @return `TopDownSet`
 #' @noRd
 setMethod("aggregate", "TopDownSet",
-          function(x, by=colData(x)[, c("Mz", "AGCTarget",
-                                        "ETDReagentTarget",
-                                        "ETDActivation",
-                                        "CIDActivation",
-                                        "HCDActivation",
-                                        "SupplementalActivationCE",
-                                        "SupplementalActivation")]) {
+          function(x, by=colData(x)[, "Sample"]) {
   d0 <- dim(x)
 
   if (!is.list(by) && !is.data.frame(by) && !inherits(by, "DataFrame")) {
