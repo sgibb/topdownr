@@ -78,6 +78,8 @@ defaultMs2Settings <- function(...) {
 
 #' @rdname default-functions
 #'
+#' @param protein `character`, protein name.
+#'
 #' @export
 #' @examples
 #'

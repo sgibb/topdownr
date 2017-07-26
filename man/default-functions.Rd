@@ -14,6 +14,8 @@ defaultProteins(protein = c("GST", "myoglobin", "h2a", "h2b", "h3_1", "h3_3",
   "h4", "c345c_c3", "h33tail"))
 }
 \arguments{
+\item{protein}{\code{character}, protein name.}
+
 \item{\ldots}{named arguments that should be overwritten.}
 }
 \value{
