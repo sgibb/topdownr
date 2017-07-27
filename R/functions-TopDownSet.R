@@ -108,6 +108,7 @@ readTopDownFiles <- function(path, pattern=".*",
 
   header <- .mergeSpectraAndHeaderInformation(mzmlHeader, scanHeadsman)
   header$Sample <- .groupId(header, cols=sampleColumns)
+  header$MedianIonInjectionTimeMs <- .medianIonInjectionTime(header)
 
   if (dropNonInformativeColumns) {
     header <- .dropNonInformativeColumns(header)

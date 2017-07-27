@@ -126,6 +126,15 @@ test_that(".massLabelToId", {
                c(1:999))
 })
 
+test_that(".medianIonInjectionTime", {
+  d <- data.frame(IonInjectionTimeMs=1:12, Mz=rep(1:3, each=4),
+                  AGCTarget=rep(1:6, each=2))
+  expect_error(topdown:::.medianIonInjectionTime(1:3))
+  expect_error(topdown:::.medianIonInjectionTime(data.frame(foo=1:3, bar=1:3)))
+  expect_equal(topdown:::.medianIonInjectionTime(d),
+               rep(seq(1.5, by=2, length.out=6), each=2))
+})
+
 test_that(".msg", {
   expect_message(topdown:::.msg(TRUE, "foobar"), "foobar")
   expect_message(topdown:::.msg(TRUE, "foo", "bar"), "foobar")
