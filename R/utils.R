@@ -56,7 +56,7 @@ cat0 <- function(...) {
 #' than 1 in a row and both is possible 1, 2, 2, 4 and 1, 3, 3, 4.
 #'
 #' In general it seems that the fix is as easy as ensuring that the FilterString
-#' ids following a sequence.
+#' ids following a sequence (with some drop-outs).
 #'
 #' See the following issues for details:
 #' - https://github.com/sgibb/topdown/issues/14
@@ -68,14 +68,38 @@ cat0 <- function(...) {
 #' @param x `character`, FilterString
 #' @return `character`, fixed FilterString with equal length as `x`
 #' @noRd
-.fixFilterStringId <- function(x) {
+.fixFilterString <- function(x) {
   ufs <- unique(x)
   ids <- .filterStringToId(ufs)
   pos <- regexpr("[0-9]{3}@", ufs)
   i <- match(x, ufs)
-  substr(x, pos[i], pos[i] + 3L) <- sprintf("%03d@",
-                                            seq(from=ids[1L],
-                                                length.out=length(ufs)))[i]
+  substr(x, pos[i], pos[i] + 3L) <- sprintf("%03d@", .fixFilterStringId(ids))[i]
+  x
+}
+
+#' Workhorse function of .fixFilterString
+#'
+#' There are two patterns possible: 1, 2, 2, 4 and 1, 3, 3, 4
+#'
+#' @param x `numeric`, id
+#' @return `numeric`, fixed id
+#' @noRd
+.fixFilterStringId <- function(x) {
+  d <- diff(x)
+  ## 1, 2, 2, 4: d == d(1, 0, 2)
+  l <- c(FALSE, d == 0L & c(d[-1L], Inf) == 2L)
+  x[l] <- x[l] + 1L
+  ## 1, 3, 3, 4: d == d(2, 0, 1)
+  l <- c(FALSE, d == 2L & c(d[-1L], Inf) == 0L)
+  x[l] <- x[l] - 1L
+  ## edge case: 2, 2, 3, 4
+  if (all(d[1L:2L] == c(0L, 1L))) {
+    x[1L] <- x[1L] - 1L
+  }
+  ## edge case: 1, 2, 3, 3
+  if (all(d[length(d) - 0L:1L] == c(0L, 1L))) {
+    x[length(x)] <- x[length(x)] + 1L
+  }
   x
 }
 

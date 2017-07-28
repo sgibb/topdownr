@@ -118,7 +118,7 @@
   # See the following issues for details:
   # - https://github.com/sgibb/topdown/issues/14
   # - https://github.com/sgibb/topdown/issues/25
-  d$FilterString <- .fixFilterStringId(d$FilterString)
+  d$FilterString <- .fixFilterString(d$FilterString)
   d$Condition <- cumsum(!duplicated(d$FilterString))
 
   d[is.na(d)] <- 0L

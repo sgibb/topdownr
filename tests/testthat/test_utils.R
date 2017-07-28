@@ -23,19 +23,28 @@ test_that(".filterStringToId", {
                c(219L, 10L))
 })
 
-test_that(".fixFilterStringId", {
+test_that(".fixFilterString", {
   fs <- c("FTMS + p NSI Full ms2 162.0004@cid28.00 [100.0000-2000.0000]",
           "FTMS + p NSI Full ms2 162.0004@hcd28.00 [100.0000-2000.0000]",
           "FTMS + p NSI Full ms2 162.0004@hcd28.00 [100.0000-2000.0000]",
           "FTMS + p NSI Full ms2 162.0006@cid35.00 [100.0000-2000.0000]",
-          "FTMS + p NSI Full ms2 1162.0007@cid28.00 [100.0000-2000.0000]",
-          "FTMS + p NSI Full ms2 1162.0009@hcd28.00 [100.0000-2000.0000]",
-          "FTMS + p NSI Full ms2 1162.0009@hcd28.00 [100.0000-2000.0000]",
-          "FTMS + p NSI Full ms2 1162.0009@cid35.00 [100.0000-2000.0000]")
+          "FTMS + p NSI Full ms2 1162.0008@cid28.00 [100.0000-2000.0000]",
+          "FTMS + p NSI Full ms2 1162.0010@hcd28.00 [100.0000-2000.0000]",
+          "FTMS + p NSI Full ms2 1162.0010@hcd28.00 [100.0000-2000.0000]",
+          "FTMS + p NSI Full ms2 1162.0010@cid35.00 [100.0000-2000.0000]")
   ffs <- fs
   ffs[2:3] <- "FTMS + p NSI Full ms2 162.0005@hcd28.00 [100.0000-2000.0000]"
-  ffs[6:7] <- "FTMS + p NSI Full ms2 1162.0008@hcd28.00 [100.0000-2000.0000]"
-  expect_equal(topdown:::.fixFilterStringId(fs), ffs)
+  ffs[6:7] <- "FTMS + p NSI Full ms2 1162.0009@hcd28.00 [100.0000-2000.0000]"
+  expect_equal(topdown:::.fixFilterString(fs), ffs)
+})
+
+test_that(".fixFilterStringId", {
+  expect_equal(topdown:::.fixFilterStringId(c(1, 2, 2, 4)), 1:4)
+  expect_equal(topdown:::.fixFilterStringId(c(1, 3, 3, 4)), 1:4)
+  expect_equal(topdown:::.fixFilterStringId(c(4, 4, 6, 8, 10, 10)),
+               c(4:6, 8:10))
+  expect_equal(topdown:::.fixFilterStringId(c(5, 5, 6, 8, 9, 9)),
+               c(4:6, 8:10))
 })
 
 test_that(".formatNames", {
