@@ -205,8 +205,8 @@ test_that(".subsetByNumeric", {
   expect_error(topdown:::.subsetByNumeric(TRUE, 10))
   expect_error(topdown:::.subsetByNumeric(1:10, TRUE))
   expect_error(topdown:::.subsetByNumeric("foo", 10))
-  expect_error(topdown:::.subsetByNumeric(c(-1, 3, 12), 10),
-               "Subscript out of bound: '-1', '12'")
+  expect_error(topdown:::.subsetByNumeric(c(1, 3, 12), 10),
+               "Subscript out of bound: '12'")
   expect_equal(topdown:::.subsetByNumeric(1:10, 20), 1:10)
 })
 

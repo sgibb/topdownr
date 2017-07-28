@@ -352,9 +352,8 @@ cat0 <- function(...) {
   stopifnot(is.numeric(i))
   stopifnot(is.numeric(n))
 
-  if (any(n < i | i < 0L)) {
-    stop("Subscript out of bound: ", paste0("'", i[n < i | i < 0L], "'",
-                                            collapse=", "))
+  if (any(n < i)) {
+    stop("Subscript out of bound: ", paste0("'", i[n < i], "'", collapse=", "))
   }
   i
 }
