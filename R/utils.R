@@ -131,11 +131,14 @@ cat0 <- function(...) {
 
 #' Create group labels from data.frame columns
 #'
-#' @param x `data.frame`, e.g. from .ms2Experiments
+#' @param x `data.frame`, or `DataFrame` e.g. from .ms2Experiments
 #' @param cols `character`, colnames used to split
 #' @return `list`
 #' @noRd
-.groupByLabels <- function(x, cols) {
+.groupByLabels <- function(x, cols=names(x)) {
+  if (inherits(x, "DataFrame")) {
+    x <- as.data.frame(x)
+  }
   stopifnot(is.data.frame(x))
   if (length(cols) > 1L) {
     ## `interaction` doesn't handle NA values, so use `paste` instead
