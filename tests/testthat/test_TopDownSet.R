@@ -237,7 +237,7 @@ test_that("normalize", {
 
 test_that("readTopDownFiles", {
   expect_error(readTopDownFiles(".", pattern="FOOBAR"),
-               "Could not find any experiments.csv, fasta, mzML, txt files!")
+               "Could not find any csv, fasta, mzML, txt files!")
 })
 
 test_that("show", {

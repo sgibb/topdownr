@@ -10,7 +10,7 @@ test_that(".fileExists", {
 
 test_that(".listTopDownFiles", {
   fns <- tempfile(pattern=c("fileA_", "fileB_"))
-  fasta <- paste(tempfile(pattern=c("file")), "fasta", sep=".")
+  fasta <- tempfile(pattern="fileA_", fileext=".fasta")
   fns <- paste(rep(fns, each=3), c("experiments.csv", "mzML", "txt"), sep=".")
   r <- split(fns, c("csv", "mzML", "txt"))
   r$fasta <- fasta
@@ -18,8 +18,22 @@ test_that(".listTopDownFiles", {
   file.create(c(fasta, fns))
   expect_equal(topdown:::.listTopDownFiles(tempdir()), r)
   expect_equal(topdown:::.listTopDownFiles(tempdir(), pattern="^fileA_.*"),
-               lapply(r[names(r) != "fasta"], "[", 1L))
-  unlink(c(fasta, fns))
+               lapply(r, "[", 1L))
+  expect_error(topdown:::.listTopDownFiles(tempdir(), pattern="^fileB_.*"),
+               "Could not find any fasta files")
+  expect_error(topdown:::.listTopDownFiles(tempdir(), pattern="^fileC_.*"),
+               "Could not find any csv, fasta, mzML, txt files")
+  fasta2 <- tempfile(pattern="fileB_", fileext=".fasta")
+  file.create(fasta2)
+  expect_error(topdown:::.listTopDownFiles(tempdir()),
+               "More than one fasta file")
+  fns2 <- tempfile("fileA_")
+  fns2 <- paste(fns2, c("mzML", "txt"), sep=".")
+  file.create(fns2)
+  expect_error(topdown:::.listTopDownFiles(tempdir(), pattern="^fileA_.*"),
+               paste0("There have to be the same number .*",
+                      "Found: csv=1, mzML=2, txt=2", collapse=""))
+  unlink(c(fasta, fasta2, fns, fns2))
 })
 
 test_that(".readExperimentCsv", {

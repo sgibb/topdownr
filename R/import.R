@@ -24,8 +24,27 @@
   files <- list.files(path,
                       pattern=paste0(pattern, "(",
                                      .topDownFileExtRx("cfmt"), ")"),
-                      full.names=TRUE)
-  split(files, .fileExt(files))
+                      recursive=TRUE, full.names=TRUE)
+  l <- split(files, .fileExt(files))
+  n <- lengths(l)
+
+  ext <- c("csv", "fasta", "mzML", "txt")
+
+  if (!length(n) || any(!ext %in% names(l))) {
+    stop("Could not find any ", paste0(ext[!ext %in% names(l)],
+                                       collapse=", "), " files!")
+  }
+
+  if (n["fasta"] > 1L) {
+    stop("More than one fasta file found. Consider the 'pattern' argument.")
+  }
+
+  if (!all(n["csv"] == n[!grepl("fasta", names(n))])) {
+    nd <- n[!grepl("fasta", names(n))]
+    stop("There have to be the same number of csv, mzML and txt files. ",
+         "Found: ", paste0(names(nd), "=", nd, collapse=", "))
+  }
+  l
 }
 
 #' Read ScanHeadMans method (experiments.csv) output.

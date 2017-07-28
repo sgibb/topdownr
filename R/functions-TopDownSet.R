@@ -71,14 +71,6 @@ readTopDownFiles <- function(path, pattern=".*",
 
   files <- .listTopDownFiles(path, pattern=pattern)
 
-  if (!length(files) || any(lengths(files) == 0L)) {
-    ext <- c("experiments.csv", "fasta", "mzML", "txt")
-    if (length(files)) {
-      ext <- ext[lengths(files) == 0L]
-    }
-    stop("Could not find any ", paste0(ext, collapse=", "), " files!")
-  }
-
   sequence <- .readFasta(files$fasta, verbose=verbose)
 
   fragmentViews <- .calculateFragments(sequence=sequence,
