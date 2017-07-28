@@ -20,17 +20,17 @@ readTopDownFiles(path, pattern = ".*", type = c("a", "b", "c", "x", "y",
 files.}
 
 \item{type}{\code{character}, type of fragments, currently \emph{a-c} and \emph{x-z} are
-supported, see \code{\link[MSnbase:calulateFragments]{MSnbase::calulateFragments()}} for details.}
+supported, see \code{\link[MSnbase:calculateFragments]{MSnbase::calculateFragments()}} for details.}
 
 \item{modifications}{\code{double}, named vector with modifications that should be
 applied. The name hast to be an amino acid that should be replaced, see
-\code{\link[MSnbase:calulateFragments]{MSnbase::calulateFragments()}} for details.}
+\code{\link[MSnbase:calculateFragments]{MSnbase::calculateFragments()}} for details.}
 
 \item{adducts}{\code{data.frame}, with 3 columns, namely: mass, name, to, see
 details section.}
 
 \item{neutralLoss}{\code{list}, neutral loss that should be applied, see
-\code{\link[MSnbase:calulateFragments]{MSnbase::calulateFragments()}} and \code{\link[MSnbase:defaultNeutralLoss]{MSnbase::defaultNeutralLoss()}} for
+\code{\link[MSnbase:calculateFragments]{MSnbase::calculateFragments()}} and \code{\link[MSnbase:defaultNeutralLoss]{MSnbase::defaultNeutralLoss()}} for
 details.}
 
 \item{tolerance}{\code{double}, tolerance in \emph{ppm} that is used to match the
@@ -119,7 +119,7 @@ if (require("topdowndata")) {
 \seealso{
 \linkS4class{FragmentViews}
 
-\code{\link[MSnbase:calulateFragments]{MSnbase::calulateFragments()}}, \code{\link[MSnbase:defaultNeutralLoss]{MSnbase::defaultNeutralLoss()}}
+\code{\link[MSnbase:calculateFragments]{MSnbase::calculateFragments()}}, \code{\link[MSnbase:defaultNeutralLoss]{MSnbase::defaultNeutralLoss()}}
 }
 \author{
 Sebastian Gibb \email{mail@sebastiangibb.de}

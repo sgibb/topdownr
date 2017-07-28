@@ -136,10 +136,10 @@ cat0 <- function(...) {
 #' @return `list`
 #' @noRd
 .groupByLabels <- function(x, cols=names(x)) {
-  if (inherits(x, "DataFrame")) {
-    x <- as.data.frame(x)
+  x <- as.data.frame(x)
+  if (any(!cols %in% colnames(x))) {
+    stop("All 'cols' have to be valid column names of 'x'.")
   }
-  stopifnot(is.data.frame(x))
   if (length(cols) > 1L) {
     ## `interaction` doesn't handle NA values, so use `paste` instead
     do.call(paste, c(x[, cols], sep=":"))
@@ -206,8 +206,7 @@ cat0 <- function(...) {
 #' topdown:::.massLabel(c(750, 1000), c(1, 100))
 .massLabel <- function(x, id, divisor=10000L) {
   if (any(log10(divisor) <= log10(id) + 1L)) {
-    stop(sQuote("divisor"), " has to be at least two digits more than ",
-         sQuote("id"))
+    stop("'divisor' has to be at least two digits more than 'id'")
   }
   round(x, 1L) + id / divisor
 }
@@ -406,6 +405,27 @@ cat0 <- function(...) {
                 "cmt" = c("csv", "mzml", "txt"),
                 type)
   paste0("\\.", ext[sel], "(\\.(gz|bz2|xz|zip))?$", collapse="|")
+}
+
+#' Find indicies of top N values
+#'
+#' @param x `double`/`character`, value of interest
+#' @param groupBy `character`, grouping variable
+#' @return `integer`, indices
+#' @noRd
+.topIdx <- function(x, groupByLabels, n) {
+  if (!is.double(x) && !is.numeric(x) && !is.character(x)) {
+    stop("'x' has to be of type 'double' or 'character'")
+  }
+  if (n < 1L) {
+    stop("'n' has to be greater or equal than 1.")
+  }
+  if (length(x) != length(groupByLabels)) {
+    stop("'length(x)' and 'length(groupByLabels)' have to be equal.")
+  }
+  o <- order(x, decreasing=TRUE, na.last=TRUE)
+  i <- unlist(lapply(split(o, groupByLabels[o]), "[", seq_len(n)), use.names=FALSE)
+  i[!is.na(i)]
 }
 
 #' wrapper around vapply for FUN.VALUE=double(1L)

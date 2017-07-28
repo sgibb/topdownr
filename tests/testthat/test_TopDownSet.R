@@ -119,8 +119,7 @@ test_that("aggregate", {
              files=c("foo.fasta"),
              processing=c("[2017-07-16 14:00:00] Data created.",
                           "[2017-07-16 14:00:01] Aggregated [3;5] to [3;2]."))
-
-  expect_error(aggregate(tds, by="FooBar"), "must be a list")
+  expect_error(aggregate(tds, by="FooBar"), "same length")
   expect_equal_TDS(aggregate(tds, by=list(tds$File)), tda)
   expect_equal_TDS(aggregate(tds, by=list(rep(1:2, c(3, 2)))), tda)
 })
@@ -131,6 +130,35 @@ test_that("dim", {
 
 test_that("dimnames", {
   expect_equal(dimnames(tds), list(c("c1", "c2", "x1"), NULL))
+})
+
+test_that("filterInjectionTime", {
+  tdfit <- tds
+  tdfit$IonInjectionTimeMs <- c(1:3, 2:3)
+  tdfit$MedianIonInjectionTimeMs <- rep(1:2, 3:2)
+  tdfit$Sample <- rep(1:2, 3:2)
+
+  expect_equal(filterInjectionTime(tdfit, maxDeviation=100, keepTopN=5),
+               tdfit)
+  tdfitr <- tdfit[, c(1, 4)]
+  tdfitr@processing <- c(tdfitr@processing,
+                         paste0("[2017-07-28 16:00:02] 3 scans filtered with ",
+                                "injection time deviation >= 0.5 or rank >= 6."))
+  expect_equal_TDS(filterInjectionTime(tdfit, maxDeviation=0.5, keepTopN=5),
+                   tdfitr)
+  tdfitr <- tdfit[, -3]
+  tdfitr@processing <- c(tdfitr@processing,
+                         paste0("[2017-07-28 16:00:02] 1 scan filtered with ",
+                                "injection time deviation >= 5 or rank >= 3."))
+  expect_equal_TDS(filterInjectionTime(tdfit, maxDeviation=5, keepTopN=2),
+                   tdfitr)
+  tdfitr <- tdfit[, -(2:3)]
+  tdfitr@processing <- c(tdfitr@processing,
+                         paste0("[2017-07-28 16:00:02] 2 scans filtered with ",
+                                "injection time deviation >= 0.6 or rank >= 3."))
+  expect_equal_TDS(filterInjectionTime(tdfit, maxDeviation=0.6, keepTopN=2),
+                   tdfitr)
+
 })
 
 test_that("filterIntensity", {

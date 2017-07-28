@@ -26,14 +26,14 @@
 #' @param pattern `character`, a filename pattern, the default `.*` means all
 #' files.
 #' @param type `character`, type of fragments, currently *a-c* and *x-z* are
-#' supported, see [MSnbase::calulateFragments()] for details.
+#' supported, see [MSnbase::calculateFragments()] for details.
 #' @param modifications `double`, named vector with modifications that should be
 #' applied. The name hast to be an amino acid that should be replaced, see
-#' [MSnbase::calulateFragments()] for details.
+#' [MSnbase::calculateFragments()] for details.
 #' @param adducts `data.frame`, with 3 columns, namely: mass, name, to, see
 #' details section.
 #' @param neutralLoss `list`, neutral loss that should be applied, see
-#' [MSnbase::calulateFragments()] and [MSnbase::defaultNeutralLoss()] for
+#' [MSnbase::calculateFragments()] and [MSnbase::defaultNeutralLoss()] for
 #' details.
 #' @param tolerance `double`, tolerance in *ppm* that is used to match the
 #' theoretical fragments with the observed ones.
@@ -45,7 +45,7 @@
 #' @param verbose `logical`, verbose output?
 #' @return A `TopDownSet` object.
 #' @export
-#' @seealso [MSnbase::calulateFragments()], [MSnbase::defaultNeutralLoss()]
+#' @seealso [MSnbase::calculateFragments()], [MSnbase::defaultNeutralLoss()]
 #' @examples
 #' library("topdown")
 #'

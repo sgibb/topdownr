@@ -76,7 +76,7 @@ test_that(".groupByLabels", {
   x <- data.frame(ID=1:2, LE=rep(LETTERS[1:4], each=2), na=rep(c(1, NA), 4),
                   stringsAsFactors=FALSE)
   DF <- DataFrame(ID=1:2, LE=rep(LETTERS[1:4], each=2))
-  expect_error(topdown:::.groupByLabels(1:10, "LE"))
+  expect_error(topdown:::.groupByLabels(1:10, "LE"), "valid column names")
   expect_equal(topdown:::.groupByLabels(x, "LE"), x$LE)
   expect_equal(topdown:::.groupByLabels(x, c("ID", "LE")),
                paste(1:2, rep(LETTERS[1:4], each=2), sep=":"))
@@ -244,4 +244,18 @@ test_that(".topDownFileExtRx", {
                paste0("\\.", ext[3], gz, collapse="|"))
   expect_equal(topdown:::.topDownFileExtRx("txt"),
                paste0("\\.", ext[5], gz, collapse="|"))
+})
+
+test_that(".topIdx", {
+  d <- 1:10
+  g <- rep_len(LETTERS[1:3], 10)
+  expect_error(topdown:::.topIdx(logical(10)),
+               "'x' has to be of type")
+  expect_error(topdown:::.topIdx(d, groupBy=g, n=-1),
+               "'n' has to be greater or equal than 1.")
+  expect_error(topdown:::.topIdx(d, groupBy=1:3, n=3), "have to be equal.")
+  expect_equal(topdown:::.topIdx(d, groupBy=g, n=3),
+               c(10, 7, 4, 8, 5, 2, 9, 6, 3))
+  expect_equal(topdown:::.topIdx(d, groupBy=g, n=2),
+               c(10, 7, 8, 5, 9, 6))
 })

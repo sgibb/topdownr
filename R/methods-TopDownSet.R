@@ -93,17 +93,17 @@ setReplaceMethod("$", "TopDownSet", function(x, name, value) {
 })
 
 #' @param object `TopDownSet`
+#' @param by `list`, grouping variable
 #' @return `TopDownSet`
 #' @noRd
 setMethod("aggregate", "TopDownSet",
-          function(x, by=colData(x)[, "Sample"]) {
+          function(x, by=x$Sample) {
   d0 <- dim(x)
+  groups <- .groupByLabels(by)
 
-  if (!is.list(by) && !is.data.frame(by) && !inherits(by, "DataFrame")) {
-    stop("'by' must be a list or a data.frame!")
+  if (length(groups) != ncol(x)) {
+    stop("'by' has to be of the same length as 'ncol(x)'.")
   }
-  by <- as.data.frame(by)
-  groups <- .groupByLabels(by, names(by))
   x@assay <- .rowMeansGroup(x@assay, groups)
   x@colData <- .aggregateDataFrame(x@colData, groups,
                                    ignoreNumCols=c("Scan", "Condition"))
@@ -186,6 +186,50 @@ setMethod("dimnames", "TopDownSet", function(x) {
 #' @noRd
 setMethod("fragmentData", "TopDownSet", function(object, ...) {
   rowViews(object)
+})
+
+#' Filter `TopDownSet` by ion injection time.
+#'
+#' Filtering is done by maximal allowed deviation and just the technical
+#' `keepTopN` replicates with the lowest deviation from the median ion
+#' injection time are kept.
+#'
+#' @param object `TopDownSet`
+#' @param maxDeviation `double`, maximal allowed deviation in the log2 injection
+#' time in ms in comparison to the median ion injection time.
+#' @param keepTopN `integer`, how many technical repliactes should be kept?
+#' @param by `list`, how technical repliactes are defined.
+#' @return `TopDownSet`
+#' @export
+#' @noRd
+setMethod("filterInjectionTime", "TopDownSet",
+          function(object, maxDeviation=log2(3), keepTopN=2,
+                   by=object$Sample) {
+  if (!is.numeric(maxDeviation) || !length(maxDeviation) == 1L) {
+    stop("'maxDeviation' has to be a 'numeric' of length one.")
+  }
+
+  if (maxDeviation < 0) {
+    stop("'maxDeviation' has to be greater than 0.")
+  }
+
+  lr <- log2(object$IonInjectionTimeMs / object$MedianIonInjectionTimeMs)
+
+  i <- intersect(which(lr <= maxDeviation),
+                 .topIdx(-abs(lr), .groupByLabels(by), n=keepTopN))
+
+  if (length(i) && length(i) != ncol(object)) {
+    n0 <- ncol(object)
+    object <- object[, i]
+    n1 <- ncol(object)
+    nd <- n0 - n1
+    .tdsLogMsg(object, n0 - n1,
+               " scan", if (nd > 1L) { "s" },
+               " filtered with injection time deviation >= ",
+               maxDeviation, " or rank >= ", keepTopN + 1L, ".")
+  } else {
+    object
+  }
 })
 
 #' @param object `TopDownSet`
