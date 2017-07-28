@@ -141,7 +141,7 @@
 
   hd <- header(fh)
   i <- which(hd$msLevel == 2L & hd$acquisitionNum %in% scans)
-  hd <- hd[i, !grepl("seqNum", colnames(hd), fixed=TRUE), drop=FALSE]
+  hd <- hd[i, !colnames(hd) %in% c("injectionTime", "seqNum"), drop=FALSE]
   colnames(hd)[grepl("acquisitionNum", colnames(hd), fixed=TRUE)] <- "Scan"
   hd$File <- gsub(.topDownFileExtRx("mzml"), "", basename(file))
   colnames(hd) <- .formatNames(colnames(hd))
