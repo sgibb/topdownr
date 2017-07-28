@@ -349,8 +349,7 @@
 #' [defaultMs2Settings()].
 #' @param groupBy `character`, split files by `groupBy` entries.
 #' @param replications `integer`, number of replications of experiments.
-#' @param mz `matrix`, two columns (column 1: *mass*, column 2: *z*), see e.g.
-#' [defaultProteins()].
+#' @param mz `matrix`, two columns (column 1: *mass*, column 2: *z*).
 #' @param massLabeling `logical`, should *mz* values used for ID labeling?
 #' @param nMs2perMs1 `integer`, how many MS2 scans should be run after a
 #' MS1 scan?
@@ -385,7 +384,7 @@
 #'  `groupBy`.
 #'
 #' @return An invisivble `list` with the MS1, MS2, runtimes and mz.
-#' @seealso [defaultMs1Settings()], [defaultMs2Settings()], [defaultProteins()]
+#' @seealso [defaultMs1Settings()], [defaultMs2Settings()]
 #' @author Sebastian Gibb \email{mail@@sebastiangibb.de}, Pavel V. Shliaha
 #' \email{pavels@@bmb.sdu.dk}
 #' @examples
@@ -394,7 +393,7 @@
 #'
 #' writeMethodXmls(defaultMs1Settings(FirstMass=400),
 #'                 defaultMs2Settings(),
-#'                 mz=defaultProteins("h2a"),
+#'                 mz=cbind(mass=c(609.21, 700.45, 823.95), z=10),
 #'                 groupBy=c("replication", "ETDReactionTime"),
 #'                 replications=4,
 #'                 pattern="method_firstmass_400_%s.xml")

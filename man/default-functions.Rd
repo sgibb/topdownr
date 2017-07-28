@@ -3,19 +3,13 @@
 \name{defaultMs1Settings}
 \alias{defaultMs1Settings}
 \alias{defaultMs2Settings}
-\alias{defaultProteins}
 \title{Settings for MS1/2 parameters.}
 \usage{
 defaultMs1Settings(...)
 
 defaultMs2Settings(...)
-
-defaultProteins(protein = c("GST", "myoglobin", "h2a", "h2b", "h3_1", "h3_3",
-  "h4", "c345c_c3", "h33tail"))
 }
 \arguments{
-\item{protein}{\code{character}, protein name.}
-
 \item{\ldots}{named arguments that should be overwritten.}
 }
 \value{
@@ -38,7 +32,4 @@ defaultMs2Settings()
 
 # overwrite AgcTarget
 defaultMs2Settings(AgcTarget=c(1e4, 1e5))
-
-# default mass/z values for H2A
-defaultProteins("h2a")
 }

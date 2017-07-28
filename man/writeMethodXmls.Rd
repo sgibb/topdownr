@@ -20,8 +20,7 @@ writeMethodXmls(ms1Settings, ms2Settings, groupBy = c("replication",
 
 \item{replications}{\code{integer}, number of replications of experiments.}
 
-\item{mz}{\code{matrix}, two columns (column 1: \emph{mass}, column 2: \emph{z}), see e.g.
-\code{\link[=defaultProteins]{defaultProteins()}}.}
+\item{mz}{\code{matrix}, two columns (column 1: \emph{mass}, column 2: \emph{z}).}
 
 \item{massLabeling}{\code{logical}, should \emph{mz} values used for ID labeling?}
 
@@ -71,14 +70,14 @@ library("topdown")
 
 writeMethodXmls(defaultMs1Settings(FirstMass=400),
                 defaultMs2Settings(),
-                mz=defaultProteins("h2a"),
+                mz=cbind(mass=c(609.21, 700.45, 823.95), z=10),
                 groupBy=c("replication", "ETDReactionTime"),
                 replications=4,
                 pattern="method_firstmass_400_\%s.xml")
 }
 }
 \seealso{
-\code{\link[=defaultMs1Settings]{defaultMs1Settings()}}, \code{\link[=defaultMs2Settings]{defaultMs2Settings()}}, \code{\link[=defaultProteins]{defaultProteins()}}
+\code{\link[=defaultMs1Settings]{defaultMs1Settings()}}, \code{\link[=defaultMs2Settings]{defaultMs2Settings()}}
 }
 \author{
 Sebastian Gibb \email{mail@sebastiangibb.de}, Pavel V. Shliaha
