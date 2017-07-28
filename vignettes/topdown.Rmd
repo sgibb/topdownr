@@ -92,10 +92,9 @@ containing the scan header information and the `.mzML` files with the
 deconvulted spectra.
 
 ```{r list_files, eval=-1, echo=1, comment=NA}
-list.files(topdowndata::h2aPath())
-lapply(topdown:::.listTopDownFiles(topdowndata::h2aPath()), function(x) {
-         c(head(x, 2), "...")
-})
+list.files(topdowndata::topDownDataPath("myoglobin"))
+lapply(topdown:::.listTopDownFiles(topdowndata::topDownDataPath("myoglobin")),
+       function(x) { c(head(x, 2), "...") })
 ```
 
 All these files have to be in a directory. You could import them via
@@ -104,7 +103,7 @@ All these files have to be in a directory. You could import them via
 ```{r import_files}
 library("topdown")
 
-tds <- readTopDownFiles(topdowndata::h2aPath())
+tds <- readTopDownFiles(topdowndata::topDownDataPath("myoglobin"))
 tds
 ```
 
@@ -171,10 +170,10 @@ tds[c("a", "b", paste0("c", 1:100))]
 tds[, 1:10]
 
 # select all conditions from one file
-tds[, tds$File == "h2a_560_ETDReagentTarget_1e+06_1"]
+tds[, tds$File == "myo_1211_ETDReagentTarget_1e+06_1"]
 
 # select all "c" fragments from a single file
-tds["c", tds$File == "h2a_560_ETDReagentTarget_1e+06_1"]
+tds["c", tds$File == "myo_1211_ETDReagentTarget_1e+06_1"]
 ```
 
 ```{r sessioninfo}

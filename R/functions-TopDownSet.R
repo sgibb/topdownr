@@ -51,7 +51,7 @@
 #'
 #' if (require("topdowndata")) {
 #'   # add H+ to z and no neutral loss of water
-#'   tds <- readTopDownFiles(topdowndata::h2aPath(),
+#'   tds <- readTopDownFiles(topdowndata::topDownDataPath("myoglobin"),
 #'                           adducts=data.frame(mass=1.008, name="zpH", to="z"),
 #'                           neutralLoss=MSnbase::defaultNeutralLoss(
 #'                            disableWaterLoss=c("Cterm", "D", "E", "S", "T")),

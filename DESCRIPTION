@@ -16,7 +16,7 @@ Imports:
     MSnbase (>= 2.3.8),
     mzR (>= 2.11.4)
 Suggests:
-    topdowndata,
+    topdowndata (>= 0.2),
     knitr,
     testthat,
     BiocStyle
