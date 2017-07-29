@@ -216,7 +216,7 @@ setMethod("filterInjectionTime", "TopDownSet",
   lr <- log2(object$IonInjectionTimeMs / object$MedianIonInjectionTimeMs)
 
   i <- intersect(which(lr <= maxDeviation),
-                 .topIdx(-abs(lr), .groupByLabels(by), n=keepTopN))
+                 .topIdx(-abs(as.vector(lr)), .groupByLabels(by), n=keepTopN))
 
   if (length(i) && length(i) != ncol(object)) {
     n0 <- ncol(object)
@@ -306,7 +306,8 @@ setMethod("show", "TopDownSet", function(object) {
 
   if (nrow(object@colData)) {
     cat("- - - Condition data - - -\n")
-    cat("Number of conditions:", nrow(object@colData), "\n")
+    cat("Number of conditions:", length(unique(object$Sample)), "\n")
+    cat("Number of scans:", nrow(object@colData), "\n")
     cat0("Condition variables (", ncol(object@colData), "): ",
          paste0(.hft(colnames(object@colData), n=2), collapse=", "), "\n")
   }

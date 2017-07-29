@@ -243,6 +243,7 @@ test_that("readTopDownFiles", {
 test_that("show", {
   expect_output(show(new("TopDownSet")),
                 "TopDownSet object \\([0-9]\\.[0-9]+ Mb\\)")
+  tds$Sample <- rep(1:2, 3:2)
   expect_output(show(tds),
                 paste(c("TopDownSet object \\([0-9]\\.[0-9]+ Mb\\)",
                         "- - - Protein data - - -",
@@ -252,8 +253,9 @@ test_that("show", {
                         "Theoretical fragment types \\(2\\): c, x",
                         "Theoretical mass range: \\[100\\.00;300\\.00\\]",
                         "- - - Condition data - - -",
-                        "Number of conditions: 5 ",
-                        "Condition variables \\(2\\): Scan, File",
+                        "Number of conditions: 2 ",
+                        "Number of scans: 5 ",
+                        "Condition variables \\(3\\): Scan, File, Sample",
                         "- - - Intensity data - - -",
                         "Size of array: 3x5 \\(53\\.33% != 0\\)",
                         "Intensity range: \\[2.00;9.00\\]",
