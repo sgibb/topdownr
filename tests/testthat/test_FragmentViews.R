@@ -35,6 +35,14 @@ test_that("constructor", {
                                                modifications="Met-loss+Acetyl",
                                                neutralLoss=list(water=NULL)),
                  fv3, tolerance=1e-7)
+    fv4 <- FragmentViews("CA", start=2:1, end=2, names=paste0("x", 1:2),
+                         mass=c(116.034216, 219.043406),
+                         type=rep("x", 2), z=rep(1, 2),
+                         metadata=list(modifications=NULL))
+    expect_equal(topdown:::.calculateFragments("CA", type="x",
+                                               modifications=NULL,
+                                               neutralLoss=list(water=NULL)),
+                 fv4, tolerance=1e-7)
 })
 
 test_that("show", {
