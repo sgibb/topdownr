@@ -140,6 +140,13 @@ test_that("filterInjectionTime", {
     tdfit$MedianIonInjectionTimeMs <- rep(1:2, 3:2)
     tdfit$Sample <- rep(1:2, 3:2)
 
+    expect_error(filterInjectionTime(tdfit, maxDeviation="A"),
+                 "has to be a 'numeric'")
+    expect_error(filterInjectionTime(tdfit, maxDeviation=1:2),
+                 "length one")
+    expect_error(filterInjectionTime(tdfit, maxDeviation=-1),
+                 "greater than 0")
+
     expect_equal(filterInjectionTime(tdfit, maxDeviation=100, keepTopN=5),
                  tdfit)
     tdfitr <- tdfit[, c(1, 4)]
