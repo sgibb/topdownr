@@ -2,10 +2,10 @@
 #' @param file filename
 #' @noRd
 .fileExists <- function(file) {
-  if (!file.exists(file)) {
-    stop(file, " doesn't exists!")
-  }
-  TRUE
+    if (!file.exists(file)) {
+        stop(file, " doesn't exists!")
+    }
+    TRUE
 }
 
 #' List TopDown files
@@ -21,30 +21,31 @@
 #' @return list (splitted by file extension) with file path
 #' @noRd
 .listTopDownFiles <- function(path, pattern=".*") {
-  files <- list.files(path,
-                      pattern=paste0(pattern, "(",
-                                     .topDownFileExtRx("cfmt"), ")"),
-                      recursive=TRUE, full.names=TRUE)
-  l <- split(files, .fileExt(files))
-  n <- lengths(l)
+    files <- list.files(path,
+                        pattern=paste0(pattern, "(",
+                                       .topDownFileExtRx("cfmt"), ")"),
+                        recursive=TRUE, full.names=TRUE)
+    l <- split(files, .fileExt(files))
+    n <- lengths(l)
 
-  ext <- c("csv", "fasta", "mzML", "txt")
+    ext <- c("csv", "fasta", "mzML", "txt")
 
-  if (!length(n) || any(!ext %in% names(l))) {
-    stop("Could not find any ", paste0(ext[!ext %in% names(l)],
-                                       collapse=", "), " files!")
-  }
+    if (!length(n) || any(!ext %in% names(l))) {
+        stop("Could not find any ", paste0(ext[!ext %in% names(l)],
+                                           collapse=", "), " files!")
+    }
 
-  if (n["fasta"] > 1L) {
-    stop("More than one fasta file found. Consider the 'pattern' argument.")
-  }
+    if (n["fasta"] > 1L) {
+        stop("More than one fasta file found. Consider the 'pattern' ",
+             "argument.")
+    }
 
-  if (!all(n["csv"] == n[!grepl("fasta", names(n))])) {
-    nd <- n[!grepl("fasta", names(n))]
-    stop("There have to be the same number of csv, mzML and txt files. ",
-         "Found: ", paste0(names(nd), "=", nd, collapse=", "))
-  }
-  l
+    if (!all(n["csv"] == n[!grepl("fasta", names(n))])) {
+        nd <- n[!grepl("fasta", names(n))]
+        stop("There have to be the same number of csv, mzML and txt files. ",
+             "Found: ", paste0(names(nd), "=", nd, collapse=", "))
+    }
+    l
 }
 
 #' Read ScanHeadMans method (experiments.csv) output.
@@ -56,22 +57,22 @@
 #' @return data.frame
 #' @noRd
 .readExperimentCsv <- function(file, verbose=interactive()) {
-  stopifnot(.fileExt(file) == "csv")
-  d <- read.csv(file, stringsAsFactors=FALSE)
-  colnames(d) <- .camelCase(colnames(d))
+    stopifnot(.fileExt(file) == "csv")
+    d <- read.csv(file, stringsAsFactors=FALSE)
+    colnames(d) <- .camelCase(colnames(d))
 
-  .msg(verbose, "Reading ", nrow(d), " experiment conditions from file ",
-       basename(file))
+    .msg(verbose, "Reading ", nrow(d), " experiment conditions from file ",
+         basename(file))
 
-  ## drop MS1
-  d <- d[d$MsLevel == 2L,]
+    ## drop MS1
+    d <- d[d$MsLevel == 2L, ]
 
-  d[is.na(d)] <- 0L
+    d[is.na(d)] <- 0L
 
-  d$Condition <- seq_len(nrow(d))
-  d$Mz <- .targetedMassListToMz(d$TargetedMassList)
-  d$File <- gsub(.topDownFileExtRx("csv"), "", basename(file))
-  d
+    d$Condition <- seq_len(nrow(d))
+    d$Mz <- .targetedMassListToMz(d$TargetedMassList)
+    d$File <- gsub(.topDownFileExtRx("csv"), "", basename(file))
+    d
 }
 
 #' Read fasta file.
@@ -83,12 +84,12 @@
 #' @return character
 #' @noRd
 .readFasta <- function(file, verbose=interactive()) {
-  aa <- readAAStringSet(file, nrec=1L, use.names=FALSE)[[1L]]
-  .msg(verbose, "Reading sequence from fasta file ", basename(file))
-  if (!length(aa)) {
-    stop("No sequence found.")
-  }
-  aa
+    aa <- readAAStringSet(file, nrec=1L, use.names=FALSE)[[1L]]
+    .msg(verbose, "Reading sequence from fasta file ", basename(file))
+    if (!length(aa)) {
+        stop("No sequence found.")
+    }
+    aa
 }
 
 #' Read ScanHeadMans header (txt) output.
@@ -101,45 +102,51 @@
 #' @return data.frame
 #' @noRd
 .readScanHeadsTable <- function(file, verbose=interactive()) {
-  stopifnot(.fileExt(file) == "txt")
-  d <- read.csv(file, stringsAsFactors=FALSE)
-  colnames(d) <- .camelCase(colnames(d))
+    stopifnot(.fileExt(file) == "txt")
+    d <- read.csv(file, stringsAsFactors=FALSE)
+    colnames(d) <- .camelCase(colnames(d))
 
-  .msg(verbose, "Reading ", nrow(d), " header information from file ",
-       basename(file))
+    .msg(verbose, "Reading ", nrow(d), " header information from file ",
+         basename(file))
 
-  ## drop MS1
-  d <- d[d$MsOrder == 2L,]
+    ## drop MS1
+    d <- d[d$MsOrder == 2L, ]
 
-  # TODO: somehow the FilterString doesn't always contains the right mass label.
-  # For now we just take the first non-duplicated (unique) condition
-  # disabled: d$Condition <- as.integer(.filterStringToId(d$FilterString))
-  #
-  # See the following issues for details:
-  # - https://github.com/sgibb/topdown/issues/14
-  # - https://github.com/sgibb/topdown/issues/25
-  d$FilterString <- .fixFilterString(d$FilterString)
-  d$Condition <- cumsum(!duplicated(d$FilterString))
+    # TODO: somehow the FilterString doesn't always contains the right mass
+    # label.
+    # For now we just take the first non-duplicated (unique) condition
+    # disabled: d$Condition <- as.integer(.filterStringToId(d$FilterString))
+    #
+    # See the following issues for details:
+    # - https://github.com/sgibb/topdown/issues/14
+    # - https://github.com/sgibb/topdown/issues/25
+    d$FilterString <- .fixFilterString(d$FilterString)
+    d$Condition <- cumsum(!duplicated(d$FilterString))
 
-  d[is.na(d)] <- 0L
+    d[is.na(d)] <- 0L
 
-  d$EtdActivation[d$Activation1 == "ETD"] <- d$Energy1[d$Activation1 == "ETD"]
-  d$CidActivation[d$Activation1 == "CID"] <- d$Energy1[d$Activation1 == "CID"]
-  d$CidActivation[d$Activation2 == "CID"] <- d$Energy2[d$Activation2 == "CID"]
-  d$HcdActivation[d$Activation1 == "HCD"] <- d$Energy1[d$Activation1 == "HCD"]
-  d$HcdActivation[d$Activation2 == "HCD"] <- d$Energy2[d$Activation2 == "HCD"]
+    d$EtdActivation[d$Activation1 == "ETD"] <-
+        d$Energy1[d$Activation1 == "ETD"]
+    d$CidActivation[d$Activation1 == "CID"] <-
+        d$Energy1[d$Activation1 == "CID"]
+    d$CidActivation[d$Activation2 == "CID"] <-
+        d$Energy2[d$Activation2 == "CID"]
+    d$HcdActivation[d$Activation1 == "HCD"] <-
+        d$Energy1[d$Activation1 == "HCD"]
+    d$HcdActivation[d$Activation2 == "HCD"] <-
+        d$Energy2[d$Activation2 == "HCD"]
 
-  d[is.na(d)] <- 0L
+    d[is.na(d)] <- 0L
 
-  d$Activation <- .fragmentationMethod(d[, paste0(c("Etd", "Cid", "Hcd"),
-                                                  "Activation")])
+    d$Activation <- .fragmentationMethod(d[, paste0(c("Etd", "Cid", "Hcd"),
+                                                    "Activation")])
 
-  d$ActivationString <- paste(.formatNumbers(d$EtdActivation),
-                              .formatNumbers(d$CidActivation),
-                              .formatNumbers(d$HcdActivation), sep=":")
+    d$ActivationString <- paste(.formatNumbers(d$EtdActivation),
+                                .formatNumbers(d$CidActivation),
+                                .formatNumbers(d$HcdActivation), sep=":")
 
-  d$File <- gsub(.topDownFileExtRx("txt"), "", basename(file))
-  d
+    d$File <- gsub(.topDownFileExtRx("txt"), "", basename(file))
+    d
 }
 
 #' Read MS2 Spectra (mzML)
@@ -152,34 +159,34 @@
 #' values)
 #' @noRd
 .readMzMl <- function(file, scans, fmass, ..., verbose=interactive()) {
-  .msg(verbose, "Reading spectra information from file ", basename(file),
-       appendLF=FALSE)
+   .msg(verbose, "Reading spectra information from file ", basename(file),
+        appendLF=FALSE)
 
-  fh <- openMSfile(file)
-  on.exit(close(fh))
+   fh <- openMSfile(file)
+   on.exit(close(fh))
 
-  hd <- header(fh)
-  i <- which(hd$msLevel == 2L & hd$acquisitionNum %in% scans)
-  hd <- hd[i, !colnames(hd) %in% c("injectionTime", "seqNum"), drop=FALSE]
-  colnames(hd)[grepl("acquisitionNum", colnames(hd), fixed=TRUE)] <- "Scan"
-  hd$File <- gsub(.topDownFileExtRx("mzml"), "", basename(file))
-  colnames(hd) <- .camelCase(colnames(hd))
+   hd <- header(fh)
+   i <- which(hd$msLevel == 2L & hd$acquisitionNum %in% scans)
+   hd <- hd[i, !colnames(hd) %in% c("injectionTime", "seqNum"), drop=FALSE]
+   colnames(hd)[grepl("acquisitionNum", colnames(hd), fixed=TRUE)] <- "Scan"
+   hd$File <- gsub(.topDownFileExtRx("mzml"), "", basename(file))
+   colnames(hd) <- .camelCase(colnames(hd))
 
-  nr <- nrow(hd)
-  m <- Matrix(0L, nrow=length(fmass), ncol=nr, sparse=TRUE)
+   nr <- nrow(hd)
+   m <- Matrix(0L, nrow=length(fmass), ncol=nr, sparse=TRUE)
 
-  for (j in seq_along(i)) {
-    k <- .matchFragments(peaks(fh, i[j])[, 1L], fmass, ...)
-    notNA <- !is.na(k)
-    if (sum(notNA)) {
-      m[k[notNA], j] <- peaks(fh, i[j])[notNA, 2L]
-    }
-  }
+   for (j in seq_along(i)) {
+      k <- .matchFragments(peaks(fh, i[j])[, 1L], fmass, ...)
+      notNA <- !is.na(k)
+      if (sum(notNA)) {
+          m[k[notNA], j] <- peaks(fh, i[j])[notNA, 2L]
+      }
+   }
 
-  .msg(verbose, sprintf(" (%02.1f%%)",
-                        round(sum(m != 0L)/sum(hd$PeaksCount) * 100, 1L)))
+   .msg(verbose, sprintf(" (%02.1f%%)",
+                         round(sum(m != 0L)/sum(hd$PeaksCount) * 100, 1L)))
 
-  list(hd=hd, m=m)
+   list(hd=hd, m=m)
 }
 
 #' Merge ScanCondition and HeaderInformation
@@ -189,10 +196,10 @@
 #' @return data.frame
 #' @noRd
 .mergeScanConditionAndHeaderInformation <- function(sc, hi) {
-  stopifnot(is(sc, "data.frame"))
-  stopifnot(is(hi, "data.frame"))
-  merge(sc, hi, by=c("File", "Condition"), all.y=TRUE,
-        suffixes=c(".ScanCondition", ".HeaderInformation"))
+    stopifnot(is(sc, "data.frame"))
+    stopifnot(is(hi, "data.frame"))
+    merge(sc, hi, by=c("File", "Condition"), all.y=TRUE,
+          suffixes=c(".ScanCondition", ".HeaderInformation"))
 }
 
 #' Merge spectra and ScanConditions/HeaderInformation (into featureData slot)
@@ -202,6 +209,6 @@
 #' @return merged data.frame
 #' @noRd
 .mergeSpectraAndHeaderInformation <- function(mzml, scdm) {
-  merge(mzml, scdm, sort=FALSE, by=c("File", "Scan"),
-        suffixes=c(".SpectraInformation", ".HeaderInformation"))
+    merge(mzml, scdm, sort=FALSE, by=c("File", "Scan"),
+          suffixes=c(".SpectraInformation", ".HeaderInformation"))
 }

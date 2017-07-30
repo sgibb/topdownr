@@ -29,7 +29,6 @@ Waiting for our response. We may suggest some changes and/or improvements.
 If you want to increase the chance that your pull request is accepted:
 
 * Use the
-  [Bioconductor Coding Style](https://www.bioconductor.org/developers/how-to/coding-style/)
-  with the exception that we prefer 2 spaces instead of 4 for indention.
+  [Bioconductor Coding Style](https://www.bioconductor.org/developers/how-to/coding-style/).
 * Write [good commit messages](https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message).
 * Write unit tests using the `testthat` package.

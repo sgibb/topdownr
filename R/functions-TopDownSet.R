@@ -64,60 +64,62 @@ readTopDownFiles <- function(path, pattern=".*",
                              neutralLoss=MSnbase::defaultNeutralLoss(),
                              tolerance=10e-6,
                              dropNonInformativeColumns=TRUE,
-                             sampleColumns=c("Mz", "AgcTarget", "EtdReagentTarget",
-                                             "EtdActivation", "CidActivation",
+                             sampleColumns=c("Mz", "AgcTarget",
+                                             "EtdReagentTarget",
+                                             "EtdActivation",
+                                             "CidActivation",
                                              "HcdActivation"),
                              verbose=interactive()) {
 
-  files <- .listTopDownFiles(path, pattern=pattern)
+   files <- .listTopDownFiles(path, pattern=pattern)
 
-  sequence <- .readFasta(files$fasta, verbose=verbose)
+   sequence <- .readFasta(files$fasta, verbose=verbose)
 
-  fragmentViews <- .calculateFragments(sequence=sequence,
-                                       type=type,
-                                       modifications=modifications,
-                                       neutralLoss=neutralLoss,
-                                       adducts=adducts,
-                                       verbose=verbose)
+   fragmentViews <- .calculateFragments(sequence=sequence,
+                                        type=type,
+                                        modifications=modifications,
+                                        neutralLoss=neutralLoss,
+                                        adducts=adducts,
+                                        verbose=verbose)
 
-  scanConditions <- do.call(rbind, lapply(files$txt, .readScanHeadsTable,
-                                          verbose=verbose))
+   scanConditions <- do.call(rbind, lapply(files$txt, .readScanHeadsTable,
+                                           verbose=verbose))
 
-  headerInformation <- do.call(rbind, lapply(files$csv, .readExperimentCsv,
-                                             verbose=verbose))
+   headerInformation <- do.call(rbind, lapply(files$csv, .readExperimentCsv,
+                                              verbose=verbose))
 
-  mzml <- mapply(.readMzMl,
-                 file=files$mzML,
-                 scans=split(scanConditions$Scan, scanConditions$File),
-                 MoreArgs=list(fmass=elementMetadata(fragmentViews)$mass,
-                               tolerance=tolerance, verbose=verbose),
-                 SIMPLIFY=FALSE, USE.NAMES=FALSE)
+   mzml <- mapply(.readMzMl,
+                  file=files$mzML,
+                  scans=split(scanConditions$Scan, scanConditions$File),
+                  MoreArgs=list(fmass=elementMetadata(fragmentViews)$mass,
+                                tolerance=tolerance, verbose=verbose),
+                  SIMPLIFY=FALSE, USE.NAMES=FALSE)
 
-  mzmlHeader <- do.call(rbind, lapply(mzml, "[[", "hd"))
+   mzmlHeader <- do.call(rbind, lapply(mzml, "[[", "hd"))
 
-  scanHeadsman <- .mergeScanConditionAndHeaderInformation(scanConditions,
-                                                          headerInformation)
+   scanHeadsman <- .mergeScanConditionAndHeaderInformation(scanConditions,
+                                                           headerInformation)
 
-  header <- .mergeSpectraAndHeaderInformation(mzmlHeader, scanHeadsman)
-  header$Sample <- .groupId(header, cols=sampleColumns)
-  header$MedianIonInjectionTimeMs <- .medianIonInjectionTime(header)
+   header <- .mergeSpectraAndHeaderInformation(mzmlHeader, scanHeadsman)
+   header$Sample <- .groupId(header, cols=sampleColumns)
+   header$MedianIonInjectionTimeMs <- .medianIonInjectionTime(header)
 
-  if (dropNonInformativeColumns) {
-    header <- .dropNonInformativeColumns(header)
-  }
+   if (dropNonInformativeColumns) {
+       header <- .dropNonInformativeColumns(header)
+   }
 
-  assay <- do.call(cbind, lapply(mzml, "[[", "m"))
-  dimnames(assay) <- list(names(fragmentViews),
-                          rownames(header))
+   assay <- do.call(cbind, lapply(mzml, "[[", "m"))
+   dimnames(assay) <- list(names(fragmentViews),
+                           rownames(header))
 
-  new("TopDownSet",
-      rowViews=fragmentViews,
-      colData=.colsToRle(as(header, "DataFrame")),
-      assay=assay,
-      files=basename(unlist(unname(files))),
-      tolerance=tolerance,
-      processing=.logmsg("Data loaded (tolerance: ",
-                         round(tolerance/1e-6, 1L) , " ppm)."))
+   new("TopDownSet",
+       rowViews=fragmentViews,
+       colData=.colsToRle(as(header, "DataFrame")),
+       assay=assay,
+       files=basename(unlist(unname(files))),
+       tolerance=tolerance,
+       processing=.logmsg("Data loaded (tolerance: ",
+                          round(tolerance/1e-6, 1L), " ppm)."))
 }
 
 #' Test for TopDownSet class
@@ -126,10 +128,10 @@ readTopDownFiles <- function(path, pattern=".*",
 #' @return `TRUE` if object is a TopDownSet otherwise fails with an error
 #' @noRd
 .isTopDownSet <- function(object) {
-  if (!isTRUE(is(object, "TopDownSet"))) {
-    stop("'object' has to be an 'TopDownSet' object.")
-  }
-  TRUE
+    if (!isTRUE(is(object, "TopDownSet"))) {
+        stop("'object' has to be an 'TopDownSet' object.")
+    }
+    TRUE
 }
 
 #' Get fragment mass
@@ -138,8 +140,8 @@ readTopDownFiles <- function(path, pattern=".*",
 #' @return `double`
 #' @noRd
 fragmentMass <- function(object) {
-  .isTopDownSet(object)
-  elementMetadata(object@rowViews)$mass
+    .isTopDownSet(object)
+    elementMetadata(object@rowViews)$mass
 }
 
 #' Get fragment names
@@ -148,8 +150,8 @@ fragmentMass <- function(object) {
 #' @return `character`
 #' @noRd
 fragmentNames <- function(object) {
-  .isTopDownSet(object)
-  names(object@rowViews)
+    .isTopDownSet(object)
+    names(object@rowViews)
 }
 
 #' Get fragment types
@@ -158,8 +160,8 @@ fragmentNames <- function(object) {
 #' @return `character`
 #' @noRd
 fragmentType <- function(object) {
-  .isTopDownSet(object)
-  elementMetadata(object@rowViews)$type
+    .isTopDownSet(object)
+    elementMetadata(object@rowViews)$type
 }
 
 #' Create NCB Map (N-/C-terminal, or both)
@@ -168,19 +170,19 @@ fragmentType <- function(object) {
 #' @return `Matrix`, Nterm == 1, Cterm == 2, both == 3
 #' @noRd
 .ncbMap <- function(object, nterm=c("a", "b", "c"), cterm=c("x", "y", "z")) {
-  .isTopDownSet(object)
+    .isTopDownSet(object)
 
-  w <- width(object@rowViews)
-  mn <- mc <- object@assay
-  selN <- fragmentType(object) %in% nterm
-  selC <- fragmentType(object) %in% cterm
-  mn[!selN,] <- 0L
-  mc[!selC,] <- 0L
+    w <- width(object@rowViews)
+    mn <- mc <- object@assay
+    selN <- fragmentType(object) %in% nterm
+    selC <- fragmentType(object) %in% cterm
+    mn[!selN, ] <- 0L
+    mc[!selC, ] <- 0L
 
-  mn <- as(.colSumsGroup(mn, w) > 0L, "dgCMatrix")
-  mc <- as(.colSumsGroup(mc, max(w) + 1L - w) > 0L, "dgCMatrix")
-  mc@x[] <- 2
-  mn + mc
+    mn <- as(.colSumsGroup(mn, w) > 0L, "dgCMatrix")
+    mc <- as(.colSumsGroup(mc, max(w) + 1L - w) > 0L, "dgCMatrix")
+    mc@x[] <- 2
+    mn + mc
 }
 
 #' Add log message.
@@ -189,9 +191,9 @@ fragmentType <- function(object) {
 #' @return `TopDownSet`
 #' @noRd
 .tdsLogMsg <- function(object, ...) {
-  .isTopDownSet(object)
-  object@processing <- c(object@processing, .logmsg(...))
-  object
+   .isTopDownSet(object)
+   object@processing <- c(object@processing, .logmsg(...))
+   object
 }
 
 #' Validate `TopDownSet`
@@ -200,29 +202,31 @@ fragmentType <- function(object) {
 #' @return `TRUE` (if valid) else character with msg what was incorrect
 #' @noRd
 .validateTopDownSet <- function(object) {
-  msg <- character()
+    msg <- character()
 
-  if (nrow(object@assay) != length(object@rowViews)) {
-    msg <- c(msg, "Mismatch between fragment data in 'rowViews' and 'assay'.")
-  }
+    if (nrow(object@assay) != length(object@rowViews)) {
+        msg <- c(msg,
+                 "Mismatch between fragment data in 'rowViews' and 'assay'.")
+    }
 
-  if (any(rownames(object@assay) != names(object@rowViews))) {
-    msg <- c(msg,
-             "Mismatch between fragment names in 'rowViews' and 'assay'.")
-  }
+    if (any(rownames(object@assay) != names(object@rowViews))) {
+        msg <- c(msg,
+                 "Mismatch between fragment names in 'rowViews' and 'assay'.")
+    }
 
-  if (ncol(object@assay) != nrow(object@colData)) {
-    msg <- c(msg, "Mismatch between condition data in 'colData' and 'assay'.")
-  }
+    if (ncol(object@assay) != nrow(object@colData)) {
+        msg <- c(msg,
+                 "Mismatch between condition data in 'colData' and 'assay'.")
+    }
 
-  if (any(colnames(object@assay) != rownames(object@colData))) {
-    msg <- c(msg,
-             "Mismatch between condition names in 'colData' and 'assay'.")
-  }
+    if (any(colnames(object@assay) != rownames(object@colData))) {
+        msg <- c(msg,
+                 "Mismatch between condition names in 'colData' and 'assay'.")
+    }
 
-  if (length(msg)) {
-    msg
-  } else {
-    TRUE
-  }
+    if (length(msg)) {
+        msg
+    } else {
+        TRUE
+    }
 }

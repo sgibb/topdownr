@@ -1,38 +1,36 @@
 if (is.null(getGeneric("assayData"))) {
-  setGeneric("assayData",
-             function(object)standardGeneric("assayData"))
+    setGeneric("assayData",
+              function(object)standardGeneric("assayData"))
 }
 if (is.null(getGeneric("rowViews"))) {
-  setGeneric("rowViews",
-             function(object, ...)standardGeneric("rowViews"))
+      setGeneric("rowViews",
+                 function(object, ...)standardGeneric("rowViews"))
 }
 if (is.null(getGeneric("fragmentData"))) {
-  setGeneric("fragmentData",
-             function(object, ...)standardGeneric("fragmentData"))
+    setGeneric("fragmentData",
+               function(object, ...)standardGeneric("fragmentData"))
 }
 if (is.null(getGeneric("colData"))) {
-  setGeneric("colData",
-             function(object, ...)standardGeneric("colData"))
+    setGeneric("colData",
+               function(object, ...)standardGeneric("colData"))
 }
 if (is.null(getGeneric("colData<-"))) {
-  setGeneric("colData<-",
-             function(object, ..., value)standardGeneric("colData<-"))
+    setGeneric("colData<-",
+               function(object, ..., value)standardGeneric("colData<-"))
 }
 if (is.null(getGeneric("conditionData"))) {
-  setGeneric("conditionData",
-             function(object, ...)standardGeneric("conditionData"))
+    setGeneric("conditionData",
+               function(object, ...)standardGeneric("conditionData"))
 }
 if (is.null(getGeneric("conditionData<-"))) {
-  setGeneric("conditionData<-",
-             function(object, ..., value)standardGeneric("conditionData<-"))
+    setGeneric("conditionData<-",
+               function(object, ..., value)standardGeneric("conditionData<-"))
 }
 if (is.null(getGeneric("filterInjectionTime"))) {
-  setGeneric("filterInjectionTime",
-             function(object, ...)
-               standardGeneric("filterInjectionTime"))
+    setGeneric("filterInjectionTime",
+               function(object, ...)standardGeneric("filterInjectionTime"))
 }
 if (is.null(getGeneric("filterIntensity"))) {
-  setGeneric("filterIntensity",
-             function(object, ...)
-               standardGeneric("filterIntensity"))
+    setGeneric("filterIntensity",
+               function(object, ...)standardGeneric("filterIntensity"))
 }

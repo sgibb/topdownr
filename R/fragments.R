@@ -5,24 +5,24 @@
 #' @return data.frame
 #' @noRd
 .addAdducts <- function(x, adducts) {
-  if (!nrow(adducts)) {
-    return(x)
-  }
+   if (!nrow(adducts)) {
+       return(x)
+   }
 
-  if (!all(c("mass", "name", "to") %in% colnames(adducts))) {
-    stop("The 'adducts' data.frame must have the columns: ",
-         "'mass', 'name' and 'to'.")
-  }
+   if (!all(c("mass", "name", "to") %in% colnames(adducts))) {
+       stop("The 'adducts' data.frame must have the columns: ",
+            "'mass', 'name' and 'to'.")
+   }
 
-  r <- do.call(rbind, lapply(seq_len(nrow(adducts)), function(i) {
-    a <- x[x$type == adducts$to[i], , drop=FALSE]
-    a$mz <- a$mz + adducts$mass[i]
-    a$ion <- paste0(adducts$name[i], a$pos)
-    a
-  }))
-  x <- rbind(x, r)
-  rownames(x) <- NULL
-  x
+   r <- do.call(rbind, lapply(seq_len(nrow(adducts)), function(i) {
+       a <- x[x$type == adducts$to[i], , drop=FALSE]
+       a$mz <- a$mz + adducts$mass[i]
+       a$ion <- paste0(adducts$name[i], a$pos)
+       a
+   }))
+   x <- rbind(x, r)
+   rownames(x) <- NULL
+   x
 }
 
 #' Calculate Fragments (via MSnbase::calculateFragments)
@@ -41,18 +41,19 @@
                                 neutralLoss=defaultNeutralLoss(),
                                 adducts=data.frame(),
                                 verbose=interactive()) {
-  csequence <- as.character(sequence)
-  d <- calculateFragments(csequence,
-                          type=type,
-                          modifications=modifications,
-                          neutralLoss=neutralLoss,
-                          verbose=verbose)
-  d <- .addAdducts(d, adducts)
+    csequence <- as.character(sequence)
+    d <- calculateFragments(csequence,
+                            type=type,
+                            modifications=modifications,
+                            neutralLoss=neutralLoss,
+                            verbose=verbose)
+    d <- .addAdducts(d, adducts)
 
-  n <- nchar(sequence)
-  FragmentViews(sequence, mass=d$mz, type=d$type, z=Rle(d$z), names=d$ion,
-                start=ifelse(startsWith(csequence, d$seq), 1L, n - d$pos + 1L),
-                width=d$pos)
+    n <- nchar(sequence)
+    FragmentViews(sequence, mass=d$mz, type=d$type, z=Rle(d$z), names=d$ion,
+                  start=ifelse(startsWith(csequence, d$seq),
+                               1L, n - d$pos + 1L),
+                  width=d$pos)
 }
 
 #' Match fragments and measured mz values.

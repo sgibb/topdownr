@@ -5,7 +5,7 @@
 #' @return `logical`, TRUE/FALSE
 #' @noRd
 .allIdentical <- function(x) {
-  isTRUE(length(unique(x)) == 1L)
+    isTRUE(length(unique(x)) == 1L)
 }
 
 #' cat0, cat with sep="", similar to paste0
@@ -13,7 +13,7 @@
 #' @param \ldots arguments passed to cat
 #' @noRd
 cat0 <- function(...) {
-  cat(..., sep="", append=TRUE)
+    cat(..., sep="", append=TRUE)
 }
 
 #' file extension
@@ -23,10 +23,10 @@ cat0 <- function(...) {
 #' @return `character`
 #' @noRd
 .fileExt <- function(x, compression=TRUE) {
-  if (compression) {
-    x <- sub("[.](gz|bz2|xz|zip)$", "", x)
-  }
-  file_ext(x)
+    if (compression) {
+        x <- sub("[.](gz|bz2|xz|zip)$", "", x)
+    }
+    file_ext(x)
 }
 
 #' The ScanHeadsman output for the header information contains a column
@@ -38,8 +38,8 @@ cat0 <- function(...) {
 #' @return `double`
 #' @noRd
 .filterStringToId <- function(x) {
-  stopifnot(is.character(x))
-  .massLabelToId(gsub("^.*ms2 ([^@]+)\\@.*$", "\\1", x))
+    stopifnot(is.character(x))
+    .massLabelToId(gsub("^.*ms2 ([^@]+)\\@.*$", "\\1", x))
 }
 
 #' Ensure unique, increasing ids in FilterStrings
@@ -69,12 +69,13 @@ cat0 <- function(...) {
 #' @return `character`, fixed FilterString with equal length as `x`
 #' @noRd
 .fixFilterString <- function(x) {
-  ufs <- unique(x)
-  ids <- .filterStringToId(ufs)
-  pos <- regexpr("[0-9]{3}@", ufs)
-  i <- match(x, ufs)
-  substr(x, pos[i], pos[i] + 3L) <- sprintf("%03d@", .fixFilterStringId(ids))[i]
-  x
+    ufs <- unique(x)
+    ids <- .filterStringToId(ufs)
+    pos <- regexpr("[0-9]{3}@", ufs)
+    i <- match(x, ufs)
+    substr(x, pos[i], pos[i] + 3L) <-
+        sprintf("%03d@", .fixFilterStringId(ids))[i]
+    x
 }
 
 #' Workhorse function of .fixFilterString
@@ -85,22 +86,22 @@ cat0 <- function(...) {
 #' @return `numeric`, fixed id
 #' @noRd
 .fixFilterStringId <- function(x) {
-  d <- diff(x)
-  ## 1, 2, 2, 4: d == d(1, 0, 2)
-  l <- c(FALSE, d == 0L & c(d[-1L], Inf) == 2L)
-  x[l] <- x[l] + 1L
-  ## 1, 3, 3, 4: d == d(2, 0, 1)
-  l <- c(FALSE, d == 2L & c(d[-1L], Inf) == 0L)
-  x[l] <- x[l] - 1L
-  ## edge case: 2, 2, 3, 4
-  if (all(d[1L:2L] == c(0L, 1L))) {
-    x[1L] <- x[1L] - 1L
-  }
-  ## edge case: 1, 2, 3, 3
-  if (all(d[length(d) - 0L:1L] == c(0L, 1L))) {
-    x[length(x)] <- x[length(x)] + 1L
-  }
-  x
+    d <- diff(x)
+    ## 1, 2, 2, 4: d == d(1, 0, 2)
+    l <- c(FALSE, d == 0L & c(d[-1L], Inf) == 2L)
+    x[l] <- x[l] + 1L
+    ## 1, 3, 3, 4: d == d(2, 0, 1)
+    l <- c(FALSE, d == 2L & c(d[-1L], Inf) == 0L)
+    x[l] <- x[l] - 1L
+    ## edge case: 2, 2, 3, 4
+    if (all(d[1L:2L] == c(0L, 1L))) {
+        x[1L] <- x[1L] - 1L
+    }
+    ## edge case: 1, 2, 3, 3
+    if (all(d[length(d) - 0L:1L] == c(0L, 1L))) {
+        x[length(x)] <- x[length(x)] + 1L
+    }
+    x
 }
 
 #' Create camelCase names.
@@ -109,17 +110,17 @@ cat0 <- function(...) {
 #' @return `character`
 #' @noRd
 .camelCase <- function(x) {
-  ## convert dots from `make.names` to space
-  x <- gsub("\\.+", " ", x)
-  ## remove all the other punctiation like (, ), /
-  x <- gsub("[[:punct:]]+", "", x)
-  ## split AGCTarget to AGC Target
-  x <- gsub("([A-Z])(?=[a-z])", " \\1", x, perl=TRUE)
-  ## just capitalize the first letter in a word
-  x <- gsub("(?<=\\b)([a-z])", "\\U\\1", tolower(x), perl=TRUE)
-  ## remove whitespace
-  x <- gsub(" ", "", x)
-  x
+   ## convert dots from `make.names` to space
+   x <- gsub("\\.+", " ", x)
+   ## remove all the other punctiation like (, ), /
+   x <- gsub("[[:punct:]]+", "", x)
+   ## split AGCTarget to AGC Target
+   x <- gsub("([A-Z])(?=[a-z])", " \\1", x, perl=TRUE)
+   ## just capitalize the first letter in a word
+   x <- gsub("(?<=\\b)([a-z])", "\\U\\1", tolower(x), perl=TRUE)
+   ## remove whitespace
+   x <- gsub(" ", "", x)
+   x
 }
 
 #' Convert number to string and prepend zeros
@@ -128,7 +129,7 @@ cat0 <- function(...) {
 #' @return `character`
 #' @noRd
 .formatNumbers <- function(x) {
-  sprintf(paste0("%0", .ndigits(max(x)), "d"), x)
+    sprintf(paste0("%0", .ndigits(max(x)), "d"), x)
 }
 
 #' Get fragmentation method from {ETD,CID,HCD}Activation
@@ -137,11 +138,12 @@ cat0 <- function(...) {
 #' @return `character`, fragmentation method
 #' @noRd
 .fragmentationMethod <- function(x) {
-  methods <- c("None", "ETD", "CID", "ETcid", "HCD", "EThcd", "HCD/CID", "All")
-  v <- c(EtdActivation=1L, CidActivation=2L, HcdActivation=4L)
-  stopifnot(all(colnames(x) %in% names(v)))
-  x <- x[, names(v)]
-  apply(x, 1L, function(i)methods[sum(v[as.logical(i)]) + 1L])
+    methods <- c("None", "ETD", "CID", "ETcid", "HCD", "EThcd", "HCD/CID",
+                 "All")
+    v <- c(EtdActivation=1L, CidActivation=2L, HcdActivation=4L)
+    stopifnot(all(colnames(x) %in% names(v)))
+    x <- x[, names(v)]
+    apply(x, 1L, function(i)methods[sum(v[as.logical(i)]) + 1L])
 }
 
 #' Split list/data.frame
@@ -151,7 +153,7 @@ cat0 <- function(...) {
 #' @return `list`
 #' @noRd
 .groupBy <- function(x, cols) {
-  split(x, .groupByLabels(x, cols))
+    split(x, .groupByLabels(x, cols))
 }
 
 #' Create group labels from data.frame columns
@@ -161,16 +163,16 @@ cat0 <- function(...) {
 #' @return `list`
 #' @noRd
 .groupByLabels <- function(x, cols=names(x)) {
-  x <- as.data.frame(x)
-  if (any(!cols %in% colnames(x))) {
-    stop("All 'cols' have to be valid column names of 'x'.")
-  }
-  if (length(cols) > 1L) {
-    ## `interaction` doesn't handle NA values, so use `paste` instead
-    do.call(paste, c(x[, cols], sep=":"))
-  } else {
-    as.character(x[, cols])
-  }
+    x <- as.data.frame(x)
+    if (any(!cols %in% colnames(x))) {
+        stop("All 'cols' have to be valid column names of 'x'.")
+    }
+    if (length(cols) > 1L) {
+        ## `interaction` doesn't handle NA values, so use `paste` instead
+        do.call(paste, c(x[, cols], sep=":"))
+    } else {
+        as.character(x[, cols])
+    }
 }
 
 #' Create group id
@@ -180,10 +182,10 @@ cat0 <- function(...) {
 #' @return `integer`
 #' @noRd
 .groupId <- function(x, cols) {
-  stopifnot(is.data.frame(x))
-  groups <- .groupByLabels(x, cols)
-  ugroups <- unique(groups)
-  match(groups, ugroups)
+    stopifnot(is.data.frame(x))
+    groups <- .groupByLabels(x, cols)
+    ugroups <- unique(groups)
+    match(groups, ugroups)
 }
 
 #' head/fill/tail of vector elements (e.g. for printing)
@@ -194,11 +196,11 @@ cat0 <- function(...) {
 #' @return vector, `c(head(x, n), fill, tail(x, n))`
 #' @noRd
 .hft <- function(x, fill="...", n=3) {
-  if (length(x) <= 2 * n) {
-    x
-  } else {
-    c(head(x, n), fill, tail(x, n))
-  }
+    if (length(x) <= 2 * n) {
+        x
+    } else {
+        c(head(x, n), fill, tail(x, n))
+    }
 }
 
 #' Add log message.
@@ -207,7 +209,7 @@ cat0 <- function(...) {
 #' @return msg with date string added
 #' @noRd
 .logmsg <- function(...) {
-  paste0("[", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "] ", ...)
+    paste0("[", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "] ", ...)
 }
 
 #' Create mass label
@@ -230,10 +232,10 @@ cat0 <- function(...) {
 #' library("topdown")
 #' topdown:::.massLabel(c(750, 1000), c(1, 100))
 .massLabel <- function(x, id, divisor=10000L) {
-  if (any(log10(divisor) <= log10(id) + 1L)) {
-    stop("'divisor' has to be at least two digits more than 'id'")
-  }
-  round(x, 1L) + id / divisor
+    if (any(log10(divisor) <= log10(id) + 1L)) {
+        stop("'divisor' has to be at least two digits more than 'id'")
+    }
+    round(x, 1L) + id / divisor
 }
 
 #' Extract ID from mass labels
@@ -245,11 +247,11 @@ cat0 <- function(...) {
 #' @seealso [.massLabel()]
 #' @noRd
 .massLabelToId <- function(x, idDigits=3L) {
-  # was the following before, but results in round errors ("7" becomes 6L)
-  # x <- as.double(x)
-  # as.integer((x - round(x, 1L)) * multiplicator)
-  n <- nchar(x)
-  as.integer(substring(x, n - idDigits + 1L, n))
+    # was the following before, but results in round errors ("7" becomes 6L)
+    # x <- as.double(x)
+    # as.integer((x - round(x, 1L)) * multiplicator)
+    n <- nchar(x)
+    as.integer(substring(x, n - idDigits + 1L, n))
 }
 
 #' Median Ion Injection Time for a specific Mz and AgcTarget
@@ -259,11 +261,11 @@ cat0 <- function(...) {
 #' @return `double`, median injection time with `length() == nrow(x)`
 #' @noRd
 .medianIonInjectionTime <- function(x) {
-  stopifnot(is.data.frame(x) || is(x, "DataFrame"))
-  stopifnot(all(c("IonInjectionTimeMs", "Mz", "AgcTarget") %in% colnames(x)))
-  ave(x$IonInjectionTimeMs,
-      as.factor(x$Mz), as.factor(x$AgcTarget),
-      FUN=median, na.rm=TRUE)
+    stopifnot(is.data.frame(x) || is(x, "DataFrame"))
+    stopifnot(all(c("IonInjectionTimeMs", "Mz", "AgcTarget") %in% colnames(x)))
+    ave(x$IonInjectionTimeMs,
+        as.factor(x$Mz), as.factor(x$AgcTarget),
+        FUN=median, na.rm=TRUE)
 }
 
 #' verbose output
@@ -271,9 +273,9 @@ cat0 <- function(...) {
 #' @param \ldots arguments passed to `message`
 #' @noRd
 .msg <- function(verbose, ...) {
-  if (verbose) {
-    message(...)
-  }
+    if (verbose) {
+        message(...)
+    }
 }
 
 #' number of digits
@@ -282,7 +284,7 @@ cat0 <- function(...) {
 #' @return `integer`
 #' @noRd
 .ndigits <- function(x) {
-  trunc(log10(abs(x)) + 1)
+    trunc(log10(abs(x)) + 1L)
 }
 
 #' similar to lengths but for rows
@@ -290,8 +292,8 @@ cat0 <- function(...) {
 #' @param x `list` of `data.frames`/`matrices`
 #' @noRd
 .nrows <- function(x) {
-  stopifnot(is.list(x))
-  .vapply1d(x, nrow)
+    stopifnot(is.list(x))
+    .vapply1d(x, nrow)
 }
 
 #' shortend string to width and place "..." in the middle
@@ -301,11 +303,11 @@ cat0 <- function(...) {
 #' @return `character`
 #' @noRd
 .snippet <- function(x, width=getOption("width")) {
-  nc <- nchar(x)
-  w <- (width - 2L:3L) %/% 2L
+    nc <- nchar(x)
+    w <- (width - 2L:3L) %/% 2L
 
-  ifelse(nc <= width, x, paste0(substring(x, 1L, w[1L]), "...",
-                                substring(x, nc - w[2L] + 1L, nc)))
+    ifelse(nc <= width, x, paste0(substring(x, 1L, w[1L]), "...",
+                                  substring(x, nc - w[2L] + 1L, nc)))
 }
 
 #' normalize subset (turn `logical`, `numeric` and `character` to `numeric`)
@@ -316,20 +318,20 @@ cat0 <- function(...) {
 #' @return `logical`, vector of length n
 #' @noRd
 .subset <- function(i, n, nms=NULL) {
-  ## use decode to turn Rle into native vectors, does nothing if i is already a
-  ## native vector
-  i <- decode(i)
-  if (anyNA(i)) {
-    stop("Subsetting by 'NA' is not supported.")
-  }
-  stopifnot(is.null(nms) || length(nms) == n)
-  switch(class(i),
-         "character" = .subsetByCharacter(i, nms),
-         "logical" = .subsetByLogical(i, n),
-         "integer" = ,
-         "double" = ,
-         "numeric" = .subsetByNumeric(i, n),
-         stop("Unknown index class."))
+    ## use decode to turn Rle into native vectors, does nothing if i is already a
+    ## native vector
+    i <- decode(i)
+    if (anyNA(i)) {
+        stop("Subsetting by 'NA' is not supported.")
+    }
+    stopifnot(is.null(nms) || length(nms) == n)
+    switch(class(i),
+           "character" = .subsetByCharacter(i, nms),
+           "logical" = .subsetByLogical(i, n),
+           "integer" = ,
+           "double" = ,
+           "numeric" = .subsetByNumeric(i, n),
+           stop("Unknown index class."))
 }
 
 #' subset by `character`
@@ -339,18 +341,18 @@ cat0 <- function(...) {
 #' @return `numeric`
 #' @noRd
 .subsetByCharacter <- function(i, nms=NULL) {
-  if (is.null(nms)) {
-    return(integer())
-  }
-  stopifnot(is.character(i))
-  stopifnot(is.character(nms))
+    if (is.null(nms)) {
+        return(integer())
+    }
+    stopifnot(is.character(i))
+    stopifnot(is.character(nms))
 
-  ii <- match(i, nms)
-  if (anyNA(ii)) {
-    stop("Subscript out of bound: ", paste0("'", i[is.na(ii)], "'",
-                                            collapse=", "))
-  }
-  ii
+    ii <- match(i, nms)
+    if (anyNA(ii)) {
+        stop("Subscript out of bound: ", paste0("'", i[is.na(ii)], "'",
+                                                collapse=", "))
+    }
+    ii
 }
 
 #' subset by `logical`
@@ -360,10 +362,10 @@ cat0 <- function(...) {
 #' @return `numeric`
 #' @noRd
 .subsetByLogical <- function(i, n) {
-  stopifnot(is.logical(i))
-  stopifnot(is.numeric(n))
+    stopifnot(is.logical(i))
+    stopifnot(is.numeric(n))
 
-  which(rep_len(i, n))
+    which(rep_len(i, n))
 }
 
 #' subset by `numeric`
@@ -373,13 +375,14 @@ cat0 <- function(...) {
 #' @return `numeric`
 #' @noRd
 .subsetByNumeric <- function(i, n) {
-  stopifnot(is.numeric(i))
-  stopifnot(is.numeric(n))
+    stopifnot(is.numeric(i))
+    stopifnot(is.numeric(n))
 
-  if (any(n < i)) {
-    stop("Subscript out of bound: ", paste0("'", i[n < i], "'", collapse=", "))
-  }
-  i
+    if (any(n < i)) {
+        stop("Subscript out of bound: ",
+             paste0("'", i[n < i], "'", collapse=", "))
+    }
+    i
 }
 
 #' subset filenames
@@ -389,7 +392,7 @@ cat0 <- function(...) {
 #' @return `character`
 #' @noRd
 .subsetFiles <- function(files, selFiles) {
-  gsub(.topDownFileExtRx("cfmt"), "", files) %in% selFiles
+    gsub(.topDownFileExtRx("cfmt"), "", files) %in% selFiles
 }
 
 #' swap file extensions
@@ -399,7 +402,7 @@ cat0 <- function(...) {
 #' @return `character`
 #' @noRd
 .swapFileExt <- function(x, ext="meth") {
-  paste(file_path_sans_ext(x), ext, sep=".")
+    paste(file_path_sans_ext(x), ext, sep=".")
 }
 
 #' The ScanHeadsMan output for the scan conditons contains a column
@@ -410,8 +413,8 @@ cat0 <- function(...) {
 #' @return `double`
 #' @noRd
 .targetedMassListToMz <- function(x) {
-  stopifnot(is.character(x))
-  trunc(as.double(gsub("^.*mz=([^ ]+) z.*$", "\\1", x)) * 10L) / 10L
+    stopifnot(is.character(x))
+    trunc(as.double(gsub("^.*mz=([^ ]+) z.*$", "\\1", x)) * 10L) / 10L
 }
 
 #' TopDown file extensions.
@@ -421,15 +424,15 @@ cat0 <- function(...) {
 #' @noRd
 .topDownFileExtRx <- function(type=c("cfmt", "cmt", "csv", "fasta", "mzml",
                                      "txt", "raw", "all")) {
-  type <- match.arg(type)
-  ext <- c(csv="experiments\\.csv", fasta="fasta", mzml="mz[Mm][Ll]",
-           raw="raw", txt="txt")
-  sel <- switch(type,
-                "all" = seq_along(ext),
-                "cfmt" = c("csv", "fasta", "mzml", "txt"),
-                "cmt" = c("csv", "mzml", "txt"),
-                type)
-  paste0("\\.", ext[sel], "(\\.(gz|bz2|xz|zip))?$", collapse="|")
+    type <- match.arg(type)
+    ext <- c(csv="experiments\\.csv", fasta="fasta", mzml="mz[Mm][Ll]",
+             raw="raw", txt="txt")
+    sel <- switch(type,
+                  "all" = seq_along(ext),
+                  "cfmt" = c("csv", "fasta", "mzml", "txt"),
+                  "cmt" = c("csv", "mzml", "txt"),
+                  type)
+    paste0("\\.", ext[sel], "(\\.(gz|bz2|xz|zip))?$", collapse="|")
 }
 
 #' Find indicies of top N values
@@ -439,28 +442,29 @@ cat0 <- function(...) {
 #' @return `integer`, indices
 #' @noRd
 .topIdx <- function(x, groupByLabels, n) {
-  if (!is.double(x) && !is.numeric(x) && !is.character(x)) {
-    stop("'x' has to be of type 'double' or 'character'")
-  }
-  if (n < 1L) {
-    stop("'n' has to be greater or equal than 1.")
-  }
-  if (length(x) != length(groupByLabels)) {
-    stop("'length(x)' and 'length(groupByLabels)' have to be equal.")
-  }
-  o <- order(x, decreasing=TRUE, na.last=TRUE)
-  i <- unlist(lapply(split(o, groupByLabels[o]), "[", seq_len(n)), use.names=FALSE)
-  i[!is.na(i)]
+    if (!is.double(x) && !is.numeric(x) && !is.character(x)) {
+        stop("'x' has to be of type 'double' or 'character'")
+    }
+    if (n < 1L) {
+        stop("'n' has to be greater or equal than 1.")
+    }
+    if (length(x) != length(groupByLabels)) {
+        stop("'length(x)' and 'length(groupByLabels)' have to be equal.")
+    }
+    o <- order(x, decreasing=TRUE, na.last=TRUE)
+    i <- unlist(lapply(split(o, groupByLabels[o]), "[", seq_len(n)),
+                use.names=FALSE)
+    i[!is.na(i)]
 }
 
 #' wrapper around vapply for FUN.VALUE=double(1L)
 #' @noRd
 .vapply1d <- function(X, FUN, ..., USE.NAMES=FALSE) {
-  vapply(X=X, FUN=FUN, FUN.VALUE=NA_real_, ..., USE.NAMES=USE.NAMES)
+    vapply(X=X, FUN=FUN, FUN.VALUE=NA_real_, ..., USE.NAMES=USE.NAMES)
 }
 
 #' wrapper around vapply for FUN.VALUE=logical(1L)
 #' @noRd
 .vapply1l <- function(X, FUN, ..., USE.NAMES=FALSE) {
-  vapply(X=X, FUN=FUN, FUN.VALUE=NA, ..., USE.NAMES=USE.NAMES)
+    vapply(X=X, FUN=FUN, FUN.VALUE=NA, ..., USE.NAMES=USE.NAMES)
 }

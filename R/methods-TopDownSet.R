@@ -7,50 +7,50 @@
 #' @param drop `logical`, currently ignored.
 #' @noRd
 setMethod("[", c("TopDownSet", "ANY", "ANY"),
-          function(x, i, j, ..., drop=FALSE) {
-  d0 <- dim(x)
-  dn <- dimnames(x)
+           function(x, i, j, ..., drop=FALSE) {
+   d0 <- dim(x)
+   dn <- dimnames(x)
 
-  if (missing(i)) {
-    i <- seq_len(d0[1L])
-  }
+   if (missing(i)) {
+       i <- seq_len(d0[1L])
+   }
 
-  if (is.character(i)) {
-    ii <- .subset(dn[[1L]] %in% i | as.character(fragmentType(x)) %in% i,
-                  d0[1L], dn[[1L]])
-  } else {
-    ii <- .subset(i, d0[1L], dn[[1L]])
-  }
+   if (is.character(i)) {
+       ii <- .subset(dn[[1L]] %in% i | as.character(fragmentType(x)) %in% i,
+                     d0[1L], dn[[1L]])
+   } else {
+       ii <- .subset(i, d0[1L], dn[[1L]])
+   }
 
-  if (is.unsorted(ii)) {
-    warning("It is not possible to change the row order.")
-    ii <- sort(ii)
-  }
+   if (is.unsorted(ii)) {
+       warning("It is not possible to change the row order.")
+       ii <- sort(ii)
+   }
 
-  if (missing(j)) {
-    j <- seq_len(d0[2L])
-  }
-  jj <- .subset(j, d0[2L], dn[[2L]])
+   if (missing(j)) {
+       j <- seq_len(d0[2L])
+   }
+   jj <- .subset(j, d0[2L], dn[[2L]])
 
-  if (drop) {
-    warning("'drop' is ignored.")
-  }
+   if (drop) {
+       warning("'drop' is ignored.")
+   }
 
-  x@assay <- x@assay[ii, jj, drop=FALSE]
-  x@colData <- .droplevels(x@colData[jj, ])
-  x@rowViews <- x@rowViews[ii, ]
-  x@rowViews@elementMetadata <- .droplevels(x@rowViews@elementMetadata)
-  isFasta <- grepl(.topDownFileExtRx("fasta"), x@files)
-  x@files <- x@files[.subsetFiles(x@files, unique(x@colData$File)) | isFasta]
+   x@assay <- x@assay[ii, jj, drop=FALSE]
+   x@colData <- .droplevels(x@colData[jj, ])
+   x@rowViews <- x@rowViews[ii, ]
+   x@rowViews@elementMetadata <- .droplevels(x@rowViews@elementMetadata)
+   isFasta <- grepl(.topDownFileExtRx("fasta"), x@files)
+   x@files <- x@files[.subsetFiles(x@files, unique(x@colData$File)) | isFasta]
 
-  d1 <- dim(x)
+   d1 <- dim(x)
 
-  x <- .tdsLogMsg(x, "Subsetted [", d0[1L], ";", d0[2L], "] to [",
-                                    d1[1L], ";", d1[2L], "].")
+   x <- .tdsLogMsg(x, "Subsetted [", d0[1L], ";", d0[2L], "] to [",
+                                     d1[1L], ";", d1[2L], "].")
 
-  if (validObject(x)) {
-    x
-  }
+   if (validObject(x)) {
+       x
+   }
 })
 
 #' @param x [TopDownSet-class]
@@ -60,36 +60,37 @@ setMethod("[", c("TopDownSet", "ANY", "ANY"),
 #' @param \ldots currently ignored.
 #' @noRd
 setMethod("[[", c("TopDownSet", "ANY", "missing"), function(x, i, j, ...) {
-  colData(x)[[i, ...]]
+    colData(x)[[i, ...]]
 })
 
 #' @param x `TopDownSet`
 #' @noRd
 setReplaceMethod("[[", c("TopDownSet", "ANY", "missing"),
                  function(x, i, j, ..., value) {
-  colData(x)[[i, ...]] <- value
-  if (validObject(x)) {
-    x
-  }
+    colData(x)[[i, ...]] <- value
+    if (validObject(x)) {
+      x
+    }
 })
 
 #' @param x `TopDownSet`
 #' @noRd
 #' @export
-.DollarNames.TopDownSet <- function(x, pattern="")
-  grep(pattern, names(colData(x)), value=TRUE)
+.DollarNames.TopDownSet <- function(x, pattern="") {
+    grep(pattern, names(colData(x)), value=TRUE)
+}
 
 #' @param x `TopDownSet`
 #' @noRd
 setMethod("$", "TopDownSet", function(x, name) {
-  colData(x)[[name]]
+    colData(x)[[name]]
 })
 
 #' @param x `TopDownSet`
 #' @noRd
 setReplaceMethod("$", "TopDownSet", function(x, name, value) {
-  colData(x)[[name]] <- value
-  x
+    colData(x)[[name]] <- value
+    x
 })
 
 #' @param object `TopDownSet`
@@ -98,26 +99,26 @@ setReplaceMethod("$", "TopDownSet", function(x, name, value) {
 #' @noRd
 setMethod("aggregate", "TopDownSet",
           function(x, by=x$Sample) {
-  d0 <- dim(x)
-  groups <- .groupByLabels(by)
+    d0 <- dim(x)
+    groups <- .groupByLabels(by)
 
-  if (length(groups) != ncol(x)) {
-    stop("'by' has to be of the same length as 'ncol(x)'.")
-  }
-  x@assay <- .rowMeansGroup(x@assay, groups)
-  x@colData <- .aggregateDataFrame(x@colData, groups,
-                                   ignoreNumCols=c("Scan", "Condition"))
-  ## now meaningless
-  x@files <- x@files[grepl(.topDownFileExtRx("fasta"), x@files)]
+    if (length(groups) != ncol(x)) {
+        stop("'by' has to be of the same length as 'ncol(x)'.")
+    }
+    x@assay <- .rowMeansGroup(x@assay, groups)
+    x@colData <- .aggregateDataFrame(x@colData, groups,
+                                     ignoreNumCols=c("Scan", "Condition"))
+    ## now meaningless
+    x@files <- x@files[grepl(.topDownFileExtRx("fasta"), x@files)]
 
-  d1 <- dim(x)
+    d1 <- dim(x)
 
-  x <- .tdsLogMsg(x, "Aggregated [", d0[1L], ";", d0[2L], "] to [",
-                                     d1[1L], ";", d1[2L], "].")
+    x <- .tdsLogMsg(x, "Aggregated [", d0[1L], ";", d0[2L], "] to [",
+                                       d1[1L], ";", d1[2L], "].")
 
-  if (validObject(x)) {
-    x
-  }
+    if (validObject(x)) {
+        x
+    }
 })
 
 #' @param object `TopDownSet`
@@ -125,7 +126,7 @@ setMethod("aggregate", "TopDownSet",
 #' @export
 #' @noRd
 setMethod("assayData", "TopDownSet", function(object) {
-  object@assay
+    object@assay
 })
 
 #' @param object `TopDownSet`
@@ -133,7 +134,7 @@ setMethod("assayData", "TopDownSet", function(object) {
 #' @export
 #' @noRd
 setMethod("colData", "TopDownSet", function(object) {
-  object@colData
+    object@colData
 })
 
 #' @param x `TopDownSet`
@@ -141,10 +142,10 @@ setMethod("colData", "TopDownSet", function(object) {
 #' @export
 #' @noRd
 setReplaceMethod("colData", "TopDownSet", function(object, ..., value) {
-  object@colData <- value
-  if (validObject(object)) {
-    object
-  }
+    object@colData <- value
+    if (validObject(object)) {
+      object
+    }
 })
 
 #' @param object `TopDownSet`
@@ -152,7 +153,7 @@ setReplaceMethod("colData", "TopDownSet", function(object, ..., value) {
 #' @export
 #' @noRd
 setMethod("conditionData", "TopDownSet", function(object, ...) {
-  colData(object)
+    colData(object)
 })
 
 #' @param object `TopDownSet`
@@ -160,24 +161,24 @@ setMethod("conditionData", "TopDownSet", function(object, ...) {
 #' @export
 #' @noRd
 setReplaceMethod("conditionData", "TopDownSet", function(object, ..., value) {
-  colData(object) <- value
-  if (validObject(object)) {
-    object
-  }
+    colData(object) <- value
+    if (validObject(object)) {
+      object
+    }
 })
 
 #' @param object `TopDownSet`
 #' @return `numeric`
 #' @noRd
 setMethod("dim", "TopDownSet", function(x) {
-  dim(x@assay)
+    dim(x@assay)
 })
 
 #' @param object `TopDownSet`
 #' @return `list`
 #' @noRd
 setMethod("dimnames", "TopDownSet", function(x) {
-  list(names(x@rowViews), row.names(x@colData))
+    list(names(x@rowViews), row.names(x@colData))
 })
 
 #' @param object `TopDownSet`
@@ -185,7 +186,7 @@ setMethod("dimnames", "TopDownSet", function(x) {
 #' @export
 #' @noRd
 setMethod("fragmentData", "TopDownSet", function(object, ...) {
-  rowViews(object)
+    rowViews(object)
 })
 
 #' Filter `TopDownSet` by ion injection time.
@@ -205,31 +206,32 @@ setMethod("fragmentData", "TopDownSet", function(object, ...) {
 setMethod("filterInjectionTime", "TopDownSet",
           function(object, maxDeviation=log2(3), keepTopN=2,
                    by=object$Sample) {
-  if (!is.numeric(maxDeviation) || !length(maxDeviation) == 1L) {
-    stop("'maxDeviation' has to be a 'numeric' of length one.")
-  }
+    if (!is.numeric(maxDeviation) || !length(maxDeviation) == 1L) {
+      stop("'maxDeviation' has to be a 'numeric' of length one.")
+    }
 
-  if (maxDeviation < 0) {
-    stop("'maxDeviation' has to be greater than 0.")
-  }
+    if (maxDeviation < 0) {
+      stop("'maxDeviation' has to be greater than 0.")
+    }
 
-  lr <- log2(object$IonInjectionTimeMs / object$MedianIonInjectionTimeMs)
+    lr <- log2(object$IonInjectionTimeMs / object$MedianIonInjectionTimeMs)
 
-  i <- intersect(which(lr <= maxDeviation),
-                 .topIdx(-abs(as.vector(lr)), .groupByLabels(by), n=keepTopN))
+    i <- intersect(which(lr <= maxDeviation),
+                   .topIdx(-abs(as.vector(lr)), .groupByLabels(by),
+                           n=keepTopN))
 
-  if (length(i) && length(i) != ncol(object)) {
-    n0 <- ncol(object)
-    object <- object[, i]
-    n1 <- ncol(object)
-    nd <- n0 - n1
-    .tdsLogMsg(object, n0 - n1,
-               " scan", if (nd > 1L) { "s" },
-               " filtered with injection time deviation >= ",
-               maxDeviation, " or rank >= ", keepTopN + 1L, ".")
-  } else {
-    object
-  }
+    if (length(i) && length(i) != ncol(object)) {
+        n0 <- ncol(object)
+        object <- object[, i]
+        n1 <- ncol(object)
+        nd <- n0 - n1
+        .tdsLogMsg(object, n0 - n1,
+                   " scan", if (nd > 1L) { "s" },
+                   " filtered with injection time deviation >= ",
+                   maxDeviation, " or rank >= ", keepTopN + 1L, ".")
+    } else {
+      object
+    }
 })
 
 #' @param object `TopDownSet`
@@ -240,26 +242,26 @@ setMethod("filterInjectionTime", "TopDownSet",
 #' @noRd
 setMethod("filterIntensity", "TopDownSet",
           function(object, threshold, relative=TRUE) {
-  if (!is.numeric(threshold) || !length(threshold) == 1L) {
-    stop("'threshold' has to be a 'numeric' of length one.")
-  }
+   if (!is.numeric(threshold) || !length(threshold) == 1L) {
+       stop("'threshold' has to be a 'numeric' of length one.")
+   }
 
-  n0 <- nnzero(object@assay)
+   n0 <- nnzero(object@assay)
 
-  if (relative) {
-    if (1L < threshold || threshold < 0L) {
-      stop("'threshold hast to be between 0 and 1.")
-    }
-    object@assay <- .drop0rowLt(object@assay,
-                                tol=.rowMax(object@assay) * threshold)
-  } else {
-    object@assay <- drop0(object@assay,
-                          tol=threshold - 10L * .Machine$double.eps,
-                          is.Csparse=TRUE)
-  }
-  n1 <- nnzero(object@assay)
-  .tdsLogMsg(object, n0 - n1, " intensity values < ",
-             threshold, if (relative) { " (relative)" }, " filtered.")
+   if (relative) {
+       if (1L < threshold || threshold < 0L) {
+           stop("'threshold hast to be between 0 and 1.")
+       }
+       object@assay <- .drop0rowLt(object@assay,
+                                   tol=.rowMax(object@assay) * threshold)
+   } else {
+       object@assay <- drop0(object@assay,
+                             tol=threshold - 10L * .Machine$double.eps,
+                             is.Csparse=TRUE)
+   }
+   n1 <- nnzero(object@assay)
+   .tdsLogMsg(object, n0 - n1, " intensity values < ",
+              threshold, if (relative) { " (relative)" }, " filtered.")
 })
 
 #' @param object `TopDownSet`
@@ -268,8 +270,8 @@ setMethod("filterIntensity", "TopDownSet",
 #' @noRd
 setMethod("normalize", "TopDownSet",
           function(object, ...) {
-  object@assay <- .normaliseRows(object@assay)
-  .tdsLogMsg(object, "Fragment intensity values normalized.")
+    object@assay <- .normaliseRows(object@assay)
+    .tdsLogMsg(object, "Fragment intensity values normalized.")
 })
 
 #' @param object `TopDownSet`
@@ -277,58 +279,60 @@ setMethod("normalize", "TopDownSet",
 #' @export
 #' @noRd
 setMethod("rowViews", "TopDownSet", function(object, ...) {
-  object@rowViews
+    object@rowViews
 })
 
 #' @param object `TopDownSet`
 #' @noRd
 setMethod("show", "TopDownSet", function(object) {
-  cat(sprintf("%s object (%.2f Mb)\n",
-              class(object), object.size(object) / 1024L^2L))
+    cat(sprintf("%s object (%.2f Mb)\n",
+                class(object), object.size(object) / 1024L^2L))
 
-  if (length(object@rowViews)) {
-    cat("- - - Protein data - - -\n")
-    prefix <- sprintf("Amino acid sequence (%d):",
-                      nchar(object@rowViews@subject))
-    cat(prefix, .snippet(as.character(object@rowViews@subject),
-                         getOption("width") - nchar(prefix)), "\n")
-  }
-
-  if (length(object@rowViews)) {
-    cat("- - - Fragment data - - -\n")
-    cat("Number of theoretical fragments:", length(object@rowViews), "\n")
-    fragments <- fragmentType(object)
-    cat0("Theoretical fragment types (", nlevels(fragments), "): ",
-         paste0(.hft(levels(fragments), n=5), collapse=", "), "\n")
-    mass <- range(fragmentMass(object))
-    cat(sprintf("Theoretical mass range: [%.2f;%.2f]\n", mass[1L], mass[2L]))
-  }
-
-  if (nrow(object@colData)) {
-    cat("- - - Condition data - - -\n")
-    cat("Number of conditions:", length(unique(object$Sample)), "\n")
-    cat("Number of scans:", nrow(object@colData), "\n")
-    cat0("Condition variables (", ncol(object@colData), "): ",
-         paste0(.hft(colnames(object@colData), n=2), collapse=", "), "\n")
-  }
-
-  if (all(dim(object))) {
-    cat("- - - Intensity data - - -\n")
-    cat(sprintf("Size of array: %dx%d (%.2f%% != 0)\n",
-                nrow(object@assay), ncol(object@assay),
-                nnzero(object@assay) / length(object@assay) * 100L))
-    if (length(object@assay@x)) {
-      intensity <- range(object@assay@x)
-    } else {
-      intensity <- c(-NA, NA)
+    if (length(object@rowViews)) {
+        cat("- - - Protein data - - -\n")
+        prefix <- sprintf("Amino acid sequence (%d):",
+                          nchar(object@rowViews@subject))
+        cat(prefix, .snippet(as.character(object@rowViews@subject),
+                             getOption("width") - nchar(prefix)), "\n")
     }
-    cat(sprintf("Intensity range: [%.2f;%.2f]\n", intensity[1L], intensity[2L]))
-  }
 
-  if (length(object@processing)) {
-    cat("- - - Processing information - - -\n")
-    cat(paste0(object@processing, collapse="\n"), "\n")
-  }
+    if (length(object@rowViews)) {
+        cat("- - - Fragment data - - -\n")
+        cat("Number of theoretical fragments:", length(object@rowViews), "\n")
+        fragments <- fragmentType(object)
+        cat0("Theoretical fragment types (", nlevels(fragments), "): ",
+             paste0(.hft(levels(fragments), n=5), collapse=", "), "\n")
+        mass <- range(fragmentMass(object))
+        cat(sprintf("Theoretical mass range: [%.2f;%.2f]\n",
+                    mass[1L], mass[2L]))
+    }
 
-  invisible(NULL)
+    if (nrow(object@colData)) {
+        cat("- - - Condition data - - -\n")
+        cat("Number of conditions:", length(unique(object$Sample)), "\n")
+        cat("Number of scans:", nrow(object@colData), "\n")
+        cat0("Condition variables (", ncol(object@colData), "): ",
+             paste0(.hft(colnames(object@colData), n=2), collapse=", "), "\n")
+    }
+
+    if (all(dim(object))) {
+        cat("- - - Intensity data - - -\n")
+        cat(sprintf("Size of array: %dx%d (%.2f%% != 0)\n",
+                    nrow(object@assay), ncol(object@assay),
+                    nnzero(object@assay) / length(object@assay) * 100L))
+        if (length(object@assay@x)) {
+            intensity <- range(object@assay@x)
+        } else {
+            intensity <- c(-NA, NA)
+        }
+        cat(sprintf("Intensity range: [%.2f;%.2f]\n",
+                    intensity[1L], intensity[2L]))
+    }
+
+    if (length(object@processing)) {
+        cat("- - - Processing information - - -\n")
+        cat(paste0(object@processing, collapse="\n"), "\n")
+    }
+
+    invisible(NULL)
 })

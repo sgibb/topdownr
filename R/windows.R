@@ -25,31 +25,31 @@ createTngFusionMethFiles <- function(template,
                                      xml=list.files(pattern=".*\\.xml$"),
                                      executable="XmlMethodChanger.exe",
                                      verbose=interactive()) {
-  if (.Platform$OS.type != "windows") {
-    stop("This function works only on Windows.")
-  }
-  if (!file.exists(executable)) {
-    stop(sQuote(executable), " not found!")
-  }
-  if (!file.exists(template)) {
-    stop(sQuote(template), " not found!")
-  }
-
-  if (verbose) {
-    pb <- txtProgressBar(0L, length(xml))
-  }
-
-  for (i in seq(along=xml)) {
-    .xmlMethodChanger(executable, template,
-                      .swapFileExt(xml[i]), xml[i])
-    if (verbose) {
-      setTxtProgressBar(pb, i)
+    if (.Platform$OS.type != "windows") {
+        stop("This function works only on Windows.")
     }
-  }
+    if (!file.exists(executable)) {
+        stop(sQuote(executable), " not found!")
+    }
+    if (!file.exists(template)) {
+        stop(sQuote(template), " not found!")
+    }
 
-  if (verbose) {
-    close(pb)
-  }
+    if (verbose) {
+        pb <- txtProgressBar(0L, length(xml))
+    }
+
+    for (i in seq(along=xml)) {
+        .xmlMethodChanger(executable, template,
+                          .swapFileExt(xml[i]), xml[i])
+        if (verbose) {
+            setTxtProgressBar(pb, i)
+        }
+    }
+
+    if (verbose) {
+        close(pb)
+    }
 }
 
 #' @rdname XmlMethodChanger
@@ -57,9 +57,9 @@ createTngFusionMethFiles <- function(template,
 runXmlMethodChanger <- createTngFusionMethFiles
 
 .xmlMethodChanger <- function(exe, input, output, modification) {
-  args <- paste0("--", c("input", "output", "modification"), "=",
-                 shQuote(c(input, output, modification)))
-  system2(normalizePath(exe), args=args)
+    args <- paste0("--", c("input", "output", "modification"), "=",
+                   shQuote(c(input, output, modification)))
+    system2(normalizePath(exe), args=args)
 }
 
 #' Create .csv/.txt files from raw files
@@ -82,17 +82,16 @@ runXmlMethodChanger <- createTngFusionMethFiles
 #' runScanHeadsman("raw", executable="..\\ScanHeadsman.exe")
 #' }
 runScanHeadsman <- function(path=".", executable="ScanHeadsman.exe") {
-  if (.Platform$OS.type != "windows") {
-    stop("This function works only on Windows.")
-  }
-  if (!file.exists(executable)) {
-    stop(sQuote(executable), " not found!")
-  }
-  .scanHeadsman(exe=executable, path=path)
+    if (.Platform$OS.type != "windows") {
+        stop("This function works only on Windows.")
+    }
+    if (!file.exists(executable)) {
+        stop(sQuote(executable), " not found!")
+    }
+    .scanHeadsman(exe=executable, path=path)
 }
 
 .scanHeadsman <- function(exe, path=".") {
-  args <- c(paste0("--", c("noMS", "methods:CSV")), path)
-  system2(normalizePath(exe), args=args)
+    args <- c(paste0("--", c("noMS", "methods:CSV")), path)
+    system2(normalizePath(exe), args=args)
 }
-
