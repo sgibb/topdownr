@@ -64,9 +64,9 @@ readTopDownFiles <- function(path, pattern=".*",
                              neutralLoss=MSnbase::defaultNeutralLoss(),
                              tolerance=10e-6,
                              dropNonInformativeColumns=TRUE,
-                             sampleColumns=c("Mz", "AGCTarget", "ETDReagentTarget",
-                                             "ETDActivation", "CIDActivation",
-                                             "HCDActivation"),
+                             sampleColumns=c("Mz", "AgcTarget", "EtdReagentTarget",
+                                             "EtdActivation", "CidActivation",
+                                             "HcdActivation"),
                              verbose=interactive()) {
 
   files <- .listTopDownFiles(path, pattern=pattern)

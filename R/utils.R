@@ -103,22 +103,23 @@ cat0 <- function(...) {
   x
 }
 
-#' Create (nearly) CamelCase names. Could not correct "AGC" to "Agc".
+#' Create camelCase names.
 #'
 #' @param x `character`
 #' @return `character`
 #' @noRd
-.formatNames <- function(x) {
-  x <- gsub("[[:punct:]]+", " ", x)
-  unlist(lapply(strsplit(x, " "), function(s) {
-    if (length(s) == 1L) {
-      # don't convert already camelcased strings
-      paste0(toupper(substring(s, 1L, 1L)), substring(s, 2L), collapse="")
-    } else {
-      paste0(toupper(substring(s, 1L, 1L)), tolower(substring(s, 2L)),
-             collapse="")
-    }
-  }))
+.camelCase <- function(x) {
+  ## convert dots from `make.names` to space
+  x <- gsub("\\.+", " ", x)
+  ## remove all the other punctiation like (, ), /
+  x <- gsub("[[:punct:]]+", "", x)
+  ## split AGCTarget to AGC Target
+  x <- gsub("([A-Z])(?=[a-z])", " \\1", x, perl=TRUE)
+  ## just capitalize the first letter in a word
+  x <- gsub("(?<=\\b)([a-z])", "\\U\\1", tolower(x), perl=TRUE)
+  ## remove whitespace
+  x <- gsub(" ", "", x)
+  x
 }
 
 #' Convert number to string and prepend zeros
@@ -137,7 +138,7 @@ cat0 <- function(...) {
 #' @noRd
 .fragmentationMethod <- function(x) {
   methods <- c("None", "ETD", "CID", "ETcid", "HCD", "EThcd", "HCD/CID", "All")
-  v <- c(ETDActivation=1L, CIDActivation=2L, HCDActivation=4L)
+  v <- c(EtdActivation=1L, CidActivation=2L, HcdActivation=4L)
   stopifnot(all(colnames(x) %in% names(v)))
   x <- x[, names(v)]
   apply(x, 1L, function(i)methods[sum(v[as.logical(i)]) + 1L])
@@ -251,7 +252,7 @@ cat0 <- function(...) {
   as.integer(substring(x, n - idDigits + 1L, n))
 }
 
-#' Median Ion Injection Time for a specific Mz and AGCTarget
+#' Median Ion Injection Time for a specific Mz and AgcTarget
 #'
 #' @param x `data.frame`, with three columns (InjectionTimeMs, Mz,
 #' AGCTarget), all but the first would be used for grouping
@@ -259,9 +260,9 @@ cat0 <- function(...) {
 #' @noRd
 .medianIonInjectionTime <- function(x) {
   stopifnot(is.data.frame(x) || is(x, "DataFrame"))
-  stopifnot(all(c("IonInjectionTimeMs", "Mz", "AGCTarget") %in% colnames(x)))
+  stopifnot(all(c("IonInjectionTimeMs", "Mz", "AgcTarget") %in% colnames(x)))
   ave(x$IonInjectionTimeMs,
-      as.factor(x$Mz), as.factor(x$AGCTarget),
+      as.factor(x$Mz), as.factor(x$AgcTarget),
       FUN=median, na.rm=TRUE)
 }
 

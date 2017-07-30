@@ -46,9 +46,9 @@ test_that(".readExperimentCsv", {
   expect_message(e <- topdown:::.readExperimentCsv(fn, verbose=TRUE),
                  "Reading 3 experiment conditions from file")
   expect_equal(colnames(e),
-               c("MSLevel", "NaColumn", "TargetedMassList", "Condition",
+               c("MsLevel", "NaColumn", "TargetedMassList", "Condition",
                  "Mz", "File"))
-  expect_equal(e$MSLevel, rep(2, 2))
+  expect_equal(e$MsLevel, rep(2, 2))
   expect_equal(e$NaColumn, rep(0, 2))
   expect_equal(e$Condition, 1:2)
   expect_equal(e$Mz, rep(933.1, 2))
@@ -82,14 +82,14 @@ test_that(".readScanHeadsTable", {
   expect_message(h <- topdown:::.readScanHeadsTable(fn, verbose=TRUE),
                  "Reading 5 header information from file")
   expect_equal(colnames(h),
-               c("MSOrder", "FilterString", "Activation1", "Activation2",
+               c("MsOrder", "FilterString", "Activation1", "Activation2",
                  "Energy1", "Energy2", "Condition",
-                 "ETDActivation", "CIDActivation", "HCDActivation",
+                 "EtdActivation", "CidActivation", "HcdActivation",
                  "Activation", "ActivationString", "File"))
-  expect_equal(h$MSOrder, rep(2, 4))
-  expect_equal(h$ETDActivation, c(50, 50, 0, 0))
-  expect_equal(h$CIDActivation, c(0, 0, 20, 20))
-  expect_equal(h$HCDActivation, c(30, 30, 0, 10))
+  expect_equal(h$MsOrder, rep(2, 4))
+  expect_equal(h$EtdActivation, c(50, 50, 0, 0))
+  expect_equal(h$CidActivation, c(0, 0, 20, 20))
+  expect_equal(h$HcdActivation, c(30, 30, 0, 10))
   # TODO: FilterStrings are not unique in .experiment.csv files
   # see issue #14
   #expect_equal(h$Condition, c(1, 7, 9))

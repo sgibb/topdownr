@@ -47,12 +47,12 @@ test_that(".fixFilterStringId", {
                c(4:6, 8:10))
 })
 
-test_that(".formatNames", {
-  expect_equal(topdown:::.formatNames(c("Monoisotopic M/Z", "SPS Mass 2",
-                                        "RT (min)", "MSLevel",
-                                        "Multi.Inject.Info", "RF.Comp...ppm")),
-               c("MonoisotopicMZ", "SpsMass2", "RtMin", "MSLevel",
-                 "MultiInjectInfo", "RfCompPpm"))
+test_that(".camelCase", {
+  expect_equal(topdown:::.camelCase(c("Monoisotopic M/Z", "SPS Mass 2",
+                                      "RT (min)", "MSLevel", "peaksCount",
+                                      "Multi.Inject.Info", "RF.Comp...ppm")),
+               c("MonoisotopicMz", "SpsMass2", "RtMin", "MsLevel",
+                 "PeaksCount", "MultiInjectInfo", "RfCompPpm"))
 })
 
 test_that(".formatNumbers", {
@@ -61,9 +61,9 @@ test_that(".formatNumbers", {
 })
 
 test_that(".fragmentationMethod", {
-  d <- expand.grid(ETDActivation=0:1,
-                   CIDActivation=0:1,
-                   HCDActivation=0:1)
+  d <- expand.grid(EtdActivation=0:1,
+                   CidActivation=0:1,
+                   HcdActivation=0:1)
   expect_error(topdown:::.fragmentationMethod(cbind(d, foo=1L)))
   expect_equal(topdown:::.fragmentationMethod(d),
                c("None", "ETD", "CID", "ETcid", "HCD", "EThcd", "HCD/CID", "All"))
@@ -142,7 +142,7 @@ test_that(".massLabelToId", {
 
 test_that(".medianIonInjectionTime", {
   d <- data.frame(IonInjectionTimeMs=1:12, Mz=rep(1:3, each=4),
-                  AGCTarget=rep(1:6, each=2))
+                  AgcTarget=rep(1:6, each=2))
   expect_error(topdown:::.medianIonInjectionTime(1:3))
   expect_error(topdown:::.medianIonInjectionTime(data.frame(foo=1:3, bar=1:3)))
   expect_equal(topdown:::.medianIonInjectionTime(d),

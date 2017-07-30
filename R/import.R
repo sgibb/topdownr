@@ -58,13 +58,13 @@
 .readExperimentCsv <- function(file, verbose=interactive()) {
   stopifnot(.fileExt(file) == "csv")
   d <- read.csv(file, stringsAsFactors=FALSE)
-  colnames(d) <- .formatNames(colnames(d))
+  colnames(d) <- .camelCase(colnames(d))
 
   .msg(verbose, "Reading ", nrow(d), " experiment conditions from file ",
        basename(file))
 
   ## drop MS1
-  d <- d[d$MSLevel == 2L,]
+  d <- d[d$MsLevel == 2L,]
 
   d[is.na(d)] <- 0L
 
@@ -103,13 +103,13 @@
 .readScanHeadsTable <- function(file, verbose=interactive()) {
   stopifnot(.fileExt(file) == "txt")
   d <- read.csv(file, stringsAsFactors=FALSE)
-  colnames(d) <- .formatNames(colnames(d))
+  colnames(d) <- .camelCase(colnames(d))
 
   .msg(verbose, "Reading ", nrow(d), " header information from file ",
        basename(file))
 
   ## drop MS1
-  d <- d[d$MSOrder == 2L,]
+  d <- d[d$MsOrder == 2L,]
 
   # TODO: somehow the FilterString doesn't always contains the right mass label.
   # For now we just take the first non-duplicated (unique) condition
@@ -123,20 +123,20 @@
 
   d[is.na(d)] <- 0L
 
-  d$ETDActivation[d$Activation1 == "ETD"] <- d$Energy1[d$Activation1 == "ETD"]
-  d$CIDActivation[d$Activation1 == "CID"] <- d$Energy1[d$Activation1 == "CID"]
-  d$CIDActivation[d$Activation2 == "CID"] <- d$Energy2[d$Activation2 == "CID"]
-  d$HCDActivation[d$Activation1 == "HCD"] <- d$Energy1[d$Activation1 == "HCD"]
-  d$HCDActivation[d$Activation2 == "HCD"] <- d$Energy2[d$Activation2 == "HCD"]
+  d$EtdActivation[d$Activation1 == "ETD"] <- d$Energy1[d$Activation1 == "ETD"]
+  d$CidActivation[d$Activation1 == "CID"] <- d$Energy1[d$Activation1 == "CID"]
+  d$CidActivation[d$Activation2 == "CID"] <- d$Energy2[d$Activation2 == "CID"]
+  d$HcdActivation[d$Activation1 == "HCD"] <- d$Energy1[d$Activation1 == "HCD"]
+  d$HcdActivation[d$Activation2 == "HCD"] <- d$Energy2[d$Activation2 == "HCD"]
 
   d[is.na(d)] <- 0L
 
-  d$Activation <- .fragmentationMethod(d[, paste0(c("ETD", "CID", "HCD"),
+  d$Activation <- .fragmentationMethod(d[, paste0(c("Etd", "Cid", "Hcd"),
                                                   "Activation")])
 
-  d$ActivationString <- paste(.formatNumbers(d$ETDActivation),
-                              .formatNumbers(d$CIDActivation),
-                              .formatNumbers(d$HCDActivation), sep=":")
+  d$ActivationString <- paste(.formatNumbers(d$EtdActivation),
+                              .formatNumbers(d$CidActivation),
+                              .formatNumbers(d$HcdActivation), sep=":")
 
   d$File <- gsub(.topDownFileExtRx("txt"), "", basename(file))
   d
@@ -163,7 +163,7 @@
   hd <- hd[i, !colnames(hd) %in% c("injectionTime", "seqNum"), drop=FALSE]
   colnames(hd)[grepl("acquisitionNum", colnames(hd), fixed=TRUE)] <- "Scan"
   hd$File <- gsub(.topDownFileExtRx("mzml"), "", basename(file))
-  colnames(hd) <- .formatNames(colnames(hd))
+  colnames(hd) <- .camelCase(colnames(hd))
 
   nr <- nrow(hd)
   m <- Matrix(0L, nrow=length(fmass), ncol=nr, sparse=TRUE)
