@@ -281,6 +281,10 @@ test_that("show", {
                   paste(c("Size of array: 3x5 \\(0\\.00% != 0\\)",
                           "Intensity range: \\[NA;NA\\]"),
                         collapse="\n"))
+    tdn@rowViews@metadata$modifications <-
+        c("Carbamidomethyl", "Met-loss+Acetyl")
+    expect_output(show(tdn),
+                  "Modifications \\(2\\): Carbamidomethyl, Met-loss\\+Acetyl")
 })
 
 test_that(".tdsLogMsg", {
