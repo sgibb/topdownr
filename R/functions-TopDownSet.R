@@ -27,8 +27,10 @@
 #' files.
 #' @param type `character`, type of fragments, currently *a-c* and *x-z* are
 #' supported, see [MSnbase::calculateFragments()] for details.
-#' @param modifications `double`, named vector with modifications that should be
-#' applied. The name hast to be an amino acid that should be replaced, see
+#' @param modifications `character`, unimod names of modifications that should
+#' be applied. Currenlty just *Carbamidomethyl* (Unimod:4) and
+#' *Met-loss+Acetyl* (Unimod:766) are supported. Use `NULL` to disable
+#' modifications.
 #' [MSnbase::calculateFragments()] for details.
 #' @param adducts `data.frame`, with 3 columns, namely: mass, name, to, see
 #' details section.
@@ -59,7 +61,8 @@
 #' }
 readTopDownFiles <- function(path, pattern=".*",
                              type=c("a", "b", "c", "x", "y", "z"),
-                             modifications=c(C=57.02146),
+                             modifications=c("Carbamidomethyl",
+                                             "Met-loss+Acetyl"),
                              adducts=data.frame(),
                              neutralLoss=MSnbase::defaultNeutralLoss(),
                              tolerance=10e-6,

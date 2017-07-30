@@ -27,3 +27,20 @@ test_that(".matchFragments", {
                                            tolerance=0.2),
                  as.integer(c(1, NA, 2)))
 })
+
+test_that(".unimod4", {
+    d <- data.frame(mz=1:5, seq=c("C", "AC", "U", "AE", "AB"),
+                    stringsAsFactors=FALSE)
+    r <- data.frame(mz=c(57.021464 + 1:3, 4:5), seq=d$seq,
+                    stringsAsFactors=FALSE)
+    expect_equal(topdown:::.unimod4(d), r)
+})
+
+test_that(".unimod766", {
+    d <- data.frame(mz=201:203, pos=c(1, 2, 2), seq=c("M", "MA", "MC"),
+                    ion=c("x1", "x2_", "x2"), stringsAsFactors=FALSE)
+    r <- data.frame(mz=c(202 - 89.029920, 203 - 131.040485), pos=1,
+                    seq=c("A", "C"), ion=c("x1_", "x1"),
+                    stringsAsFactors=FALSE)
+    expect_equal(topdown:::.unimod766(d), r)
+})

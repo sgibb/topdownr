@@ -294,6 +294,11 @@ setMethod("show", "TopDownSet", function(object) {
                           nchar(object@rowViews@subject))
         cat(prefix, .snippet(as.character(object@rowViews@subject),
                              getOption("width") - nchar(prefix)), "\n")
+        if (length(metadata(object@rowViews)$modifications)) {
+            mod <- metadata(object@rowViews)$modifications
+            cat0("Modifications (", length(mod), "): ",
+                 paste0(.hft(mod, n=3), collapse=", "), "\n")
+        }
     }
 
     if (length(object@rowViews)) {

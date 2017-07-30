@@ -7,11 +7,12 @@
 \title{The TopDownSet class}
 \usage{
 readTopDownFiles(path, pattern = ".*", type = c("a", "b", "c", "x", "y",
-  "z"), modifications = c(C = 57.02146), adducts = data.frame(),
-  neutralLoss = MSnbase::defaultNeutralLoss(), tolerance = 1e-05,
-  dropNonInformativeColumns = TRUE, sampleColumns = c("Mz", "AGCTarget",
-  "ETDReagentTarget", "ETDActivation", "CIDActivation", "HCDActivation"),
-  verbose = interactive())
+  "z"), modifications = c("Carbamidomethyl", "Met-loss+Acetyl"),
+  adducts = data.frame(), neutralLoss = MSnbase::defaultNeutralLoss(),
+  tolerance = 1e-05, dropNonInformativeColumns = TRUE,
+  sampleColumns = c("Mz", "AgcTarget", "EtdReagentTarget", "EtdActivation",
+  "CidActivation", "HcdActivation", "SupplementalActivation",
+  "SupplementalActivationCe"), verbose = interactive())
 }
 \arguments{
 \item{path}{\code{character}, path to directory that contains the top-down files.}
@@ -22,8 +23,10 @@ files.}
 \item{type}{\code{character}, type of fragments, currently \emph{a-c} and \emph{x-z} are
 supported, see \code{\link[MSnbase:calculateFragments]{MSnbase::calculateFragments()}} for details.}
 
-\item{modifications}{\code{double}, named vector with modifications that should be
-applied. The name hast to be an amino acid that should be replaced, see
+\item{modifications}{\code{character}, unimod names of modifications that should
+be applied. Currenlty just \emph{Carbamidomethyl} (Unimod:4) and
+\emph{Met-loss+Acetyl} (Unimod:766) are supported. Use \code{NULL} to disable
+modifications.
 \code{\link[MSnbase:calculateFragments]{MSnbase::calculateFragments()}} for details.}
 
 \item{adducts}{\code{data.frame}, with 3 columns, namely: mass, name, to, see

@@ -9,7 +9,7 @@
 \title{The FragmentViews class}
 \usage{
 FragmentViews(sequence, mass, type, z = 1L, start = NULL, end = NULL,
-  width = NULL, names = NULL)
+  width = NULL, names = NULL, metadata = list())
 
 \S4method{show}{FragmentViews}(object)
 }
@@ -36,6 +36,8 @@ FragmentViews(sequence, mass, type, z = 1L, start = NULL, end = NULL,
 
 \item{names}{\code{character}, names of the fragments, same length as
 \code{start}/\code{end}/width`.}
+
+\item{metadata}{\code{list}, metadata like modifications.}
 
 \item{object}{FragmentViews}
 }

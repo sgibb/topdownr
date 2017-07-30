@@ -7,6 +7,12 @@ setMethod("show", "FragmentViews", function(object) {
          "-letter sequence:\n")
     cat0("  ", .snippet(as.character(subject(object)),
                         getOption("width") - 2L), "\n")
+
+    if (length(metadata(object)$modifications)) {
+        cat0("Modifications:\n")
+        cat0(paste0("  ", metadata(object)$modifications, "\n"))
+    }
+
     cat0("Views:\n")
 
     entries <- list(
