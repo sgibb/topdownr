@@ -68,7 +68,9 @@ readTopDownFiles <- function(path, pattern=".*",
                                              "EtdReagentTarget",
                                              "EtdActivation",
                                              "CidActivation",
-                                             "HcdActivation"),
+                                             "HcdActivation",
+                                             "SupplementalActivation",
+                                             "SupplementalActivationCe"),
                              verbose=interactive()) {
 
    files <- .listTopDownFiles(path, pattern=pattern)
