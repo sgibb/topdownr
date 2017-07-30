@@ -50,9 +50,11 @@ test_that(".fixFilterStringId", {
 test_that(".camelCase", {
     expect_equal(topdown:::.camelCase(c("Monoisotopic M/Z", "SPS Mass 2",
                                         "RT (min)", "MSLevel", "peaksCount",
-                                        "Multi.Inject.Info", "RF.Comp...ppm")),
+                                        "Multi.Inject.Info", "RF.Comp...ppm",
+                                        "SupplementalActivationCE")),
                  c("MonoisotopicMz", "SpsMass2", "RtMin", "MsLevel",
-                   "PeaksCount", "MultiInjectInfo", "RfCompPpm"))
+                   "PeaksCount", "MultiInjectInfo", "RfCompPpm",
+                   "SupplementalActivationCe"))
 })
 
 test_that(".formatNumbers", {

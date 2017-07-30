@@ -8,6 +8,26 @@
     isTRUE(length(unique(x)) == 1L)
 }
 
+#' Create camelCase names.
+#'
+#' @param x `character`
+#' @return `character`
+#' @noRd
+.camelCase <- function(x) {
+   ## convert dots from `make.names` to space
+   x <- gsub("\\.+", " ", x)
+   ## remove all the other punctiation like (, ), /
+   x <- gsub("[[:punct:]]+", "", x)
+   ## split AGCTarget to AGC Target and/or
+   ## SupplementalActivationCE to Supplemental Activation CE
+   x <- gsub("([A-Z])(?=([a-z]|[A-Z]$))", " \\1", x, perl=TRUE)
+   ## just capitalize the first letter in a word
+   x <- gsub("(?<=\\b)([a-z])", "\\U\\1", tolower(x), perl=TRUE)
+   ## remove whitespace
+   x <- gsub(" ", "", x)
+   x
+}
+
 #' cat0, cat with sep="", similar to paste0
 #'
 #' @param \ldots arguments passed to cat
@@ -102,25 +122,6 @@ cat0 <- function(...) {
         x[length(x)] <- x[length(x)] + 1L
     }
     x
-}
-
-#' Create camelCase names.
-#'
-#' @param x `character`
-#' @return `character`
-#' @noRd
-.camelCase <- function(x) {
-   ## convert dots from `make.names` to space
-   x <- gsub("\\.+", " ", x)
-   ## remove all the other punctiation like (, ), /
-   x <- gsub("[[:punct:]]+", "", x)
-   ## split AGCTarget to AGC Target
-   x <- gsub("([A-Z])(?=[a-z])", " \\1", x, perl=TRUE)
-   ## just capitalize the first letter in a word
-   x <- gsub("(?<=\\b)([a-z])", "\\U\\1", tolower(x), perl=TRUE)
-   ## remove whitespace
-   x <- gsub(" ", "", x)
-   x
 }
 
 #' Convert number to string and prepend zeros
