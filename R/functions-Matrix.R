@@ -1,7 +1,7 @@
 #' mask matrix for matrix multiplication in .rowMeansGroup
 #'
-#' @param x character/numeric, group identifier
-#' @return sparseMatrix with group masked
+#' @param x `character`/`numeric`, group identifier
+#' @return `sparseMatrix` with group masked
 #' @noRd
 .createMaskMatrix <- function(x) {
     if (!is.numeric(x)) {
@@ -12,23 +12,21 @@
 
 #' colSums groupwise, similar to rowsum but for sparceMatrices
 #'
-#' @param x Matrix
-#' @param group group
-#' @param ... further arguments passed to rowMeans
-#' @return sparseMatrix
+#' @param x `Matrix`
+#' @param group `character`/`numeric`, group identifier
+#' @return `sparseMatrix`
 #' @noRd
 .colSumsGroup <- function(x, group) {
     stopifnot(is(x, "Matrix"))
     stopifnot(nrow(x) == length(group))
-    mm <- .createMaskMatrix(group)
-    t(mm) %*% x
+    crossprod(.createMaskMatrix(group), x)
 }
 
 #' drop0 but row-wise with length(tol) == nrow(x)
 #'
-#' @param x dgCMatrix
-#' @param tol sparseVector/double, length==nrow(x), less than
-#' @return dgCMatrix
+#' @param x `dgCMatrix`
+#' @param tol `sparseVector`/`double`, length==nrow(x), less than
+#' @return `dgCMatrix`
 #' @noRd
 .drop0rowLe <- function(x, tol) {
     stopifnot(is(x, "dgCMatrix"))
@@ -44,12 +42,29 @@
    drop0(x, tol=0L, is.Csparse=TRUE)
 }
 
+#' drop0 but just row-wise groups with fewer than minN entries per group
+#'
+#' @param x `dgCMatrix`
+#' @param group `character`/`numeric`, group identifier
+#' @param minN `integer`, minimal number of group members > 0
+#' @return `dgCMatrix`
+.drop0rowReplicates <- function(x, group, minN) {
+   stopifnot(is(x, "dgCMatrix"))
+   stopifnot(length(group) == ncol(x))
+   stopifnot(is.integer(minN) && length(minN) == 1L)
+   m <- .createMaskMatrix(group)
+   l <- tcrossprod(as(x, "lgCMatrix") %*% m, # identical to .rowSumsGroup
+                   m)
+   x@x[l@x < minN] <- 0L
+   drop0(x, tol=0L, is.Csparse=TRUE)
+}
+
 #' calculate rect coordinates for a Matrix
 #'
-#' @param x Matrix
-#' @param width double
-#' @param height double
-#' @return matrix with coords (xleft, ybottom, xright, ytop) (row index is x,
+#' @param x `Matrix`
+#' @param width `double`
+#' @param height `double`
+#' @return `matrix` with coords (xleft, ybottom, xright, ytop) (row index is x,
 #' col index is y), and color
 #' @noRd
 .m2rect <- function(x, width=1L, height=1L) {
@@ -74,8 +89,8 @@
 #' rowMax row-wise maximum, similar to apply(x, 1, max) but faster on
 #' sparseMatrix
 #'
-#' @param x dgCMatrix
-#' @return sparseVector
+#' @param x `dgCMatrix`
+#' @return `sparseVector`
 #' @noRd
 .rowMax <- function(x) {
    stopifnot(is(x, "dgCMatrix"))
@@ -85,9 +100,9 @@
 
 #' rowMeans groupwise, similar to rowsum but for sparceMatrices
 #'
-#' @param x Matrix
-#' @param group group
-#' @return sparseMatrix
+#' @param x `Matrix`
+#' @param group `integer`/`character` group identifier
+#' @return `sparseMatrix`
 #' @noRd
 .rowMeansGroup <- function(x, group) {
    stopifnot(is(x, "Matrix"))
@@ -96,4 +111,16 @@
    m <- (x %*% mm)
    m@x <- m@x / ((x != 0L) %*% mm)@x
    m
+}
+
+#' rowSums groupwise, similar to rowsum but for sparceMatrices
+#'
+#' @param x `Matrix`
+#' @param group `integer`/`character` group identifier
+#' @return `sparseMatrix`
+#' @noRd
+.rowSumsGroup <- function(x, group) {
+    stopifnot(is(x, "Matrix"))
+    stopifnot(ncol(x) == length(group))
+    x %*% .createMaskMatrix(group)
 }
