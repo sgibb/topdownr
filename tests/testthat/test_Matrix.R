@@ -45,11 +45,20 @@ test_that(".drop0rowReplicates", {
     expect_error(topdown:::.drop0rowReplicates(m, group, 1L:2L))
     expect_equal(topdown:::.drop0rowReplicates(m, group, minN=1L), m)
     expect_equal(topdown:::.drop0rowReplicates(m, group, minN=2L),
-                 sparseMatrix(i=rep(1:4, c(4, 2, 4, 2)),
-                              j=rep(c(1:4, 9:10), 2),
-                              x=c(1:4, 9:10, 11:14, 19:20)))
+                 sparseMatrix(i=rep(1:4, each=4),
+                              j=rep(c(1:4, 7:10), 2),
+                              x=c(1:4, 7:10, 11:14, 17:20)))
     expect_equal(topdown:::.drop0rowReplicates(m, group, minN=3L),
                  Matrix(0L, nrow=4, ncol=10, sparse=TRUE))
+
+    expect_equal(topdown:::.drop0rowReplicates(
+                    sparseMatrix(i=c(1:2, 1:3, 1, 3, 2),
+                                 j=rep(1:5, c(2, 3, 1, 1, 1)),
+                                 x=2:9),
+                    rep(1:2, 3:2), 2L),
+                 sparseMatrix(i=c(1:2, 1:2, 1),
+                              j=rep(1:3, c(2, 2, 1)),
+                              x=c(2:5, 7), dims=c(3, 5)))
 })
 
 test_that(".m2rect", {

@@ -55,8 +55,10 @@
    m <- .createMaskMatrix(group)
    l <- tcrossprod(as(x, "lgCMatrix") %*% m, # identical to .rowSumsGroup
                    m)
-   x@x[l@x < minN] <- 0L
-   drop0(x, tol=0L, is.Csparse=TRUE)
+   l@x[l@x < minN] <- 0L
+   l <- drop0(l, tol=0L, is.Csparse=TRUE)
+   l@x[] <- 1L
+   x * l
 }
 
 #' calculate rect coordinates for a Matrix
