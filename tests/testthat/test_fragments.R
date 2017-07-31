@@ -28,6 +28,14 @@ test_that(".matchFragments", {
                  as.integer(c(1, NA, 2)))
 })
 
+test_that(".unimod1", {
+    d <- data.frame(mz=200:202, pos=1, seq=c("A", "AC", "ACE"),
+                    ion=c("c1", "c2", "c3"), stringsAsFactors=FALSE)
+    r <- data.frame(mz=200:202 + 42.010565, pos=1, seq=c("A", "AC", "ACE"),
+                    ion=c("c1", "c2", "c3"), stringsAsFactors=FALSE)
+    expect_equal(topdown:::.unimod1(d, "ACE"), r)
+})
+
 test_that(".unimod4", {
     d <- data.frame(mz=1:5, seq=c("C", "AC", "U", "AE", "AB"),
                     stringsAsFactors=FALSE)
@@ -36,11 +44,21 @@ test_that(".unimod4", {
     expect_equal(topdown:::.unimod4(d), r)
 })
 
+test_that(".unimod765", {
+    expect_equal(topdown:::.unimod765(c("MACE", "MWE", "EAC")),
+                 c("ACE", "MWE", "EAC"))
+})
+
 test_that(".unimod766", {
-    d <- data.frame(mz=201:203, pos=c(1, 2, 2), seq=c("M", "MA", "MC"),
-                    ion=c("x1", "x2_", "x2"), stringsAsFactors=FALSE)
-    r <- data.frame(mz=c(202 - 89.029920, 203 - 131.040485), pos=1,
-                    seq=c("A", "C"), ion=c("x1_", "x1"),
-                    stringsAsFactors=FALSE)
-    expect_equal(topdown:::.unimod766(d), r)
+    d1 <- data.frame(mz=200, pos=1, seq="A", ion="c1",
+                     stringsAsFactors=FALSE)
+    d2 <- data.frame(mz=200, pos=1, seq="C", ion="c1",
+                     stringsAsFactors=FALSE)
+    r1 <- data.frame(mz=200 + 42.010565, pos=1, seq="A", ion="c1",
+                     stringsAsFactors=FALSE)
+    r2 <- data.frame(mz=200, pos=1, seq="C", ion="c1",
+                     stringsAsFactors=FALSE)
+
+    expect_equal(topdown:::.unimod766(d1, "A"), r1)
+    expect_equal(topdown:::.unimod766(d2, "C"), r2)
 })

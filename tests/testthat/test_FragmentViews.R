@@ -19,30 +19,46 @@ test_that("constructor", {
     expect_equal(topdown:::.calculateFragments("MAC", type="x",
                                                neutralLoss=list(water=NULL)),
                  fv1, tolerance=1e-7)
-    fv2 <- FragmentViews("AC", start=1:2, end=2, names=paste0("x", 2:1),
+    fv2 <- FragmentViews("AC", start=2:1, end=2, names=paste0("x", 1:2),
+                         mass=c(148.006296, 219.043406 + 42.010565),
+                         type=rep("x", 2), z=rep(1, 2),
+                         metadata=list(modifications="Acetyl"))
+    expect_equal(topdown:::.calculateFragments("AC", type="x",
+                                               modifications="Acetyl",
+                                               neutralLoss=list(water=NULL)),
+                 fv2, tolerance=1e-7)
+    fv3 <- FragmentViews("AC", start=1:2, end=2, names=paste0("x", 2:1),
+                         mass=c(276.064870, 205.027760) - 57.021464,
+                         type=rep("x", 2), z=rep(1, 2),
+                         metadata=list(modifications="Met-loss"))
+    expect_equal(topdown:::.calculateFragments("MAC", type="x",
+                                               modifications="Met-loss",
+                                               neutralLoss=list(water=NULL)),
+                 fv3, tolerance=1e-7)
+    fv4 <- FragmentViews("AC", start=1:2, end=2, names=paste0("x", 2:1),
                          mass=c(276.064870 + 42.010565, 205.027760) - 57.021464,
                          type=rep("x", 2), z=rep(1, 2),
-                         metadata=list(modifications=c("Met-loss+Acetyl")))
+                         metadata=list(modifications="Met-loss+Acetyl"))
     expect_equal(topdown:::.calculateFragments("MAC", type="x",
                                                modifications="Met-loss+Acetyl",
                                                neutralLoss=list(water=NULL)),
-                 fv2, tolerance=1e-7)
-    fv3 <- FragmentViews("CA", start=2:1, end=2, names=paste0("x", 1:2),
+                 fv4, tolerance=1e-7)
+    fv5 <- FragmentViews("CA", start=2:1, end=2, names=paste0("x", 1:2),
                          mass=c(116.034216, 276.064866 - 57.021464),
                          type=rep("x", 2), z=rep(1, 2),
-                         metadata=list(modifications=c("Met-loss+Acetyl")))
+                         metadata=list(modifications="Met-loss+Acetyl"))
     expect_equal(topdown:::.calculateFragments("MCA", type="x",
                                                modifications="Met-loss+Acetyl",
                                                neutralLoss=list(water=NULL)),
-                 fv3, tolerance=1e-7)
-    fv4 <- FragmentViews("CA", start=2:1, end=2, names=paste0("x", 1:2),
+                 fv5, tolerance=1e-7)
+    fv6 <- FragmentViews("CA", start=2:1, end=2, names=paste0("x", 1:2),
                          mass=c(116.034216, 219.043406),
                          type=rep("x", 2), z=rep(1, 2),
                          metadata=list(modifications=NULL))
     expect_equal(topdown:::.calculateFragments("CA", type="x",
                                                modifications=NULL,
                                                neutralLoss=list(water=NULL)),
-                 fv4, tolerance=1e-7)
+                 fv6, tolerance=1e-7)
 })
 
 test_that("show", {
