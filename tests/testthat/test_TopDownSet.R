@@ -187,6 +187,28 @@ test_that("filterIntensity", {
    expect_equal_TDS(filterIntensity(tds, 0.8), tdl)
 })
 
+test_that("filterNonReplicatedFragments", {
+    tdfit <- tds
+    tdfit$Sample <- rep(1:2, 3:2)
+
+    expect_error(filterNonReplicatedFragments(tdfit, minN="A"),
+                 "has to be a 'numeric'")
+    expect_error(filterNonReplicatedFragments(tdfit, minN=1:2),
+                 "length one")
+
+    expect_equal(filterNonReplicatedFragments(tdfit, minN=0),
+                 tdfit)
+    tdfitr <- tdfit
+    tdfitr@assay <- sparseMatrix(i=c(1:2, 1:2, 1),
+                                 j=rep(1:3, c(2, 2, 1)),
+                                 x=c(2:5, 7), dims=c(3, 5))
+    tdfitr@processing <- c(tdfitr@processing,
+                           paste0("[2017-07-31 22:15:00] 3 intensity values ",
+                                  "of fragments replicated < 2 times ",
+                                  "filtered."))
+    expect_equal_TDS(filterNonReplicatedFragments(tdfit, minN=2), tdfitr)
+})
+
 test_that("fragmentMass", {
     expect_error(fragmentMass(1L), "has to be an 'TopDownSet' object")
     expect_equal(fragmentMass(tds), 1:3 * 100)

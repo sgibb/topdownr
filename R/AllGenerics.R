@@ -34,3 +34,8 @@ if (is.null(getGeneric("filterIntensity"))) {
     setGeneric("filterIntensity",
                function(object, ...)standardGeneric("filterIntensity"))
 }
+if (is.null(getGeneric("filterNonReplicatedFragments"))) {
+    setGeneric("filterNonReplicatedFragments",
+               function(object, ...)
+                   standardGeneric("filterNonReplicatedFragments"))
+}

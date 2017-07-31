@@ -225,12 +225,12 @@ setMethod("filterInjectionTime", "TopDownSet",
         object <- object[, i]
         n1 <- ncol(object)
         nd <- n0 - n1
-        .tdsLogMsg(object, n0 - n1,
-                   " scan", if (nd > 1L) { "s" },
-                   " filtered with injection time deviation >= ",
-                   maxDeviation, " or rank >= ", keepTopN + 1L, ".")
-    } else {
-      object
+        object <- .tdsLogMsg(object, n0 - n1, " scan", if (nd > 1L) { "s" },
+                             " filtered with injection time deviation >= ",
+                             maxDeviation, " or rank >= ", keepTopN + 1L, ".")
+    }
+    if (validObject(object)) {
+        object
     }
 })
 
@@ -242,26 +242,59 @@ setMethod("filterInjectionTime", "TopDownSet",
 #' @noRd
 setMethod("filterIntensity", "TopDownSet",
           function(object, threshold, relative=TRUE) {
-   if (!is.numeric(threshold) || !length(threshold) == 1L) {
-       stop("'threshold' has to be a 'numeric' of length one.")
-   }
+    if (!is.numeric(threshold) || !length(threshold) == 1L) {
+        stop("'threshold' has to be a 'numeric' of length one.")
+    }
 
-   n0 <- nnzero(object@assay)
+    n0 <- nnzero(object@assay)
 
-   if (relative) {
-       if (1L < threshold || threshold < 0L) {
-           stop("'threshold hast to be between 0 and 1.")
-       }
-       object@assay <- .drop0rowLt(object@assay,
-                                   tol=.rowMax(object@assay) * threshold)
-   } else {
-       object@assay <- drop0(object@assay,
-                             tol=threshold - 10L * .Machine$double.eps,
-                             is.Csparse=TRUE)
-   }
-   n1 <- nnzero(object@assay)
-   .tdsLogMsg(object, n0 - n1, " intensity values < ",
-              threshold, if (relative) { " (relative)" }, " filtered.")
+    if (relative) {
+        if (1L < threshold || threshold < 0L) {
+            stop("'threshold hast to be between 0 and 1.")
+        }
+        object@assay <- .drop0rowLt(object@assay,
+                                    tol=.rowMax(object@assay) * threshold)
+    } else {
+        object@assay <- drop0(object@assay,
+                              tol=threshold - 10L * .Machine$double.eps,
+                              is.Csparse=TRUE)
+    }
+    n1 <- nnzero(object@assay)
+    object <- .tdsLogMsg(object, n0 - n1, " intensity values < ", threshold,
+                         if (relative) { " (relative)" }, " filtered.")
+    if (validObject(object)) {
+        object
+    }
+})
+
+#' @param object `TopDownSet`
+#' @param minN `numeric`, if less than `minN` of a fragment a found across
+#' technical replicates it is removed.
+#' @param by `list`, how technical repliactes are defined.
+#' @return `TopDownSet`
+#' @export
+#' @noRd
+setMethod("filterNonReplicatedFragments", "TopDownSet",
+          function(object, minN=2, by=object$Sample) {
+    if (!is.numeric(minN) || !length(minN) == 1L) {
+        stop("'minN' has to be a 'numeric' of length one.")
+    }
+    minN <- as.integer(minN)
+
+    n0 <- nnzero(object@assay)
+
+    object@assay <- .drop0rowReplicates(object@assay, .groupByLabels(by),
+                                        minN=minN)
+    n1 <- nnzero(object@assay)
+
+    if (n0 - n1) {
+        object <- .tdsLogMsg(object, n0 - n1, " intensity values of ",
+                             "fragments replicated < ", minN,
+                             " times filtered.")
+    }
+    if (validObject(object)) {
+        object
+    }
 })
 
 #' @param object `TopDownSet`
