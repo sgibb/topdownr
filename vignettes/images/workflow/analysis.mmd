@@ -1,0 +1,27 @@
+graph TD
+
+fCsv>".experiments.csv files<br/>(Method information)"]
+fTxt>".txt files<br/>(Scan information)"]
+fMzMl>".mzML files<br/>(Spectra information)"]
+fFasta>".fasta file<br/>(Protein sequence information)"]
+
+fCsv --> td(`readTopDownFiles`)
+fTxt --> td
+fMzMl --> td
+fFasta -- Predict fragments  --> td
+td -- Link method/scan header tables/deconvulted spectra/fragments --> tds(TopDownSet)
+
+tds -- Filter on injection times --> fit[`filterInjectionTime`]
+fit -- Filter on intensity values --> fiv[`filterIntensity`]
+fiv -- Filter on non-replicated fragments --> fnf[`filterNonReplicatedFragments`]
+fnf -- Aggregate technical replicates --> agg[`aggregate`]
+agg -.-> analysis(Further Analysis)
+
+classDef topdownClass fill:#2D882D,stroke:#004400
+classDef fileClass fill:#FFFFFF,stroke:#808080,stroke-width:2
+classDef infoClass fill:#FFFFFF,stroke:#000000
+classDef unknownClass fill:#B4E0B4,stroke:#004400,stroke-dasharray:5
+
+class td,tds,fit,fiv,fnf,agg topdownClass
+class fFasta,fCsv,fTxt,fMzMl fileClass
+class analysis unknownClass

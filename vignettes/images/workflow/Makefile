@@ -1,2 +1,4 @@
-all: workflow
-	mermaid -p workflow
+all: %.png
+
+%.png: %.mmd
+	mermaid -p $<
