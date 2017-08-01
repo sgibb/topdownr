@@ -1,0 +1,91 @@
+---
+title: "topdown"
+author:
+- name: Sebastian Gibb
+  affiliation: Department of Anesthesiology and Intensive Care, University Medicine Greifswald, Germany.
+- name: Pavel V. Shliaha
+  affiliation: Department of Biochemistry and Molecular Biology, University of Southern Denmark, Denmark.
+package: topdown
+abstract: >
+  This vignette describes the setup and the data preparation functionality
+  of the 'topdown' package.
+output:
+  BiocStyle::html_document2:
+    toc_float: true
+    tidy: TRUE
+bibliography: topdown.bib
+vignette: >
+  %\VignetteIndexEntry{TopDown Data Generation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteKeywords{Mass Spectrometry, Proteomics, Bioinformatics}
+  %\VignetteEncoding{UTF-8}
+  %\VignettePackage{topdown}
+---
+
+```{r environment, echo=FALSE}
+suppressPackageStartupMessages(library("topdown"))
+suppressPackageStartupMessages(library("BiocStyle"))
+```
+
+```{r include_forword, child="Foreword.md"}
+```
+
+```{r include_bugs, child="Bugs.md"}
+```
+
+# Introduction
+
+## The `topdown` data generation workflow
+
+![topdown data-generation](images/workflow/data-generation.mmd.png)
+
+# Setup
+
+## Setup the Thermo Software
+
+1. Install the workstation by running `OrbitrapFusionLumosWorkstation.exe`.
+2. Run `C:\Thermo\Instruments\TNG\OrbitrapFusionLumos\2.1\System\programs\TNGInstrumentConfigControl.exe`,
+   set *Optional Ion Source* to *ETD and Internal Calibration*, click *Apply* and *OK* (you could ignore the *restart your instrument* message).
+3. Replace `C:\Thermo\Instruments\TNG\OrbitrapFusionLumos\2.1\System\programs\Thermo.TNG.Calcium.MethodXML.dll` by `Thermo.TNG.Calcium.MethodXML.dll`.
+
+## Setup XMLMethodChanger
+
+**TODO:**: has to be easier and more user-friendly:
+Download and compile https://github.com/thermofisherlsms/meth-modifications
+
+## Setup Operating System
+
+In order to use `XMLMethodChanger` the operating system has to use the `.` (dot)
+as decimal mark and the `,` (comma) as digit group separator (one thousand dot
+two should be formated as `1,000.2`).
+
+In *Windows 7* the settings are located at `Windows Control Panel > Region and Language > Formats`.
+Choose *English (USA)* here or use the *Additional settings* button to change it
+manually.
+
+## Setup ScanHeadsman
+
+Download *ScanHeadsman* from https://bitbucket.org/caetera/scanheadsman
+
+It requires Microsoft **.NET 4.5** or later (it is often preinstalled on a typical modern Windows
+or could be found in Microsoft's Download Center, e.g.
+https://www.microsoft.com/en-us/download/details.aspx?id=30653).
+Additionally you would need Thermo's *MS File Reader* which could be downloaded
+free of charge (but you have to register) from the Thermo FlexNet website:
+https://thermo.flexnetoperations.com/
+
+*ScanHeadsman* was created by Vladimir Gorshkov.
+
+# Data preparation with `topdown`
+
+```{r load_package}
+library("topdown")
+```
+
+***TODO***
+
+```{r sessioninfo}
+sessionInfo()
+```
+
+# References
