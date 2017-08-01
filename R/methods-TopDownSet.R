@@ -308,6 +308,17 @@ setMethod("normalize", "TopDownSet",
 })
 
 #' @param object `TopDownSet`
+#' @return `TopDownSet`
+#' @export
+#' @noRd
+setMethod("removeEmptyConditions", "TopDownSet",
+          function(object) {
+    i <- Matrix::colSums(object@assay) != 0L
+    object <- object[, i]
+    .tdsLogMsg(object, sum(!i), " empty conditions removed.")
+})
+
+#' @param object `TopDownSet`
 #' @return `FragmentViews`
 #' @export
 #' @noRd

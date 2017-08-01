@@ -39,3 +39,7 @@ if (is.null(getGeneric("filterNonReplicatedFragments"))) {
                function(object, ...)
                    standardGeneric("filterNonReplicatedFragments"))
 }
+if (is.null(getGeneric("removeEmptyConditions"))) {
+    setGeneric("removeEmptyConditions",
+               function(object, ...)standardGeneric("removeEmptyConditions"))
+}

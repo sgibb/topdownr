@@ -275,6 +275,17 @@ test_that("readTopDownFiles", {
                  "Could not find any csv, fasta, mzML, txt files!")
 })
 
+test_that("removeEmptyConditions", {
+    tdr <- tds
+    tdrr <- tds[, c(1:2, 5)]
+    tdrr@processing <- c(tdrr@processing,
+                         paste0("[2017-08-01 22:25:00] ",
+                                "2 empty conditions removed."))
+    tdr@assay[cbind(c(1, 3), 3:4)] <- 0L
+    tdr@assay <- drop0(tdr@assay)
+    expect_equal_TDS(removeEmptyConditions(tdr), tdrr)
+})
+
 test_that("show", {
     expect_output(show(new("TopDownSet")),
                   "TopDownSet object \\([0-9]\\.[0-9]+ Mb\\)")
