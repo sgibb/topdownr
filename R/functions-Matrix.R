@@ -48,6 +48,7 @@
 #' @param group `character`/`numeric`, group identifier
 #' @param minN `integer`, minimal number of group members > 0
 #' @return `dgCMatrix`
+#' @noRd
 .drop0rowReplicates <- function(x, group, minN) {
    stopifnot(is(x, "dgCMatrix"))
    stopifnot(length(group) == ncol(x))
