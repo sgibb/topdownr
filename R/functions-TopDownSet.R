@@ -1,4 +1,4 @@
-#' @describeIn TopDownSet-class Constructor/Read top-down files.
+#' Read top-down files.
 #'
 #' It creates an [TopDownSet-class] object and is its only constructor.
 #'
