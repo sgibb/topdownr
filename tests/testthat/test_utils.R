@@ -5,6 +5,16 @@ test_that(".allIdentical", {
     expect_false(topdown:::.allIdentical(1:3))
 })
 
+test_that(".camelCase", {
+    expect_equal(topdown:::.camelCase(c("Monoisotopic M/Z", "SPS Mass 2",
+                                        "RT (min)", "MSLevel", "peaksCount",
+                                        "Multi.Inject.Info", "RF.Comp...ppm",
+                                        "SupplementalActivationCE")),
+                 c("MonoisotopicMz", "SpsMass2", "RtMin", "MsLevel",
+                   "PeaksCount", "MultiInjectInfo", "RfCompPpm",
+                   "SupplementalActivationCe"))
+})
+
 test_that("cat0", {
     expect_output(topdown:::cat0("foo", "bar"), "foobar")
 })
@@ -45,16 +55,6 @@ test_that(".fixFilterStringId", {
                  c(4:6, 8:10))
     expect_equal(topdown:::.fixFilterStringId(c(5, 5, 6, 8, 9, 9)),
                  c(4:6, 8:10))
-})
-
-test_that(".camelCase", {
-    expect_equal(topdown:::.camelCase(c("Monoisotopic M/Z", "SPS Mass 2",
-                                        "RT (min)", "MSLevel", "peaksCount",
-                                        "Multi.Inject.Info", "RF.Comp...ppm",
-                                        "SupplementalActivationCE")),
-                 c("MonoisotopicMz", "SpsMass2", "RtMin", "MsLevel",
-                   "PeaksCount", "MultiInjectInfo", "RfCompPpm",
-                   "SupplementalActivationCe"))
 })
 
 test_that(".formatNumbers", {
