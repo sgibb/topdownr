@@ -58,8 +58,10 @@ test_that(".camelCase", {
 })
 
 test_that(".formatNumbers", {
-    expect_equal(topdown:::.formatNumbers(1:10), sprintf("%02d", 1:10))
-    expect_equal(topdown:::.formatNumbers(c(1, 100)), sprintf("%03d", c(1, 100)))
+    expect_equal(topdown:::.formatNumbers(1:10), sprintf("%05.2f", 1:10))
+    expect_equal(topdown:::.formatNumbers(c(1, 100)), sprintf("%06.2f", c(1, 100)))
+    expect_equal(topdown:::.formatNumbers(c(1, 100) + 0.1),
+                 sprintf("%06.2f", c(1, 100) + 0.1))
 })
 
 test_that(".fragmentationMethod", {

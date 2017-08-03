@@ -130,7 +130,8 @@ cat0 <- function(...) {
 #' @return `character`
 #' @noRd
 .formatNumbers <- function(x) {
-    sprintf(paste0("%0", .ndigits(max(x)), "d"), x)
+    # + 3L = 2 place after the decimal point + the point itself
+    sprintf(paste0("%0", .ndigits(max(x)) + 3L, ".2f"), x)
 }
 
 #' Get fragmentation method from {ETD,CID,HCD}Activation
