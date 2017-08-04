@@ -145,14 +145,14 @@ test_that("filterCv", {
     expect_error(filterCv(tdfit, threshold=-1),
                  "greater than 0")
 
-    expect_equal(filterCv(tdfit, threshold=1), tdfit)
+    expect_equal(filterCv(tdfit, threshold=100), tdfit)
     tdfitr <- tdfit
     tdfitr@assay[c(1, 4, 7)] <- 0L
     tdfitr@assay <- drop0(tdfitr@assay)
     tdfitr@processing <- c(tdfitr@processing,
                            paste0("[2017-08-04 18:05:00] 3 fragments with ",
-                                  "CV > 0.4 filtered."))
-    expect_equal_TDS(filterCv(tdfit, threshold=0.4), tdfitr)
+                                  "CV > 40% filtered."))
+    expect_equal_TDS(filterCv(tdfit, threshold=40), tdfitr)
 })
 
 test_that("filterInjectionTime", {

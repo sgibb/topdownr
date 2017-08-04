@@ -195,7 +195,7 @@ setMethod("fragmentData", "TopDownSet", function(object, ...) {
 #' All fragments below a given threshold are removed.
 #'
 #' @param object `TopDownSet`
-#' @param threshold max allowed cv.
+#' @param threshold max allowed CV in percent (`sd/mean * 100 < threshold`).
 #' @param by `list`, how technical repliactes are defined.
 #' @return `TopDownSet`
 #' @export
@@ -215,13 +215,13 @@ setMethod("filterCv", "TopDownSet",
     group <- .groupByLabels(by)
     mm <- .createMaskMatrix(group)
     cvs <- tcrossprod(.rowCvsGroup(object@assay, group, na.rm=TRUE), mm)
-    object@assay[Matrix::which(cvs > threshold)] <- 0L
+    object@assay[Matrix::which(cvs * 100L > threshold)] <- 0L
     object@assay <- drop0(object@assay, is.Csparse=TRUE)
 
     n1 <- nnzero(object@assay)
     if (n0 - n1) {
         object <- .tdsLogMsg(object, n0 - n1, " fragments with CV > ",
-                             threshold, " filtered.")
+                             threshold, "% filtered.")
 
     }
     if (validObject(object)) {
