@@ -274,9 +274,16 @@ setMethod("filterInjectionTime", "TopDownSet",
     }
 })
 
+#' Filter `TopDownSet` by intensity.
+#'
+#' Filtering is done by removing all fragments that are below a given
+#' (absolute/relative) intensity threshold.
+#
 #' @param object `TopDownSet`
-#' @param threshold `double`, remove fragments with intensity below threshold
-#' @param relative `logical`, relativ to max in fragments
+#' @param threshold `double`, remove fragments with intensity below
+#' `threshold`.
+#' @param relative `logical`, if relative is `TRUE` all fragments with
+#' intensity below `threshold * max(intensity)` per fragment are removed.
 #' @return `TopDownSet`
 #' @export
 #' @noRd
@@ -310,8 +317,13 @@ setMethod("filterIntensity", "TopDownSet",
     }
 })
 
+#' Filter `TopDownSet` by intensity.
+#'
+#' Filtering is done by removing all fragments that don't replicate across
+#' technical replicates.
+#'
 #' @param object `TopDownSet`
-#' @param minN `numeric`, if less than `minN` of a fragment a found across
+#' @param minN `numeric`, if less than `minN` of a fragment are found across
 #' technical replicates it is removed.
 #' @param by `list`, how technical repliactes are defined.
 #' @return `TopDownSet`
