@@ -107,4 +107,14 @@ test_that(".rowSumsGroup", {
     expect_equal(t(topdown:::.rowSumsGroup(t(m), group=rep(1:2, 2))),
                  topdown:::.colSumsGroup(m, group=rep(1:2, 2)))
 
+    ## na.rm
+    n <- m
+    n[cbind(c(1, 3, 3, 2, 2), c(1, 1, 2, 7, 8))] <- NA
+    r[cbind(c(1, 3, 2), c(1, 1, 4))] <- NA
+    expect_equal(topdown:::.rowSumsGroup(n, group=rep(1:5, each=2),
+                                         na.rm=FALSE), r)
+    r[cbind(c(1, 3, 2), c(1, 1, 4))] <- c(2, 0, 0)
+    r <- drop0(r)
+    expect_equal(topdown:::.rowSumsGroup(n, group=rep(1:5, each=2),
+                                         na.rm=TRUE), r)
 })

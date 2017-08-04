@@ -120,10 +120,16 @@
 #'
 #' @param x `Matrix`
 #' @param group `integer`/`character` group identifier
+#' @param na.rm `logical`, should `NA`s removed?
 #' @return `sparseMatrix`
 #' @noRd
-.rowSumsGroup <- function(x, group) {
+.rowSumsGroup <- function(x, group, na.rm=TRUE) {
     stopifnot(is(x, "Matrix"))
     stopifnot(ncol(x) == length(group))
+
+    if (na.rm) {
+        x@x[is.na(x@x)] <- 0L
+        x <- drop0(x)
+    }
     x %*% .createMaskMatrix(group)
 }
