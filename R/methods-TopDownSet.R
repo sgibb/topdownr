@@ -300,8 +300,11 @@ setMethod("filterIntensity", "TopDownSet",
                               is.Csparse=TRUE)
     }
     n1 <- nnzero(object@assay)
-    object <- .tdsLogMsg(object, n0 - n1, " intensity values < ", threshold,
-                         if (relative) { " (relative)" }, " filtered.")
+    if (n0 - n1) {
+        object <- .tdsLogMsg(object, n0 - n1, " intensity values < ",
+                             threshold, if (relative) { " (relative)" },
+                             " filtered.")
+    }
     if (validObject(object)) {
         object
     }
