@@ -87,6 +87,45 @@ test_that(".normaliseRows", {
                     "dgCMatrix"))
 })
 
+test_that(".rowCvsGroup", {
+    .rowcvs <- function(x, group, na.rm=TRUE) {
+        l <- lapply(split(1L:ncol(x), group), function(i) {
+            apply(x[, i, drop=FALSE], 1, function(xx) {
+                      sd(xx, na.rm=na.rm) / mean(xx, na.rm=na.rm)
+            })
+        })
+        do.call(cbind, l)
+    }
+    bm <- as.matrix(m)
+    bm[bm == 0L] <- NA
+    group <- rep(1:5, each=2)
+    bmr <- .rowcvs(bm, group)
+    dimnames(bmr) <- NULL
+    mr <- as.matrix(topdown:::.rowCvsGroup(m, group))
+    mr[mr == 0L] <- NA
+    dimnames(mr) <- NULL
+    expect_equal(bmr, mr)
+
+    n <- m
+    n[cbind(c(1, 3, 3, 2, 2), c(1, 1, 2, 7, 8))] <- NA
+    bn <- as.matrix(n)
+    bn[bn == 0L] <- NA
+    group <- rep(1:2, each=5)
+    bnr <- .rowcvs(bn, group, na.rm=FALSE)
+    dimnames(bnr) <- NULL
+    nr <- as.matrix(topdown:::.rowCvsGroup(n, group, na.rm=FALSE))
+    nr[nr == 0L] <- NA
+    dimnames(nr) <- NULL
+    expect_equal(bnr, nr)
+
+    bnr <- .rowcvs(bn, group, na.rm=TRUE)
+    dimnames(bnr) <- NULL
+    nr <- as.matrix(topdown:::.rowCvsGroup(n, group, na.rm=TRUE))
+    nr[nr == 0L] <- NA
+    dimnames(nr) <- NULL
+    expect_equal(bnr, nr)
+})
+
 test_that(".rowMax", {
     expect_error(topdown:::.rowMax(matrix(1:10, ncol=2)))
     expect_equal(topdown:::.rowMax(m), sparseVector(c(5, 10, 15, 20), 1:4, 4))
@@ -122,7 +161,6 @@ test_that(".rowMeansGroup", {
     r[cbind(1:3, c(1, 2, 1))] <- c(14/4, 25/3, 14)
     expect_equal(topdown:::.rowMeansGroup(n, group=rep(1:2, each=5),
                                           na.rm=TRUE), r)
-
 })
 
 test_that(".rowSdsGroup", {

@@ -100,6 +100,21 @@
    x
 }
 
+#' rowCvs groupwise, similar to rowsum but for sparceMatrices
+#'
+#' @param x `Matrix`
+#' @param group `integer`/`character` group identifier
+#' @param na.rm `logical`, should `NA`s removed?
+#' @return `sparseMatrix`
+#' @noRd
+.rowCvsGroup <- function(x, group, na.rm=TRUE) {
+    y <- .rowSdsGroup(x, group, na.rm)
+    i <- Matrix::which(y != 0L)
+    m <- .rowMeansGroup(x, group, na.rm)
+    y@x <- y@x / m[i]
+    y
+}
+
 #' rowMax row-wise maximum, similar to apply(x, 1, max) but faster on
 #' sparseMatrix
 #'
@@ -151,7 +166,6 @@
     }
     nna@x[] <- 1L
     nna <- .rowSumsGroup(nna, group=group, na.rm=na.rm)
-    #nna@x[nna@x < 2L] <- NA_real_ # return NA if n < 2 (similar to sd)
     nna@x[nna@x < 2L] <- NA_real_ # return NA if n < 2 (similar to sd)
     var <- .rowMeansGroup(x * x, group=group, na.rm=na.rm) -
         .rowMeansGroup(x, group=group, na.rm=na.rm)^2L
