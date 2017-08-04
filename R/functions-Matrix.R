@@ -105,15 +105,20 @@
 #'
 #' @param x `Matrix`
 #' @param group `integer`/`character` group identifier
+#' @param na.rm `logical`, should `NA`s removed?
 #' @return `sparseMatrix`
 #' @noRd
-.rowMeansGroup <- function(x, group) {
-   stopifnot(is(x, "Matrix"))
-   stopifnot(ncol(x) == length(group))
-   mm <- .createMaskMatrix(group)
-   m <- (x %*% mm)
-   m@x <- m@x / ((x != 0L) %*% mm)@x
-   m
+.rowMeansGroup <- function(x, group, na.rm=TRUE) {
+    stopifnot(is(x, "Matrix"))
+    stopifnot(ncol(x) == length(group))
+    if (na.rm) {
+        x@x[is.na(x@x)] <- 0L
+        x <- drop0(x)
+    }
+    mm <- .createMaskMatrix(group)
+    m <- (x %*% mm)
+    m@x <- m@x / ((x != 0L) %*% mm)@x
+    m
 }
 
 #' rowSums groupwise, similar to rowsum but for sparceMatrices

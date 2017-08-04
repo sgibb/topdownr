@@ -95,6 +95,17 @@ test_that(".rowMeansGroup", {
     expect_error(topdown:::.rowMeansGroup(m, group=1:2))
     expect_equal(topdown:::.rowMeansGroup(m, group=rep(1:2, each=5)), r)
     expect_equal(topdown:::.rowMeansGroup(t(m), group=rep(1:2, 2)), r2)
+
+    ## na.rm
+    n <- m
+    n[cbind(c(1, 3, 3, 2, 2), c(1, 1, 2, 7, 8))] <- NA
+    r[cbind(1:3, c(1, 2, 1))] <- NA
+    expect_equal(topdown:::.rowMeansGroup(n, group=rep(1:2, each=5),
+                                          na.rm=FALSE), r)
+    r[cbind(1:3, c(1, 2, 1))] <- c(14/4, 25/3, 14)
+    expect_equal(topdown:::.rowMeansGroup(n, group=rep(1:2, each=5),
+                                          na.rm=TRUE), r)
+
 })
 
 test_that(".rowSumsGroup", {
