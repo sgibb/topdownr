@@ -36,10 +36,10 @@
 }
 
 .drop0rowLt <- function(x, tol) {
-   stopifnot(is(x, "dgCMatrix"))
-   stopifnot(length(tol) == nrow(x))
-   x@x[x@x < as.vector(tol)[x@i + 1L]] <- 0L
-   drop0(x, tol=0L, is.Csparse=TRUE)
+    stopifnot(is(x, "dgCMatrix"))
+    stopifnot(length(tol) == nrow(x))
+    x@x[x@x < as.vector(tol)[x@i + 1L]] <- 0L
+    drop0(x, tol=0L, is.Csparse=TRUE)
 }
 
 #' drop0 but just row-wise groups with fewer than minN entries per group
@@ -50,16 +50,16 @@
 #' @return `dgCMatrix`
 #' @noRd
 .drop0rowReplicates <- function(x, group, minN) {
-   stopifnot(is(x, "dgCMatrix"))
-   stopifnot(length(group) == ncol(x))
-   stopifnot(is.integer(minN) && length(minN) == 1L)
-   m <- .createMaskMatrix(group)
-   l <- tcrossprod(as(x, "lgCMatrix") %*% m, # identical to .rowSumsGroup
-                   m)
-   l@x[l@x < minN] <- 0L
-   l <- drop0(l, tol=0L, is.Csparse=TRUE)
-   l@x[] <- 1L
-   x * l
+    stopifnot(is(x, "dgCMatrix"))
+    stopifnot(length(group) == ncol(x))
+    stopifnot(is.integer(minN) && length(minN) == 1L)
+    m <- .createMaskMatrix(group)
+    l <- tcrossprod(as(x, "lgCMatrix") %*% m, # identical to .rowSumsGroup
+                    m)
+    l@x[l@x < minN] <- 0L
+    l <- drop0(l, tol=0L, is.Csparse=TRUE)
+    l@x[] <- 1L
+    x * l
 }
 
 #' drop0 but for `NA`
