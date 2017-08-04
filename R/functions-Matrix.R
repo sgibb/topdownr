@@ -93,12 +93,13 @@
 #' sparseMatrix
 #'
 #' @param x `dgCMatrix`
+#' @param na.rm `logical`, should `NA`s removed?
 #' @return `sparseVector`
 #' @noRd
-.rowMax <- function(x) {
-   stopifnot(is(x, "dgCMatrix"))
-   sparseVector(.vapply1d(split(x@x, x@i), max),
-                i=sort.int(unique(x@i)) + 1L, length=nrow(x))
+.rowMax <- function(x, na.rm=TRUE) {
+    stopifnot(is(x, "dgCMatrix"))
+    sparseVector(.vapply1d(split(x@x, x@i), max, na.rm=na.rm),
+                 i=sort.int(unique(x@i)) + 1L, length=nrow(x))
 }
 
 #' rowMeans groupwise, similar to rowsum but for sparceMatrices

@@ -82,6 +82,13 @@ test_that(".rowMax", {
     expect_equal(topdown:::.rowMax(m), sparseVector(c(5, 10, 15, 20), 1:4, 4))
     expect_equal(as.vector(topdown:::.rowMax(m)), c(5, 10, 15, 20))
     expect_equal(as.vector(topdown:::.rowMax(t(m))), 11:20)
+
+    ## na.rm
+    n <- m
+    n[cbind(c(1, 3, 3, 2, 2), c(1, 1, 2, 7, 8))] <- NA
+    expect_equal(as.vector(topdown:::.rowMax(n, na.rm=FALSE)),
+                           c(rep(NA, 3), 20))
+    expect_equal(as.vector(topdown:::.rowMax(n, na.rm=TRUE)), c(5, 10, 15, 20))
 })
 
 test_that(".rowMeansGroup", {
