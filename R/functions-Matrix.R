@@ -62,6 +62,17 @@
    x * l
 }
 
+#' drop0 but for `NA`
+#'
+#' @param x `dgCMatrix`
+#' @return `dgCMatrix`
+#' @noRd
+.dropNA <- function(x) {
+    stopifnot(is(x, "dgCMatrix"))
+    x@x[is.na(x@x)] <- 0L
+    drop0(x, tol=0L, is.Csparse=TRUE)
+}
+
 #' calculate rect coordinates for a Matrix
 #'
 #' @param x `Matrix`
@@ -113,8 +124,7 @@
     stopifnot(is(x, "Matrix"))
     stopifnot(ncol(x) == length(group))
     if (na.rm) {
-        x@x[is.na(x@x)] <- 0L
-        x <- drop0(x)
+        x <- .dropNA(x)
     }
     mm <- .createMaskMatrix(group)
     m <- (x %*% mm)
@@ -132,10 +142,8 @@
 .rowSumsGroup <- function(x, group, na.rm=TRUE) {
     stopifnot(is(x, "Matrix"))
     stopifnot(ncol(x) == length(group))
-
     if (na.rm) {
-        x@x[is.na(x@x)] <- 0L
-        x <- drop0(x)
+        x <- .dropNA(x)
     }
     x %*% .createMaskMatrix(group)
 }

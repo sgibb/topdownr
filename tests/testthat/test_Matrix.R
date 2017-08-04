@@ -61,6 +61,16 @@ test_that(".drop0rowReplicates", {
                               x=c(2:5, 7), dims=c(3, 5)))
 })
 
+test_that(".dropNA", {
+    r <- sparseMatrix(i=rep(1:4, each=3), j=rep(c(3:5, 8:10), 2),
+                      x=c(3:5, 8:10, 13:15, 18:20))
+    n <- m
+    n[cbind(rep(1:4, each=2), rep(c(1:2, 6:7), 2))] <- NA
+    expect_error(topdown:::.dropNA(matrix(1:10, ncol=2)))
+    expect_equal(topdown:::.dropNA(m), m)
+    expect_equal(topdown:::.dropNA(n), r)
+})
+
 test_that(".m2rect", {
     m <- sparseMatrix(i=rep(1:2, each=5), j=1:10, x=1:10)
     r <- cbind(xleft=rep(0:1, each=5), ybottom=0:9,
