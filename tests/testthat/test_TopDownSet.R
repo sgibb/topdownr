@@ -134,6 +134,27 @@ test_that("dimnames", {
     expect_equal(dimnames(tds), list(c("c1", "c2", "x1"), NULL))
 })
 
+test_that("filterCv", {
+    tdfit <- tds
+    tdfit$Sample <- rep(1:2, 3:2)
+
+    expect_error(filterCv(tdfit, threshold="A"),
+                 "has to be a 'numeric'")
+    expect_error(filterCv(tdfit, threshold=1:2),
+                 "length one")
+    expect_error(filterCv(tdfit, threshold=-1),
+                 "greater than 0")
+
+    expect_equal(filterCv(tdfit, threshold=1), tdfit)
+    tdfitr <- tdfit
+    tdfitr@assay[c(1, 4, 7)] <- 0L
+    tdfitr@assay <- drop0(tdfitr@assay)
+    tdfitr@processing <- c(tdfitr@processing,
+                           paste0("[2017-08-04 18:05:00] 3 fragments with ",
+                                  "CV > 0.4 filtered."))
+    expect_equal_TDS(filterCv(tdfit, threshold=0.4), tdfitr)
+})
+
 test_that("filterInjectionTime", {
     tdfit <- tds
     tdfit$IonInjectionTimeMs <- c(1:3, 2:3)

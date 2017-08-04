@@ -189,6 +189,46 @@ setMethod("fragmentData", "TopDownSet", function(object, ...) {
     rowViews(object)
 })
 
+#' Filter `TopDownSet` by CV.
+#'
+#' Filtering is done by coefficent of variation across technical replicates.
+#' All fragments below a given threshold are removed.
+#'
+#' @param object `TopDownSet`
+#' @param threshold max allowed cv.
+#' @param by `list`, how technical repliactes are defined.
+#' @return `TopDownSet`
+#' @export
+#' @noRd
+setMethod("filterCv", "TopDownSet",
+          function(object, threshold, by=object$Sample) {
+    if (!is.numeric(threshold) || !length(threshold) == 1L) {
+      stop("'threshold' has to be a 'numeric' of length one.")
+    }
+
+    if (threshold < 0) {
+      stop("'threshold' has to be greater than 0.")
+    }
+
+    n0 <- nnzero(object@assay)
+
+    group <- .groupByLabels(by)
+    mm <- .createMaskMatrix(group)
+    cvs <- tcrossprod(.rowCvsGroup(object@assay, group, na.rm=TRUE), mm)
+    object@assay[Matrix::which(cvs > threshold)] <- 0L
+    object@assay <- drop0(object@assay, is.Csparse=TRUE)
+
+    n1 <- nnzero(object@assay)
+    if (n0 - n1) {
+        object <- .tdsLogMsg(object, n0 - n1, " fragments with CV > ",
+                             threshold, " filtered.")
+
+    }
+    if (validObject(object)) {
+        object
+    }
+})
+
 #' Filter `TopDownSet` by ion injection time.
 #'
 #' Filtering is done by maximal allowed deviation and just the technical

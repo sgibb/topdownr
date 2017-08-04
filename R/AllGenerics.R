@@ -26,6 +26,10 @@ if (is.null(getGeneric("conditionData<-"))) {
     setGeneric("conditionData<-",
                function(object, ..., value)standardGeneric("conditionData<-"))
 }
+if (is.null(getGeneric("filterCv"))) {
+    setGeneric("filterCv",
+               function(object, ...)standardGeneric("filterCv"))
+}
 if (is.null(getGeneric("filterInjectionTime"))) {
     setGeneric("filterInjectionTime",
                function(object, ...)standardGeneric("filterInjectionTime"))

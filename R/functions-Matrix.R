@@ -54,7 +54,9 @@
     stopifnot(length(group) == ncol(x))
     stopifnot(is.integer(minN) && length(minN) == 1L)
     m <- .createMaskMatrix(group)
-    l <- tcrossprod(as(x, "lgCMatrix") %*% m, # identical to .rowSumsGroup
+    l <- x
+    l@x[] <- 1L
+    l <- tcrossprod(l %*% m, # identical to .rowSumsGroup
                     m)
     l@x[l@x < minN] <- 0L
     l <- drop0(l, tol=0L, is.Csparse=TRUE)
@@ -160,7 +162,6 @@
 
     if (na.rm) {
         nna <- .dropNA(x)
-        nna@x[] <- 1L
     } else {
         nna <- x
     }
