@@ -125,6 +125,43 @@ test_that(".rowMeansGroup", {
 
 })
 
+test_that(".rowSdsGroup", {
+    .rowsds <- function(x, group, na.rm=TRUE) {
+        l <- lapply(split(1L:ncol(x), group), function(i) {
+            apply(x[, i, drop=FALSE], 1, sd, na.rm=na.rm)
+        })
+        do.call(cbind, l)
+    }
+    bm <- as.matrix(m)
+    bm[bm == 0L] <- NA
+    group <- rep(1:5, each=2)
+    bmr <- .rowsds(bm, group)
+    dimnames(bmr) <- NULL
+    mr <- as.matrix(topdown:::.rowSdsGroup(m, group))
+    mr[mr == 0L] <- NA
+    dimnames(mr) <- NULL
+    expect_equal(bmr, mr)
+
+    n <- m
+    n[cbind(c(1, 3, 3, 2, 2), c(1, 1, 2, 7, 8))] <- NA
+    bn <- as.matrix(n)
+    bn[bn == 0L] <- NA
+    group <- rep(1:2, each=5)
+    bnr <- .rowsds(bn, group, na.rm=FALSE)
+    dimnames(bnr) <- NULL
+    nr <- as.matrix(topdown:::.rowSdsGroup(n, group, na.rm=FALSE))
+    nr[nr == 0L] <- NA
+    dimnames(nr) <- NULL
+    expect_equal(bnr, nr)
+
+    bnr <- .rowsds(bn, group, na.rm=TRUE)
+    dimnames(bnr) <- NULL
+    nr <- as.matrix(topdown:::.rowSdsGroup(n, group, na.rm=TRUE))
+    nr[nr == 0L] <- NA
+    dimnames(nr) <- NULL
+    expect_equal(bnr, nr)
+})
+
 test_that(".rowSumsGroup", {
     r <- sparseMatrix(i=rep(1:4, each=3),
                       j=rep(c(1:3, 3:5), 2),

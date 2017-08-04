@@ -132,6 +132,36 @@
     m
 }
 
+#' rowSds groupwise, similar to rowsum but for sparceMatrices
+#'
+#' @param x `Matrix`
+#' @param group `integer`/`character` group identifier
+#' @param na.rm `logical`, should `NA`s removed?
+#' @return `sparseMatrix`
+#' @noRd
+.rowSdsGroup <- function(x, group, na.rm=TRUE) {
+    stopifnot(is(x, "Matrix"))
+    stopifnot(ncol(x) == length(group))
+
+    if (na.rm) {
+        nna <- .dropNA(x)
+        nna@x[] <- 1L
+    } else {
+        nna <- x
+    }
+    nna@x[] <- 1L
+    nna <- .rowSumsGroup(nna, group=group, na.rm=na.rm)
+    #nna@x[nna@x < 2L] <- NA_real_ # return NA if n < 2 (similar to sd)
+    nna@x[nna@x < 2L] <- NA_real_ # return NA if n < 2 (similar to sd)
+    var <- .rowMeansGroup(x * x, group=group, na.rm=na.rm) -
+        .rowMeansGroup(x, group=group, na.rm=na.rm)^2L
+    nna1 <- nna
+    nna1@x <- nna1@x - 1L
+    var@x <- (var * nna)@x / nna1@x
+    # we want a sparse matrix; NA == missing, we dropNA
+    .dropNA(sqrt(var))
+}
+
 #' rowSums groupwise, similar to rowsum but for sparceMatrices
 #'
 #' @param x `Matrix`
