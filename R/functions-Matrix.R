@@ -84,22 +84,34 @@
 #' col index is y), and color
 #' @noRd
 .m2rect <- function(x, width=1L, height=1L) {
-   stopifnot(is(x, "Matrix"))
-   dp <- diff(x@p)
-   y <- rep(seq_along(dp), dp) - 1L
-   cbind(xleft=x@i, ybottom=y, xright=x@i + width, ytop=y + height, col=x@x)
+    stopifnot(is(x, "Matrix"))
+    dp <- diff(x@p)
+    y <- rep(seq_along(dp), dp) - 1L
+    cbind(xleft=x@i, ybottom=y, xright=x@i + width, ytop=y + height, col=x@x)
 }
 
-#' normalise (row-wise scale) to 0:1
+#' normalise (col-wise scale)
 #'
 #' @param x `dgCMatrix`
+#' @param scale `double`, scale variable
 #' @return `dgCMatrix`
 #' @noRd
-.normaliseRows <- function(x) {
-   stopifnot(is(x, "dgCMatrix"))
-   scale <- .rowMax(x)
-   x@x <- x@x / scale[x@i + 1L]
-   x
+.normaliseCols <- function(x, scale=.rowMax(t(x))) {
+    t(.normaliseRows(t(x), scale=scale))
+}
+
+#' normalise (row-wise scale)
+#'
+#' @param x `dgCMatrix`
+#' @param scale `double`, scale variable
+#' @return `dgCMatrix`
+#' @noRd
+.normaliseRows <- function(x, scale=.rowMax(x)) {
+    stopifnot(is(x, "dgCMatrix"))
+    stopifnot((is.numeric(scale) || is(scale, "sparseVector")) &&
+              (length(scale) == 1L || length(scale) == nrow(x)))
+    x@x <- x@x / scale[x@i + 1L]
+    x
 }
 
 #' rowCvs groupwise, similar to rowsum but for sparceMatrices

@@ -80,10 +80,28 @@ test_that(".m2rect", {
     expect_equal(topdown:::.m2rect(m), r)
 })
 
+
+test_that(".normaliseCols", {
+    expect_error(topdown:::.normaliseCols(matrix(1:10, nrow=2)))
+    expect_error(topdown:::.normaliseCols(m, "A"))
+    expect_error(topdown:::.normaliseCols(m, 1:2))
+    expect_equal(topdown:::.normaliseCols(m),
+                 as((scale(m, center=FALSE, scale=11:20)),
+                    "dgCMatrix"))
+    expect_equal(topdown:::.normaliseCols(m, 11:20),
+                 as((scale(m, center=FALSE, scale=11:20)),
+                    "dgCMatrix"))
+})
+
 test_that(".normaliseRows", {
     expect_error(topdown:::.normaliseRows(matrix(1:10, nrow=2)))
+    expect_error(topdown:::.normaliseRows(m, "A"))
+    expect_error(topdown:::.normaliseRows(m, 1:2))
     expect_equal(topdown:::.normaliseRows(m),
                  as((t(scale(t(m), center=FALSE, scale=c(5, 10, 15, 20)))),
+                    "dgCMatrix"))
+    expect_equal(topdown:::.normaliseRows(m, 1:4),
+                 as((t(scale(t(m), center=FALSE, scale=1:4))),
                     "dgCMatrix"))
 })
 

@@ -287,8 +287,16 @@ test_that("normalize", {
                               x=2:9/c(7, 9, 7, 9, 8, 7, 8, 9))
     tdn@processing <- c(tdn@processing,
                         paste0("[2017-07-16 14:00:02] ",
-                               "Fragment intensity values normalized."))
-    expect_equal_TDS(normalize(tds), tdn)
+                               "Fragment intensity values normalized to max."))
+    expect_equal_TDS(normalize(tds, method="fragments"), tdn)
+    tds$TotIonCurrent <- c(10, 20, 10, 10, 20)
+    tdn <- tds
+    tdn@assay <- t(t(tds@assay) / tdn$TotIonCurrent)
+    tdn@processing <- c(tdn@processing,
+                        paste0("[2017-08-06 14:50:00] ",
+                               "Scan/Condition intensity values normalized ",
+                               "to TIC."))
+    expect_equal_TDS(normalize(tds, method="TIC"), tdn)
 })
 
 test_that("readTopDownFiles", {
