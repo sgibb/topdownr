@@ -189,12 +189,15 @@ fragmentType <- function(object) {
     selN <- fragmentType(object) %in% nterm
     selC <- fragmentType(object) %in% cterm
     mn[!selN, ] <- 0L
+    mn <- drop0(mn)
     mc[!selC, ] <- 0L
+    mc <- drop0(mc)
 
     mn <- as(.colSumsGroup(mn, w) > 0L, "dgCMatrix")
     mc <- as(.colSumsGroup(mc, max(w) + 1L - w) > 0L, "dgCMatrix")
     mc@x[] <- 2
     mn + mc
+    drop0(mn + mc)
 }
 
 #' Add log message.
