@@ -112,16 +112,31 @@
     ## drop MS1
     d <- d[d$MsOrder == 2L, ]
 
-    # TODO: somehow the FilterString doesn't always contains the right mass
-    # label.
-    # For now we just take the first non-duplicated (unique) condition
-    # disabled: d$Condition <- as.integer(.filterStringToId(d$FilterString))
-    #
-    # See the following issues for details:
-    # - https://github.com/sgibb/topdown/issues/14
-    # - https://github.com/sgibb/topdown/issues/25
-    d$FilterString <- .fixFilterString(d$FilterString)
-    d$Condition <- cumsum(!duplicated(d$FilterString))
+    ## Somehow the FilterString doesn't always contains the right mass
+    ## label and we have to correct them.
+    ## See also:
+    ## - https://github.com/sgibb/topdown/issues/25
+    fixedFilterStrings <- .fixFilterString(d$FilterString)
+    if (nFixed <- sum(fixedFilterStrings != d$FilterString)) {
+        warning(nFixed, " FilterString entries modified because of ",
+                "duplicated ID for different conditions.",
+                immediate.=verbose)
+    }
+    d$FilterString <- fixedFilterStrings
+
+    d$Condition <- as.integer(.filterStringToId(d$FilterString))
+
+    ## Sometimes skips happen and the ID is not the same as in the FilterString
+    ## (happens often in the missing_scans files)
+    ## See also:
+    ## - https://github.com/sgibb/topdown/issues/14
+    if (is.unsorted(d$Condition)) {
+        warning("ID in FilterString are not sorted in ascending order. ",
+                "Introduce own condition ID via 'cumsum'.",
+                immediate.=verbose)
+        d$Condition <- cumsum(
+            c(TRUE, d$FilterString[-1L] != d$FilterString[-nrow(d)]))
+    }
 
     d[is.na(d)] <- 0L
 

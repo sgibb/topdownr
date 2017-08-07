@@ -80,6 +80,7 @@ test_that(".readScanHeadsTable", {
                     Energy2=c(NA, 30, 30, 20, 10),
                     stringsAsFactors=FALSE)
     write.csv(d, file=fn, row.names=FALSE)
+    on.exit(unlink(fn))
     expect_message(h <- topdown:::.readScanHeadsTable(fn, verbose=TRUE),
                    "Reading 5 header information from file")
     expect_equal(colnames(h),
@@ -91,12 +92,55 @@ test_that(".readScanHeadsTable", {
     expect_equal(h$EtdActivation, c(50, 50, 0, 0))
     expect_equal(h$CidActivation, c(0, 0, 20, 20))
     expect_equal(h$HcdActivation, c(30, 30, 0, 10))
-    # TODO: FilterStrings are not unique in .experiment.csv files
-    # see issue #14
-    #expect_equal(h$Condition, c(1, 7, 9))
-    expect_equal(h$Condition, c(1, 1:3))
+    expect_equal(h$Condition, c(1, 1, 7, 9))
     expect_equal(h$File, rep(gsub("\\.txt$", "", basename(fn)), 4))
-    unlink(fn)
+
+    ## .fixFilterString needed
+    d <- data.frame(MSOrder=c(1, 2, 2, 2, 2),
+                    FilterString=c("ms2 100.0001@etd", "ms2 100.0001@hcd",
+                                   "ms2 100.0001@hcd", "ms2 100.0001@cid",
+                                   "ms2 100.0003@hcd"),
+                    Activation1=c("ETD", "ETD", "ETD", "HCD", "CID"),
+                    Activation2=c(NA, "HCD", "HCD", "CID", "HCD"),
+                    Energy1=c(10, 50, 50, NA, 20),
+                    Energy2=c(NA, 30, 30, 20, 10),
+                    stringsAsFactors=FALSE)
+    write.csv(d, file=fn, row.names=FALSE)
+    expect_warning(h <- topdown:::.readScanHeadsTable(fn, verbose=TRUE),
+                   "1 FilterString entries modified")
+    expect_equal(h$Condition, c(1, 1:3))
+
+    ## .fixFilterString needed;
+    ## https://github.com/sgibb/topdown/issues/25
+    d <- data.frame(MSOrder=c(1, 2, 2, 2, 2),
+                    FilterString=c("ms2 100.0001@etd", "ms2 100.0001@hcd",
+                                   "ms2 100.0001@hcd", "ms2 100.0001@cid",
+                                   "ms2 100.0003@hcd"),
+                    Activation1=c("ETD", "ETD", "ETD", "HCD", "CID"),
+                    Activation2=c(NA, "HCD", "HCD", "CID", "HCD"),
+                    Energy1=c(10, 50, 50, NA, 20),
+                    Energy2=c(NA, 30, 30, 20, 10),
+                    stringsAsFactors=FALSE)
+    write.csv(d, file=fn, row.names=FALSE)
+    expect_warning(h <- topdown:::.readScanHeadsTable(fn, verbose=TRUE),
+                   "1 FilterString entries modified")
+    expect_equal(h$Condition, c(1, 1:3))
+
+    ## duplicated IDs in different order (missing scans files)
+    ## https://github.com/sgibb/topdown/issues/14
+    d <- data.frame(MSOrder=c(1, 2, 2, 2, 2),
+                    FilterString=c("ms2 100.0001@etd", "ms2 100.0001@hcd",
+                                   "ms2 100.0001@hcd", "ms2 100.0007@cid",
+                                   "ms2 100.0001@hcd"),
+                    Activation1=c("ETD", "ETD", "ETD", "HCD", "CID"),
+                    Activation2=c(NA, "HCD", "HCD", "CID", "HCD"),
+                    Energy1=c(10, 50, 50, NA, 20),
+                    Energy2=c(NA, 30, 30, 20, 10),
+                    stringsAsFactors=FALSE)
+    write.csv(d, file=fn, row.names=FALSE)
+    expect_warning(h <- topdown:::.readScanHeadsTable(fn, verbose=FALSE),
+                   "not sorted in ascending order")
+    expect_equal(h$Condition, c(1, 1:3))
 })
 
 test_that(".mergeScanConditionAndHeaderInformation", {
