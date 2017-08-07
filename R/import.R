@@ -198,7 +198,7 @@
 .mergeScanConditionAndHeaderInformation <- function(sc, hi) {
     stopifnot(is(sc, "data.frame"))
     stopifnot(is(hi, "data.frame"))
-    merge(sc, hi, by=c("File", "Condition"), all.y=TRUE,
+    merge(sc, hi, by=c("File", "Condition"),
           suffixes=c(".ScanCondition", ".HeaderInformation"))
 }
 

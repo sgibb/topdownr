@@ -104,9 +104,9 @@ test_that(".mergeScanConditionAndHeaderInformation", {
                      File=c("foo", "foo", "bar"))
     hi <- data.frame(BAR=1:5, Condition=c(1, 1, 2, 2, 1), Both=2,
                      File=c("bar", "bar", "bar", "foo", "foo"))
-    r <- data.frame(File=c(rep("bar", 3), rep("foo", 2)),
-                    Condition=c(1, 1, 2, 1, 2), FOO=c(3, 3, NA, 1, 2),
-                    Both.ScanCondition=c(1, 1, NA, 1, 1), BAR=c(1:3, 5:4),
+    r <- data.frame(File=rep(c("bar", "foo"), each=2),
+                    Condition=c(1, 1, 1, 2), FOO=c(3, 3, 1, 2),
+                    Both.ScanCondition=c(1, 1, 1, 1), BAR=c(1:2, 5:4),
                     Both.HeaderInformation=2)
     expect_equal(topdown:::.mergeScanConditionAndHeaderInformation(sc, hi), r)
 })
