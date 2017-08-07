@@ -213,8 +213,15 @@
 .mergeScanConditionAndHeaderInformation <- function(sc, hi) {
     stopifnot(is(sc, "data.frame"))
     stopifnot(is(hi, "data.frame"))
-    merge(sc, hi, by=c("File", "Condition"),
-          suffixes=c(".ScanCondition", ".HeaderInformation"))
+    d <- merge(sc, hi, by=c("File", "Condition"),
+               suffixes=c(".ScanCondition", ".HeaderInformation"))
+    if (!all((d$SupplementalActivationCe == d$CidActivation) |
+             (d$SupplementalActivationCe == d$HcdActivation))) {
+        stop("Merging of header and method information failed. ",
+             "Differences in 'SupplementalActivationCe', 'CidActivation' ",
+             "and 'HcdActivation' found.")
+    }
+    d
 }
 
 #' Merge spectra and ScanConditions/HeaderInformation (into featureData slot)

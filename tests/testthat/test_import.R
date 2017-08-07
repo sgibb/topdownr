@@ -145,14 +145,24 @@ test_that(".readScanHeadsTable", {
 
 test_that(".mergeScanConditionAndHeaderInformation", {
     sc <- data.frame(FOO=1:3, Condition=c(1:2, 1), Both=1,
-                     File=c("foo", "foo", "bar"))
+                     File=c("foo", "foo", "bar"),
+                     CidActivation=1:3,
+                     HcdActivation=rep(0, 3))
     hi <- data.frame(BAR=1:5, Condition=c(1, 1, 2, 2, 1), Both=2,
-                     File=c("bar", "bar", "bar", "foo", "foo"))
+                     File=c("bar", "bar", "bar", "foo", "foo"),
+                     SupplementalActivationCe=c(3, 3, 3, 2:1))
     r <- data.frame(File=rep(c("bar", "foo"), each=2),
                     Condition=c(1, 1, 1, 2), FOO=c(3, 3, 1, 2),
-                    Both.ScanCondition=c(1, 1, 1, 1), BAR=c(1:2, 5:4),
-                    Both.HeaderInformation=2)
+                    Both.ScanCondition=c(1, 1, 1, 1),
+                    CidActivation=c(3, 3, 1:2),
+                    HcdActivation=0, BAR=c(1:2, 5:4),
+                    Both.HeaderInformation=2,
+                    SupplementalActivationCe=c(3, 3, 1, 2))
     expect_equal(topdown:::.mergeScanConditionAndHeaderInformation(sc, hi), r)
+    sc$CidActivation <- 0
+    sc$HcdActivation <- 11:13
+    expect_error(topdown:::.mergeScanConditionAndHeaderInformation(sc, hi),
+                 "Merging of header and method information failed")
 })
 
 test_that(".mergeSpectraAndHeaderInformation", {
