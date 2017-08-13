@@ -37,3 +37,12 @@ test_that(".dropNonInformativeColumns", {
                    c=Rle(rep(c("foo", "bar"), each=5)))
     expect_equal(topdown:::.dropNonInformativeColumns(d), r)
 })
+
+test_that(".orderByColumns", {
+    d <- DataFrame(a=10:1, b=c(1:3, 7:1),
+                   c=Rle(rep(c("foo", "bar"), each=5)),
+                   d=Rle(rep("foo", 10)))
+    expect_error(topdown:::.orderByColumns(1:10))
+    expect_error(topdown:::.orderByColumns(d, c("foo", "bar")))
+    expect_equal(topdown:::.orderByColumns(d, c("c", "a")), 10:1)
+})

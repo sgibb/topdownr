@@ -111,14 +111,20 @@ readTopDownFiles <- function(path, pattern=".*",
                                                            headerInformation)
 
    header <- .mergeSpectraAndHeaderInformation(mzmlHeader, scanHeadsman)
-   header$Sample <- .groupId(header, cols=sampleColumns)
    header$MedianIonInjectionTimeMs <- .medianIonInjectionTime(header)
+
+   o <- .orderByColumns(header, sampleColumns)
+   header <- header[o, ]
+   header$Sample <- .groupId(header, cols=sampleColumns)
+   rownames(header) <- .makeNames(.groupByLabels(header, cols=sampleColumns),
+                                  prefix="C")
 
    if (dropNonInformativeColumns) {
        header <- .dropNonInformativeColumns(header)
    }
 
    assay <- do.call(cbind, lapply(mzml, "[[", "m"))
+   assay <- assay[, o]
    dimnames(assay) <- list(names(fragmentViews),
                            rownames(header))
 

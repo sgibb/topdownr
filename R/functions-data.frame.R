@@ -1,11 +1,11 @@
 #' aggregate data.frame (combine numeric columns by fun, and take the
 #' first row for non-numeric columns
 #'
-#' @param x data.frame
-#' @param f character, grouping value
-#' @param ignoreNumCols character, column names that won't be aggregated by fun
-#' @param fun function, aggregation function
-#' @return data.frame
+#' @param x `data.frame`
+#' @param f `character`, grouping value
+#' @param ignoreNumCols `character`, column names that won't be aggregated by fun
+#' @param fun `function`, aggregation function
+#' @return `data.frame`
 #' @noRd
 .aggregateDataFrame <- function(x, f, ignoreNumCols=character(), fun=mean,
                                 na.rm=TRUE) {
@@ -29,8 +29,8 @@
 
 #' Convert DataFrame columns to Rle
 #'
-#' @param x DataFrame
-#' @return DataFrame
+#' @param x `DataFrame`
+#' @return `DataFrame`
 #' @noRd
 .colsToRle <- function(x) {
     toConvert <- .vapply1l(x, function(xx)length(unique(xx)) < nrow(x) / 4L)
@@ -40,8 +40,8 @@
 
 #' droplevels for Rle/factor columns
 #'
-#' @param x DataFrame
-#' @return DataFrame
+#' @param x `DataFrame`
+#' @return `DataFrame`
 #' @noRd
 .droplevels <- function(x) {
     isFactorColumn <- .vapply1l(x, function(column) {
@@ -53,9 +53,20 @@
 
 #' Drop non informative columns (all rows are identical)
 #'
-#' @param x data.frame/DataFrame
+#' @param x `data.frame`/`DataFrame`
 #' @return x, without columns that are identical
 #' @noRd
 .dropNonInformativeColumns <- function(x) {
     x[, !.vapply1l(x, .allIdentical), drop=FALSE]
+}
+
+#' Order data.frame by multiple columns given as character vector
+#'
+#' @param x `data.frame`
+#' @param cols `character`, column names
+#' @return `integer`
+.orderByColumns <- function(x, cols) {
+    stopifnot(is.data.frame(x) || inherits(x, "DataFrame"))
+    stopifnot(all(cols %in% colnames(x)))
+    do.call(order, x[cols])
 }
