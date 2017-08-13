@@ -220,6 +220,7 @@ cat0 <- function(...) {
 #' @param prefix `character`, prefix
 #' @param sep `character`, separator
 #' @return `character`
+#' @noRd
 .makeNames <- function(x, prefix, sep=":") {
     x <- as.character(x)
     if (!missing(prefix)) {

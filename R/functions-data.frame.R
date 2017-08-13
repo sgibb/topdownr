@@ -65,6 +65,7 @@
 #' @param x `data.frame`
 #' @param cols `character`, column names
 #' @return `integer`
+#' @noRd
 .orderByColumns <- function(x, cols) {
     stopifnot(is.data.frame(x) || inherits(x, "DataFrame"))
     stopifnot(all(cols %in% colnames(x)))

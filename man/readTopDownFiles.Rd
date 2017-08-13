@@ -9,8 +9,7 @@ readTopDownFiles(path, pattern = ".*", type = c("a", "b", "c", "x", "y",
   adducts = data.frame(), neutralLoss = MSnbase::defaultNeutralLoss(),
   tolerance = 1e-05, dropNonInformativeColumns = TRUE,
   sampleColumns = c("Mz", "AgcTarget", "EtdReagentTarget", "EtdActivation",
-  "CidActivation", "HcdActivation", "SupplementalActivation",
-  "SupplementalActivationCe"), verbose = interactive())
+  "CidActivation", "HcdActivation"), verbose = interactive())
 }
 \arguments{
 \item{path}{\code{character}, path to directory that contains the top-down files.}
