@@ -214,6 +214,26 @@ cat0 <- function(...) {
     paste0("[", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "] ", ...)
 }
 
+#' Make names (similar to base::make.names but start appending with 1)
+#'
+#' @param x `character` (or must be convertable to `character`)
+#' @param prefix `character`, prefix
+#' @param sep `character`, separator
+#' @return `character`
+.makeNames <- function(x, prefix, sep=":") {
+    x <- as.character(x)
+    if (!missing(prefix)) {
+        x <- paste0(prefix, x)
+    }
+    ave(x, x, FUN=function(xx) {
+        if (length(xx) == 1L) {
+            xx
+        } else {
+            sprintf(paste0("%s", sep, "%0", .ndigits(length(xx)), "d"), xx, seq_along(xx))
+        }
+    })
+}
+
 #' Create mass label
 #'
 #' Identifying the experiments by the running time/order is complicated.

@@ -128,6 +128,14 @@ test_that(".logmsg", {
                       topdown:::.logmsg("foo", "bar")))
 })
 
+test_that(".makeNames", {
+    x <- rep(LETTERS[1:3], c(2, 1, 10))
+    expect_equal(topdown:::.makeNames(x),
+                 c("A:1", "A:2", "B", sprintf("C:%02d", 1:10)))
+    expect_equal(topdown:::.makeNames(x, sep="_", prefix="D"),
+                 c("DA_1", "DA_2", "DB", sprintf("DC_%02d", 1:10)))
+})
+
 test_that(".massLabel", {
     expect_equal(topdown:::.massLabel(c(750, 1000.76), c(1, 245)),
                  c(750.0001, 1000.8245))
