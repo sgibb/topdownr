@@ -22,6 +22,17 @@
     crossprod(.createMaskMatrix(group), x)
 }
 
+#' Column index
+#'
+#' @param x `dgCMatrix`
+#' @return `numeric`, column index
+#' @noRd
+.col <- function(x) {
+    stopifnot(is(x, "dgCMatrix"))
+    dp <- diff(x@p)
+    rep(seq_along(dp), dp)
+}
+
 #' drop0 but row-wise with length(tol) == nrow(x)
 #'
 #' @param x `dgCMatrix`
@@ -31,14 +42,14 @@
 .drop0rowLe <- function(x, tol) {
     stopifnot(is(x, "dgCMatrix"))
     stopifnot(length(tol) == nrow(x))
-    x@x[x@x <= as.vector(tol)[x@i + 1L]] <- 0L
+    x@x[x@x <= as.vector(tol)[.row(x)]] <- 0L
     drop0(x, tol=0L, is.Csparse=TRUE)
 }
 
 .drop0rowLt <- function(x, tol) {
     stopifnot(is(x, "dgCMatrix"))
     stopifnot(length(tol) == nrow(x))
-    x@x[x@x < as.vector(tol)[x@i + 1L]] <- 0L
+    x@x[x@x < as.vector(tol)[.row(x)]] <- 0L
     drop0(x, tol=0L, is.Csparse=TRUE)
 }
 
@@ -85,9 +96,9 @@
 #' @noRd
 .m2rect <- function(x, width=1L, height=1L) {
     stopifnot(is(x, "Matrix"))
-    dp <- diff(x@p)
-    y <- rep(seq_along(dp), dp) - 1L
-    cbind(xleft=x@i, ybottom=y, xright=x@i + width, ytop=y + height, col=x@x)
+    xm <- .row(x) - 1L
+    ym <- .col(x) - 1L
+    cbind(xleft=xm, ybottom=ym, xright=xm + width, ytop=ym + height, col=x@x)
 }
 
 #' normalise (col-wise scale)
@@ -110,8 +121,18 @@
     stopifnot(is(x, "dgCMatrix"))
     stopifnot((is.numeric(scale) || is(scale, "sparseVector")) &&
               (length(scale) == 1L || length(scale) == nrow(x)))
-    x@x <- x@x / scale[x@i + 1L]
+    x@x <- x@x / scale[.row(x)]
     x
+}
+
+#' Row index
+#'
+#' @param x `dgCMatrix`
+#' @return `numeric`, column index
+#' @noRd
+.row <- function(x) {
+    stopifnot(is(x, "dgCMatrix"))
+    x@i + 1L
 }
 
 #' rowCvs groupwise, similar to rowsum but for sparceMatrices
@@ -138,8 +159,8 @@
 #' @noRd
 .rowMax <- function(x, na.rm=TRUE) {
     stopifnot(is(x, "dgCMatrix"))
-    sparseVector(.vapply1d(split(x@x, x@i), max, na.rm=na.rm),
-                 i=sort.int(unique(x@i)) + 1L, length=nrow(x))
+    sparseVector(.vapply1d(split(x@x, .row(x)), max, na.rm=na.rm),
+                 i=sort.int(unique(.row(x))), length=nrow(x))
 }
 
 #' rowMeans groupwise, similar to rowsum but for sparceMatrices
@@ -156,7 +177,7 @@
         x <- .dropNA(x)
     }
     mm <- .createMaskMatrix(group)
-    m <- (x %*% mm)
+    m <- x %*% mm
     m@x <- m@x / ((x != 0L) %*% mm)@x
     m
 }
