@@ -281,14 +281,6 @@ test_that(".ncbMap", {
 })
 
 test_that("normalize", {
-    tdn <- tds
-    tdn@assay <- sparseMatrix(i=c(1:2, 1:3, 1, 3, 2),
-                              j=rep(1:5, c(2, 3, 1, 1, 1)),
-                              x=2:9/c(7, 9, 7, 9, 8, 7, 8, 9))
-    tdn@processing <- c(tdn@processing,
-                        paste0("[2017-07-16 14:00:02] ",
-                               "Fragment intensity values normalized to max."))
-    expect_equal_TDS(normalize(tds, method="fragments"), tdn)
     tds$TotIonCurrent <- c(10, 20, 10, 10, 20)
     tdn <- tds
     tdn@assay <- t(t(tds@assay) / tdn$TotIonCurrent)

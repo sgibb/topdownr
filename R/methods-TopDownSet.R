@@ -357,24 +357,20 @@ setMethod("filterNonReplicatedFragments", "TopDownSet",
 #' This method applies various normalisation methods to a [TopDownSet-class].
 #'
 #' @param object `TopDownSet`
-#' @param method `character´, could be `"TIC"` for *T*otal *I*on *C*urrent
-#' normalisation of the scans/conditions (column-wise normalisation), or
-#' `"fragments"` for normalisation of the fragments to their respective maximum
-#' intensity (row-wise normalisation).
+#' @param method `character´, currently just `"TIC"` for *T*otal *I*on
+#' *C*urrent normalisation of the scans/conditions (column-wise normalisation)
+#' is supported.
 #' @return `TopDownSet`
 #' @export
 #' @noRd
 setMethod("normalize", "TopDownSet",
-          function(object, method=c("TIC", "fragments"), ...) {
+          function(object, method="TIC", ...) {
     method <- match.arg(method)
 
     if (method == "TIC") {
         object@assay <- .normaliseCols(object@assay,
                                        scale=object$TotIonCurrent)
         .tdsLogMsg(object, "Scan/Condition intensity values normalized to TIC.")
-    } else if (method == "fragments") {
-        object@assay <- .normaliseRows(object@assay)
-        .tdsLogMsg(object, "Fragment intensity values normalized to max.")
     }
 })
 
