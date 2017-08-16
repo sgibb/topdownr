@@ -15,6 +15,11 @@ test_that(".col", {
     expect_equal(topdown:::.col(m), rep(1:10, each=2))
 })
 
+test_that(".colCounts", {
+    expect_error(topdown:::.colCounts(matrix(1:10, ncol=2)))
+    expect_equal(topdown:::.colCounts(m), rep(2, 10))
+})
+
 test_that(".colSumsGroup", {
     r <- sparseMatrix(i=rep(1:2, each=5),
                       j=1:10,
@@ -113,6 +118,11 @@ test_that(".normaliseRows", {
 test_that(".row", {
     expect_error(topdown:::.row(matrix(1:10, ncol=2)))
     expect_equal(topdown:::.row(m), c(rep(c(1, 3), 5), rep(c(2, 4), 5)))
+})
+
+test_that(".rowCounts", {
+    expect_error(topdown:::.rowCounts(matrix(1:10, ncol=2)))
+    expect_equal(topdown:::.rowCounts(m), rep(5, 4))
 })
 
 test_that(".rowCvsGroup", {

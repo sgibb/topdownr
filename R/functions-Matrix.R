@@ -10,6 +10,26 @@
     sparseMatrix(i=seq_along(x), j=x, x=1L)
 }
 
+#' Column index
+#'
+#' @param x `dgCMatrix`
+#' @return `numeric`, column index
+#' @noRd
+.col <- function(x) {
+    stopifnot(is(x, "dgCMatrix"))
+    dp <- diff(x@p)
+    rep(seq_along(dp), dp)
+}
+
+#' Count nonzero values in columns
+#'
+#' @param x `dgCMatrix`
+#' @return `numeric`
+#' @noRd
+.colCounts <- function(x) {
+    tabulate(.col(x), ncol(x))
+}
+
 #' colSums groupwise, similar to rowsum but for sparceMatrices
 #'
 #' @param x `Matrix`
@@ -20,17 +40,6 @@
     stopifnot(is(x, "Matrix"))
     stopifnot(nrow(x) == length(group))
     crossprod(.createMaskMatrix(group), x)
-}
-
-#' Column index
-#'
-#' @param x `dgCMatrix`
-#' @return `numeric`, column index
-#' @noRd
-.col <- function(x) {
-    stopifnot(is(x, "dgCMatrix"))
-    dp <- diff(x@p)
-    rep(seq_along(dp), dp)
 }
 
 #' drop0 but row-wise with length(tol) == nrow(x)
@@ -128,7 +137,7 @@
 #' Row index
 #'
 #' @param x `dgCMatrix`
-#' @return `numeric`, column index
+#' @return `numeric`, row index
 #' @noRd
 .row <- function(x) {
     stopifnot(is(x, "dgCMatrix"))
@@ -161,6 +170,15 @@
     stopifnot(is(x, "dgCMatrix"))
     sparseVector(.vapply1d(split(x@x, .row(x)), max, na.rm=na.rm),
                  i=sort.int(unique(.row(x))), length=nrow(x))
+}
+
+#' Count nonzero values in rows
+#'
+#' @param x `dgCMatrix`
+#' @return `numeric`
+#' @noRd
+.rowCounts <- function(x) {
+    tabulate(.row(x), nbins=nrow(x))
 }
 
 #' rowMeans groupwise, similar to rowsum but for sparceMatrices
