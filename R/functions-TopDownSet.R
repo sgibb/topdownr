@@ -199,9 +199,12 @@ fragmentType <- function(object) {
 
     mn <- as(.colSumsGroup(mn, w) > 0L, "dgCMatrix")
     mc <- as(.colSumsGroup(mc, max(w) + 1L - w) > 0L, "dgCMatrix")
-    mc@x[] <- 2
-    mn + mc
-    drop0(mn + mc)
+    mc@x[] <- 2L
+    m <- drop0(mn + mc)
+    colnames(m) <- colnames(object)
+    rownames(m) <- paste0("bond",
+                          .formatNumbers(seq_len(nrow(m)), asInteger=TRUE))
+    m
 }
 
 #' Add log message.

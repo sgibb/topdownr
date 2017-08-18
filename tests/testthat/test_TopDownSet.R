@@ -272,12 +272,15 @@ test_that(".ncbMap", {
     r <- sparseMatrix(i=rep(1:2, c(3, 4)),
                       j=c(1:3, 1:2, 4:5),
                       x=c(rep(1, 4), 3:1),
-                      dims=c(2, 5))
+                      dims=c(2, 5),
+                      dimnames=list(paste0("bond", 1:2), c()))
 
     r1 <- sparseMatrix(i=c(1:2, 1, 1:2),
                        j=c(1, 1, 2, 3, 3),
                        x=c(1, 1, 2, 3, 1),
-                       dims=c(3, 4))
+                       dims=c(3, 4),
+                       dimnames=list(paste0("bond", 1:3), c()))
+
     expect_equal(topdown:::.ncbMap(tds), r)
     expect_equal(topdown:::.ncbMap(tds1), r1)
 })
