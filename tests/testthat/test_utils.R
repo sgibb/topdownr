@@ -62,6 +62,8 @@ test_that(".formatNumbers", {
     expect_equal(topdown:::.formatNumbers(c(1, 100)), sprintf("%06.2f", c(1, 100)))
     expect_equal(topdown:::.formatNumbers(c(1, 100) + 0.1),
                  sprintf("%06.2f", c(1, 100) + 0.1))
+    expect_equal(topdown:::.formatNumbers(c(1, 100) + 0.1, asInteger=TRUE),
+                 sprintf("%03d", c(1L, 100L)))
 })
 
 test_that(".fragmentationMethod", {

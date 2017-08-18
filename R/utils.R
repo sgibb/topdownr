@@ -127,11 +127,18 @@ cat0 <- function(...) {
 #' Convert number to string and prepend zeros
 #'
 #' @param x `double`
+#' @param asInteger `logical`
 #' @return `character`
 #' @noRd
-.formatNumbers <- function(x) {
-    # + 3L = 2 place after the decimal point + the point itself
-    sprintf(paste0("%0", .ndigits(max(x)) + 3L, ".2f"), x)
+.formatNumbers <- function(x, asInteger=FALSE) {
+    n <- .ndigits(max(x))
+
+    if (asInteger) {
+        sprintf(paste0("%0", n, "d"), as.integer(x))
+    } else {
+        # + 3L = 2 place after the decimal point + the point itself
+        sprintf(paste0("%0", n + 3L, ".2f"), x)
+    }
 }
 
 #' Get fragmentation method from {ETD,CID,HCD}Activation
