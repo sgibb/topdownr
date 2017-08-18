@@ -198,6 +198,11 @@
       }
    }
 
+   ## depending on the used processing software the header column totIonCurrent
+   ## doesn't take deisotoping and charge state reduction into account; so we
+   ## calculate TIC for our own here
+   hd$TotIonCurrent <- .vapply1d(peaks(fh)[i], function(ii)sum(ii))
+
    .msg(verbose, sprintf(" (%02.1f%%)",
                          round(sum(m != 0L)/sum(hd$PeaksCount) * 100, 1L)))
 
