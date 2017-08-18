@@ -111,6 +111,9 @@ setMethod("aggregate", "TopDownSet",
     ## now meaningless
     x@files <- x@files[grepl(.topDownFileExtRx("fasta"), x@files)]
 
+    x$AssignedFragments <- .colCounts(x@assay)
+    x$AssignedIntensity <- Matrix::colSums(x@assay)
+
     d1 <- dim(x)
 
     x <- .tdsLogMsg(x, "Aggregated [", d0[1L], ";", d0[2L], "] to [",
