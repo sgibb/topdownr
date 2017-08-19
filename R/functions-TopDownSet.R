@@ -81,61 +81,61 @@ readTopDownFiles <- function(path, pattern=".*",
                                              "HcdActivation"),
                              verbose=interactive()) {
 
-   files <- .listTopDownFiles(path, pattern=pattern)
+    files <- .listTopDownFiles(path, pattern=pattern)
 
-   sequence <- .readFasta(files$fasta, verbose=verbose)
+    sequence <- .readFasta(files$fasta, verbose=verbose)
 
-   fragmentViews <- .calculateFragments(sequence=sequence,
-                                        type=type,
-                                        modifications=modifications,
-                                        neutralLoss=neutralLoss,
-                                        adducts=adducts,
-                                        verbose=verbose)
+    fragmentViews <- .calculateFragments(sequence=sequence,
+                                         type=type,
+                                         modifications=modifications,
+                                         neutralLoss=neutralLoss,
+                                         adducts=adducts,
+                                         verbose=verbose)
 
-   scanConditions <- do.call(rbind, lapply(files$txt, .readScanHeadsTable,
-                                           verbose=verbose))
+    scanConditions <- do.call(rbind, lapply(files$txt, .readScanHeadsTable,
+                                            verbose=verbose))
 
-   headerInformation <- do.call(rbind, lapply(files$csv, .readExperimentCsv,
-                                              verbose=verbose))
+    headerInformation <- do.call(rbind, lapply(files$csv, .readExperimentCsv,
+                                               verbose=verbose))
 
-   mzml <- mapply(.readMzMl,
-                  file=files$mzML,
-                  scans=split(scanConditions$Scan, scanConditions$File),
-                  MoreArgs=list(fmass=elementMetadata(fragmentViews)$mass,
-                                tolerance=tolerance, verbose=verbose),
-                  SIMPLIFY=FALSE, USE.NAMES=FALSE)
+    mzml <- mapply(.readMzMl,
+                   file=files$mzML,
+                   scans=split(scanConditions$Scan, scanConditions$File),
+                   MoreArgs=list(fmass=elementMetadata(fragmentViews)$mass,
+                                 tolerance=tolerance, verbose=verbose),
+                   SIMPLIFY=FALSE, USE.NAMES=FALSE)
 
-   mzmlHeader <- do.call(rbind, lapply(mzml, "[[", "hd"))
+    mzmlHeader <- do.call(rbind, lapply(mzml, "[[", "hd"))
 
-   scanHeadsman <- .mergeScanConditionAndHeaderInformation(scanConditions,
-                                                           headerInformation)
+    scanHeadsman <- .mergeScanConditionAndHeaderInformation(scanConditions,
+                                                            headerInformation)
 
-   header <- .mergeSpectraAndHeaderInformation(mzmlHeader, scanHeadsman)
-   header$MedianIonInjectionTimeMs <- .medianIonInjectionTime(header)
+    header <- .mergeSpectraAndHeaderInformation(mzmlHeader, scanHeadsman)
+    header$MedianIonInjectionTimeMs <- .medianIonInjectionTime(header)
 
-   o <- .orderByColumns(header, sampleColumns)
-   header <- header[o, ]
-   header$Sample <- .groupId(header, cols=sampleColumns)
-   rownames(header) <- .makeNames(.groupByLabels(header, cols=sampleColumns),
-                                  prefix="C")
+    o <- .orderByColumns(header, sampleColumns)
+    header <- header[o, ]
+    header$Sample <- .groupId(header, cols=sampleColumns)
+    rownames(header) <- .makeNames(.groupByLabels(header, cols=sampleColumns),
+                                   prefix="C")
 
-   if (dropNonInformativeColumns) {
-       header <- .dropNonInformativeColumns(header)
-   }
+    if (dropNonInformativeColumns) {
+        header <- .dropNonInformativeColumns(header)
+    }
 
-   assay <- do.call(cbind, lapply(mzml, "[[", "m"))
-   assay <- assay[, o]
-   dimnames(assay) <- list(names(fragmentViews),
-                           rownames(header))
+    assay <- do.call(cbind, lapply(mzml, "[[", "m"))
+    assay <- assay[, o]
+    dimnames(assay) <- list(names(fragmentViews),
+                            rownames(header))
 
-   new("TopDownSet",
-       rowViews=fragmentViews,
-       colData=.colsToRle(as(header, "DataFrame")),
-       assay=assay,
-       files=basename(unlist(unname(files))),
-       tolerance=tolerance,
-       processing=.logmsg("Data loaded (tolerance: ",
-                          round(tolerance/1e-6, 1L), " ppm)."))
+    new("TopDownSet",
+        rowViews=fragmentViews,
+        colData=.colsToRle(as(header, "DataFrame")),
+        assay=assay,
+        files=basename(unlist(unname(files))),
+        tolerance=tolerance,
+        processing=.logmsg("Data loaded (tolerance: ",
+                           round(tolerance/1e-6, 1L), " ppm)."))
 }
 
 #' Test for TopDownSet class
