@@ -16,6 +16,30 @@ setClass("FragmentViews",
          contains="XStringViews",
          validity=function(object).validateFragmentViews(object))
 
+#' The AbstractTopDownSet class
+#'
+#' Abstract/VIRTUAL parent class for [TopDownSet-class] and [NCBSet-class] to
+#' provide common interface.
+#'
+#' @noRd
+setClass("AbstractTopDownSet",
+         contains="VIRTUAL",
+         slots=c(rowViews="XStringViews",
+                 colData="DataFrame",
+                 assay="dgCMatrix",
+                 files="character",
+                 tolerance="numeric",
+                 processing="character"),
+         prototype=prototype(rowViews=new("XStringViews"),
+                             colData=new("DataFrame"),
+                             assay=new("dgCMatrix"),
+                             files=character(),
+                             tolerance=double(),
+                             processing=character()),
+         validity=function(object).validateAbstractTopDownSet(object)
+)
+
+
 #' The TopDownSet class
 #'
 #' The TopDownSet class is a container for a whole top-down proteomics
@@ -40,17 +64,21 @@ setClass("FragmentViews",
 #' @seealso [FragmentViews-class]
 #' @author Sebastian Gibb \email{mail@@sebastiangibb.de}
 setClass("TopDownSet",
-         slots=c(rowViews="FragmentViews",
-                 colData="DataFrame",
-                 assay="dgCMatrix",
-                 files="character",
-                 tolerance="numeric",
-                 processing="character"),
-         prototype=prototype(rowViews=new("FragmentViews"),
-                             colData=new("DataFrame"),
-                             assay=new("dgCMatrix"),
-                             files=character(),
-                             tolerance=double(),
-                             processing=character()),
-         validity=function(object).validateTopDownSet(object)
+         contains="AbstractTopDownSet",
+         prototype=prototype(rowViews=new("FragmentViews"))
+)
+
+#' The NCBSet class
+#'
+#' The NCBSet class is a container for a top-down proteomics
+#' experiment similar to the [TopDownSet-class] but instead of intensity values
+#' it just stores the information if a bond is covered by a
+#' N-terminal (encoded as `1`), a C-terminal (encoded as `2`)
+#' and/or both fragments (encoded as `3`).
+#'
+#' @seealso [TopDownSet-class]
+#' @author Sebastian Gibb \email{mail@@sebastiangibb.de}
+setClass("NCBSet",
+         contains="AbstractTopDownSet",
+         validity=function(object).validateNCBSet(object)
 )

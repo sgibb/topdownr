@@ -232,21 +232,6 @@ test_that("filterNonReplicatedFragments", {
     expect_equal_TDS(filterNonReplicatedFragments(tdfit, minN=2), tdfitr)
 })
 
-test_that("fragmentMass", {
-    expect_error(fragmentMass(1L), "has to be an 'TopDownSet' object")
-    expect_equal(fragmentMass(tds), 1:3 * 100)
-})
-
-test_that("fragmentNames", {
-    expect_error(fragmentNames(1L), "has to be an 'TopDownSet' object")
-    expect_equal(fragmentNames(tds), c("c1", "c2", "x1"))
-})
-
-test_that("fragmentTypes", {
-    expect_error(fragmentType(1L), "has to be an 'TopDownSet' object")
-    expect_equal(fragmentType(tds), factor(c("c", "c", "x")))
-})
-
 test_that(".isTopDownSet", {
     expect_true(topdown:::.isTopDownSet(new("TopDownSet")))
     expect_true(topdown:::.isTopDownSet(tds))
@@ -346,13 +331,7 @@ test_that("show", {
                   "Modifications \\(2\\): Carbamidomethyl, Met-loss\\+Acetyl")
 })
 
-test_that(".tdsLogMsg", {
-    expect_equal(gsub("^\\[[^]]+\\] *", "",
-                      topdown:::.tdsLogMsg(tds, "foobar")@processing),
-                 c("Data created.", "foobar"))
-})
-
-test_that(".validateTopDownSet", {
+test_that("validObject", {
     tdn <- tds
     tdn@assay <- tdn@assay[1,,drop=FALSE]
     expect_error(validObject(tdn), "Mismatch between fragment data")

@@ -150,36 +150,6 @@ readTopDownFiles <- function(path, pattern=".*",
     TRUE
 }
 
-#' Get fragment mass
-#'
-#' @param object `TopDownSet`
-#' @return `double`
-#' @noRd
-fragmentMass <- function(object) {
-    .isTopDownSet(object)
-    elementMetadata(object@rowViews)$mass
-}
-
-#' Get fragment names
-#'
-#' @param object `TopDownSet`
-#' @return `character`
-#' @noRd
-fragmentNames <- function(object) {
-    .isTopDownSet(object)
-    names(object@rowViews)
-}
-
-#' Get fragment types
-#'
-#' @param object `TopDownSet`
-#' @return `character`
-#' @noRd
-fragmentType <- function(object) {
-    .isTopDownSet(object)
-    elementMetadata(object@rowViews)$type
-}
-
 #' Create NCB Map (N-/C-terminal, or both)
 #'
 #' @param object `TopDownSet`
@@ -205,50 +175,4 @@ fragmentType <- function(object) {
     rownames(m) <- paste0("bond",
                           .formatNumbers(seq_len(nrow(m)), asInteger=TRUE))
     m
-}
-
-#' Add log message.
-#'
-#' @param object `TopDownSet`
-#' @return `TopDownSet`
-#' @noRd
-.tdsLogMsg <- function(object, ...) {
-   .isTopDownSet(object)
-   object@processing <- c(object@processing, .logmsg(...))
-   object
-}
-
-#' Validate `TopDownSet`
-#'
-#' @param object `TopDownSet`
-#' @return `TRUE` (if valid) else character with msg what was incorrect
-#' @noRd
-.validateTopDownSet <- function(object) {
-    msg <- character()
-
-    if (nrow(object@assay) != length(object@rowViews)) {
-        msg <- c(msg,
-                 "Mismatch between fragment data in 'rowViews' and 'assay'.")
-    }
-
-    if (any(rownames(object@assay) != names(object@rowViews))) {
-        msg <- c(msg,
-                 "Mismatch between fragment names in 'rowViews' and 'assay'.")
-    }
-
-    if (ncol(object@assay) != nrow(object@colData)) {
-        msg <- c(msg,
-                 "Mismatch between condition data in 'colData' and 'assay'.")
-    }
-
-    if (any(colnames(object@assay) != rownames(object@colData))) {
-        msg <- c(msg,
-                 "Mismatch between condition names in 'colData' and 'assay'.")
-    }
-
-    if (length(msg)) {
-        msg
-    } else {
-        TRUE
-    }
 }

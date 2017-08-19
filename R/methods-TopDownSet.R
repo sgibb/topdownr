@@ -1,98 +1,3 @@
-#' @param x [TopDownSet-class]
-#' @param i `numeric`, `logical` or `character`, subsetting on fragment data,
-#' names (`c("a1", "b1", "c1", "c2", "c3")`) and types (`c("c", "x")`) are
-#' supported.
-#' @param j `numeric` or `logical`, subsetting based on condition data.
-#' @param \ldots currently ignored.
-#' @param drop `logical`, currently ignored.
-#' @noRd
-setMethod("[", c("TopDownSet", "ANY", "ANY"),
-           function(x, i, j, ..., drop=FALSE) {
-   d0 <- dim(x)
-   dn <- dimnames(x)
-
-   if (missing(i)) {
-       i <- seq_len(d0[1L])
-   }
-
-   if (is.character(i)) {
-       ii <- .subset(dn[[1L]] %in% i | as.character(fragmentType(x)) %in% i,
-                     d0[1L], dn[[1L]])
-   } else {
-       ii <- .subset(i, d0[1L], dn[[1L]])
-   }
-
-   if (is.unsorted(ii)) {
-       warning("It is not possible to change the row order.")
-       ii <- sort(ii)
-   }
-
-   if (missing(j)) {
-       j <- seq_len(d0[2L])
-   }
-   jj <- .subset(j, d0[2L], dn[[2L]])
-
-   if (drop) {
-       warning("'drop' is ignored.")
-   }
-
-   x@assay <- x@assay[ii, jj, drop=FALSE]
-   x@colData <- .droplevels(x@colData[jj, ])
-   x@rowViews <- x@rowViews[ii, ]
-   x@rowViews@elementMetadata <- .droplevels(x@rowViews@elementMetadata)
-   isFasta <- grepl(.topDownFileExtRx("fasta"), x@files)
-   x@files <- x@files[.subsetFiles(x@files, unique(x@colData$File)) | isFasta]
-
-   d1 <- dim(x)
-
-   x <- .tdsLogMsg(x, "Subsetted [", d0[1L], ";", d0[2L], "] to [",
-                                     d1[1L], ";", d1[2L], "].")
-
-   if (validObject(x)) {
-       x
-   }
-})
-
-#' @param x [TopDownSet-class]
-#' @param i `numeric`, `logical` or `character`, subsetting based on condition
-#' data.
-#' @param j currently ignored.
-#' @param \ldots currently ignored.
-#' @noRd
-setMethod("[[", c("TopDownSet", "ANY", "missing"), function(x, i, j, ...) {
-    colData(x)[[i, ...]]
-})
-
-#' @param x `TopDownSet`
-#' @noRd
-setReplaceMethod("[[", c("TopDownSet", "ANY", "missing"),
-                 function(x, i, j, ..., value) {
-    colData(x)[[i, ...]] <- value
-    if (validObject(x)) {
-      x
-    }
-})
-
-#' @param x `TopDownSet`
-#' @noRd
-#' @export
-.DollarNames.TopDownSet <- function(x, pattern="") {
-    grep(pattern, names(colData(x)), value=TRUE)
-}
-
-#' @param x `TopDownSet`
-#' @noRd
-setMethod("$", "TopDownSet", function(x, name) {
-    colData(x)[[name]]
-})
-
-#' @param x `TopDownSet`
-#' @noRd
-setReplaceMethod("$", "TopDownSet", function(x, name, value) {
-    colData(x)[[name]] <- value
-    x
-})
-
 #' @param object `TopDownSet`
 #' @param by `list`, grouping variable
 #' @return `TopDownSet`
@@ -116,80 +21,12 @@ setMethod("aggregate", "TopDownSet",
 
     d1 <- dim(x)
 
-    x <- .tdsLogMsg(x, "Aggregated [", d0[1L], ";", d0[2L], "] to [",
-                                       d1[1L], ";", d1[2L], "].")
+    x <- .atdsLogMsg(x, "Aggregated [", d0[1L], ";", d0[2L], "] to [",
+                                        d1[1L], ";", d1[2L], "].")
 
     if (validObject(x)) {
         x
     }
-})
-
-#' @param object `TopDownSet`
-#' @return `Matrix`
-#' @export
-#' @noRd
-setMethod("assayData", "TopDownSet", function(object) {
-    object@assay
-})
-
-#' @param object `TopDownSet`
-#' @return `DataFrame`
-#' @export
-#' @noRd
-setMethod("colData", "TopDownSet", function(object) {
-    object@colData
-})
-
-#' @param x `TopDownSet`
-#' @return `TopDownSet`
-#' @export
-#' @noRd
-setReplaceMethod("colData", "TopDownSet", function(object, ..., value) {
-    object@colData <- value
-    if (validObject(object)) {
-      object
-    }
-})
-
-#' @param object `TopDownSet`
-#' @return `DataFrame`
-#' @export
-#' @noRd
-setMethod("conditionData", "TopDownSet", function(object, ...) {
-    colData(object)
-})
-
-#' @param object `TopDownSet`
-#' @return `TopDownSet`
-#' @export
-#' @noRd
-setReplaceMethod("conditionData", "TopDownSet", function(object, ..., value) {
-    colData(object) <- value
-    if (validObject(object)) {
-      object
-    }
-})
-
-#' @param object `TopDownSet`
-#' @return `numeric`
-#' @noRd
-setMethod("dim", "TopDownSet", function(x) {
-    dim(x@assay)
-})
-
-#' @param object `TopDownSet`
-#' @return `list`
-#' @noRd
-setMethod("dimnames", "TopDownSet", function(x) {
-    list(names(x@rowViews), row.names(x@colData))
-})
-
-#' @param object `TopDownSet`
-#' @return `FragmentViews`
-#' @export
-#' @noRd
-setMethod("fragmentData", "TopDownSet", function(object, ...) {
-    rowViews(object)
 })
 
 #' Filter `TopDownSet` by CV.
@@ -223,8 +60,8 @@ setMethod("filterCv", "TopDownSet",
 
     n1 <- nnzero(object@assay)
     if (n0 - n1) {
-        object <- .tdsLogMsg(object, n0 - n1, " fragments with CV > ",
-                             threshold, "% filtered.")
+        object <- .atdsLogMsg(object, n0 - n1, " fragments with CV > ",
+                              threshold, "% filtered.")
 
     }
     if (validObject(object)) {
@@ -268,9 +105,9 @@ setMethod("filterInjectionTime", "TopDownSet",
         object <- object[, i]
         n1 <- ncol(object)
         nd <- n0 - n1
-        object <- .tdsLogMsg(object, n0 - n1, " scan", if (nd > 1L) { "s" },
-                             " filtered with injection time deviation >= ",
-                             maxDeviation, " or rank >= ", keepTopN + 1L, ".")
+        object <- .atdsLogMsg(object, n0 - n1, " scan", if (nd > 1L) { "s" },
+                              " filtered with injection time deviation >= ",
+                              maxDeviation, " or rank >= ", keepTopN + 1L, ".")
     }
     if (validObject(object)) {
         object
@@ -311,16 +148,16 @@ setMethod("filterIntensity", "TopDownSet",
     }
     n1 <- nnzero(object@assay)
     if (n0 - n1) {
-        object <- .tdsLogMsg(object, n0 - n1, " intensity values < ",
-                             threshold, if (relative) { " (relative)" },
-                             " filtered.")
+        object <- .atdsLogMsg(object, n0 - n1, " intensity values < ",
+                              threshold, if (relative) { " (relative)" },
+                              " filtered.")
     }
     if (validObject(object)) {
         object
     }
 })
 
-#' Filter `TopDownSet` by intensity.
+#' Filter `TopDownSet` by non-replicated fragments.
 #'
 #' Filtering is done by removing all fragments that don't replicate across
 #' technical replicates.
@@ -346,9 +183,9 @@ setMethod("filterNonReplicatedFragments", "TopDownSet",
     n1 <- nnzero(object@assay)
 
     if (n0 - n1) {
-        object <- .tdsLogMsg(object, n0 - n1, " intensity values of ",
-                             "fragments replicated < ", minN,
-                             " times filtered.")
+        object <- .atdsLogMsg(object, n0 - n1, " intensity values of ",
+                              "fragments replicated < ", minN,
+                              " times filtered.")
     }
     if (validObject(object)) {
         object
@@ -373,47 +210,14 @@ setMethod("normalize", "TopDownSet",
     if (method == "TIC") {
         object@assay <- .normaliseCols(object@assay,
                                        scale=object$TotIonCurrent)
-        .tdsLogMsg(object, "Scan/Condition intensity values normalized to TIC.")
+        .atdsLogMsg(object, "Scan/Condition intensity values normalized to TIC.")
     }
-})
-
-#' @param object `TopDownSet`
-#' @return `TopDownSet`
-#' @export
-#' @noRd
-setMethod("removeEmptyConditions", "TopDownSet",
-          function(object) {
-    i <- Matrix::colSums(object@assay) != 0L
-    object <- object[, i]
-    .tdsLogMsg(object, sum(!i), " empty conditions removed.")
-})
-
-#' @param object `TopDownSet`
-#' @return `FragmentViews`
-#' @export
-#' @noRd
-setMethod("rowViews", "TopDownSet", function(object, ...) {
-    object@rowViews
 })
 
 #' @param object `TopDownSet`
 #' @noRd
 setMethod("show", "TopDownSet", function(object) {
-    cat(sprintf("%s object (%.2f Mb)\n",
-                class(object), object.size(object) / 1024L^2L))
-
-    if (length(object@rowViews)) {
-        cat("- - - Protein data - - -\n")
-        prefix <- sprintf("Amino acid sequence (%d):",
-                          nchar(object@rowViews@subject))
-        cat(prefix, .snippet(as.character(object@rowViews@subject),
-                             getOption("width") - nchar(prefix)), "\n")
-        if (length(metadata(object@rowViews)$modifications)) {
-            mod <- metadata(object@rowViews)$modifications
-            cat0("Modifications (", length(mod), "): ",
-                 paste0(.hft(mod, n=3), collapse=", "), "\n")
-        }
-    }
+    callNextMethod()
 
     if (length(object@rowViews)) {
         cat("- - - Fragment data - - -\n")
@@ -454,4 +258,18 @@ setMethod("show", "TopDownSet", function(object) {
     }
 
     invisible(NULL)
+})
+
+setAs("TopDownSet", "NCBSet", function(from) {
+    assay <- .ncbMap(from)
+    new("NCBSet",
+        rowViews=Views(subject(from@rowViews),
+                       start=1L, width=seq_len(nrow(assay)),
+                       names=rownames(assay)),
+        colData=from@colData,
+        assay=assay,
+        files=from@files,
+        tolerance=from@tolerance,
+        processing=c(from@processing,
+                     .logmsg("Coerced TopDownSet into an NCBSet object.")))
 })
