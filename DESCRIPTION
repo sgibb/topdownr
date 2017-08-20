@@ -13,7 +13,7 @@ Depends:
 Imports:
     Biobase,
     Matrix (>= 1.2.10),
-    MSnbase (>= 2.3.8),
+    MSnbase (>= 2.3.10),
     mzR (>= 2.11.4)
 Suggests:
     topdowndata (>= 0.2),
