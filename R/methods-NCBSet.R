@@ -5,13 +5,13 @@
 #' @param minN `integer` stop if there are less than `minN` additional fragments
 #' added.
 #' @return `matrix`, first column: index of condition, second column: number of
-#' added fragments.
+#' newly covered bonds.
 #' @export
 #' @noRd
 setMethod("bestConditions", "NCBSet",
           function(object, n=ncol(object), minN=0L) {
     m <- .bestCoverageCombination(object@assay, n=n, minN=minN)
-    colnames(m) <- c("index", "fragments")
+    colnames(m) <- c("index", "bonds")
     m
 })
 

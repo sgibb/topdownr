@@ -84,7 +84,7 @@ test_that("accessors<-", {
 })
 
 test_that("bestConditions", {
-    dn <- list(NULL, c("index", "fragments"))
+    dn <- list(NULL, c("index", "bonds"))
     expect_equal(bestConditions(ncb), matrix(2:3, nrow=1, dimnames=dn))
     ncbn <- ncb
     ncbn@assay[1, 2] <- 0
