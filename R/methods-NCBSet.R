@@ -1,3 +1,19 @@
+#' Find best combination of conditions for highest coverage
+#'
+#' @param object `NCBSet`
+#' @param n `integer`, max number of combinations/iterations.
+#' @param minN `integer` stop if there are less than `minN` additional fragments
+#' added.
+#' @return `matrix`, first column: index of condition, second column: number of
+#' added fragments.
+#' @noRd
+setMethod("bestConditions", "NCBSet",
+          function(object, n=ncol(object), minN=0L) {
+    m <- .bestCoverageCombination(object@assay, n=n, minN=minN)
+    colnames(m) <- c("index", "fragments")
+    m
+})
+
 #' @param object `NCBSet`
 #' @noRd
 setMethod("show", "NCBSet", function(object) {

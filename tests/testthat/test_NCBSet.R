@@ -83,6 +83,16 @@ test_that("accessors<-", {
     expect_equal(conditionData(ncbn)$Scan, 11:15)
 })
 
+test_that("bestConditions", {
+    dn <- list(NULL, c("index", "fragments"))
+    expect_equal(bestConditions(ncb), matrix(2:3, nrow=1, dimnames=dn))
+    ncbn <- ncb
+    ncbn@assay[1, 2] <- 0
+    expect_equal(bestConditions(ncbn), matrix(c(2:1, 2:1), nrow=2, dimnames=dn))
+    expect_equal(bestConditions(ncbn, n=1), matrix(c(2, 2), nrow=1, dimnames=dn))
+    expect_equal(bestConditions(ncbn, minN=2), matrix(c(2, 2), nrow=1, dimnames=dn))
+})
+
 test_that("dim", {
     expect_equal(dim(ncb), c(3, 5))
 })
