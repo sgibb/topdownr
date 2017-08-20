@@ -1,21 +1,7 @@
 #' @param object `NCBSet`
 #' @noRd
 setMethod("show", "NCBSet", function(object) {
-    cat(sprintf("%s object (%.2f Mb)\n",
-                class(object), object.size(object) / 1024L^2L))
-
-    if (length(object@rowViews)) {
-        cat("- - - Protein data - - -\n")
-        prefix <- sprintf("Amino acid sequence (%d):",
-                          nchar(object@rowViews@subject))
-        cat(prefix, .snippet(as.character(object@rowViews@subject),
-                             getOption("width") - nchar(prefix)), "\n")
-        if (length(metadata(object@rowViews)$modifications)) {
-            mod <- metadata(object@rowViews)$modifications
-            cat0("Modifications (", length(mod), "): ",
-                 paste0(.hft(mod, n=3), collapse=", "), "\n")
-        }
-    }
+    callNextMethod()
 
     if (length(object@rowViews)) {
         cat("- - - Fragment data - - -\n")
