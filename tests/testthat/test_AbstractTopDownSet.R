@@ -15,6 +15,8 @@ tds <- new("TopDownSet",
            processing="[2017-07-16 14:00:00] Data created.")
 
 test_that(".atdsLogMsg", {
+    expect_error(topdown:::.atdsLogMsg(1L, "foo"),
+                 "has to be an 'AbstractTopDownSet' object")
     expect_equal(gsub("^\\[[^]]+\\] *", "",
                       topdown:::.atdsLogMsg(tds, "foobar")@processing),
                  c("Data created.", "foobar"))
