@@ -1,3 +1,31 @@
+#' find best combination of columns for highest coverage
+#'
+#' @param x `dgCMatrix`
+#' @param n `integer`, max number of combinations/iterations
+#' @param minN `integer` stop if there are less than `minN` non-zero
+#' elements added by the next column.
+#' @return `matrix`, first column: index, second column: number of non-zero
+#' elements.
+#' @noRd
+.bestCoverageCombination <- function(x, n=ncol(x), minN=0L) {
+    m <- matrix(NA_real_, nrow=n, ncol=2,
+                dimnames=list(NULL, c("index", "n")))
+    for (i in seq_len(n)) {
+        hc <- .highestCoverage(x)
+        x[.row(x[, hc[1L], drop=FALSE]), ] <- 0L
+        x <- drop0(x)
+        m[i, ] <- hc
+        if (!nnzero(x)) {
+            m <- m[seq_len(i), ]
+            break
+        } else if (hc[2L] < minN) {
+            m <- m[seq_len(i - 1L), ]
+            break
+        }
+    }
+    m
+}
+
 #' mask matrix for matrix multiplication in .rowMeansGroup
 #'
 #' @param x `character`/`numeric`, group identifier
@@ -93,6 +121,28 @@
     stopifnot(is(x, "dgCMatrix"))
     x@x[is.na(x@x)] <- 0L
     drop0(x, tol=0L, is.Csparse=TRUE)
+}
+
+#' highest coverage
+#'
+#' Find column with maximum number of non-zero entries. If two
+#' or more have the same number of non-zero entries it uses the one with the
+#' highest colSums.
+#'
+#' @param x `dgCMatrix`
+#' @return `numeric`, first element: index of column with highest coverage,
+#' second element: number of non-zero elements
+#' @noRd
+.highestCoverage <- function(x) {
+    stopifnot(is(x, "dgCMatrix"))
+    cc <- .colCounts(x)
+    mc <- max(cc)
+    i <- which(cc == mc)
+
+    if (length(i) > 1L) {
+        i <- i[which.max(Matrix::colSums(x[, i]))]
+    }
+    c(index=i, nonzero=cc[i])
 }
 
 #' calculate rect coordinates for a Matrix

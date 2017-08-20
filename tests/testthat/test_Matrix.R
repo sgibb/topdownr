@@ -2,6 +2,17 @@ context("Matrix")
 
 m <- sparseMatrix(i=rep(1:4, each=5), j=rep(1:10, 2), x=1:20)
 
+test_that(".bestCoverageCombination", {
+    m1 <- sparseMatrix(i=c(1:10, 2), j=c(1, 3, 3, 4, 4, 5, 4, 5, 5, 5, 1),
+                       x=c(1:10, 1))
+    expect_equal(topdown:::.bestCoverageCombination(m1),
+                 cbind(index=c(5:3, 1), n=4:1))
+    expect_equal(topdown:::.bestCoverageCombination(m1, minN=3),
+                 cbind(index=5:4, n=4:3))
+    expect_equal(topdown:::.bestCoverageCombination(m1, n=3),
+                 cbind(index=5:3, n=4:2))
+})
+
 test_that(".createMaskMatrix", {
     r1 <- sparseMatrix(i=1:10, j=rep(1:5, 2), x=1)
     r2 <- sparseMatrix(i=1:10, j=rep(1:2, each=5), x=1)
@@ -79,6 +90,11 @@ test_that(".dropNA", {
     expect_error(topdown:::.dropNA(matrix(1:10, ncol=2)))
     expect_equal(topdown:::.dropNA(m), m)
     expect_equal(topdown:::.dropNA(n), r)
+})
+
+test_that(".highestCoverage", {
+    expect_equal(topdown:::.highestCoverage(m), c(index=10, nonzero=2))
+    expect_equal(topdown:::.highestCoverage(t(m)), c(index=4, nonzero=5))
 })
 
 test_that(".m2rect", {
