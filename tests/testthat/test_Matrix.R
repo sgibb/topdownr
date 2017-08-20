@@ -9,8 +9,12 @@ test_that(".bestCoverageCombination", {
                  cbind(index=c(5:3, 1), n=4:1))
     expect_equal(topdown:::.bestCoverageCombination(m1, minN=3),
                  cbind(index=5:4, n=4:3))
+    expect_equal(topdown:::.bestCoverageCombination(m1, minN=2),
+                 cbind(index=5:3, n=4:2))
     expect_equal(topdown:::.bestCoverageCombination(m1, n=3),
                  cbind(index=5:3, n=4:2))
+    expect_equal(topdown:::.bestCoverageCombination(m1, minN=4),
+                 cbind(index=5, n=4))
 })
 
 test_that(".createMaskMatrix", {

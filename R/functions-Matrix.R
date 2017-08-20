@@ -15,11 +15,11 @@
         x[.row(x[, hc[1L], drop=FALSE]), ] <- 0L
         x <- drop0(x)
         m[i, ] <- hc
-        if (!nnzero(x)) {
-            m <- m[seq_len(i), ]
+        if (!nnzero(x) && hc[2L] >= minN) {
+            m <- m[seq_len(i), , drop=FALSE]
             break
         } else if (hc[2L] < minN) {
-            m <- m[seq_len(i - 1L), ]
+            m <- m[seq_len(i - 1L), , drop=FALSE]
             break
         }
     }
