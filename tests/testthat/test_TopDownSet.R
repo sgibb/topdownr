@@ -347,3 +347,19 @@ test_that("validObject", {
     colnames(tdn@assay) <- rev(seq_len(ncol(tdn@assay)))
     expect_error(validObject(tdn), "Mismatch between condition names")
 })
+
+test_that("as(\"NCBSet\")", {
+    ncb <- new("NCBSet",
+               rowViews=Views(AAString("ACE"), start=1, width=1:2,
+                              names=paste0("bond", 1:2)),
+               colData=tds@colData,
+               assay=sparseMatrix(i=rep(1:2, c(3, 4)),
+                                  j=c(1:3, 1:2, 4:5),
+                                  x=c(rep(1, 4), 3, 2, 1),
+                                  dimnames=list(c("bond1", "bond2"), NULL)),
+               files=tds@files,
+               processing=c(tds@processing,
+                            paste("[2017-08-20 16:30:00]",
+                                  "Coerced TopDownSet into an NCBSet object.")))
+    expect_equal_TDS(as(tds, "NCBSet"), ncb)
+})
