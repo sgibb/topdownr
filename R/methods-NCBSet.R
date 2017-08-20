@@ -6,6 +6,7 @@
 #' added.
 #' @return `matrix`, first column: index of condition, second column: number of
 #' added fragments.
+#' @export
 #' @noRd
 setMethod("bestConditions", "NCBSet",
           function(object, n=ncol(object), minN=0L) {
