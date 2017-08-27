@@ -94,11 +94,11 @@ setMethod("filterInjectionTime", "TopDownSet",
       stop("'maxDeviation' has to be greater than 0.")
     }
 
-    lr <- log2(object$IonInjectionTimeMs / object$MedianIonInjectionTimeMs)
+    lr <- abs(as.vector(log2(object$IonInjectionTimeMs /
+                             object$MedianIonInjectionTimeMs)))
 
     i <- intersect(which(lr <= maxDeviation),
-                   .topIdx(-abs(as.vector(lr)), .groupByLabels(by),
-                           n=keepTopN))
+                   .topIdx(-lr, .groupByLabels(by), n=keepTopN))
 
     if (length(i) && length(i) != ncol(object)) {
         n0 <- ncol(object)
