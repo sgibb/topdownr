@@ -9,6 +9,7 @@
 setMethod("[", c("AbstractTopDownSet", "ANY", "ANY"),
            function(x, i, j, ..., drop=FALSE) {
     d0 <- dim(x)
+    ld0 <- .logdim(x)
     dn <- dimnames(x)
 
     if (missing(i)) {
@@ -50,10 +51,9 @@ setMethod("[", c("AbstractTopDownSet", "ANY", "ANY"),
     isFasta <- grepl(.topDownFileExtRx("fasta"), x@files)
     x@files <- x@files[.subsetFiles(x@files, unique(x@colData$File)) | isFasta]
 
-    d1 <- dim(x)
+    ld1 <- .logdim(x)
 
-    x <- .atdsLogMsg(x, "Subsetted [", d0[1L], ";", d0[2L], "] to [",
-                                      d1[1L], ";", d1[2L], "].")
+    x <- .atdsLogMsg(x, "Subsetted ", ld0, " to ", ld1, ".", addDim=FALSE)
 
     if (validObject(x)) {
         x
@@ -178,7 +178,7 @@ setMethod("removeEmptyConditions", "AbstractTopDownSet",
           function(object) {
     i <- Matrix::colSums(object@assay) != 0L
     object <- object[, i]
-    .atdsLogMsg(object, sum(!i), " empty conditions removed.")
+    .atdsLogMsg(object, sum(!i), " empty conditions removed")
 })
 
 #' @param object `AbstractTopDownSet`

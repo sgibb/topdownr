@@ -1,27 +1,20 @@
 #' Add log message.
 #'
 #' @param object `AbstractTopDownSet`
+#' @param addDim `logical`, add dimension information
 #' @return `AbstractTopDownSet`
 #' @noRd
-.atdsLogMsg <- function(object, ...) {
-   if (!isTRUE(inherits(object, "AbstractTopDownSet"))) {
-       stop("'object' has to be an 'AbstractTopDownSet' object.")
-   }
-   object@processing <- c(object@processing, .logmsg(...))
-   object
-}
-
-#' Test for AbstractTopDownSetclass
-#'
-#' @param object object to test
-#' @return `TRUE` if object is an AbstractTopDownSet otherwise fails with an
-#' error
-#' @noRd
-.inheritsAbstractTopDownSet <- function(object) {
+.atdsLogMsg <- function(object, ..., addDim=TRUE) {
     if (!isTRUE(inherits(object, "AbstractTopDownSet"))) {
-        stop("'object' doesn't inherit 'AbstractTopDownSet'.")
+        stop("'object' has to be an 'AbstractTopDownSet' object.")
     }
-    TRUE
+    if (addDim) {
+        object@processing <- c(object@processing,
+                               .logmsg(..., "; ", .logdim(object), "."))
+    } else {
+        object@processing <- c(object@processing, .logmsg(...))
+    }
+    object
 }
 
 #' Get fragment mass
@@ -52,6 +45,30 @@ fragmentNames <- function(object) {
 fragmentType <- function(object) {
     .inheritsAbstractTopDownSet(object)
     elementMetadata(object@rowViews)$type
+}
+
+#' Test for AbstractTopDownSetclass
+#'
+#' @param object object to test
+#' @return `TRUE` if object is an AbstractTopDownSet otherwise fails with an
+#' error
+#' @noRd
+.inheritsAbstractTopDownSet <- function(object) {
+    if (!isTRUE(inherits(object, "AbstractTopDownSet"))) {
+        stop("'object' doesn't inherit 'AbstractTopDownSet'.")
+    }
+    TRUE
+}
+
+#' String with number of fragments and dimension of the assay.
+#'
+#' @param object `TopDownSet`
+#' @return `character`
+#' @noRd
+.logdim <- function(object) {
+    .inheritsAbstractTopDownSet(object)
+    sprintf("%d fragments [%d;%d]",
+            nnzero(object@assay), nrow(object), ncol(object))
 }
 
 #' Validate `AbstractTopDownSet`

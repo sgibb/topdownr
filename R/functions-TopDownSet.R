@@ -128,14 +128,14 @@ readTopDownFiles <- function(path, pattern=".*",
     dimnames(assay) <- list(names(fragmentViews),
                             rownames(header))
 
-    new("TopDownSet",
-        rowViews=fragmentViews,
-        colData=.colsToRle(as(header, "DataFrame")),
-        assay=assay,
-        files=basename(unlist(unname(files))),
-        tolerance=tolerance,
-        processing=.logmsg("Data loaded (tolerance: ",
-                           round(tolerance/1e-6, 1L), " ppm)."))
+    tds <- new("TopDownSet",
+               rowViews=fragmentViews,
+               colData=.colsToRle(as(header, "DataFrame")),
+               assay=assay,
+               files=basename(unlist(unname(files))),
+               tolerance=tolerance)
+    .atdsLogMsg(tds, .logdim(tds), " matched (tolerance: ",
+                round(tolerance/1e-6, 1L), " ppm).", addDim=FALSE)
 }
 
 #' Test for TopDownSet class

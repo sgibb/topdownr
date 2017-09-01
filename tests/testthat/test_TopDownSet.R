@@ -38,7 +38,9 @@ test_that("[", {
                       "foo.fasta", "bar.mzML", "foo.mzML", "bar.txt",
                       "foo.txt"),
                processing=c("[2017-07-16 14:00:00] Data created.",
-                            "[2017-07-16 14:00:01] Subsetted [3;5] to [2;5]."))
+                            paste0("[2017-07-16 14:00:01] ",
+                                   "Subsetted 8 fragments [3;5] to ",
+                                   "6 fragments [2;5].")))
     tdsc1 <- new("TopDownSet",
                  rowViews=FragmentViews("ACE", mass=100, type="c",
                                         start=1, width=1, names="c1"),
@@ -52,7 +54,9 @@ test_that("[", {
                        "foo.fasta", "bar.mzML", "foo.mzML", "bar.txt",
                        "foo.txt"),
                 processing=c("[2017-07-16 14:00:00] Data created.",
-                             "[2017-07-16 14:00:02] Subsetted [3;5] to [1;5]."))
+                             paste0("[2017-07-16 14:00:02] ",
+                                    "Subsetted 8 fragments [3;5] to ",
+                                    "3 fragments [1;5].")))
 
     tdsf <- new("TopDownSet",
                 rowViews=FragmentViews("ACE", mass=1:3 * 100,
@@ -66,7 +70,9 @@ test_that("[", {
                 files=c("foo.experiments.csv", "foo.fasta", "foo.mzML",
                         "foo.txt"),
                 processing=c("[2017-07-16 14:00:00] Data created.",
-                             "[2017-07-16 14:00:03] Subsetted [3;5] to [3;3]."))
+                             paste0("[2017-07-16 14:00:03] ",
+                                    "Subsetted 8 fragments [3;5] to ",
+                                    "6 fragments [3;3].")))
     expect_equal_TDS(tds["c"], tdsc)
     expect_equal_TDS(tds["c",], tdsc)
     expect_equal_TDS(tds["c1"], tdsc1)
@@ -122,7 +128,9 @@ test_that("aggregate", {
                                    x=c(13/3, 4, 6, 9, 8)),
                files=c("foo.fasta"),
                processing=c("[2017-07-16 14:00:00] Data created.",
-                            "[2017-07-16 14:00:01] Aggregated [3;5] to [3;2]."))
+                            paste0("[2017-07-16 14:00:01] Aggregated ",
+                                   "8 fragments [3;5] to ",
+                                   "5 fragments [3;2].")))
     expect_error(aggregate(tds, by="FooBar"), "same length")
     expect_equal_TDS(aggregate(tds, by=list(tds$File)), tda)
     expect_equal_TDS(aggregate(tds, by=list(rep(1:2, c(3, 2)))), tda)
@@ -153,7 +161,7 @@ test_that("filterCv", {
     tdfitr@assay <- drop0(tdfitr@assay)
     tdfitr@processing <- c(tdfitr@processing,
                            paste0("[2017-08-04 18:05:00] 3 fragments with ",
-                                  "CV > 40% filtered."))
+                                  "CV > 40% filtered; 5 fragments [3;5]."))
     expect_equal_TDS(filterCv(tdfit, threshold=40), tdfitr)
 })
 
@@ -176,21 +184,21 @@ test_that("filterInjectionTime", {
     tdfitr@processing <- c(tdfitr@processing,
                            paste0("[2017-07-28 16:00:02] 3 scans filtered ",
                                   "with injection time deviation >= 0.5 or ",
-                                  "rank >= 6."))
+                                  "rank >= 6; 3 fragments [3;2]."))
     expect_equal_TDS(filterInjectionTime(tdfit, maxDeviation=0.5, keepTopN=5),
                      tdfitr)
     tdfitr <- tdfit[, -3]
     tdfitr@processing <- c(tdfitr@processing,
                            paste0("[2017-07-28 16:00:02] 1 scan filtered ",
                                   "with injection time deviation >= 5 or ",
-                                  "rank >= 3."))
+                                  "rank >= 3; 7 fragments [3;4]."))
     expect_equal_TDS(filterInjectionTime(tdfit, maxDeviation=5, keepTopN=2),
                      tdfitr)
     tdfitr <- tdfit[, -(2:3)]
     tdfitr@processing <- c(tdfitr@processing,
                            paste0("[2017-07-28 16:00:02] 2 scans filtered ",
                                   "with injection time deviation >= 0.6 or ",
-                                  "rank >= 3."))
+                                  "rank >= 3; 4 fragments [3;3]."))
     expect_equal_TDS(filterInjectionTime(tdfit, maxDeviation=0.6, keepTopN=2),
                      tdfitr)
 })
@@ -199,14 +207,17 @@ test_that("filterIntensity", {
    tdl <- tds
    tdl@assay <- sparseMatrix(i=c(1, 3, 2), j=3:5, x=7:9)
    tdl@processing <- c(tdl@processing,
-                       "[2017-07-16 14:00:02] 5 intensity values < 7 filtered.")
+                       paste0("[2017-07-16 14:00:02] ",
+                              "5 intensity values < 7 filtered; ",
+                              "3 fragments [3;5]."))
    expect_error(filterIntensity(tds, 1:2), "length one")
    expect_error(filterIntensity(tds, "c"), "numeric")
    expect_error(filterIntensity(tds, 2), "between 0 and 1")
    expect_error(filterIntensity(tds, -1), "between 0 and 1")
    expect_equal_TDS(filterIntensity(tds, 7, relative=FALSE), tdl)
-   tdl@processing[2L] <-
-     "[2017-07-16 14:00:02] 5 intensity values < 0.8 (relative) filtered."
+   tdl@processing[2L] <- paste0("[2017-07-16 14:00:02] ",
+                                "5 intensity values < 0.8 (relative) filtered; ",
+                                "3 fragments [3;5].")
    expect_equal_TDS(filterIntensity(tds, 0.8), tdl)
 })
 
@@ -228,7 +239,7 @@ test_that("filterNonReplicatedFragments", {
     tdfitr@processing <- c(tdfitr@processing,
                            paste0("[2017-07-31 22:15:00] 3 intensity values ",
                                   "of fragments replicated < 2 times ",
-                                  "filtered."))
+                                  "filtered; 5 fragments [3;5]."))
     expect_equal_TDS(filterNonReplicatedFragments(tdfit, minN=2), tdfitr)
 })
 
@@ -276,7 +287,7 @@ test_that("normalize", {
     tdn@assay <- t(t(tds@assay) / tdn$TotIonCurrent)
     tdn@processing <- c(tdn@processing,
                         paste0("[2017-08-06 14:50:00] ",
-                               "Scan/Condition intensity values normalized ",
+                               "Intensity values normalized ",
                                "to TIC."))
     expect_equal_TDS(normalize(tds, method="TIC"), tdn)
 })
@@ -288,12 +299,13 @@ test_that("readTopDownFiles", {
 
 test_that("removeEmptyConditions", {
     tdr <- tds
-    tdrr <- tds[, c(1:2, 5)]
-    tdrr@processing <- c(tdrr@processing,
-                         paste0("[2017-08-01 22:25:00] ",
-                                "2 empty conditions removed."))
     tdr@assay[cbind(c(1, 3), 3:4)] <- 0L
     tdr@assay <- drop0(tdr@assay)
+    tdrr <- tdr[, c(1:2, 5)]
+    tdrr@processing <- c(tdrr@processing,
+                         paste0("[2017-08-01 22:25:00] ",
+                                "2 empty conditions removed; ",
+                                "6 fragments [3;3]."))
     expect_equal_TDS(removeEmptyConditions(tdr), tdrr)
 })
 
@@ -315,6 +327,7 @@ test_that("show", {
                           "Condition variables \\(3\\): Scan, File, Sample",
                           "- - - Intensity data - - -",
                           "Size of array: 3x5 \\(53\\.33% != 0\\)",
+                          "Number of matched fragments: 8 ",
                           "Intensity range: \\[2.00;9.00\\]",
                           "- - - Processing information - - -",
                           "\\[2017-07-16 14:00:00\\] Data created. "),
@@ -323,6 +336,7 @@ test_that("show", {
     tdn@assay <- Matrix(0, nrow=3, ncol=5, sparse=TRUE)
     expect_output(show(tdn),
                   paste(c("Size of array: 3x5 \\(0\\.00% != 0\\)",
+                          "Number of matched fragments: 0 ",
                           "Intensity range: \\[NA;NA\\]"),
                         collapse="\n"))
     tdn@rowViews@metadata$modifications <-
@@ -360,6 +374,7 @@ test_that("as(\"NCBSet\")", {
                files=tds@files,
                processing=c(tds@processing,
                             paste("[2017-08-20 16:30:00]",
-                                  "Coerced TopDownSet into an NCBSet object.")))
+                                  "Coerced TopDownSet into an NCBSet object;",
+                                  "7 fragments [2;5].")))
     expect_equal_TDS(as(tds, "NCBSet"), ncb)
 })

@@ -31,7 +31,9 @@ test_that("[", {
                                    dims=c(1, 5)),
                 files="aced.fasta",
                 processing=c("[2017-08-19 15:00:00] Data created.",
-                             "[2017-08-19 21:48:00] Subsetted [3;5] to [1;5]."))
+                             paste0("[2017-08-19 21:48:00] ",
+                                    "Subsetted 8 fragments [3;5] to ",
+                                    "3 fragments [1;5].")))
 
     ncb3 <- new("NCBSet",
                 rowViews=Views(AAString("ACED"), start=1, width=1:3,
@@ -42,7 +44,9 @@ test_that("[", {
                                    x=c(1, 2, 1:3, 1)),
                 files="aced.fasta",
                 processing=c("[2017-08-19 15:00:00] Data created.",
-                             "[2017-08-19 21:48:00] Subsetted [3;5] to [3;3]."))
+                             paste0("[2017-08-19 21:48:00] ",
+                                    "Subsetted 8 fragments [3;5] to ",
+                                    "6 fragments [3;3].")))
 
     expect_equal_NCBSet(ncb["bond1"], ncb1)
     expect_equal_NCBSet(ncb[1,], ncb1)
@@ -103,12 +107,15 @@ test_that("dimnames", {
 
 test_that("removeEmptyConditions", {
     ncbr <- ncb
-    ncbrr <- ncb[, c(1:2, 5)]
-    ncbrr@processing <- c(ncbrr@processing,
-                         paste0("[2017-08-01 22:25:00] ",
-                                "2 empty conditions removed."))
     ncbr@assay[cbind(c(1, 3), 3:4)] <- 0L
     ncbr@assay <- drop0(ncbr@assay)
+    ncbrr <- ncbr[, c(1:2, 5)]
+    ncbrr@processing <- c(ncbrr@processing,
+                          paste0("[2017-08-01 22:25:00] ",
+                                 "2 empty conditions removed; ",
+                                 "6 fragments [3;3]."))
+    #ncbr@assay[cbind(c(1, 3), 3:4)] <- 0L
+    #ncbr@assay <- drop0(ncbr@assay)
     expect_equal_NCBSet(removeEmptyConditions(ncbr), ncbrr)
 })
 

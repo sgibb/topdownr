@@ -4,7 +4,7 @@
 #' @noRd
 setMethod("aggregate", "TopDownSet",
           function(x, by=x$Sample) {
-    d0 <- dim(x)
+    d0 <- .logdim(x)
     groups <- .groupByLabels(by)
 
     if (length(groups) != ncol(x)) {
@@ -19,10 +19,9 @@ setMethod("aggregate", "TopDownSet",
     x$AssignedFragments <- .colCounts(x@assay)
     x$AssignedIntensity <- Matrix::colSums(x@assay)
 
-    d1 <- dim(x)
+    d1 <- .logdim(x)
 
-    x <- .atdsLogMsg(x, "Aggregated [", d0[1L], ";", d0[2L], "] to [",
-                                        d1[1L], ";", d1[2L], "].")
+    x <- .atdsLogMsg(x, "Aggregated ", d0, " to ", d1, ".", addDim=FALSE)
 
     if (validObject(x)) {
         x
@@ -61,7 +60,7 @@ setMethod("filterCv", "TopDownSet",
     n1 <- nnzero(object@assay)
     if (n0 - n1) {
         object <- .atdsLogMsg(object, n0 - n1, " fragments with CV > ",
-                              threshold, "% filtered.")
+                              threshold, "% filtered")
 
     }
     if (validObject(object)) {
@@ -94,7 +93,7 @@ setMethod("filterInjectionTime", "TopDownSet",
       stop("'maxDeviation' has to be greater than 0.")
     }
 
-    lr <- abs(as.vector(log2(object$IonInjectionTimeMs /
+    lr <- as.vector(abs(log2(object$IonInjectionTimeMs /
                              object$MedianIonInjectionTimeMs)))
 
     i <- intersect(which(lr <= maxDeviation),
@@ -107,7 +106,7 @@ setMethod("filterInjectionTime", "TopDownSet",
         nd <- n0 - n1
         object <- .atdsLogMsg(object, n0 - n1, " scan", if (nd > 1L) { "s" },
                               " filtered with injection time deviation >= ",
-                              maxDeviation, " or rank >= ", keepTopN + 1L, ".")
+                              maxDeviation, " or rank >= ", keepTopN + 1L)
     }
     if (validObject(object)) {
         object
@@ -150,7 +149,7 @@ setMethod("filterIntensity", "TopDownSet",
     if (n0 - n1) {
         object <- .atdsLogMsg(object, n0 - n1, " intensity values < ",
                               threshold, if (relative) { " (relative)" },
-                              " filtered.")
+                              " filtered")
     }
     if (validObject(object)) {
         object
@@ -185,7 +184,7 @@ setMethod("filterNonReplicatedFragments", "TopDownSet",
     if (n0 - n1) {
         object <- .atdsLogMsg(object, n0 - n1, " intensity values of ",
                               "fragments replicated < ", minN,
-                              " times filtered.")
+                              " times filtered")
     }
     if (validObject(object)) {
         object
@@ -210,7 +209,8 @@ setMethod("normalize", "TopDownSet",
     if (method == "TIC") {
         object@assay <- .normaliseCols(object@assay,
                                        scale=object$TotIonCurrent)
-        .atdsLogMsg(object, "Scan/Condition intensity values normalized to TIC.")
+        .atdsLogMsg(object, "Intensity values normalized to TIC.",
+                    addDim=FALSE)
     }
 })
 
@@ -248,6 +248,7 @@ setMethod("show", "TopDownSet", function(object) {
         } else {
             intensity <- c(-NA, NA)
         }
+        cat("Number of matched fragments:", nnzero(object@assay), "\n")
         cat(sprintf("Intensity range: [%.2f;%.2f]\n",
                     intensity[1L], intensity[2L]))
     }
@@ -262,14 +263,14 @@ setMethod("show", "TopDownSet", function(object) {
 
 setAs("TopDownSet", "NCBSet", function(from) {
     assay <- .ncbMap(from)
-    new("NCBSet",
-        rowViews=Views(subject(from@rowViews),
-                       start=1L, width=seq_len(nrow(assay)),
-                       names=rownames(assay)),
-        colData=from@colData,
-        assay=assay,
-        files=from@files,
-        tolerance=from@tolerance,
-        processing=c(from@processing,
-                     .logmsg("Coerced TopDownSet into an NCBSet object.")))
+    ncb <- new("NCBSet",
+               rowViews=Views(subject(from@rowViews),
+                              start=1L, width=seq_len(nrow(assay)),
+                              names=rownames(assay)),
+               colData=from@colData,
+               assay=assay,
+               files=from@files,
+               tolerance=from@tolerance,
+               processing=from@processing)
+    .atdsLogMsg(ncb, "Coerced TopDownSet into an NCBSet object")
 })

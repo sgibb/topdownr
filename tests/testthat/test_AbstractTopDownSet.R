@@ -19,14 +19,11 @@ test_that(".atdsLogMsg", {
                  "has to be an 'AbstractTopDownSet' object")
     expect_equal(gsub("^\\[[^]]+\\] *", "",
                       topdown:::.atdsLogMsg(tds, "foobar")@processing),
+                 c("Data created.", "foobar; 8 fragments [3;5]."))
+    expect_equal(gsub("^\\[[^]]+\\] *", "",
+                      topdown:::.atdsLogMsg(tds, "foobar",
+                                            addDim=FALSE)@processing),
                  c("Data created.", "foobar"))
-})
-
-test_that(".inheritsAbstractTopDownSet", {
-    expect_true(topdown:::.inheritsAbstractTopDownSet(new("TopDownSet")))
-    expect_true(topdown:::.inheritsAbstractTopDownSet(new("NCBSet")))
-    expect_error(topdown:::.inheritsAbstractTopDownSet(1L),
-                 "doesn't inherit 'AbstractTopDownSet'")
 })
 
 test_that("fragmentMass", {
@@ -44,4 +41,16 @@ test_that("fragmentTypes", {
     expect_equal(fragmentType(tds), factor(c("c", "c", "x")))
 })
 
+test_that(".inheritsAbstractTopDownSet", {
+    expect_true(topdown:::.inheritsAbstractTopDownSet(new("TopDownSet")))
+    expect_true(topdown:::.inheritsAbstractTopDownSet(new("NCBSet")))
+    expect_error(topdown:::.inheritsAbstractTopDownSet(1L),
+                 "doesn't inherit 'AbstractTopDownSet'")
+})
+
+test_that(".logdim", {
+    expect_error(topdown:::.logdim(1L))
+    expect_equal(topdown:::.logdim(new("TopDownSet")), "0 fragments [0;0]")
+    expect_equal(topdown:::.logdim(tds), "8 fragments [3;5]")
+})
 
