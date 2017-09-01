@@ -25,6 +25,7 @@ setMethod("show", "FragmentViews", function(object) {
         ## metadata
         mass=c("mass", .hft(sprintf("%.2f", elementMetadata(object)$mass),
                             n=5L)),
+        name=c("name", .hft(names(object), n=5L)),
         type=c("type", .hft(as.character(elementMetadata(object)$type), n=5L)),
         z=c("z", as.character(.hft(elementMetadata(object)$z, n=5L)))
     )
@@ -40,7 +41,7 @@ setMethod("show", "FragmentViews", function(object) {
                      n=5L))
 
     ## format
-    just <- c(rep("right", 5), "left", "right", "left")
+    just <- c(rep("right", 5), "left", "left", "right", "left")
     entries <- mapply(format, x=c(entries, list(vw)), justify=just)
 
     ## output

@@ -47,10 +47,10 @@ test_that("show", {
                           "  Carbamidomethyl",
                           "  Met-loss\\+Acetyl",
                           "Views:",
-                          "    start end width   mass type z *",
-                          "\\[1\\]     1   1     1 114\\.05 b    1 \\[A\\] *",
-                          "\\[2\\]     1   2     2 185\\.09 b    1 \\[AA\\] *",
-                          "\\[3\\]     1   3     3 345\\.12 b    1 \\[AAC\\]"),
+                          "    start end width   mass name type z *",
+                          "\\[1\\]     1   1     1 114\\.05 b1   b    1 \\[A\\] *",
+                          "\\[2\\]     1   2     2 185\\.09 b2   b    1 \\[AA\\] *",
+                          "\\[3\\]     1   3     3 345\\.12 b3   b    1 \\[AAC\\]"),
                         collapse="\n"))
 })
 
