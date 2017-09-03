@@ -8,6 +8,8 @@ test_that(".aggregateDataFrame", {
                     stringsAsFactors=FALSE, row.names=letters[c(1, 3)])
     expect_equal(topdown:::.aggregateDataFrame(d, rep(1:2, each=2),
                                                ignoreNumCols="id"), r)
+    expect_equal(topdown:::.aggregateDataFrame(d, rep(c(10, 2), each=2),
+                                               ignoreNumCols="id"), r)
 })
 
 test_that(".colsToRle", {

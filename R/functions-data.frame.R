@@ -22,6 +22,8 @@
     rn <- rownames(nonNum)
     num <- aggregate(x[, isNumCol, drop=FALSE], by=list(f), FUN=fun,
                      na.rm=na.rm, drop=FALSE)
+    ## resort (aggregate turns "by" into a factor (locale depended sorting))
+    num <- num[match(unique(f), num[["Group.1"]]),, drop=FALSE]
     x <- .colsToRle(cbind(nonNum, num)[, cn])
     rownames(x) <- rn
     x

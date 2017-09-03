@@ -115,12 +115,14 @@ test_that("accessors<-", {
 })
 
 test_that("aggregate", {
+    tds$Sample <- c(2, 2, 2, 10, 10)
     tda <- new("TopDownSet",
                rowViews=FragmentViews("ACE", mass=1:3 * 100,
                                       type=c("c", "c", "x"),
                                       start=1:3, width=c(1:2, 1),
                                       names=c("c1", "c2", "x1")),
                colData=DataFrame(Scan=c(1, 4), File=Rle(c("foo", "bar")),
+                                 Sample=c(2, 10),
                                  AssignedFragments=3:2,
                                  AssignedIntensity=c(43/3, 17)),
                assay=sparseMatrix(i=c(1:3, 2:3),
@@ -134,6 +136,7 @@ test_that("aggregate", {
     expect_error(aggregate(tds, by="FooBar"), "same length")
     expect_equal_TDS(aggregate(tds, by=list(tds$File)), tda)
     expect_equal_TDS(aggregate(tds, by=list(rep(1:2, c(3, 2)))), tda)
+    expect_equal_TDS(aggregate(tds, by=list(rep(c(2, 10), c(3, 2)))), tda)
 })
 
 test_that("dim", {
