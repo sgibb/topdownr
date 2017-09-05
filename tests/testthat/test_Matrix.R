@@ -109,16 +109,6 @@ test_that(".highestCoverage", {
     expect_equal(topdown:::.highestCoverage(t(m)), c(index=4, nonzero=5))
 })
 
-test_that(".m2rect", {
-    m <- sparseMatrix(i=rep(1:2, each=5), j=1:10, x=1:10)
-    r <- cbind(xleft=rep(0:1, each=5), ybottom=0:9,
-               xright=rep(1:2, each=5), ytop=1:10,
-               col=1:10)
-    expect_error(topdown:::.m2rect(matrix(1:10, nrow=2)))
-    expect_equal(topdown:::.m2rect(m), r)
-})
-
-
 test_that(".normaliseCols", {
     expect_error(topdown:::.normaliseCols(matrix(1:10, nrow=2)))
     expect_error(topdown:::.normaliseCols(m, "A"))

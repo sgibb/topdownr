@@ -156,21 +156,6 @@
     c(index=i, nonzero=cc[i])
 }
 
-#' calculate rect coordinates for a Matrix
-#'
-#' @param x `Matrix`
-#' @param width `double`
-#' @param height `double`
-#' @return `matrix` with coords (xleft, ybottom, xright, ytop) (row index is x,
-#' col index is y), and color
-#' @noRd
-.m2rect <- function(x, width=1L, height=1L) {
-    stopifnot(is(x, "Matrix"))
-    xm <- .row(x) - 1L
-    ym <- .col(x) - 1L
-    cbind(xleft=xm, ybottom=ym, xright=xm + width, ytop=ym + height, col=x@x)
-}
-
 #' normalise (col-wise scale)
 #'
 #' @param x `dgCMatrix`
