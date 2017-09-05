@@ -75,16 +75,8 @@
 #' @param x `dgCMatrix`
 #' @return `data.frame`
 .dgcMatrix2data.frame <- function(x) {
-    dn <- dimnames(x)
-
-    if (is.null(dn[[1L]])) {
-        dn[[1L]] <- seq_len(nrow(x))
-    }
-    if (is.null(dn[[2L]])) {
-        dn[[2L]] <- seq_len(ncol(x))
-    }
-    data.frame(row=dn[[1L]][.row(x)],
-               col=dn[[2L]][.col(x)],
+    data.frame(row=.row(x),
+               col=.col(x),
                x=x@x,
                stringsAsFactors=FALSE)
 }
