@@ -70,6 +70,25 @@
     crossprod(.createMaskMatrix(group), x)
 }
 
+#' convert sparseMatrix to data.frame (for ggplot2)
+#'
+#' @param x `dgCMatrix`
+#' @return `data.frame`
+.dgcMatrix2data.frame <- function(x) {
+    dn <- dimnames(x)
+
+    if (is.null(dn[[1L]])) {
+        dn[[1L]] <- seq_len(nrow(x))
+    }
+    if (is.null(dn[[2L]])) {
+        dn[[2L]] <- seq_len(ncol(x))
+    }
+    data.frame(row=dn[[1L]][.row(x)],
+               col=dn[[2L]][.col(x)],
+               x=x@x,
+               stringsAsFactors=FALSE)
+}
+
 #' drop0 but row-wise with length(tol) == nrow(x)
 #'
 #' @param x `dgCMatrix`

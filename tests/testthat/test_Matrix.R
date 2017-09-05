@@ -48,6 +48,14 @@ test_that(".colSumsGroup", {
     expect_equal(topdown:::.colSumsGroup(t(m), group=rep(1:2, each=5)), r2)
 })
 
+test_that(".dgcMatrix2data.frame", {
+    d <- data.frame(row=c(rep(c(1, 3), 5), rep(c(2, 4), 5)),
+                    col=rep(1:10, each=2), x=rep(1:10, each=2) + c(0, 10),
+                    stringsAsFactors=FALSE)
+    expect_error(topdown:::.dgcMatrix2data.frame(matrix(1:10, nrow=2)))
+    expect_equal(topdown:::.dgcMatrix2data.frame(m), d)
+})
+
 test_that(".drop0rowLe/Lt", {
     r1 <- sparseMatrix(i=rep(1:4, each=3), j=rep(c(3:5, 8:10), 2),
                        x=c(3:5, 8:10, 13:15, 18:20))
