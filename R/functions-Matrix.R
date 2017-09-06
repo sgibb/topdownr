@@ -26,18 +26,6 @@
     m
 }
 
-#' mask matrix for matrix multiplication in .rowMeansGroup
-#'
-#' @param x `character`/`numeric`, group identifier
-#' @return `sparseMatrix` with group masked
-#' @noRd
-.createMaskMatrix <- function(x) {
-    if (!is.numeric(x)) {
-        x <- match(x, unique(x))
-    }
-    sparseMatrix(i=seq_along(x), j=x, x=1L)
-}
-
 #' Column index
 #'
 #' @param x `dgCMatrix`
@@ -68,6 +56,18 @@
     stopifnot(is(x, "Matrix"))
     stopifnot(nrow(x) == length(group))
     crossprod(.createMaskMatrix(group), x)
+}
+
+#' mask matrix for matrix multiplication in .rowMeansGroup
+#'
+#' @param x `character`/`numeric`, group identifier
+#' @return `sparseMatrix` with group masked
+#' @noRd
+.createMaskMatrix <- function(x) {
+    if (!is.numeric(x)) {
+        x <- match(x, unique(x))
+    }
+    sparseMatrix(i=seq_along(x), j=x, x=1L)
 }
 
 #' convert sparseMatrix to data.frame (for ggplot2)
@@ -191,6 +191,15 @@
     x@i + 1L
 }
 
+#' Count nonzero values in rows
+#'
+#' @param x `dgCMatrix`
+#' @return `numeric`
+#' @noRd
+.rowCounts <- function(x) {
+    tabulate(.row(x), nbins=nrow(x))
+}
+
 #' rowCvs groupwise, similar to rowsum but for sparceMatrices
 #'
 #' @param x `Matrix`
@@ -217,15 +226,6 @@
     stopifnot(is(x, "dgCMatrix"))
     sparseVector(.vapply1d(split(x@x, .row(x)), max, na.rm=na.rm),
                  i=sort.int(unique(.row(x))), length=nrow(x))
-}
-
-#' Count nonzero values in rows
-#'
-#' @param x `dgCMatrix`
-#' @return `numeric`
-#' @noRd
-.rowCounts <- function(x) {
-    tabulate(.row(x), nbins=nrow(x))
 }
 
 #' rowMeans groupwise, similar to rowsum but for sparceMatrices

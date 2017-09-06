@@ -17,14 +17,6 @@ test_that(".bestCoverageCombination", {
                  cbind(index=5, n=4))
 })
 
-test_that(".createMaskMatrix", {
-    r1 <- sparseMatrix(i=1:10, j=rep(1:5, 2), x=1)
-    r2 <- sparseMatrix(i=1:10, j=rep(1:2, each=5), x=1)
-    expect_equal(topdown:::.createMaskMatrix(rep(1:5, 2)), r1)
-    expect_equal(topdown:::.createMaskMatrix(rep(letters[1:5], 2)), r1)
-    expect_equal(topdown:::.createMaskMatrix(rep(1:2, each=5)), r2)
-})
-
 test_that(".col", {
     expect_error(topdown:::.col(matrix(1:10, ncol=2)))
     expect_equal(topdown:::.col(m), rep(1:10, each=2))
@@ -46,6 +38,14 @@ test_that(".colSumsGroup", {
     expect_error(topdown:::.colSumsGroup(m, group=1:2))
     expect_equal(topdown:::.colSumsGroup(m, group=rep(1:2, 2)), r)
     expect_equal(topdown:::.colSumsGroup(t(m), group=rep(1:2, each=5)), r2)
+})
+
+test_that(".createMaskMatrix", {
+    r1 <- sparseMatrix(i=1:10, j=rep(1:5, 2), x=1)
+    r2 <- sparseMatrix(i=1:10, j=rep(1:2, each=5), x=1)
+    expect_equal(topdown:::.createMaskMatrix(rep(1:5, 2)), r1)
+    expect_equal(topdown:::.createMaskMatrix(rep(letters[1:5], 2)), r1)
+    expect_equal(topdown:::.createMaskMatrix(rep(1:2, each=5)), r2)
 })
 
 test_that(".dgcMatrix2data.frame", {
