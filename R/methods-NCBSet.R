@@ -15,6 +15,44 @@ setMethod("bestConditions", "NCBSet",
     m
 })
 
+#' Plot fragmentation map.
+#'
+#' @param object `NCBSet`
+#' @export
+#' @noRd
+setMethod("fragmentationMap", "NCBSet",
+          function(object, ...) {
+    d <- .dgcMatrix2data.frame(object@assay)
+    d <- cbind(d,
+               ActivationString=object$ActivationString[d$col],
+               Activation=object$Activation[d$col])
+
+    d$Activation <- factor(d$Activation,
+                           levels=c("CID", "HCD", "ETD", "ETcid", "EThcd"))
+
+    ggplot(data=d) +
+        geom_raster(aes(x=ActivationString, y=row, fill=as.factor(x))) +
+        facet_grid(. ~ Activation, scales="free_x", space="free_x") +
+        scale_fill_manual(name="Observed Fragments",
+                          labels=c("N-terminal", "C-terminal", "Both"),
+                          values=c("#1b9e77", "#d95f02", "#7570b3")) +
+        scale_x_discrete(name="Condition (ETD:CID:HCD)", expand=c(0L, 0L)) +
+        scale_y_discrete(name=expression(
+                            paste("Bonds (", N-terminal %->% C-termnial, ")")),
+                         expand=c(0L, 0L)) +
+        geom_vline(xintercept=c(0L, seq_len(ncol(object))) + 0.5,
+                   colour="#808080", size=0.1) +
+        geom_hline(yintercept=c(0L, seq_len(nrow(object))) + 0.5,
+                   colour="#808080", size=0.1) +
+        ggtitle("fragmentation map") +
+        theme(axis.text.x=element_text(angle=90, vjust=0.4),
+              plot.title=element_text(hjust=0.5, face="bold"),
+              panel.grid.major=element_blank(),
+              panel.border=element_blank(),
+              panel.background=element_blank(),
+              strip.background=element_rect(fill="#f0f0f0", colour="#ffffff"))
+})
+
 #' @param object `NCBSet`
 #' @noRd
 setMethod("show", "NCBSet", function(object) {
