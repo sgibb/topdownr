@@ -58,12 +58,17 @@ test_that(".fixFilterStringId", {
 })
 
 test_that(".formatNumbers", {
-    expect_equal(topdown:::.formatNumbers(1:10), sprintf("%05.2f", 1:10))
-    expect_equal(topdown:::.formatNumbers(c(1, 100)), sprintf("%06.2f", c(1, 100)))
+    expect_equal(topdown:::.formatNumbers(1:10), sprintf("%02d", 1:10))
+    expect_equal(topdown:::.formatNumbers(c(1, 100.1)),
+                 sprintf("%06.2f", c(1, 100.1)))
     expect_equal(topdown:::.formatNumbers(c(1, 100) + 0.1),
                  sprintf("%06.2f", c(1, 100) + 0.1))
     expect_equal(topdown:::.formatNumbers(c(1, 100) + 0.1, asInteger=TRUE),
                  sprintf("%03d", c(1L, 100L)))
+    expect_equal(topdown:::.formatNumbers(c(1, 100) + 0.1, asInteger=FALSE),
+                 sprintf("%06.2f", c(1, 100) + 0.1))
+    expect_equal(topdown:::.formatNumbers(c(1, 100) + 0.1, asInteger=NA),
+                 sprintf("%06.2f", c(1, 100) + 0.1))
 })
 
 test_that(".fragmentationMethod", {

@@ -130,8 +130,11 @@ cat0 <- function(...) {
 #' @param asInteger `logical`
 #' @return `character`
 #' @noRd
-.formatNumbers <- function(x, asInteger=FALSE) {
+.formatNumbers <- function(x, asInteger=NA_integer_) {
     n <- .ndigits(max(x))
+
+    asInteger <- isTRUE(asInteger) ||
+        (is.na(asInteger) && all(abs(x - as.integer(x)) < .Machine$double.eps))
 
     if (asInteger) {
         sprintf(paste0("%0", n, "d"), as.integer(x))
