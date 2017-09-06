@@ -74,6 +74,7 @@
 #'
 #' @param x `dgCMatrix`
 #' @return `data.frame`
+#' @noRd
 .dgcMatrix2data.frame <- function(x) {
     data.frame(row=.row(x),
                col=.col(x),
