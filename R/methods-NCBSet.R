@@ -18,25 +18,50 @@ setMethod("bestConditions", "NCBSet",
 #' Plot fragmentation map.
 #'
 #' @param object `NCBSet`
+#' @param nCombinations `integer`, number of combinations to show (0 to avoid
+#' plotting them at all)
+#' @param cumCoverage `logical`, if `TRUE` (default) cumulative coverage of
+#' combinations is shown.
 #' @export
 #' @noRd
 setMethod("fragmentationMap", "NCBSet",
-          function(object, ...) {
+          function(object, nCombinations=10, cumCoverage=TRUE, ...) {
     d <- .dgcMatrix2data.frame(object@assay)
     d <- cbind(d,
-               ActivationString=object$ActivationString[d$col],
+               Condition=colnames(object)[d$col],
                Activation=object$Activation[d$col])
 
+    if (nCombinations) {
+        i <- bestConditions(object, nCombinations)[, "index"]
+        combinations <- object[, i]
+
+        if (cumCoverage) {
+            cmb <- .dgcMatrix2data.frame(.cumComb(combinations@assay))
+        } else {
+            cmb <- .dgcMatrix2data.frame(combinations@assay)
+        }
+        cmb <- cbind(cmb,
+                     Condition=paste(.formatNumbers(cmb$col),
+                                     colnames(combinations)[cmb$col],
+                                     sep=": "),
+                     Activation="Cmb")
+        cmb$Condition <- as.ordered(cmb$Condition)
+        d <- rbind(d, cmb)
+    }
+
+    ## tell ggplot that we have an already ordered factor
+    d$Condition <- as.ordered(d$Condition)
     d$Activation <- factor(d$Activation,
-                           levels=c("CID", "HCD", "ETD", "ETcid", "EThcd"))
+                           levels=c("CID", "HCD", "ETD", "ETcid", "EThcd",
+                                    "Cmb"))
 
     ggplot(data=d) +
-        geom_raster(aes(x=ActivationString, y=row, fill=as.factor(x))) +
+        geom_raster(aes(x=Condition, y=row, fill=as.factor(x))) +
         facet_grid(. ~ Activation, scales="free_x", space="free_x") +
         scale_fill_manual(name="Observed Fragments",
                           labels=c("N-terminal", "C-terminal", "Both"),
                           values=c("#1b9e77", "#d95f02", "#7570b3")) +
-        scale_x_discrete(name="Condition (ETD:CID:HCD)", expand=c(0L, 0L)) +
+        scale_x_discrete(name="Condition", expand=c(0L, 0L)) +
         scale_y_discrete(name=expression(
                             paste("Bonds (", N-terminal %->% C-termnial, ")")),
                          expand=c(0L, 0L)) +
@@ -45,7 +70,7 @@ setMethod("fragmentationMap", "NCBSet",
         geom_hline(yintercept=c(0L, seq_len(nrow(object))) + 0.5,
                    colour="#808080", size=0.1) +
         ggtitle("fragmentation map") +
-        theme(axis.text.x=element_text(angle=90, vjust=0.4),
+        theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.4),
               plot.title=element_text(hjust=0.5, face="bold"),
               panel.grid.major=element_blank(),
               panel.border=element_blank(),
