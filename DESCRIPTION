@@ -9,7 +9,8 @@ Depends:
     methods,
     BiocGenerics (>= 0.20.0),
     Biostrings (>= 2.42.1),
-    S4Vectors (>= 0.12.2)
+    S4Vectors (>= 0.12.2),
+    ggplot2 (>= 2.2.1)
 Imports:
     Biobase,
     Matrix (>= 1.2.10),

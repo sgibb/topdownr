@@ -12,6 +12,7 @@
 #' @import BiocGenerics
 #' @import Biostrings
 #' @import S4Vectors
+#' @import ggplot2
 #' @importClassesFrom Matrix Matrix dgCMatrix
 #' @importFrom Matrix Matrix sparseMatrix sparseVector crossprod tcrossprod
 #' drop0 nnzero
