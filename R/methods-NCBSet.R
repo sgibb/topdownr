@@ -25,43 +25,48 @@ setMethod("bestConditions", "NCBSet",
 #' @export
 #' @noRd
 setMethod("fragmentationMap", "NCBSet",
-          function(object, nCombinations=10, cumCoverage=TRUE, ...) {
+          function(object, nCombinations=10, cumCoverage=TRUE,
+                   labels=colnames(object), ...) {
+
+    if (length(labels) != ncol(object)) {
+        stop("The number of elements in 'labels' has to be the same as ",
+             "the number of columns in 'object'.")
+    }
     d <- .dgcMatrix2data.frame(object@assay)
-    d <- cbind(d,
-               Condition=colnames(object)[d$col],
-               Activation=object$Activation[d$col])
+    d$Activation <- as.character(object$Activation[d$col])
 
     if (nCombinations) {
         i <- bestConditions(object, nCombinations)[, "index"]
         combinations <- object[, i]
+        labels <- c(labels, labels[i])
 
         if (cumCoverage) {
             cmb <- .dgcMatrix2data.frame(.cumComb(combinations@assay))
         } else {
             cmb <- .dgcMatrix2data.frame(combinations@assay)
         }
-        cmb <- cbind(cmb,
-                     Condition=paste(.formatNumbers(cmb$col),
-                                     colnames(combinations)[cmb$col],
-                                     sep=": "),
-                     Activation="Cmb")
-        cmb$Condition <- as.ordered(cmb$Condition)
+        cmb$col <- cmb$col + ncol(object)
+        cmb$Activation <- "Cmb"
         d <- rbind(d, cmb)
     }
 
     ## tell ggplot that we have an already ordered factor
-    d$Condition <- as.ordered(d$Condition)
+    d$col <- as.ordered(d$col)
     d$Activation <- factor(d$Activation,
                            levels=c("CID", "HCD", "ETD", "ETcid", "EThcd",
-                                    "Cmb"))
+                                    "Cmb"),
+                           ordered=TRUE)
+
+    names(labels) <- seq_along(labels)
 
     ggplot(data=d) +
-        geom_raster(aes(x=Condition, y=row, fill=as.factor(x))) +
+        geom_raster(aes(x=col, y=row, fill=as.factor(x))) +
         facet_grid(. ~ Activation, scales="free_x", space="free_x") +
         scale_fill_manual(name="Observed Fragments",
                           labels=c("N-terminal", "C-terminal", "Both"),
                           values=c("#1b9e77", "#d95f02", "#7570b3")) +
-        scale_x_discrete(name="Condition", expand=c(0L, 0L)) +
+        scale_x_discrete(name="Condition", expand=c(0L, 0L),
+                         labels=labels) +
         scale_y_discrete(name=expression(
                             paste("Bonds (", N-terminal %->% C-termnial, ")")),
                          expand=c(0L, 0L)) +
