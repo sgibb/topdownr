@@ -9,12 +9,12 @@ Depends:
     methods,
     BiocGenerics (>= 0.20.0),
     Biostrings (>= 2.42.1),
-    S4Vectors (>= 0.12.2),
-    ggplot2 (>= 2.2.1)
+    S4Vectors (>= 0.12.2)
 Imports:
     Biobase,
     Matrix (>= 1.2.10),
     MSnbase (>= 2.3.10),
+    ggplot2 (>= 2.2.1),
     mzR (>= 2.11.4)
 Suggests:
     topdowndata (>= 0.2),

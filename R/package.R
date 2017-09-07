@@ -12,11 +12,13 @@
 #' @import BiocGenerics
 #' @import Biostrings
 #' @import S4Vectors
-#' @import ggplot2
 #' @importClassesFrom Matrix Matrix dgCMatrix
 #' @importFrom Matrix Matrix sparseMatrix sparseVector crossprod tcrossprod
 #' drop0 nnzero
 #' @importFrom Biobase assayData
+#' @importFrom ggplot2 ggplot geom_raster aes facet_grid scale_fill_manual
+#' scale_x_discrete scale_y_discrete geom_vline geom_hline ggtitle theme
+#' element_text element_blank element_rect
 #'
 #' @importFrom mzR openMSfile close header peaks
 #' @importFrom MSnbase calculateFragments defaultNeutralLoss
