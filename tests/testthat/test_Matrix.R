@@ -281,8 +281,8 @@ test_that(".rowSumsGroup", {
 test_that(".summary", {
     mr <- seq(1, 20, by=5)
     dr <- data.frame(Fragments=5, Total=c(15, 40, 65, 90),
-                     Min=r, Q1=r + 1, Median=r + 2, Mean=(r + 2)/2,
-                     Q3=r + 3, Max=r + 4)
+                     Min=mr, Q1=mr + 1, Median=mr + 2, Mean=(mr + 2)/2,
+                     Q3=mr + 3, Max=mr + 4)
     mc <- 1:10
     dc <- data.frame(Fragments=2, Total=mc * 2 + 10,
                      Min=mc, Q1=mc + 2.5, Median=mc + 5, Mean=(mc + 5)/2,
