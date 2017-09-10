@@ -156,10 +156,6 @@
     d$Activation <- .fragmentationMethod(d[, paste0(c("Etd", "Cid", "Hcd"),
                                                     "Activation")])
 
-    d$ActivationString <- paste(.formatNumbers(d$EtdActivation),
-                                .formatNumbers(d$CidActivation),
-                                .formatNumbers(d$HcdActivation), sep=":")
-
     d$File <- gsub(.topDownFileExtRx("txt"), "", basename(file))
     d
 }
