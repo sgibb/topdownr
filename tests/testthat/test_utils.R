@@ -69,6 +69,14 @@ test_that(".formatNumbers", {
                  sprintf("%06.2f", c(1, 100) + 0.1))
     expect_equal(topdown:::.formatNumbers(c(1, 100) + 0.1, asInteger=NA),
                  sprintf("%06.2f", c(1, 100) + 0.1))
+    expect_equal(topdown:::.formatNumbers(c(1, 1000, 1e6) + 0.1),
+                 sprintf("%010.2f", c(1, 1000, 1e6) + 0.1))
+    expect_equal(topdown:::.formatNumbers(c(1, 1000, 1e6)),
+                 sprintf("%.1e", c(1, 1000, 1e6)))
+    expect_equal(topdown:::.formatNumbers(c(1, 1000, 1e6), asInteger=TRUE),
+                 sprintf("%.1e", c(1, 1000, 1e6)))
+    expect_equal(topdown:::.formatNumbers(c(1, 1000, 1e6), nScientific=10),
+                 sprintf("%07d", c(1, 1000, 1e6)))
 })
 
 test_that(".fragmentationMethod", {
@@ -141,6 +149,16 @@ test_that(".makeNames", {
                  c("A:1", "A:2", "B", sprintf("C:%02d", 1:10)))
     expect_equal(topdown:::.makeNames(x, sep="_", prefix="D"),
                  c("DA_1", "DA_2", "DB", sprintf("DC_%02d", 1:10)))
+})
+
+test_that(".makeRowNames", {
+    d <- data.frame(a=c(1e5, 1e6, 1e7), b=letters[1:3], c=8:10)
+    expect_equal(topdown:::.makeRowNames(d),
+                 c("C1.0e+05:a:08", "C1.0e+06:b:09", "C1.0e+07:c:10"))
+    expect_equal(topdown:::.makeRowNames(data.frame(a=LETTERS[1:3])),
+                 paste0("C", LETTERS[1:3]))
+    expect_equal(topdown:::.makeRowNames(data.frame(a=1:3)),
+                 paste0("C", 1:3))
 })
 
 test_that(".massLabel", {

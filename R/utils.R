@@ -130,14 +130,16 @@ cat0 <- function(...) {
 #' @param asInteger `logical`
 #' @return `character`
 #' @noRd
-.formatNumbers <- function(x, asInteger=NA_integer_) {
+.formatNumbers <- function(x, asInteger=NA_integer_, nScientific=5L) {
     n <- .ndigits(max(x))
 
     asInteger <- isTRUE(asInteger) ||
         (is.na(asInteger) && all(abs(x - as.integer(x)) < .Machine$double.eps))
 
-    if (asInteger) {
+    if (asInteger && n <= nScientific) {
         sprintf(paste0("%0", n, "d"), as.integer(x))
+    } else if (asInteger && n > nScientific) {
+        sprintf(paste0("%.1e"), as.integer(x))
     } else {
         # + 3L = 2 place after the decimal point + the point itself
         sprintf(paste0("%0", n + 3L, ".2f"), x)
@@ -243,6 +245,17 @@ cat0 <- function(...) {
             sprintf(paste0("%s", sep, "%0", .ndigits(length(xx)), "d"), xx, seq_along(xx))
         }
     })
+}
+
+#' Make row.names
+#'
+#' @param x `data.frame`
+#' @return `character`
+#' @noRd
+.makeRowNames <- function(x) {
+    isNumCol <- .isNumCol(x)
+    x[isNumCol] <- lapply(x[isNumCol], .formatNumbers)
+    .makeNames(.groupByLabels(x), prefix="C")
 }
 
 #' Create mass label

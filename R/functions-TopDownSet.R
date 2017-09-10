@@ -116,8 +116,7 @@ readTopDownFiles <- function(path, pattern=".*",
     o <- .orderByColumns(header, sampleColumns)
     header <- header[o, ]
     header$Sample <- .groupId(header, cols=sampleColumns)
-    rownames(header) <- .makeNames(.groupByLabels(header, cols=sampleColumns),
-                                   prefix="C")
+    rownames(header) <- .makeRowNames(header[, sampleColumns, drop=FALSE])
 
     if (dropNonInformativeColumns) {
         header <- .dropNonInformativeColumns(header)

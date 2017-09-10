@@ -13,10 +13,7 @@
 
     cn <- colnames(x)
 
-    isNumCol <- .vapply1l(x, function(column) {
-        is.numeric(column) ||
-            (is(column, "Rle") && is.numeric(runValue(column)))
-    }) & !cn %in% ignoreNumCols
+    isNumCol <- .isNumCol(x) & !cn %in% ignoreNumCols
 
     nonNum <- x[!duplicated(f), !isNumCol, drop=FALSE]
     rn <- rownames(nonNum)
@@ -60,6 +57,18 @@
 #' @noRd
 .dropNonInformativeColumns <- function(x) {
     x[, !.vapply1l(x, .allIdentical), drop=FALSE]
+}
+
+#' Test for numeric columns
+#'
+#' @param x `data.frame`
+#' @return `logical`
+#' @noRd
+.isNumCol <- function(x) {
+    .vapply1l(x, function(column) {
+        is.numeric(column) ||
+            (is(column, "Rle") && is.numeric(runValue(column)))
+    })
 }
 
 #' Order data.frame by multiple columns given as character vector

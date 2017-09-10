@@ -40,6 +40,13 @@ test_that(".dropNonInformativeColumns", {
     expect_equal(topdown:::.dropNonInformativeColumns(d), r)
 })
 
+test_that(".isNumCol", {
+    d <- DataFrame(a=1:10, b=factor(rep(1, 10)),
+                   c=Rle(rep(c("foo", "bar"), each=5)),
+                   d=Rle(rep(1:2, each=5)))
+    expect_equal(topdown:::.isNumCol(d), c(TRUE, FALSE, FALSE, TRUE))
+})
+
 test_that(".orderByColumns", {
     d <- DataFrame(a=10:1, b=c(1:3, 7:1),
                    c=Rle(rep(c("foo", "bar"), each=5)),
