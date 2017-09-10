@@ -346,6 +346,19 @@ test_that("show", {
                   "Modifications \\(2\\): Carbamidomethyl, Met-loss\\+Acetyl")
 })
 
+test_that("summary", {
+    dc <- data.frame(Fragments=c(2, 3, 1, 1, 1), Total=c(5, 15, 7:9),
+                     Min=c(2, 4, 7:9), Q1=c(2.25, 4.5, 7:9),
+                     Median=c(2.5, 5.0, 7:9), Mean=c(5/3, 5, 7/3, 8/3, 3),
+                     Q3=c(2.75, 5.5, 7:9), Max=c(3, 6, 7:9))
+    dr <- data.frame(Fragments=c(3, 3, 2), Total=c(13, 17, 14), Min=c(2:3, 6),
+                     Q1=c(3:4, 6.5), Median=c(4:5, 7), Mean=c(2.6, 3.4, 2.8),
+                     Q3=c(5.5, 7.0, 7.5), Max=c(7, 9, 8))
+    expect_equal(summary(tds), dc)
+    expect_equal(summary(tds, "conditions"), dc)
+    expect_equal(summary(tds, "fragments"), dr)
+})
+
 test_that("validObject", {
     tdn <- tds
     tdn@assay <- tdn@assay[1,,drop=FALSE]

@@ -277,3 +277,17 @@ test_that(".rowSumsGroup", {
     expect_equal(topdown:::.rowSumsGroup(n, group=rep(1:5, each=2),
                                          na.rm=TRUE), r)
 })
+
+test_that(".summary", {
+    mr <- seq(1, 20, by=5)
+    dr <- data.frame(Fragments=5, Total=c(15, 40, 65, 90),
+                     Min=r, Q1=r + 1, Median=r + 2, Mean=(r + 2)/2,
+                     Q3=r + 3, Max=r + 4)
+    mc <- 1:10
+    dc <- data.frame(Fragments=2, Total=mc * 2 + 10,
+                     Min=mc, Q1=mc + 2.5, Median=mc + 5, Mean=(mc + 5)/2,
+                     Q3=mc + 7.5, Max=mc + 10)
+    expect_equal(topdown:::.summary(m), dr)
+    expect_equal(topdown:::.summary(m, "row"), dr)
+    expect_equal(topdown:::.summary(m, "col"), dc)
+})

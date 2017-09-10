@@ -152,6 +152,19 @@ test_that("show", {
                         collapse="\n"))
 })
 
+test_that("summary", {
+    dc <- data.frame(Fragments=c(2, 3, 1, 1, 1), Total=c(3, 6, 1, 2, 1),
+                     Min=c(1, 1, 1, 2, 1), Q1=c(1.25, 1.5, 1, 2, 1),
+                     Median=c(1.5, 2, 1, 2, 1), Mean=c(1, 2, 1/3, 2/3, 1/3),
+                     Q3=c(1.75, 2.5, 1, 2, 1), Max=c(2, 3, 1, 2, 1))
+    dr <- data.frame(Fragments=c(3, 3, 2), Total=c(3, 5, 5), Min=c(1, 1, 2),
+                     Q1=c(1, 1.5, 2.25), Median=c(1, 2, 2.5), Mean=c(0.6, 1, 1),
+                     Q3=c(1, 2, 2.75), Max=1:3)
+    expect_equal(summary(ncb), dc)
+    expect_equal(summary(ncb, "conditions"), dc)
+    expect_equal(summary(ncb, "bonds"), dr)
+})
+
 test_that("validObject", {
     ncbn <- ncb
     ncbn@assay <- ncbn@assay[1,,drop=FALSE]

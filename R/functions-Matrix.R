@@ -290,3 +290,32 @@
     }
     x %*% .createMaskMatrix(group)
 }
+
+#' summary
+#'
+#' @param x `Matrix`
+#' @param what `character`, "row"/"col"
+#' @param na.rm `logical`, should NA removed?
+#' @return `data.frame`
+#' @noRd
+.summary <- function(x, what=c("row", "col"), na.rm=TRUE) {
+
+    if (match.arg(what) == "col") {
+        x <- t(x)
+    }
+
+    i <- sort.int(unique(.row(x)))
+    qq <- matrix(0, nrow=5L, ncol=nrow(x))
+    qq[, i] <- vapply(X=split(x@x, .row(x)), FUN=quantile,
+                      FUN.VALUE=double(5L), probs=seq(0, 1, 0.25),
+                      na.rm=na.rm, USE.NAMES=FALSE)
+
+    data.frame(Fragments=.rowCounts(x),
+               Total=Matrix::rowSums(x, na.rm=na.rm),
+               Min=qq[1L, ],
+               Q1=qq[2L, ],
+               Median=qq[3L, ],
+               Mean=Matrix::rowMeans(x, na.rm=na.rm),
+               Q3=qq[4L, ],
+               Max=qq[5L, ])
+}

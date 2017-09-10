@@ -258,6 +258,17 @@ setMethod("show", "TopDownSet", function(object) {
     invisible(NULL)
 })
 
+#' @param object `TopDownSet`
+#' @param what `character`, summarise by "conditions" (col) or "fragments" (rows)
+#' @return `data.frame`
+#' @export
+#' @noRd
+setMethod("summary", "TopDownSet",
+          function(object, what=c("conditions", "fragments"), ...) {
+    what <- if (match.arg(what) == "conditions") { "col" } else { "row" }
+    .summary(object@assay, what=what)
+})
+
 setAs("TopDownSet", "NCBSet", function(from) {
     assay <- .ncbMap(from)
     ncb <- new("NCBSet",

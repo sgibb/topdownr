@@ -117,3 +117,15 @@ setMethod("show", "NCBSet", function(object) {
 
     invisible(NULL)
 })
+
+#' @param object `NCBSet`
+#' @param what `character`, summarise by "conditions" (col) or "fragments" (rows)
+#' @return `data.frame`
+#' @export
+#' @noRd
+setMethod("summary", "NCBSet",
+          function(object, what=c("conditions", "bonds"), ...) {
+    what <- if (match.arg(what) == "conditions") { "col" } else { "row" }
+    .summary(object@assay, what=what)
+})
+
