@@ -67,9 +67,10 @@ setMethod("fragmentationMap", "NCBSet",
                           values=c("#1b9e77", "#d95f02", "#7570b3")) +
         scale_x_discrete(name="Condition", expand=c(0L, 0L),
                          labels=labels) +
-        scale_y_discrete(name=expression(
+        scale_y_continuous(name=expression(
                             paste("Bonds (", N-terminal %->% C-termnial, ")")),
-                         expand=c(0L, 0L)) +
+                           breaks=seq_len(nrow(object)),
+                           expand=c(0L, 0L)) +
         geom_vline(xintercept=c(0L, seq_len(ncol(object))) + 0.5,
                    colour="#808080", size=0.1) +
         geom_hline(yintercept=c(0L, seq_len(nrow(object))) + 0.5,
