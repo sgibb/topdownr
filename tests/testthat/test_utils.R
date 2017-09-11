@@ -115,6 +115,8 @@ test_that(".groupByLabels", {
                  paste(1:2, rep(LETTERS[1:4], each=2), sep=":"))
     expect_equal(topdown:::.groupByLabels(x, c("ID", "na")),
                  paste(rep(1:2, 4), rep(c(1, NA), 4), sep=":"))
+    expect_equal(topdown:::.groupByLabels(x, c("ID", "na"), sep="_"),
+                 paste(rep(1:2, 4), rep(c(1, NA), 4), sep="_"))
 })
 
 test_that(".groupId", {
@@ -154,7 +156,7 @@ test_that(".makeNames", {
 test_that(".makeRowNames", {
     d <- data.frame(a=c(1e5, 1e6, 1e7), b=letters[1:3], c=8:10)
     expect_equal(topdown:::.makeRowNames(d),
-                 c("C1.0e+05:a:08", "C1.0e+06:b:09", "C1.0e+07:c:10"))
+                 c("C1.0e+05_a_08", "C1.0e+06_b_09", "C1.0e+07_c_10"))
     expect_equal(topdown:::.makeRowNames(data.frame(a=LETTERS[1:3])),
                  paste0("C", LETTERS[1:3]))
     expect_equal(topdown:::.makeRowNames(data.frame(a=1:3)),

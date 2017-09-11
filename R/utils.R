@@ -174,16 +174,17 @@ cat0 <- function(...) {
 #'
 #' @param x `data.frame`, or `DataFrame` e.g. from .ms2Experiments
 #' @param cols `character`, colnames used to split
+#' @param sep `character`, separator
 #' @return `list`
 #' @noRd
-.groupByLabels <- function(x, cols=names(x)) {
+.groupByLabels <- function(x, cols=names(x), sep=":") {
     x <- as.data.frame(x)
     if (any(!cols %in% colnames(x))) {
         stop("All 'cols' have to be valid column names of 'x'.")
     }
     if (length(cols) > 1L) {
         ## `interaction` doesn't handle NA values, so use `paste` instead
-        do.call(paste, c(x[, cols], sep=":"))
+        do.call(paste, c(x[, cols], sep=sep))
     } else {
         as.character(x[, cols])
     }
@@ -255,7 +256,7 @@ cat0 <- function(...) {
 .makeRowNames <- function(x) {
     isNumCol <- .isNumCol(x)
     x[isNumCol] <- lapply(x[isNumCol], .formatNumbers)
-    .makeNames(.groupByLabels(x), prefix="C")
+    .makeNames(.groupByLabels(x, sep="_"), prefix="C", sep="_")
 }
 
 #' Create mass label
