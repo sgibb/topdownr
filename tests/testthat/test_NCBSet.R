@@ -97,21 +97,6 @@ test_that("bestConditions", {
     expect_equal(bestConditions(ncbn, minN=2), matrix(c(2, 2), nrow=1, dimnames=dn))
 })
 
-test_that(".cumComb", {
-    a <- sparseMatrix(i=rep(1:3, 3:1),
-                      j=c(1:2, 4, 3:4, 1),
-                      x=c(1, 2, 2, 3, 1, 2))
-    r <- sparseMatrix(i=rep(1:3, c(4, 2, 4)),
-                      j=c(1:4, 3:4, 1:4),
-                      x=rep(c(1, 3, 2), c(1, 5, 4)))
-    a2 <- sparseMatrix(i=c(1:3),
-                       j=rep(1, 3),
-                       x=c(1, 2, 3))
-    expect_error(topdown:::.cumComb(1:10))
-    expect_equal(topdown:::.cumComb(a), r)
-    expect_equal(topdown:::.cumComb(a2), a2)
-})
-
 test_that("dim", {
     expect_equal(dim(ncb), c(3, 5))
 })

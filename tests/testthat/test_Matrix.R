@@ -48,6 +48,21 @@ test_that(".createMaskMatrix", {
     expect_equal(topdown:::.createMaskMatrix(rep(1:2, each=5)), r2)
 })
 
+test_that(".cumComb", {
+    a <- sparseMatrix(i=rep(1:3, 3:1),
+                      j=c(1:2, 4, 3:4, 1),
+                      x=c(1, 2, 2, 3, 1, 2))
+    r <- sparseMatrix(i=rep(1:3, c(4, 2, 4)),
+                      j=c(1:4, 3:4, 1:4),
+                      x=rep(c(1, 3, 2), c(1, 5, 4)))
+    a2 <- sparseMatrix(i=c(1:3),
+                       j=rep(1, 3),
+                       x=c(1, 2, 3))
+    expect_error(topdown:::.cumComb(1:10))
+    expect_equal(topdown:::.cumComb(a), r)
+    expect_equal(topdown:::.cumComb(a2), a2)
+})
+
 test_that(".dgcMatrix2data.frame", {
     d <- data.frame(row=c(rep(c(1, 3), 5), rep(c(2, 4), 5)),
                     col=rep(1:10, each=2), x=rep(1:10, each=2) + c(0, 10),
