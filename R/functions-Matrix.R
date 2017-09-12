@@ -7,11 +7,11 @@
 #' @return `matrix`, first column: index, second column: number of non-zero
 #' elements.
 #' @noRd
-.bestCoverageCombination <- function(x, n=ncol(x), minN=0L) {
-    m <- matrix(NA_real_, nrow=n, ncol=2,
-                dimnames=list(NULL, c("index", "n")))
+.bestNcbCoverageCombination <- function(x, n=ncol(x), minN=0L) {
+    m <- matrix(NA_real_, nrow=n, ncol=3L,
+                dimnames=list(NULL, c("index", "fragments", "bonds")))
     for (i in seq_len(n)) {
-        hc <- .highestCoverage(x)
+        hc <- .highestNcbCoverage(x)
         x[.row(x[, hc[1L], drop=FALSE]), ] <- 0L
         x <- drop0(x)
         m[i, ] <- hc
@@ -160,26 +160,30 @@
     drop0(x, tol=0L, is.Csparse=TRUE)
 }
 
-#' highest coverage
+#' highest NCB coverage
 #'
-#' Find column with maximum number of non-zero entries. If two
-#' or more have the same number of non-zero entries it uses the one with the
-#' highest colSums.
+#' Find column with highest coverage of NCB fragments, B fragments count twice.
+#' If multiple max. are found choose the one with the most bonds covered (not
+#' with the highest number of fragments).
 #'
 #' @param x `dgCMatrix`
 #' @return `numeric`, first element: index of column with highest coverage,
-#' second element: number of non-zero elements
+#' second element: number fragments, third element: number of bonds
 #' @noRd
-.highestCoverage <- function(x) {
+.highestNcbCoverage <- function(x) {
     stopifnot(is(x, "dgCMatrix"))
+    stopifnot(!any(x@x > 3L))
+    i <- x@x > 1L
+    x@x[i] <- x@x[i] - 1L
+    cs <- Matrix::colSums(x)
     cc <- .colCounts(x)
-    mc <- max(cc)
-    i <- which(cc == mc)
+    ms <- max(cs)
+    i <- which(cs == ms)
 
     if (length(i) > 1L) {
-        i <- i[which.max(Matrix::colSums(x[, i]))]
+        i <- i[which.max(cc[i])]
     }
-    c(index=i, nonzero=cc[i])
+    c(index=i, fragments=cs[i], bonds=cc[i])
 }
 
 #' normalise (col-wise scale)
