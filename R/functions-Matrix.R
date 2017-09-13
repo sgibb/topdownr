@@ -32,7 +32,7 @@
 #' @return `numeric`, column index
 #' @noRd
 .col <- function(x) {
-    stopifnot(is(x, "dgCMatrix"))
+    stopifnot(is(x, "CsparseMatrix"))
     dp <- diff(x@p)
     rep(seq_along(dp), dp)
 }
@@ -216,7 +216,7 @@
 #' @return `numeric`, row index
 #' @noRd
 .row <- function(x) {
-    stopifnot(is(x, "dgCMatrix"))
+    stopifnot(is(x, "CsparseMatrix"))
     x@i + 1L
 }
 
