@@ -4,18 +4,17 @@ fv <- FragmentViews("AACE", start=1, end=1:3, names=paste0("b", 1:3),
                     mass=c(114.054951, 185.092061, 345.122711),
                     type=rep("b", 3), z=rep(1, 3),
                     metadata=list(modifications=c("Carbamidomethyl",
-                                                  "Met-loss+Acetyl")))
+                                                  "Acetyl", "Met-loss")))
 
 test_that("constructor", {
     expect_error(topdown:::.calculateFragments("AACE", modifications="FOO"))
     expect_equal(topdown:::.calculateFragments("MAACE", type="b"), fv)
 
-    ## no Acetylation because no ^M
-    fv1 <- fv
-    fv1@elementMetadata$mass <- fv1@elementMetadata$mass - 42.010565
-    expect_equal(topdown:::.calculateFragments("AACE", type="b"),
-                 fv1)
-    ## Acetylation but no Carboxyamidomethylation
+    ## default: Acetylation, Carboxyamidomethylation and Met-loss
+    expect_equal(topdown:::.calculateFragments("MAACE", type="b"),
+                 fv)
+
+    ## Acetylation but no Carboxyamidomethylation/Met-loss
     fv2 <- fv
     fv2@elementMetadata$mass[3] <- fv@elementMetadata$mass[3] - 57.021464
     fv2@metadata$modifications <- c("Acetyl")
@@ -45,7 +44,8 @@ test_that("show", {
                           "  AACE",
                           "Modifications:",
                           "  Carbamidomethyl",
-                          "  Met-loss\\+Acetyl",
+                          "  Acetyl",
+                          "  Met-loss",
                           "Views:",
                           "    start end width   mass name type z *",
                           "\\[1\\]     1   1     1 114\\.05 b1   b    1 \\[A\\] *",

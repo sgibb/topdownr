@@ -5,7 +5,7 @@
 \title{Read top-down files.}
 \usage{
 readTopDownFiles(path, pattern = ".*", type = c("a", "b", "c", "x", "y",
-  "z"), modifications = c("Carbamidomethyl", "Met-loss+Acetyl"),
+  "z"), modifications = c("Carbamidomethyl", "Acetyl", "Met-loss"),
   adducts = data.frame(), neutralLoss = MSnbase::defaultNeutralLoss(),
   tolerance = 1e-05, dropNonInformativeColumns = TRUE,
   sampleColumns = c("Mz", "AgcTarget", "EtdReagentTarget", "EtdActivation",
@@ -22,14 +22,12 @@ supported, see \code{\link[MSnbase:calculateFragments]{MSnbase::calculateFragmen
 
 \item{modifications}{\code{character}, unimod names of modifications that should
 be applied. Currenlty just \emph{Acetyl} (Unimod:1 but just protein N-term),
-\emph{Carbamidomethyl} (Unimod:4), \emph{Met-loss} (Unimod:765), and
-\emph{Met-loss+Acetyl} (Unimod:766) are supported. Please note that \code{c("Acetyl", "Met-loss")} is not identical to \code{c("Met-loss+Acetyl")}. The former removes
-M (if followed by A, C, G, P, S, T, or V) and does Acetylation on the
-protein N-term while the latter just acytelate the N-term if M was followed
-by A, G, S, T (see
+\emph{Carbamidomethyl} (Unimod:4) and \emph{Met-loss} (Unimod:765) are supported.
+\emph{Met-loss} removes M (if followed by A, C, G, P, S, T, or V;
+(see also
 http://www.unimod.org/modifications_view.php?editid1=1,
-http://www.unimod.org/modifications_view.php?editid1=765, and
-http://www.unimod.org/modifications_view.php?editid1=766 for details).
+http://www.unimod.org/modifications_view.php?editid1=4, and
+http://www.unimod.org/modifications_view.php?editid1=765 for details).
 Use \code{NULL} to disable all modifications.}
 
 \item{adducts}{\code{data.frame}, with 3 columns, namely: mass, name, to, see

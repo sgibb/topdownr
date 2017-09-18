@@ -48,17 +48,3 @@ test_that(".unimod765", {
     expect_equal(topdown:::.unimod765(c("MACE", "MWE", "EAC")),
                  c("ACE", "MWE", "EAC"))
 })
-
-test_that(".unimod766", {
-    d1 <- data.frame(mz=200, pos=1, seq="A", ion="c1",
-                     stringsAsFactors=FALSE)
-    d2 <- data.frame(mz=200, pos=1, seq="C", ion="c1",
-                     stringsAsFactors=FALSE)
-    r1 <- data.frame(mz=200 + 42.010565, pos=1, seq="A", ion="c1",
-                     stringsAsFactors=FALSE)
-    r2 <- data.frame(mz=200, pos=1, seq="C", ion="c1",
-                     stringsAsFactors=FALSE)
-
-    expect_equal(topdown:::.unimod766(d1, "A"), r1)
-    expect_equal(topdown:::.unimod766(d2, "C"), r2)
-})
