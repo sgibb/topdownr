@@ -119,6 +119,8 @@ readTopDownFiles <- function(path, pattern=".*",
         header <- .dropNonInformativeColumns(header)
     }
 
+    header$Charge <- round(fragmentViews@metadata$mass / header$Mz)
+
     assay <- do.call(cbind, lapply(mzml, "[[", "m"))
     assay <- assay[, o]
     dimnames(assay) <- list(names(fragmentViews),
