@@ -3,22 +3,19 @@ context("Matrix")
 m <- sparseMatrix(i=rep(1:4, each=5), j=rep(1:10, 2), x=1:20)
 
 test_that(".bestNcbCoverageCombination", {
-    m1 <- sparseMatrix(i=c(1:10, 2), j=c(1, 5, 3, 4, 4, 5, 4, 5, 5, 5, 1),
-                       x=c(1, 1, 3, 1, 1, 2, 2, 2, 3, 1, 1))
+    m1 <- sparseMatrix(i=c(1, 2, 2, 3, 5, 5, 6, 9, 8, 9, 8),
+                       j=c(1, 5, 3, 4, 4, 5, 4, 4, 5, 5, 1),
+                       x=c(1, 1, 3, 1, 1, 2, 2, 2, 3, 1, 2))
     expect_equal(topdown:::.bestNcbCoverageCombination(m1),
-                 cbind(index=c(5:3, 1), fragments=c(6, 3:1),
-                       bonds=c(5, 3, 1, 1)))
+                 cbind(index=c(5:4, 1, 3), fragments=c(5:4, 1, 1)))
+    expect_equal(topdown:::.bestNcbCoverageCombination(m1, intensity=1:5),
+                 cbind(index=c(5:3, 1), fragments=c(5:4, 1, 1)))
     expect_equal(topdown:::.bestNcbCoverageCombination(m1, minN=3),
-                 cbind(index=c(5:4), fragments=c(6, 3),
-                       bonds=c(5, 3)))
-    expect_equal(topdown:::.bestNcbCoverageCombination(m1, minN=2),
-                 cbind(index=c(5:3), fragments=c(6, 3:2),
-                       bonds=c(5, 3, 1)))
+                 cbind(index=c(5:4), fragments=c(5, 4)))
     expect_equal(topdown:::.bestNcbCoverageCombination(m1, n=3),
-                 cbind(index=c(5:3), fragments=c(6, 3:2),
-                       bonds=c(5, 3, 1)))
-    expect_equal(topdown:::.bestNcbCoverageCombination(m1, minN=4),
-                 cbind(index=5, fragments=6, bonds=5))
+                 cbind(index=c(5:4, 1), fragments=c(5:4, 1)))
+    expect_equal(topdown:::.bestNcbCoverageCombination(m1, minN=5),
+                 cbind(index=5, fragments=5))
 })
 
 test_that(".col", {
@@ -42,6 +39,12 @@ test_that(".colSumsGroup", {
     expect_error(topdown:::.colSumsGroup(m, group=1:2))
     expect_equal(topdown:::.colSumsGroup(m, group=rep(1:2, 2)), r)
     expect_equal(topdown:::.colSumsGroup(t(m), group=rep(1:2, each=5)), r2)
+})
+
+test_that(".countFragments", {
+    expect_error(topdown:::.countFragments(matrix(1:10, ncol=2)))
+    expect_error(topdown:::.countFragments(m))
+    expect_equal(topdown:::.countFragments(drop0(m %% 4)), rep(c(3, 1), 5))
 })
 
 test_that(".createMaskMatrix", {
@@ -128,10 +131,10 @@ test_that(".highestNcbCoverage", {
                        x=c(1, 1, 3, 1, 1, 2, 2, 2, 3, 1, 1))
     expect_error(topdown:::.highestNcbCoverage(as.matrix(1:10)))
     expect_error(topdown:::.highestNcbCoverage(m))
-    expect_equal(topdown:::.highestNcbCoverage(m1),
-                 c(index=5, fragments=6, bonds=5))
+    expect_equal(topdown:::.highestNcbCoverage(m1, intensity=1:5),
+                 c(index=5, fragments=6))
     expect_equal(topdown:::.highestNcbCoverage(t(m1)),
-                 c(index=2, fragments=2, bonds=2))
+                 c(index=2, fragments=2))
 })
 
 test_that(".normaliseCols", {
@@ -156,6 +159,22 @@ test_that(".normaliseRows", {
     expect_equal(topdown:::.normaliseRows(m, 1:4),
                  as((t(scale(t(m), center=FALSE, scale=1:4))),
                     "dgCMatrix"))
+})
+
+test_that(".removeNcbCombinations", {
+    m1 <- sparseMatrix(i=c(1, 2, 2, 3, 5, 5, 6, 9, 8, 9, 8),
+                       j=c(1, 5, 3, 4, 4, 5, 4, 4, 5, 5, 1),
+                       x=c(1, 1, 3, 1, 1, 2, 2, 2, 3, 1, 2))
+    r1 <- sparseMatrix(i=c(1, 2, 3, 5, 6, 9),
+                       j=c(1, 3, 4, 4, 4, 4),
+                       x=c(1, 2, 1, 1, 2, 2), dims=c(9, 5))
+    r2 <- sparseMatrix(i=c(1, 2, 2, 5, 8, 9, 8),
+                       j=c(1, 5, 3, 5, 5, 5, 1),
+                       x=c(1, 1, 3, 2, 3, 1, 2))
+    expect_error(topdown:::.removeNcbCombinations(matrix(1:10, ncol=2), 2))
+    expect_error(topdown:::.removeNcbCombinations(m, 2))
+    expect_equal(topdown:::.removeNcbCombinations(m1, 5), r1)
+    expect_equal(topdown:::.removeNcbCombinations(m1, 4), r2)
 })
 
 test_that(".row", {
