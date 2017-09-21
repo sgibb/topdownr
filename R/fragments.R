@@ -47,7 +47,6 @@
                                          "Acetyl",
                                          "Met-loss"),
                                several.ok=TRUE)
-
     csequence <- as.character(sequence)
     ## TODO: replace by unimod package
     if ("Met-loss" %in% modifications) {
@@ -59,6 +58,13 @@
                             modifications=NULL,
                             neutralLoss=neutralLoss,
                             verbose=FALSE)
+
+    ## add protein sequence to data.frame to calculate modifications
+    d <- rbind(list(mz=.calculateProteinMass(csequence),
+                    ion="none", type="protein", pos=0,
+                    z=0, seq=csequence),
+               d)
+
     ## TODO: replace by unimod package
     if ("Acetyl" %in% modifications) {
         d <- .unimod1(d, csequence)
@@ -72,11 +78,32 @@
     }
     d <- .addAdducts(d, adducts)
 
+    ## remove protein sequence from data.frame (just added to calculate
+    ## modifications)
+    mass <- d$mz[1L]
+    d <- d[-1L,]
+
+
     n <- nchar(csequence)
     FragmentViews(csequence, mass=d$mz, type=d$type, z=Rle(d$z), names=d$ion,
                   start=ifelse(startsWith(csequence, d$seq),
                                1L, n - d$pos + 1L),
-                  width=d$pos, metadata=list(modifications=modifications))
+                  width=d$pos, metadata=list(modifications=modifications,
+                                             mass=mass))
+}
+
+#' Calculate protein mass
+#'
+#' TODO: replace by unimod package
+#'
+#' @param x `character`, sequence
+#' @return `numeric`
+#' @noRd
+.calculateProteinMass <- function(x) {
+    aa <- get.amino.acids()[, c("AA", "ResidueMass")]
+    aamass <- setNames(aa$ResidueMass, aa$AA)
+    x <- strsplit(x, "")[[1L]]
+    sum(aamass[x])
 }
 
 #' Match fragments and measured mz values.
