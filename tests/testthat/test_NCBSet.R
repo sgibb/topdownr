@@ -88,19 +88,19 @@ test_that("accessors<-", {
 })
 
 test_that("bestConditions", {
-    cn <- c("index", "fragments", "bonds")
-    expect_equal(bestConditions(ncb), matrix(c(2, 4, 3), nrow=1,
+    cn <- c("index", "fragments")
+    expect_equal(bestConditions(ncb), matrix(c(2, 5, 4, 1), nrow=2,
                                              dimnames=list(NULL, cn)))
     ncbn <- ncb
     ncbn@assay[1, 2] <- 0
     rownames(ncbn@colData) <- LETTERS[1:5]
     expect_equal(bestConditions(ncbn),
-                 matrix(c(2:1, 3, 1, 2, 1), nrow=2,
-                        dimnames=list(c("B", "A"), cn)))
+                 matrix(c(2:1, 5, 3, 1, 1), nrow=3,
+                        dimnames=list(c("B", "A", "E"), cn)))
     expect_equal(bestConditions(ncbn, n=1),
-                 matrix(c(2, 3, 2), nrow=1, dimnames=list("B", cn)))
+                 matrix(c(2, 3), nrow=1, dimnames=list("B", cn)))
     expect_equal(bestConditions(ncbn, minN=2),
-                 matrix(c(2, 3, 2), nrow=1, dimnames=list("B", cn)))
+                 matrix(c(2, 3), nrow=1, dimnames=list("B", cn)))
 })
 
 test_that("dim", {
