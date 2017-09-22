@@ -163,14 +163,6 @@ setMethod("dimnames", "AbstractTopDownSet", function(x) {
 })
 
 #' @param object `AbstractTopDownSet`
-#' @return `XStringViews`
-#' @export
-#' @noRd
-setMethod("fragmentData", "AbstractTopDownSet", function(object, ...) {
-    rowViews(object)
-})
-
-#' @param object `AbstractTopDownSet`
 #' @return `AbstractTopDownSet`
 #' @export
 #' @noRd

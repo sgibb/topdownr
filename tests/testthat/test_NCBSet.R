@@ -74,7 +74,6 @@ test_that("accessors", {
     expect_equal(assayData(ncb), ncb@assay)
     expect_equal(colData(ncb), ncb@colData)
     expect_equal(conditionData(ncb), colData(ncb))
-    expect_equal(fragmentData(ncb), rowViews(ncb))
     expect_equal(rowViews(ncb), ncb@rowViews)
 })
 

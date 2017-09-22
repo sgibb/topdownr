@@ -6,10 +6,6 @@ if (is.null(getGeneric("rowViews"))) {
       setGeneric("rowViews",
                  function(object, ...)standardGeneric("rowViews"))
 }
-if (is.null(getGeneric("fragmentData"))) {
-    setGeneric("fragmentData",
-               function(object, ...)standardGeneric("fragmentData"))
-}
 if (is.null(getGeneric("colData"))) {
     setGeneric("colData",
                function(object, ...)standardGeneric("colData"))
