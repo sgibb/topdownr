@@ -8,6 +8,11 @@ setMethod("show", "FragmentViews", function(object) {
     cat0("  ", .snippet(as.character(subject(object)),
                         getOption("width") - 2L), "\n")
 
+    if (length(metadata(object)$mass)) {
+        cat0("Mass:\n")
+        cat0(paste0("  ", metadata(object)$mass, "\n"))
+    }
+
     if (length(metadata(object)$modifications)) {
         cat0("Modifications:\n")
         cat0(paste0("  ", metadata(object)$modifications, "\n"))
