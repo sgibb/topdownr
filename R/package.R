@@ -22,7 +22,7 @@
 #'
 #' @importFrom mzR openMSfile close header peaks
 #' @importFrom MSnbase calculateFragments defaultNeutralLoss get.amino.acids
-#' @importFrom stats ave median setNames
+#' @importFrom stats ave median setNames quantile
 #' @importFrom tools file_ext file_path_sans_ext
 #' @importFrom utils modifyList txtProgressBar setTxtProgressBar object.size
 #' read.csv .DollarNames
