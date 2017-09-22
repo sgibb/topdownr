@@ -16,9 +16,9 @@
 #' @importFrom Matrix Matrix sparseMatrix sparseVector crossprod tcrossprod
 #' drop0 nnzero
 #' @importFrom Biobase assayData
-#' @importFrom ggplot2 ggplot geom_raster aes facet_grid scale_fill_manual
-#' scale_x_discrete scale_y_continuous geom_vline geom_hline ggtitle theme
-#' element_text element_blank element_rect
+#' @importFrom ggplot2 ggplot geom_raster aes_string facet_grid
+#' scale_fill_manual scale_x_discrete scale_y_continuous geom_vline geom_hline
+#' ggtitle theme element_text element_blank element_rect
 #'
 #' @importFrom mzR openMSfile close header peaks
 #' @importFrom MSnbase calculateFragments defaultNeutralLoss get.amino.acids

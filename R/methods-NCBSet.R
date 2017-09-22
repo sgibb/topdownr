@@ -52,6 +52,7 @@ setMethod("fragmentationMap", "NCBSet",
 
     ## tell ggplot that we have an already ordered factor
     d$col <- as.ordered(d$col)
+    d$x <- as.factor(d$x)
     d$Activation <- factor(d$Activation,
                            levels=c("CID", "HCD", "ETD", "ETcid", "EThcd",
                                     "Cmb"),
@@ -60,7 +61,7 @@ setMethod("fragmentationMap", "NCBSet",
     names(labels) <- seq_along(labels)
 
     ggplot(data=d) +
-        geom_raster(aes(x=col, y=row, fill=as.factor(x))) +
+        geom_raster(aes_string(x="col", y="row", fill="x")) +
         facet_grid(. ~ Activation, scales="free_x", space="free_x") +
         scale_fill_manual(name="Observed Fragments",
                           labels=c("N-terminal", "C-terminal", "Both"),
