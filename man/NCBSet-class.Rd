@@ -11,8 +11,36 @@ it just stores the information if a bond is covered by a
 N-terminal (encoded as \code{1}), a C-terminal (encoded as \code{2})
 and/or both fragments (encoded as \code{3}).
 }
+\section{Slots}{
+
+\describe{
+\item{\code{rowViews}}{\link[Biostrings:XStringViews-class]{Biostrings::XStringViews}, information about bonds
+(name, start, end, width, sequence), see \link[Biostrings:XStringViews-class]{Biostrings::XStringViews}
+for details.}
+
+\item{\code{colData}}{\link[S4Vectors:DataFrame-class]{S4Vectors::DataFrame}, information about the MS2
+experiments and the fragmentation conditions.}
+
+\item{\code{assay}}{\link[Matrix:dgCMatrix-class]{Matrix::dgCMatrix}, coverage values of the bonds. The
+rows correspond to the bonds and the columns to the condition/run. It
+just stores values that are different from zero. If a bond is covered by an
+N-terminal fragment its encoded with \code{1}, by an C-terminal fragmentl with \code{2}
+and by both fragment types by \code{3} respectively.}
+
+\item{\code{files}}{\code{character}, files that were imported.}
+
+\item{\code{tolerance}}{\code{double}, tolerance in \emph{ppm} that were used for matching the
+experimental mz values to the theoretical fragments.}
+
+\item{\code{processing}}{\code{character}, log messages.}
+}}
+
 \seealso{
-\linkS4class{TopDownSet}
+\itemize{
+\item An \code{NCBSet} is generated from an \linkS4class{TopDownSet} object.
+\item \link[Biostrings:XStringViews-class]{Biostrings::XStringViews} for the row view interface.
+\item \link[Matrix:dgCMatrix-class]{Matrix::dgCMatrix} for technical details about the coverage storage.
+}
 }
 \author{
 Sebastian Gibb \email{mail@sebastiangibb.de}

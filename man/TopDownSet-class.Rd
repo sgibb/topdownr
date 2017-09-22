@@ -9,7 +9,7 @@ The TopDownSet class is a container for a whole top-down proteomics
 experiment.
 }
 \details{
-See \code{vignette("TopDown", package="topdown")} for a detailed example how to
+See \code{vignette("analysis", package="topdown")} for a detailed example how to
 work with \code{TopDownSet} objects.
 }
 \section{Slots}{
@@ -22,7 +22,7 @@ work with \code{TopDownSet} objects.
 experiments and the fragmentation conditions.}
 
 \item{\code{assay}}{\link[Matrix:dgCMatrix-class]{Matrix::dgCMatrix}, intensity values of the fragments. The
-rows corresponding to the fragments and the columns to the condition/run. It
+rows correspond to the fragments and the columns to the condition/run. It
 just stores values that are different from zero.}
 
 \item{\code{files}}{\code{character}, files that were imported.}
@@ -34,7 +34,10 @@ experimental mz values to the theoretical fragments.}
 }}
 
 \seealso{
-\linkS4class{FragmentViews}
+\itemize{
+\item \linkS4class{FragmentViews} for the row view interface.
+\item \link[Matrix:dgCMatrix-class]{Matrix::dgCMatrix} for technical details about the intensity storage.
+}
 }
 \author{
 Sebastian Gibb \email{mail@sebastiangibb.de}

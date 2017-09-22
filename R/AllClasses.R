@@ -21,7 +21,32 @@ setClass("FragmentViews",
 #' Abstract/VIRTUAL parent class for [TopDownSet-class] and [NCBSet-class] to
 #' provide common interface.
 #'
-#' @noRd
+#' @details
+#' This class just provides a common interface. It is not intended for direct
+#' use by the user. Please see [TopDownSet-class] for an example usage of its
+#' child class.
+#'
+#' @slot rowViews [Biostrings::XStringViews-class], information about fragments/bonds
+#' (name, type, sequence, mass, charge), see [Biostrings::XStringViews-class] and
+#' [FragmentViews-class] for details.
+#' @slot colData [S4Vectors::DataFrame-class], information about the MS2
+#' experiments and the fragmentation conditions.
+#' @slot assay [Matrix::dgCMatrix-class], intensity/coverage values of the
+#' fragments/bonds. The rows correspond to the fragments/bonds and the
+#' columns to the condition/run. It just stores values that are different from
+#' zero.
+#' @slot files `character`, files that were imported.
+#' @slot tolerance `double`, tolerance in *ppm* that were used for matching the
+#' experimental *m/z* values to the theoretical fragments.
+#' @slot processing `character`, log messages.
+#'
+#' @seealso
+#' - [TopDownSet-class] and [NCBSet-class] which both implement/use this
+#' interface. These manual pages also provide some example code.
+#' - [FragmentViews-class] (and [Biostrings::XStringViews-class]) for the row
+#' view interface.
+#' - [Matrix::dgCMatrix-class] for technical details about the intensity/coverage storage.
+#' @author Sebastian Gibb \email{mail@@sebastiangibb.de}
 setClass("AbstractTopDownSet",
          contains="VIRTUAL",
          slots=c(rowViews="XStringViews",
@@ -39,14 +64,13 @@ setClass("AbstractTopDownSet",
          validity=function(object).validateAbstractTopDownSet(object)
 )
 
-
 #' The TopDownSet class
 #'
 #' The TopDownSet class is a container for a whole top-down proteomics
 #' experiment.
 #'
 #' @details
-#' See `vignette("TopDown", package="topdown")` for a detailed example how to
+#' See `vignette("analysis", package="topdown")` for a detailed example how to
 #' work with `TopDownSet` objects.
 #'
 #' @slot rowViews [FragmentViews-class], information about fragments
@@ -54,14 +78,16 @@ setClass("AbstractTopDownSet",
 #' @slot colData [S4Vectors::DataFrame-class], information about the MS2
 #' experiments and the fragmentation conditions.
 #' @slot assay [Matrix::dgCMatrix-class], intensity values of the fragments. The
-#' rows corresponding to the fragments and the columns to the condition/run. It
+#' rows correspond to the fragments and the columns to the condition/run. It
 #' just stores values that are different from zero.
 #' @slot files `character`, files that were imported.
 #' @slot tolerance `double`, tolerance in *ppm* that were used for matching the
 #' experimental mz values to the theoretical fragments.
 #' @slot processing `character`, log messages.
 #'
-#' @seealso [FragmentViews-class]
+#' @seealso
+#' - [FragmentViews-class] for the row view interface.
+#' - [Matrix::dgCMatrix-class] for technical details about the intensity storage.
 #' @author Sebastian Gibb \email{mail@@sebastiangibb.de}
 setClass("TopDownSet",
          contains="AbstractTopDownSet",
@@ -76,7 +102,25 @@ setClass("TopDownSet",
 #' N-terminal (encoded as `1`), a C-terminal (encoded as `2`)
 #' and/or both fragments (encoded as `3`).
 #'
-#' @seealso [TopDownSet-class]
+#' @slot rowViews [Biostrings::XStringViews-class], information about bonds
+#' (name, start, end, width, sequence), see [Biostrings::XStringViews-class]
+#' for details.
+#' @slot colData [S4Vectors::DataFrame-class], information about the MS2
+#' experiments and the fragmentation conditions.
+#' @slot assay [Matrix::dgCMatrix-class], coverage values of the bonds. The
+#' rows correspond to the bonds and the columns to the condition/run. It
+#' just stores values that are different from zero. If a bond is covered by an
+#' N-terminal fragment its encoded with `1`, by an C-terminal fragmentl with `2`
+#' and by both fragment types by `3` respectively.
+#' @slot files `character`, files that were imported.
+#' @slot tolerance `double`, tolerance in *ppm* that were used for matching the
+#' experimental mz values to the theoretical fragments.
+#' @slot processing `character`, log messages.
+#'
+#' @seealso
+#' - An `NCBSet` is generated from an [TopDownSet-class] object.
+#' - [Biostrings::XStringViews-class] for the row view interface.
+#' - [Matrix::dgCMatrix-class] for technical details about the coverage storage.
 #' @author Sebastian Gibb \email{mail@@sebastiangibb.de}
 setClass("NCBSet",
          contains="AbstractTopDownSet",
