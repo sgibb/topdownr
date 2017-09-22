@@ -201,6 +201,9 @@ setMethod("show", "AbstractTopDownSet", function(object) {
                           nchar(object@rowViews@subject))
         cat(prefix, .snippet(as.character(object@rowViews@subject),
                              getOption("width") - nchar(prefix)), "\n")
+        if (length(metadata(object@rowViews)$mass)) {
+            cat0("Mass : ", metadata(object@rowViews)$mass, "\n")
+        }
         if (length(metadata(object@rowViews)$modifications)) {
             mod <- metadata(object@rowViews)$modifications
             cat0("Modifications (", length(mod), "): ",
