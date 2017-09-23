@@ -13,8 +13,6 @@ setMethod("aggregate", "TopDownSet",
     x@assay <- .rowMeansGroup(x@assay, groups)
     x@colData <- .aggregateDataFrame(x@colData, groups,
                                      ignoreNumCols=c("Scan", "Condition"))
-    ## now meaningless
-    x@files <- x@files[grepl(.topDownFileExtRx("fasta"), x@files)]
 
     d1 <- .logdim(x)
 

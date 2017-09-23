@@ -125,7 +125,7 @@ test_that("aggregate", {
                assay=sparseMatrix(i=c(1:3, 2:3),
                                    j=rep(1:2, 3:2),
                                    x=c(13/3, 4, 6, 9, 8)),
-               files=c("foo.fasta"),
+               files=tds@files,
                processing=c("[2017-07-16 14:00:00] Data created.",
                             paste0("[2017-07-16 14:00:01] Aggregated ",
                                    "8 fragments [3;5] to ",
