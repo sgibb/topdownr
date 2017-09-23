@@ -80,7 +80,7 @@ data*, *Assay data*.
 ### Fragment data
 
 ```{r rowViews}
-fragmentData(tds)
+rowViews(tds)
 ```
 
 Fragment data contains one `AAString` (the protein sequence) and an `IRanges`
