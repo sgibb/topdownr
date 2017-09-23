@@ -265,8 +265,8 @@ setMethod("show", "TopDownSet", function(object) {
 #' @noRd
 setMethod("summary", "TopDownSet",
           function(object, what=c("conditions", "fragments"), ...) {
-    what <- if (match.arg(what) == "conditions") { "col" } else { "row" }
-    .summary(object@assay, what=what)
+    what <- if (match.arg(what) == "conditions") { "columns" } else { "rows" }
+    callNextMethod(object=object, what=what)
 })
 
 setAs("TopDownSet", "NCBSet", function(from) {

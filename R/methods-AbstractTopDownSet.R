@@ -273,3 +273,19 @@ setMethod("show", "AbstractTopDownSet", function(object) {
 
     invisible(NULL)
 })
+
+#' @describeIn AbstractTopDownSet Summary statistics.
+#'
+#' Returns a `matrix` with some statistics: number of fragments,
+#' total/min/first quartile/median/mean/third quartile/maximum of intensity
+#' values.
+#'
+## @param object `AbstractTopDownSet`
+#' @param what `character`, specifies whether `"rows"` or `"columns`" should be
+#' summarized.
+#' @aliases summary,AbstractTopDownSet-method
+#' @export
+setMethod("summary", "AbstractTopDownSet",
+          function(object, what=c("rows", "columns"), ...) {
+    .summary(object@assay, what=what)
+})

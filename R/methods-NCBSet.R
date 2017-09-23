@@ -127,7 +127,7 @@ setMethod("show", "NCBSet", function(object) {
 #' @noRd
 setMethod("summary", "NCBSet",
           function(object, what=c("conditions", "bonds"), ...) {
-    what <- if (match.arg(what) == "conditions") { "col" } else { "row" }
-    .summary(object@assay, what=what)
+    what <- if (match.arg(what) == "conditions") { "columns" } else { "rows" }
+    callNextMethod(object=object, what=what)
 })
 

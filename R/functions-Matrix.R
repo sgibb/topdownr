@@ -360,13 +360,13 @@
 #' summary
 #'
 #' @param x `Matrix`
-#' @param what `character`, "row"/"col"
+#' @param what `character`, "rows"/"columns"
 #' @param na.rm `logical`, should NA removed?
 #' @return `data.frame`
 #' @noRd
-.summary <- function(x, what=c("row", "col"), na.rm=TRUE) {
+.summary <- function(x, what=c("rows", "columns"), na.rm=TRUE) {
 
-    if (match.arg(what) == "col") {
+    if (match.arg(what) == "columns") {
         x <- t(x)
     }
 
