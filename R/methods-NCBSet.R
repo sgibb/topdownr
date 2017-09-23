@@ -86,6 +86,7 @@ setMethod("fragmentationMap", "NCBSet",
 })
 
 #' @param object `NCBSet`
+#' @export
 #' @noRd
 setMethod("show", "NCBSet", function(object) {
     callNextMethod()

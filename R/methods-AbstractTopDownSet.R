@@ -1,13 +1,25 @@
 #' @describeIn AbstractTopDownSet Subset operator.
 #'
-#' @param x `AbstractTopDownSet`
+#' For `i` `numeric`, `logical` or `character` vectors or empty (missing) or
+#' `NULL` are supported. Subsetting is done on the fragment/bond (row) level.
+#' `character` indices could be names (e.g. `c("a1", "b1", "c1", "c2", "c3")`)
+#' or types (e.g. `c("c", "x")`) of the fragments for [TopDownSet-class]
+#' objects, or names of the bonds (e.g. `c("bond001")`) for [NCBSet-class]
+#' objects. \cr
+#' `j` could be a `numeric` or `logical` vector and subsetting is done on the
+#' condition/run (column) level.
 #'
-#' @param i `numeric`, `logical` or `character`, subsetting on fragment/bond data,
-#' names (`c("a1", "b1", "c1", "c2", "c3")`) and types (`c("c", "x")`) (or for
-#' [NCBSet-class] bonds e.g. `bond001`) are supported.
-#' @param j `numeric` or `logical`, subsetting based on condition data.
-#' @param \ldots currently ignored.
+#' @param object,x `AbstractTopDownSet`
+#' @param i,j `numeric`, `logical` or `character`, indices specifying elements
+#' to extract or replace.
+#' @param \ldots arguments passed to internal/other methods.
 #' @param drop `logical`, currently ignored.
+#'
+## @param i `numeric`, `logical` or `character`, subsetting on fragment/bond data,
+## names (`c("a1", "b1", "c1", "c2", "c3")`) and types (`c("c", "x")`) (or for
+## [NCBSet-class] bonds e.g. `bond001`) are supported.
+## @param j `numeric` or `logical`, subsetting based on condition data.
+## @param \ldots currently ignored.'
 #' @aliases [,AbstractTopDownSet,ANY,ANY,ANY-method
 #' @export
 setMethod("[", c("AbstractTopDownSet", "ANY", "ANY"),
@@ -64,21 +76,34 @@ setMethod("[", c("AbstractTopDownSet", "ANY", "ANY"),
     }
 })
 
-#' @param x `AbstractTopDownSet`
-#' @param i `numeric`, `logical` or `character`, subsetting based on condition
-#' data.
-#' @param j currently ignored.
-#' @param \ldots currently ignored.
+#' @describeIn AbstractTopDownSet Subset operator.
+#'
+#' `i` could be a `numeric` or `logical` vector and subsetting is done on the
+#' condition/run (column) level.
+#'
+## @param x `AbstractTopDownSet`
+## @param i `logical` or `character`, subsetting based on condition
+## @param j currently ignored.
+## @param \ldots currently ignored.
+#' @aliases [[,AbstractTopDownSet,ANY,missing,-method
 #' @export
-#' @noRd
 setMethod("[[", c("AbstractTopDownSet", "ANY", "missing"),
           function(x, i, j, ...) {
     colData(x)[[i, ...]]
 })
 
-#' @param x `AbstractTopDownSet`
+#' @describeIn AbstractTopDownSet Setter for a column in the `colData` slot.
+#'
+#' The `[[<-` operator is used to add/replace a single column of the `colData`
+#' `DataFrame`.
+#
+## @param x `AbstractTopDownSet`
+## @param i `logical` or `character`, subsetting based on condition
+## @param j currently ignored.
+## @param \ldots currently ignored.
+#' @param value replacment value.
+#' @aliases [[<-,AbstractTopDownSet,ANY,missing,-method
 #' @export
-#' @noRd
 setReplaceMethod("[[", c("AbstractTopDownSet", "ANY", "missing"),
                  function(x, i, j, ..., value) {
     colData(x)[[i, ...]] <- value
@@ -96,9 +121,11 @@ setReplaceMethod("[[", c("AbstractTopDownSet", "ANY", "missing"),
 
 #' @describeIn AbstractTopDownSet Accessor for columns in the `colData` slot.
 #'
-#' The `$` simplifies the accession of a single column of the `colData`.
+#' The `$` simplifies the accession of a single column of the `colData`. It is
+#' identical to the `[[` operator.
 #'
 ## @param x `AbstractTopDownSet`
+#' @param name `character` name of an (non)existing column in `colData`.
 ## @return `AbstractTopDownSet`
 #' @aliases $,AbstractTopDownSet-method
 #' @export
@@ -109,7 +136,7 @@ setMethod("$", "AbstractTopDownSet", function(x, name) {
 #' @describeIn AbstractTopDownSet Setter for a column in the `colData` slot.
 #'
 #' The `$<-` operator is used to add/replace a single column of the `colData`
-#' `DataFrame`.
+#' `DataFrame`. It is identical to the `[[<-` operator.
 #'
 ## @param x `AbstractTopDownSet`
 ## @return `AbstractTopDownSet`
@@ -125,7 +152,7 @@ setReplaceMethod("$", "AbstractTopDownSet", function(x, name, value) {
 #' Returns a [Matrix::dgCMatrix-class] that stores the intensity/coverage
 #' information of [AbstractTopDownSet-class] object.
 #'
-#' @param object `AbstractTopDownSet`
+## @param object `AbstractTopDownSet`
 ## @return `dgCMatrix`
 #' @aliases assayData,AbstractTopDownSet-method
 #' @export
@@ -168,7 +195,7 @@ setReplaceMethod("colData", "AbstractTopDownSet", function(object, ..., value) {
 #'
 ## @param object `AbstractTopDownSet`
 ## @return `DataFrame`
-#' @aliases conditionData,AbstractTopDownSet-method
+#' @aliases conditionData conditionData,AbstractTopDownSet-method
 #' @export
 setMethod("conditionData", "AbstractTopDownSet", function(object, ...) {
     colData(object)
@@ -180,7 +207,7 @@ setMethod("conditionData", "AbstractTopDownSet", function(object, ...) {
 #'
 ## @param object `AbstractTopDownSet`
 ## @return `AbstractTopDownSet`
-#' @aliases conditionData<-,AbstractTopDownSet-method
+#' @aliases conditionData<- conditionData<-,AbstractTopDownSet-method
 #' @export
 setReplaceMethod("conditionData", "AbstractTopDownSet",
                  function(object, ..., value) {
@@ -224,7 +251,7 @@ setMethod("dimnames", "AbstractTopDownSet", function(x) {
 #'
 ## @param object `AbstractTopDownSet`
 ## @return `AbstractTopDownSet`
-#' @aliases removeEmptyConditions,AbstractTopDownSet-method
+#' @aliases removeEmptyConditions removeEmptyConditions,AbstractTopDownSet-method
 #' @export
 setMethod("removeEmptyConditions", "AbstractTopDownSet",
           function(object) {
@@ -281,7 +308,7 @@ setMethod("show", "AbstractTopDownSet", function(object) {
 #' values.
 #'
 ## @param object `AbstractTopDownSet`
-#' @param what `character`, specifies whether `"rows"` or `"columns`" should be
+#' @param what `character`, specifies whether `"rows"` or `"columns"` should be
 #' summarized.
 #' @aliases summary,AbstractTopDownSet-method
 #' @export

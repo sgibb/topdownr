@@ -4,6 +4,10 @@
 \name{AbstractTopDownSet-class}
 \alias{AbstractTopDownSet-class}
 \alias{[,AbstractTopDownSet,ANY,ANY,ANY-method}
+\alias{[[,AbstractTopDownSet,ANY,missing-method}
+\alias{[[,AbstractTopDownSet,ANY,missing,-method}
+\alias{[[<-,AbstractTopDownSet,ANY,missing-method}
+\alias{[[<-,AbstractTopDownSet,ANY,missing,-method}
 \alias{$,AbstractTopDownSet-method}
 \alias{$<-,AbstractTopDownSet-method}
 \alias{assayData,AbstractTopDownSet-method}
@@ -12,16 +16,24 @@
 \alias{colData<-,AbstractTopDownSet-method}
 \alias{colData<-}
 \alias{conditionData,AbstractTopDownSet-method}
+\alias{conditionData}
 \alias{conditionData<-,AbstractTopDownSet-method}
+\alias{conditionData<-}
 \alias{dim,AbstractTopDownSet-method}
 \alias{dimnames,AbstractTopDownSet-method}
 \alias{removeEmptyConditions,AbstractTopDownSet-method}
+\alias{removeEmptyConditions}
 \alias{rowViews,AbstractTopDownSet-method}
 \alias{rowViews}
 \alias{show,AbstractTopDownSet-method}
+\alias{summary,AbstractTopDownSet-method}
 \title{The AbstractTopDownSet class}
 \usage{
 \S4method{[}{AbstractTopDownSet,ANY,ANY,ANY}(x, i, j, ..., drop = FALSE)
+
+\S4method{[[}{AbstractTopDownSet,ANY,missing}(x, i, j, ...)
+
+\S4method{[[}{AbstractTopDownSet,ANY,missing}(x, i, j, ...) <- value
 
 \S4method{$}{AbstractTopDownSet}(x, name)
 
@@ -46,24 +58,29 @@
 \S4method{rowViews}{AbstractTopDownSet}(object, ...)
 
 \S4method{show}{AbstractTopDownSet}(object)
+
+\S4method{summary}{AbstractTopDownSet}(object, what = c("rows", "columns"),
+  ...)
 }
 \arguments{
-\item{x}{\code{AbstractTopDownSet}}
-
-\item{i}{\code{numeric}, \code{logical} or \code{character}, subsetting on fragment/bond data,
-names (\code{c("a1", "b1", "c1", "c2", "c3")}) and types (\code{c("c", "x")}) (or for
-\linkS4class{NCBSet} bonds e.g. \code{bond001}) are supported.}
-
-\item{j}{\code{numeric} or \code{logical}, subsetting based on condition data.}
+\item{i, j}{\code{numeric}, \code{logical} or \code{character}, indices specifying elements
+to extract or replace.}
 
 \item{drop}{\code{logical}, currently ignored.}
 
-\item{object}{\code{AbstractTopDownSet}}
+\item{value}{replacment value.}
 
-\item{\ldots}{currently ignored.}
+\item{name}{\code{character} name of an (non)existing column in \code{colData}.}
+
+\item{object, x}{\code{AbstractTopDownSet}}
+
+\item{what}{\code{character}, specifies whether \code{"rows"} or \code{"columns"} should be
+summarized.}
+
+\item{\ldots}{arguments passed to internal/other methods.}
 }
 \description{
-Abstract/VIRTUAL parent class for \linkS4class{TopDownSet} and \linkS4class{NCBSet} to
+\emph{Abstract/VIRTUAL} parent class for \linkS4class{TopDownSet} and \linkS4class{NCBSet} to
 provide common interface.
 }
 \details{
@@ -75,14 +92,34 @@ child class.
 \itemize{
 \item \code{[}: Subset operator.
 
+For \code{i} \code{numeric}, \code{logical} or \code{character} vectors or empty (missing) or
+\code{NULL} are supported. Subsetting is done on the fragment/bond (row) level.
+\code{character} indices could be names (e.g. \code{c("a1", "b1", "c1", "c2", "c3")})
+or types (e.g. \code{c("c", "x")}) of the fragments for \linkS4class{TopDownSet}
+objects, or names of the bonds (e.g. \code{c("bond001")}) for \linkS4class{NCBSet}
+objects. \cr
+\code{j} could be a \code{numeric} or \code{logical} vector and subsetting is done on the
+condition/run (column) level.
+
+\item \code{[[}: Subset operator.
+
+\code{i} could be a \code{numeric} or \code{logical} vector and subsetting is done on the
+condition/run (column) level.
+
+\item \code{[[<-}: Setter for a column in the \code{colData} slot.
+
+The \code{[[<-} operator is used to add/replace a single column of the \code{colData}
+\code{DataFrame}.
+
 \item \code{$}: Accessor for columns in the \code{colData} slot.
 
-The \code{$} simplifies the accession of a single column of the \code{colData}.
+The \code{$} simplifies the accession of a single column of the \code{colData}. It is
+identical to the \code{[[} operator.
 
 \item \code{$<-}: Setter for a column in the \code{colData} slot.
 
 The \code{$<-} operator is used to add/replace a single column of the \code{colData}
-\code{DataFrame}.
+\code{DataFrame}. It is identical to the \code{[[<-} operator.
 
 \item \code{assayData}: Accessor for the \code{assay} slot.
 
@@ -128,6 +165,12 @@ information from the \linkS4class{AbstractTopDownSet} object. It returns a modif
 Depending on the implementation it returns an \linkS4class{FragmentViews}
 object for \linkS4class{TopDownSet} objects or an \link[Biostrings:XStringViews]{Biostrings::XStringViews}
 object for \linkS4class{NCBSet} objects.
+
+\item \code{summary}: Summary statistics.
+
+Returns a \code{matrix} with some statistics: number of fragments,
+total/min/first quartile/median/mean/third quartile/maximum of intensity
+values.
 }}
 
 \section{Slots}{

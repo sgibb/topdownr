@@ -77,6 +77,7 @@ loss should be applied on adducts you have to create additional rows, e.g.:
 \code{data.frame(mass=c(1.008, 1.008), name=c("cpH", "cpH_"), to=c("c", "c_"))}.
 }
 \examples{
+\dontrun{
 library("topdown")
 
 if (require("topdowndata")) {
@@ -86,6 +87,7 @@ if (require("topdowndata")) {
                           neutralLoss=MSnbase::defaultNeutralLoss(
                            disableWaterLoss=c("Cterm", "D", "E", "S", "T")),
                           tolerance=25e-6)
+}
 }
 }
 \seealso{

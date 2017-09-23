@@ -212,6 +212,7 @@ setMethod("normalize", "TopDownSet",
 })
 
 #' @param object `TopDownSet`
+#' @export
 #' @noRd
 setMethod("show", "TopDownSet", function(object) {
     callNextMethod()

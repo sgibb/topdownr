@@ -1,6 +1,6 @@
-#' Helper functions for topdown proteomics.
+#' Package for top-down proteomics.
 #'
-#' Some xml helper functions for topdown proteomics.
+#' Need detailed description here.
 #'
 #' @docType package
 #' @name topdown-package
@@ -26,4 +26,4 @@
 #' @importFrom tools file_ext file_path_sans_ext
 #' @importFrom utils modifyList txtProgressBar setTxtProgressBar object.size
 #' read.csv .DollarNames
-NULL
+"_PACKAGE"

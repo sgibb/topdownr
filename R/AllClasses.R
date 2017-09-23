@@ -18,7 +18,7 @@ setClass("FragmentViews",
 
 #' The AbstractTopDownSet class
 #'
-#' Abstract/VIRTUAL parent class for [TopDownSet-class] and [NCBSet-class] to
+#' *Abstract/VIRTUAL* parent class for [TopDownSet-class] and [NCBSet-class] to
 #' provide common interface.
 #'
 #' @details

@@ -53,6 +53,7 @@
 #' @export
 #' @seealso [MSnbase::calculateFragments()], [MSnbase::defaultNeutralLoss()]
 #' @examples
+#' \dontrun{
 #' library("topdown")
 #'
 #' if (require("topdowndata")) {
@@ -62,6 +63,7 @@
 #'                           neutralLoss=MSnbase::defaultNeutralLoss(
 #'                            disableWaterLoss=c("Cterm", "D", "E", "S", "T")),
 #'                           tolerance=25e-6)
+#' }
 #' }
 readTopDownFiles <- function(path, pattern=".*",
                              type=c("a", "b", "c", "x", "y", "z"),

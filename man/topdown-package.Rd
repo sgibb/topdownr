@@ -2,13 +2,22 @@
 % Please edit documentation in R/package.R
 \docType{package}
 \name{topdown-package}
+\alias{topdown}
 \alias{topdown-package}
-\title{Helper functions for topdown proteomics.}
+\title{Package for top-down proteomics.}
 \description{
-Some xml helper functions for topdown proteomics.
+Need detailed description here.
 }
 \references{
 \url{https://github.com/sgibb/topdown/}
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/sgibb/topdown/}
+  \item Report bugs at \url{https://github.com/sgibb/topdown/issues/}
+}
+
 }
 \author{
 Sebastian Gibb \email{mail@sebastiangibb.de}
