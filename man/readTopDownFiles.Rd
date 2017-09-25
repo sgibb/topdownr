@@ -7,9 +7,10 @@
 readTopDownFiles(path, pattern = ".*", type = c("a", "b", "c", "x", "y",
   "z"), modifications = c("Carbamidomethyl", "Acetyl", "Met-loss"),
   adducts = data.frame(), neutralLoss = MSnbase::defaultNeutralLoss(),
-  tolerance = 1e-05, dropNonInformativeColumns = TRUE,
-  sampleColumns = c("Mz", "AgcTarget", "EtdReagentTarget", "EtdActivation",
-  "CidActivation", "HcdActivation"), verbose = interactive())
+  sequenceOrder = c("original", "random", "inverse"), tolerance = 1e-05,
+  dropNonInformativeColumns = TRUE, sampleColumns = c("Mz", "AgcTarget",
+  "EtdReagentTarget", "EtdActivation", "CidActivation", "HcdActivation"),
+  verbose = interactive())
 }
 \arguments{
 \item{path}{\code{character}, path to directory that contains the top-down files.}
@@ -36,6 +37,11 @@ details section.}
 \item{neutralLoss}{\code{list}, neutral loss that should be applied, see
 \code{\link[MSnbase:calculateFragments]{MSnbase::calculateFragments()}} and \code{\link[MSnbase:defaultNeutralLoss]{MSnbase::defaultNeutralLoss()}} for
 details.}
+
+\item{sequenceOrder}{\code{character}, order of the sequence before fragment
+calculation and matching is done. \code{"original"} doesn't change anything.
+\code{"inverse"} reverse the sequence and \code{"random"} arranges the amino
+acid sequence at random.}
 
 \item{tolerance}{\code{double}, tolerance in \emph{ppm} that is used to match the
 theoretical fragments with the observed ones.}

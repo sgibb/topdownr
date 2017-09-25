@@ -28,6 +28,15 @@ test_that(".matchFragments", {
                  as.integer(c(1, NA, 2)))
 })
 
+test_that(".reorderSequence", {
+    expect_error(topdown:::.reorderSequence(1:10))
+    expect_equal(topdown:::.reorderSequence("ABCDE"), "ABCDE")
+    expect_equal(topdown:::.reorderSequence("ABCDE", "original"), "ABCDE")
+    expect_equal(topdown:::.reorderSequence("ABCDE", "inverse"), "EDCBA")
+    set.seed(2017)
+    expect_equal(topdown:::.reorderSequence("ABCDE", "random"), "ECBAD")
+})
+
 test_that(".unimod1", {
     d <- data.frame(mz=200:202, pos=1, seq=c("A", "AC", "ACE"),
                     ion=c("c1", "c2", "c3"), stringsAsFactors=FALSE)

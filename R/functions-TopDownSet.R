@@ -41,6 +41,10 @@
 #' @param neutralLoss `list`, neutral loss that should be applied, see
 #' [MSnbase::calculateFragments()] and [MSnbase::defaultNeutralLoss()] for
 #' details.
+#' @param sequenceOrder `character`, order of the sequence before fragment
+#' calculation and matching is done. `"original"` doesn't change anything.
+#' `"inverse"` reverse the sequence and `"random"` arranges the amino
+#' acid sequence at random.
 #' @param tolerance `double`, tolerance in *ppm* that is used to match the
 #' theoretical fragments with the observed ones.
 #' @param dropNonInformativeColumns logical, should columns with just one
@@ -71,6 +75,7 @@ readTopDownFiles <- function(path, pattern=".*",
                                              "Acetyl", "Met-loss"),
                              adducts=data.frame(),
                              neutralLoss=MSnbase::defaultNeutralLoss(),
+                             sequenceOrder=c("original", "random", "inverse"),
                              tolerance=10e-6,
                              dropNonInformativeColumns=TRUE,
                              sampleColumns=c("Mz", "AgcTarget",
@@ -89,6 +94,7 @@ readTopDownFiles <- function(path, pattern=".*",
                                          modifications=modifications,
                                          neutralLoss=neutralLoss,
                                          adducts=adducts,
+                                         sequenceOrder=sequenceOrder,
                                          verbose=verbose)
 
     scanConditions <- do.call(rbind, lapply(files$txt, .readScanHeadsTable,

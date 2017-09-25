@@ -32,6 +32,7 @@
 #' @param modification `character`, unimod names
 #' @param neutralLoss `list`, neutral loss (see [MSnbase::calculateFragments()])
 #' @param adducts `data.frame`, with 3 columns mass, name, to
+#' @param sequenceOrder `character`, `c("original", "random", "inverse")`
 #' @param verbose `logical`, verbose output?
 #' @return `FragmentViews`
 #' @noRd
@@ -40,6 +41,7 @@
                                                 "Met-loss"),
                                 neutralLoss=defaultNeutralLoss(),
                                 adducts=data.frame(),
+                                sequenceOrder=c("original", "random", "inverse"),
                                 verbose=interactive()) {
     modifications <- match.arg(modifications,
                                choices=c("", # allow NULL for nothing
@@ -47,11 +49,18 @@
                                          "Acetyl",
                                          "Met-loss"),
                                several.ok=TRUE)
+    sequenceOrder <- match.arg(sequenceOrder)
+
+    ## just to be sure if an AAString is given
     csequence <- as.character(sequence)
+
     ## TODO: replace by unimod package
     if ("Met-loss" %in% modifications) {
         csequence <- .unimod765(csequence)
     }
+
+    ## has to be done after Met-loss but before any other modification
+    csequence <- .reorderSequence(csequence, method=sequenceOrder)
 
     d <- calculateFragments(csequence,
                             type=type,
@@ -126,6 +135,29 @@
     m[o] <- sortedMatches
   }
   as.integer(m)
+}
+
+#' Reorder protein sequence.
+#'
+#' @param x `character`, sequence
+#' @param method `character`, reorder method
+#' @return `character`
+#' @noRd
+.reorderSequence <- function(x, method=c("original", "random", "inverse")) {
+    stopifnot(is.character(x))
+    method <- match.arg(method)
+
+    if (method != "original") {
+        x <- strsplit(x, "", fixed=TRUE)[[1L]]
+
+        if (method == "random") {
+            x <- sample(x)
+        } else if (method == "inverse") {
+            x <- rev(x)
+        }
+        x <- paste0(x, collapse="")
+    }
+    x
 }
 
 #' Apply unimod modification 1: Acetyl
