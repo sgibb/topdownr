@@ -1,9 +1,21 @@
-#' @param object `TopDownSet`
-#' @param by `list`, grouping variable
-#' @return `TopDownSet`
-#' @noRd
+#' @describeIn TopDownSet Aggregate conditions/runs.
+#'
+#' Aggregates conditions/runs (columns) in an [TopDownSet-class] object `by` a
+#' user-given value (default is the `"Sample"` column of `colData` which has the
+#' same value for technical replicates).
+#' It combines intensity values and numeric metadata of the grouped
+#' conditions/runs (columns) by `mean` and returns a reduced
+#' [TopDownSet-class] object.
+#'
+#' @param x,object `TopDownSet`
+#' @param by `list`, grouping variable, in general it refers to technical
+#' @param \ldots arguments passed to internal/other methods.
+#' replicates (that's why the default is the `"Sample"` column in `colData`).
+## @return `TopDownSet`
+#' @aliases aggregate,TopDownSet-method
+#' @export
 setMethod("aggregate", "TopDownSet",
-          function(x, by=x$Sample) {
+          function(x, by=x$Sample, ...) {
     d0 <- .logdim(x)
     groups <- .groupByLabels(by)
 
@@ -23,19 +35,21 @@ setMethod("aggregate", "TopDownSet",
     }
 })
 
-#' Filter `TopDownSet` by CV.
+#' @describeIn TopDownSet Filter by CV.
 #'
-#' Filtering is done by coefficent of variation across technical replicates.
-#' All fragments below a given threshold are removed.
+#' Filtering is done by coefficient of variation across technical replicates
+#' (defined by the `by` argument). All fragments below a given `threshold`
+#' are removed. The `threshold` is the maximal allowed CV in percent (`sd/mean *
+#' 100 < threshold`).
 #'
-#' @param object `TopDownSet`
-#' @param threshold max allowed CV in percent (`sd/mean * 100 < threshold`).
-#' @param by `list`, how technical repliactes are defined.
-#' @return `TopDownSet`
+## @param object `TopDownSet`
+#' @param threshold `double`, threshold variable.
+## @param by `list`, how technical replicates are defined.
+## @return `TopDownSet`
+#' @aliases filterCv filterCv,TopDownSet-method
 #' @export
-#' @noRd
 setMethod("filterCv", "TopDownSet",
-          function(object, threshold, by=object$Sample) {
+          function(object, threshold, by=object$Sample, ...) {
     if (!is.numeric(threshold) || !length(threshold) == 1L) {
       stop("'threshold' has to be a 'numeric' of length one.")
     }
@@ -63,23 +77,23 @@ setMethod("filterCv", "TopDownSet",
     }
 })
 
-#' Filter `TopDownSet` by ion injection time.
+#' @describeIn TopDownSet Filter by ion injection time.
 #'
 #' Filtering is done by maximal allowed deviation and just the technical
 #' `keepTopN` replicates with the lowest deviation from the median ion
 #' injection time are kept.
 #'
-#' @param object `TopDownSet`
-#' @param maxDeviation `double`, maximal allowed deviation in the log2 injection
-#' time in ms in comparison to the median ion injection time.
-#' @param keepTopN `integer`, how many technical repliactes should be kept?
-#' @param by `list`, how technical repliactes are defined.
-#' @return `TopDownSet`
+## @param object `TopDownSet`
+#' @param maxDeviation `double`, maximal allowed deviation in the `log2`
+#' injection time in ms in comparison to the median ion injection time.
+#' @param keepTopN `integer`, how many technical replicates should be kept?
+## @param by `list`, how technical replicates are defined.
+## @return `TopDownSet`
+#' @aliases filterInjectionTime filterInjectionTime,TopDownSet-method
 #' @export
-#' @noRd
 setMethod("filterInjectionTime", "TopDownSet",
           function(object, maxDeviation=log2(3), keepTopN=2,
-                   by=object$Sample) {
+                   by=object$Sample, ...) {
     if (!is.numeric(maxDeviation) || !length(maxDeviation) == 1L) {
       stop("'maxDeviation' has to be a 'numeric' of length one.")
     }
@@ -108,21 +122,22 @@ setMethod("filterInjectionTime", "TopDownSet",
     }
 })
 
-#' Filter `TopDownSet` by intensity.
+#' @describeIn TopDownSet Filter by intensity.
 #'
 #' Filtering is done by removing all fragments that are below a given
-#' (absolute/relative) intensity threshold.
+#' (absolute/relative) intensity `threshold`.
 #
-#' @param object `TopDownSet`
-#' @param threshold `double`, remove fragments with intensity below
+## @param object `TopDownSet`
+## @param threshold `double`, remove fragments with intensity below
 #' `threshold`.
 #' @param relative `logical`, if relative is `TRUE` all fragments with
-#' intensity below `threshold * max(intensity)` per fragment are removed.
-#' @return `TopDownSet`
+#' intensity below `threshold * max(intensity)` per fragment are removed,
+#' otherwise all fragments below `threshold` are removed.
+## @return `TopDownSet`
+#' @aliases filterIntensity filterIntensity,TopDownSet-method
 #' @export
-#' @noRd
 setMethod("filterIntensity", "TopDownSet",
-          function(object, threshold, relative=TRUE) {
+          function(object, threshold, relative=TRUE, ...) {
     if (!is.numeric(threshold) || !length(threshold) == 1L) {
         stop("'threshold' has to be a 'numeric' of length one.")
     }
@@ -151,20 +166,21 @@ setMethod("filterIntensity", "TopDownSet",
     }
 })
 
-#' Filter `TopDownSet` by non-replicated fragments.
+#' @describeIn TopDownSet Filter by non-replicated fragments.
 #'
 #' Filtering is done by removing all fragments that don't replicate across
 #' technical replicates.
 #'
-#' @param object `TopDownSet`
+## @param object `TopDownSet`
 #' @param minN `numeric`, if less than `minN` of a fragment are found across
 #' technical replicates it is removed.
-#' @param by `list`, how technical repliactes are defined.
-#' @return `TopDownSet`
+## @param by `list`, how technical replicates are defined.
+## @return `TopDownSet`
+#' @aliases filterNonReplicatedFragments
+#' filterNonReplicatedFragments,TopDownSet-method
 #' @export
-#' @noRd
 setMethod("filterNonReplicatedFragments", "TopDownSet",
-          function(object, minN=2, by=object$Sample) {
+          function(object, minN=2, by=object$Sample, ...) {
     if (!is.numeric(minN) || !length(minN) == 1L) {
         stop("'minN' has to be a 'numeric' of length one.")
     }
@@ -186,17 +202,18 @@ setMethod("filterNonReplicatedFragments", "TopDownSet",
     }
 })
 
-#' Normalise a `TopDownSet`
+#' @describeIn TopDownSet Normalise.
 #'
-#' This method applies various normalisation methods to a [TopDownSet-class].
+#' Applies *T*otal *I*on *C*urrent normalisation to a [TopDownSet-class]. The
+#' normalisation ist done per scans/conditions (column-wise normalisation).
 #'
-#' @param object `TopDownSet`
-#' @param method `character´, currently just `"TIC"` for *T*otal *I*on
-#' *C*urrent normalisation of the scans/conditions (column-wise normalisation)
-#' is supported.
-#' @return `TopDownSet`
+## @param object `TopDownSet`
+#' @param method `character`, normalisation method, currently just `"TIC"`
+#' for *T*otal *I*on *C*urrent normalisation of the scans/conditions
+#' (column-wise normalisation) is supported.
+## @return `TopDownSet`
+#' @aliases normalize,TopDownSet-method
 #' @export
-#' @noRd
 setMethod("normalize", "TopDownSet",
           function(object, method="TIC", ...) {
     method <- match.arg(method)
@@ -209,9 +226,9 @@ setMethod("normalize", "TopDownSet",
     }
 })
 
-#' @param object `TopDownSet`
+#' @rdname TopDownSet-class
+#' @aliases show,TopDownSet-method
 #' @export
-#' @noRd
 setMethod("show", "TopDownSet", function(object) {
     callNextMethod()
 
@@ -257,17 +274,29 @@ setMethod("show", "TopDownSet", function(object) {
     invisible(NULL)
 })
 
-#' @param object `TopDownSet`
-#' @param what `character`, summarise by "conditions" (col) or "fragments" (rows)
-#' @return `data.frame`
+#' @describeIn TopDownSet Summary statistics.
+#'
+#' Returns a `matrix` with some statistics: number of fragments,
+#' total/min/first quartile/median/mean/third quartile/maximum of intensity
+#' values.
+#'
+## @param object `TopDownSet`
+#' @param what `character`, specifies whether `"conditions"` (columns; default) or
+#' `"fragments"` (rows) should be summarized.
+#' @aliases summary,TopDownSet-method
 #' @export
-#' @noRd
 setMethod("summary", "TopDownSet",
           function(object, what=c("conditions", "fragments"), ...) {
     what <- if (match.arg(what) == "conditions") { "columns" } else { "rows" }
     callNextMethod(object=object, what=what)
 })
 
+#' @rdname TopDownSet-class
+#' @name as
+#' @section Coercion:
+#'
+#' `as(object, "NCBSet"): Coerce an [TopDownSet-class] object into an
+#' [NCBSet-class] object.
 setAs("TopDownSet", "NCBSet", function(from) {
     assay <- .ncbMap(from)
     ncb <- new("NCBSet",

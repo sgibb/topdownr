@@ -1,29 +1,42 @@
-#' Find best combination of conditions for highest coverage
+#' @describeIn NCBSet Best combination of conditions.
+#'
+#' Finds the best combination of conditions for highest coverage of bonds. Use
+#' `n` to limit the number of iterations and combinations that should be returned.
+#' If `minN` is set at least `minN` fragments have to be added to the
+#' combinations. The function returns a 2-column matrix. The first column
+#' contains the index of the condition (column number) and the second one the
+#' newly added number of fragments.
 #'
 #' @param object `NCBSet`
 #' @param n `integer`, max number of combinations/iterations.
 #' @param minN `integer` stop if there are less than `minN` additional fragments
+#' @param \ldots arguments passed to internal/other methods.
 #' added.
-#' @return `matrix`, first column: index of condition, second column: number of
+## @return `matrix`, first column: index of condition, second column: number of
 #' newly added fragments third column: number of newly covered bonds.
+#' @aliases bestConditions bestConditions,NCBSet-method
 #' @export
-#' @noRd
 setMethod("bestConditions", "NCBSet",
-          function(object, n=ncol(object), minN=0L) {
+          function(object, n=ncol(object), minN=0L, ...) {
     m <- .bestNcbCoverageCombination(object@assay, n=n, minN=minN)
     rownames(m) <- colnames(object)[m[, "index"]]
     m
 })
 
-#' Plot fragmentation map.
+#' @describeIn NCBSet Plot fragmentation map.
 #'
-#' @param object `NCBSet`
+#' Plots a fragmentation map of the Protein. Use `nCombinations` to add another
+#' plot with `nCombinations` combined conditions. If `cumCoverage` is `TRUE`
+#' (default) these combinations increase the coverage cumulatively.
+#'
+## @param object `NCBSet`
 #' @param nCombinations `integer`, number of combinations to show (0 to avoid
-#' plotting them at all)
+#' plotting them at all).
 #' @param cumCoverage `logical`, if `TRUE` (default) cumulative coverage of
 #' combinations is shown.
+#' @param labels `character`, overwrite x-axis labels.
+#' @aliases fragmentationMap fragmentationMap,NCBSet-method
 #' @export
-#' @noRd
 setMethod("fragmentationMap", "NCBSet",
           function(object, nCombinations=10, cumCoverage=TRUE,
                    labels=colnames(object), ...) {
@@ -85,9 +98,9 @@ setMethod("fragmentationMap", "NCBSet",
               strip.background=element_rect(fill="#f0f0f0", colour="#ffffff"))
 })
 
-#' @param object `NCBSet`
+#' @rdname NCBSet-class
+#' @aliases show,NCBSet-method
 #' @export
-#' @noRd
 setMethod("show", "NCBSet", function(object) {
     callNextMethod()
 
@@ -121,14 +134,19 @@ setMethod("show", "NCBSet", function(object) {
     invisible(NULL)
 })
 
-#' @param object `NCBSet`
-#' @param what `character`, summarise by "conditions" (col) or "fragments" (rows)
-#' @return `data.frame`
+#' @describeIn NCBSet Summary statistics.
+#'
+#' Returns a `matrix` with some statistics: number of fragments,
+#' total/min/first quartile/median/mean/third quartile/maximum of intensity
+#' values.
+#'
+## @param object `NCBSet`
+#' @param what `character`, specifies whether `"conditions"` (columns; default) or
+#' `"bonds"` (rows) should be summarized.
+#' @aliases summary,NCBSet-method
 #' @export
-#' @noRd
 setMethod("summary", "NCBSet",
           function(object, what=c("conditions", "bonds"), ...) {
     what <- if (match.arg(what) == "conditions") { "columns" } else { "rows" }
     callNextMethod(object=object, what=what)
 })
-
