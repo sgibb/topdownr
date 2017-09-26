@@ -6,6 +6,7 @@
 \alias{FragmentViews-class}
 \alias{FragmentViews}
 \alias{show,FragmentViews-method}
+\alias{coerce,FragmentViews,data.frame-method}
 \title{The FragmentViews class}
 \usage{
 FragmentViews(sequence, mass, type, z = 1L, start = NULL, end = NULL,
@@ -59,6 +60,13 @@ In general it is not necessary to call the constructor manually. See
 \code{\link[=readTopDownFiles]{readTopDownFiles()}} instead.
 }}
 
+\section{Coercion}{
+
+
+\code{as(object, "data.frame")}: Coerce an \linkS4class{FragmentViews} object into a
+\code{data.frame}.
+}
+
 \examples{
 library("topdown")
 
@@ -67,6 +75,7 @@ fv <- FragmentViews("ACE", start=1, width=1:3, names=paste0("b", 1:3),
                     mass=c(72.04439, 232.07504, 361.11763),
                     type="b", z=1)
 fv
+as(fv, "data.frame")
 }
 \seealso{
 \link[Biostrings:XStringViews-class]{Biostrings::XStringViews}

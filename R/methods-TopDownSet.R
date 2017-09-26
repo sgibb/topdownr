@@ -292,7 +292,7 @@ setMethod("summary", "TopDownSet",
 })
 
 #' @rdname TopDownSet-class
-#' @name as
+#' @name coerce,TopDownSet,NCBSet-method
 #' @section Coercion:
 #'
 #' `as(object, "NCBSet"): Coerce an [TopDownSet-class] object into an

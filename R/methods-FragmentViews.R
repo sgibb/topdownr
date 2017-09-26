@@ -55,3 +55,23 @@ setMethod("show", "FragmentViews", function(object) {
 
     invisible(NULL)
 })
+
+#' @rdname FragmentViews-class
+#' @name coerce,FragmentViews,data.frame-method
+#' @section Coercion:
+#'
+#' `as(object, "data.frame")`: Coerce an [FragmentViews-class] object into a
+#' `data.frame`.
+#' @examples
+#' as(fv, "data.frame")
+setAs("FragmentViews", "data.frame", function(from) {
+    data.frame(fragment=as(from, "character"),
+               start=start(from),
+               end=end(from),
+               width=width(from),
+               name=names(from),
+               type=elementMetadata(from)$type,
+               mass=elementMetadata(from)$mass,
+               z=elementMetadata(from)$z,
+               row.names=names(from))
+})

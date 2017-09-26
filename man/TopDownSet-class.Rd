@@ -15,7 +15,7 @@
 \alias{normalize,TopDownSet-method}
 \alias{show,TopDownSet-method}
 \alias{summary,TopDownSet-method}
-\alias{as}
+\alias{coerce,TopDownSet,NCBSet-method}
 \title{The TopDownSet class}
 \usage{
 \S4method{aggregate}{TopDownSet}(x, by = x$Sample, ...)

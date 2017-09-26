@@ -85,3 +85,16 @@ test_that("validity", {
     elementMetadata(fv)$mass <- as.double(3:1)
     expect_error(validObject(fv), "'mass' has to be sorted")
 })
+
+test_that("as(\"data.frame\")", {
+    expect_equal(as(fv, "data.frame"),
+                 data.frame(fragment=c("A", "AA", "AAC"),
+                            start=1,
+                            end=1:3,
+                            width=1:3,
+                            name=paste0("b", 1:3),
+                            type=factor(rep("b", 3)),
+                            mass=c(114.054951, 185.092061, 345.122711),
+                            z=1,
+                            row.names=paste0("b", 1:3)))
+})
