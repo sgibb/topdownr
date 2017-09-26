@@ -15,6 +15,7 @@
 \alias{normalize,TopDownSet-method}
 \alias{show,TopDownSet-method}
 \alias{summary,TopDownSet-method}
+\alias{coerce,TopDownSet,MSnSet-method}
 \alias{coerce,TopDownSet,NCBSet-method}
 \title{The TopDownSet class}
 \usage{
@@ -143,6 +144,11 @@ experimental mz values to the theoretical fragments.}
 }}
 
 \section{Coercion}{
+
+
+`as(object, "MSnSet"): Coerce an \linkS4class{TopDownSet} object into an
+\link[MSnbase:MSnSet-class]{MSnbase::MSnSet} object.
+
 
 
 `as(object, "NCBSet"): Coerce an \linkS4class{TopDownSet} object into an

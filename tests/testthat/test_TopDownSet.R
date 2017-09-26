@@ -375,6 +375,24 @@ test_that("validObject", {
     expect_error(validObject(tdn), "Mismatch between condition names")
 })
 
+test_that("as(\"MSnSet\")", {
+    msn <- new("MSnSet",
+               exprs=matrix(c(2:3, 0, 4:6, 7, rep(0, 4), 8, 0, 9, 0), nrow=3),
+               phenoData=as(data.frame(Scan=1:5,
+                                       File=Rle(rep(c("foo", "bar"), 3:2))),
+                            "AnnotatedDataFrame"),
+               featureData=as(data.frame(fragment=c("A", "CE", "E"),
+                                         start=1:3, end=c(1, 3, 3), width=c(1, 2, 1),
+                                         name=c("c1", "c2", "x1"),
+                                         type=factor(c("c", "c", "x")),
+                                         mass=(1:3)*100, z=1,
+                                         row.names=c("c1", "c2", "x1")),
+                              "AnnotatedDataFrame"))
+    msn@processingData <- new("MSnProcess", files=tds@files,
+                              processing="[2017-07-16 14:00:00] Data created.")
+    expect_equal(as(tds, "MSnSet"), msn)
+})
+
 test_that("as(\"NCBSet\")", {
     ncb <- new("NCBSet",
                rowViews=Views(AAString("ACE"), start=1, width=1:2,

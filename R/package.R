@@ -22,6 +22,7 @@
 #'
 #' @importFrom mzR openMSfile close header peaks
 #' @importFrom MSnbase calculateFragments defaultNeutralLoss get.amino.acids
+#' @importClassesFrom MSnbase MSnSet
 #' @importFrom stats ave median setNames quantile
 #' @importFrom tools file_ext file_path_sans_ext
 #' @importFrom utils modifyList txtProgressBar setTxtProgressBar object.size

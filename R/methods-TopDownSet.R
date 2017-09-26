@@ -292,6 +292,33 @@ setMethod("summary", "TopDownSet",
 })
 
 #' @rdname TopDownSet-class
+#' @name coerce,TopDownSet,MSnSet-method
+#' @section Coercion:
+#'
+#' `as(object, "MSnSet"): Coerce an [TopDownSet-class] object into an
+#' [MSnbase::MSnSet-class] object.
+setAs("TopDownSet", "MSnSet", function(from) {
+    processing <- new("MSnProcess",
+                      processing=from@processing,
+                      files=from@files)
+
+    msnset <- new("MSnSet",
+                  exprs=as.matrix(from@assay),
+                  phenoData=as(as(from@colData, "data.frame"),
+                                  "AnnotatedDataFrame"),
+                  featureData=as(as(from@rowViews, "data.frame"),
+                                 "AnnotatedDataFrame"),
+                  processingData=processing)
+
+    ## processingData are overwritten by ctor
+    msnset@processingData <- processing
+
+    if (validObject(msnset)) {
+        msnset
+    }
+})
+
+#' @rdname TopDownSet-class
 #' @name coerce,TopDownSet,NCBSet-method
 #' @section Coercion:
 #'
