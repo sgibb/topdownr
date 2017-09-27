@@ -122,7 +122,7 @@
 #' @param tolerance `double`, allowed tolerance
 #' @return `integer`
 #' @noRd
-.matchFragments <- function(mz, fmass, tolerance=2.5e-5) {
+.matchFragments <- function(mz, fmass, tolerance=5e-6) {
   if (!length(mz)) {
     integer()
   }
