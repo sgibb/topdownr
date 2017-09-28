@@ -4,9 +4,21 @@
 \name{topdown-package}
 \alias{topdown}
 \alias{topdown-package}
-\title{Package for top-down proteomics.}
+\title{Investigation of Fragmentation Conditions in Top-Down Proteomics}
 \description{
-Need detailed description here.
+The topdown package allows automatic and systemic investigation of
+fragment conditions. It creates Thermo Orbitrap Fusion Lumos method files
+to test hundreds of fragmentation conditions. Additionally it provides
+functions to analyse and process the generated MS data and determine the
+best conditions to maximise overall fragment coverage.
+}
+\details{
+The usage of the topdown package is demonstrated in the following vignettes:
+\itemize{
+\item Generate .meth files prior data acquisition for the Thermo Orbitrap Fusion
+Lumos MS devise: \code{vignette("data-generation", package="topdown")}.
+\item How to analyse top-down fragmenation data: \code{vignette("analysis", package="topdown")}
+}
 }
 \references{
 \url{https://github.com/sgibb/topdown/}
