@@ -27,7 +27,7 @@
 #'
 #' @param x `data.frame`, generated from [.ms2Experiments()].
 #' @return `data.frame`
-#' @seealso https://github.com/sgibb/topdown/issues/9
+#' @seealso https://github.com/sgibb/topdownr/issues/9
 #' @noRd
 .replaceZeroETDReactionTime <- function(x) {
     col <- grep("ETDReactionTime", colnames(x))
@@ -363,6 +363,7 @@
 #' @param verbose `logical`, verbose output?
 #'
 #' @details
+#'
 #' * `ms1Settings`: A `list` of MS1 settings. This has to be a named `list`.
 #'   Valid MS1 settings are:
 #'   `c("FirstMass", "LastMass", "Microscans", "MaxITTimeInMS", "AgcTarget")`
@@ -384,7 +385,7 @@
 #'  in `mz` are rounded to the first decimal place and the second to fourth
 #'  decimal place is used as numeric identifier.
 #' * `pattern`: The file name pattern used to name different method files.
-#'  It must contain a `"\\%s"` that is replaced by the conditions defined in
+#'  It must contain a `"%s"` that is replaced by the conditions defined in
 #'  `groupBy`.
 #'
 #' @return An invisivble `list` with the MS1, MS2, runtimes and mz.
@@ -393,7 +394,7 @@
 #' \email{pavels@@bmb.sdu.dk}
 #' @examples
 #' \dontrun{
-#' library("topdown")
+#' library("topdownr")
 #'
 #' writeMethodXmls(defaultMs1Settings(FirstMass=400),
 #'                 defaultMs2Settings(),

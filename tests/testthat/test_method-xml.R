@@ -1,13 +1,13 @@
 context("method-xml")
 
 test_that(".ms2Experiments", {
-    expect_equal(topdown:::.ms2Experiments(list(A=1:2, B="FOO"),
+    expect_equal(topdownr:::.ms2Experiments(list(A=1:2, B="FOO"),
                                            groupBy=character(),
                                            replication=1, randomise=FALSE),
                  list(data.frame(A=1:2, B="FOO", replication=1,
                                  stringsAsFactors=FALSE)),
                  check.attributes=FALSE)
-    expect_equal(topdown:::.ms2Experiments(list(A=1:2, B="FOO"),
+    expect_equal(topdownr:::.ms2Experiments(list(A=1:2, B="FOO"),
                                            groupBy=character(),
                                            randomise=FALSE),
                  list(data.frame(A=c(1:2, 1:2), B="FOO",
@@ -15,21 +15,21 @@ test_that(".ms2Experiments", {
                                  stringsAsFactors=FALSE)),
                  check.attributes=FALSE)
     set.seed(2017) # set.seed(2017); sample(4) # 4 2 1 3
-    expect_equal(topdown:::.ms2Experiments(list(A=1:2, B="FOO"),
+    expect_equal(topdownr:::.ms2Experiments(list(A=1:2, B="FOO"),
                                            groupBy=character(),
                                            randomise=TRUE),
                  list(data.frame(A=c(2, 2, 1, 1), B="FOO",
                                  replication=c(2, 1, 1, 2),
                                  stringsAsFactors=FALSE)),
                  check.attributes=FALSE)
-    expect_equal(topdown:::.ms2Experiments(list(A=1:2, B="FOO"), groupBy="A",
+    expect_equal(topdownr:::.ms2Experiments(list(A=1:2, B="FOO"), groupBy="A",
                                            randomise=FALSE),
                  list("1"=data.frame(A=1, B="FOO", replication=1:2,
                                      stringsAsFactors=FALSE),
                       "2"=data.frame(A=2, B="FOO", replication=1:2,
                                      stringsAsFactors=FALSE)),
                  check.attributes=FALSE)
-    expect_equal(topdown:::.ms2Experiments(list(A=1:2, B="FOO"),
+    expect_equal(topdownr:::.ms2Experiments(list(A=1:2, B="FOO"),
                                            groupBy=c("A", "replication"),
                                            randomise=FALSE),
                  list("1:1"=data.frame(A=1, B="FOO", replication=1,
@@ -56,7 +56,7 @@ test_that(".replaceZeroETDReactionTime", {
                     CollisionEnergy=c(1:3, rep(NA, 3)),
                     stringsAsFactors=FALSE)
 
-    expect_equal(topdown:::.replaceZeroETDReactionTime(x), r)
+    expect_equal(topdownr:::.replaceZeroETDReactionTime(x), r)
 })
 
 test_that(".startEndTime", {
@@ -64,9 +64,9 @@ test_that(".startEndTime", {
                     StartTimeMin=seq(0.02, by=0.8, length.out=22),
                     EndTimeMin=seq(0.8, by=0.8, length.out=22),
                     stringsAsFactors=FALSE)
-    expect_equal(topdown:::.startEndTime(nMs2=20, nMs2perMs1=12, duration=0.8,
+    expect_equal(topdownr:::.startEndTime(nMs2=20, nMs2perMs1=12, duration=0.8,
                                          gap=0.02), r)
-    expect_warning(topdown:::.startEndTime(nMs2=201, nMs2perMs1=2),
+    expect_warning(topdownr:::.startEndTime(nMs2=201, nMs2perMs1=2),
                    "More than 150 experiments")
 })
 
@@ -74,50 +74,50 @@ test_that(".resample", {
     x <- data.frame(A=LETTERS[1:10],
                     B=1:10)
     set.seed(2017) # set.seed(2017); sample(10); # 10 5 4 3 9 8 1 2 6 7
-    expect_equal(topdown:::.resample(x), x[c(10, 5:3, 9:8, 1:2, 6:7),])
-    expect_equal(topdown:::.resample(x, seq), x)
+    expect_equal(topdownr:::.resample(x), x[c(10, 5:3, 9:8, 1:2, 6:7),])
+    expect_equal(topdownr:::.resample(x, seq), x)
 })
 
 test_that(".xmlHeader", {
-    expect_output(topdown:::.xmlHeader(file=""),
+    expect_output(topdownr:::.xmlHeader(file=""),
                   "<\\?xml version=\"1\\.0\" encoding=\"utf-8\"\\?>")
-    expect_output(topdown:::.xmlHeader(file="", encoding="utf-16"),
+    expect_output(topdownr:::.xmlHeader(file="", encoding="utf-16"),
                   "<\\?xml version=\"1\\.0\" encoding=\"utf-16\"\\?>")
 })
 
 test_that(".xmlTag", {
-    expect_output(topdown:::.xmlTag("foo", file=""), "<foo/>")
-    expect_output(topdown:::.xmlTag("foo", value="bar", file=""),
+    expect_output(topdownr:::.xmlTag("foo", file=""), "<foo/>")
+    expect_output(topdownr:::.xmlTag("foo", value="bar", file=""),
                   "<foo>bar</foo>")
-    expect_output(topdown:::.xmlTag("foo", value="bar", indention=2, file=""),
+    expect_output(topdownr:::.xmlTag("foo", value="bar", indention=2, file=""),
                   "  <foo>bar</foo>")
-    expect_output(topdown:::.xmlTag("foo", value="bar", close=FALSE, file=""),
+    expect_output(topdownr:::.xmlTag("foo", value="bar", close=FALSE, file=""),
                   "<foo>bar")
-    expect_output(topdown:::.xmlTag("foo", attrs=c(bar=1), file=""),
+    expect_output(topdownr:::.xmlTag("foo", attrs=c(bar=1), file=""),
                   "<foo bar=\"1\"/>")
-    expect_output(topdown:::.xmlTag("foo", attrs=c(bar=1), close=FALSE,
+    expect_output(topdownr:::.xmlTag("foo", attrs=c(bar=1), close=FALSE,
                                     file=""), "<foo bar=\"1\">")
-    expect_output(topdown:::.xmlTag("foo", value="bar", attrs=c(x=1, y=2),
+    expect_output(topdownr:::.xmlTag("foo", value="bar", attrs=c(x=1, y=2),
                                     file=""), "<foo x=\"1\" y=\"2\">bar</foo>")
 })
 
 test_that(".xmlTagClose", {
-    expect_output(topdown:::.xmlTagClose("foo", file=""), "</foo>")
-    expect_output(topdown:::.xmlTagClose("foo", indention=2, file=""), "  </foo>")
+    expect_output(topdownr:::.xmlTagClose("foo", file=""), "</foo>")
+    expect_output(topdownr:::.xmlTagClose("foo", indention=2, file=""), "  </foo>")
 })
 
 test_that(".xmlListToTags", {
     l <- list(foo="bar", x=1, y=2, z=NA)
-    expect_output(topdown:::.xmlListToTags(l, file=""),
+    expect_output(topdownr:::.xmlListToTags(l, file=""),
                   "<foo>bar</foo>\n<x>1</x>\n<y>2</y>")
-    expect_output(topdown:::.xmlListToTags(l, indention=2, file=""),
+    expect_output(topdownr:::.xmlListToTags(l, indention=2, file=""),
                   "  <foo>bar</foo>\n  <x>1</x>\n  <y>2</y>")
-    expect_output(topdown:::.xmlListToTags(l, na.rm=FALSE, file=""),
+    expect_output(topdownr:::.xmlListToTags(l, na.rm=FALSE, file=""),
                   "<foo>bar</foo>\n<x>1</x>\n<y>2</y>\n<z>NA</z>")
 })
 
 test_that(".xmlFullMsScan", {
-    expect_output(topdown:::.xmlFullMsScan(list(FirstMass=100, LastMass=200),
+    expect_output(topdownr:::.xmlFullMsScan(list(FirstMass=100, LastMass=200),
                                            file=""),
                   paste0("<Modification Order=\"1\">\n",
                          "  <Experiment ExperimentIndex=\"0\">\n",
@@ -130,7 +130,7 @@ test_that(".xmlFullMsScan", {
 })
 
 test_that(".xmlTMSnScan", {
-    expect_output(topdown:::.xmlTMSnScan(data.frame(OrbitrapResolution="R120K",
+    expect_output(topdownr:::.xmlTMSnScan(data.frame(OrbitrapResolution="R120K",
                                                     ActivationType="CID",
                                                     CollisionEnergy=5,
                                                     stringsAsFactors=FALSE),
@@ -162,16 +162,16 @@ test_that(".xmlTMSnScan", {
 })
 
 test_that(".xmlCopyAndAppendExperiment", {
-    expect_output(topdown:::.xmlCopyAndAppendExperiment(order=2, src=1, file=""),
+    expect_output(topdownr:::.xmlCopyAndAppendExperiment(order=2, src=1, file=""),
                   paste0("<Modification Order=\"2\">\n",
                          "  <CopyAndAppendExperiment SourceExperimentIndex=\"1\"/>\n",
                          "</Modification>"))
 })
 
 test_that(".xmlStartEndTime", {
-    expect_error(topdown:::.xmlStartEndTime(order=2, times=1, file=""))
-    expect_error(topdown:::.xmlStartEndTime(order=2, times=1:3, file=""))
-    expect_output(topdown:::.xmlStartEndTime(order=2, idx=1, times=1:2,
+    expect_error(topdownr:::.xmlStartEndTime(order=2, times=1, file=""))
+    expect_error(topdownr:::.xmlStartEndTime(order=2, times=1:3, file=""))
+    expect_output(topdownr:::.xmlStartEndTime(order=2, idx=1, times=1:2,
                                              file=""),
                   paste0("<Modification Order=\"2\">\n",
                          "  <Experiment ExperimentIndex=\"1\">\n",
@@ -182,7 +182,7 @@ test_that(".xmlStartEndTime", {
 })
 
 test_that(".xmlMassList", {
-    expect_output(topdown:::.xmlMassList(c(100, 120), 2:3, file=""),
+    expect_output(topdownr:::.xmlMassList(c(100, 120), 2:3, file=""),
                   paste0("<MassList>\n",
                          "  <MassListRecord>\n",
                          "    <MOverZ>100</MOverZ>\n",
@@ -193,7 +193,7 @@ test_that(".xmlMassList", {
                          "    <Z>3</Z>\n",
                          "  </MassListRecord>\n",
                          "</MassList>"))
-    expect_output(topdown:::.xmlMassList(c(100, 120), 14:15, file=""),
+    expect_output(topdownr:::.xmlMassList(c(100, 120), 14:15, file=""),
                   paste0("<MassList>\n",
                          "  <MassListRecord>\n",
                          "    <MOverZ>100</MOverZ>\n",
@@ -204,7 +204,7 @@ test_that(".xmlMassList", {
                          "    <Z>10</Z>\n",
                          "  </MassListRecord>\n",
                          "</MassList>"))
-    expect_output(topdown:::.xmlMassList(c(100, 120, 140), 2:4,
+    expect_output(topdownr:::.xmlMassList(c(100, 120, 140), 2:4,
                                          indention=2, file=""),
                   paste0("  <MassList>\n",
                          "    <MassListRecord>\n",
@@ -220,7 +220,7 @@ test_that(".xmlMassList", {
                          "      <Z>4</Z>\n",
                          "    </MassListRecord>\n",
                          "  </MassList>"))
-    expect_output(topdown:::.xmlMassList(c(100, 120), 2:3, 30, type="CID",
+    expect_output(topdownr:::.xmlMassList(c(100, 120), 2:3, 30, type="CID",
                                          file=""),
                   paste0("<MassList CollisionEnergyCID=\"true\">\n",
                          "  <MassListRecord>\n",
@@ -234,7 +234,7 @@ test_that(".xmlMassList", {
                          "    <CollisionEnergyCID>30</CollisionEnergyCID>\n",
                          "  </MassListRecord>\n",
                          "</MassList>"))
-    expect_output(topdown:::.xmlMassList(c(100, 120), 2:3, 50, type="HCD",
+    expect_output(topdownr:::.xmlMassList(c(100, 120), 2:3, 50, type="HCD",
                                          file=""),
                   paste0("<MassList CollisionEnergyHCD=\"true\">\n",
                          "  <MassListRecord>\n",
@@ -251,29 +251,29 @@ test_that(".xmlMassList", {
 })
 
 test_that(".xmlMassListRecord", {
-   expect_output(topdown:::.xmlMassListRecord(100, 3, file=""),
+   expect_output(topdownr:::.xmlMassListRecord(100, 3, file=""),
                  paste0("<MassListRecord>\n",
                         "  <MOverZ>100</MOverZ>\n",
                         "  <Z>3</Z>\n",
                         "</MassListRecord>"))
-   expect_output(topdown:::.xmlMassListRecord(100, 13, file=""),
+   expect_output(topdownr:::.xmlMassListRecord(100, 13, file=""),
                  paste0("<MassListRecord>\n",
                         "  <MOverZ>100</MOverZ>\n",
                         "  <Z>10</Z>\n",
                         "</MassListRecord>"))
-   expect_output(topdown:::.xmlMassListRecord(100, 3, indention=2, file=""),
+   expect_output(topdownr:::.xmlMassListRecord(100, 3, indention=2, file=""),
                  paste0("  <MassListRecord>\n",
                         "    <MOverZ>100</MOverZ>\n",
                         "    <Z>3</Z>\n",
                         "  </MassListRecord>"))
-   expect_output(topdown:::.xmlMassListRecord(20, 5, energy=30, type="CID",
+   expect_output(topdownr:::.xmlMassListRecord(20, 5, energy=30, type="CID",
                                               file=""),
                  paste0("<MassListRecord>\n",
                         "  <MOverZ>20</MOverZ>\n",
                         "  <Z>5</Z>\n",
                         "  <CollisionEnergyCID>30</CollisionEnergyCID>\n",
                         "</MassListRecord>"))
-   expect_output(topdown:::.xmlMassListRecord(20, 5, energy=50, type="HCD",
+   expect_output(topdownr:::.xmlMassListRecord(20, 5, energy=50, type="HCD",
                                               file=""),
                  paste0("<MassListRecord>\n",
                         "  <MOverZ>20</MOverZ>\n",
@@ -283,32 +283,32 @@ test_that(".xmlMassListRecord", {
 })
 
 test_that("writeMethodXmls", {
-    expect_error(topdown:::writeMethodXmls(list(1:3)),
+    expect_error(topdownr:::writeMethodXmls(list(1:3)),
                  ".*ms1Settings.* has to be a named list")
-    expect_error(topdown:::writeMethodXmls(list(foo=1:3)),
+    expect_error(topdownr:::writeMethodXmls(list(foo=1:3)),
                  "is/are no valid MS1 tag")
-    expect_error(topdown:::writeMethodXmls(defaultMs1Settings(), list(1:3)),
+    expect_error(topdownr:::writeMethodXmls(defaultMs1Settings(), list(1:3)),
                  ".*ms2Settings.* has to be a named list")
-    expect_error(topdown:::writeMethodXmls(defaultMs1Settings(),
+    expect_error(topdownr:::writeMethodXmls(defaultMs1Settings(),
                                            list(foo=1:3)),
                  "is/are no valid MS2 tag")
-    expect_error(topdown:::writeMethodXmls(defaultMs1Settings(),
+    expect_error(topdownr:::writeMethodXmls(defaultMs1Settings(),
                                            defaultMs2Settings(),
                                            groupBy="foo"),
                  "Items of .*groupBy.* have to be one or more of:")
-    expect_error(topdown:::writeMethodXmls(defaultMs1Settings(),
+    expect_error(topdownr:::writeMethodXmls(defaultMs1Settings(),
                                            defaultMs2Settings(),
                                            mz=1),
                  ".*mz.* has to be a matrix")
-    expect_error(topdown:::writeMethodXmls(defaultMs1Settings(),
+    expect_error(topdownr:::writeMethodXmls(defaultMs1Settings(),
                                            defaultMs2Settings(),
                                            mz=cbind(1:3, 1:3, 1:3)),
                  ".*mz.* has to be a matrix with two columns")
-    expect_error(topdown:::writeMethodXmls(defaultMs1Settings(),
+    expect_error(topdownr:::writeMethodXmls(defaultMs1Settings(),
                                            defaultMs2Settings(),
                                            mz=matrix(nrow=0, ncol=2)),
                  ".*mz.* has to have at least one row")
-    expect_error(topdown:::writeMethodXmls(defaultMs1Settings(),
+    expect_error(topdownr:::writeMethodXmls(defaultMs1Settings(),
                                            defaultMs2Settings(),
                                            mz=cbind(1:3, 1:3),
                                            pattern="foo.xml"),

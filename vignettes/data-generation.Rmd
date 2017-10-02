@@ -1,29 +1,29 @@
 ---
-title: "topdown"
+title: "topdownr"
 author:
 - name: Sebastian Gibb
   affiliation: Department of Anesthesiology and Intensive Care, University Medicine Greifswald, Germany.
 - name: Pavel V. Shliaha
   affiliation: Department of Biochemistry and Molecular Biology, University of Southern Denmark, Denmark.
-package: topdown
+package: topdownr
 abstract: >
   This vignette describes the setup and the data preparation functionality
-  of the 'topdown' package.
+  of the 'topdownr' package.
 output:
   BiocStyle::html_document2:
     toc_float: true
     tidy: TRUE
-bibliography: topdown.bib
+bibliography: topdownr.bib
 vignette: >
   %\VignetteIndexEntry{TopDown Data Generation}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteKeywords{Mass Spectrometry, Proteomics, Bioinformatics}
   %\VignetteEncoding{UTF-8}
-  %\VignettePackage{topdown}
+  %\VignettePackage{topdownr}
 ---
 
 ```{r environment, echo=FALSE}
-suppressPackageStartupMessages(library("topdown"))
+suppressPackageStartupMessages(library("topdownr"))
 suppressPackageStartupMessages(library("BiocStyle"))
 ```
 
@@ -35,9 +35,9 @@ suppressPackageStartupMessages(library("BiocStyle"))
 
 # Introduction
 
-## The `topdown` data generation workflow
+## The `topdownr` data generation workflow
 
-![topdown data-generation](images/workflow/data-generation.mmd.png)
+![topdownr data-generation](images/workflow/data-generation.mmd.png)
 
 # Setup
 
@@ -76,10 +76,10 @@ https://thermo.flexnetoperations.com/
 
 *ScanHeadsman* was created by Vladimir Gorshkov.
 
-# Data preparation with `topdown`
+# Data preparation with `topdownr`
 
 ```{r load_package}
-library("topdown")
+library("topdownr")
 ```
 
 ***TODO***

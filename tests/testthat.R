@@ -1,4 +1,4 @@
 library("testthat")
-library("topdown")
+library("topdownr")
 
-test_check("topdown")
+test_check("topdownr")

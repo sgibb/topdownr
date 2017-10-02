@@ -244,9 +244,9 @@ test_that("filterNonReplicatedFragments", {
 })
 
 test_that(".isTopDownSet", {
-    expect_true(topdown:::.isTopDownSet(new("TopDownSet")))
-    expect_true(topdown:::.isTopDownSet(tds))
-    expect_error(topdown:::.isTopDownSet(1L),
+    expect_true(topdownr:::.isTopDownSet(new("TopDownSet")))
+    expect_true(topdownr:::.isTopDownSet(tds))
+    expect_error(topdownr:::.isTopDownSet(1L),
                  "has to be an 'TopDownSet' object")
 })
 
@@ -277,8 +277,8 @@ test_that(".ncbMap", {
                        dims=c(3, 4),
                        dimnames=list(paste0("bond", 1:3), c()))
 
-    expect_equal(topdown:::.ncbMap(tds), r)
-    expect_equal(topdown:::.ncbMap(tds1), r1)
+    expect_equal(topdownr:::.ncbMap(tds), r)
+    expect_equal(topdownr:::.ncbMap(tds1), r1)
 })
 
 test_that("normalize", {

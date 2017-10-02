@@ -1,4 +1,4 @@
 # Foreword {-}
 
-[*topdown*](http://bioconductor.org/packages/topdown) is free and
+[*topdownr*](http://bioconductor.org/packages/topdownr) is free and
 open-source software.

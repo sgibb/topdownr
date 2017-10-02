@@ -60,13 +60,13 @@ timings. If \code{massLabeling} is \code{TRUE} (default) the mass values given
 in \code{mz} are rounded to the first decimal place and the second to fourth
 decimal place is used as numeric identifier.
 \item \code{pattern}: The file name pattern used to name different method files.
-It must contain a \code{"\\\%s"} that is replaced by the conditions defined in
+It must contain a \code{"\%s"} that is replaced by the conditions defined in
 \code{groupBy}.
 }
 }
 \examples{
 \dontrun{
-library("topdown")
+library("topdownr")
 
 writeMethodXmls(defaultMs1Settings(FirstMass=400),
                 defaultMs2Settings(),

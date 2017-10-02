@@ -1,7 +1,7 @@
 # Questions and bugs {-}
 
 For bugs, typos, suggestions or other questions, please file an issue
-in our tracking system (https://github.com/sgibb/topdown/issues)
+in our tracking system (https://github.com/sgibb/topdownr/issues)
 providing as much information as possible, a reproducible example and
 the output of `sessionInfo()`.
 

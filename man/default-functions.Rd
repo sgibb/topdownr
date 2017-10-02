@@ -19,7 +19,7 @@ A named \code{list} of settings.
 This functions create the default settings for \code{\link[=writeMethodXmls]{writeMethodXmls()}}.
 }
 \examples{
-library("topdown")
+library("topdownr")
 
 # all default MS1 settings
 defaultMs1Settings()

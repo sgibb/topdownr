@@ -1,16 +1,16 @@
-Package: topdown
+Package: topdownr
 Title: Investigation of Fragmentation Conditions in Top-Down Proteomics
-Version: 0.2
+Version: 0.3
 Authors@R: c(person("Sebastian", "Gibb", role=c("aut", "cre"), email="mail@sebastiangibb.de"),
              person("Pavel", "Shliaha", role="aut", email="pavels@bmb.sdu.dk"),
              person(c("Ole", "Nørregaard"), "Jensen", role="aut", email="jenseno@bmb.sdu.dk"))
-Description: The topdown package allows automatic and systemic investigation of
-    fragment conditions. It creates Thermo Orbitrap Fusion Lumos method files
-    to test hundreds of fragmentation conditions. Additionally it provides
-    functions to analyse and process the generated MS data and determine the
-    best conditions to maximise overall fragment coverage.
+Description: The topdownr package allows automatic and systemic investigation
+    of fragment conditions. It creates Thermo Orbitrap Fusion Lumos method
+    files to test hundreds of fragmentation conditions. Additionally it
+    provides functions to analyse and process the generated MS data and
+    determine the best conditions to maximise overall fragment coverage.
 Depends:
-    R (>= 3.2.4),
+    R (>= 3.3),
     methods,
     BiocGenerics (>= 0.20.0),
     Biostrings (>= 2.42.1),
@@ -22,15 +22,16 @@ Imports:
     ggplot2 (>= 2.2.1),
     mzR (>= 2.11.4)
 Suggests:
-    topdowndata (>= 0.2),
+    topdownrdata (>= 0.2),
     knitr,
     testthat,
     BiocStyle
 License: GPL (>= 3)
-URL: https://github.com/sgibb/topdown/
-BugReports: https://github.com/sgibb/topdown/issues/
+URL: https://github.com/sgibb/topdownr/
+BugReports: https://github.com/sgibb/topdownr/issues/
 LazyData: true
 VignetteBuilder: knitr
 Roxygen: list(markdown=TRUE)
-RoxygenNote: 6.0.1
-biocViews: Infrastructure, Proteomics, MassSpectrometry
+RoxygenNote: 6.0.1.9000
+biocViews: Infrastructure, Proteomics, MassSpectrometry, Coverage
+Encoding: UTF-8

@@ -70,7 +70,7 @@ setClass("AbstractTopDownSet",
 #' experiment.
 #'
 #' @details
-#' See `vignette("analysis", package="topdown")` for a detailed example how to
+#' See `vignette("analysis", package="topdownr")` for a detailed example how to
 #' work with `TopDownSet` objects.
 #'
 #' @slot rowViews [FragmentViews-class], information about fragments

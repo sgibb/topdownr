@@ -1,30 +1,30 @@
 ---
-title: "topdown"
+title: "topdownr"
 author:
 - name: Sebastian Gibb
   affiliation: Department of Anesthesiology and Intensive Care, University Medicine Greifswald, Germany.
 - name: Pavel V. Shliaha
   affiliation: Department of Biochemistry and Molecular Biology, University of Southern Denmark, Denmark.
-package: topdown
+package: topdownr
 abstract: >
   This vignette describes the analysis functionality
-  of the 'topdown' package.
+  of the 'topdownr' package.
 output:
   BiocStyle::html_document2:
     toc_float: true
     tidy: TRUE
-bibliography: topdown.bib
+bibliography: topdownr.bib
 vignette: >
   %\VignetteIndexEntry{TopDown Analysis}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteKeywords{Mass Spectrometry, Proteomics, Bioinformatics}
   %\VignetteEncoding{UTF-8}
-  %\VignettePackage{topdown}
+  %\VignettePackage{topdownr}
 ---
 
 ```{r environment, echo=FALSE}
-suppressPackageStartupMessages(library("topdown"))
-suppressPackageStartupMessages(library("topdowndata"))
+suppressPackageStartupMessages(library("topdownr"))
+suppressPackageStartupMessages(library("topdownrdata"))
 suppressPackageStartupMessages(library("BiocStyle"))
 ```
 
@@ -36,27 +36,27 @@ suppressPackageStartupMessages(library("BiocStyle"))
 
 # Introduction
 
-## The `topdown` analysis workflow
+## The `topdownr` analysis workflow
 
-![topdown workflow](images/workflow/analysis.mmd.png)
+![topdownr workflow](images/workflow/analysis.mmd.png)
 
-# Working with `topdown`
+# Working with `topdownr`
 
 ```{r load_package}
-library("topdown")
+library("topdownr")
 ```
 
 ## Importing files
 
-The example files are provided in the `topdowndata` package. For a full
+The example files are provided in the `topdownrdata` package. For a full
 analysis you need a `.fasta` file with the protein sequence, the
 `.experiments.csv` files containing the method information, the `.txt` files
 containing the scan header information and the `.mzML` files with the
 deconvulted spectra.
 
 ```{r list_files, eval=-1, echo=1, comment=NA}
-list.files(topdowndata::topDownDataPath("myoglobin"))
-lapply(topdown:::.listTopDownFiles(topdowndata::topDownDataPath("myoglobin")),
+list.files(topdownrdata::topDownDataPath("myoglobin"))
+lapply(topdownr:::.listTopDownFiles(topdownrdata::topDownDataPath("myoglobin")),
        function(x) { c(head(x, 2), "...") })
 ```
 
@@ -64,9 +64,9 @@ All these files have to be in a directory. You could import them via
 `readTopDownFiles`:
 
 ```{r import_files}
-library("topdown")
+library("topdownr")
 
-tds <- readTopDownFiles(topdowndata::topDownDataPath("myoglobin"))
+tds <- readTopDownFiles(topdownrdata::topDownDataPath("myoglobin"))
 tds
 ```
 

@@ -1,23 +1,23 @@
 #' Investigation of Fragmentation Conditions in Top-Down Proteomics
 #'
-#' The topdown package allows automatic and systemic investigation of
+#' The topdownr package allows automatic and systemic investigation of
 #' fragment conditions. It creates Thermo Orbitrap Fusion Lumos method files
 #' to test hundreds of fragmentation conditions. Additionally it provides
 #' functions to analyse and process the generated MS data and determine the
 #' best conditions to maximise overall fragment coverage.
 #'
-#' The usage of the topdown package is demonstrated in the following vignettes:
+#' The usage of the topdownr package is demonstrated in the following vignettes:
 #'
 #' - Generate .meth files prior data acquisition for the Thermo Orbitrap Fusion
-#' Lumos MS devise: `vignette("data-generation", package="topdown")`.
-#' - How to analyse top-down fragmenation data: `vignette("analysis", package="topdown")`
+#' Lumos MS devise: `vignette("data-generation", package="topdownr")`.
+#' - How to analyse top-down fragmenation data: `vignette("analysis", package="topdownr")`
 #'
 #' @docType package
-#' @name topdown-package
+#' @name topdownr-package
 #' @author Sebastian Gibb \email{mail@@sebastiangibb.de},
 #' Pavel Shliaha \email{pavels@bmb.sdu.dk},
 #' Ole Nørregaard Jensen \email{jenseno@bmb.sdu.dk}
-#' @references \url{https://github.com/sgibb/topdown/}
+#' @references \url{https://github.com/sgibb/topdownr/}
 #' @keywords package
 #'
 #' @import methods

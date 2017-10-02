@@ -79,8 +79,8 @@ cat0 <- function(...) {
 #' ids following a sequence (with some drop-outs).
 #'
 #' See the following issues for details:
-#' - https://github.com/sgibb/topdown/issues/14
-#' - https://github.com/sgibb/topdown/issues/25
+#' - https://github.com/sgibb/topdownr/issues/14
+#' - https://github.com/sgibb/topdownr/issues/25
 #'
 #' TODO: replace this with a better approach if we understand why some ID are
 #' skipped.
@@ -276,8 +276,8 @@ cat0 <- function(...) {
 #' @seealso [.massLabelToId()]
 #' @noRd
 #' @example
-#' library("topdown")
-#' topdown:::.massLabel(c(750, 1000), c(1, 100))
+#' library("topdownr")
+#' topdownr:::.massLabel(c(750, 1000), c(1, 100))
 .massLabel <- function(x, id, divisor=10000L) {
     if (any(log10(divisor) <= log10(id) + 1L)) {
         stop("'divisor' has to be at least two digits more than 'id'")

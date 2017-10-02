@@ -1,10 +1,10 @@
 context("import")
 
 test_that(".fileExists", {
-    expect_error(topdown:::.fileExists("foo.bar"))
+    expect_error(topdownr:::.fileExists("foo.bar"))
     fn <- tempfile()
     file.create(fn)
-    expect_true(topdown:::.fileExists(fn))
+    expect_true(topdownr:::.fileExists(fn))
     unlink(fn)
 })
 
@@ -17,21 +17,21 @@ test_that(".listTopDownFiles", {
     r$fasta <- fasta
     r <- r[order(names(r))]
     file.create(c(fasta, fns))
-    expect_equal(topdown:::.listTopDownFiles(tempdir()), r)
-    expect_equal(topdown:::.listTopDownFiles(tempdir(), pattern="^fileA_.*"),
+    expect_equal(topdownr:::.listTopDownFiles(tempdir()), r)
+    expect_equal(topdownr:::.listTopDownFiles(tempdir(), pattern="^fileA_.*"),
                  lapply(r, "[", 1L))
-    expect_error(topdown:::.listTopDownFiles(tempdir(), pattern="^fileB_.*"),
+    expect_error(topdownr:::.listTopDownFiles(tempdir(), pattern="^fileB_.*"),
                  "Could not find any fasta files")
-    expect_error(topdown:::.listTopDownFiles(tempdir(), pattern="^fileC_.*"),
+    expect_error(topdownr:::.listTopDownFiles(tempdir(), pattern="^fileC_.*"),
                  "Could not find any csv, fasta, mzML, txt files")
     fasta2 <- tempfile(pattern="fileB_", fileext=".fasta")
     file.create(fasta2)
-    expect_error(topdown:::.listTopDownFiles(tempdir()),
+    expect_error(topdownr:::.listTopDownFiles(tempdir()),
                  "More than one fasta file")
     fns2 <- tempfile("fileA_")
     fns2 <- paste(fns2, c("mzML", "txt"), sep=".")
     file.create(fns2)
-    expect_error(topdown:::.listTopDownFiles(tempdir(), pattern="^fileA_.*"),
+    expect_error(topdownr:::.listTopDownFiles(tempdir(), pattern="^fileA_.*"),
                  paste0("There have to be the same number .*",
                         "Found: csv=1, mzML=2, txt=2", collapse=""))
     unlink(c(fasta, fasta2, fns, fns2))
@@ -44,7 +44,7 @@ test_that(".readExperimentCsv", {
                     TargetedMassList=paste0("(mz=933.100", 1:3, " z=2 name=)"),
                     stringsAsFactors=FALSE)
     write.csv(d, file=fn, row.names=FALSE)
-    expect_message(e <- topdown:::.readExperimentCsv(fn, verbose=TRUE),
+    expect_message(e <- topdownr:::.readExperimentCsv(fn, verbose=TRUE),
                    "Reading 3 experiment conditions from file")
     expect_equal(colnames(e),
                  c("MsLevel", "NaColumn", "TargetedMassList", "Condition",
@@ -60,11 +60,11 @@ test_that(".readExperimentCsv", {
 test_that(".readFasta", {
     fn <- paste0(tempfile(), ".fasta")
     writeLines(c("> FOOBAR", "Sequence"), fn)
-    expect_message(s <- topdown:::.readFasta(fn, verbose=TRUE),
+    expect_message(s <- topdownr:::.readFasta(fn, verbose=TRUE),
                    "Reading sequence from fasta file")
     expect_equal(s, AAString("Sequence"))
     writeLines(c("> FOOBAR", "> Sequence"), fn)
-    expect_error(topdown:::.readFasta(fn), "No sequence found")
+    expect_error(topdownr:::.readFasta(fn), "No sequence found")
     unlink(fn)
 })
 
@@ -81,7 +81,7 @@ test_that(".readScanHeadsTable", {
                     stringsAsFactors=FALSE)
     write.csv(d, file=fn, row.names=FALSE)
     on.exit(unlink(fn))
-    expect_message(h <- topdown:::.readScanHeadsTable(fn, verbose=TRUE),
+    expect_message(h <- topdownr:::.readScanHeadsTable(fn, verbose=TRUE),
                    "Reading 5 header information from file")
     expect_equal(colnames(h),
                  c("MsOrder", "FilterString", "Activation1", "Activation2",
@@ -106,12 +106,12 @@ test_that(".readScanHeadsTable", {
                     Energy2=c(NA, 30, 30, 20, 10),
                     stringsAsFactors=FALSE)
     write.csv(d, file=fn, row.names=FALSE)
-    expect_warning(h <- topdown:::.readScanHeadsTable(fn, verbose=TRUE),
+    expect_warning(h <- topdownr:::.readScanHeadsTable(fn, verbose=TRUE),
                    "1 FilterString entries modified")
     expect_equal(h$Condition, c(1, 1:3))
 
     ## .fixFilterString needed;
-    ## https://github.com/sgibb/topdown/issues/25
+    ## https://github.com/sgibb/topdownr/issues/25
     d <- data.frame(MSOrder=c(1, 2, 2, 2, 2),
                     FilterString=c("ms2 100.0001@etd", "ms2 100.0001@hcd",
                                    "ms2 100.0001@hcd", "ms2 100.0001@cid",
@@ -122,12 +122,12 @@ test_that(".readScanHeadsTable", {
                     Energy2=c(NA, 30, 30, 20, 10),
                     stringsAsFactors=FALSE)
     write.csv(d, file=fn, row.names=FALSE)
-    expect_warning(h <- topdown:::.readScanHeadsTable(fn, verbose=TRUE),
+    expect_warning(h <- topdownr:::.readScanHeadsTable(fn, verbose=TRUE),
                    "1 FilterString entries modified")
     expect_equal(h$Condition, c(1, 1:3))
 
     ## duplicated IDs in different order (missing scans files)
-    ## https://github.com/sgibb/topdown/issues/14
+    ## https://github.com/sgibb/topdownr/issues/14
     d <- data.frame(MSOrder=c(1, 2, 2, 2, 2),
                     FilterString=c("ms2 100.0001@etd", "ms2 100.0001@hcd",
                                    "ms2 100.0001@hcd", "ms2 100.0007@cid",
@@ -138,7 +138,7 @@ test_that(".readScanHeadsTable", {
                     Energy2=c(NA, 30, 30, 20, 10),
                     stringsAsFactors=FALSE)
     write.csv(d, file=fn, row.names=FALSE)
-    expect_warning(h <- topdown:::.readScanHeadsTable(fn, verbose=FALSE),
+    expect_warning(h <- topdownr:::.readScanHeadsTable(fn, verbose=FALSE),
                    "not sorted in ascending order")
     expect_equal(h$Condition, c(1, 1:3))
 })
@@ -158,10 +158,10 @@ test_that(".mergeScanConditionAndHeaderInformation", {
                     HcdActivation=0, BAR=c(1:2, 5:4),
                     Both.HeaderInformation=2,
                     SupplementalActivationCe=c(3, 3, 1, 2))
-    expect_equal(topdown:::.mergeScanConditionAndHeaderInformation(sc, hi), r)
+    expect_equal(topdownr:::.mergeScanConditionAndHeaderInformation(sc, hi), r)
     sc$CidActivation <- 0
     sc$HcdActivation <- 11:13
-    expect_error(topdown:::.mergeScanConditionAndHeaderInformation(sc, hi),
+    expect_error(topdownr:::.mergeScanConditionAndHeaderInformation(sc, hi),
                  "Merging of header and method information failed")
 })
 
@@ -176,5 +176,5 @@ test_that(".mergeSpectraAndHeaderInformation", {
     r$z.HeaderInformation <- 3:4
     r <- r[, c("File", "Scan", "x", "spectrum",
                "z.SpectraInformation", "y", "z.HeaderInformation")]
-    expect_equal(topdown:::.mergeSpectraAndHeaderInformation(fd, hi), r)
+    expect_equal(topdownr:::.mergeSpectraAndHeaderInformation(fd, hi), r)
 })

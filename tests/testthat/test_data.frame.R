@@ -6,9 +6,9 @@ test_that(".aggregateDataFrame", {
     r <- data.frame(id=c(1, 3), col1=c(1.5, 3.5), col2=c(5.5, 7.5),
                     col3=LETTERS[c(1, 3)],
                     stringsAsFactors=FALSE, row.names=letters[c(1, 3)])
-    expect_equal(topdown:::.aggregateDataFrame(d, rep(1:2, each=2),
+    expect_equal(topdownr:::.aggregateDataFrame(d, rep(1:2, each=2),
                                                ignoreNumCols="id"), r)
-    expect_equal(topdown:::.aggregateDataFrame(d, rep(c(10, 2), each=2),
+    expect_equal(topdownr:::.aggregateDataFrame(d, rep(c(10, 2), each=2),
                                                ignoreNumCols="id"), r)
 })
 
@@ -16,7 +16,7 @@ test_that(".colsToRle", {
     d <- DataFrame(a=1:10, b=rep(1, 10), c=rep(c("foo", "bar"), each=5))
     r <- DataFrame(a=1:10, b=Rle(rep(1, 10)),
                    c=Rle(rep(c("foo", "bar"), each=5)))
-    expect_equal(topdown:::.colsToRle(d), r)
+    expect_equal(topdownr:::.colsToRle(d), r)
 })
 
 test_that(".droplevels", {
@@ -28,7 +28,7 @@ test_that(".droplevels", {
                    c=Rle(rep("foo", 5)),
                    d=Rle(factor(rep("foo", 5))),
                    e=factor(rep(1, 5)))
-    expect_equal(topdown:::.droplevels(d[1:5,]), r)
+    expect_equal(topdownr:::.droplevels(d[1:5,]), r)
 })
 
 test_that(".dropNonInformativeColumns", {
@@ -37,21 +37,21 @@ test_that(".dropNonInformativeColumns", {
                    d=Rle(rep("foo", 10)))
     r <- DataFrame(a=1:10,
                    c=Rle(rep(c("foo", "bar"), each=5)))
-    expect_equal(topdown:::.dropNonInformativeColumns(d), r)
+    expect_equal(topdownr:::.dropNonInformativeColumns(d), r)
 })
 
 test_that(".isNumCol", {
     d <- DataFrame(a=1:10, b=factor(rep(1, 10)),
                    c=Rle(rep(c("foo", "bar"), each=5)),
                    d=Rle(rep(1:2, each=5)))
-    expect_equal(topdown:::.isNumCol(d), c(TRUE, FALSE, FALSE, TRUE))
+    expect_equal(topdownr:::.isNumCol(d), c(TRUE, FALSE, FALSE, TRUE))
 })
 
 test_that(".orderByColumns", {
     d <- DataFrame(a=10:1, b=c(1:3, 7:1),
                    c=Rle(rep(c("foo", "bar"), each=5)),
                    d=Rle(rep("foo", 10)))
-    expect_error(topdown:::.orderByColumns(1:10))
-    expect_error(topdown:::.orderByColumns(d, c("foo", "bar")))
-    expect_equal(topdown:::.orderByColumns(d, c("c", "a")), 10:1)
+    expect_error(topdownr:::.orderByColumns(1:10))
+    expect_error(topdownr:::.orderByColumns(d, c("foo", "bar")))
+    expect_equal(topdownr:::.orderByColumns(d, c("c", "a")), 10:1)
 })

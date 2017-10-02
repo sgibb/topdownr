@@ -18,7 +18,7 @@
 #'
 #' *Please note:* The `adducts` are added to the output of
 #' [MSnbase::calculateFragments()]. That has some limitations, e.g.
-#' neutral loss calculation could not be done in [topdown-package]. If neutral
+#' neutral loss calculation could not be done in [topdownr-package]. If neutral
 #' loss should be applied on adducts you have to create additional rows, e.g.:
 #' `data.frame(mass=c(1.008, 1.008), name=c("cpH", "cpH_"), to=c("c", "c_"))`.
 #'
@@ -58,11 +58,11 @@
 #' @seealso [MSnbase::calculateFragments()], [MSnbase::defaultNeutralLoss()]
 #' @examples
 #' \dontrun{
-#' library("topdown")
+#' library("topdownr")
 #'
-#' if (require("topdowndata")) {
+#' if (require("topdownrdata")) {
 #'   # add H+ to z and no neutral loss of water
-#'   tds <- readTopDownFiles(topdowndata::topDownDataPath("myoglobin"),
+#'   tds <- readTopDownFiles(topdownrdata::topDownDataPath("myoglobin"),
 #'                           adducts=data.frame(mass=1.008, name="zpH", to="z"),
 #'                           neutralLoss=MSnbase::defaultNeutralLoss(
 #'                            disableWaterLoss=c("Cterm", "D", "E", "S", "T")),

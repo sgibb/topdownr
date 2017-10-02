@@ -108,7 +108,7 @@ condition/run (column) level.
 
 \item \code{[[<-}: Setter for a column in the \code{colData} slot.
 
-The \code{[[<-} operator is used to add/replace a single column of the \code{colData}
+The \code{[[&lt;-} operator is used to add/replace a single column of the \code{colData}
 \code{DataFrame}.
 
 \item \code{$}: Accessor for columns in the \code{colData} slot.
@@ -118,8 +118,8 @@ identical to the \code{[[} operator.
 
 \item \code{$<-}: Setter for a column in the \code{colData} slot.
 
-The \code{$<-} operator is used to add/replace a single column of the \code{colData}
-\code{DataFrame}. It is identical to the \code{[[<-} operator.
+The \code{$&lt;-} operator is used to add/replace a single column of the \code{colData}
+\code{DataFrame}. It is identical to the \code{[[&lt;-} operator.
 
 \item \code{assayData}: Accessor for the \code{assay} slot.
 
@@ -142,7 +142,7 @@ An alias for \code{colData}.
 
 \item \code{conditionData<-}: Setter for the \code{colData} slot.
 
-An alias for \code{colData<-}.
+An alias for \code{colData&lt;-}.
 
 \item \code{dim}: Accessor for dimensions.
 
