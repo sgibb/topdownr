@@ -14,7 +14,9 @@
 #'
 #' @docType package
 #' @name topdown-package
-#' @author Sebastian Gibb \email{mail@@sebastiangibb.de}
+#' @author Sebastian Gibb \email{mail@@sebastiangibb.de},
+#' Pavel Shliaha \email{pavels@bmb.sdu.dk},
+#' Ole Nørregaard Jensen \email{jenseno@bmb.sdu.dk}
 #' @references \url{https://github.com/sgibb/topdown/}
 #' @keywords package
 #'

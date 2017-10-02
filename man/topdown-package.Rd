@@ -32,6 +32,8 @@ Useful links:
 
 }
 \author{
-Sebastian Gibb \email{mail@sebastiangibb.de}
+Sebastian Gibb \email{mail@sebastiangibb.de},
+Pavel Shliaha \email{pavels@bmb.sdu.dk},
+Ole Nørregaard Jensen \email{jenseno@bmb.sdu.dk}
 }
 \keyword{package}
