@@ -1,0 +1,38 @@
+graph TD
+subgraph Windows
+   tdwmx(`topdownr::writeMethodXmls`) -- Create XML files for different fragmentation conditions --> tdrxmc(`topdownr::runXmlMethodChanger`)
+   tdrxmc --> thxmc(XmlMethodChanger.exe)
+   thxmc --> fMeth>.meth files]
+   fMeth --Run the MS experiment --> fRaw>.raw files]
+   fRaw -- Extract information about scans --> tdsh(`topdownr::runScanHeadsman`)
+   tdsh --> sh(ScanHeadsman.exe)
+   sh -- Method tables --> fCsv>.experiments.csv files]
+   sh -- Scan header tables --> fTxt>.txt files]
+   fRaw --> thxcal(Xcalibur/Xtract)
+   thxcal -- Charge state deconvultion --> fMzMl>.mzML files]
+end
+
+si[Spectra information] --> tdwmx
+
+psi[Protein sequence information] --> fFasta>.fasta file]
+
+fCsv -->  td(`topdownr::readTopDownFiles`)
+fTxt --> td
+fMzMl --> td
+fFasta -- Predict fragments  --> td
+td -- Link method/scan header tables/deconvulted spectra/fragments --> tds(TopDownSet)
+tds -.-> analysis(Further Analysis)
+
+classDef topdownrClass fill:#2D882D,stroke:#004400
+classDef thermoClass fill:#FFFFFF,stroke:#7C0000,stroke-dasharray:5
+classDef scanheadsmanClass fill:#FFFFFF,stroke:#0000AA,stroke-dasharray:5
+classDef fileClass fill:#FFFFFF,stroke:#808080,stroke-width:2
+classDef infoClass fill:#FFFFFF,stroke:#000000
+classDef unknownClass fill:#B4E0B4,stroke:#004400,stroke-dasharray:5
+
+class tdwmx,tdrxmc,tdsh,td,tds topdownrClass
+class thxmc,thxcal thermoClass
+class sh scanheadsmanClass
+class fFasta,fMeth,fRaw,fCsv,fTxt,fMzMl fileClass
+class si,psi infoClass
+class analysis unknownClass
