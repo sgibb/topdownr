@@ -12,7 +12,7 @@ abstract: >
   This vignette describes the setup and the data preparation to create the input
   files needed for the analysis with the functionality the `topdownr` package.
 output:
-  BiocStyle::html_document2:
+  BiocStyle::html_document:
     toc_float: true
     tidy: TRUE
 bibliography: topdownr.bib

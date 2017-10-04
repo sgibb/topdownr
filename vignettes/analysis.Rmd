@@ -12,7 +12,7 @@ abstract: >
   This vignette describes the fragmentation analysis functionality
   of the `topdownr` package.
 output:
-  BiocStyle::html_document2:
+  BiocStyle::html_document:
     toc_float: true
     tidy: TRUE
 bibliography: topdownr.bib
