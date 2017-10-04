@@ -1,21 +1,23 @@
 ---
-title: "topdownr"
+title: "Data Generation for topdownr"
 author:
+- name: Pavel V. Shliaha
+  affiliation: Department of Biochemistry and Molecular Biology, University of Southern Denmark, Denmark.
 - name: Sebastian Gibb
   affiliation: Department of Anesthesiology and Intensive Care, University Medicine Greifswald, Germany.
-- name: Pavel V. Shliaha
+- name: Ole Nørregaard Jensen
   affiliation: Department of Biochemistry and Molecular Biology, University of Southern Denmark, Denmark.
 package: topdownr
 abstract: >
-  This vignette describes the setup and the data preparation functionality
-  of the 'topdownr' package.
+  This vignette describes the setup and the data preparation to create the input
+  files needed for the analysis with the functionality the `topdownr` package.
 output:
   BiocStyle::html_document2:
     toc_float: true
     tidy: TRUE
 bibliography: topdownr.bib
 vignette: >
-  %\VignetteIndexEntry{TopDown Data Generation}
+  %\VignetteIndexEntry{Data Generation for topdownr}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteKeywords{Mass Spectrometry, Proteomics, Bioinformatics}
   %\VignetteEncoding{UTF-8}
@@ -35,27 +37,32 @@ suppressPackageStartupMessages(library("BiocStyle"))
 
 # Introduction
 
-## The `topdownr` data generation workflow
+## The `topdownr` Data Generation Workflow
 
-![topdownr data-generation](images/workflow/data-generation.mmd.png)
+![Data Generation Workflow](images/workflow/data-generation.mmd.png)
 
-# Setup
+# Installation of Additional Software
 
 ## Setup the Thermo Software
 
-1. Install the workstation by running `OrbitrapFusionLumosWorkstation.exe`.
-2. Run `C:\Thermo\Instruments\TNG\OrbitrapFusionLumos\2.1\System\programs\TNGInstrumentConfigControl.exe`,
+To create methods the user will have to install and modify Orbitrap Fusion LUMOS workstation first:
+
+1. Request `OrbitrapFusionLumosWorkstation.exe` from Thermo Scientific.
+2. Install the workstation by running `OrbitrapFusionLumosWorkstation.exe`.
+3. Run `C:\Thermo\Instruments\TNG\OrbitrapFusionLumos\2.1\System\programs\TNGInstrumentConfigControl.exe`,
    set *Optional Ion Source* to *ETD and Internal Calibration*, click *Apply* and *OK* (you could ignore the *restart your instrument* message).
-3. Replace `C:\Thermo\Instruments\TNG\OrbitrapFusionLumos\2.1\System\programs\Thermo.TNG.Calcium.MethodXML.dll` by `Thermo.TNG.Calcium.MethodXML.dll`.
+4. Replace `C:\Thermo\Instruments\TNG\OrbitrapFusionLumos\2.1\System\programs\Thermo.TNG.Calcium.MethodXML.dll` by `Thermo.TNG.Calcium.MethodXML.dll`.
 
 ## Setup XMLMethodChanger
 
-**TODO:**: has to be easier and more user-friendly:
-Download and compile https://github.com/thermofisherlsms/meth-modifications
+*XMLMethodChanger* is needed to convert the xml methods into `.meth` files. It
+could be found at https://github.com/thermofisherlsms/meth-modifications
+The user has to download and compile it himself (or request it from Thermo
+Scientific as well).
 
 ## Setup Operating System
 
-In order to use `XMLMethodChanger` the operating system has to use the `.` (dot)
+In order to use *XMLMethodChanger* the operating system has to use the `.` (dot)
 as decimal mark and the `,` (comma) as digit group separator (one thousand dot
 two should be formated as `1,000.2`).
 
@@ -65,7 +72,10 @@ manually.
 
 ## Setup ScanHeadsman
 
-Download *ScanHeadsman* from https://bitbucket.org/caetera/scanheadsman
+After data aquisition `topdownr` would need the header information from the
+`.raw` files.
+Therefore the *ScanHeadsman* software is used. It could be
+downloaded from https://bitbucket.org/caetera/scanheadsman
 
 It requires Microsoft **.NET 4.5** or later (it is often preinstalled on a typical modern Windows
 or could be found in Microsoft's Download Center, e.g.
@@ -74,15 +84,148 @@ Additionally you would need Thermo's *MS File Reader* which could be downloaded
 free of charge (but you have to register) from the Thermo FlexNet website:
 https://thermo.flexnetoperations.com/
 
-*ScanHeadsman* was created by Vladimir Gorshkov.
+*ScanHeadsman* was created by Vladimir Gorshkov <vgor@bmb.sdu.dk>.
+
+# Creating Methods
+
+Importantly, *XMLmethodChanger* does not create methods *de novo*, but modifies
+pre-existing methods (supplied with *XMLMethodChanger*) using modifications
+described in XML files. Thus the whole process of creating user specified methods
+consists of 2 parts:
+
+1. Construction of XML files with all possible combination of fragmentation
+   parameters (see `topdownr::writeMethodXmls` below).
+2. Submitting the constructed XML files together with a template
+   `.meth` file to *XMLmethodChanger*.
+
+We choose to use targeted MS2 scans (TMS2) as a way to store the fragmentation parameters.
+Each TMS2 is stored in a separate experiment. Experiments do not overlap.
+
+![Method Editor - Experiment 21](images/methodeditor-exp21.png)
 
 # Data preparation with `topdownr`
 
-```{r load_package}
+Shown below is the process of creating XML files and using them to modify the
+*TMS2IndependentTemplateForTD.meth* template file.
+
+```{r writeMethodXml, eval=FALSE}
 library("topdownr")
+
+## MS1 parameters (you could also use and modify
+## the output of `defaultMs1Settings()`)
+parMS1 <- list(
+    FirstMass = 400,
+    LastMass = 1600,
+    Microscans = 10
+)
+
+## MS2 parameters (you could also use and modify
+## the output of `defaultMs2Settings()`)
+parMS2  <- list(
+    OrbitrapResolution = "R120K",
+    IsolationWindow = 1,
+    MaxITTimeInMS = 200,
+    ETDSupplementalActivation = c("ETciD", "EThcD"),
+    ActivationType = "ETD",
+    Microscans = 40,
+    ETDSupplementalActivationEnergy = seq (0, 35, 7),
+    ETDReactionTime = c (0, 2.5, 5, 10, 15, 30, 50),
+    ETDReagentTarget = c(1e6, 5e6, 1e7),
+    AgcTarget = c(1e5, 5e5, 1e6)
+)
+
+## Create the XML files for mz == 707
+writeMethodXmls(ms1Settings = parMS1,
+                ms2Settings = parMS2,
+                replications = 1,
+                groupBy = "ETDReagentTarget",
+                mz = cbind(mass=707.3, z=1),
+                massLabeling = TRUE,
+                nMs2perMs1 = 1000,
+                duration = 0.5,
+                randomise = FALSE,
+                pattern = "method707_%s.xml")
+
+## Create the XML files for mz == 893
+writeMethodXmls(ms1Settings = parMS1,
+                ms2Settings = parMS2,
+                replications = 1,
+                groupBy = "ETDReagentTarget",
+                mz = cbind(mass=893.1, z=1),
+                massLabeling = TRUE,
+                nMs2perMs1 = 1000,
+                duration = 0.5,
+                randomise = FALSE,
+                pattern = "method893_%s.xml")
+
+## Create the XML files for mz == 1211
+writeMethodXmls(ms1Settings = parMS1,
+                ms2Settings = parMS2,
+                replications = 1,
+                groupBy = "ETDReagentTarget",
+                mz = cbind(mass=1211.7, z=1),
+                massLabeling = TRUE,
+                nMs2perMs1 = 1000,
+                duration = 0.5,
+                randomise = FALSE,
+                pattern = "method1211_%s.xml")
+
+## Run XMLMethodChanger
+runXmlMethodChanger(
+    modificationXml=list.files(pattern="^method.*\\.xml$"),
+    templateMeth="TMS2IndependentTemplateForTD.meth",
+    executable="path\\to\\XmlMethodChanger.exe"
+)
 ```
 
-***TODO***
+# Data Acquisition
+
+After setting up direct infusion make sure that MS1 spectrum produces expected protein mass after
+deconvolution by *Xtract*. Shown below is a deconvoluted MS1 spectrum for myoglobin.
+The dominant mass corresponds to myoglobin with Met removed.
+
+![Xtract myoglobin](images/xtract-myo.png)
+
+# Data Preparation
+
+Prior to `R` analysis of protein fragmentation data we have to convert the
+`.raw` files.
+
+## Extracting Header Information
+
+Some of the information
+(SpectrumId, Ion Injection Time (ms), Orbitrap Resolution, targeted Mz,
+ETD reaction time,  CID activation and HCD activation) is stored in scan
+headers, while other (ETD reagent target and AGC target) is only available
+in method table.
+
+You can run *ScanHeadsman* from the commandline
+(`ScanHeadsman.exe --noMS --methods:CSV`) or use the function provided by
+`topdownr`:
+
+```{r ScanHeadsman, eval=FALSE}
+runScanHeadsman(
+    path="path\\to\\raw-files",
+    executable="path\\to\\ScanHeadsman.exe"
+)
+```
+
+*ScanHeadsman* will generate a `.txt` (scan header table) and a `.csv` (method
+table) file for each `.raw` file.
+
+## Convert .raw files into mzML
+
+The spectra have to be charge state deconvoluted with *Xtract* node in
+*Proteome Discoverer 2.1*. The software returns deconvoluted spectra in mzML format.
+
+![Proteome Discoverer](images/proteomediscoverer.png)
+
+Once a `.csv`, `.txt`, and `.mzML` file for each `.raw` have been produced we
+can start the analysis using `topdownr`.
+Please see *analysis* vignette (`vignette("analysis", package="topdownr")`) for
+an example.
+
+# Session Info
 
 ```{r sessioninfo}
 sessionInfo()
