@@ -10,13 +10,7 @@
 Release: [![build release](http://bioconductor.org/shields/build/release/bioc/topdownr.svg)](http://bioconductor.org/checkResults/release/bioc-LATEST/topdownr/)
 Devel: [![build devel](http://bioconductor.org/shields/build/devel/bioc/topdownr.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/topdownr/)
 
-## Install packages in `R`
-
-```r
-devtools::install_github(c("sgibb/topdownr", "sgibb/topdownrdata"),
-                         auth_token="aacd4f502a2036427fb97b35ca5e98fb8028f195",
-                         quick=TRUE)
-```
+## Installation
 
 ## Contribution
 
