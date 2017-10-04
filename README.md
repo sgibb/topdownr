@@ -24,6 +24,19 @@ source("https://bioconductor.org/biocLite.R")
 biocLite("sgibb/topdownr")
 ```
 
+## Documentation
+
+To get started:
+
+```r
+?"topdown-package"
+vignette("data-generation", package="topdownr")
+vignette("analysis", package="topdownr")
+```
+
+Development documentation: https://sgibb.github.io/topdownr/
+
+
 ## Contribution
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
