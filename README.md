@@ -17,7 +17,8 @@ source("https://bioconductor.org/biocLite.R")
 biocLite("topdownr")
 ```
 
-Install the development version from github (not recommended):
+If you want to install the development version from github
+(not recommended unless you know what you are doing):
 
 ```r
 source("https://bioconductor.org/biocLite.R")
@@ -29,13 +30,20 @@ biocLite("sgibb/topdownr")
 To get started:
 
 ```r
-?"topdown-package"
+?"topdownr-package"
 vignette("data-generation", package="topdownr")
 vignette("analysis", package="topdownr")
 ```
 
 Development documentation: https://sgibb.github.io/topdownr/
 
+## Questions
+
+General questions should be asked on
+the [Bioconductor support forum](https://support.bioconductor.org/),
+using `topdownr` to tag the question. Feel also free to open a
+GitHub [issue](https://github.com/sgibb/topdownr/issues), in
+particular for bug reports.
 
 ## Contribution
 
