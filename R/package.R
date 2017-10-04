@@ -38,5 +38,5 @@
 #' @importFrom stats ave median setNames quantile
 #' @importFrom tools file_ext file_path_sans_ext
 #' @importFrom utils modifyList txtProgressBar setTxtProgressBar object.size
-#' read.csv .DollarNames
+#' read.csv .DollarNames packageVersion
 "_PACKAGE"
