@@ -2,17 +2,15 @@ language: r
 sudo: false
 cache: packages
 
+r: bioc-devel
+
 warnings_are_errors: true
-bioc_required: true
 
 r_packages:
   - covr
 
 r_github_packages:
   - sgibb/topdowndata
-
-bioc_packages:
-  - BiocStyle
 
 after_success:
   - Rscript -e 'covr::codecov()'
