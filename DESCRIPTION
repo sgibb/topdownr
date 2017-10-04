@@ -27,6 +27,7 @@ Imports:
 Suggests:
     topdownrdata (>= 0.2),
     knitr,
+    ranger,
     testthat,
     BiocStyle
 License: GPL (>= 3)
