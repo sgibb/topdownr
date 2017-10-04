@@ -12,6 +12,18 @@ Devel: [![build devel](http://bioconductor.org/shields/build/devel/bioc/topdownr
 
 ## Installation
 
+```r
+source("https://bioconductor.org/biocLite.R")
+biocLite("topdownr")
+```
+
+Install the development version from github (not recommended):
+
+```r
+source("https://bioconductor.org/biocLite.R")
+biocLite("sgibb/topdownr")
+```
+
 ## Contribution
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
