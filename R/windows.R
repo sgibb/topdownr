@@ -1,14 +1,16 @@
 #' Windows specific functions.
 #'
 #' The functions `runXmlMethodChanger` and `runScanHeadsman` call
-#' `XmlMethodChanger.exe` and `ScanHeadsman.exe` with the correspond arguments.
+#' `XmlMethodChanger.exe` and `ScanHeadsman.exe`
+#' with the corresponding arguments.
 #' The only work on Windows (maybe on Linux + wine as well but that was never
 #' tested).
 #'
 #' @details
 #'
 #' `runXmlMethodChanger` applies ‘XmlMethodChanger.exe’ on all given XML files
-#' generated with [writeMethodXmls()] to create `.meth` files from a template.
+#' generated with [writeMethodXmls()]
+#' to create `.meth` files from a template.
 #'
 #' @param template `character`, path to template `.meth` file.
 #' @param xml `character`, vector of path to `.xml` files.
@@ -46,8 +48,9 @@ createTngFusionMethFiles <- function(template,
     }
 
     for (i in seq(along=xml)) {
-        .xmlMethodChanger(executable, template,
-                          .swapFileExt(xml[i]), xml[i])
+        .xmlMethodChanger(
+                executable, template, .swapFileExt(xml[i]), xml[i]
+        )
         if (verbose) {
             setTxtProgressBar(pb, i)
         }
@@ -63,8 +66,10 @@ createTngFusionMethFiles <- function(template,
 runXmlMethodChanger <- createTngFusionMethFiles
 
 .xmlMethodChanger <- function(exe, input, output, modification) {
-    args <- paste0("--", c("input", "output", "modification"), "=",
-                   shQuote(c(input, output, modification)))
+    args <- paste0(
+        "--", c("input", "output", "modification"), "=",
+        shQuote(c(input, output, modification))
+    )
     system2(normalizePath(exe), args=args)
 }
 
@@ -72,12 +77,14 @@ runXmlMethodChanger <- createTngFusionMethFiles
 #'
 #' @details
 #'
-#' `runScanHeadsman` calls `ScanHeadsman.exe` on a given directory containing
-#' `.raw` files. `ScanHeadsman.exe` extracts the method and scan header data
+#' `runScanHeadsman` calls `ScanHeadsman.exe`
+#' on a given directory containing `.raw` files.
+#' `ScanHeadsman.exe` extracts the method and scan header data
 #' into `.experiments.csv` and `.txt` files, respectively.
 #'
 ## @param executable `character`, path to the `ScanHeadsman.exe` executable.
-#' @param path `character`, path to the directory containing the `.raw` files.
+#' @param path `character`,
+#' path to the directory containing the `.raw` files.
 ## @return Nothing. Used for its side effects.
 #' @export
 #' @references ScanHeadsman source code:

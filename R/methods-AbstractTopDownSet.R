@@ -1,29 +1,32 @@
 #' @describeIn AbstractTopDownSet Subset operator.
 #'
-#' For `i` `numeric`, `logical` or `character` vectors or empty (missing) or
-#' `NULL` are supported. Subsetting is done on the fragment/bond (row) level.
-#' `character` indices could be names (e.g. `c("a1", "b1", "c1", "c2", "c3")`)
-#' or types (e.g. `c("c", "x")`) of the fragments for [TopDownSet-class]
-#' objects, or names of the bonds (e.g. `c("bond001")`) for [NCBSet-class]
-#' objects. \cr
-#' `j` could be a `numeric` or `logical` vector and subsetting is done on the
-#' condition/run (column) level.
+#' For `i` `numeric`, `logical` or `character` vectors or empty
+#' (missing) or `NULL` are supported.
+#' Subsetting is done on the fragment/bond (row) level.
+#' `character` indices could be names
+#' (e.g. `c("a1", "b1", "c1", "c2", "c3")`)
+#' or types (e.g. `c("c", "x")`) of the fragments for
+#' [TopDownSet-class] objects,
+#' or names of the bonds (e.g. `c("bond001")`) for
+#' [NCBSet-class] objects. \cr
+#' `j` could be a `numeric` or `logical` vector
+#' and subsetting is done on the condition/run (column) level.
 #'
 #' @param object,x `AbstractTopDownSet`
-#' @param i,j `numeric`, `logical` or `character`, indices specifying elements
-#' to extract or replace.
+#' @param i,j `numeric`, `logical` or `character`,
+#' indices specifying elements to extract or replace.
 #' @param \ldots arguments passed to internal/other methods.
 #' @param drop `logical`, currently ignored.
 #'
-## @param i `numeric`, `logical` or `character`, subsetting on fragment/bond data,
-## names (`c("a1", "b1", "c1", "c2", "c3")`) and types (`c("c", "x")`) (or for
-## [NCBSet-class] bonds e.g. `bond001`) are supported.
+## @param i `numeric`, `logical` or `character`, subsetting on fragment/bond
+## data, names (`c("a1", "b1", "c1", "c2", "c3")`) and types (`c("c", "x")`)
+## (or for [NCBSet-class] bonds e.g. `bond001`) are supported.
 ## @param j `numeric` or `logical`, subsetting based on condition data.
 ## @param \ldots currently ignored.'
 #' @aliases [,AbstractTopDownSet,ANY,ANY,ANY-method
 #' @export
 setMethod("[", c("AbstractTopDownSet", "ANY", "ANY"),
-           function(x, i, j, ..., drop=FALSE) {
+          function(x, i, j, ..., drop=FALSE) {
     d0 <- dim(x)
     ld0 <- .logdim(x)
     dn <- dimnames(x)
@@ -78,8 +81,8 @@ setMethod("[", c("AbstractTopDownSet", "ANY", "ANY"),
 
 #' @describeIn AbstractTopDownSet Subset operator.
 #'
-#' `i` could be a `numeric` or `logical` vector and subsetting is done on the
-#' condition/run (column) level.
+#' `i` could be a `numeric` or `logical` vector and
+#' subsetting is done on the condition/run (column) level.
 #'
 ## @param x `AbstractTopDownSet`
 ## @param i `logical` or `character`, subsetting based on condition
@@ -94,8 +97,8 @@ setMethod("[[", c("AbstractTopDownSet", "ANY", "missing"),
 
 #' @describeIn AbstractTopDownSet Setter for a column in the `colData` slot.
 #'
-#' The `[[<-` operator is used to add/replace a single column of the `colData`
-#' `DataFrame`.
+#' The `[[<-` operator is used to add/replace
+#' a single column of the `colData` `DataFrame`.
 #
 ## @param x `AbstractTopDownSet`
 ## @param i `logical` or `character`, subsetting based on condition
@@ -108,7 +111,7 @@ setReplaceMethod("[[", c("AbstractTopDownSet", "ANY", "missing"),
                  function(x, i, j, ..., value) {
     colData(x)[[i, ...]] <- value
     if (validObject(x)) {
-      x
+        x
     }
 })
 
@@ -121,8 +124,9 @@ setReplaceMethod("[[", c("AbstractTopDownSet", "ANY", "missing"),
 
 #' @describeIn AbstractTopDownSet Accessor for columns in the `colData` slot.
 #'
-#' The `$` simplifies the accession of a single column of the `colData`. It is
-#' identical to the `[[` operator.
+#' The `$` simplifies the accession of a single column
+#' of the `colData`.
+#' It is identical to the `[[` operator.
 #'
 ## @param x `AbstractTopDownSet`
 #' @param name `character` name of an (non)existing column in `colData`.
@@ -135,8 +139,9 @@ setMethod("$", "AbstractTopDownSet", function(x, name) {
 
 #' @describeIn AbstractTopDownSet Setter for a column in the `colData` slot.
 #'
-#' The `$<-` operator is used to add/replace a single column of the `colData`
-#' `DataFrame`. It is identical to the `[[<-` operator.
+#' The `$<-` operator is used to add/replace a single column
+#' of the `colData` `DataFrame`.
+#' It is identical to the `[[<-` operator.
 #'
 ## @param x `AbstractTopDownSet`
 ## @return `AbstractTopDownSet`
@@ -149,8 +154,9 @@ setReplaceMethod("$", "AbstractTopDownSet", function(x, name, value) {
 
 #' @describeIn AbstractTopDownSet Accessor for the `assay` slot.
 #'
-#' Returns a [Matrix::dgCMatrix-class] that stores the intensity/coverage
-#' information of [AbstractTopDownSet-class] object.
+#' Returns a [Matrix::dgCMatrix-class] that stores the
+#' intensity/coverage information of [AbstractTopDownSet-class]
+#' object.
 #'
 ## @param object `AbstractTopDownSet`
 ## @return `dgCMatrix`
@@ -162,8 +168,9 @@ setMethod("assayData", "AbstractTopDownSet", function(object) {
 
 #' @describeIn AbstractTopDownSet Accessor for the `colData` slot.
 #'
-#' Returns a [S4Vectors::DataFrame-class] that stores metadata for the
-#' conditons/runs (columns) of the [AbstractTopDownSet-class] object.
+#' Returns a [S4Vectors::DataFrame-class] that stores
+#' metadata for the conditons/runs (columns) of the
+#' [AbstractTopDownSet-class] object.
 #'
 ## @param object `AbstractTopDownSet`
 ## @return `DataFrame`
@@ -185,7 +192,7 @@ setMethod("colData", "AbstractTopDownSet", function(object) {
 setReplaceMethod("colData", "AbstractTopDownSet", function(object, ..., value) {
     object@colData <- value
     if (validObject(object)) {
-      object
+        object
     }
 })
 
@@ -213,7 +220,7 @@ setReplaceMethod("conditionData", "AbstractTopDownSet",
                  function(object, ..., value) {
     colData(object) <- value
     if (validObject(object)) {
-      object
+        object
     }
 })
 
@@ -246,12 +253,13 @@ setMethod("dimnames", "AbstractTopDownSet", function(x) {
 #' @describeIn AbstractTopDownSet Remove empty conditions/runs.
 #'
 #' Removes conditions/runs (columns) without any intensity/coverage
-#' information from the [AbstractTopDownSet-class] object. It returns a modified
-#' [AbstractTopDownSet-class] object.
+#' information from the [AbstractTopDownSet-class] object.
+#' It returns a modified [AbstractTopDownSet-class] object.
 #'
 ## @param object `AbstractTopDownSet`
 ## @return `AbstractTopDownSet`
-#' @aliases removeEmptyConditions removeEmptyConditions,AbstractTopDownSet-method
+#' @aliases removeEmptyConditions
+#' removeEmptyConditions,AbstractTopDownSet-method
 #' @export
 setMethod("removeEmptyConditions", "AbstractTopDownSet",
           function(object) {
@@ -262,9 +270,11 @@ setMethod("removeEmptyConditions", "AbstractTopDownSet",
 
 #' @describeIn AbstractTopDownSet Accessor for the `rowViews` slot.
 #'
-#' Depending on the implementation it returns an [FragmentViews-class]
-#' object for [TopDownSet-class] objects or an [Biostrings::XStringViews]
-#' object for [NCBSet-class] objects.
+#' Depending on the implementation it returns an
+#' [FragmentViews-class] object for
+#' [TopDownSet-class] objects
+#' or an [Biostrings::XStringViews] object for
+#' [NCBSet-class] objects.
 #'
 ## @param object `AbstractTopDownSet`
 ## @return `XStringViews`
@@ -284,17 +294,22 @@ setMethod("show", "AbstractTopDownSet", function(object) {
 
     if (length(object@rowViews)) {
         cat("- - - Protein data - - -\n")
-        prefix <- sprintf("Amino acid sequence (%d):",
-                          nchar(object@rowViews@subject))
-        cat(prefix, .snippet(as.character(object@rowViews@subject),
-                             getOption("width") - nchar(prefix)), "\n")
+        prefix <- sprintf(
+            "Amino acid sequence (%d):", nchar(object@rowViews@subject)
+        )
+        cat(prefix,
+            .snippet(
+                as.character(object@rowViews@subject),
+                getOption("width") - nchar(prefix)
+            ), "\n"
+        )
         if (length(metadata(object@rowViews)$mass)) {
             cat0("Mass : ", metadata(object@rowViews)$mass, "\n")
         }
         if (length(metadata(object@rowViews)$modifications)) {
             mod <- metadata(object@rowViews)$modifications
             cat0("Modifications (", length(mod), "): ",
-                 paste0(.hft(mod, n=3), collapse=", "), "\n")
+                paste0(.hft(mod, n=3), collapse=", "), "\n")
         }
     }
 
@@ -308,8 +323,8 @@ setMethod("show", "AbstractTopDownSet", function(object) {
 #' values.
 #'
 ## @param object `AbstractTopDownSet`
-#' @param what `character`, specifies whether `"rows"` or `"columns"` should be
-#' summarized.
+#' @param what `character`,
+#' specifies whether `"rows"` or `"columns"` should be summarized.
 #' @aliases summary,AbstractTopDownSet-method
 #' @export
 setMethod("summary", "AbstractTopDownSet",

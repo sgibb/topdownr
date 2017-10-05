@@ -3,12 +3,13 @@
 #'
 #' @param x `data.frame`
 #' @param f `character`, grouping value
-#' @param ignoreNumCols `character`, column names that won't be aggregated by fun
+#' @param ignoreNumCols `character`, column names that won't be aggregated by
+#' fun
 #' @param fun `function`, aggregation function
 #' @return `data.frame`
 #' @noRd
-.aggregateDataFrame <- function(x, f, ignoreNumCols=character(), fun=mean,
-                                na.rm=TRUE) {
+.aggregateDataFrame <- function(x, f, ignoreNumCols=character(),
+                                fun=mean, na.rm=TRUE) {
     fun <- match.fun(fun)
 
     cn <- colnames(x)
@@ -17,8 +18,9 @@
 
     nonNum <- x[!duplicated(f), !isNumCol, drop=FALSE]
     rn <- rownames(nonNum)
-    num <- aggregate(x[, isNumCol, drop=FALSE], by=list(f), FUN=fun,
-                     na.rm=na.rm, drop=FALSE)
+    num <- aggregate(
+        x[, isNumCol, drop=FALSE], by=list(f), FUN=fun, na.rm=na.rm, drop=FALSE
+    )
     ## resort (aggregate turns "by" into a factor (locale depended sorting))
     num <- num[match(unique(f), num[["Group.1"]]),, drop=FALSE]
     x <- .colsToRle(cbind(nonNum, num)[, cn])

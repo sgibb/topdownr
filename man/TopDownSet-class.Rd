@@ -42,31 +42,40 @@
 \arguments{
 \item{x, object}{\code{TopDownSet}}
 
-\item{by}{\code{list}, grouping variable, in general it refers to technical}
+\item{by}{\code{list},
+grouping variable, in general it refers to technical}
 
 \item{threshold}{\code{double}, threshold variable.}
 
-\item{maxDeviation}{\code{double}, maximal allowed deviation in the \code{log2}
+\item{maxDeviation}{\code{double},
+maximal allowed deviation in the \code{log2}
 injection time in ms in comparison to the median ion injection time.}
 
 \item{keepTopN}{\code{integer}, how many technical replicates should be kept?}
 
-\item{relative}{\code{logical}, if relative is \code{TRUE} all fragments with
-intensity below \code{threshold * max(intensity)} per fragment are removed,
+\item{relative}{\code{logical},
+if relative is \code{TRUE} all fragments with
+intensity below \code{threshold * max(intensity)}
+per fragment are removed,
 otherwise all fragments below \code{threshold} are removed.}
 
-\item{minN}{\code{numeric}, if less than \code{minN} of a fragment are found across
+\item{minN}{\code{numeric},
+if less than \code{minN} of a fragment are found across
 technical replicates it is removed.}
 
-\item{method}{\code{character}, normalisation method, currently just \code{"TIC"}
-for \emph{T}otal \emph{I}on \emph{C}urrent normalisation of the scans/conditions
-(column-wise normalisation) is supported.}
+\item{method}{\code{character},
+normalisation method, currently just \code{"TIC"}
+for \emph{T}otal \emph{I}on \emph{C}urrent
+normalisation of the scans/conditions (column-wise normalisation)
+is supported.}
 
-\item{what}{\code{character}, specifies whether \code{"conditions"} (columns; default) or
-\code{"fragments"} (rows) should be summarized.}
+\item{what}{\code{character},
+specifies whether \code{"conditions"} (columns; default)
+or \code{"fragments"} (rows) should be summarized.}
 
 \item{\ldots}{arguments passed to internal/other methods.
-replicates (that's why the default is the \code{"Sample"} column in \code{colData}).}
+replicates (that's why the default is the
+\code{"Sample"} column in \code{colData}).}
 }
 \value{
 An \linkS4class{TopDownSet} object.
@@ -76,16 +85,20 @@ The TopDownSet class is a container for a whole top-down proteomics
 experiment.
 }
 \details{
-See \code{vignette("analysis", package="topdownr")} for a detailed example how to
-work with \code{TopDownSet} objects.
+See \code{vignette("analysis", package="topdownr")}
+for a detailed example how to work with
+\code{TopDownSet} objects.
 }
 \section{Methods (by generic)}{
 \itemize{
 \item \code{aggregate}: Aggregate conditions/runs.
 
-Aggregates conditions/runs (columns) in an \linkS4class{TopDownSet} object \code{by} a
-user-given value (default is the \code{"Sample"} column of \code{colData} which has the
-same value for technical replicates).
+Aggregates conditions/runs (columns) in an
+\linkS4class{TopDownSet} object
+\code{by} a
+user-given value (default is the
+\code{"Sample"} column of \code{colData}
+which has the same value for technical replicates).
 It combines intensity values and numeric metadata of the grouped
 conditions/runs (columns) by \code{mean} and returns a reduced
 \linkS4class{TopDownSet} object.
@@ -93,8 +106,10 @@ conditions/runs (columns) by \code{mean} and returns a reduced
 \item \code{filterCv}: Filter by CV.
 
 Filtering is done by coefficient of variation across technical replicates
-(defined by the \code{by} argument). All fragments below a given \code{threshold}
-are removed. The \code{threshold} is the maximal allowed CV in percent (\code{sd/mean * 100 &lt; threshold}).
+(defined by the \code{by} argument).
+All fragments below a given \code{threshold}
+are removed. The \code{threshold} is the maximal allowed CV in percent
+(\code{sd/mean * 100 &lt; threshold}).
 
 \item \code{filterInjectionTime}: Filter by ion injection time.
 
@@ -106,7 +121,6 @@ injection time are kept.
 
 Filtering is done by removing all fragments that are below a given
 (absolute/relative) intensity \code{threshold}.
-\code{threshold}.
 
 \item \code{filterNonReplicatedFragments}: Filter by non-replicated fragments.
 
@@ -115,32 +129,37 @@ technical replicates.
 
 \item \code{normalize}: Normalise.
 
-Applies \emph{T}otal \emph{I}on \emph{C}urrent normalisation to a \linkS4class{TopDownSet}. The
-normalisation ist done per scans/conditions (column-wise normalisation).
+Applies \emph{T}otal \emph{I}on \emph{C}urrent normalisation to a
+\linkS4class{TopDownSet} object.
+The normalisation ist done per scans/conditions (column-wise normalisation).
 
 \item \code{summary}: Summary statistics.
 
-Returns a \code{matrix} with some statistics: number of fragments,
-total/min/first quartile/median/mean/third quartile/maximum of intensity
-values.
+Returns a \code{matrix}
+with some statistics: number of fragments,
+total/min/first quartile/median/mean/third quartile/maximum of
+intensity values.
 }}
 
 \section{Slots}{
 
 \describe{
-\item{\code{rowViews}}{\linkS4class{FragmentViews}, information about fragments
-(name, type, sequence, mass, charge), see \linkS4class{FragmentViews} for details.}
+\item{\code{rowViews}}{\linkS4class{FragmentViews},
+information about fragments (name, type, sequence, mass, charge), see
+\linkS4class{FragmentViews} for details.}
 
-\item{\code{colData}}{\link[S4Vectors:DataFrame-class]{S4Vectors::DataFrame}, information about the MS2
-experiments and the fragmentation conditions.}
+\item{\code{colData}}{\link[S4Vectors:DataFrame-class]{S4Vectors::DataFrame},
+information about the MS2 experiments and the fragmentation conditions.}
 
-\item{\code{assay}}{\link[Matrix:dgCMatrix-class]{Matrix::dgCMatrix}, intensity values of the fragments. The
+\item{\code{assay}}{\link[Matrix:dgCMatrix-class]{Matrix::dgCMatrix},
+intensity values of the fragments. The
 rows correspond to the fragments and the columns to the condition/run. It
 just stores values that are different from zero.}
 
 \item{\code{files}}{\code{character}, files that were imported.}
 
-\item{\code{tolerance}}{\code{double}, tolerance in \emph{ppm} that were used for matching the
+\item{\code{tolerance}}{\code{double},
+tolerance in \emph{ppm} that were used for matching the
 experimental mz values to the theoretical fragments.}
 
 \item{\code{processing}}{\code{character}, log messages.}
@@ -220,10 +239,12 @@ if (require("MSnbase")) {
 }
 \seealso{
 \itemize{
-\item \linkS4class{FragmentViews} for the row view interface.
-\item \link[Matrix:dgCMatrix-class]{Matrix::dgCMatrix} for technical details about the intensity storage.
-\item \code{?vignette("analysis", package="topdownr")} for a full documented example
-of an analysis using \code{topdownr}.
+\item \linkS4class{FragmentViews}
+for the row view interface.
+\item \link[Matrix:dgCMatrix-class]{Matrix::dgCMatrix}
+for technical details about the intensity storage.
+\item \code{?vignette("analysis", package="topdownr")}
+for a full documented example of an analysis using \code{topdownr}.
 }
 }
 \author{

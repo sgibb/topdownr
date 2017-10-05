@@ -15,28 +15,34 @@ FragmentViews(sequence, mass, type, z = 1L, start = NULL, end = NULL,
 \S4method{show}{FragmentViews}(object)
 }
 \arguments{
-\item{sequence}{\code{character}/\code{AAString}, complete protein/peptide sequence.}
+\item{sequence}{\code{character}/
+\link[Biostrings:AAString-class]{Biostrings::AAString},
+complete protein/peptide sequence.}
 
-\item{mass}{\code{double}, mass of the fragments, same length as
-\code{start}/\code{end}/\code{width}.}
+\item{mass}{\code{double},
+mass of the fragments, same length as \code{start}/\code{end}/\code{width}.}
 
-\item{type}{\code{character}, type of the fragments, same length as
-\code{start}/\code{end}/width`.}
+\item{type}{\code{character},
+type of the fragments, same length as \code{start}/\code{end}/width`.}
 
-\item{z}{\code{integer}, charge of the fragments, length one or same length as
-\code{start}/\code{end}/width`.}
+\item{z}{\code{integer},
+charge of the fragments,
+length one or same length as \code{start}/\code{end}/width`.}
 
-\item{start}{\code{integer}, start positions of the fragments. At least two of
+\item{start}{\code{integer},
+start positions of the fragments. At least two of
 \code{start}/\code{end}/width` has to be given.}
 
-\item{end}{\code{integer}, end positions of the fragments. At least two of
+\item{end}{\code{integer},
+end positions of the fragments. At least two of
 \code{start}/\code{end}/width` has to be given.}
 
-\item{width}{\code{integer}, width positions of the fragments. At least two of
+\item{width}{\code{integer},
+width positions of the fragments. At least two of
 \code{start}/\code{end}/width` has to be given.}
 
-\item{names}{\code{character}, names of the fragments, same length as
-\code{start}/\code{end}/width`.}
+\item{names}{\code{character},
+names of the fragments, same length as \code{start}/\code{end}/width`.}
 
 \item{metadata}{\code{list}, metadata like modifications.}
 
@@ -51,9 +57,13 @@ The FragmentViews class is a basic container for storing a set of views
 it keeps information about mass, type and charge of the fragments.
 }
 \details{
-FragmentViews extends \link[Biostrings:XStringViews-class]{Biostrings::XStringViews}.
-In short it combines an \link[IRanges:IRanges-class]{IRanges::IRanges} object to store start/end
-location on a sequence, an \link[Biostrings:AAString]{Biostrings::AAString} object.
+FragmentViews extends
+\link[Biostrings:XStringViews-class]{Biostrings::XStringViews}.
+In short it combines an
+\link[IRanges:IRanges-class]{IRanges::IRanges}
+object to store start/end
+location on a sequence, an
+\link[Biostrings:AAString]{Biostrings::AAString} object.
 }
 \section{Functions}{
 \itemize{
@@ -66,8 +76,8 @@ In general it is not necessary to call the constructor manually. See
 \section{Coercion}{
 
 
-\code{as(object, "data.frame")}: Coerce an \linkS4class{FragmentViews} object into a
-\code{data.frame}.
+\code{as(object, "data.frame")}: Coerce an
+\linkS4class{FragmentViews} object into a \code{data.frame}.
 }
 
 \examples{

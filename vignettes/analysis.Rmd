@@ -2,26 +2,29 @@
 title: "Fragmentation Analysis with topdownr"
 author:
 - name: Pavel V. Shliaha
-  affiliation: Department of Biochemistry and Molecular Biology, University of Southern Denmark, Denmark.
+  affiliation: Department of Biochemistry and Molecular Biology,
+    University of Southern Denmark, Denmark.
 - name: Sebastian Gibb
-  affiliation: Department of Anesthesiology and Intensive Care, University Medicine Greifswald, Germany.
+  affiliation: Department of Anesthesiology and Intensive Care,
+    University Medicine Greifswald, Germany.
 - name: Ole Nørregaard Jensen
-  affiliation: Department of Biochemistry and Molecular Biology, University of Southern Denmark, Denmark.
+  affiliation: Department of Biochemistry and Molecular Biology,
+    University of Southern Denmark, Denmark.
 package: topdownr
 abstract: >
-  This vignette describes the fragmentation analysis functionality
-  of the `topdownr` package.
+    This vignette describes the fragmentation analysis functionality
+    of the `topdownr` package.
 output:
-  BiocStyle::html_document:
-    toc_float: true
-    tidy: TRUE
+    BiocStyle::html_document:
+        toc_float: true
+        tidy: TRUE
 bibliography: topdownr.bib
 vignette: >
-  %\VignetteIndexEntry{Fragmentation Analysis with topdownr}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteKeywords{Mass Spectrometry, Proteomics, Bioinformatics}
-  %\VignetteEncoding{UTF-8}
-  %\VignettePackage{topdownr}
+    %\VignetteIndexEntry{Fragmentation Analysis with topdownr}
+    %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteKeywords{Mass Spectrometry, Proteomics, Bioinformatics}
+    %\VignetteEncoding{UTF-8}
+    %\VignettePackage{topdownr}
 ---
 
 ```{r environment, echo=FALSE}
@@ -69,9 +72,9 @@ list.files(topdownrdata::topDownDataPath("myoglobin"))
 lapply(
     topdownr:::.listTopDownFiles(
         topdownrdata::topDownDataPath("myoglobin")),
-       function(x) {
-           c(head(paste0(".../", dirname(x), basename(x), 2)), "...")
-       }
+    function(x) {
+        c(head(paste0(".../", dirname(x), basename(x), 2)), "...")
+    }
 )
 ```
 
@@ -114,9 +117,9 @@ The assembled object is an `TopDownSet` object.
 Briefly it is composed of three interconnected tables:
 
 1. `rowViews`/*fragment data*: holds the information on the type of fragments,
-   their modifications and adducts.
+    their modifications and adducts.
 2. `colData`/*condition data*: contains the corresponding fragmentation
-   condition for every spectrum.
+    condition for every spectrum.
 3. `assayData`: contains the intensity of assigned fragments.
 
 ![TopDownSet anatomy, image adopted from [@SummarizedExperiment].](images/TopDownSet.svg)
@@ -247,9 +250,9 @@ injTime <- as.data.frame(rbind(injTimeBefore, injTimeAfter))
 library("ggplot2")
 
 ggplot(injTime,
-       aes(x = as.factor(AgcTarget),
-           y = IonInjectionTimeMs,
-           group = AgcTarget)) +
+    aes(x = as.factor(AgcTarget),
+        y = IonInjectionTimeMs,
+        group = AgcTarget)) +
     geom_boxplot() +
     facet_grid(Status ~ Mz)
 ```
@@ -378,13 +381,13 @@ the `NCBSet` has one row per bond instead one row per fragment. Also the
 `assayData` contains no intensity information but a `1` for an *N*-terminal, a
 `2` for a *C*-terminal and a `3` for both fragments.
 
-The `NCBSet` can be used to select the combination of conditions that provide the
-best fragment coverage. While computing coverage `topdownr` awards 1 point for
-every fragment going from every bond in either *N* or *C* directions.
-This means that bonds covered in both directions increase the score of a condition
-by 2 points.
-For the myoglobin fragmentation example we get the following table for the best three
-conditions:
+The `NCBSet` can be used to select the combination of conditions that provide
+the best fragment coverage. While computing coverage `topdownr` awards 1 point
+for every fragment going from every bond in either *N* or *C* directions.
+This means that bonds covered in both directions increase the score of a
+condition by 2 points.
+For the myoglobin fragmentation example we get the following table for the best
+three conditions:
 
 ```{r bestConditions}
 bestConditions(myoglobinNcb, n=3)

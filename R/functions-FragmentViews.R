@@ -3,29 +3,38 @@
 #' In general it is not necessary to call the constructor manually. See
 #' [readTopDownFiles()] instead.
 #'
-#' @param sequence `character`/`AAString`, complete protein/peptide sequence.
-#' @param mass `double`, mass of the fragments, same length as
-#' `start`/`end`/`width`.
-#' @param type `character`, type of the fragments, same length as
-#' `start`/`end`/width`.
-#' @param z `integer`, charge of the fragments, length one or same length as
-#' `start`/`end`/width`.
-#' @param start `integer`, start positions of the fragments. At least two of
+#' @param sequence `character`/
+#' [Biostrings::AAString-class],
+#' complete protein/peptide sequence.
+#' @param mass `double`,
+#' mass of the fragments, same length as `start`/`end`/`width`.
+#' @param type `character`,
+#' type of the fragments, same length as `start`/`end`/width`.
+#' @param z `integer`,
+#' charge of the fragments,
+#' length one or same length as `start`/`end`/width`.
+#' @param start `integer`,
+#' start positions of the fragments. At least two of
 #' `start`/`end`/width` has to be given.
-#' @param end `integer`, end positions of the fragments. At least two of
+#' @param end `integer`,
+#' end positions of the fragments. At least two of
 #' `start`/`end`/width` has to be given.
-#' @param width `integer`, width positions of the fragments. At least two of
+#' @param width `integer`,
+#' width positions of the fragments. At least two of
 #' `start`/`end`/width` has to be given.
-#' @param names `character`, names of the fragments, same length as
-#' `start`/`end`/width`.
+#' @param names `character`,
+#' names of the fragments, same length as `start`/`end`/width`.
 #' @param metadata `list`, metadata like modifications.
 #' @return An [FragmentViews-class] object.
 #' @export
 FragmentViews <- function(sequence, mass, type, z=1L,
                           start=NULL, end=NULL, width=NULL, names=NULL,
                           metadata=list()) {
-    v <- Views(AAString(sequence), start=start, end=end, width=width,
-               names=names)
+    v <- Views(
+        AAString(sequence),
+        start=start, end=end, width=width,
+        names=names
+    )
     d <- DataFrame(mass=mass, type=factor(type), z=Rle(z))
     elementMetadata(v) <- d
     metadata(v) <- metadata

@@ -118,10 +118,7 @@
 #' @return `data.frame`
 #' @noRd
 .dgcMatrix2data.frame <- function(x) {
-    data.frame(row=.row(x),
-               col=.col(x),
-               x=x@x,
-               stringsAsFactors=FALSE)
+    data.frame(row=.row(x), col=.col(x), x=x@x, stringsAsFactors=FALSE)
 }
 
 #' drop0 but row-wise with length(tol) == nrow(x)
@@ -216,8 +213,10 @@
 #' @noRd
 .normaliseRows <- function(x, scale=.rowMax(x)) {
     stopifnot(is(x, "dgCMatrix"))
-    stopifnot((is.numeric(scale) || is(scale, "sparseVector")) &&
-              (length(scale) == 1L || length(scale) == nrow(x)))
+    stopifnot(
+        (is.numeric(scale) || is(scale, "sparseVector")) &&
+        (length(scale) == 1L || length(scale) == nrow(x))
+    )
     x@x <- x@x / scale[.row(x)]
     x
 }
@@ -290,8 +289,10 @@
 #' @noRd
 .rowMax <- function(x, na.rm=TRUE) {
     stopifnot(is(x, "dgCMatrix"))
-    sparseVector(.vapply1d(split(x@x, .row(x)), max, na.rm=na.rm),
-                 i=sort.int(unique(.row(x))), length=nrow(x))
+    sparseVector(
+        .vapply1d(split(x@x, .row(x)), max, na.rm=na.rm),
+        i=sort.int(unique(.row(x))), length=nrow(x)
+    )
 }
 
 #' rowMeans groupwise, similar to rowsum but for sparceMatrices
@@ -372,16 +373,19 @@
 
     i <- sort.int(unique(.row(x)))
     qq <- matrix(0, nrow=5L, ncol=nrow(x))
-    qq[, i] <- vapply(X=split(x@x, .row(x)), FUN=quantile,
-                      FUN.VALUE=double(5L), probs=seq(0, 1, 0.25),
-                      na.rm=na.rm, USE.NAMES=FALSE)
+    qq[, i] <- vapply(
+        X=split(x@x, .row(x)), FUN=quantile, FUN.VALUE=double(5L),
+        probs=seq(0, 1, 0.25), na.rm=na.rm, USE.NAMES=FALSE
+    )
 
-    data.frame(Fragments=.rowCounts(x),
-               Total=Matrix::rowSums(x, na.rm=na.rm),
-               Min=qq[1L, ],
-               Q1=qq[2L, ],
-               Median=qq[3L, ],
-               Mean=Matrix::rowMeans(x, na.rm=na.rm),
-               Q3=qq[4L, ],
-               Max=qq[5L, ])
+    data.frame(
+        Fragments=.rowCounts(x),
+        Total=Matrix::rowSums(x, na.rm=na.rm),
+        Min=qq[1L, ],
+        Q1=qq[2L, ],
+        Median=qq[3L, ],
+        Mean=Matrix::rowMeans(x, na.rm=na.rm),
+        Q3=qq[4L, ],
+        Max=qq[5L, ]
+    )
 }

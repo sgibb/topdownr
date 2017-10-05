@@ -24,23 +24,27 @@ runScanHeadsman(path = ".", executable = "ScanHeadsman.exe")
 
 \item{verbose}{\code{logical}, if \code{TRUE} a progress bar is shown.}
 
-\item{path}{\code{character}, path to the directory containing the \code{.raw} files.}
+\item{path}{\code{character},
+path to the directory containing the \code{.raw} files.}
 }
 \value{
 Nothing. Used for its side effects.
 }
 \description{
 The functions \code{runXmlMethodChanger} and \code{runScanHeadsman} call
-\code{XmlMethodChanger.exe} and \code{ScanHeadsman.exe} with the correspond arguments.
+\code{XmlMethodChanger.exe} and \code{ScanHeadsman.exe}
+with the corresponding arguments.
 The only work on Windows (maybe on Linux + wine as well but that was never
 tested).
 }
 \details{
 \code{runXmlMethodChanger} applies ‘XmlMethodChanger.exe’ on all given XML files
-generated with \code{\link[=writeMethodXmls]{writeMethodXmls()}} to create \code{.meth} files from a template.
+generated with \code{\link[=writeMethodXmls]{writeMethodXmls()}}
+to create \code{.meth} files from a template.
 
-\code{runScanHeadsman} calls \code{ScanHeadsman.exe} on a given directory containing
-\code{.raw} files. \code{ScanHeadsman.exe} extracts the method and scan header data
+\code{runScanHeadsman} calls \code{ScanHeadsman.exe}
+on a given directory containing \code{.raw} files.
+\code{ScanHeadsman.exe} extracts the method and scan header data
 into \code{.experiments.csv} and \code{.txt} files, respectively.
 }
 \examples{

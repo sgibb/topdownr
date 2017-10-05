@@ -14,18 +14,18 @@
 #' @return `character`
 #' @noRd
 .camelCase <- function(x) {
-   ## convert dots from `make.names` to space
-   x <- gsub("\\.+", " ", x)
-   ## remove all the other punctiation like (, ), /
-   x <- gsub("[[:punct:]]+", "", x)
-   ## split AGCTarget to AGC Target and/or
-   ## SupplementalActivationCE to Supplemental Activation CE
-   x <- gsub("([A-Z])(?=([a-z]|[A-Z]$))", " \\1", x, perl=TRUE)
-   ## just capitalize the first letter in a word
-   x <- gsub("(?<=\\b)([a-z])", "\\U\\1", tolower(x), perl=TRUE)
-   ## remove whitespace
-   x <- gsub(" ", "", x)
-   x
+    ## convert dots from `make.names` to space
+    x <- gsub("\\.+", " ", x)
+    ## remove all the other punctiation like (, ), /
+    x <- gsub("[[:punct:]]+", "", x)
+    ## split AGCTarget to AGC Target and/or
+    ## SupplementalActivationCE to Supplemental Activation CE
+    x <- gsub("([A-Z])(?=([a-z]|[A-Z]$))", " \\1", x, perl=TRUE)
+    ## just capitalize the first letter in a word
+    x <- gsub("(?<=\\b)([a-z])", "\\U\\1", tolower(x), perl=TRUE)
+    ## remove whitespace
+    x <- gsub(" ", "", x)
+    x
 }
 
 #' cat0, cat with sep="", similar to paste0
@@ -152,8 +152,9 @@ cat0 <- function(...) {
 #' @return `character`, fragmentation method
 #' @noRd
 .fragmentationMethod <- function(x) {
-    methods <- c("None", "ETD", "CID", "ETcid", "HCD", "EThcd", "HCD/CID",
-                 "All")
+    methods <- c(
+        "None", "ETD", "CID", "ETcid", "HCD", "EThcd", "HCD/CID", "All"
+    )
     v <- c(EtdActivation=1L, CidActivation=2L, HcdActivation=4L)
     stopifnot(all(colnames(x) %in% names(v)))
     x <- x[, names(v)]
@@ -243,7 +244,10 @@ cat0 <- function(...) {
         if (length(xx) == 1L) {
             xx
         } else {
-            sprintf(paste0("%s", sep, "%0", .ndigits(length(xx)), "d"), xx, seq_along(xx))
+            sprintf(
+                paste0("%s", sep, "%0", .ndigits(length(xx)), "d"),
+                xx, seq_along(xx)
+            )
         }
     })
 }
@@ -272,7 +276,8 @@ cat0 <- function(...) {
 #' @param x `double`, original mass
 #' @param id `double`, run id
 #' @param divisor `double`, divisor (determines which decimal place)
-#' @return `double`, mass label (id encoded in the second to fourth decimal place)
+#' @return `double`, mass label (id encoded in the second to fourth decimal
+#' place)
 #' @seealso [.massLabelToId()]
 #' @noRd
 .massLabel <- function(x, id, divisor=10000L) {
@@ -350,8 +355,13 @@ cat0 <- function(...) {
     nc <- nchar(x)
     w <- (width - 2L:3L) %/% 2L
 
-    ifelse(nc <= width, x, paste0(substring(x, 1L, w[1L]), "...",
-                                  substring(x, nc - w[2L] + 1L, nc)))
+    ifelse(
+        nc <= width,
+        x,
+        paste0(
+            substring(x, 1L, w[1L]), "...", substring(x, nc - w[2L] + 1L, nc)
+        )
+    )
 }
 
 #' normalize subset (turn `logical`, `numeric` and `character` to `numeric`)
@@ -362,20 +372,22 @@ cat0 <- function(...) {
 #' @return `logical`, vector of length n
 #' @noRd
 .subset <- function(i, n, nms=NULL) {
-    ## use decode to turn Rle into native vectors, does nothing if i is already a
-    ## native vector
+    ## use decode to turn Rle into native vectors, does nothing if i is
+    ## already a native vector
     i <- decode(i)
     if (anyNA(i)) {
         stop("Subsetting by 'NA' is not supported.")
     }
     stopifnot(is.null(nms) || length(nms) == n)
-    switch(class(i),
-           "character" = .subsetByCharacter(i, nms),
-           "logical" = .subsetByLogical(i, n),
-           "integer" = ,
-           "double" = ,
-           "numeric" = .subsetByNumeric(i, n),
-           stop("Unknown index class."))
+    switch(
+        class(i),
+        "character" = .subsetByCharacter(i, nms),
+        "logical" = .subsetByLogical(i, n),
+        "integer" = ,
+        "double" = ,
+        "numeric" = .subsetByNumeric(i, n),
+        stop("Unknown index class.")
+    )
 }
 
 #' subset by `character`
@@ -424,7 +436,7 @@ cat0 <- function(...) {
 
     if (any(n < i)) {
         stop("Subscript out of bound: ",
-             paste0("'", i[n < i], "'", collapse=", "))
+            paste0("'", i[n < i], "'", collapse=", "))
     }
     i
 }
@@ -469,13 +481,20 @@ cat0 <- function(...) {
 .topDownFileExtRx <- function(type=c("cfmt", "cmt", "csv", "fasta", "mzml",
                                      "txt", "raw", "all")) {
     type <- match.arg(type)
-    ext <- c(csv="experiments\\.csv", fasta="fasta", mzml="mz[Mm][Ll]",
-             raw="raw", txt="txt")
-    sel <- switch(type,
-                  "all" = seq_along(ext),
-                  "cfmt" = c("csv", "fasta", "mzml", "txt"),
-                  "cmt" = c("csv", "mzml", "txt"),
-                  type)
+    ext <- c(
+        csv="experiments\\.csv",
+        fasta="fasta",
+        mzml="mz[Mm][Ll]",
+        raw="raw",
+        txt="txt"
+    )
+    sel <- switch(
+        type,
+        "all" = seq_along(ext),
+        "cfmt" = c("csv", "fasta", "mzml", "txt"),
+        "cmt" = c("csv", "mzml", "txt"),
+        type
+    )
     paste0("\\.", ext[sel], "(\\.(gz|bz2|xz|zip))?$", collapse="|")
 }
 
@@ -496,8 +515,9 @@ cat0 <- function(...) {
         stop("'length(x)' and 'length(groupByLabels)' have to be equal.")
     }
     o <- order(x, decreasing=TRUE, na.last=TRUE)
-    i <- unlist(lapply(split(o, groupByLabels[o]), "[", seq_len(n)),
-                use.names=FALSE)
+    i <- unlist(
+        lapply(split(o, groupByLabels[o]), "[", seq_len(n)), use.names=FALSE
+    )
     i[!is.na(i)]
 }
 

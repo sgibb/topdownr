@@ -25,17 +25,19 @@
 
 \item{n}{\code{integer}, max number of combinations/iterations.}
 
-\item{minN}{\code{integer} stop if there are less than \code{minN} additional fragments}
+\item{minN}{\code{integer},
+stop if there are less than \code{minN} additional fragments}
 
-\item{nCombinations}{\code{integer}, number of combinations to show (0 to avoid
-plotting them at all).}
+\item{nCombinations}{\code{integer},
+number of combinations to show (0 to avoid plotting them at all).}
 
-\item{cumCoverage}{\code{logical}, if \code{TRUE} (default) cumulative coverage of
-combinations is shown.}
+\item{cumCoverage}{\code{logical},
+if \code{TRUE} (default) cumulative coverage of combinations is shown.}
 
 \item{labels}{\code{character}, overwrite x-axis labels.}
 
-\item{what}{\code{character}, specifies whether \code{"conditions"} (columns; default) or
+\item{what}{\code{character},
+specifies whether \code{"conditions"} (columns; default) or
 \code{"bonds"} (rows) should be summarized.}
 
 \item{\ldots}{arguments passed to internal/other methods.
@@ -46,10 +48,11 @@ newly added fragments third column: number of newly covered bonds.}
 An \linkS4class{NCBSet} object.
 }
 \description{
-The NCBSet class is a container for a top-down proteomics
-experiment similar to the \linkS4class{TopDownSet} but instead of intensity values
-it just stores the information if a bond is covered by a
-N-terminal (encoded as \code{1}), a C-terminal (encoded as \code{2})
+The NCBSet class is a container for a top-down proteomics experiment
+similar to the \linkS4class{TopDownSet}
+but instead of intensity values it just stores the information if a
+bond is covered by a N-terminal (encoded as \code{1}),
+a C-terminal (encoded as \code{2})
 and/or both fragments (encoded as \code{3}).
 }
 \section{Methods (by generic)}{
@@ -57,7 +60,8 @@ and/or both fragments (encoded as \code{3}).
 \item \code{bestConditions}: Best combination of conditions.
 
 Finds the best combination of conditions for highest coverage of bonds. Use
-\code{n} to limit the number of iterations and combinations that should be returned.
+\code{n} to limit the number of iterations and combinations that should be
+returned.
 If \code{minN} is set at least \code{minN} fragments have to be added to the
 combinations. The function returns a 2-column matrix. The first column
 contains the index of the condition (column number) and the second one the
@@ -65,9 +69,11 @@ newly added number of fragments.
 
 \item \code{fragmentationMap}: Plot fragmentation map.
 
-Plots a fragmentation map of the Protein. Use \code{nCombinations} to add another
-plot with \code{nCombinations} combined conditions. If \code{cumCoverage} is \code{TRUE}
-(default) these combinations increase the coverage cumulatively.
+Plots a fragmentation map of the Protein.
+Use \code{nCombinations} to add another
+plot with \code{nCombinations} combined conditions.
+If \code{cumCoverage} is \code{TRUE} (default)
+these combinations increase the coverage cumulatively.
 
 \item \code{summary}: Summary statistics.
 
@@ -79,23 +85,25 @@ values.
 \section{Slots}{
 
 \describe{
-\item{\code{rowViews}}{\link[Biostrings:XStringViews-class]{Biostrings::XStringViews}, information about bonds
-(name, start, end, width, sequence), see \link[Biostrings:XStringViews-class]{Biostrings::XStringViews}
-for details.}
+\item{\code{rowViews}}{\link[Biostrings:XStringViews-class]{Biostrings::XStringViews},
+information about bonds (name, start, end, width, sequence),
+see \link[Biostrings:XStringViews-class]{Biostrings::XStringViews} for details.}
 
-\item{\code{colData}}{\link[S4Vectors:DataFrame-class]{S4Vectors::DataFrame}, information about the MS2
-experiments and the fragmentation conditions.}
+\item{\code{colData}}{\link[S4Vectors:DataFrame-class]{S4Vectors::DataFrame},
+information about the MS2 experiments and the fragmentation conditions.}
 
-\item{\code{assay}}{\link[Matrix:dgCMatrix-class]{Matrix::dgCMatrix}, coverage values of the bonds. The
-rows correspond to the bonds and the columns to the condition/run. It
-just stores values that are different from zero. If a bond is covered by an
-N-terminal fragment its encoded with \code{1}, by an C-terminal fragmentl with \code{2}
-and by both fragment types by \code{3} respectively.}
+\item{\code{assay}}{\link[Matrix:dgCMatrix-class]{Matrix::dgCMatrix},
+coverage values of the bonds. The rows correspond to the bonds and the
+columns to the condition/run. It just stores values that are different
+from zero. If a bond is covered by an N-terminal fragment its encoded
+with \code{1}, by an C-terminal fragmentl with \code{2} and
+by both fragment types by \code{3} respectively.}
 
 \item{\code{files}}{\code{character}, files that were imported.}
 
-\item{\code{tolerance}}{\code{double}, tolerance in \emph{ppm} that were used for matching the
-experimental mz values to the theoretical fragments.}
+\item{\code{tolerance}}{\code{double},
+tolerance in \emph{ppm} that were used for matching the experimental mz values
+to the theoretical fragments.}
 
 \item{\code{processing}}{\code{character}, log messages.}
 }}
@@ -139,8 +147,10 @@ fragmentationMap(ncb)
 \seealso{
 \itemize{
 \item An \code{NCBSet} is generated from an \linkS4class{TopDownSet} object.
-\item \link[Biostrings:XStringViews-class]{Biostrings::XStringViews} for the row view interface.
-\item \link[Matrix:dgCMatrix-class]{Matrix::dgCMatrix} for technical details about the coverage storage.
+\item \link[Biostrings:XStringViews-class]{Biostrings::XStringViews}
+for the row view interface.
+\item \link[Matrix:dgCMatrix-class]{Matrix::dgCMatrix}
+for technical details about the coverage storage.
 }
 }
 \author{

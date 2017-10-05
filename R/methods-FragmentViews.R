@@ -3,10 +3,14 @@
 #' @aliases show,FragmentViews-method
 #' @export
 setMethod("show", "FragmentViews", function(object) {
-    cat0(class(object), " on a ", length(subject(object)),
-         "-letter sequence:\n")
-    cat0("  ", .snippet(as.character(subject(object)),
-                        getOption("width") - 2L), "\n")
+    cat0(class(object), " on a ",
+        length(subject(object)), "-letter sequence:\n")
+    cat0("  ",
+        .snippet(
+            as.character(subject(object)),
+            getOption("width") - 2L
+        ), "\n"
+    )
 
     if (length(metadata(object)$mass)) {
         cat0("Mass:\n")
@@ -40,10 +44,10 @@ setMethod("show", "FragmentViews", function(object) {
     ## views
     mw <- sum(cw + 1L)
     ## n == 5 + 1 (to compensate for the fill ("...") below
-    vw <- as(object[.hft(seq_len(length(object)), fill=NULL, n=6L)],
-             "character")
-    vw <- c("", .hft(.snippet(paste0("[", vw, "]"), getOption("width") - mw),
-                     n=5L))
+    vw <-
+        as(object[.hft(seq_len(length(object)), fill=NULL, n=6L)], "character")
+    vw <- c("",
+        .hft(.snippet(paste0("[", vw, "]"), getOption("width") - mw), n=5L))
 
     ## format
     just <- c(rep("right", 5), "left", "left", "right", "left")
@@ -60,18 +64,20 @@ setMethod("show", "FragmentViews", function(object) {
 #' @name coerce,FragmentViews,data.frame-method
 #' @section Coercion:
 #'
-#' `as(object, "data.frame")`: Coerce an [FragmentViews-class] object into a
-#' `data.frame`.
+#' `as(object, "data.frame")`: Coerce an
+#' [FragmentViews-class] object into a `data.frame`.
 #' @examples
 #' as(fv, "data.frame")
 setAs("FragmentViews", "data.frame", function(from) {
-    data.frame(fragment=as(from, "character"),
-               start=start(from),
-               end=end(from),
-               width=width(from),
-               name=names(from),
-               type=elementMetadata(from)$type,
-               mass=elementMetadata(from)$mass,
-               z=elementMetadata(from)$z,
-               row.names=names(from))
+    data.frame(
+        fragment=as(from, "character"),
+        start=start(from),
+        end=end(from),
+        width=width(from),
+        name=names(from),
+        type=elementMetadata(from)$type,
+        mass=elementMetadata(from)$mass,
+        z=elementMetadata(from)$z,
+        row.names=names(from)
+    )
 })

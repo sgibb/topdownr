@@ -10,7 +10,8 @@
 #'
 #' - Generate .meth files prior data acquisition for the Thermo Orbitrap Fusion
 #' Lumos MS devise: `vignette("data-generation", package="topdownr")`.
-#' - How to analyse top-down fragmenation data: `vignette("analysis", package="topdownr")`
+#' - How to analyse top-down fragmenation data:
+#' `vignette("analysis", package="topdownr")`
 #'
 #' @docType package
 #' @name topdownr-package

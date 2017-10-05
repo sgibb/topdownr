@@ -21,29 +21,34 @@
 #' @return list (splitted by file extension) with file path
 #' @noRd
 .listTopDownFiles <- function(path, pattern=".*") {
-    files <- list.files(path,
-                        pattern=paste0(pattern, "(",
-                                       .topDownFileExtRx("cfmt"), ")"),
-                        recursive=TRUE, full.names=TRUE)
+    files <- list.files(
+        path,
+        pattern=paste0(pattern, "(", .topDownFileExtRx("cfmt"), ")"),
+        recursive=TRUE,
+        full.names=TRUE
+    )
     l <- split(files, .fileExt(files))
     n <- lengths(l)
 
     ext <- c("csv", "fasta", "mzML", "txt")
 
     if (!length(n) || any(!ext %in% names(l))) {
-        stop("Could not find any ", paste0(ext[!ext %in% names(l)],
-                                           collapse=", "), " files!")
+        stop(
+            "Could not find any ",
+            paste0(ext[!ext %in% names(l)], collapse=", "), " files!"
+        )
     }
 
     if (n["fasta"] > 1L) {
-        stop("More than one fasta file found. Consider the 'pattern' ",
-             "argument.")
+        stop("More than one fasta file found. Consider the 'pattern' argument.")
     }
 
     if (!all(n["csv"] == n[!grepl("fasta", names(n))])) {
         nd <- n[!grepl("fasta", names(n))]
-        stop("There have to be the same number of csv, mzML and txt files. ",
-             "Found: ", paste0(names(nd), "=", nd, collapse=", "))
+        stop(
+            "There have to be the same number of csv, mzML and txt files. ",
+            "Found: ", paste0(names(nd), "=", nd, collapse=", ")
+        )
     }
     l
 }
@@ -61,8 +66,9 @@
     d <- read.csv(file, stringsAsFactors=FALSE)
     colnames(d) <- .camelCase(colnames(d))
 
-    .msg(verbose, "Reading ", nrow(d), " experiment conditions from file ",
-         basename(file))
+    .msg(verbose,
+        "Reading ", nrow(d), " experiment conditions from file ", basename(file)
+    )
 
     ## drop MS1
     d <- d[d$MsLevel == 2L, ]
@@ -106,8 +112,9 @@
     d <- read.csv(file, stringsAsFactors=FALSE)
     colnames(d) <- .camelCase(colnames(d))
 
-    .msg(verbose, "Reading ", nrow(d), " header information from file ",
-         basename(file))
+    .msg(verbose,
+        "Reading ", nrow(d), " header information from file ", basename(file)
+    )
 
     ## drop MS1
     d <- d[d$MsOrder == 2L, ]
@@ -118,9 +125,10 @@
     ## - https://github.com/sgibb/topdownr/issues/25
     fixedFilterStrings <- .fixFilterString(d$FilterString)
     if (nFixed <- sum(fixedFilterStrings != d$FilterString)) {
-        warning(nFixed, " FilterString entries modified because of ",
-                "duplicated ID for different conditions.",
-                immediate.=verbose)
+        warning(
+            nFixed, " FilterString entries modified because of ",
+            "duplicated ID for different conditions.", immediate.=verbose
+        )
     }
     d$FilterString <- fixedFilterStrings
 
@@ -131,11 +139,13 @@
     ## See also:
     ## - https://github.com/sgibb/topdownr/issues/14
     if (is.unsorted(d$Condition)) {
-        warning("ID in FilterString are not sorted in ascending order. ",
-                "Introduce own condition ID via 'cumsum'.",
-                immediate.=verbose)
+        warning(
+            "ID in FilterString are not sorted in ascending order. ",
+            "Introduce own condition ID via 'cumsum'.", immediate.=verbose
+        )
         d$Condition <- cumsum(
-            c(TRUE, d$FilterString[-1L] != d$FilterString[-nrow(d)]))
+            c(TRUE, d$FilterString[-1L] != d$FilterString[-nrow(d)])
+        )
     }
 
     d[is.na(d)] <- 0L
@@ -153,8 +163,8 @@
 
     d[is.na(d)] <- 0L
 
-    d$Activation <- .fragmentationMethod(d[, paste0(c("Etd", "Cid", "Hcd"),
-                                                    "Activation")])
+    d$Activation <-
+        .fragmentationMethod(d[, paste0(c("Etd", "Cid", "Hcd"), "Activation")])
 
     d$File <- gsub(.topDownFileExtRx("txt"), "", basename(file))
     d
@@ -170,39 +180,45 @@
 #' values)
 #' @noRd
 .readMzMl <- function(file, scans, fmass, ..., verbose=interactive()) {
-   .msg(verbose, "Reading spectra information from file ", basename(file),
-        appendLF=FALSE)
+    .msg(verbose,
+        "Reading spectra information from file ", basename(file),
+        appendLF=FALSE
+    )
 
-   fh <- openMSfile(file)
-   on.exit(close(fh))
+    fh <- openMSfile(file)
+    on.exit(close(fh))
 
-   hd <- header(fh)
-   i <- which(hd$msLevel == 2L & hd$acquisitionNum %in% scans)
-   hd <- hd[i, !colnames(hd) %in% c("injectionTime", "seqNum"), drop=FALSE]
-   colnames(hd)[grepl("acquisitionNum", colnames(hd), fixed=TRUE)] <- "Scan"
-   hd$File <- gsub(.topDownFileExtRx("mzml"), "", basename(file))
-   colnames(hd) <- .camelCase(colnames(hd))
+    hd <- header(fh)
+    i <- which(hd$msLevel == 2L & hd$acquisitionNum %in% scans)
+    hd <- hd[i, !colnames(hd) %in% c("injectionTime", "seqNum"), drop=FALSE]
+    colnames(hd)[grepl("acquisitionNum", colnames(hd), fixed=TRUE)] <- "Scan"
+    hd$File <- gsub(.topDownFileExtRx("mzml"), "", basename(file))
+    colnames(hd) <- .camelCase(colnames(hd))
 
-   nr <- nrow(hd)
-   m <- Matrix(0L, nrow=length(fmass), ncol=nr, sparse=TRUE)
+    nr <- nrow(hd)
+    m <- Matrix(0L, nrow=length(fmass), ncol=nr, sparse=TRUE)
 
-   for (j in seq_along(i)) {
-      k <- .matchFragments(peaks(fh, i[j])[, 1L], fmass, ...)
-      notNA <- !is.na(k)
-      if (sum(notNA)) {
-          m[k[notNA], j] <- peaks(fh, i[j])[notNA, 2L]
-      }
-   }
+    for (j in seq_along(i)) {
+        k <- .matchFragments(peaks(fh, i[j])[, 1L], fmass, ...)
+        notNA <- !is.na(k)
+        if (sum(notNA)) {
+            m[k[notNA], j] <- peaks(fh, i[j])[notNA, 2L]
+        }
+    }
 
-   ## depending on the used processing software the header column totIonCurrent
-   ## doesn't take deisotoping and charge state reduction into account; so we
-   ## calculate TIC for our own here
-   hd$TotIonCurrent <- .vapply1d(peaks(fh)[i], function(ii)sum(ii))
+    ## depending on the used processing software the header column totIonCurrent
+    ## doesn't take deisotoping and charge state reduction into account; so we
+    ## calculate TIC for our own here
+    hd$TotIonCurrent <- .vapply1d(peaks(fh)[i], function(ii)sum(ii))
 
-   .msg(verbose, sprintf(" (%02.1f%%)",
-                         round(sum(m != 0L)/sum(hd$PeaksCount) * 100, 1L)))
+    .msg(verbose,
+        sprintf(
+            " (%02.1f%%)",
+            round(sum(m != 0L) / sum(hd$PeaksCount) * 100, 1L)
+        )
+    )
 
-   list(hd=hd, m=m)
+    list(hd=hd, m=m)
 }
 
 #' Merge ScanCondition and HeaderInformation
@@ -214,13 +230,17 @@
 .mergeScanConditionAndHeaderInformation <- function(sc, hi) {
     stopifnot(is(sc, "data.frame"))
     stopifnot(is(hi, "data.frame"))
-    d <- merge(sc, hi, by=c("File", "Condition"),
-               suffixes=c(".ScanCondition", ".HeaderInformation"))
-    if (!all((d$SupplementalActivationCe == d$CidActivation) |
-             (d$SupplementalActivationCe == d$HcdActivation))) {
+    d <- merge(
+        sc, hi,
+        by=c("File", "Condition"),
+        suffixes=c(".ScanCondition", ".HeaderInformation")
+    )
+    if (!all(
+        (d$SupplementalActivationCe == d$CidActivation) |
+        (d$SupplementalActivationCe == d$HcdActivation))) {
         stop("Merging of header and method information failed. ",
-             "Differences in 'SupplementalActivationCe', 'CidActivation' ",
-             "and 'HcdActivation' found.")
+            "Differences in 'SupplementalActivationCe', 'CidActivation' ",
+            "and 'HcdActivation' found.")
     }
     d
 }
@@ -232,6 +252,9 @@
 #' @return merged data.frame
 #' @noRd
 .mergeSpectraAndHeaderInformation <- function(mzml, scdm) {
-    merge(mzml, scdm, sort=FALSE, by=c("File", "Scan"),
-          suffixes=c(".SpectraInformation", ".HeaderInformation"))
+    merge(
+        mzml, scdm, sort=FALSE,
+        by=c("File", "Scan"),
+        suffixes=c(".SpectraInformation", ".HeaderInformation")
+    )
 }

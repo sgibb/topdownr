@@ -16,7 +16,8 @@ defaultMs2Settings(...)
 A named \code{list} of settings.
 }
 \description{
-This functions create the default settings for \code{\link[=writeMethodXmls]{writeMethodXmls()}}.
+This functions create the default settings for
+\code{\link[=writeMethodXmls]{writeMethodXmls()}}.
 }
 \examples{
 # all default MS1 settings

@@ -63,8 +63,8 @@
   ...)
 }
 \arguments{
-\item{i, j}{\code{numeric}, \code{logical} or \code{character}, indices specifying elements
-to extract or replace.}
+\item{i, j}{\code{numeric}, \code{logical} or \code{character},
+indices specifying elements to extract or replace.}
 
 \item{drop}{\code{logical}, currently ignored.}
 
@@ -74,19 +74,20 @@ to extract or replace.}
 
 \item{object, x}{\code{AbstractTopDownSet}}
 
-\item{what}{\code{character}, specifies whether \code{"rows"} or \code{"columns"} should be
-summarized.}
+\item{what}{\code{character},
+specifies whether \code{"rows"} or \code{"columns"} should be summarized.}
 
 \item{\ldots}{arguments passed to internal/other methods.}
 }
 \value{
-This is an \emph{Abstract/VIRTUAL} class to provide a common interface for
-\linkS4class{TopDownSet} and \linkS4class{NCBSet}. It is not possible to create an
-\code{AbstractTopDownSet} object.
+This is an \emph{Abstract/VIRTUAL} class
+to provide a common interface for
+\linkS4class{TopDownSet} and \linkS4class{NCBSet}.
+It is not possible to create an \code{AbstractTopDownSet} object.
 }
 \description{
-\emph{Abstract/VIRTUAL} parent class for \linkS4class{TopDownSet} and \linkS4class{NCBSet} to
-provide common interface.
+\emph{Abstract/VIRTUAL} parent class for
+\linkS4class{TopDownSet} and \linkS4class{NCBSet} to provide common interface.
 }
 \details{
 This class just provides a common interface. It is not intended for direct
@@ -97,44 +98,51 @@ child class.
 \itemize{
 \item \code{[}: Subset operator.
 
-For \code{i} \code{numeric}, \code{logical} or \code{character} vectors or empty (missing) or
-\code{NULL} are supported. Subsetting is done on the fragment/bond (row) level.
-\code{character} indices could be names (e.g. \code{c("a1", "b1", "c1", "c2", "c3")})
-or types (e.g. \code{c("c", "x")}) of the fragments for \linkS4class{TopDownSet}
-objects, or names of the bonds (e.g. \code{c("bond001")}) for \linkS4class{NCBSet}
-objects. \cr
-\code{j} could be a \code{numeric} or \code{logical} vector and subsetting is done on the
-condition/run (column) level.
+For \code{i} \code{numeric}, \code{logical} or \code{character} vectors or empty
+(missing) or \code{NULL} are supported.
+Subsetting is done on the fragment/bond (row) level.
+\code{character} indices could be names
+(e.g. \code{c("a1", "b1", "c1", "c2", "c3")})
+or types (e.g. \code{c("c", "x")}) of the fragments for
+\linkS4class{TopDownSet} objects,
+or names of the bonds (e.g. \code{c("bond001")}) for
+\linkS4class{NCBSet} objects. \cr
+\code{j} could be a \code{numeric} or \code{logical} vector
+and subsetting is done on the condition/run (column) level.
 
 \item \code{[[}: Subset operator.
 
-\code{i} could be a \code{numeric} or \code{logical} vector and subsetting is done on the
-condition/run (column) level.
+\code{i} could be a \code{numeric} or \code{logical} vector and
+subsetting is done on the condition/run (column) level.
 
 \item \code{[[<-}: Setter for a column in the \code{colData} slot.
 
-The \code{[[&lt;-} operator is used to add/replace a single column of the \code{colData}
-\code{DataFrame}.
+The \code{[[&lt;-} operator is used to add/replace
+a single column of the \code{colData} \code{DataFrame}.
 
 \item \code{$}: Accessor for columns in the \code{colData} slot.
 
-The \code{$} simplifies the accession of a single column of the \code{colData}. It is
-identical to the \code{[[} operator.
+The \code{$} simplifies the accession of a single column
+of the \code{colData}.
+It is identical to the \code{[[} operator.
 
 \item \code{$<-}: Setter for a column in the \code{colData} slot.
 
-The \code{$&lt;-} operator is used to add/replace a single column of the \code{colData}
-\code{DataFrame}. It is identical to the \code{[[&lt;-} operator.
+The \code{$&lt;-} operator is used to add/replace a single column
+of the \code{colData} \code{DataFrame}.
+It is identical to the \code{[[&lt;-} operator.
 
 \item \code{assayData}: Accessor for the \code{assay} slot.
 
-Returns a \link[Matrix:dgCMatrix-class]{Matrix::dgCMatrix} that stores the intensity/coverage
-information of \linkS4class{AbstractTopDownSet} object.
+Returns a \link[Matrix:dgCMatrix-class]{Matrix::dgCMatrix} that stores the
+intensity/coverage information of \linkS4class{AbstractTopDownSet}
+object.
 
 \item \code{colData}: Accessor for the \code{colData} slot.
 
-Returns a \link[S4Vectors:DataFrame-class]{S4Vectors::DataFrame} that stores metadata for the
-conditons/runs (columns) of the \linkS4class{AbstractTopDownSet} object.
+Returns a \link[S4Vectors:DataFrame-class]{S4Vectors::DataFrame} that stores
+metadata for the conditons/runs (columns) of the
+\linkS4class{AbstractTopDownSet} object.
 
 \item \code{colData<-}: Setter for the \code{colData} slot.
 
@@ -162,14 +170,16 @@ conditions/runs (columns).
 \item \code{removeEmptyConditions}: Remove empty conditions/runs.
 
 Removes conditions/runs (columns) without any intensity/coverage
-information from the \linkS4class{AbstractTopDownSet} object. It returns a modified
-\linkS4class{AbstractTopDownSet} object.
+information from the \linkS4class{AbstractTopDownSet} object.
+It returns a modified \linkS4class{AbstractTopDownSet} object.
 
 \item \code{rowViews}: Accessor for the \code{rowViews} slot.
 
-Depending on the implementation it returns an \linkS4class{FragmentViews}
-object for \linkS4class{TopDownSet} objects or an \link[Biostrings:XStringViews]{Biostrings::XStringViews}
-object for \linkS4class{NCBSet} objects.
+Depending on the implementation it returns an
+\linkS4class{FragmentViews} object for
+\linkS4class{TopDownSet} objects
+or an \link[Biostrings:XStringViews]{Biostrings::XStringViews} object for
+\linkS4class{NCBSet} objects.
 
 \item \code{summary}: Summary statistics.
 
@@ -181,22 +191,25 @@ values.
 \section{Slots}{
 
 \describe{
-\item{\code{rowViews}}{\link[Biostrings:XStringViews-class]{Biostrings::XStringViews}, information about fragments/bonds
-(name, type, sequence, mass, charge), see \link[Biostrings:XStringViews-class]{Biostrings::XStringViews} and
+\item{\code{rowViews}}{\link[Biostrings:XStringViews-class]{Biostrings::XStringViews},
+information about fragments/bonds (name, type, sequence, mass, charge),
+see \link[Biostrings:XStringViews-class]{Biostrings::XStringViews} and
 \linkS4class{FragmentViews} for details.}
 
-\item{\code{colData}}{\link[S4Vectors:DataFrame-class]{S4Vectors::DataFrame}, information about the MS2
-experiments and the fragmentation conditions.}
+\item{\code{colData}}{\link[S4Vectors:DataFrame-class]{S4Vectors::DataFrame},
+information about the MS2 experiments and the fragmentation conditions.}
 
-\item{\code{assay}}{\link[Matrix:dgCMatrix-class]{Matrix::dgCMatrix}, intensity/coverage values of the
-fragments/bonds. The rows correspond to the fragments/bonds and the
-columns to the condition/run. It just stores values that are different from
-zero.}
+\item{\code{assay}}{\link[Matrix:dgCMatrix-class]{Matrix::dgCMatrix},
+intensity/coverage values of the fragments/bonds.
+The rows correspond to the fragments/bonds and the
+columns to the condition/run. It just stores values that are
+different from zero.}
 
 \item{\code{files}}{\code{character}, files that were imported.}
 
-\item{\code{tolerance}}{\code{double}, tolerance in \emph{ppm} that were used for matching the
-experimental \emph{m/z} values to the theoretical fragments.}
+\item{\code{tolerance}}{\code{double},
+tolerance in \emph{ppm} that were used for matching the experimental
+\emph{m/z} values to the theoretical fragments.}
 
 \item{\code{processing}}{\code{character}, log messages.}
 }}
@@ -239,11 +252,14 @@ tds[, 1:10]
 }
 \seealso{
 \itemize{
-\item \linkS4class{TopDownSet} and \linkS4class{NCBSet} which both implement/use this
-interface. These manual pages also provide some example code.
-\item \linkS4class{FragmentViews} (and \link[Biostrings:XStringViews-class]{Biostrings::XStringViews}) for the row
-view interface.
-\item \link[Matrix:dgCMatrix-class]{Matrix::dgCMatrix} for technical details about the intensity/coverage storage.
+\item \linkS4class{TopDownSet} and \linkS4class{NCBSet}
+which both implement/use this interface.
+These manual pages also provide some example code.
+\item \linkS4class{FragmentViews}
+(and \link[Biostrings:XStringViews-class]{Biostrings::XStringViews})
+for the row view interface.
+\item \link[Matrix:dgCMatrix-class]{Matrix::dgCMatrix}
+for technical details about the intensity/coverage storage.
 }
 }
 \author{

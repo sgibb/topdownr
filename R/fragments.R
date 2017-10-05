@@ -5,24 +5,26 @@
 #' @return `data.frame`
 #' @noRd
 .addAdducts <- function(x, adducts) {
-   if (!nrow(adducts)) {
-       return(x)
-   }
+    if (!nrow(adducts)) {
+        return(x)
+    }
 
-   if (!all(c("mass", "name", "to") %in% colnames(adducts))) {
-       stop("The 'adducts' data.frame must have the columns: ",
-            "'mass', 'name' and 'to'.")
-   }
+    if (!all(c("mass", "name", "to") %in% colnames(adducts))) {
+        stop(
+            "The 'adducts' data.frame must have the columns: ",
+            "'mass', 'name' and 'to'."
+        )
+    }
 
-   r <- do.call(rbind, lapply(seq_len(nrow(adducts)), function(i) {
-       a <- x[x$type == adducts$to[i], , drop=FALSE]
-       a$mz <- a$mz + adducts$mass[i]
-       a$ion <- paste0(adducts$name[i], a$pos)
-       a
-   }))
-   x <- rbind(x, r)
-   rownames(x) <- NULL
-   x
+    r <- do.call(rbind, lapply(seq_len(nrow(adducts)), function(i) {
+        a <- x[x$type == adducts$to[i], , drop = FALSE]
+        a$mz <- a$mz + adducts$mass[i]
+        a$ion <- paste0(adducts$name[i], a$pos)
+        a
+    }))
+    x <- rbind(x, r)
+    rownames(x) <- NULL
+    x
 }
 
 #' Calculate Fragments (via MSnbase::calculateFragments)
@@ -37,18 +39,28 @@
 #' @return `FragmentViews`
 #' @noRd
 .calculateFragments <- function(sequence, type=c("a", "b", "c", "x", "y", "z"),
-                                modifications=c("Carbamidomethyl", "Acetyl",
-                                                "Met-loss"),
+                                modifications=c(
+                                    "Carbamidomethyl", "Acetyl",
+                                    "Met-loss"
+                                ),
                                 neutralLoss=defaultNeutralLoss(),
                                 adducts=data.frame(),
-                                sequenceOrder=c("original", "random", "inverse"),
+                                sequenceOrder=c(
+                                    "original",
+                                    "random",
+                                    "inverse"
+                                ),
                                 verbose=interactive()) {
-    modifications <- match.arg(modifications,
-                               choices=c("", # allow NULL for nothing
-                                         "Carbamidomethyl",
-                                         "Acetyl",
-                                         "Met-loss"),
-                               several.ok=TRUE)
+    modifications <- match.arg(
+        modifications,
+        choices=c(
+        "", # allow NULL for nothing
+        "Carbamidomethyl",
+        "Acetyl",
+        "Met-loss"
+        ),
+        several.ok=TRUE
+    )
     sequenceOrder <- match.arg(sequenceOrder)
 
     ## just to be sure if an AAString is given
@@ -62,17 +74,23 @@
     ## has to be done after Met-loss but before any other modification
     csequence <- .reorderSequence(csequence, method=sequenceOrder)
 
-    d <- calculateFragments(csequence,
-                            type=type,
-                            modifications=NULL,
-                            neutralLoss=neutralLoss,
-                            verbose=FALSE)
+    d <- calculateFragments(
+        csequence,
+        type=type,
+        modifications=NULL,
+        neutralLoss=neutralLoss,
+        verbose=FALSE
+    )
 
     ## add protein sequence to data.frame to calculate modifications
-    d <- rbind(list(mz=.calculateProteinMass(csequence),
-                    ion="none", type="protein", pos=0,
-                    z=0, seq=csequence),
-               d)
+    d <- rbind(
+        list(
+            mz=.calculateProteinMass(csequence),
+            ion="none", type="protein", pos=0, z=0,
+            seq=csequence
+        ),
+        d
+    )
 
     ## TODO: replace by unimod package
     if ("Acetyl" %in% modifications) {
@@ -90,15 +108,14 @@
     ## remove protein sequence from data.frame (just added to calculate
     ## modifications)
     mass <- d$mz[1L]
-    d <- d[-1L,]
-
+    d <- d[-1L, ]
 
     n <- nchar(csequence)
-    FragmentViews(csequence, mass=d$mz, type=d$type, z=Rle(d$z), names=d$ion,
-                  start=ifelse(startsWith(csequence, d$seq),
-                               1L, n - d$pos + 1L),
-                  width=d$pos, metadata=list(modifications=modifications,
-                                             mass=mass))
+    FragmentViews(
+        csequence, mass=d$mz, type=d$type, z=Rle(d$z), names=d$ion,
+        start=ifelse(startsWith(csequence, d$seq), 1L, n-d$pos + 1L),
+        width=d$pos, metadata=list(modifications=modifications, mass=mass)
+    )
 }
 
 #' Calculate protein mass
@@ -123,18 +140,19 @@
 #' @return `integer`
 #' @noRd
 .matchFragments <- function(mz, fmass, tolerance=5e-6) {
-  if (!length(mz)) {
-    integer()
-  }
-  m <- MSnbase:::relaxedMatch(mz, fmass, nomatch=NA, tolerance=tolerance,
-                              relative=TRUE)
-  if (anyDuplicated(m)) {
-    o <- order(abs(mz - fmass[m]))
-    sortedMatches <- m[o]
-    sortedMatches[which(duplicated(sortedMatches))] <- NA
-    m[o] <- sortedMatches
-  }
-  as.integer(m)
+    if (!length(mz)) {
+        integer()
+    }
+    m <- MSnbase:::relaxedMatch(
+        mz, fmass, nomatch=NA, tolerance=tolerance, relative=TRUE
+    )
+    if (anyDuplicated(m)) {
+        o <- order(abs(mz - fmass[m]))
+        sortedMatches <- m[o]
+        sortedMatches[which(duplicated(sortedMatches))] <- NA
+        m[o] <- sortedMatches
+    }
+    as.integer(m)
 }
 
 #' Reorder protein sequence.
@@ -155,7 +173,7 @@
         } else if (method == "inverse") {
             x <- rev(x)
         }
-        x <- paste0(x, collapse="")
+        x <- paste0(x, collapse = "")
     }
     x
 }

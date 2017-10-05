@@ -1,16 +1,21 @@
 #' @describeIn TopDownSet Aggregate conditions/runs.
 #'
-#' Aggregates conditions/runs (columns) in an [TopDownSet-class] object `by` a
-#' user-given value (default is the `"Sample"` column of `colData` which has the
-#' same value for technical replicates).
+#' Aggregates conditions/runs (columns) in an
+#' [TopDownSet-class] object
+#' `by` a
+#' user-given value (default is the
+#' `"Sample"` column of `colData`
+#' which has the same value for technical replicates).
 #' It combines intensity values and numeric metadata of the grouped
 #' conditions/runs (columns) by `mean` and returns a reduced
 #' [TopDownSet-class] object.
 #'
 #' @param x,object `TopDownSet`
-#' @param by `list`, grouping variable, in general it refers to technical
+#' @param by `list`,
+#' grouping variable, in general it refers to technical
 #' @param \ldots arguments passed to internal/other methods.
-#' replicates (that's why the default is the `"Sample"` column in `colData`).
+#' replicates (that's why the default is the
+#' `"Sample"` column in `colData`).
 ## @return `TopDownSet`
 #' @aliases aggregate,TopDownSet-method
 #' @export
@@ -23,8 +28,9 @@ setMethod("aggregate", "TopDownSet",
         stop("'by' has to be of the same length as 'ncol(x)'.")
     }
     x@assay <- .rowMeansGroup(x@assay, groups)
-    x@colData <- .aggregateDataFrame(x@colData, groups,
-                                     ignoreNumCols=c("Scan", "Condition"))
+    x@colData <- .aggregateDataFrame(
+        x@colData, groups, ignoreNumCols=c("Scan", "Condition")
+    )
 
     d1 <- .logdim(x)
 
@@ -38,9 +44,10 @@ setMethod("aggregate", "TopDownSet",
 #' @describeIn TopDownSet Filter by CV.
 #'
 #' Filtering is done by coefficient of variation across technical replicates
-#' (defined by the `by` argument). All fragments below a given `threshold`
-#' are removed. The `threshold` is the maximal allowed CV in percent (`sd/mean *
-#' 100 < threshold`).
+#' (defined by the `by` argument).
+#' All fragments below a given `threshold`
+#' are removed. The `threshold` is the maximal allowed CV in percent
+#' (`sd/mean * 100 < threshold`).
 #'
 ## @param object `TopDownSet`
 #' @param threshold `double`, threshold variable.
@@ -51,11 +58,11 @@ setMethod("aggregate", "TopDownSet",
 setMethod("filterCv", "TopDownSet",
           function(object, threshold, by=object$Sample, ...) {
     if (!is.numeric(threshold) || !length(threshold) == 1L) {
-      stop("'threshold' has to be a 'numeric' of length one.")
+        stop("'threshold' has to be a 'numeric' of length one.")
     }
 
     if (threshold < 0) {
-      stop("'threshold' has to be greater than 0.")
+        stop("'threshold' has to be greater than 0.")
     }
 
     n0 <- nnzero(object@assay)
@@ -68,8 +75,9 @@ setMethod("filterCv", "TopDownSet",
 
     n1 <- nnzero(object@assay)
     if (n0 - n1) {
-        object <- .atdsLogMsg(object, n0 - n1, " fragments with CV > ",
-                              threshold, "% filtered")
+        object <- .atdsLogMsg(
+            object, n0 - n1, " fragments with CV > ", threshold, "% filtered"
+        )
 
     }
     if (validObject(object)) {
@@ -84,7 +92,8 @@ setMethod("filterCv", "TopDownSet",
 #' injection time are kept.
 #'
 ## @param object `TopDownSet`
-#' @param maxDeviation `double`, maximal allowed deviation in the `log2`
+#' @param maxDeviation `double`,
+#' maximal allowed deviation in the `log2`
 #' injection time in ms in comparison to the median ion injection time.
 #' @param keepTopN `integer`, how many technical replicates should be kept?
 ## @param by `list`, how technical replicates are defined.
@@ -95,27 +104,31 @@ setMethod("filterInjectionTime", "TopDownSet",
           function(object, maxDeviation=log2(3), keepTopN=2,
                    by=object$Sample, ...) {
     if (!is.numeric(maxDeviation) || !length(maxDeviation) == 1L) {
-      stop("'maxDeviation' has to be a 'numeric' of length one.")
+        stop("'maxDeviation' has to be a 'numeric' of length one.")
     }
 
     if (maxDeviation < 0) {
-      stop("'maxDeviation' has to be greater than 0.")
+        stop("'maxDeviation' has to be greater than 0.")
     }
 
-    lr <- as.vector(abs(log2(object$IonInjectionTimeMs /
-                             object$MedianIonInjectionTimeMs)))
+    lr <- as.vector(
+        abs(log2(object$IonInjectionTimeMs / object$MedianIonInjectionTimeMs))
+    )
 
-    i <- intersect(which(lr <= maxDeviation),
-                   .topIdx(-lr, .groupByLabels(by), n=keepTopN))
+    i <- intersect(
+        which(lr <= maxDeviation), .topIdx(-lr, .groupByLabels(by), n=keepTopN)
+    )
 
     if (length(i) && length(i) != ncol(object)) {
         n0 <- ncol(object)
         object <- object[, i]
         n1 <- ncol(object)
         nd <- n0 - n1
-        object <- .atdsLogMsg(object, n0 - n1, " scan", if (nd > 1L) { "s" },
-                              " filtered with injection time deviation >= ",
-                              maxDeviation, " or rank >= ", keepTopN + 1L)
+        object <- .atdsLogMsg(
+            object, n0 - n1, " scan", if (nd > 1L) { "s" },
+            " filtered with injection time deviation >= ",
+            maxDeviation, " or rank >= ", keepTopN + 1L
+        )
     }
     if (validObject(object)) {
         object
@@ -129,9 +142,11 @@ setMethod("filterInjectionTime", "TopDownSet",
 #
 ## @param object `TopDownSet`
 ## @param threshold `double`, remove fragments with intensity below
-#' `threshold`.
-#' @param relative `logical`, if relative is `TRUE` all fragments with
-#' intensity below `threshold * max(intensity)` per fragment are removed,
+## `threshold`.
+#' @param relative `logical`,
+#' if relative is `TRUE` all fragments with
+#' intensity below `threshold * max(intensity)`
+#' per fragment are removed,
 #' otherwise all fragments below `threshold` are removed.
 ## @return `TopDownSet`
 #' @aliases filterIntensity filterIntensity,TopDownSet-method
@@ -148,18 +163,22 @@ setMethod("filterIntensity", "TopDownSet",
         if (1L < threshold || threshold < 0L) {
             stop("'threshold hast to be between 0 and 1.")
         }
-        object@assay <- .drop0rowLt(object@assay,
-                                    tol=.rowMax(object@assay) * threshold)
+        object@assay <- .drop0rowLt(
+            object@assay, tol=.rowMax(object@assay) * threshold
+        )
     } else {
-        object@assay <- drop0(object@assay,
-                              tol=threshold - 10L * .Machine$double.eps,
-                              is.Csparse=TRUE)
+        object@assay <- drop0(
+            object@assay,
+            tol=threshold - 10L * .Machine$double.eps,
+            is.Csparse=TRUE
+        )
     }
     n1 <- nnzero(object@assay)
     if (n0 - n1) {
-        object <- .atdsLogMsg(object, n0 - n1, " intensity values < ",
-                              threshold, if (relative) { " (relative)" },
-                              " filtered")
+        object <- .atdsLogMsg(
+            object, n0 - n1, " intensity values < ", threshold,
+            if (relative) { " (relative)" }, " filtered"
+        )
     }
     if (validObject(object)) {
         object
@@ -172,7 +191,8 @@ setMethod("filterIntensity", "TopDownSet",
 #' technical replicates.
 #'
 ## @param object `TopDownSet`
-#' @param minN `numeric`, if less than `minN` of a fragment are found across
+#' @param minN `numeric`,
+#' if less than `minN` of a fragment are found across
 #' technical replicates it is removed.
 ## @param by `list`, how technical replicates are defined.
 ## @return `TopDownSet`
@@ -188,14 +208,16 @@ setMethod("filterNonReplicatedFragments", "TopDownSet",
 
     n0 <- nnzero(object@assay)
 
-    object@assay <- .drop0rowReplicates(object@assay, .groupByLabels(by),
-                                        minN=minN)
+    object@assay <- .drop0rowReplicates(
+        object@assay, .groupByLabels(by), minN=minN
+    )
     n1 <- nnzero(object@assay)
 
     if (n0 - n1) {
-        object <- .atdsLogMsg(object, n0 - n1, " intensity values of ",
-                              "fragments replicated < ", minN,
-                              " times filtered")
+        object <- .atdsLogMsg(
+            object, n0 - n1, " intensity values of fragments replicated < ",
+            minN, " times filtered"
+        )
     }
     if (validObject(object)) {
         object
@@ -204,13 +226,16 @@ setMethod("filterNonReplicatedFragments", "TopDownSet",
 
 #' @describeIn TopDownSet Normalise.
 #'
-#' Applies *T*otal *I*on *C*urrent normalisation to a [TopDownSet-class]. The
-#' normalisation ist done per scans/conditions (column-wise normalisation).
+#' Applies *T*otal *I*on *C*urrent normalisation to a
+#' [TopDownSet-class] object.
+#' The normalisation ist done per scans/conditions (column-wise normalisation).
 #'
 ## @param object `TopDownSet`
-#' @param method `character`, normalisation method, currently just `"TIC"`
-#' for *T*otal *I*on *C*urrent normalisation of the scans/conditions
-#' (column-wise normalisation) is supported.
+#' @param method `character`,
+#' normalisation method, currently just `"TIC"`
+#' for *T*otal *I*on *C*urrent
+#' normalisation of the scans/conditions (column-wise normalisation)
+#' is supported.
 ## @return `TopDownSet`
 #' @aliases normalize,TopDownSet-method
 #' @export
@@ -219,10 +244,10 @@ setMethod("normalize", "TopDownSet",
     method <- match.arg(method)
 
     if (method == "TIC") {
-        object@assay <- .normaliseCols(object@assay,
-                                       scale=object$TotIonCurrent)
-        .atdsLogMsg(object, "Intensity values normalized to TIC.",
-                    addDim=FALSE)
+        object@assay <- .normaliseCols(
+            object@assay, scale=object$TotIonCurrent
+        )
+        .atdsLogMsg(object, "Intensity values normalized to TIC.", addDim=FALSE)
     }
 })
 
@@ -237,10 +262,11 @@ setMethod("show", "TopDownSet", function(object) {
         cat("Number of theoretical fragments:", length(object@rowViews), "\n")
         fragments <- fragmentType(object)
         cat0("Theoretical fragment types (", nlevels(fragments), "): ",
-             paste0(.hft(levels(fragments), n=5), collapse=", "), "\n")
+            paste0(.hft(levels(fragments), n=5), collapse=", "), "\n")
         mass <- range(fragmentMass(object))
-        cat(sprintf("Theoretical mass range: [%.2f;%.2f]\n",
-                    mass[1L], mass[2L]))
+        cat(sprintf(
+            "Theoretical mass range: [%.2f;%.2f]\n", mass[1L], mass[2L])
+        )
     }
 
     if (nrow(object@colData)) {
@@ -248,22 +274,25 @@ setMethod("show", "TopDownSet", function(object) {
         cat("Number of conditions:", length(unique(object$Sample)), "\n")
         cat("Number of scans:", nrow(object@colData), "\n")
         cat0("Condition variables (", ncol(object@colData), "): ",
-             paste0(.hft(colnames(object@colData), n=2), collapse=", "), "\n")
+            paste0(.hft(colnames(object@colData), n=2), collapse=", "), "\n")
     }
 
     if (all(dim(object))) {
         cat("- - - Intensity data - - -\n")
-        cat(sprintf("Size of array: %dx%d (%.2f%% != 0)\n",
-                    nrow(object@assay), ncol(object@assay),
-                    nnzero(object@assay) / length(object@assay) * 100L))
+        cat(sprintf(
+            "Size of array: %dx%d (%.2f%% != 0)\n",
+            nrow(object@assay), ncol(object@assay),
+            nnzero(object@assay) / length(object@assay) * 100L)
+        )
         if (length(object@assay@x)) {
             intensity <- range(object@assay@x)
         } else {
             intensity <- c(-NA, NA)
         }
         cat("Number of matched fragments:", nnzero(object@assay), "\n")
-        cat(sprintf("Intensity range: [%.2f;%.2f]\n",
-                    intensity[1L], intensity[2L]))
+        cat(sprintf(
+            "Intensity range: [%.2f;%.2f]\n", intensity[1L], intensity[2L])
+        )
     }
 
     if (length(object@processing)) {
@@ -276,13 +305,15 @@ setMethod("show", "TopDownSet", function(object) {
 
 #' @describeIn TopDownSet Summary statistics.
 #'
-#' Returns a `matrix` with some statistics: number of fragments,
-#' total/min/first quartile/median/mean/third quartile/maximum of intensity
-#' values.
+#' Returns a `matrix`
+#' with some statistics: number of fragments,
+#' total/min/first quartile/median/mean/third quartile/maximum of
+#' intensity values.
 #'
 ## @param object `TopDownSet`
-#' @param what `character`, specifies whether `"conditions"` (columns; default) or
-#' `"fragments"` (rows) should be summarized.
+#' @param what `character`,
+#' specifies whether `"conditions"` (columns; default)
+#' or `"fragments"` (rows) should be summarized.
 #' @aliases summary,TopDownSet-method
 #' @export
 setMethod("summary", "TopDownSet",
@@ -298,17 +329,19 @@ setMethod("summary", "TopDownSet",
 #' `as(object, "MSnSet"): Coerce an [TopDownSet-class] object into an
 #' [MSnbase::MSnSet-class] object.
 setAs("TopDownSet", "MSnSet", function(from) {
-    processing <- new("MSnProcess",
-                      processing=from@processing,
-                      files=from@files)
+    processing <- new(
+        "MSnProcess",
+        processing=from@processing,
+        files=from@files
+    )
 
-    msnset <- new("MSnSet",
-                  exprs=as.matrix(from@assay),
-                  phenoData=as(as(from@colData, "data.frame"),
-                                  "AnnotatedDataFrame"),
-                  featureData=as(as(from@rowViews, "data.frame"),
-                                 "AnnotatedDataFrame"),
-                  processingData=processing)
+    msnset <- new(
+        "MSnSet",
+        exprs=as.matrix(from@assay),
+        phenoData=as(as(from@colData, "data.frame"), "AnnotatedDataFrame"),
+        featureData=as(as(from@rowViews, "data.frame"), "AnnotatedDataFrame"),
+        processingData=processing
+    )
 
     ## processingData are overwritten by ctor
     msnset@processingData <- processing
@@ -326,14 +359,18 @@ setAs("TopDownSet", "MSnSet", function(from) {
 #' [NCBSet-class] object.
 setAs("TopDownSet", "NCBSet", function(from) {
     assay <- .ncbMap(from)
-    ncb <- new("NCBSet",
-               rowViews=Views(subject(from@rowViews),
-                              start=1L, width=seq_len(nrow(assay)),
-                              names=rownames(assay)),
-               colData=from@colData,
-               assay=assay,
-               files=from@files,
-               tolerance=from@tolerance,
-               processing=from@processing)
+    ncb <- new(
+        "NCBSet",
+        rowViews=Views(
+            subject(from@rowViews),
+            start=1L, width=seq_len(nrow(assay)
+        ),
+        names=rownames(assay)),
+        colData=from@colData,
+        assay=assay,
+        files=from@files,
+        tolerance=from@tolerance,
+        processing=from@processing
+    )
     .atdsLogMsg(ncb, "Coerced TopDownSet into an NCBSet object")
 })

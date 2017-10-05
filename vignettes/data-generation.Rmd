@@ -2,26 +2,30 @@
 title: "Data Generation for topdownr"
 author:
 - name: Pavel V. Shliaha
-  affiliation: Department of Biochemistry and Molecular Biology, University of Southern Denmark, Denmark.
+  affiliation: Department of Biochemistry and Molecular Biology,
+    University of Southern Denmark, Denmark.
 - name: Sebastian Gibb
-  affiliation: Department of Anesthesiology and Intensive Care, University Medicine Greifswald, Germany.
+  affiliation: Department of Anesthesiology and Intensive Care,
+    University Medicine Greifswald, Germany.
 - name: Ole Nørregaard Jensen
-  affiliation: Department of Biochemistry and Molecular Biology, University of Southern Denmark, Denmark.
+  affiliation: Department of Biochemistry and Molecular Biology,
+    University of Southern Denmark, Denmark.
 package: topdownr
 abstract: >
-  This vignette describes the setup and the data preparation to create the input
-  files needed for the analysis with the functionality the `topdownr` package.
+    This vignette describes the setup and the data preparation to create the
+    input files needed for the analysis with the functionality the `topdownr`
+    package.
 output:
   BiocStyle::html_document:
     toc_float: true
     tidy: TRUE
 bibliography: topdownr.bib
 vignette: >
-  %\VignetteIndexEntry{Data Generation for topdownr}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteKeywords{Mass Spectrometry, Proteomics, Bioinformatics}
-  %\VignetteEncoding{UTF-8}
-  %\VignettePackage{topdownr}
+    %\VignetteIndexEntry{Data Generation for topdownr}
+    %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteKeywords{Mass Spectrometry, Proteomics, Bioinformatics}
+    %\VignetteEncoding{UTF-8}
+    %\VignettePackage{topdownr}
 ---
 
 ```{r environment, echo=FALSE}
@@ -55,13 +59,19 @@ to use the Bioconductor support site: https://support.bioconductor.org/.
 
 ## Setup the Thermo Software
 
-To create methods the user will have to install and modify Orbitrap Fusion LUMOS workstation first:
+To create methods the user will have to install and modify Orbitrap Fusion
+LUMOS workstation first:
 
 1. Request `OrbitrapFusionLumosWorkstation.exe` from Thermo Scientific.
 2. Install the workstation by running `OrbitrapFusionLumosWorkstation.exe`.
-3. Run `C:\Thermo\Instruments\TNG\OrbitrapFusionLumos\2.1\System\programs\TNGInstrumentConfigControl.exe`,
-   set *Optional Ion Source* to *ETD and Internal Calibration*, click *Apply* and *OK* (you could ignore the *restart your instrument* message).
-4. Replace `C:\Thermo\Instruments\TNG\OrbitrapFusionLumos\2.1\System\programs\Thermo.TNG.Calcium.MethodXML.dll` by `Thermo.TNG.Calcium.MethodXML.dll`.
+3. Run
+    `C:\Thermo\Instruments\TNG\OrbitrapFusionLumos\2.1\System\programs\TNGInstrumentConfigControl.exe`,
+    set *Optional Ion Source* to *ETD and Internal Calibration*,
+    click *Apply* and *OK* (you could ignore the *restart your instrument*
+    message).
+4. Replace
+    `C:\Thermo\Instruments\TNG\OrbitrapFusionLumos\2.1\System\programs\Thermo.TNG.Calcium.MethodXML.dll`
+    by `Thermo.TNG.Calcium.MethodXML.dll`.
 
 ## Setup XMLMethodChanger
 
@@ -76,7 +86,8 @@ In order to use *XMLMethodChanger* the operating system has to use the `.` (dot)
 as decimal mark and the `,` (comma) as digit group separator (one thousand dot
 two should be formated as `1,000.2`).
 
-In *Windows 7* the settings are located at `Windows Control Panel > Region and Language > Formats`.
+In *Windows 7* the settings are located at
+`Windows Control Panel > Region and Language > Formats`.
 Choose *English (USA)* here or use the *Additional settings* button to change it
 manually.
 
@@ -87,8 +98,8 @@ After data aquisition `topdownr` would need the header information from the
 Therefore the *ScanHeadsman* software is used. It could be
 downloaded from https://bitbucket.org/caetera/scanheadsman
 
-It requires Microsoft **.NET 4.5** or later (it is often preinstalled on a typical modern Windows
-or could be found in Microsoft's Download Center, e.g.
+It requires Microsoft **.NET 4.5** or later (it is often preinstalled on a
+typical modern Windows or could be found in Microsoft's Download Center, e.g.
 https://www.microsoft.com/en-us/download/details.aspx?id=30653).
 Additionally you would need Thermo's *MS File Reader* which could be downloaded
 free of charge (but you have to register) from the Thermo FlexNet website:
@@ -100,15 +111,16 @@ https://thermo.flexnetoperations.com/
 
 Importantly, *XMLmethodChanger* does not create methods *de novo*, but modifies
 pre-existing methods (supplied with *XMLMethodChanger*) using modifications
-described in XML files. Thus the whole process of creating user specified methods
-consists of 2 parts:
+described in XML files. Thus the whole process of creating user specified
+methods consists of 2 parts:
 
 1. Construction of XML files with all possible combination of fragmentation
-   parameters (see `topdownr::writeMethodXmls` below).
+    parameters (see `topdownr::writeMethodXmls` below).
 2. Submitting the constructed XML files together with a template
-   `.meth` file to *XMLmethodChanger*.
+    `.meth` file to *XMLmethodChanger*.
 
-We choose to use targeted MS2 scans (TMS2) as a way to store the fragmentation parameters.
+We choose to use targeted MS2 scans (TMS2) as a way to store the
+fragmentation parameters.
 Each TMS2 is stored in a separate experiment. Experiments do not overlap.
 
 ![Method Editor - Experiment 21](images/methodeditor-exp21.png)
@@ -190,8 +202,9 @@ runXmlMethodChanger(
 
 # Data Acquisition
 
-After setting up direct infusion make sure that MS1 spectrum produces expected protein mass after
-deconvolution by *Xtract*. Shown below is a deconvoluted MS1 spectrum for myoglobin.
+After setting up direct infusion make sure that MS1 spectrum produces
+expected protein mass after deconvolution by *Xtract*.
+Shown below is a deconvoluted MS1 spectrum for myoglobin.
 The dominant mass corresponds to myoglobin with Met removed.
 
 ![Xtract myoglobin](images/xtract-myo.png)
@@ -226,7 +239,8 @@ table) file for each `.raw` file.
 ## Convert .raw files into mzML
 
 The spectra have to be charge state deconvoluted with *Xtract* node in
-*Proteome Discoverer 2.1*. The software returns deconvoluted spectra in mzML format.
+*Proteome Discoverer 2.1*. The software returns deconvoluted spectra in
+mzML format.
 
 ![Proteome Discoverer](images/proteomediscoverer.png)
 

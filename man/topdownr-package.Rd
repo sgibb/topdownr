@@ -17,7 +17,8 @@ The usage of the topdownr package is demonstrated in the following vignettes:
 \itemize{
 \item Generate .meth files prior data acquisition for the Thermo Orbitrap Fusion
 Lumos MS devise: \code{vignette("data-generation", package="topdownr")}.
-\item How to analyse top-down fragmenation data: \code{vignette("analysis", package="topdownr")}
+\item How to analyse top-down fragmenation data:
+\code{vignette("analysis", package="topdownr")}
 }
 }
 \references{

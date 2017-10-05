@@ -9,8 +9,9 @@
         stop("'object' has to be an 'AbstractTopDownSet' object.")
     }
     if (addDim) {
-        object@processing <- c(object@processing,
-                               .logmsg(..., "; ", .logdim(object), "."))
+        object@processing <- c(
+            object@processing,
+            .logmsg(..., "; ", .logdim(object), "."))
     } else {
         object@processing <- c(object@processing, .logmsg(...))
     }
@@ -80,23 +81,31 @@ fragmentType <- function(object) {
     msg <- character()
 
     if (nrow(object@assay) != length(object@rowViews)) {
-        msg <- c(msg,
-                 "Mismatch between fragment data in 'rowViews' and 'assay'.")
+        msg <- c(
+            msg,
+            "Mismatch between fragment data in 'rowViews' and 'assay'."
+        )
     }
 
     if (any(rownames(object@assay) != names(object@rowViews))) {
-        msg <- c(msg,
-                 "Mismatch between fragment names in 'rowViews' and 'assay'.")
+        msg <- c(
+            msg,
+            "Mismatch between fragment names in 'rowViews' and 'assay'."
+        )
     }
 
     if (ncol(object@assay) != nrow(object@colData)) {
-        msg <- c(msg,
-                 "Mismatch between condition data in 'colData' and 'assay'.")
+        msg <- c(
+            msg,
+            "Mismatch between condition data in 'colData' and 'assay'."
+        )
     }
 
     if (any(colnames(object@assay) != rownames(object@colData))) {
-        msg <- c(msg,
-                 "Mismatch between condition names in 'colData' and 'assay'.")
+        msg <- c(
+            msg,
+            "Mismatch between condition names in 'colData' and 'assay'."
+        )
     }
 
     if (length(msg)) {

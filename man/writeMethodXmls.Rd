@@ -10,22 +10,28 @@ writeMethodXmls(ms1Settings, ms2Settings, groupBy = c("replication",
   pattern = "method_\%s.xml", verbose = interactive())
 }
 \arguments{
-\item{ms1Settings}{\code{list}, named list of MS1 settings, see e.g.
+\item{ms1Settings}{\code{list},
+named list of MS1 settings, see e.g.
 \code{\link[=defaultMs1Settings]{defaultMs1Settings()}}.}
 
-\item{ms2Settings}{\code{list}, named list of MS2 settings, see e.g.
+\item{ms2Settings}{\code{list},
+named list of MS2 settings, see e.g.
 \code{\link[=defaultMs2Settings]{defaultMs2Settings()}}.}
 
-\item{groupBy}{\code{character}, split files by \code{groupBy} entries.}
+\item{groupBy}{\code{character},
+split files by \code{groupBy} entries.}
 
-\item{replications}{\code{integer}, number of replications of experiments.}
+\item{replications}{\code{integer},
+number of replications of experiments.}
 
-\item{mz}{\code{matrix}, two columns (column 1: \emph{mass}, column 2: \emph{z}).}
+\item{mz}{\code{matrix},
+two columns (column 1: \emph{mass}, column 2: \emph{z}).}
 
-\item{massLabeling}{\code{logical}, should \emph{mz} values used for ID labeling?}
+\item{massLabeling}{\code{logical},
+should \emph{mz} values used for ID labeling?}
 
-\item{nMs2perMs1}{\code{integer}, how many MS2 scans should be run after a
-MS1 scan?}
+\item{nMs2perMs1}{\code{integer},
+how many MS2 scans should be run after a MS1 scan?}
 
 \item{duration}{\code{double}, how long should the scan be?}
 
@@ -44,10 +50,12 @@ all combinations of a user-given set of MS1 and MS2 settings.
 }
 \details{
 \itemize{
-\item \code{ms1Settings}: A \code{list} of MS1 settings. This has to be a named \code{list}.
+\item \code{ms1Settings}:
+A \code{list} of MS1 settings. This has to be a named \code{list}.
 Valid MS1 settings are:
 \code{c("FirstMass", "LastMass", "Microscans", "MaxITTimeInMS", "AgcTarget")}
-\item \code{ms2Settings}: A \code{list} of MS2 settings. This has to be a named \code{list}.
+\item \code{ms2Settings}:
+A \code{list} of MS2 settings. This has to be a named \code{list}.
 Valid MS2 settings are:
 \code{c("ActivationType", "IsolationWindow", "EnableMultiplexIons", "EnableMSXIds", "MaxNoOfMultiplexIons", "OrbitrapResolution", "AgcTarget", "MinAgcTarget", "MaxITTimeInMS", "Microscans", "ETDReactionTime", "ETDReagentTarget", "MaximumETDReagentInjectionTime", "UseInternalCalibratedETD", "ETDSupplementalActivationEnergy", "ETDSupplementalActivation")}
 \item \code{groupBy}: The \code{groupBy} parameter is used to split methods into
@@ -73,7 +81,8 @@ writeMethodXmls(defaultMs1Settings(FirstMass=400),
                 pattern="method_firstmass_400_\%s.xml")
 }
 \seealso{
-\code{\link[=defaultMs1Settings]{defaultMs1Settings()}}, \code{\link[=defaultMs2Settings]{defaultMs2Settings()}}
+\code{\link[=defaultMs1Settings]{defaultMs1Settings()}},
+\code{\link[=defaultMs2Settings]{defaultMs2Settings()}}
 }
 \author{
 Sebastian Gibb \email{mail@sebastiangibb.de}, Pavel V. Shliaha
