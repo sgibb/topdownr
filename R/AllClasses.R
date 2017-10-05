@@ -40,6 +40,10 @@ setClass("FragmentViews",
 #' experimental *m/z* values to the theoretical fragments.
 #' @slot processing `character`, log messages.
 #'
+#' @return This is an *Abstract/VIRTUAL* class to provide a common interface for
+#' [TopDownSet-class] and [NCBSet-class]. It is not possible to create an
+#' `AbstractTopDownSet` object.
+#'
 #' @seealso
 #' - [TopDownSet-class] and [NCBSet-class] which both implement/use this
 #' interface. These manual pages also provide some example code.
@@ -85,6 +89,8 @@ setClass("AbstractTopDownSet",
 #' experimental mz values to the theoretical fragments.
 #' @slot processing `character`, log messages.
 #'
+#' @return An [TopDownSet-class] object.
+#'
 #' @seealso
 #' - [FragmentViews-class] for the row view interface.
 #' - [Matrix::dgCMatrix-class] for technical details about the intensity storage.
@@ -116,6 +122,8 @@ setClass("TopDownSet",
 #' @slot tolerance `double`, tolerance in *ppm* that were used for matching the
 #' experimental mz values to the theoretical fragments.
 #' @slot processing `character`, log messages.
+#'
+#' @return An [NCBSet-class] object.
 #'
 #' @seealso
 #' - An `NCBSet` is generated from an [TopDownSet-class] object.

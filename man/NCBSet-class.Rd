@@ -42,6 +42,9 @@ combinations is shown.}
 added.
 newly added fragments third column: number of newly covered bonds.}
 }
+\value{
+An \linkS4class{NCBSet} object.
+}
 \description{
 The NCBSet class is a container for a top-down proteomics
 experiment similar to the \linkS4class{TopDownSet} but instead of intensity values

@@ -19,6 +19,7 @@
 #' @param names `character`, names of the fragments, same length as
 #' `start`/`end`/width`.
 #' @param metadata `list`, metadata like modifications.
+#' @return An [FragmentViews-class] object.
 #' @export
 #' @examples
 #'

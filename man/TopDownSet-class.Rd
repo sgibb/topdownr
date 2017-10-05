@@ -68,6 +68,9 @@ for \emph{T}otal \emph{I}on \emph{C}urrent normalisation of the scans/conditions
 \item{\ldots}{arguments passed to internal/other methods.
 replicates (that's why the default is the \code{"Sample"} column in \code{colData}).}
 }
+\value{
+An \linkS4class{TopDownSet} object.
+}
 \description{
 The TopDownSet class is a container for a whole top-down proteomics
 experiment.

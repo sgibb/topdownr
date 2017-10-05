@@ -79,6 +79,11 @@ summarized.}
 
 \item{\ldots}{arguments passed to internal/other methods.}
 }
+\value{
+This is an \emph{Abstract/VIRTUAL} class to provide a common interface for
+\linkS4class{TopDownSet} and \linkS4class{NCBSet}. It is not possible to create an
+\code{AbstractTopDownSet} object.
+}
 \description{
 \emph{Abstract/VIRTUAL} parent class for \linkS4class{TopDownSet} and \linkS4class{NCBSet} to
 provide common interface.

@@ -42,6 +42,9 @@ FragmentViews(sequence, mass, type, z = 1L, start = NULL, end = NULL,
 
 \item{object}{FragmentViews}
 }
+\value{
+An \linkS4class{FragmentViews} object.
+}
 \description{
 The FragmentViews class is a basic container for storing a set of views
 (start/end locations) on the same peptides/protein sequence. Additionally
