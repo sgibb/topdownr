@@ -58,8 +58,6 @@
 #' @seealso [MSnbase::calculateFragments()], [MSnbase::defaultNeutralLoss()]
 #' @examples
 #' \dontrun{
-#' library("topdownr")
-#'
 #' if (require("topdownrdata")) {
 #'   # add H+ to z and no neutral loss of water
 #'   tds <- readTopDownFiles(topdownrdata::topDownDataPath("myoglobin"),

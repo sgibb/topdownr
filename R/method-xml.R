@@ -394,8 +394,6 @@
 #' \email{pavels@@bmb.sdu.dk}
 #' @examples
 #' \dontrun{
-#' library("topdownr")
-#'
 #' writeMethodXmls(defaultMs1Settings(FirstMass=400),
 #'                 defaultMs2Settings(),
 #'                 mz=cbind(mass=c(609.21, 700.45, 823.95), z=10),

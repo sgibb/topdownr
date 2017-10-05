@@ -275,9 +275,6 @@ cat0 <- function(...) {
 #' @return `double`, mass label (id encoded in the second to fourth decimal place)
 #' @seealso [.massLabelToId()]
 #' @noRd
-#' @example
-#' library("topdownr")
-#' topdownr:::.massLabel(c(750, 1000), c(1, 100))
 .massLabel <- function(x, id, divisor=10000L) {
     if (any(log10(divisor) <= log10(id) + 1L)) {
         stop("'divisor' has to be at least two digits more than 'id'")

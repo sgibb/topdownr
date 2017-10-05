@@ -21,7 +21,6 @@
 #' @param metadata `list`, metadata like modifications.
 #' @export
 #' @examples
-#' library("topdownr")
 #'
 #' # constructor
 #' fv <- FragmentViews("ACE", start=1, width=1:3, names=paste0("b", 1:3),

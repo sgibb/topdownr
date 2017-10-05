@@ -84,8 +84,6 @@ loss should be applied on adducts you have to create additional rows, e.g.:
 }
 \examples{
 \dontrun{
-library("topdownr")
-
 if (require("topdownrdata")) {
   # add H+ to z and no neutral loss of water
   tds <- readTopDownFiles(topdownrdata::topDownDataPath("myoglobin"),

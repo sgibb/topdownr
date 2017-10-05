@@ -24,8 +24,6 @@
 #' @rdname default-functions
 #' @export
 #' @examples
-#' library("topdownr")
-#'
 #' # all default MS1 settings
 #' defaultMs1Settings()
 #'
