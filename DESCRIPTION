@@ -13,7 +13,7 @@ Description: The topdownr package allows automatic and systemic investigation
     provides functions to analyse and process the generated MS data and
     determine the best conditions to maximise overall fragment coverage.
 Depends:
-    R (>= 3.3),
+    R (>= 3.4),
     methods,
     BiocGenerics (>= 0.20.0),
     Biostrings (>= 2.42.1),
