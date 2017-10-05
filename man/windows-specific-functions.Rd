@@ -3,31 +3,45 @@
 \name{createTngFusionMethFiles}
 \alias{createTngFusionMethFiles}
 \alias{runXmlMethodChanger}
-\title{Create meth files from xml templates}
+\alias{runScanHeadsman}
+\title{Windows specific functions.}
 \usage{
 createTngFusionMethFiles(template, xml = list.files(pattern = ".*\\\\.xml$"),
   executable = "XmlMethodChanger.exe", verbose = interactive())
 
 runXmlMethodChanger(template, xml = list.files(pattern = ".*\\\\.xml$"),
   executable = "XmlMethodChanger.exe", verbose = interactive())
+
+runScanHeadsman(path = ".", executable = "ScanHeadsman.exe")
 }
 \arguments{
 \item{template}{\code{character}, path to template \code{.meth} file.}
 
 \item{xml}{\code{character}, vector of path to \code{.xml} files.}
 
-\item{executable}{\code{character}, path to the \code{XmlMethodChanger.exe}
-executable.}
+\item{executable}{\code{character}, path to the \code{XmlMethodChanger.exe} or
+\code{ScanHeadsman.exe} executable.}
 
 \item{verbose}{\code{logical}, if \code{TRUE} a progress bar is shown.}
+
+\item{path}{\code{character}, path to the directory containing the \code{.raw} files.}
 }
 \value{
 Nothing. Used for its side effects.
 }
 \description{
-This function calls \code{XmlMethodChanger.exe} on all given xml files generated
-with \code{\link[=writeMethodXmls]{writeMethodXmls()}}.
-It works only on Windows.
+The functions \code{runXmlMethodChanger} and \code{runScanHeadsman} call
+\code{XmlMethodChanger.exe} and \code{ScanHeadsman.exe} with the correspond arguments.
+The only work on Windows (maybe on Linux + wine as well but that was never
+tested).
+}
+\details{
+\code{runXmlMethodChanger} applies ‘XmlMethodChanger.exe’ on all given XML files
+generated with \code{\link[=writeMethodXmls]{writeMethodXmls()}} to create \code{.meth} files from a template.
+
+\code{runScanHeadsman} calls \code{ScanHeadsman.exe} on a given directory containing
+\code{.raw} files. \code{ScanHeadsman.exe} extracts the method and scan header data
+into \code{.experiments.csv} and \code{.txt} files, respectively.
 }
 \examples{
 \dontrun{
@@ -35,10 +49,16 @@ runXmlMethodChanger(templateMeth="TMS2IndependentTemplate240Extended.meth",
                     modificationXml=list.files(pattern="^method.*\\\\.xml$"),
                     executable="..\\\\XmlMethodChanger.exe")
 }
+\dontrun{
+runScanHeadsman("raw", executable="..\\\\ScanHeadsman.exe")
+}
 }
 \references{
 XmlMethodChanger source code:
 https://github.com/thermofisherlsms/meth-modifications/
+
+ScanHeadsman source code:
+https://bitbucket.org/caetera/scanheadsman
 }
 \seealso{
 \code{\link[=writeMethodXmls]{writeMethodXmls()}}
