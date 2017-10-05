@@ -287,7 +287,7 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
     <pre class="examples"><div class='input'><span class='co'>## Example data</span>
 <span class='fu'>data</span>(<span class='no'>tds</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"topdownr"</span>)
 
-<span class='no'>tds</span></div><div class='output co'>#&gt; TopDownSet object (0.68 Mb)
+<span class='no'>tds</span></div><div class='output co'>#&gt; TopDownSet object (0.74 Mb)
 #&gt; - - - Protein data - - -
 #&gt; Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
 #&gt; Mass : 16964.96
@@ -11856,7 +11856,7 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 <span class='co'># Subsetting</span>
 
 <span class='co'># First 100 fragments</span>
-<span class='no'>tds</span>[<span class='fl'>1</span>:<span class='fl'>100</span>]</div><div class='output co'>#&gt; TopDownSet object (0.29 Mb)
+<span class='no'>tds</span>[<span class='fl'>1</span>:<span class='fl'>100</span>]</div><div class='output co'>#&gt; TopDownSet object (0.30 Mb)
 #&gt; - - - Protein data - - -
 #&gt; Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
 #&gt; Mass : 16964.96
@@ -11875,9 +11875,9 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 #&gt; Intensity range: [407.50;56063.52]
 #&gt; - - - Processing information - - -
 #&gt; [2017-10-05 10:28:55] 6185 fragments [2700;351] matched (tolerance: 5 ppm).
-#&gt; [2017-10-05 14:23:23] Subsetted 6185 fragments [2700;351] to 366 fragments [100;351]. </div><div class='input'>
+#&gt; [2017-10-05 20:21:45] Subsetted 6185 fragments [2700;351] to 366 fragments [100;351]. </div><div class='input'>
 <span class='co'># All c fragments</span>
-<span class='no'>tds</span>[<span class='st'>"c"</span>]</div><div class='output co'>#&gt; TopDownSet object (0.29 Mb)
+<span class='no'>tds</span>[<span class='st'>"c"</span>]</div><div class='output co'>#&gt; TopDownSet object (0.31 Mb)
 #&gt; - - - Protein data - - -
 #&gt; Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
 #&gt; Mass : 16964.96
@@ -11896,9 +11896,9 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 #&gt; Intensity range: [775.78;664294.75]
 #&gt; - - - Processing information - - -
 #&gt; [2017-10-05 10:28:55] 6185 fragments [2700;351] matched (tolerance: 5 ppm).
-#&gt; [2017-10-05 14:23:23] Subsetted 6185 fragments [2700;351] to 159 fragments [152;351]. </div><div class='input'>
+#&gt; [2017-10-05 20:21:45] Subsetted 6185 fragments [2700;351] to 159 fragments [152;351]. </div><div class='input'>
 <span class='co'># Just c 152</span>
-<span class='no'>tds</span>[<span class='st'>"c152"</span>]</div><div class='output co'>#&gt; TopDownSet object (0.27 Mb)
+<span class='no'>tds</span>[<span class='st'>"c152"</span>]</div><div class='output co'>#&gt; TopDownSet object (0.29 Mb)
 #&gt; - - - Protein data - - -
 #&gt; Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
 #&gt; Mass : 16964.96
@@ -11917,9 +11917,9 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 #&gt; Intensity range: [979.57;664294.75]
 #&gt; - - - Processing information - - -
 #&gt; [2017-10-05 10:28:55] 6185 fragments [2700;351] matched (tolerance: 5 ppm).
-#&gt; [2017-10-05 14:23:23] Subsetted 6185 fragments [2700;351] to 93 fragments [1;351]. </div><div class='input'>
+#&gt; [2017-10-05 20:21:45] Subsetted 6185 fragments [2700;351] to 93 fragments [1;351]. </div><div class='input'>
 <span class='co'># Condition 1 to 10</span>
-<span class='no'>tds</span>[, <span class='fl'>1</span>:<span class='fl'>10</span>]</div><div class='output co'>#&gt; TopDownSet object (0.40 Mb)
+<span class='no'>tds</span>[, <span class='fl'>1</span>:<span class='fl'>10</span>]</div><div class='output co'>#&gt; TopDownSet object (0.44 Mb)
 #&gt; - - - Protein data - - -
 #&gt; Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
 #&gt; Mass : 16964.96
@@ -11938,7 +11938,7 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 #&gt; Intensity range: [1566.07;158090.86]
 #&gt; - - - Processing information - - -
 #&gt; [2017-10-05 10:28:55] 6185 fragments [2700;351] matched (tolerance: 5 ppm).
-#&gt; [2017-10-05 14:23:23] Subsetted 6185 fragments [2700;351] to 134 fragments [2700;10]. </div><div class='input'>
+#&gt; [2017-10-05 20:21:45] Subsetted 6185 fragments [2700;351] to 134 fragments [2700;10]. </div><div class='input'>
 <span class='co'># Filtering</span>
 <span class='co'># Filter all intensities that don't have at least 10 % of the highest</span>
 <span class='co'># intensity per fragment.</span>
@@ -11974,7 +11974,7 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 #&gt; 5 0.00000000 0.00000000
 #&gt; 6 0.00000000 0.00000000</div><div class='input'>
 <span class='co'># Coercion</span>
-<span class='fu'>as</span>(<span class='no'>tds</span>, <span class='st'>"NCBSet"</span>)</div><div class='output co'>#&gt; NCBSet object (0.24 Mb)
+<span class='fu'>as</span>(<span class='no'>tds</span>, <span class='st'>"NCBSet"</span>)</div><div class='output co'>#&gt; NCBSet object (0.25 Mb)
 #&gt; - - - Protein data - - -
 #&gt; Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
 #&gt; - - - Fragment data - - -
@@ -11989,14 +11989,14 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 #&gt; Size of array: 152x220 (2.22% != 0)
 #&gt; - - - Processing information - - -
 #&gt; [2017-10-05 10:28:55] 6185 fragments [2700;351] matched (tolerance: 5 ppm).
-#&gt; [2017-10-05 14:23:23] 2121 intensity values &lt; 0.1 (relative) filtered; 4064 fragments [2700;351].
-#&gt; [2017-10-05 14:23:23] 274 fragments with CV &gt; 30% filtered; 3790 fragments [2700;351].
-#&gt; [2017-10-05 14:23:23] Subsetted 3790 fragments [2700;351] to 3785 fragments [2700;345].
-#&gt; [2017-10-05 14:23:23] 6 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 3785 fragments [2700;345].
-#&gt; [2017-10-05 14:23:23] 2195 intensity values of fragments replicated &lt; 2 times filtered; 1590 fragments [2700;345].
-#&gt; [2017-10-05 14:23:23] Intensity values normalized to TIC.
-#&gt; [2017-10-05 14:23:23] Aggregated 1590 fragments [2700;345] to 795 fragments [2700;220].
-#&gt; [2017-10-05 14:23:23] Coerced TopDownSet into an NCBSet object; 741 fragments [152;220]. </div><div class='input'>
+#&gt; [2017-10-05 20:21:45] 2121 intensity values &lt; 0.1 (relative) filtered; 4064 fragments [2700;351].
+#&gt; [2017-10-05 20:21:45] 274 fragments with CV &gt; 30% filtered; 3790 fragments [2700;351].
+#&gt; [2017-10-05 20:21:45] Subsetted 3790 fragments [2700;351] to 3785 fragments [2700;345].
+#&gt; [2017-10-05 20:21:45] 6 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 3785 fragments [2700;345].
+#&gt; [2017-10-05 20:21:45] 2195 intensity values of fragments replicated &lt; 2 times filtered; 1590 fragments [2700;345].
+#&gt; [2017-10-05 20:21:45] Intensity values normalized to TIC.
+#&gt; [2017-10-05 20:21:45] Aggregated 1590 fragments [2700;345] to 795 fragments [2700;220].
+#&gt; [2017-10-05 20:21:45] Coerced TopDownSet into an NCBSet object; 741 fragments [152;220]. </div><div class='input'>
 <span class='kw'>if</span> (<span class='fu'>require</span>(<span class='st'>"MSnbase"</span>)) {
     <span class='fu'><a href='http://www.rdocumentation.org/packages/MSnbase/topics/mzRident2dfr'>as</a></span>(<span class='no'>tds</span>, <span class='st'>"MSnSet"</span>)
 }</div><div class='output co'>#&gt; <span class='message'>Loading required package: MSnbase</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: Biobase</span></div><div class='output co'>#&gt; <span class='message'>Welcome to Bioconductor</span>
@@ -12004,7 +12004,7 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 #&gt; <span class='message'>    Vignettes contain introductory material; view with</span>
 #&gt; <span class='message'>    'browseVignettes()'. To cite Bioconductor, see</span>
 #&gt; <span class='message'>    'citation("Biobase")', and for packages 'citation("pkgname")'.</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: mzR</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: Rcpp</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: BiocParallel</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: ProtGenerics</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>This is MSnbase version 2.3.11 </span>
+#&gt; <span class='message'>This is MSnbase version 2.3.12 </span>
 #&gt; <span class='message'>  Visit https://lgatto.github.io/MSnbase/ to get started.</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: ‘MSnbase’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:stats’:</span>
 #&gt; <span class='message'></span>
@@ -12028,14 +12028,14 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 #&gt; Annotation:  
 #&gt; - - - Processing information - - -
 #&gt; [2017-10-05 10:28:55] 6185 fragments [2700;351] matched (tolerance: 5 ppm). 
-#&gt; [2017-10-05 14:23:23] 2121 intensity values &lt; 0.1 (relative) filtered; 4064 fragments [2700;351]. 
-#&gt; [2017-10-05 14:23:23] 274 fragments with CV &gt; 30% filtered; 3790 fragments [2700;351]. 
-#&gt; [2017-10-05 14:23:23] Subsetted 3790 fragments [2700;351] to 3785 fragments [2700;345]. 
-#&gt; [2017-10-05 14:23:23] 6 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 3785 fragments [2700;345]. 
-#&gt; [2017-10-05 14:23:23] 2195 intensity values of fragments replicated &lt; 2 times filtered; 1590 fragments [2700;345]. 
-#&gt; [2017-10-05 14:23:23] Intensity values normalized to TIC. 
-#&gt; [2017-10-05 14:23:23] Aggregated 1590 fragments [2700;345] to 795 fragments [2700;220]. 
-#&gt;  MSnbase version: 2.3.11 </div></pre>
+#&gt; [2017-10-05 20:21:45] 2121 intensity values &lt; 0.1 (relative) filtered; 4064 fragments [2700;351]. 
+#&gt; [2017-10-05 20:21:45] 274 fragments with CV &gt; 30% filtered; 3790 fragments [2700;351]. 
+#&gt; [2017-10-05 20:21:45] Subsetted 3790 fragments [2700;351] to 3785 fragments [2700;345]. 
+#&gt; [2017-10-05 20:21:45] 6 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 3785 fragments [2700;345]. 
+#&gt; [2017-10-05 20:21:45] 2195 intensity values of fragments replicated &lt; 2 times filtered; 1590 fragments [2700;345]. 
+#&gt; [2017-10-05 20:21:45] Intensity values normalized to TIC. 
+#&gt; [2017-10-05 20:21:45] Aggregated 1590 fragments [2700;345] to 795 fragments [2700;220]. 
+#&gt;  MSnbase version: 2.3.12 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
