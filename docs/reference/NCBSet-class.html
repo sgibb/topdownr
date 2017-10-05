@@ -99,10 +99,11 @@
     </div>
 
     
-    <p>The NCBSet class is a container for a top-down proteomics
-experiment similar to the <a href='TopDownSet-class.html'>TopDownSet</a> but instead of intensity values
-it just stores the information if a bond is covered by a
-N-terminal (encoded as <code>1</code>), a C-terminal (encoded as <code>2</code>)
+    <p>The NCBSet class is a container for a top-down proteomics experiment
+similar to the <a href='TopDownSet-class.html'>TopDownSet</a>
+but instead of intensity values it just stores the information if a
+bond is covered by a N-terminal (encoded as <code>1</code>),
+a C-terminal (encoded as <code>2</code>)
 and/or both fragments (encoded as <code>3</code>).</p>
     
 
@@ -132,17 +133,18 @@ and/or both fragments (encoded as <code>3</code>).</p>
     </tr>
     <tr>
       <th>minN</th>
-      <td><p><code>integer</code> stop if there are less than <code>minN</code> additional fragments</p></td>
+      <td><p><code>integer</code>,
+stop if there are less than <code>minN</code> additional fragments</p></td>
     </tr>
     <tr>
       <th>nCombinations</th>
-      <td><p><code>integer</code>, number of combinations to show (0 to avoid
-plotting them at all).</p></td>
+      <td><p><code>integer</code>,
+number of combinations to show (0 to avoid plotting them at all).</p></td>
     </tr>
     <tr>
       <th>cumCoverage</th>
-      <td><p><code>logical</code>, if <code>TRUE</code> (default) cumulative coverage of
-combinations is shown.</p></td>
+      <td><p><code>logical</code>,
+if <code>TRUE</code> (default) cumulative coverage of combinations is shown.</p></td>
     </tr>
     <tr>
       <th>labels</th>
@@ -150,7 +152,8 @@ combinations is shown.</p></td>
     </tr>
     <tr>
       <th>what</th>
-      <td><p><code>character</code>, specifies whether <code>"conditions"</code> (columns; default) or
+      <td><p><code>character</code>,
+specifies whether <code>"conditions"</code> (columns; default) or
 <code>"bonds"</code> (rows) should be summarized.</p></td>
     </tr>
     <tr>
@@ -161,20 +164,27 @@ newly added fragments third column: number of newly covered bonds.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>An NCBSet object.</p>
+    
     <h2 class="hasAnchor" id="methods-by-generic-"><a class="anchor" href="#methods-by-generic-"></a>Methods (by generic)</h2>
 
     <ul>
 <li><p><code>bestConditions</code>: Best combination of conditions.</p>
 <p>Finds the best combination of conditions for highest coverage of bonds. Use
-<code>n</code> to limit the number of iterations and combinations that should be returned.
+<code>n</code> to limit the number of iterations and combinations that should be
+returned.
 If <code>minN</code> is set at least <code>minN</code> fragments have to be added to the
 combinations. The function returns a 2-column matrix. The first column
 contains the index of the condition (column number) and the second one the
 newly added number of fragments.</p></li>
 <li><p><code>fragmentationMap</code>: Plot fragmentation map.</p>
-<p>Plots a fragmentation map of the Protein. Use <code>nCombinations</code> to add another
-plot with <code>nCombinations</code> combined conditions. If <code>cumCoverage</code> is <code>TRUE</code>
-(default) these combinations increase the coverage cumulatively.</p></li>
+<p>Plots a fragmentation map of the Protein.
+Use <code>nCombinations</code> to add another
+plot with <code>nCombinations</code> combined conditions.
+If <code>cumCoverage</code> is <code>TRUE</code> (default)
+these combinations increase the coverage cumulatively.</p></li>
 <li><p><code>summary</code>: Summary statistics.</p>
 <p>Returns a <code>matrix</code> with some statistics: number of fragments,
 total/min/first quartile/median/mean/third quartile/maximum of intensity
@@ -185,19 +195,21 @@ values.</p></li>
 
     
     <dl class='dl-horizontal'>
-<dt><code>rowViews</code></dt><dd><p><a href='http://www.rdocumentation.org/packages/Biostrings/topics/XStringViews-class'>Biostrings::XStringViews</a>, information about bonds
-(name, start, end, width, sequence), see <a href='http://www.rdocumentation.org/packages/Biostrings/topics/XStringViews-class'>Biostrings::XStringViews</a>
-for details.</p></dd>
-    <dt><code>colData</code></dt><dd><p><a href='http://www.rdocumentation.org/packages/S4Vectors/topics/DataFrame-class'>S4Vectors::DataFrame</a>, information about the MS2
-experiments and the fragmentation conditions.</p></dd>
-    <dt><code>assay</code></dt><dd><p><a href='http://www.rdocumentation.org/packages/Matrix/topics/dgCMatrix-class'>Matrix::dgCMatrix</a>, coverage values of the bonds. The
-rows correspond to the bonds and the columns to the condition/run. It
-just stores values that are different from zero. If a bond is covered by an
-N-terminal fragment its encoded with <code>1</code>, by an C-terminal fragmentl with <code>2</code>
-and by both fragment types by <code>3</code> respectively.</p></dd>
+<dt><code>rowViews</code></dt><dd><p><a href='http://www.rdocumentation.org/packages/Biostrings/topics/XStringViews-class'>Biostrings::XStringViews</a>,
+information about bonds (name, start, end, width, sequence),
+see <a href='http://www.rdocumentation.org/packages/Biostrings/topics/XStringViews-class'>Biostrings::XStringViews</a> for details.</p></dd>
+    <dt><code>colData</code></dt><dd><p><a href='http://www.rdocumentation.org/packages/S4Vectors/topics/DataFrame-class'>S4Vectors::DataFrame</a>,
+information about the MS2 experiments and the fragmentation conditions.</p></dd>
+    <dt><code>assay</code></dt><dd><p><a href='http://www.rdocumentation.org/packages/Matrix/topics/dgCMatrix-class'>Matrix::dgCMatrix</a>,
+coverage values of the bonds. The rows correspond to the bonds and the
+columns to the condition/run. It just stores values that are different
+from zero. If a bond is covered by an N-terminal fragment its encoded
+with <code>1</code>, by an C-terminal fragmentl with <code>2</code> and
+by both fragment types by <code>3</code> respectively.</p></dd>
     <dt><code>files</code></dt><dd><p><code>character</code>, files that were imported.</p></dd>
-    <dt><code>tolerance</code></dt><dd><p><code>double</code>, tolerance in <em>ppm</em> that were used for matching the
-experimental mz values to the theoretical fragments.</p></dd>
+    <dt><code>tolerance</code></dt><dd><p><code>double</code>,
+tolerance in <em>ppm</em> that were used for matching the experimental mz values
+to the theoretical fragments.</p></dd>
     <dt><code>processing</code></dt><dd><p><code>character</code>, log messages.</p></dd>
 </dl>
     
@@ -205,23 +217,1572 @@ experimental mz values to the theoretical fragments.</p></dd>
 
     <ul>
 <li><p>An <code>NCBSet</code> is generated from an <a href='TopDownSet-class.html'>TopDownSet</a> object.</p></li>
-<li><p><a href='http://www.rdocumentation.org/packages/Biostrings/topics/XStringViews-class'>Biostrings::XStringViews</a> for the row view interface.</p></li>
-<li><p><a href='http://www.rdocumentation.org/packages/Matrix/topics/dgCMatrix-class'>Matrix::dgCMatrix</a> for technical details about the coverage storage.</p></li>
+<li><p><a href='http://www.rdocumentation.org/packages/Biostrings/topics/XStringViews-class'>Biostrings::XStringViews</a>
+for the row view interface.</p></li>
+<li><p><a href='http://www.rdocumentation.org/packages/Matrix/topics/dgCMatrix-class'>Matrix::dgCMatrix</a>
+for technical details about the coverage storage.</p></li>
 </ul>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'>## Example data</span>
+<span class='fu'>data</span>(<span class='no'>tds</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"topdownr"</span>)
+
+<span class='co'>## Aggregate technical replicates</span>
+<span class='no'>tds</span> <span class='kw'>&lt;-</span> <span class='fu'>aggregate</span>(<span class='no'>tds</span>)
+
+<span class='co'>## Coercion into an NCBSet object</span>
+<span class='no'>ncb</span> <span class='kw'>&lt;-</span> <span class='fu'>as</span>(<span class='no'>tds</span>, <span class='st'>"NCBSet"</span>)
+
+<span class='no'>ncb</span></div><div class='output co'>#&gt; NCBSet object (0.27 Mb)
+#&gt; - - - Protein data - - -
+#&gt; Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
+#&gt; - - - Fragment data - - -
+#&gt; Number of N-terminal fragments: 239
+#&gt; Number of C-terminal fragments: 3625
+#&gt; Number of N- and C-terminal fragments: 14
+#&gt; - - - Condition data - - -
+#&gt; Number of conditions: 222 
+#&gt; Number of scans: 222 
+#&gt; Condition variables (56): Scan, PeaksCount, ..., Sample, Charge
+#&gt; - - - Assay data - - -
+#&gt; Size of array: 152x222 (11.49% != 0)
+#&gt; - - - Processing information - - -
+#&gt; [2017-10-05 10:28:55] 6185 fragments [2700;351] matched (tolerance: 5 ppm).
+#&gt; [2017-10-05 14:23:16] Aggregated 6185 fragments [2700;351] to 4771 fragments [2700;222].
+#&gt; [2017-10-05 14:23:17] Coerced TopDownSet into an NCBSet object; 3878 fragments [152;222]. </div><div class='input'>
+<span class='fu'>head</span>(<span class='fu'>summary</span>(<span class='no'>ncb</span>))</div><div class='output co'>#&gt;                                        Fragments Total Min Q1 Median      Mean
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1        10    20   2  2      2 0.1315789
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1        59   118   2  2      2 0.7763158
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1        15    30   2  2      2 0.1973684
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1         0     0   0  0      0 0.0000000
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1         0     0   0  0      0 0.0000000
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_07_00_1         0     0   0  0      0 0.0000000
+#&gt;                                        Q3 Max
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1  2   2
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1  2   2
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1  2   2
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1  0   0
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1  0   0
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_07_00_1  0   0</div><div class='input'>
+<span class='co'># Accessing slots</span>
+<span class='fu'><a href='AbstractTopDownSet-class.html'>rowViews</a></span>(<span class='no'>ncb</span>)</div><div class='output co'>#&gt;   Views on a 153-letter AAString subject
+#&gt; subject: GLSDGEWQQVLNVWGKVEADIAGHGQEVLIRLFT...PGDFGADAQGAMTKALELFRNDIAAKYKELGFQG
+#&gt; views:
+#&gt;       start end width
+#&gt;   [1]     1   1     1 [G]
+#&gt;   [2]     1   2     2 [GL]
+#&gt;   [3]     1   3     3 [GLS]
+#&gt;   [4]     1   4     4 [GLSD]
+#&gt;   [5]     1   5     5 [GLSDG]
+#&gt;   ...   ... ...   ... ...
+#&gt; [148]     1 148   148 [GLSDGEWQQVLNVWGKVEADIAGHGQE...FGADAQGAMTKALELFRNDIAAKYKE]
+#&gt; [149]     1 149   149 [GLSDGEWQQVLNVWGKVEADIAGHGQE...GADAQGAMTKALELFRNDIAAKYKEL]
+#&gt; [150]     1 150   150 [GLSDGEWQQVLNVWGKVEADIAGHGQE...ADAQGAMTKALELFRNDIAAKYKELG]
+#&gt; [151]     1 151   151 [GLSDGEWQQVLNVWGKVEADIAGHGQE...DAQGAMTKALELFRNDIAAKYKELGF]
+#&gt; [152]     1 152   152 [GLSDGEWQQVLNVWGKVEADIAGHGQE...AQGAMTKALELFRNDIAAKYKELGFQ]</div><div class='input'><span class='fu'><a href='AbstractTopDownSet-class.html'>colData</a></span>(<span class='no'>ncb</span>)</div><div class='output co'>#&gt; DataFrame with 222 rows and 56 columns
+#&gt;                                             Scan PeaksCount TotIonCurrent
+#&gt;                                        &lt;integer&gt;  &lt;numeric&gt;     &lt;numeric&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1        13       34.0     6076019.0
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1        17      118.0     4954683.2
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1        21       50.5      911811.8
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1        25       17.0      632774.9
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1        29       17.0     1189008.9
+#&gt; ...                                          ...        ...           ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1       354      207.0       3673983
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00         357      147.0       2404668
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00         360      304.0       6164025
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1       362      238.5       4522979
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1       365      271.5       5081922
+#&gt;                                        RetentionTime BasePeakMz
+#&gt;                                            &lt;numeric&gt;  &lt;numeric&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1      73.35103 16932.9849
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1     133.46582 16941.4662
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1     193.52460   231.1238
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1     253.60162   231.1238
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1     313.64949   231.1238
+#&gt; ...                                              ...        ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1      6587.799   6068.152
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00        6643.156   3402.745
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00        6708.301   6068.160
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1      6763.062   6068.156
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1      6828.858   6068.156
+#&gt;                                        BasePeakIntensity.SpectraInformation
+#&gt;                                                                   &lt;numeric&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1                           4694689.44
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1                            457806.72
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1                             70850.86
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1                            121952.60
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1                            297256.26
+#&gt; ...                                                                     ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1                             264098.0
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00                               181041.8
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00                               393674.6
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1                             320460.5
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1                             348272.6
+#&gt;                                            LowMz     HighMz PrecursorMz
+#&gt;                                        &lt;numeric&gt;  &lt;numeric&gt;   &lt;numeric&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1  941.4712 16932.9849    1211.700
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1  536.2326 16941.4662    1211.700
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1  229.6290  3629.8030    1211.701
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1  203.0662   715.3829    1211.701
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1  200.1392   318.6420    1211.701
+#&gt; ...                                          ...        ...         ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1  565.4061   14324.61    1211.722
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00    762.3887   10875.79    1211.722
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00    565.4063   17350.14    1211.722
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1  745.4286   17226.10    1211.723
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1  762.3892   17248.59    1211.723
+#&gt;                                                                          SpectrumId
+#&gt;                                                                         &lt;character&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1  controllerType=0 controllerNumber=1 scan=13
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1  controllerType=0 controllerNumber=1 scan=17
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1  controllerType=0 controllerNumber=1 scan=21
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1  controllerType=0 controllerNumber=1 scan=25
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1  controllerType=0 controllerNumber=1 scan=29
+#&gt; ...                                                                             ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1 controllerType=0 controllerNumber=1 scan=354
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00   controllerType=0 controllerNumber=1 scan=357
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00   controllerType=0 controllerNumber=1 scan=360
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1 controllerType=0 controllerNumber=1 scan=362
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1 controllerType=0 controllerNumber=1 scan=365
+#&gt;                                        Condition
+#&gt;                                        &lt;integer&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1         2
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1         4
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1         6
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1         8
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1        10
+#&gt; ...                                          ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1       219
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00         221
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00         223
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1       225
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1       227
+#&gt;                                                                                                     FilterString
+#&gt;                                                                                                      &lt;character&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1              FTMS + p NSI Full ms2 1211.7002@hcd7.00 [100.0000-2000.0000]
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1             FTMS + p NSI Full ms2 1211.7004@hcd14.00 [100.0000-2000.0000]
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1             FTMS + p NSI Full ms2 1211.7006@hcd21.00 [100.0000-2000.0000]
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1             FTMS + p NSI Full ms2 1211.7008@hcd28.00 [100.0000-2000.0000]
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1             FTMS + p NSI Full ms2 1211.7010@hcd35.00 [100.0000-2000.0000]
+#&gt; ...                                                                                                          ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1  FTMS + p NSI sa Full ms2 1211.7219@etd50.00@cid7.00 [100.0000-2000.0000]
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00   FTMS + p NSI sa Full ms2 1211.7221@etd50.00@cid14.00 [100.0000-2000.0000]
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00   FTMS + p NSI sa Full ms2 1211.7223@etd50.00@cid21.00 [100.0000-2000.0000]
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1 FTMS + p NSI sa Full ms2 1211.7225@etd50.00@cid28.00 [100.0000-2000.0000]
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1 FTMS + p NSI sa Full ms2 1211.7227@etd50.00@cid35.00 [100.0000-2000.0000]
+#&gt;                                        SupplementalActivation     RtMin
+#&gt;                                                         &lt;Rle&gt; &lt;numeric&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1                    Off  1.222515
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1                    Off  2.224430
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1                    Off  3.225410
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1                    Off  4.226695
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1                    Off  5.227490
+#&gt; ...                                                       ...       ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1                     On  109.7966
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00                       On  110.7193
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00                       On  111.8050
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1                     On  112.7177
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1                     On  113.8143
+#&gt;                                              TIc BasePeakPosition
+#&gt;                                        &lt;numeric&gt;        &lt;numeric&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1 131006032        1211.7914
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1  45236324        1211.7921
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1   3801533         178.1954
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1   3917217         168.6433
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1   6561479         159.0915
+#&gt; ...                                          ...              ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1  12294937         1518.798
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00     7306622         1518.796
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00    24432736         1518.800
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1  16357413         1518.798
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1  18452991         1518.799
+#&gt;                                        BasePeakIntensity.HeaderInformation
+#&gt;                                                                  &lt;numeric&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1                          16890677.0
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1                            964287.0
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1                             97887.7
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1                            218688.0
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1                            358646.8
+#&gt; ...                                                                    ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1                            251718.0
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00                              166768.4
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00                              332005.0
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1                            286810.0
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1                            310333.1
+#&gt;                                        IonInjectionTimeMs ElapsedScanTimeSec
+#&gt;                                                 &lt;numeric&gt;          &lt;numeric&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1             5.7600            14.6710
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1             3.8740            14.5975
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1             4.4240            14.6180
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1             4.3610            14.6155
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1             4.0255            14.6025
+#&gt; ...                                                   ...                ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1            34.4005            21.5880
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00              25.6920            21.2410
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00              45.2740            22.0210
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1            37.5200            21.7115
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1            40.0575            21.8135
+#&gt;                                        HcdEnergy ConversionParameterB
+#&gt;                                            &lt;Rle&gt;            &lt;numeric&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1      7.00            211703106
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1     14.00            211703106
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1     21.00            211703105
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1     28.00            211703105
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1     35.00            211703104
+#&gt; ...                                          ...                  ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1       N/A            211702362
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00         N/A            211702362
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00         N/A            211702360
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1       N/A            211702360
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1       N/A            211702360
+#&gt;                                        ConversionParameterC TemperatureCompPpm
+#&gt;                                                   &lt;numeric&gt;              &lt;Rle&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1           -146989188             -14.43
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1           -146989187             -14.43
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1           -146989186             -14.43
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1           -146989185             -14.43
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1           -146989184             -14.44
+#&gt; ...                                                     ...                ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1           -146988154             -14.61
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00             -146988154             -14.61
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00             -146988152             -14.61
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1           -146988152             -14.61
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1           -146988151             -14.61
+#&gt;                                        SpaceChargeCompPpm  RawOvFtt InjectionT0
+#&gt;                                                     &lt;Rle&gt; &lt;numeric&gt;   &lt;numeric&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1              -0.18 649788.55     -0.0100
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1              -0.18 183905.30      0.0000
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1              -0.18  21520.40      0.0000
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1              -0.18  21954.15      0.0035
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1              -0.18  31381.65      0.0420
+#&gt; ...                                                   ...       ...         ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1              -1.76 1500476.2      -0.012
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00                -1.76  868326.2      -0.031
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00                -1.76 2443770.8      -0.082
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1              -1.76 1819566.4      -0.045
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1              -1.76 2042735.6      -0.028
+#&gt;                                        NrCentroids SelectedMass1 Activation1
+#&gt;                                          &lt;numeric&gt;         &lt;Rle&gt;       &lt;Rle&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1      1463.0        1211.7         HCD
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1      2561.5        1211.7         HCD
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1       727.5        1211.7         HCD
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1       502.0        1211.7         HCD
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1       654.0        1211.7         HCD
+#&gt; ...                                            ...           ...         ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1      2794.0       1211.72         ETD
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00        1729.0       1211.72         ETD
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00        4309.0       1211.72         ETD
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1      3352.5       1211.72         ETD
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1      3657.5       1211.72         ETD
+#&gt;                                        Energy1 Activation2 Energy2
+#&gt;                                          &lt;Rle&gt;       &lt;Rle&gt;   &lt;Rle&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1       7           0       0
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1      14           0       0
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1      21           0       0
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1      28           0       0
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1      35           0       0
+#&gt; ...                                        ...         ...     ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1      50         CID       7
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00        50         CID      14
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00        50         CID      21
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1      50         CID      28
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1      50         CID      35
+#&gt;                                        EtdActivation CidActivation
+#&gt;                                                &lt;Rle&gt;         &lt;Rle&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1             0             0
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1             0             0
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1             0             0
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1             0             0
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1             0             0
+#&gt; ...                                              ...           ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1            50             7
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00              50            14
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00              50            21
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1            50            28
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1            50            35
+#&gt;                                        HcdActivation Activation StartTime
+#&gt;                                                &lt;Rle&gt;      &lt;Rle&gt; &lt;numeric&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1             7        HCD      1.01
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1            14        HCD      2.01
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1            21        HCD      3.01
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1            28        HCD      4.01
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1            35        HCD      5.01
+#&gt; ...                                              ...        ...       ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1             0      ETcid    109.51
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00               0      ETcid    110.51
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00               0      ETcid    111.51
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1             0      ETcid    112.51
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1             0      ETcid    113.51
+#&gt;                                          EndTime ActivationType    Ce SteppedCe
+#&gt;                                        &lt;numeric&gt;          &lt;Rle&gt; &lt;Rle&gt;     &lt;Rle&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1       1.5            HCD    25     False
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1       2.5            HCD    25     False
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1       3.5            HCD    25     False
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1       4.5            HCD    25     False
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1       5.5            HCD    25     False
+#&gt; ...                                          ...            ...   ...       ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1       110            ETD     0          
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00         111            ETD     0          
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00         112            ETD     0          
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1       113            ETD     0          
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1       114            ETD     0          
+#&gt;                                        SteppedceValue MultistageActivation
+#&gt;                                                 &lt;Rle&gt;                &lt;Rle&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1              5                     
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1              5                     
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1              5                     
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1              5                     
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1              5                     
+#&gt; ...                                               ...                  ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1              0                     
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00                0                     
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00                0                     
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1              0                     
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1              0                     
+#&gt;                                        EThcd UseCalibratedetdParameters
+#&gt;                                        &lt;Rle&gt;                      &lt;Rle&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1 False                           
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1 False                           
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1 False                           
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1 False                           
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1 False                           
+#&gt; ...                                      ...                        ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1 False                      False
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00   False                      False
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00   False                      False
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1 False                      False
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1 False                      False
+#&gt;                                        EtdReactionTime EtdReagentTarget
+#&gt;                                                  &lt;Rle&gt;            &lt;Rle&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1               0                0
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1               0                0
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1               0                0
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1               0                0
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1               0                0
+#&gt; ...                                                ...              ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1              50            1e+06
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00                50            1e+06
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00                50            1e+06
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1              50            1e+06
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1              50            1e+06
+#&gt;                                        EtdSupplementalActivation
+#&gt;                                                            &lt;Rle&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1                          
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1                          
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1                          
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1                          
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1                          
+#&gt; ...                                                          ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1                      True
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00                        True
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00                        True
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1                      True
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1                      True
+#&gt;                                        SupplementalActivationCe AgcTarget
+#&gt;                                                           &lt;Rle&gt;     &lt;Rle&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1                        0     1e+05
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1                        0     1e+05
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1                        0     1e+05
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1                        0     1e+05
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1                        0     1e+05
+#&gt; ...                                                         ...       ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1                        7     1e+06
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00                         14     1e+06
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00                         21     1e+06
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1                       28     1e+06
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1                       35     1e+06
+#&gt;                                        Activationq         TargetedMassList
+#&gt;                                              &lt;Rle&gt;              &lt;character&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1           0 (mz=1211.7002 z=1 name=)
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1           0 (mz=1211.7004 z=1 name=)
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1           0 (mz=1211.7006 z=1 name=)
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1           0 (mz=1211.7008 z=1 name=)
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1           0  (mz=1211.701 z=1 name=)
+#&gt; ...                                            ...                      ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1           0 (mz=1211.7219 z=1 name=)
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00             0 (mz=1211.7221 z=1 name=)
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00             0 (mz=1211.7223 z=1 name=)
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1           0 (mz=1211.7225 z=1 name=)
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1           0 (mz=1211.7227 z=1 name=)
+#&gt;                                            Mz MedianIonInjectionTimeMs
+#&gt;                                         &lt;Rle&gt;                    &lt;Rle&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1 1211.7                    4.837
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1 1211.7                    4.837
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1 1211.7                    4.837
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1 1211.7                    4.837
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1 1211.7                    4.837
+#&gt; ...                                       ...                      ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1 1211.7                    43.14
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00   1211.7                    43.14
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00   1211.7                    43.14
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1 1211.7                    43.14
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1 1211.7                    43.14
+#&gt;                                           Sample Charge
+#&gt;                                        &lt;numeric&gt;  &lt;Rle&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1         1     14
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1         2     14
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1         3     14
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1         4     14
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1         5     14
+#&gt; ...                                          ...    ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1       218     14
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00         219     14
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00         220     14
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1       221     14
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1       222     14</div><div class='input'><span class='fu'>assayData</span>(<span class='no'>ncb</span>)</div><div class='output co'>#&gt; 152 x 222 sparse Matrix of class "dgCMatrix"</div><div class='output co'>#&gt; <span class='message'>   [[ suppressing 222 column names ‘C1211.70_1.0e+05_0.0e+00_00.00_00_07_1’, ‘C1211.70_1.0e+05_0.0e+00_00.00_00_14_1’, ‘C1211.70_1.0e+05_0.0e+00_00.00_00_21_1’ ... ]]</span></div><div class='output co'>#&gt;                                                                                
+#&gt; bond001 2 . . . . . . . . . . . 2 . . . . 2 . 2 . . 2 . . . 2 . . . . . 2 . . .
+#&gt; bond002 . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond003 . 2 . . . . . . . 2 . . . . . . . . . . . . 2 . . . . . . . . . . . . .
+#&gt; bond004 . 2 . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond005 . 2 . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond006 . 2 . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond007 . 2 . . . . . . 2 2 . . . . . . . . . . . . 2 . . . . . . . . . . . . .
+#&gt; bond008 . 2 . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond009 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond010 . 2 . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond011 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond012 . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond013 . 2 . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond014 . 2 . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond015 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond016 . . . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond017 . 2 . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond018 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond019 . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond020 . . . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond021 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond022 . . . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond023 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond024 . . . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond025 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond026 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond027 . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond028 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond029 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond030 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond031 . . . . . . . . 1 . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond032 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond033 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond034 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond035 . . . . . . . . . . . . 2 . . . . . . . . . . . . . . . 2 . . . . . . .
+#&gt; bond036 . 2 . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond037 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond038 . . . . . . . . . . . . . . . . 2 . . . . . 2 . . . . . . . . . . . . .
+#&gt; bond039 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond040 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond041 . . . . . . . . . . 2 2 2 . . . 2 2 2 2 2 2 2 2 . . 2 . 2 2 2 . . . . .
+#&gt; bond042 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond043 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond044 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond045 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond046 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond047 . 2 . . . . . . 2 2 2 2 2 . . . 2 2 2 2 2 2 2 2 2 . 2 2 2 2 2 . 2 . . .
+#&gt; bond048 . . . . . . . . . . 2 . . . . . 2 2 2 2 2 2 . . . . 2 2 2 2 2 2 2 . . .
+#&gt; bond049 . 2 . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond050 . 2 . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond051 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond052 . . . . . . . . . 1 2 . . 1 . . 2 2 2 2 2 . . . 1 . 2 2 2 . 2 . . . . .
+#&gt; bond053 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond054 . . . . . . . . . . 2 2 . . . . 2 2 2 2 2 . 2 . . . 2 2 . 2 . . 2 . . .
+#&gt; bond055 . . . . . . . . . . 2 2 . . . . . . . 2 . . . . . . . . . 2 . . . . . .
+#&gt; bond056 . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond057 . . . . . . . . . 2 . . . . . . 2 . . 2 . 2 . . . . . . . . 2 . . . . .
+#&gt; bond058 . . . . . . . . . . 2 . . . . . 2 . . 2 . . . . . . 2 2 2 . 2 2 . . . .
+#&gt; bond059 . . . . . . . . 2 . 2 2 2 . . . 2 2 2 2 2 . 2 . . . 2 2 . 2 2 . . . . .
+#&gt; bond060 2 2 . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond061 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond062 . 2 . . . . . . 2 2 2 2 2 . . . . 2 . 2 2 2 2 . . . 2 2 2 2 2 . . . . .
+#&gt; bond063 2 2 . . . . . . 2 2 2 . 2 2 . . . . . . . . . . . . . . 2 . . . . . . .
+#&gt; bond064 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond065 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond066 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond067 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond068 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond069 . . . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond070 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond071 . 2 . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond072 . 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond073 . 2 . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond074 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond075 . 2 . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond076 . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond077 . . . . . . . . 2 . . . . . . . 2 . 2 . . . 2 2 . . 2 2 2 2 2 . 2 . . .
+#&gt; bond078 . 2 . . . . . . 2 . 2 . . . . . 2 2 2 2 2 2 2 2 . . 2 2 2 2 2 2 2 . . .
+#&gt; bond079 . 2 . . . . . . 2 2 . . 2 . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond080 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond081 . . . . . . . . 2 2 . . . . . . . . . . . 2 2 . . . 2 2 2 2 2 2 2 . . .
+#&gt; bond082 . 2 . . . . . . 2 . . . . . . . . . 2 2 2 2 . . . . . . . 2 2 . . . . .
+#&gt; bond083 . . . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond084 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond085 . . . . . . . . 2 2 2 . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond086 . . . . . . . . . 2 . . 2 . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond087 . 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . 2 . . . . . . . . . . .
+#&gt; bond088 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond089 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond090 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond091 . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond092 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond093 . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond094 . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond095 . . . . . . . . . . . . . . . . . 2 . . . 2 2 . . . 2 2 2 2 2 2 2 . . .
+#&gt; bond096 2 2 . . . . . . 2 2 2 . 2 2 . . 2 2 . 2 2 . . 2 . . . 2 2 2 2 2 2 2 . .
+#&gt; bond097 . . . . . . . . . . 2 2 . . . . . . . 2 . . 2 2 . . 2 2 2 2 . 2 2 2 . .
+#&gt; bond098 . 2 . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond099 . 2 . . . . . . 2 2 . . . . . . 1 . . 1 1 . . . . . . . . 1 1 . . . . .
+#&gt; bond100 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond101 . 2 . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond102 . 2 . . . . . . 2 2 2 2 2 2 . . 2 2 2 2 2 2 2 2 2 . 2 2 2 2 2 2 2 . 2 .
+#&gt; bond103 . . . . . . . . 2 2 . 1 . . . . . . . . . . . . . . 1 . 1 1 . 1 . . . .
+#&gt; bond104 . 2 . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond105 . 2 . . . . . . 2 2 . . . 2 . . . 2 . . . 2 . . 2 . 2 2 . . 2 . . . . .
+#&gt; bond106 . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond107 . 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . 2 . . . . . . . . . . .
+#&gt; bond108 . 2 . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond109 2 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond110 . 2 . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond111 . 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond112 . 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . 2 . . . . . . . . . . .
+#&gt; bond113 . 2 . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond114 . 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond115 . 2 . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond116 . 2 . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond117 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond118 2 2 . . . . . . 2 2 . . 2 2 . . . . . . . 2 . . 2 . 2 2 2 . . 2 . . . .
+#&gt; bond119 2 2 2 . . . . . 2 2 . . . 2 . . . . . . . . . . 2 . . . . . . . . . 2 .
+#&gt; bond120 . . . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond121 . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond122 2 2 2 . . . . . 2 2 . . . 2 . . . . . . . . . . 2 . . . . . . . . . . .
+#&gt; bond123 . 2 . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond124 . . . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond125 . . . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond126 . 2 2 . . . . . 2 2 . . . 2 . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond127 . . 2 . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond128 . 2 2 . . . . . 2 2 2 2 . 2 . . . . . . . . 2 . . . . . . . . . . . . .
+#&gt; bond129 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond130 . 2 2 . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond131 . . 2 . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond132 . . 2 . . . . . . . . 2 2 2 . . . . . . . . 2 2 2 . . . . . . . 2 2 2 2
+#&gt; bond133 . 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond134 . 2 2 . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond135 . 2 . . . . . . 2 2 . 2 2 . . . . . . 2 . . 2 2 . . . . . . . . 2 2 . .
+#&gt; bond136 . 2 2 . . . . . 2 2 . . . 2 . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond137 . . . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond138 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond139 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond140 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond141 2 2 2 . . . . . 2 2 . . . 2 2 . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond142 . . 2 . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond143 . . . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond144 . 2 2 . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond145 2 2 2 . . . . . 2 2 2 2 2 2 2 2 . . 2 . 2 . 2 2 2 2 . 2 . . 2 . 2 2 2 2
+#&gt; bond146 . 2 2 . . . . . 2 2 . . . 2 2 2 . . . . . . . . . . . . . . . . . . 2 .
+#&gt; bond147 . . . . . . . . 2 . . . . 2 . . . . . . . . . . 2 . . . . . . . . . . .
+#&gt; bond148 . . . . . . . . . 2 . . 2 2 . . . . . . . . . . 2 . . . . . . . . . . .
+#&gt; bond149 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond150 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond151 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond152 . . . . . . 1 1 . . 1 1 1 . . . 1 1 1 1 1 1 1 1 1 . 1 1 1 1 1 1 1 1 . .
+#&gt;                                                                                
+#&gt; bond001 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond002 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond003 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond004 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond005 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond006 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond007 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond008 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond009 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond010 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond011 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond012 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond013 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond014 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond015 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond016 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond017 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond018 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond019 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond020 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond021 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond022 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond023 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond024 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond025 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond026 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond027 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond028 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond029 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond030 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond031 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond032 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond033 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond034 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond035 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond036 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond037 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond038 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond039 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond040 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond041 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond042 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond043 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond044 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond045 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond046 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond047 . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond048 . . . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond049 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond050 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond051 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond052 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond053 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond054 . 2 . 2 . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond055 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond056 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond057 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond058 . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond059 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond060 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+#&gt; bond061 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond062 . 2 . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+#&gt; bond063 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+#&gt; bond064 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond065 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond066 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond067 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond068 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond069 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond070 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond071 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond072 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond073 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond074 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond075 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond076 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond077 . . 2 2 . 2 . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond078 . 2 2 2 2 2 2 . . . . . 2 . 2 2 2 . . . . . . . . . . . . . . . . . . .
+#&gt; bond079 . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond080 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond081 . 2 2 2 2 2 . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond082 . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond083 . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond084 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond085 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond086 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond087 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+#&gt; bond088 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond089 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond090 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond091 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond092 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond093 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond094 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond095 . 2 2 2 2 2 2 . . . . . 2 2 2 2 . . . . . . . . . . . . . . . . . . . .
+#&gt; bond096 . 2 2 . 2 2 . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . 2
+#&gt; bond097 . 2 2 2 2 2 2 2 . . . . 2 2 2 2 2 2 . . . . 2 . . . 2 . . . . . . . . .
+#&gt; bond098 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond099 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond100 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond101 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond102 . 2 2 2 2 2 2 2 . . . . 2 2 2 2 2 2 . . . . 2 2 2 . 2 . . . . . . . . .
+#&gt; bond103 . 1 1 1 1 1 1 . . . . . . . 1 . 1 . . . . . . . . . . . . . . . . . . .
+#&gt; bond104 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond105 . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond106 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond107 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond108 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond109 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+#&gt; bond110 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond111 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond112 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond113 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond114 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond115 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond116 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond117 . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond118 . 2 2 . . 2 . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . 2
+#&gt; bond119 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+#&gt; bond120 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond121 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond122 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+#&gt; bond123 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond124 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond125 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond126 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond127 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond128 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond129 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond130 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond131 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond132 . . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond133 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond134 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond135 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond136 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond137 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond138 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond139 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond140 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond141 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+#&gt; bond142 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond143 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond144 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond145 2 . . . . . . . 2 2 2 2 . . . . . . . . . . . . . . . . . . . . . . . 2
+#&gt; bond146 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond147 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond148 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond149 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond150 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond151 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond152 . 1 1 1 1 1 . 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt;                                                                                
+#&gt; bond001 . . . . . . . . . . . . . . . . . . . . . 2 . . . . . . . . . . 2 2 . .
+#&gt; bond002 2 1 1 1 . . . . . . . . 2 . 1 . . . . . . . . . . 1 . . . . 2 . . . . .
+#&gt; bond003 2 1 1 1 . . . . . . . . 2 1 1 2 . . . . . 2 . . . 1 . . . . . . 2 . . .
+#&gt; bond004 2 1 . . . . . 2 2 . . . . . 1 . . . . . . . . . . . . . . . . . . 2 . .
+#&gt; bond005 2 . . . . . . 2 2 . 2 . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond006 2 . . . . . . . . . . . 2 . . . . . . . . . . 2 . . . . . . . . . . . .
+#&gt; bond007 2 . . . . . . 2 2 . . . 2 . . . . . . . 2 . 2 . . . . . . . . . . . . .
+#&gt; bond008 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond009 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond010 2 . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond011 . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond012 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond013 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond014 2 . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond015 . . . . . . . . . . 2 . . . . . . . . . . . 2 . . . . . . . . . 2 . . .
+#&gt; bond016 2 . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond017 2 . . . . . . 2 2 . . . 3 . . . . . . . . . 1 1 1 . . . . . . . . 1 1 1
+#&gt; bond018 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond019 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond020 2 . . . . . . 2 . . . . 2 . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond021 . . . . . . . . 2 . . . 2 . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond022 . . . . . . . 2 . . . . 2 . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond023 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond024 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond025 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond026 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond027 2 . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond028 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond029 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond030 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond031 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 . . . . . .
+#&gt; bond032 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond033 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond034 . . . . . . . . . . . . . . . . . . . . 2 . . . . . . . . . . . . . . .
+#&gt; bond035 . . . . . . . . . . . . . . . . . . . . . . 2 . . . . . . . . . . . . .
+#&gt; bond036 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond037 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond038 . . . . . . . . . . 2 . . . . . . . 2 . 2 2 2 . . . . 2 2 2 2 . 2 . . .
+#&gt; bond039 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond040 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond041 . . . . . . . . . 2 2 . 2 . . . 2 . 2 2 2 2 2 . . . . 2 2 2 2 2 2 2 . .
+#&gt; bond042 . . . . . . . 2 . . . . . . . . . . 2 . . . . . . . . 2 . 2 . . . . . .
+#&gt; bond043 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond044 . . . . . . . . . . 2 . 2 . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond045 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond046 . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond047 2 . . . . . . 2 2 . 2 . 2 . . 2 2 . 2 2 2 2 2 2 . . 2 2 2 2 2 2 2 2 . .
+#&gt; bond048 . . . . . . . 2 . 2 . . . . . . 2 . 2 2 2 2 2 2 . . 2 2 2 2 2 2 2 2 . .
+#&gt; bond049 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond050 2 . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond051 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond052 . . . . . . . . 1 2 . . 1 1 . 2 2 2 2 2 2 . . 1 1 . 2 2 2 2 2 . . . . .
+#&gt; bond053 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1 . .
+#&gt; bond054 . . . . . . . . . 2 2 . . . . 2 2 . 2 2 2 2 2 . . . 2 2 2 2 2 2 2 2 . .
+#&gt; bond055 . . . . . . . . . 2 2 . 2 . . . . . . 2 . 2 2 . . . . 2 . . 2 . . . . .
+#&gt; bond056 . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . 2 . . . .
+#&gt; bond057 . . . . . . . . . . 2 . 2 . . . . . 2 . . . . 2 . . . . . . . . . . . .
+#&gt; bond058 . . . . . . . . . 2 . . . . . . 2 . 2 2 2 2 . . . . 2 2 2 2 2 2 2 . . .
+#&gt; bond059 2 . . . . . . 2 2 2 2 . 2 . . 2 2 . 2 2 2 2 2 2 . . 2 2 2 2 2 2 2 2 . .
+#&gt; bond060 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond061 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond062 2 . . . . . . 2 2 2 2 . 2 . . . 2 . . . 2 2 2 2 . . . 2 2 2 2 2 2 2 . .
+#&gt; bond063 2 . . . . . . 2 2 . . . 2 . . . . . . . . . 2 . . . . . . . . . . . . .
+#&gt; bond064 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond065 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond066 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 . .
+#&gt; bond067 2 . . . . . . 2 . . . . . . . . . . . 2 . . . . . . . . . . . . . . . .
+#&gt; bond068 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond069 2 . . . . . . 2 2 . . . 2 . . . . . . . . . 2 2 . . . . . . . . . . . .
+#&gt; bond070 . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond071 2 . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond072 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . 2 . . . . . . . . . . . .
+#&gt; bond073 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . 2 . . . . . . . . . . . .
+#&gt; bond074 . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond075 2 . . . . . . 2 . . . . 2 . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond076 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . . . . . . . . . 1 . . . .
+#&gt; bond077 2 . . . . . . 2 . 2 . . 2 . . . . . . . 2 2 . 2 . . 2 2 2 2 2 2 2 2 . .
+#&gt; bond078 . . . . . . . 2 . 2 2 . 2 . . 2 2 . 2 2 2 2 2 . . . 2 2 2 2 2 2 . 2 . .
+#&gt; bond079 2 . . . . . . 2 2 2 . . 2 . . . . . . . 2 2 . . . . . 2 . 2 2 2 . . . .
+#&gt; bond080 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 . . . . . .
+#&gt; bond081 2 . . . . . . 2 2 . 2 . . . . . . . . 2 . 2 . . . . 2 . 2 2 2 2 2 . . .
+#&gt; bond082 2 . . . . . . . 2 2 2 . 2 . . 2 2 . . . 2 . . . . . 2 . 2 2 2 . . . . .
+#&gt; bond083 . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . 2 . . . . .
+#&gt; bond084 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond085 2 . . . . . . 2 . 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond086 . . . . . . . . 2 . . . . . . . . . . . . . 2 . . . . . . . . . . . . .
+#&gt; bond087 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . 2 . . . . . . . . . . . .
+#&gt; bond088 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond089 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond090 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond091 . . . . . . . . . . 2 . . . . 1 . . . . 1 . . . . . . . . 1 . . . . . .
+#&gt; bond092 . . . . . . . . . . . . . . . 2 . . 2 . . 2 . . . . . . . . . 2 . . . .
+#&gt; bond093 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 . . . . .
+#&gt; bond094 2 . . . . . . 2 2 . . . 2 . . . . 2 . . . . . . . . . . . 2 . . . . . .
+#&gt; bond095 . . . . . . . 2 . . 2 . . . . . . . 2 . 2 2 . . . . 2 2 2 2 2 2 2 2 . .
+#&gt; bond096 2 . . . . . . . 2 2 2 . 2 . . . 2 . 2 2 2 2 2 2 . . 2 2 2 2 2 2 . 2 2 .
+#&gt; bond097 . . . . . . . . 2 2 . . . . . 2 . . . 2 2 2 2 . . . . 2 . 2 2 2 2 2 . .
+#&gt; bond098 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . . . . 2 . . . . . . . . .
+#&gt; bond099 2 . . . . . . 2 2 . . . 2 . . . . . . 1 1 . 1 . . . . . . . . . . . . .
+#&gt; bond100 . . . . . . . . . 2 . . . . . . . . . . . 2 . . . . . . . . . . . . . .
+#&gt; bond101 2 . . . . . . 2 2 2 . . 2 . . 2 . . 2 2 2 . . 2 . . 2 . . . 2 . . 2 . .
+#&gt; bond102 2 . . . . . . 2 2 2 2 . 2 . . 2 2 . 2 2 2 2 2 2 . . 2 2 2 2 2 2 2 2 2 .
+#&gt; bond103 2 . . . . . . 2 2 . . . . . . . . . . . . . . 2 . . . . 1 1 . 1 1 1 2 .
+#&gt; bond104 2 . . . . . . 2 2 . . . . . . . . . . . . . . 2 . . . . . . . . . . . .
+#&gt; bond105 2 . . . . . . 2 2 2 2 . 2 . . 2 2 2 2 2 2 2 2 . . . . 2 2 2 2 2 . . 2 .
+#&gt; bond106 2 . . . . . . . 2 . 2 . . . . . . . . . . . . 2 . . . . . . . . . . . .
+#&gt; bond107 2 2 . . . . . 2 2 . . . 2 . . . . . . . . . . 2 . . . . . . . . . . 2 .
+#&gt; bond108 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . 2 . . . 2 2 . . . 2 . . .
+#&gt; bond109 2 . . . . . . 2 2 . . . 2 . . . . . . . . . 2 2 . . . . . . . . . . 2 .
+#&gt; bond110 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . 2 . . . . . . . . . . . .
+#&gt; bond111 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . 2 . . . . . . . . . . . .
+#&gt; bond112 2 2 . . . . . 2 2 . . . 2 2 . . . . . . . . . 2 2 . . . . . . . . . 2 .
+#&gt; bond113 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . 2 . . . . . . . . . . . .
+#&gt; bond114 2 2 . . . . . 2 2 . . . 2 . . . . . . . . . . 2 2 . . . . . . . . . . .
+#&gt; bond115 2 . . . . . . 2 2 . . . 2 2 . . . . . . . . . 2 . . . . . . . . . . 2 .
+#&gt; bond116 2 . . . . . . 3 3 . . . 2 . . . . . . . . . . 2 . . . . . . . . . . . .
+#&gt; bond117 2 . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond118 2 2 . . . . . 2 2 . . . 2 . . . . . . . . . 2 2 2 . 2 . . . . 2 2 2 2 .
+#&gt; bond119 2 2 . . . . . 2 2 . . . 2 2 . . . . . . . . . 2 2 . . . . . . . . . 2 2
+#&gt; bond120 2 2 . . . . . 2 2 . . . 2 . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond121 . . . . . . . . 2 . . . 2 . . . . . . 2 2 . . . . . 2 . . 2 2 2 . . . .
+#&gt; bond122 2 2 . . . . . 2 2 . . . 2 . . . . . . . . . 2 2 2 . . . . . . . . . 2 2
+#&gt; bond123 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond124 2 . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond125 2 2 . . . . . 2 2 2 . . 2 . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond126 2 2 . . . . . 2 2 . . . 2 2 . . . . . . . . . 2 . . . . . . . . . . 2 2
+#&gt; bond127 2 2 . . . . . 2 2 . . . 2 2 . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond128 2 2 . . . . . 2 2 2 2 . 2 2 . 2 2 . 2 2 . 2 2 2 2 . 2 2 . 2 2 . 2 2 2 2
+#&gt; bond129 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond130 2 2 . . . . . 2 2 . . . . 2 . . . . . . . . . . 2 . . . . . . . . . . .
+#&gt; bond131 2 2 . . . . . 2 2 . . . 2 . . . . . . . . . 2 2 2 . . . . . . . . . 2 .
+#&gt; bond132 2 2 . . . . . . 2 2 2 2 2 2 . 2 2 2 2 . 2 2 2 2 2 . . . . 2 2 . 2 2 2 2
+#&gt; bond133 2 2 . . . . . 2 2 . . . 2 2 . . . . . . . . . 2 2 . . . . . . . . . 2 .
+#&gt; bond134 2 2 . . . . . . 2 . . . 2 . . . . . . . . . . 2 2 . . . . . . . . . . .
+#&gt; bond135 2 2 . . . . . 2 . 2 2 . 2 . . 2 2 . 2 2 2 2 2 2 2 . 2 2 2 2 2 . 2 2 2 2
+#&gt; bond136 2 . . . . . . 2 2 . . . 2 2 . . . . . . . . . 2 2 . . . . . . . . 2 2 .
+#&gt; bond137 2 2 . . . . . 2 2 . . . 2 . . . . . . . . . . . . . . . . . . . . . 2 .
+#&gt; bond138 2 . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond139 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond140 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond141 2 2 . . . . . 2 2 . . . 2 2 . . . . . . . . 2 2 2 . . . . . . . . . . 2
+#&gt; bond142 2 2 . . . . . 2 2 . . . 2 2 . . . . . . . . . . 2 . . . . . . . . . . .
+#&gt; bond143 2 2 . . . . . 2 2 . . . 2 2 . . . . . . . . . 2 2 . . . . . . . . . . 2
+#&gt; bond144 2 2 . . . . . 2 2 . . . 2 2 . . . . . . . 2 . 2 2 2 . . . . . . . 2 2 2
+#&gt; bond145 2 2 . . . . . 2 2 2 2 . 2 2 2 . 2 . 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+#&gt; bond146 2 2 2 . . . . 2 2 . . . 2 2 . . . . . . . . 2 2 2 2 . . . . . . 2 2 2 2
+#&gt; bond147 2 . . . . . . 2 2 . 2 . 2 2 . . . . . . . 2 2 2 2 . . . . . . . 2 2 2 2
+#&gt; bond148 2 2 . . . . . 2 2 . 2 . 2 2 2 . . . . . . 2 2 2 2 2 . . . . . . 2 2 2 2
+#&gt; bond149 . 2 . . . . . . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond150 . . . . . . . . . . . . 2 2 . . . . . . . . . 2 2 . . . . . . . . 2 . .
+#&gt; bond151 . . 2 . . . . . . . . . . 2 2 . . . . . . . . . . 2 . . . . . . . . . .
+#&gt; bond152 . . . . . . . . . 1 1 1 . . . . 1 . 1 1 1 1 1 . . . . . 1 1 1 1 1 1 1 .
+#&gt;                                                                                
+#&gt; bond001 . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond002 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond003 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond004 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond005 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond006 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond007 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond008 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond009 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond010 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond011 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond012 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond013 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond014 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond015 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond016 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond017 . . . . . . . . . . 1 . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond018 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond019 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond020 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond021 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond022 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond023 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond024 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond025 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond026 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond027 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond028 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond029 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond030 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond031 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond032 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond033 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond034 . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1 . . . . 1 . .
+#&gt; bond035 . . . . . . 2 . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . .
+#&gt; bond036 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond037 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond038 . . 2 . . 2 . 2 . . . . . . . 2 . . . . . . . . . . . . . . . . . . . .
+#&gt; bond039 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond040 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond041 . . 2 2 2 2 . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond042 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond043 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond044 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond045 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond046 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond047 . . . . 2 2 . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond048 . 2 2 2 2 2 2 2 . . . . . 2 . . . . . . . . . . . . . 2 . . . . . . . .
+#&gt; bond049 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond050 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond051 . . . . . 2 . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond052 . 2 2 2 2 . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond053 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond054 . . 2 2 2 2 2 . . . . . 2 2 2 2 2 . . . . . . . . . . 2 . . . . . . . .
+#&gt; bond055 . . . 2 . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond056 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond057 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond058 . 2 2 2 2 2 2 2 . . . . 2 2 2 . 2 . . . . . . . 2 2 2 2 . . . . . . . .
+#&gt; bond059 . 2 2 2 2 2 . 2 . . . . . 2 . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond060 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond061 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond062 . . 2 . 2 . 2 2 . . . . 2 . 2 . 2 . . . . . . . . . . . . . . . . . . .
+#&gt; bond063 . . . . . . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . .
+#&gt; bond064 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond065 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond066 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond067 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond068 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond069 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond070 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond071 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond072 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond073 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond074 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond075 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond076 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond077 . 2 2 2 2 2 2 2 . . . . 2 2 2 2 . . . . . . . . . . . . . . . . . . . .
+#&gt; bond078 . 2 2 2 2 2 2 2 . . . . 2 2 2 2 2 2 . . . . . 2 2 2 2 2 . . . . . . . .
+#&gt; bond079 . 2 . . . 2 . . . . . . . 2 . 2 . . . . . . . . 2 . . . . . . . . . . .
+#&gt; bond080 . . . . 2 . . . . . . . . . . . . . . . . . . . . . 2 . . . . . . . . .
+#&gt; bond081 . 2 2 2 2 2 2 2 . . . . 2 . 2 2 2 2 . . . . . 2 . 2 . 2 . . . . . . . .
+#&gt; bond082 . 2 . . 2 2 2 2 . . . . 2 2 2 2 2 . . . . . . . . 2 . 2 . . . . . . . .
+#&gt; bond083 . . . . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond084 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond085 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond086 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond087 . . . . . . . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . .
+#&gt; bond088 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond089 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond090 . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond091 . 2 2 1 3 . . 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond092 . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond093 . . . . . . . . . . . . . 2 . . . 2 . . . . . . . . . . . . . . . . . .
+#&gt; bond094 . . . 2 2 . . 2 . . . . . 2 . 2 . . . . . . . . 2 . . 2 . . . . . . . .
+#&gt; bond095 . 2 2 2 2 2 2 2 . . . . 2 2 2 2 2 2 2 . . . . 2 2 2 2 2 2 . . . . 2 . 2
+#&gt; bond096 . 2 2 2 2 2 . . 2 2 . . . 2 . . 2 . . . . . . . . . . . . . . . . 2 . .
+#&gt; bond097 . 2 2 . 2 2 2 2 2 . . . 2 2 2 2 2 . . 2 . . . . 2 2 . 2 2 . . . . 2 . .
+#&gt; bond098 . 2 . . 2 2 . . . . . . 2 . . 2 2 2 . . . . . . 2 2 . 2 2 . . . . . . .
+#&gt; bond099 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond100 . . 2 . . . . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . .
+#&gt; bond101 . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 . . . . . . . .
+#&gt; bond102 . 2 2 2 2 2 2 2 2 2 . . 2 2 2 2 2 2 2 2 . . . 2 2 2 2 2 2 2 . . . 2 2 .
+#&gt; bond103 . 1 1 . 1 1 1 . . 2 . . 1 1 1 1 1 . . . . . . . . . . 1 . . . . . . . .
+#&gt; bond104 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond105 . 2 . 2 2 2 2 2 . . . . 2 2 2 2 2 . . . . . . . . 2 2 . . . . . . . . .
+#&gt; bond106 . . . . . . . . . . . . . . . . . . . . . . . 2 . . . . . . . . . . . .
+#&gt; bond107 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond108 . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond109 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond110 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond111 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond112 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond113 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond114 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond115 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond116 . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond117 . . . . . . 2 . . . . . 2 . . 2 2 2 2 . . . . 2 2 2 2 2 2 2 . . . 2 . 2
+#&gt; bond118 . 2 2 2 2 2 . . . 2 . . 2 . . 2 2 2 2 . . . . . 2 2 . 2 2 2 . . . . . 2
+#&gt; bond119 . . . 1 1 . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond120 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond121 . 2 2 2 2 2 2 2 . . . . 2 2 2 . 2 2 . . . . . . 2 . . 2 2 . . . . . . .
+#&gt; bond122 . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond123 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond124 . . . . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond125 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond126 2 . . . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond127 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond128 . 2 . . 2 . . 2 . 2 . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond129 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond130 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond131 . . . . . . . . 2 . . . . . . . . . . . 2 . . . . . . . . . . . . . . .
+#&gt; bond132 2 . . . . . . 2 2 2 2 . . . . . . . 2 2 2 . . . . . . . . 2 . . . . . .
+#&gt; bond133 . . . 2 . . . . . . . . . . . . . . 2 . . . . . . . . . . . . . . . . .
+#&gt; bond134 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond135 . . 2 2 2 2 . 2 2 2 2 2 . 2 . . . . . 2 . . . . . . . . . 2 . . . . . .
+#&gt; bond136 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond137 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond138 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond139 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond140 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond141 . . . . . . . . . 2 2 . . . . . . . . . 2 . . . . . . . . . . . . . . .
+#&gt; bond142 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond143 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 2 . . . . .
+#&gt; bond144 2 . . . . . . 2 . 2 2 2 . . . . . . . . 2 2 . . . . . . . . . . . . . .
+#&gt; bond145 2 2 2 2 2 2 . 2 2 2 2 2 2 2 2 2 2 . 2 2 2 2 2 2 . . 2 . . 2 2 . . . . 2
+#&gt; bond146 2 . . . . . . 2 . . 2 2 . . . . . . . . . . 2 . . . . . . . . . . . . .
+#&gt; bond147 2 . . . . . . 2 . 2 2 2 . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond148 2 . . . . . . 2 . 2 2 2 . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond149 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond150 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond151 . . . . . . . 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond152 . . 1 1 1 1 . 1 1 1 . . . . 1 . . . . . . . . . . . . . . . . . . . . .
+#&gt;                                                                                
+#&gt; bond001 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond002 . . . . . 1 1 . . . . . . . 2 2 . 1 . . . . . . . . . . 1 . . . . . . .
+#&gt; bond003 . . . . 1 1 1 . . . . . . . 2 2 1 1 . . . . . . . . 2 1 1 . . . . . . .
+#&gt; bond004 . . . 2 1 1 1 . . . 2 . . . . 2 1 1 . . . . . . . . 2 . . . . . . . . .
+#&gt; bond005 . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond006 . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond007 . . . 2 . . . . . . . 2 . . . 2 . . . . . . . . . . . . . . . . . . . .
+#&gt; bond008 . . . 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . . . . . . . . . . .
+#&gt; bond009 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond010 . . . 2 . . . . . . . 2 . . . 2 . . . . . . . . . . . . . . . . . . . .
+#&gt; bond011 . . . 2 . . . . . . . 2 . . . 2 . . . . . . . . . . . . . . . . . . . .
+#&gt; bond012 . . . 2 . . . . . . . . . . . . . . . . . . . . . 2 . . . . . . . . . .
+#&gt; bond013 . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond014 . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond015 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond016 . . . 2 . . . . . . . 2 . . 2 . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond017 . . . 2 . . . . . . 2 2 . . 1 3 1 . . . . . . . . 1 1 1 . . . . . . . .
+#&gt; bond018 . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond019 . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond020 . . . 2 . . . . . . 2 . . 2 . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond021 . . . . . . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . .
+#&gt; bond022 . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond023 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond024 . . . 2 . . . . . . . 2 . . 2 2 . . . . . . . . . . 2 . . . . . . . . .
+#&gt; bond025 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond026 . . . . . . . . . . . . . . . . 1 . . . . . . . . . . . . . . . . . . .
+#&gt; bond027 . . . . . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond028 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond029 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond030 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond031 . . . 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond032 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond033 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond034 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond035 . . . . . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond036 . . . 2 . . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . .
+#&gt; bond037 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond038 . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . 2 . 2 2 . 2 2
+#&gt; bond039 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond040 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond041 . . . . . . . . . . . . . 2 2 2 . . . . . . 2 . 2 . 2 . . 2 . . . 2 . 2
+#&gt; bond042 . . . 2 . . . . . . 2 . 2 2 . . . . . . . . . . 2 . . . . . . 2 2 . . .
+#&gt; bond043 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond044 . . . 2 . . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . .
+#&gt; bond045 . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond046 . . . . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond047 . . 2 2 . . . . . . 2 2 . . 2 2 . . . . . . . 2 . . 2 . . 2 2 2 . 2 2 2
+#&gt; bond048 . . . . . . . . . . 2 2 . . . . . . . . . . . . . . . . . 2 2 2 2 . 2 .
+#&gt; bond049 . . . 2 . . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . .
+#&gt; bond050 . . . 2 . . . . . . . . . . 2 . . . . . . . . . . . . . . 2 . . . . . .
+#&gt; bond051 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond052 . . . . . . . . . . . . 2 . . 1 . . . . 2 2 2 2 . . 1 1 . 2 2 2 2 . 2 2
+#&gt; bond053 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond054 . . . . . . . . . . . . 2 2 . . . . 2 . . . . 2 2 2 . . . 2 2 2 2 . 2 2
+#&gt; bond055 . . . . . . . . . . . . . . 2 . . . . . . 2 2 . . 2 2 . . . 2 . 2 . . 2
+#&gt; bond056 . . . 2 . . . . . . . . . . . . . . . . . . . . . . 2 . . . . 2 . . . .
+#&gt; bond057 . . . . . . . . . . . . . 2 . 2 . . . . . . . . . . . . . . . . . . . .
+#&gt; bond058 . . . . . . . . . . . . 2 . . . . . . . . 2 . 2 2 . . . . 2 2 2 2 . 2 2
+#&gt; bond059 . . . 2 . . . . . . . 2 2 2 2 2 . . 2 2 2 2 . 2 2 . 2 . . 2 2 2 2 . 2 2
+#&gt; bond060 . . 2 2 . . . . . . 2 2 . . 2 2 . . . . . . . . . . . . . . . . 2 . . .
+#&gt; bond061 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond062 . . . . . . . . . . 2 . 2 . 2 2 . . . 2 2 2 . . . 2 2 . . 2 2 2 2 . 2 2
+#&gt; bond063 . . . 2 . . . . . . 2 . . 2 2 2 . . . . . . . . . 2 2 . . . . . . . . .
+#&gt; bond064 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond065 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond066 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond067 . . . 2 . . . . . . . 2 . . . 2 . . . . . . . . . . . . . . . . . . . .
+#&gt; bond068 . . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond069 . . . 2 . . . . . . 2 2 . . . 2 . . . . . . . . . 2 2 . . . . . . . . .
+#&gt; bond070 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond071 . . . 2 . . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . .
+#&gt; bond072 . . . 2 . . . . . . . 2 . . . 2 . . . . . . . . . . 2 . . . . . . . . .
+#&gt; bond073 . . . 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . 2 . . . . . . . . .
+#&gt; bond074 . . . 2 . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond075 . . . 2 . . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . .
+#&gt; bond076 . . . 2 . . . . . . 2 . . . 2 2 . . . . . . . . . . 2 . . . . . . . . .
+#&gt; bond077 . . . 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . 2 . . 2 . 2 . . . 2
+#&gt; bond078 . . . 2 . . . . . . . . 2 2 2 2 . . 2 . 2 . . . . 2 . . . 2 2 2 2 2 2 .
+#&gt; bond079 . . . 2 . . . . . . . 2 . 2 . 2 . . . 2 . . . . . 2 2 . . 2 2 . 2 . 2 2
+#&gt; bond080 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 . . . . .
+#&gt; bond081 . . . 2 . . . . . . . 2 . . 2 2 . . . . . . . . . . 2 . . 2 . 2 2 . 2 2
+#&gt; bond082 . . . 2 . . . . . . . . 2 2 2 . . . 2 . . . . 2 2 2 . . . 2 2 2 2 . 2 2
+#&gt; bond083 . . . 2 . . . . . . . 2 . . . 2 . . . . . . . . . . . . . . . . . . . .
+#&gt; bond084 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond085 . . . 2 . . . . . . . 2 . . . 2 . . . . . . . . . . . . . . . . . . . .
+#&gt; bond086 . . . . . . . . . . . . . . . 2 . . . . . . . . . . 2 . . . . . . . . .
+#&gt; bond087 . . . 2 . . . . . . 2 . . . . 2 . . . . . . . . . . 2 . . . . . . . . .
+#&gt; bond088 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond089 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond090 . . . . . . . . . . . . . . . . . . . . . . . . 2 . . . . . . . . . . .
+#&gt; bond091 . . . 2 . . . . . . . . 1 . 2 . . . . . . . . . . . . . . 1 . . 1 . . .
+#&gt; bond092 . . . . . . . . . . . . . . . . . . . . . . . . 2 . . . . 2 2 2 . . 2 2
+#&gt; bond093 . . . 2 . . . . . . . . . . . . . . . . . . . . 2 . . . . . . . . . . .
+#&gt; bond094 . . . 2 . . . . . . . 2 . . . 2 . . . . . . . . 2 . . . . . . . 2 . . .
+#&gt; bond095 2 2 . 2 . . . . . . . . . . . . . . . . . . . . . . . . . 2 2 2 2 . 2 .
+#&gt; bond096 . . 2 2 . . . . . . 2 2 . . 2 2 . . . . . . . 2 . 2 2 . . 2 2 2 2 . 2 .
+#&gt; bond097 2 2 . . . . . . . . . 2 . . . 2 . . . . . . . . . . . . . 2 2 2 2 . . 2
+#&gt; bond098 . . . 2 . . . . . . . 2 . . . 2 . . . . . . . . . . 2 . . . . . . . . .
+#&gt; bond099 . . 2 2 . . . . . . . 2 . 1 . 1 . . . 1 . . . . . 1 1 . . . . 1 . . . .
+#&gt; bond100 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 . . .
+#&gt; bond101 . . . 2 . . . . . . . 2 . 2 . 2 . . . 2 . . . . 2 2 2 . . . 2 . 2 . . 2
+#&gt; bond102 2 . . 2 . . . . . . . 2 2 2 2 2 . . . 2 . . . 2 2 . 2 . . 2 2 2 2 . 2 2
+#&gt; bond103 . . . 2 . . . . . . . 2 . . . . . . . . . . . . . . . . . . 1 1 1 . . .
+#&gt; bond104 . . . 2 . . . . . . . 2 . . . 2 . . . . . . . . . . 2 . . . . . . . . .
+#&gt; bond105 . . . 2 . . . . . . 2 2 2 2 2 2 . . 2 2 2 2 2 . 2 2 2 . . . 2 2 2 . 2 2
+#&gt; bond106 . . . 2 . . . . . . . 2 . . . 2 . . . . . . . . . . . . . . . . . . . .
+#&gt; bond107 . . . 2 2 . . . . . 2 . . . . 2 . . . . . . . . . . 2 2 . . . . . . . .
+#&gt; bond108 . . . 2 . . . . . . . . . . . 2 . . . . . . . . . . 2 . . . . . 2 . . .
+#&gt; bond109 . . . 2 2 . . . . . 2 2 . . 2 2 . . . . . . . . . 2 2 2 . . . . . . . .
+#&gt; bond110 . . . 2 . . . . . . . . . . . 2 . . . . . . . . . . 2 . . . . . . . . .
+#&gt; bond111 . . . 2 2 . . . . . 2 2 . . . 2 . . . . . . . . . . 2 2 . . . . . . . .
+#&gt; bond112 . . . 2 2 . . . . . 2 2 . . . 2 . . . . . . . . . . 2 2 . . . . . . . .
+#&gt; bond113 . . . 2 2 . . . . . 2 2 . . . 2 . . . . . . . . . . 2 2 . . . . . . . .
+#&gt; bond114 . . . 2 2 . . . . . . 2 . . . 2 2 . . . . . . . . . 2 2 . . . . . . . .
+#&gt; bond115 . . . 2 2 . . . . . 2 2 . . . 2 . . . . . . . . . . 2 2 . . . . . . . .
+#&gt; bond116 . . . 2 2 . . . . . 2 2 . . . 3 . . . . . . . . . 2 2 2 . . . . . . . .
+#&gt; bond117 2 . . 2 . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond118 2 2 2 2 2 . . . . . 2 . . . 2 2 . . . . . . . . . 2 2 2 . . . . . . . .
+#&gt; bond119 . . 2 2 2 . . . . . 2 2 . . 2 2 2 . . . . . . . . 2 2 2 . . . . . . 1 .
+#&gt; bond120 . . . . 2 . . . . . . 2 . . . 2 . . . . . . . . . . 2 . . . . . . . . .
+#&gt; bond121 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 2 . . . 2 2
+#&gt; bond122 . . 2 2 2 . . . . . 2 2 . 1 3 2 2 . . . . . . . . . 2 2 . . . . . . . .
+#&gt; bond123 . . . 2 2 . . . . . . 2 . . . 2 . . . . . . . . . . 2 . . . . . . . . .
+#&gt; bond124 . . . 2 . . . . . . . 2 . . . 2 . . . . . . . . . . 2 . . . . . . . 2 .
+#&gt; bond125 . . . 2 2 . . . . . . 2 2 . . 2 2 . . . 2 . . . 2 . 2 2 . . 2 2 . . . 2
+#&gt; bond126 . . 2 2 2 . . . . . 2 2 . . . 2 2 . . . . . . . . . 2 2 . . . . . . . .
+#&gt; bond127 . . . 2 2 . . . . . . 2 . . . 2 2 . . . . . . . . . 2 2 . . . . . . . .
+#&gt; bond128 . . . 2 2 . . . . . . 2 2 2 2 2 2 . 2 2 . . . 2 2 2 2 2 . 2 2 2 2 . 2 2
+#&gt; bond129 . . . 2 . . . . . . . . . . . 2 . . . . . . . . . . . 2 . . . . . . . .
+#&gt; bond130 . . . 2 2 . . . . . . 2 . . . 2 2 . . . . . . . . . 2 2 . . . . . . . .
+#&gt; bond131 . . . 2 2 . . . 2 . . 2 . . . 2 . . . . . . . . . . 2 2 . . . . . . . .
+#&gt; bond132 . . . 3 2 . . . . . . . 2 2 2 3 2 . 2 2 2 . 2 2 2 2 2 2 . 2 2 2 2 . 2 2
+#&gt; bond133 . . . 2 2 . . . . . . 2 . . . 2 2 . . . . . . . . . 2 2 . . . . . . . .
+#&gt; bond134 . . . . 2 . . . . . . 2 . 2 . 2 2 . . . . . 2 . . . 2 2 . . . . . . . .
+#&gt; bond135 . . . 2 2 . . . . . . 2 2 2 2 2 2 . 2 . . . . 2 2 2 2 . . 2 2 2 2 . 2 2
+#&gt; bond136 . . . 2 2 . . . . . 2 2 . . . 2 2 . . . . . . . . 2 2 2 . . . . . . . .
+#&gt; bond137 . . . 2 . . . . . . 2 2 . . . 2 . . . . . . . . . . 2 . . . . . . . . 2
+#&gt; bond138 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+#&gt; bond139 . . . . 2 . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond140 . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 . . . . . . . .
+#&gt; bond141 . . 2 2 2 . . . . . 2 2 . . 2 2 . . . . . . . . . 2 2 2 . . . . . . . .
+#&gt; bond142 . . . 2 2 . . . . . . 2 . . . 2 2 . . . . . . . . . . 2 . . . . . . . .
+#&gt; bond143 . . . 2 2 . . . . . 2 2 . 2 . 2 . . . . . . . . . . . 2 . . . . . . . .
+#&gt; bond144 . . . 2 2 . . . . . . 2 . . . 2 2 . . . . . . . . 2 2 2 . . . . . . . .
+#&gt; bond145 2 2 . 2 2 . . . . . . 2 2 2 . 2 2 2 . 2 . . . 2 2 2 2 2 2 2 2 2 2 . 2 2
+#&gt; bond146 . . . 2 2 . . . . . 2 2 . . . 2 2 2 . . . . . 2 2 2 3 2 2 . . . . . . .
+#&gt; bond147 . . . 2 . . . . . . 2 2 . . 2 2 2 . . . . . . . 2 2 2 2 2 . . . . . . 2
+#&gt; bond148 . . . 2 2 . . . . . . 2 . 2 2 2 2 2 . 2 . . . 2 2 2 2 2 2 2 . 2 . . . 2
+#&gt; bond149 . . . 2 2 2 2 . . . . . . . 1 2 2 2 . . . . . . . 2 . 2 2 . . . . . . .
+#&gt; bond150 . . . . . . 2 . . . . . . . . 2 2 2 . . . . . . . . 2 2 2 . . . . . . .
+#&gt; bond151 . . . . 2 2 2 1 . . . . . . . 2 2 2 . . . . . . . . 2 2 2 . . . . . . .
+#&gt; bond152 . . . . . . . . . . . . . 1 1 . . . . . 1 . 1 . . 1 1 . . 1 1 1 . . . 1
+#&gt;                                                                                
+#&gt; bond001 2 . . . . . . . . . . . . 2 . . . . . . . 2 2 . . . . . . . . . . . . .
+#&gt; bond002 . . . . 2 . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond003 . . . 1 . . . . . . . 2 . . 1 . . . . . . . . . . 1 . . . . . . . . . .
+#&gt; bond004 . . . . . . . . . . . 2 . . . . . . . . . . 2 . . . . . . . . . . . . .
+#&gt; bond005 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond006 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond007 . . . . . 2 . 2 . . . . . . . 2 . . . . . 2 . . . . . . . . . . . . . .
+#&gt; bond008 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond009 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond010 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond011 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond012 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond013 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond014 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond015 . . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond016 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond017 1 1 1 1 . . . . . . . . 1 1 1 . . . . . . . . . 1 1 . . . . . . . . . 1
+#&gt; bond018 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond019 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond020 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond021 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond022 . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond023 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond024 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond025 . . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond026 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond027 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond028 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond029 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond030 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond031 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond032 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond033 2 . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond034 . . . . . . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . .
+#&gt; bond035 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 . . .
+#&gt; bond036 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond037 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond038 2 . . . 2 . 2 . 2 . 2 . . . . . 2 . 2 . . 2 . . . . . . 2 2 . . . . . .
+#&gt; bond039 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond040 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond041 2 2 . . 2 2 2 2 . . 2 2 2 . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond042 . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond043 . . . . . . . 2 . . . . . . . 2 . . . . . . . . . . . . . . . . . . . .
+#&gt; bond044 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond045 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond046 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond047 2 . . . 2 2 2 2 2 2 2 2 2 . . 2 2 . 2 2 . 2 2 . . . . . . . . . . . . .
+#&gt; bond048 . . . . 2 2 2 2 2 2 2 2 2 . . 2 2 2 2 2 2 2 2 . . . . . 2 . . . 2 . . .
+#&gt; bond049 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond050 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond051 . . . . . . 2 . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . .
+#&gt; bond052 1 1 1 . 2 2 . 2 2 . . . . . . . 2 . 2 . . . . . 1 . . . . 2 . . . . . .
+#&gt; bond053 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond054 . . . . 2 2 2 2 2 . . 2 . . . 2 2 2 2 2 . 2 . . . . . 2 . 2 . 2 . . . .
+#&gt; bond055 2 . . . 2 2 2 . . 2 . . . . . . . . 2 . . . . . . . . . . . . . . . . .
+#&gt; bond056 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond057 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond058 . . . . 2 2 2 2 2 2 2 . 2 . . 2 . . 2 2 2 2 . . . . . 2 2 2 . 2 2 . . .
+#&gt; bond059 2 . . . 2 2 2 2 2 2 2 2 2 . . 2 2 2 2 2 2 2 2 . . . . . 2 . . . 2 . . .
+#&gt; bond060 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond061 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond062 2 2 . . 2 2 2 2 2 2 2 2 2 . . 2 2 2 2 2 . 2 2 . . . . . 2 . . . . . . .
+#&gt; bond063 . 2 2 . . . . . . . . . . 2 . 2 2 . . . . . . . 2 . . . . 2 . . . . . .
+#&gt; bond064 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond065 . . . . . . . . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . .
+#&gt; bond066 2 . . . 2 2 . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond067 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond068 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond069 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond070 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond071 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond072 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond073 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond074 . . . . . . . . . . . . . . . . . . . . . . . . . . 2 . . . . . . . . .
+#&gt; bond075 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond076 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond077 2 2 . . 2 2 2 2 2 . 2 2 . . . 2 2 2 . 2 2 2 2 . . . . . 2 . . 2 2 . . .
+#&gt; bond078 2 2 . . 2 2 2 2 . 2 2 2 . . . 2 2 2 2 2 2 2 2 . . . 2 2 2 . . 2 2 2 . .
+#&gt; bond079 . . 2 . 2 2 2 2 2 2 2 . . . . 2 . . 2 . . . . . 2 . . . 2 2 2 . . . . .
+#&gt; bond080 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond081 2 2 . . 2 2 2 2 2 2 2 2 2 . . 2 2 2 2 2 2 2 2 . . . . . 2 . . 2 2 2 . .
+#&gt; bond082 2 . . . 2 2 2 2 2 2 2 2 . . . 2 2 2 2 . . . . . . . . 2 . . . 2 . . . .
+#&gt; bond083 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond084 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond085 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond086 . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond087 . . 2 . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond088 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond089 . . . . . . . . . . 2 . . . . . . . . . 2 . . . . . . . . . . . . . . .
+#&gt; bond090 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond091 . . . . 3 . 2 . . 1 . . . . . . 3 . . 1 2 1 . . . . . . 2 . . . 2 . . .
+#&gt; bond092 . . . . 2 2 2 . . 2 2 . . . . . 2 . 2 2 2 . . . . . . . 2 . . . . . . .
+#&gt; bond093 . . . . . . . . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . .
+#&gt; bond094 2 . . . 2 . 3 2 2 2 . . . . . 2 2 . 2 . 2 2 . . . . 2 . 2 2 . . . . . .
+#&gt; bond095 . . . . 2 2 2 2 2 2 2 2 2 . . 2 2 2 2 2 2 2 2 . . . . 2 2 2 2 2 2 2 . .
+#&gt; bond096 . 2 2 . 2 2 2 . 2 2 2 2 2 2 . 2 2 . . 2 2 2 . . . . . . 2 2 . . . 2 . .
+#&gt; bond097 . . . . . . . 2 . 2 2 2 . . . 2 2 2 2 2 2 2 2 . . . 2 2 2 . 2 2 2 2 . .
+#&gt; bond098 . . . . . . . . . . . . . . . 2 . 2 . . 2 2 2 . . . . 2 2 . . 2 2 . . .
+#&gt; bond099 . . . . . . 1 . . . . . . . . . . . . . . . 2 . . . . . . 1 . . . 2 . .
+#&gt; bond100 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond101 2 2 . . 2 2 2 2 2 . . 2 2 . . 2 . . . . 2 . . . . . . . . 2 . 2 . . . .
+#&gt; bond102 2 2 2 . 2 2 2 2 2 2 2 2 2 . . 2 2 2 2 2 2 2 2 2 . . 2 2 2 2 2 2 . 2 . .
+#&gt; bond103 1 2 . . . . 1 . . 1 . . 2 . . 1 1 1 . . 1 1 . . . . . 1 1 . . 1 1 . . .
+#&gt; bond104 . . . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond105 2 . 2 . 2 2 2 2 2 2 2 2 2 . . 2 2 . 2 2 2 . . . . . . 2 . . . . . . . .
+#&gt; bond106 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond107 . 2 2 . . . . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond108 . 2 . . 2 . . 2 . . . . 2 . . . . . 2 2 2 2 . . . . . . 2 . . . 2 . . .
+#&gt; bond109 2 2 2 . . 2 . . . . . 2 2 2 . . . . . . 2 . . . 2 . . . . 2 . . . . . .
+#&gt; bond110 . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond111 . 2 . . . . . . . . . . 2 2 . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond112 . . 2 . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond113 . . 2 . . . . . . . . . . . . . . . . . . . . . 2 . . . . . . . . . . .
+#&gt; bond114 . 2 2 . . . . . . . . . 2 2 . . . . . . . . . . 2 . . . . . . . . . . .
+#&gt; bond115 . 2 2 . . . . . . . . . 2 2 . . . . . . . . . . 2 . . . . . . . . . . .
+#&gt; bond116 . . . . . . . . . . . . 2 . . . . . . . . . . . 2 . . . . . . . . . . .
+#&gt; bond117 . . . . . . . . . . . . . . . . 2 2 . . . 2 . . . . 2 2 . . 2 2 2 2 . .
+#&gt; bond118 2 2 2 . . 2 2 . . 2 . 2 2 2 . 2 2 2 . 2 2 2 2 . 2 . . 2 2 . 2 . 2 2 . .
+#&gt; bond119 . 2 2 . 1 . 1 . . . . . 2 2 . . . . . . . . . . 2 . . . 1 1 . . . . . .
+#&gt; bond120 . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond121 2 . . . 2 2 . 2 . . . 2 . . . 2 2 2 2 2 3 2 2 . . . . 2 2 2 2 2 2 2 . .
+#&gt; bond122 2 2 2 . . . . . . . . 2 . 2 . . . . . . . . . 2 2 . . . . . . . . . . 2
+#&gt; bond123 . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond124 . . . . . 2 . 2 2 2 . . . . . . . . . . . . . . . . . . 2 . . . . . . .
+#&gt; bond125 2 . 2 . . . 2 . 2 . . 2 . . . . . . . 2 . . . . 2 . . . . 2 . . . . . .
+#&gt; bond126 . 2 2 2 . . . . . . . . 2 2 2 . . . . . . . . . . . . . . . . . . . . 2
+#&gt; bond127 . . 2 . . . . . . . . . . 2 . . . . . . . . . . 2 . . . . . . . . . . .
+#&gt; bond128 2 2 2 . 2 2 2 2 2 2 2 2 2 2 . 2 2 . 2 2 . 2 2 2 2 2 . . . 2 . . 2 . . 2
+#&gt; bond129 . . . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond130 . . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond131 . 2 2 . . . . . . . . . . . . . . . . . . . . . 2 . . . . . . . . 2 2 .
+#&gt; bond132 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 2 2 . 2 2 . 2 2 . . . 2 . . 2 2 . .
+#&gt; bond133 . 2 2 . . . . . . . . . 2 2 . . . . . . . 2 2 . . . . 2 . . . 2 2 2 . .
+#&gt; bond134 . 2 2 . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond135 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 2 2 2 2 2 . 2 2 . . 2 2 . . 2 2 2 2
+#&gt; bond136 . 2 2 . . . . . . . . . 2 2 . . . . . . . . . . 2 . . . . . . . 2 . . .
+#&gt; bond137 . 2 2 . . . . . . . . . 2 2 . . . . . . . . . . 2 . . . . . . . . . . .
+#&gt; bond138 . . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond139 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond140 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+#&gt; bond141 2 2 2 . . . . . . . . . 2 2 2 . . . . . . . . . 2 . . . . . . . . . . .
+#&gt; bond142 . 2 2 2 . . . . . . . . . 2 2 . . . . . . . . . 2 . . . . . . . . . . .
+#&gt; bond143 . 2 2 2 . . . . . . 2 . 2 2 2 . . . . . . . . . 2 2 . . . . . . . . . 2
+#&gt; bond144 2 2 2 2 . . . . . . 2 2 2 2 2 . . . . . . 2 2 . 2 2 . . . . . . 2 . 2 2
+#&gt; bond145 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 . 2 2 2 2 2 2 2 2 2 . 2 2 . 2 2 2 2 2
+#&gt; bond146 2 2 2 2 . . . . . . 2 . 2 2 2 . . . . . . 2 2 2 2 2 . . . . . . 2 2 2 2
+#&gt; bond147 2 2 2 2 . . . . . . 2 2 2 2 2 . . . . . . 2 2 . 2 2 . . . . . . 2 2 . 2
+#&gt; bond148 2 2 2 2 . . . . . . 2 2 2 2 2 . . . 2 . . 2 2 2 2 2 . . . . . . 2 2 . 2
+#&gt; bond149 . . 2 2 . . . . . . . 2 . . 2 . . . . . . . . . 2 . . . . . . . . . . .
+#&gt; bond150 . 2 2 2 . . . . . . . . 2 2 2 . . . . . . . . . 2 2 . . . . . . . . . 2
+#&gt; bond151 . . 2 2 . . . 1 . . . . . 2 2 . . . . . . . . . 2 . . . . . . . . . . .
+#&gt; bond152 1 . 1 . 1 1 1 1 . . 1 1 1 1 . . 1 . . . . 1 1 . . . . . . . . . . 1 . .
+#&gt;                    
+#&gt; bond001 . . . . . .
+#&gt; bond002 . . . . . .
+#&gt; bond003 . . . . . .
+#&gt; bond004 . . . . . .
+#&gt; bond005 . . . . . .
+#&gt; bond006 . . . . . .
+#&gt; bond007 . . . . . .
+#&gt; bond008 . . . . . .
+#&gt; bond009 . . . . . .
+#&gt; bond010 . . . . . .
+#&gt; bond011 . . . . . .
+#&gt; bond012 . . . . . .
+#&gt; bond013 . . . . . .
+#&gt; bond014 . . . . . .
+#&gt; bond015 . . . . . .
+#&gt; bond016 . . . . . .
+#&gt; bond017 . . . . . .
+#&gt; bond018 . . . . . .
+#&gt; bond019 . . . . . .
+#&gt; bond020 . . . . . .
+#&gt; bond021 . . . . . .
+#&gt; bond022 . . . . . .
+#&gt; bond023 . . . . . .
+#&gt; bond024 . . . . . .
+#&gt; bond025 . . . . . .
+#&gt; bond026 . . . . . .
+#&gt; bond027 . . . . . .
+#&gt; bond028 . . . . . .
+#&gt; bond029 . . . . . .
+#&gt; bond030 . . . . . .
+#&gt; bond031 . . . . . .
+#&gt; bond032 . . . . . .
+#&gt; bond033 . . . . . .
+#&gt; bond034 . . . . . .
+#&gt; bond035 . . . . . .
+#&gt; bond036 . . . . . .
+#&gt; bond037 . . . . . .
+#&gt; bond038 . . . . . .
+#&gt; bond039 . . . . . .
+#&gt; bond040 . . . . . .
+#&gt; bond041 . . . . . .
+#&gt; bond042 . . . . . .
+#&gt; bond043 . . . . . .
+#&gt; bond044 . . . . . .
+#&gt; bond045 . . . . . .
+#&gt; bond046 . . . . . .
+#&gt; bond047 . . . . . .
+#&gt; bond048 . 2 . . . 2
+#&gt; bond049 . . . . . .
+#&gt; bond050 . . . . . .
+#&gt; bond051 . . . . . .
+#&gt; bond052 . . . . . .
+#&gt; bond053 . . . . . .
+#&gt; bond054 . . . 2 2 2
+#&gt; bond055 . . . . . .
+#&gt; bond056 . . . . . .
+#&gt; bond057 . . . . . .
+#&gt; bond058 . 2 . 2 2 .
+#&gt; bond059 . . . . . 2
+#&gt; bond060 . . . . . .
+#&gt; bond061 . . . . . .
+#&gt; bond062 . . . . . .
+#&gt; bond063 . . . . . .
+#&gt; bond064 . . . . . .
+#&gt; bond065 . . . . . .
+#&gt; bond066 . . . . . .
+#&gt; bond067 . . . . . .
+#&gt; bond068 . . . . . .
+#&gt; bond069 . . . . . .
+#&gt; bond070 . . . . . .
+#&gt; bond071 . . . . . .
+#&gt; bond072 . . . . . .
+#&gt; bond073 . . . . 2 .
+#&gt; bond074 . . . . . .
+#&gt; bond075 . . . . . .
+#&gt; bond076 . . . . . .
+#&gt; bond077 . 2 . . . .
+#&gt; bond078 . 2 2 2 2 2
+#&gt; bond079 . . . . 2 .
+#&gt; bond080 . . . . . 2
+#&gt; bond081 . 2 . 2 2 .
+#&gt; bond082 . . . 2 . .
+#&gt; bond083 . . . . . .
+#&gt; bond084 . . . . . .
+#&gt; bond085 . . . . . .
+#&gt; bond086 . . . 2 . .
+#&gt; bond087 . . . . . .
+#&gt; bond088 . . . . . .
+#&gt; bond089 . . . . . .
+#&gt; bond090 . . . . . .
+#&gt; bond091 . . . . . .
+#&gt; bond092 . . . . . .
+#&gt; bond093 . 2 . . . 2
+#&gt; bond094 . . . . 2 .
+#&gt; bond095 . 2 2 2 2 2
+#&gt; bond096 . . . . . .
+#&gt; bond097 . 2 2 2 2 2
+#&gt; bond098 . 2 . 2 2 2
+#&gt; bond099 . . . . . .
+#&gt; bond100 . . . . . .
+#&gt; bond101 . . 2 2 2 .
+#&gt; bond102 . 2 2 2 2 2
+#&gt; bond103 . . . 1 1 1
+#&gt; bond104 . . . . . .
+#&gt; bond105 . 2 . 2 2 2
+#&gt; bond106 . . . . . .
+#&gt; bond107 . . . . . .
+#&gt; bond108 . . . . 2 .
+#&gt; bond109 . . . . . .
+#&gt; bond110 . . . . . .
+#&gt; bond111 . . . . . .
+#&gt; bond112 . . . . . .
+#&gt; bond113 . . . . . .
+#&gt; bond114 . . . . . .
+#&gt; bond115 . . . . . .
+#&gt; bond116 . . . . . .
+#&gt; bond117 . 2 2 2 2 2
+#&gt; bond118 . 2 . . 2 2
+#&gt; bond119 . . . . . .
+#&gt; bond120 . . . . . .
+#&gt; bond121 . 2 . 2 2 2
+#&gt; bond122 . . . . . .
+#&gt; bond123 . . . . . .
+#&gt; bond124 . . . . . .
+#&gt; bond125 . . . . . .
+#&gt; bond126 . . . . . .
+#&gt; bond127 . . . . . .
+#&gt; bond128 . . . . . .
+#&gt; bond129 . . . . . .
+#&gt; bond130 . . . . . .
+#&gt; bond131 . . . . . .
+#&gt; bond132 2 . . . . .
+#&gt; bond133 . . . . . .
+#&gt; bond134 . . . . . .
+#&gt; bond135 2 . . . . .
+#&gt; bond136 . . . . . .
+#&gt; bond137 . . . . . .
+#&gt; bond138 . . . . . .
+#&gt; bond139 . . . . . .
+#&gt; bond140 . . . . . .
+#&gt; bond141 . . . . . 2
+#&gt; bond142 . . . . . .
+#&gt; bond143 . . . . . .
+#&gt; bond144 2 . . . . .
+#&gt; bond145 2 2 . . 2 2
+#&gt; bond146 2 . . . . .
+#&gt; bond147 . . . . . .
+#&gt; bond148 2 . . . . .
+#&gt; bond149 . . . . . .
+#&gt; bond150 . . . . . .
+#&gt; bond151 . . . . . .
+#&gt; bond152 . . . . . .</div><div class='input'>
+<span class='co'># Accessing colData</span>
+<span class='no'>ncb</span>$<span class='no'>Mz</span></div><div class='output co'>#&gt; numeric-Rle of length 222 with 1 run
+#&gt;   Lengths:    222
+#&gt;   Values : 1211.7</div><div class='input'>
+<span class='co'># Subsetting</span>
+
+<span class='co'># First 100 bonds</span>
+<span class='no'>ncb</span>[<span class='fl'>1</span>:<span class='fl'>100</span>]</div><div class='output co'>#&gt; NCBSet object (0.25 Mb)
+#&gt; - - - Protein data - - -
+#&gt; Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
+#&gt; - - - Fragment data - - -
+#&gt; Number of N-terminal fragments: 104
+#&gt; Number of C-terminal fragments: 1808
+#&gt; Number of N- and C-terminal fragments: 6
+#&gt; - - - Condition data - - -
+#&gt; Number of conditions: 222 
+#&gt; Number of scans: 222 
+#&gt; Condition variables (56): Scan, PeaksCount, ..., Sample, Charge
+#&gt; - - - Assay data - - -
+#&gt; Size of array: 100x222 (8.64% != 0)
+#&gt; - - - Processing information - - -
+#&gt; [2017-10-05 10:28:55] 6185 fragments [2700;351] matched (tolerance: 5 ppm).
+#&gt; [2017-10-05 14:23:16] Aggregated 6185 fragments [2700;351] to 4771 fragments [2700;222].
+#&gt; [2017-10-05 14:23:17] Coerced TopDownSet into an NCBSet object; 3878 fragments [152;222].
+#&gt; [2017-10-05 14:23:17] Subsetted 3878 fragments [152;222] to 1918 fragments [100;222]. </div><div class='input'>
+<span class='co'># Just bond 152</span>
+<span class='no'>ncb</span>[<span class='st'>"bond152"</span>]</div><div class='output co'>#&gt; NCBSet object (0.21 Mb)
+#&gt; - - - Protein data - - -
+#&gt; Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
+#&gt; - - - Fragment data - - -
+#&gt; Number of N-terminal fragments: 76
+#&gt; Number of C-terminal fragments: 0
+#&gt; Number of N- and C-terminal fragments: 0
+#&gt; - - - Condition data - - -
+#&gt; Number of conditions: 222 
+#&gt; Number of scans: 222 
+#&gt; Condition variables (56): Scan, PeaksCount, ..., Sample, Charge
+#&gt; - - - Assay data - - -
+#&gt; Size of array: 1x222 (34.23% != 0)
+#&gt; - - - Processing information - - -
+#&gt; [2017-10-05 10:28:55] 6185 fragments [2700;351] matched (tolerance: 5 ppm).
+#&gt; [2017-10-05 14:23:16] Aggregated 6185 fragments [2700;351] to 4771 fragments [2700;222].
+#&gt; [2017-10-05 14:23:17] Coerced TopDownSet into an NCBSet object; 3878 fragments [152;222].
+#&gt; [2017-10-05 14:23:17] Subsetted 3878 fragments [152;222] to 76 fragments [1;222]. </div><div class='input'>
+<span class='co'># Condition 1 to 10</span>
+<span class='no'>ncb</span>[, <span class='fl'>1</span>:<span class='fl'>10</span>]</div><div class='output co'>#&gt; NCBSet object (0.07 Mb)
+#&gt; - - - Protein data - - -
+#&gt; Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
+#&gt; - - - Fragment data - - -
+#&gt; Number of N-terminal fragments: 4
+#&gt; Number of C-terminal fragments: 235
+#&gt; Number of N- and C-terminal fragments: 0
+#&gt; - - - Condition data - - -
+#&gt; Number of conditions: 10 
+#&gt; Number of scans: 10 
+#&gt; Condition variables (56): Scan, PeaksCount, ..., Sample, Charge
+#&gt; - - - Assay data - - -
+#&gt; Size of array: 152x10 (15.72% != 0)
+#&gt; - - - Processing information - - -
+#&gt; [2017-10-05 10:28:55] 6185 fragments [2700;351] matched (tolerance: 5 ppm).
+#&gt; [2017-10-05 14:23:16] Aggregated 6185 fragments [2700;351] to 4771 fragments [2700;222].
+#&gt; [2017-10-05 14:23:17] Coerced TopDownSet into an NCBSet object; 3878 fragments [152;222].
+#&gt; [2017-10-05 14:23:17] Subsetted 3878 fragments [152;222] to 239 fragments [152;10]. </div><div class='input'>
+<span class='co'># Plot fragmentation map</span>
+<span class='fu'>fragmentationMap</span>(<span class='no'>ncb</span>)</div><div class='img'><img src='NCBSet-class-1.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#value">Value</a></li>
+
       <li><a href="#methods-by-generic-">Methods (by generic)</a></li>
 
       <li><a href="#slots">Slots</a></li>
 
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
     <h2>Author</h2>
     

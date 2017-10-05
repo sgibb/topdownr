@@ -227,7 +227,7 @@ parMS2  &lt;-<span class="st"> </span><span class="kw">list</span>(
                 <span class="dt">pattern =</span> <span class="st">"method1211_%s.xml"</span>)
 
 ## Run XMLMethodChanger
-<span class="kw"><a href="../reference/XmlMethodChanger.html">runXmlMethodChanger</a></span>(
+<span class="kw"><a href="../reference/windows-specific-functions.html">runXmlMethodChanger</a></span>(
     <span class="dt">modificationXml=</span><span class="kw">list.files</span>(<span class="dt">pattern=</span><span class="st">"^method.*</span><span class="ch">\\</span><span class="st">.xml$"</span>),
     <span class="dt">templateMeth=</span><span class="st">"TMS2IndependentTemplateForTD.meth"</span>,
     <span class="dt">executable=</span><span class="st">"path</span><span class="ch">\\</span><span class="st">to</span><span class="ch">\\</span><span class="st">XmlMethodChanger.exe"</span>
@@ -250,7 +250,7 @@ parMS2  &lt;-<span class="st"> </span><span class="kw">list</span>(
 <a href="#extracting-header-information" class="anchor"></a>Extracting Header Information</h2>
 <p>Some of the information (SpectrumId, Ion Injection Time (ms), Orbitrap Resolution, targeted Mz, ETD reaction time, CID activation and HCD activation) is stored in scan headers, while other (ETD reagent target and AGC target) is only available in method table.</p>
 <p>You can run <em>ScanHeadsman</em> from the commandline (<code>ScanHeadsman.exe --noMS --methods:CSV</code>) or use the function provided by <code>topdownr</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/ScanHeadsman.html">runScanHeadsman</a></span>(
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/windows-specific-functions.html">runScanHeadsman</a></span>(
     <span class="dt">path=</span><span class="st">"path</span><span class="ch">\\</span><span class="st">to</span><span class="ch">\\</span><span class="st">raw-files"</span>,
     <span class="dt">executable=</span><span class="st">"path</span><span class="ch">\\</span><span class="st">to</span><span class="ch">\\</span><span class="st">ScanHeadsman.exe"</span>
 )</code></pre></div>

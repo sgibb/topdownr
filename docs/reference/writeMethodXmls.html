@@ -113,34 +113,40 @@ all combinations of a user-given set of MS1 and MS2 settings.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>ms1Settings</th>
-      <td><p><code>list</code>, named list of MS1 settings, see e.g.
+      <td><p><code>list</code>,
+named list of MS1 settings, see e.g.
 <code><a href='default-functions.html'>defaultMs1Settings()</a></code>.</p></td>
     </tr>
     <tr>
       <th>ms2Settings</th>
-      <td><p><code>list</code>, named list of MS2 settings, see e.g.
+      <td><p><code>list</code>,
+named list of MS2 settings, see e.g.
 <code><a href='default-functions.html'>defaultMs2Settings()</a></code>.</p></td>
     </tr>
     <tr>
       <th>groupBy</th>
-      <td><p><code>character</code>, split files by <code>groupBy</code> entries.</p></td>
+      <td><p><code>character</code>,
+split files by <code>groupBy</code> entries.</p></td>
     </tr>
     <tr>
       <th>replications</th>
-      <td><p><code>integer</code>, number of replications of experiments.</p></td>
+      <td><p><code>integer</code>,
+number of replications of experiments.</p></td>
     </tr>
     <tr>
       <th>mz</th>
-      <td><p><code>matrix</code>, two columns (column 1: <em>mass</em>, column 2: <em>z</em>).</p></td>
+      <td><p><code>matrix</code>,
+two columns (column 1: <em>mass</em>, column 2: <em>z</em>).</p></td>
     </tr>
     <tr>
       <th>massLabeling</th>
-      <td><p><code>logical</code>, should <em>mz</em> values used for ID labeling?</p></td>
+      <td><p><code>logical</code>,
+should <em>mz</em> values used for ID labeling?</p></td>
     </tr>
     <tr>
       <th>nMs2perMs1</th>
-      <td><p><code>integer</code>, how many MS2 scans should be run after a
-MS1 scan?</p></td>
+      <td><p><code>integer</code>,
+how many MS2 scans should be run after a MS1 scan?</p></td>
     </tr>
     <tr>
       <th>duration</th>
@@ -167,10 +173,12 @@ MS1 scan?</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <ul>
-<li><p><code>ms1Settings</code>: A <code>list</code> of MS1 settings. This has to be a named <code>list</code>.
+<li><p><code>ms1Settings</code>:
+A <code>list</code> of MS1 settings. This has to be a named <code>list</code>.
 Valid MS1 settings are:
 <code>c("FirstMass", "LastMass", "Microscans", "MaxITTimeInMS", "AgcTarget")</code></p></li>
-<li><p><code>ms2Settings</code>: A <code>list</code> of MS2 settings. This has to be a named <code>list</code>.
+<li><p><code>ms2Settings</code>:
+A <code>list</code> of MS2 settings. This has to be a named <code>list</code>.
 Valid MS2 settings are:
 <code>c("ActivationType", "IsolationWindow", "EnableMultiplexIons", "EnableMSXIds", "MaxNoOfMultiplexIons", "OrbitrapResolution", "AgcTarget", "MinAgcTarget", "MaxITTimeInMS", "Microscans", "ETDReactionTime", "ETDReagentTarget", "MaximumETDReagentInjectionTime", "UseInternalCalibratedETD", "ETDSupplementalActivationEnergy", "ETDSupplementalActivation")</code></p></li>
 <li><p><code>groupBy</code>: The <code>groupBy</code> parameter is used to split methods into
@@ -189,20 +197,17 @@ It must contain a <code>"%s"</code> that is replaced by the conditions defined i
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='default-functions.html'>defaultMs1Settings()</a></code>, <code><a href='default-functions.html'>defaultMs2Settings()</a></code></p>
+    <p><code><a href='default-functions.html'>defaultMs1Settings()</a></code>,
+<code><a href='default-functions.html'>defaultMs2Settings()</a></code></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>library</span>(<span class='st'>"topdownr"</span>)
-
-<span class='fu'>writeMethodXmls</span>(<span class='fu'><a href='default-functions.html'>defaultMs1Settings</a></span>(<span class='kw'>FirstMass</span><span class='kw'>=</span><span class='fl'>400</span>),
+    <pre class="examples"><div class='input'><span class='fu'>writeMethodXmls</span>(<span class='fu'><a href='default-functions.html'>defaultMs1Settings</a></span>(<span class='kw'>FirstMass</span><span class='kw'>=</span><span class='fl'>400</span>),
                 <span class='fu'><a href='default-functions.html'>defaultMs2Settings</a></span>(),
                 <span class='kw'>mz</span><span class='kw'>=</span><span class='fu'>cbind</span>(<span class='kw'>mass</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>609.21</span>, <span class='fl'>700.45</span>, <span class='fl'>823.95</span>), <span class='kw'>z</span><span class='kw'>=</span><span class='fl'>10</span>),
                 <span class='kw'>groupBy</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='st'>"replication"</span>, <span class='st'>"ETDReactionTime"</span>),
                 <span class='kw'>replications</span><span class='kw'>=</span><span class='fl'>4</span>,
-                <span class='kw'>pattern</span><span class='kw'>=</span><span class='st'>"method_firstmass_400_%s.xml"</span>)
-<span class='co'># }</span></pre>
+                <span class='kw'>pattern</span><span class='kw'>=</span><span class='st'>"method_firstmass_400_%s.xml"</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
