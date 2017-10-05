@@ -19,6 +19,9 @@ Depends:
     Biostrings (>= 2.42.1),
     S4Vectors (>= 0.12.2)
 Imports:
+    stats,
+    tools,
+    utils,
     Biobase,
     Matrix (>= 1.2.10),
     MSnbase (>= 2.3.10),
