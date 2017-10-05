@@ -76,8 +76,8 @@ It must contain a \code{"\%s"} that is replaced by the conditions defined in
 writeMethodXmls(defaultMs1Settings(FirstMass=400),
                 defaultMs2Settings(),
                 mz=cbind(mass=c(609.21, 700.45, 823.95), z=10),
-                groupBy=c("replication", "ETDReactionTime"),
-                replications=4,
+                groupBy="ETDReactionTime",
+                replications=1,
                 pattern="method_firstmass_400_\%s.xml")
 }
 \seealso{
