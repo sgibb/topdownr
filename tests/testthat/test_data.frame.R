@@ -37,7 +37,11 @@ test_that(".dropNonInformativeColumns", {
                    d=Rle(rep("foo", 10)))
     r <- DataFrame(a=1:10,
                    c=Rle(rep(c("foo", "bar"), each=5)))
+    r2 <- DataFrame(a=1:10,
+                    c=Rle(rep(c("foo", "bar"), each=5)),
+                    d=Rle(rep("foo", 10)))
     expect_equal(topdownr:::.dropNonInformativeColumns(d), r)
+    expect_equal(topdownr:::.dropNonInformativeColumns(d, keep="d"), r2)
 })
 
 test_that(".isNumCol", {

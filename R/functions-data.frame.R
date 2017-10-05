@@ -53,10 +53,12 @@
 #' Drop non informative columns (all rows are identical)
 #'
 #' @param x `data.frame`/`DataFrame`
+#' @param keep `character` column names that should never be dropped.
 #' @return x, without columns that are identical
 #' @noRd
-.dropNonInformativeColumns <- function(x) {
-    x[, !.vapply1l(x, .allIdentical), drop=FALSE]
+.dropNonInformativeColumns <- function(x, keep="Mz") {
+    keep <- !.vapply1l(x, .allIdentical) | colnames(x) %in% keep
+    x[, keep, drop=FALSE]
 }
 
 #' Test for numeric columns
