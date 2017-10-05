@@ -1,6 +1,6 @@
 Package: topdownr
 Title: Investigation of Fragmentation Conditions in Top-Down Proteomics
-Version: 0.99.0
+Version: 0.99.1
 Authors@R: c(person("Sebastian", "Gibb", role=c("aut", "cre"),
                     email="mail@sebastiangibb.de"),
              person("Pavel", "Shliaha", role="aut",
