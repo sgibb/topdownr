@@ -27,7 +27,7 @@
         recursive=TRUE,
         full.names=TRUE
     )
-    l <- split(files, .fileExt(files))
+    l <- split(normalizePath(files), .fileExt(files))
     n <- lengths(l)
 
     ext <- c("csv", "fasta", "mzML", "txt")

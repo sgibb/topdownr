@@ -13,10 +13,12 @@ test_that(".listTopDownFiles", {
     fasta <- tempfile(pattern="fileA_", fileext=".fasta")
     fns <- paste(rep(fns, each=3), c("experiments.csv", "mzML", "txt"),
                  sep=".")
+    file.create(c(fasta, fns))
+    fns <- normalizePath(fns)
+    fasta <- normalizePath(fasta)
     r <- split(fns, c("csv", "mzML", "txt"))
     r$fasta <- fasta
     r <- r[order(names(r))]
-    file.create(c(fasta, fns))
     expect_equal(topdownr:::.listTopDownFiles(tempdir()), r)
     expect_equal(topdownr:::.listTopDownFiles(tempdir(), pattern="^fileA_.*"),
                  lapply(r, "[", 1L))
