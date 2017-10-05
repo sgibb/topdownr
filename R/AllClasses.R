@@ -10,6 +10,15 @@
 #'
 #' @seealso [Biostrings::XStringViews-class]
 #' @author Sebastian Gibb \email{mail@@sebastiangibb.de}
+#' @examples
+#' # Constructor
+#' fv <- FragmentViews("ACE", start=1, width=1:3, names=paste0("b", 1:3),
+#'                     mass=c(72.04439, 232.07504, 361.11763),
+#'                     type="b", z=1)
+#' fv
+#'
+#' # Coercion to data.frame
+#' as(fv, "data.frame")
 ## just subclass to ensure that the elementMetadata slot (DataFrame) contains
 ## a mass column
 setClass("FragmentViews",
@@ -51,6 +60,42 @@ setClass("FragmentViews",
 #' view interface.
 #' - [Matrix::dgCMatrix-class] for technical details about the intensity/coverage storage.
 #' @author Sebastian Gibb \email{mail@@sebastiangibb.de}
+#' @examples
+#' ## Because AbstractTopDownSet is a VIRTUAL class we could not create any
+#' ## object of it. Here we demonstrate the usage with an TopDownSet that
+#' ## implements the AbstractTopDownSet interface. See `?"TopDownSet-class"` for
+#' ## more details an further examples.
+#'
+#' ## Example data
+#' data(tds, package="topdownr")
+#'
+#' tds
+#'
+#' head(summary(tds))
+#'
+#' # Accessing slots
+#' rowViews(tds)
+#' colData(tds)
+#' assayData(tds)
+#'
+#' # Accessing colData
+#' tds$Mz
+#' tds$FilterString
+#'
+#' # Subsetting
+#'
+#' # First 100 fragments
+#' tds[1:100]
+#'
+#' # All c fragments
+#' tds["c"]
+#'
+#' # Just c 152
+#' tds["c152"]
+#'
+#' # Condition 1 to 10
+#' tds[, 1:10]
+#
 setClass("AbstractTopDownSet",
          contains="VIRTUAL",
          slots=c(rowViews="XStringViews",
@@ -94,7 +139,68 @@ setClass("AbstractTopDownSet",
 #' @seealso
 #' - [FragmentViews-class] for the row view interface.
 #' - [Matrix::dgCMatrix-class] for technical details about the intensity storage.
+#' - `?vignette("analysis", package="topdownr")` for a full documented example
+#' of an analysis using `topdownr`.
 #' @author Sebastian Gibb \email{mail@@sebastiangibb.de}
+#' @examples
+#' ## Example data
+#' data(tds, package="topdownr")
+#'
+#' tds
+#'
+#' head(summary(tds))
+#'
+#' # Accessing slots
+#' rowViews(tds)
+#' colData(tds)
+#' assayData(tds)
+#'
+#' # Accessing colData
+#' tds$Mz
+#' tds$FilterString
+#'
+#' # Subsetting
+#'
+#' # First 100 fragments
+#' tds[1:100]
+#'
+#' # All c fragments
+#' tds["c"]
+#'
+#' # Just c 152
+#' tds["c152"]
+#'
+#' # Condition 1 to 10
+#' tds[, 1:10]
+#'
+#' # Filtering
+#' # Filter all intensities that don't have at least 10 % of the highest
+#' # intensity per fragment.
+#' tds <- filterIntensity(tds, threshold=0.1)
+#'
+#' # Filter all conditions with a CV above 30 % (across technical replicates)
+#' tds <- filterCv(tds, threshold=30)
+#'
+#' # Filter all conditions with a large deviation in injection time
+#' tds <- filterInjectionTime(tds, maxDeviation=log2(3), keepTopN=2)
+#'
+#' # Filter all conditions where fragments don't replicate
+#' tds <- filterNonReplicatedFragments(tds)
+#'
+#' # Normalise by TIC
+#' tds <- normalize(tds)
+#'
+#' # Aggregate technical replicates
+#' tds <- aggregate(tds)
+#'
+#' head(summary(tds))
+#'
+#' # Coercion
+#' as(tds, "NCBSet")
+#'
+#' if (require("MSnbase")) {
+#'     as(tds, "MSnSet")
+#' }
 setClass("TopDownSet",
          contains="AbstractTopDownSet",
          prototype=prototype(rowViews=new("FragmentViews"))
@@ -130,6 +236,41 @@ setClass("TopDownSet",
 #' - [Biostrings::XStringViews-class] for the row view interface.
 #' - [Matrix::dgCMatrix-class] for technical details about the coverage storage.
 #' @author Sebastian Gibb \email{mail@@sebastiangibb.de}
+#' @examples
+#' ## Example data
+#' data(tds, package="topdownr")
+#'
+#' ## Aggregate technical replicates
+#' tds <- aggregate(tds)
+#'
+#' ## Coercion into an NCBSet object
+#' ncb <- as(tds, "NCBSet")
+#'
+#' ncb
+#'
+#' head(summary(ncb))
+#'
+#' # Accessing slots
+#' rowViews(ncb)
+#' colData(ncb)
+#' assayData(ncb)
+#'
+#' # Accessing colData
+#' ncb$Mz
+#'
+#' # Subsetting
+#'
+#' # First 100 bonds
+#' ncb[1:100]
+#'
+#' # Just bond 152
+#' ncb["bond152"]
+#'
+#' # Condition 1 to 10
+#' ncb[, 1:10]
+#'
+#' # Plot fragmentation map
+#' fragmentationMap(ncb)
 setClass("NCBSet",
          contains="AbstractTopDownSet",
          validity=function(object).validateNCBSet(object)

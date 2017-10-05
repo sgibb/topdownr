@@ -201,6 +201,42 @@ experimental \emph{m/z} values to the theoretical fragments.}
 \item{\code{processing}}{\code{character}, log messages.}
 }}
 
+\examples{
+## Because AbstractTopDownSet is a VIRTUAL class we could not create any
+## object of it. Here we demonstrate the usage with an TopDownSet that
+## implements the AbstractTopDownSet interface. See `?"TopDownSet-class"` for
+## more details an further examples.
+
+## Example data
+data(tds, package="topdownr")
+
+tds
+
+head(summary(tds))
+
+# Accessing slots
+rowViews(tds)
+colData(tds)
+assayData(tds)
+
+# Accessing colData
+tds$Mz
+tds$FilterString
+
+# Subsetting
+
+# First 100 fragments
+tds[1:100]
+
+# All c fragments
+tds["c"]
+
+# Just c 152
+tds["c152"]
+
+# Condition 1 to 10
+tds[, 1:10]
+}
 \seealso{
 \itemize{
 \item \linkS4class{TopDownSet} and \linkS4class{NCBSet} which both implement/use this

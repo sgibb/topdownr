@@ -1,19 +1,25 @@
-#' Create meth files from xml templates
+#' Windows specific functions.
 #'
-#' This function calls `XmlMethodChanger.exe` on all given xml files generated
-#' with [writeMethodXmls()].
-#' It works only on Windows.
+#' The functions `runXmlMethodChanger` and `runScanHeadsman` call
+#' `XmlMethodChanger.exe` and `ScanHeadsman.exe` with the correspond arguments.
+#' The only work on Windows (maybe on Linux + wine as well but that was never
+#' tested).
+#'
+#' @details
+#'
+#' `runXmlMethodChanger` applies ‘XmlMethodChanger.exe’ on all given XML files
+#' generated with [writeMethodXmls()] to create `.meth` files from a template.
 #'
 #' @param template `character`, path to template `.meth` file.
 #' @param xml `character`, vector of path to `.xml` files.
-#' @param executable `character`, path to the `XmlMethodChanger.exe`
-#' executable.
+#' @param executable `character`, path to the `XmlMethodChanger.exe` or
+#' `ScanHeadsman.exe` executable.
 #' @param verbose `logical`, if `TRUE` a progress bar is shown.
 #' @return Nothing. Used for its side effects.
 #' @seealso [writeMethodXmls()]
 #' @references XmlMethodChanger source code:
 #' https://github.com/thermofisherlsms/meth-modifications/
-#' @rdname XmlMethodChanger
+#' @rdname windows-specific-functions
 #' @export
 #' @examples
 #' \dontrun{
@@ -52,7 +58,7 @@ createTngFusionMethFiles <- function(template,
     }
 }
 
-#' @rdname XmlMethodChanger
+#' @rdname windows-specific-functions
 #' @export
 runXmlMethodChanger <- createTngFusionMethFiles
 
@@ -62,18 +68,18 @@ runXmlMethodChanger <- createTngFusionMethFiles
     system2(normalizePath(exe), args=args)
 }
 
-#' Create .csv/.txt files from raw files
+#' @rdname windows-specific-functions
 #'
-#' This function calls `ScanHeadsman.exe` on a given directory containing
+#' @details
+#'
+#' `runScanHeadsman` calls `ScanHeadsman.exe` on a given directory containing
 #' `.raw` files. `ScanHeadsman.exe` extracts the method and scan header data
 #' into `.experiments.csv` and `.txt` files, respectively.
-#' It works only on Windows.
 #'
-#' @param executable `character`, path to the `ScanHeadsman.exe` executable.
+## @param executable `character`, path to the `ScanHeadsman.exe` executable.
 #' @param path `character`, path to the directory containing the `.raw` files.
-#' @return Nothing. Used for its side effects.
-#' @seealso [runXmlMethodChanger()]
-#' @rdname ScanHeadsman
+## @return Nothing. Used for its side effects.
+#' @export
 #' @references ScanHeadsman source code:
 #' https://bitbucket.org/caetera/scanheadsman
 #' @export

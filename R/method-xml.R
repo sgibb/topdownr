@@ -393,14 +393,12 @@
 #' @author Sebastian Gibb \email{mail@@sebastiangibb.de}, Pavel V. Shliaha
 #' \email{pavels@@bmb.sdu.dk}
 #' @examples
-#' \dontrun{
 #' writeMethodXmls(defaultMs1Settings(FirstMass=400),
 #'                 defaultMs2Settings(),
 #'                 mz=cbind(mass=c(609.21, 700.45, 823.95), z=10),
 #'                 groupBy=c("replication", "ETDReactionTime"),
 #'                 replications=4,
 #'                 pattern="method_firstmass_400_%s.xml")
-#' }
 #' @export
 writeMethodXmls <- function(ms1Settings, ms2Settings,
                             groupBy=c("replication",

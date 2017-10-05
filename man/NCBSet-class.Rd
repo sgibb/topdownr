@@ -100,6 +100,42 @@ experimental mz values to the theoretical fragments.}
 \item{\code{processing}}{\code{character}, log messages.}
 }}
 
+\examples{
+## Example data
+data(tds, package="topdownr")
+
+## Aggregate technical replicates
+tds <- aggregate(tds)
+
+## Coercion into an NCBSet object
+ncb <- as(tds, "NCBSet")
+
+ncb
+
+head(summary(ncb))
+
+# Accessing slots
+rowViews(ncb)
+colData(ncb)
+assayData(ncb)
+
+# Accessing colData
+ncb$Mz
+
+# Subsetting
+
+# First 100 bonds
+ncb[1:100]
+
+# Just bond 152
+ncb["bond152"]
+
+# Condition 1 to 10
+ncb[, 1:10]
+
+# Plot fragmentation map
+fragmentationMap(ncb)
+}
 \seealso{
 \itemize{
 \item An \code{NCBSet} is generated from an \linkS4class{TopDownSet} object.

@@ -21,13 +21,6 @@
 #' @param metadata `list`, metadata like modifications.
 #' @return An [FragmentViews-class] object.
 #' @export
-#' @examples
-#'
-#' # constructor
-#' fv <- FragmentViews("ACE", start=1, width=1:3, names=paste0("b", 1:3),
-#'                     mass=c(72.04439, 232.07504, 361.11763),
-#'                     type="b", z=1)
-#' fv
 FragmentViews <- function(sequence, mass, type, z=1L,
                           start=NULL, end=NULL, width=NULL, names=NULL,
                           metadata=list()) {

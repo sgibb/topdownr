@@ -65,14 +65,12 @@ It must contain a \code{"\%s"} that is replaced by the conditions defined in
 }
 }
 \examples{
-\dontrun{
 writeMethodXmls(defaultMs1Settings(FirstMass=400),
                 defaultMs2Settings(),
                 mz=cbind(mass=c(609.21, 700.45, 823.95), z=10),
                 groupBy=c("replication", "ETDReactionTime"),
                 replications=4,
                 pattern="method_firstmass_400_\%s.xml")
-}
 }
 \seealso{
 \code{\link[=defaultMs1Settings]{defaultMs1Settings()}}, \code{\link[=defaultMs2Settings]{defaultMs2Settings()}}

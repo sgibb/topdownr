@@ -158,10 +158,72 @@ experimental mz values to the theoretical fragments.}
 \linkS4class{NCBSet} object.
 }
 
+\examples{
+## Example data
+data(tds, package="topdownr")
+
+tds
+
+head(summary(tds))
+
+# Accessing slots
+rowViews(tds)
+colData(tds)
+assayData(tds)
+
+# Accessing colData
+tds$Mz
+tds$FilterString
+
+# Subsetting
+
+# First 100 fragments
+tds[1:100]
+
+# All c fragments
+tds["c"]
+
+# Just c 152
+tds["c152"]
+
+# Condition 1 to 10
+tds[, 1:10]
+
+# Filtering
+# Filter all intensities that don't have at least 10 \% of the highest
+# intensity per fragment.
+tds <- filterIntensity(tds, threshold=0.1)
+
+# Filter all conditions with a CV above 30 \% (across technical replicates)
+tds <- filterCv(tds, threshold=30)
+
+# Filter all conditions with a large deviation in injection time
+tds <- filterInjectionTime(tds, maxDeviation=log2(3), keepTopN=2)
+
+# Filter all conditions where fragments don't replicate
+tds <- filterNonReplicatedFragments(tds)
+
+# Normalise by TIC
+tds <- normalize(tds)
+
+# Aggregate technical replicates
+tds <- aggregate(tds)
+
+head(summary(tds))
+
+# Coercion
+as(tds, "NCBSet")
+
+if (require("MSnbase")) {
+    as(tds, "MSnSet")
+}
+}
 \seealso{
 \itemize{
 \item \linkS4class{FragmentViews} for the row view interface.
 \item \link[Matrix:dgCMatrix-class]{Matrix::dgCMatrix} for technical details about the intensity storage.
+\item \code{?vignette("analysis", package="topdownr")} for a full documented example
+of an analysis using \code{topdownr}.
 }
 }
 \author{
