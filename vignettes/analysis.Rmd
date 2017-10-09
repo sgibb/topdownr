@@ -365,10 +365,10 @@ fragments from the same bond add no extra sequence information.
 Before we compute combinations all the fragments are converted to either
 N- or C-terminal, as shown in the image below.
 
-![Schema of N-/C-terminal fragments or both.](images/ncb.svg)
+![Schema of N-/C-terminal fragments or bidirectional](images/ncb.svg)
 
 In `topdownr` we convert the `TopDownSet` into an `NCBSet` object
-(*N*-terminal/*C*-terminal/*B*oth).
+(*N*-terminal/*C*-terminal/*B*idirectional).
 
 ```{r coerce2NCBSet}
 myoglobinNcb <- as(myoglobin, "NCBSet")
@@ -379,7 +379,7 @@ An `NCBSet` is very similar to a `TopDownSet` but instead of an `FragmentViews`
 the `rowViews` are an `XStringViews` for the former. Another difference is that
 the `NCBSet` has one row per bond instead one row per fragment. Also the
 `assayData` contains no intensity information but a `1` for an *N*-terminal, a
-`2` for a *C*-terminal and a `3` for both fragments.
+`2` for a *C*-terminal and a `3` for bidirectional fragments.
 
 The `NCBSet` can be used to select the combination of conditions that provide
 the best fragment coverage. While computing coverage `topdownr` awards 1 point

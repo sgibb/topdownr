@@ -84,7 +84,7 @@ setMethod("fragmentationMap", "NCBSet",
         facet_grid(. ~ Activation, scales="free_x", space="free_x") +
         scale_fill_manual(
             name="Observed Fragments",
-            labels=c("N-terminal", "C-terminal", "Both"),
+            labels=c("N-terminal", "C-terminal", "Bidirectional"),
             values=c("#1b9e77", "#d95f02", "#7570b3")
         ) +
         scale_x_discrete(

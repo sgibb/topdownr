@@ -233,13 +233,13 @@
     r <- .row(x[, i, drop=FALSE])
     hc <- x[r, i]
     r <- r - 1L
-    ## if 3 (both) remove all
+    ## if 3 (bidirectional) remove all
     x@x[x@i %in% r[hc == 3L]] <- 0L
-    ## if 1 (N) keep 2 (C) and reduce 3 (both) to 2 (C)
+    ## if 1 (N) keep 2 (C) and reduce 3 (bidirectional) to 2 (C)
     isN <- x@i %in% r[hc == 1L]
     isN <- isN & x@x != 2L
     x@x[isN] <- x@x[isN] - 1L
-    ## if 2 (C) keep 1 (N) and reduce 3 (both) to 1 (N)
+    ## if 2 (C) keep 1 (N) and reduce 3 (bidirectional) to 1 (N)
     isC <- x@i %in% r[hc == 2L]
     isC <- isC & x@x != 1L
     x@x[isC] <- x@x[isC] - 2L

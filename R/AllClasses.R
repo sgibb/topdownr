@@ -237,7 +237,7 @@ setClass(
 #' but instead of intensity values it just stores the information if a
 #' bond is covered by a N-terminal (encoded as `1`),
 #' a C-terminal (encoded as `2`)
-#' and/or both fragments (encoded as `3`).
+#' and/or bidirectional fragments (encoded as `3`).
 #'
 #' @slot rowViews [Biostrings::XStringViews-class],
 #' information about bonds (name, start, end, width, sequence),
@@ -249,7 +249,7 @@ setClass(
 #' columns to the condition/run. It just stores values that are different
 #' from zero. If a bond is covered by an N-terminal fragment its encoded
 #' with `1`, by an C-terminal fragmentl with `2` and
-#' by both fragment types by `3` respectively.
+#' by both fragment types/bidirectional by `3` respectively.
 #' @slot files `character`, files that were imported.
 #' @slot tolerance `double`,
 #' tolerance in *ppm* that were used for matching the experimental mz values

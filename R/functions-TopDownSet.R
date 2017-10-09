@@ -193,10 +193,10 @@ readTopDownFiles <- function(path, pattern=".*",
     TRUE
 }
 
-#' Create NCB Map (N-/C-terminal, or both)
+#' Create NCB Map (N-/C-terminal, or Bidirectional)
 #'
 #' @param object `TopDownSet`
-#' @return `Matrix`, Nterm == 1, Cterm == 2, both == 3
+#' @return `Matrix`, Nterm == 1, Cterm == 2, bidirectional == 3
 #' @noRd
 .ncbMap <- function(object, nterm=c("a", "b", "c"), cterm=c("x", "y", "z")) {
     .isTopDownSet(object)

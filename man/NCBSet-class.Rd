@@ -53,7 +53,7 @@ similar to the \linkS4class{TopDownSet}
 but instead of intensity values it just stores the information if a
 bond is covered by a N-terminal (encoded as \code{1}),
 a C-terminal (encoded as \code{2})
-and/or both fragments (encoded as \code{3}).
+and/or bidirectional fragments (encoded as \code{3}).
 }
 \section{Methods (by generic)}{
 \itemize{
@@ -97,7 +97,7 @@ coverage values of the bonds. The rows correspond to the bonds and the
 columns to the condition/run. It just stores values that are different
 from zero. If a bond is covered by an N-terminal fragment its encoded
 with \code{1}, by an C-terminal fragmentl with \code{2} and
-by both fragment types by \code{3} respectively.}
+by both fragment types/bidirectional by \code{3} respectively.}
 
 \item{\code{files}}{\code{character}, files that were imported.}
 
