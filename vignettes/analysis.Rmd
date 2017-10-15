@@ -65,7 +65,7 @@ Some example files are provided in the `topdownrdata` package. For a full
 analysis you need a `.fasta` file with the protein sequence, the
 `.experiments.csv` files containing the method information, the `.txt` files
 containing the scan header information and the `.mzML` files with the
-deconvulted spectra.
+deconvoluted spectra.
 
 ```{r listFiles, eval=-1, echo=1, comment=NA}
 list.files(topdownrdata::topDownDataPath("myoglobin"))
