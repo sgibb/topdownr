@@ -231,18 +231,18 @@ additional rows, e.g.:
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'>require</span>(<span class='st'>"topdownrdata"</span>)) {
     <span class='co'># add H+ to z and no neutral loss of water</span>
     <span class='no'>tds</span> <span class='kw'>&lt;-</span> <span class='fu'>readTopDownFiles</span>(
-       <span class='kw pkg'>topdownrdata</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/topdownrdata/topics/topDownDataPath'>topDownDataPath</a></span>(<span class='st'>"myoglobin"</span>),
-       <span class='co'>## Use an artifical pattern to load just the fasta</span>
-       <span class='co'>## file and files from m/z == 1211, ETD reagent</span>
-       <span class='co'>## target 1e6 and first replicate to keep runtime</span>
-       <span class='co'>## of the example short</span>
-       <span class='kw'>pattern</span><span class='kw'>=</span><span class='st'>".*fasta.gz$|1211_.*1e\\+06_1"</span>,
-       <span class='kw'>adducts</span><span class='kw'>=</span><span class='fu'>data.frame</span>(<span class='kw'>mass</span><span class='kw'>=</span><span class='fl'>1.008</span>, <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"zpH"</span>, <span class='kw'>to</span><span class='kw'>=</span><span class='st'>"z"</span>),
-       <span class='kw'>neutralLoss</span><span class='kw'>=</span><span class='kw pkg'>MSnbase</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/MSnbase/topics/calculateFragments-methods'>defaultNeutralLoss</a></span>(
-           <span class='kw'>disableWaterLoss</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='st'>"Cterm"</span>, <span class='st'>"D"</span>, <span class='st'>"E"</span>, <span class='st'>"S"</span>, <span class='st'>"T"</span>)),
-       <span class='kw'>tolerance</span><span class='kw'>=</span><span class='fl'>25e-6</span>
+        <span class='kw pkg'>topdownrdata</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/topdownrdata/topics/topDownDataPath'>topDownDataPath</a></span>(<span class='st'>"myoglobin"</span>),
+        <span class='co'>## Use an artifical pattern to load just the fasta</span>
+        <span class='co'>## file and files from m/z == 1211, ETD reagent</span>
+        <span class='co'>## target 1e6 and first replicate to keep runtime</span>
+        <span class='co'>## of the example short</span>
+        <span class='kw'>pattern</span><span class='kw'>=</span><span class='st'>".*fasta.gz$|1211_.*1e6_1"</span>,
+        <span class='kw'>adducts</span><span class='kw'>=</span><span class='fu'>data.frame</span>(<span class='kw'>mass</span><span class='kw'>=</span><span class='fl'>1.008</span>, <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"zpH"</span>, <span class='kw'>to</span><span class='kw'>=</span><span class='st'>"z"</span>),
+        <span class='kw'>neutralLoss</span><span class='kw'>=</span><span class='kw pkg'>MSnbase</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/MSnbase/topics/calculateFragments-methods'>defaultNeutralLoss</a></span>(
+            <span class='kw'>disableWaterLoss</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='st'>"Cterm"</span>, <span class='st'>"D"</span>, <span class='st'>"E"</span>, <span class='st'>"S"</span>, <span class='st'>"T"</span>)),
+        <span class='kw'>tolerance</span><span class='kw'>=</span><span class='fl'>25e-6</span>
    )
-}</div><div class='output co'>#&gt; <span class='message'>Loading required package: topdownrdata</span></div><div class='output co'>#&gt; <span class='warning'>Warning: 61 FilterString entries modified because of duplicated ID for different conditions.</span></div></pre>
+}</div><div class='output co'>#&gt; <span class='message'>Loading required package: topdownrdata</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
