@@ -73,7 +73,17 @@ lapply(
     topdownr:::.listTopDownFiles(
         topdownrdata::topDownDataPath("myoglobin")),
     function(x) {
-        c(head(paste0(".../", dirname(x), basename(x), 2)), "...")
+        c(head(
+            file.path(
+                "...",
+                paste(
+                    tail(strsplit(dirname(x), "/")[[1L]], 2),
+                    collapse=.Platform$file.sep
+                ),
+                basename(x)
+            ),
+            2
+        ), "...")
     }
 )
 ```
