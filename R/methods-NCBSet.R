@@ -1,6 +1,8 @@
 #' @describeIn NCBSet Best combination of conditions.
 #'
-#' Finds the best combination of conditions for highest coverage of bonds. Use
+#' Finds the best combination of conditions for highest coverage of bonds. If
+#' there are two (or more conditions) that would add the same number of
+#' fragments the one with the highest assigned intensity is used. Use
 #' `n` to limit the number of iterations and combinations that should be
 #' returned.
 #' If `minN` is set at least `minN` fragments have to be added to the
@@ -20,7 +22,12 @@
 #' @export
 setMethod("bestConditions", "NCBSet",
           function(object, n=ncol(object), minN=0L, ...) {
-    m <- .bestNcbCoverageCombination(object@assay, n=n, minN=minN)
+    m <- .bestNcbCoverageCombination(
+        object@assay,
+        intensity=object@colData$AssignedIntensity,
+        n=n,
+        minN=minN
+    )
     rownames(m) <- colnames(object)[m[, "index"]]
     m
 })
@@ -39,11 +46,14 @@ setMethod("bestConditions", "NCBSet",
 #' @param cumCoverage `logical`,
 #' if `TRUE` (default) cumulative coverage of combinations is shown.
 #' @param labels `character`, overwrite x-axis labels.
+#' @param alphaIntensity `logical`, if `TRUE` (default) the alpha level of the
+#' color is used to show the `colData(object)$AssignedIntensity`. If `FALSE` the
+#' alpha is set to `1`.
 #' @aliases fragmentationMap fragmentationMap,NCBSet-method
 #' @export
 setMethod("fragmentationMap", "NCBSet",
           function(object, nCombinations=10, cumCoverage=TRUE,
-                   labels=colnames(object), ...) {
+                   labels=colnames(object), alphaIntensity=TRUE, ...) {
 
     if (length(labels) != ncol(object)) {
         stop("The number of elements in 'labels' has to be the same as ",
@@ -51,6 +61,7 @@ setMethod("fragmentationMap", "NCBSet",
     }
     d <- .dgcMatrix2data.frame(object@assay)
     d$Activation <- as.character(object$Activation[d$col])
+    d$AssignedIntensity <- object$AssignedIntensity[d$col]
 
     if (nCombinations) {
         i <- bestConditions(object, nCombinations)[, "index"]
@@ -62,6 +73,10 @@ setMethod("fragmentationMap", "NCBSet",
         } else {
             cmb <- .dgcMatrix2data.frame(combinations@assay)
         }
+        ## overwrite col (.dgcMatrix2data.frame creates 1:nCombinations)
+        i <- i[cmb$col]
+        cmb$AssignedIntensity <- object$AssignedIntensity[i]
+        ## ggplot doesn't accept duplicated col for a facet
         cmb$col <- cmb$col + ncol(object)
         cmb$Activation <- "Cmb"
         d <- rbind(d, cmb)
@@ -76,11 +91,23 @@ setMethod("fragmentationMap", "NCBSet",
             levels=c("CID", "HCD", "ETD", "ETcid", "EThcd", "Cmb"),
             ordered=TRUE
         )
-
     names(labels) <- seq_along(labels)
 
-    ggplot(data=d) +
-        geom_raster(aes_string(x="col", y="row", fill="x")) +
+    gg <- ggplot(data=d)
+        if (alphaIntensity) {
+            gg <- gg +
+                geom_raster(
+                    aes_string(
+                        x="col",
+                        y="row",
+                        fill="x",
+                        alpha="AssignedIntensity"
+                    )
+                ) + scale_alpha(name="Assigned Intensity")
+        } else {
+           gg <- gg + geom_raster(aes_string(x="col", y="row", fill="x"))
+        }
+    gg  <- gg +
         facet_grid(. ~ Activation, scales="free_x", space="free_x") +
         scale_fill_manual(
             name="Observed Fragments",
@@ -112,6 +139,7 @@ setMethod("fragmentationMap", "NCBSet",
             panel.background=element_blank(),
             strip.background=element_rect(fill="#f0f0f0", colour="#ffffff")
         )
+    gg
 })
 
 #' @rdname NCBSet-class

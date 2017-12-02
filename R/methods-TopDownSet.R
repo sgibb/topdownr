@@ -372,5 +372,6 @@ setAs("TopDownSet", "NCBSet", function(from) {
         tolerance=from@tolerance,
         processing=from@processing
     )
+    colData(ncb)$AssignedIntensity <- Matrix::colSums(from@assay)
     .atdsLogMsg(ncb, "Coerced TopDownSet into an NCBSet object")
 })

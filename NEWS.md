@@ -1,0 +1,20 @@
+# topdownr 1.1
+
+## Changes in version 1.1.1
+- Respect assigned intensity in conditions for `bestConditions,NCBSet-method`
+  and `fragmentationMap`
+  (closes [#62](https://github.com/sgibb/topdownr/issues/62)) [2017-12-02].
+- Fix explanation of random forest barchart in analysis vignette [2017-12-02].
+
+## Changes in version 1.1.0
+- New version for Bioc 3.7 (devel)
+
+# topdownr 1.0
+
+## Changes in version 1.0.0
+- New version for Bioc 3.6 (release)
+
+# MSnbase 0.9
+
+## Changes in version 0.99.0
+- First public release.

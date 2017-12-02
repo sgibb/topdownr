@@ -7,9 +7,12 @@
 #' elements added by the next column.
 #' @return `matrix`, first column: index, second column: number of fragments.
 #' @noRd
-.bestNcbCoverageCombination <- function(x, intensity=rep(0L, ncol(x)),
+.bestNcbCoverageCombination <- function(x, intensity=NULL,
                                         n=ncol(x), minN=0L) {
     stopifnot(is(x, "dgCMatrix"))
+    if (is.null(intensity)) {
+        intensity <- rep(0L, ncol(x))
+    }
     stopifnot(ncol(x) == length(intensity))
     m <- matrix(NA_real_, nrow=n, ncol=2L,
                 dimnames=list(NULL, c("index", "fragments")))

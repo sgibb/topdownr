@@ -14,7 +14,8 @@
 \S4method{bestConditions}{NCBSet}(object, n = ncol(object), minN = 0L, ...)
 
 \S4method{fragmentationMap}{NCBSet}(object, nCombinations = 10,
-  cumCoverage = TRUE, labels = colnames(object), ...)
+  cumCoverage = TRUE, labels = colnames(object), alphaIntensity = TRUE,
+  ...)
 
 \S4method{show}{NCBSet}(object)
 
@@ -35,6 +36,10 @@ number of combinations to show (0 to avoid plotting them at all).}
 if \code{TRUE} (default) cumulative coverage of combinations is shown.}
 
 \item{labels}{\code{character}, overwrite x-axis labels.}
+
+\item{alphaIntensity}{\code{logical}, if \code{TRUE} (default) the alpha level of the
+color is used to show the \code{colData(object)$AssignedIntensity}. If \code{FALSE} the
+alpha is set to \code{1}.}
 
 \item{what}{\code{character},
 specifies whether \code{"conditions"} (columns; default) or
@@ -59,7 +64,9 @@ and/or bidirectional fragments (encoded as \code{3}).
 \itemize{
 \item \code{bestConditions}: Best combination of conditions.
 
-Finds the best combination of conditions for highest coverage of bonds. Use
+Finds the best combination of conditions for highest coverage of bonds. If
+there are two (or more conditions) that would add the same number of
+fragments the one with the highest assigned intensity is used. Use
 \code{n} to limit the number of iterations and combinations that should be
 returned.
 If \code{minN} is set at least \code{minN} fragments have to be added to the
