@@ -52,7 +52,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="..//index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
@@ -74,6 +74,9 @@
       <a href="../articles/data-generation.html">Data Generation for topdownr</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
@@ -112,7 +115,8 @@ and/or bidirectional fragments (encoded as <code>3</code>).</p>
 
 <span class='co'># S4 method for NCBSet</span>
 <span class='fu'>fragmentationMap</span>(<span class='no'>object</span>, <span class='kw'>nCombinations</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>cumCoverage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'>colnames</span>(<span class='no'>object</span>), <span class='no'>...</span>)
+  <span class='kw'>cumCoverage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'>colnames</span>(<span class='no'>object</span>), <span class='kw'>alphaIntensity</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='no'>...</span>)
 
 <span class='co'># S4 method for NCBSet</span>
 <span class='fu'>show</span>(<span class='no'>object</span>)
@@ -151,6 +155,12 @@ if <code>TRUE</code> (default) cumulative coverage of combinations is shown.</p>
       <td><p><code>character</code>, overwrite x-axis labels.</p></td>
     </tr>
     <tr>
+      <th>alphaIntensity</th>
+      <td><p><code>logical</code>, if <code>TRUE</code> (default) the alpha level of the
+color is used to show the <code>colData(object)$AssignedIntensity</code>. If <code>FALSE</code> the
+alpha is set to <code>1</code>.</p></td>
+    </tr>
+    <tr>
       <th>what</th>
       <td><p><code>character</code>,
 specifies whether <code>"conditions"</code> (columns; default) or
@@ -172,7 +182,9 @@ newly added fragments third column: number of newly covered bonds.</p></td>
 
     <ul>
 <li><p><code>bestConditions</code>: Best combination of conditions.</p>
-<p>Finds the best combination of conditions for highest coverage of bonds. Use
+<p>Finds the best combination of conditions for highest coverage of bonds. If
+there are two (or more conditions) that would add the same number of
+fragments the one with the highest assigned intensity is used. Use
 <code>n</code> to limit the number of iterations and combinations that should be
 returned.
 If <code>minN</code> is set at least <code>minN</code> fragments have to be added to the
@@ -244,13 +256,13 @@ for technical details about the coverage storage.</p></li>
 #&gt; - - - Condition data - - -
 #&gt; Number of conditions: 222 
 #&gt; Number of scans: 222 
-#&gt; Condition variables (56): Scan, PeaksCount, ..., Sample, Charge
+#&gt; Condition variables (57): Scan, PeaksCount, ..., Charge, AssignedIntensity
 #&gt; - - - Assay data - - -
 #&gt; Size of array: 152x222 (11.49% != 0)
 #&gt; - - - Processing information - - -
 #&gt; [2017-10-05 10:28:55] 6185 fragments [2700;351] matched (tolerance: 5 ppm).
-#&gt; [2017-10-16 22:13:07] Aggregated 6185 fragments [2700;351] to 4771 fragments [2700;222].
-#&gt; [2017-10-16 22:13:07] Coerced TopDownSet into an NCBSet object; 3878 fragments [152;222]. </div><div class='input'>
+#&gt; [2017-12-02 21:52:38] Aggregated 6185 fragments [2700;351] to 4771 fragments [2700;222].
+#&gt; [2017-12-02 21:52:38] Coerced TopDownSet into an NCBSet object; 3878 fragments [152;222]. </div><div class='input'>
 <span class='fu'>head</span>(<span class='fu'>summary</span>(<span class='no'>ncb</span>))</div><div class='output co'>#&gt;                                        Fragments Total Min Q1 Median      Mean
 #&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1        10    20   2  2      2 0.1315789
 #&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1        59   118   2  2      2 0.7763158
@@ -280,7 +292,7 @@ for technical details about the coverage storage.</p></li>
 #&gt; [149]     1 149   149 [GLSDGEWQQVLNVWGKVEADIAGHGQE...GADAQGAMTKALELFRNDIAAKYKEL]
 #&gt; [150]     1 150   150 [GLSDGEWQQVLNVWGKVEADIAGHGQE...ADAQGAMTKALELFRNDIAAKYKELG]
 #&gt; [151]     1 151   151 [GLSDGEWQQVLNVWGKVEADIAGHGQE...DAQGAMTKALELFRNDIAAKYKELGF]
-#&gt; [152]     1 152   152 [GLSDGEWQQVLNVWGKVEADIAGHGQE...AQGAMTKALELFRNDIAAKYKELGFQ]</div><div class='input'><span class='fu'><a href='AbstractTopDownSet-class.html'>colData</a></span>(<span class='no'>ncb</span>)</div><div class='output co'>#&gt; DataFrame with 222 rows and 56 columns
+#&gt; [152]     1 152   152 [GLSDGEWQQVLNVWGKVEADIAGHGQE...AQGAMTKALELFRNDIAAKYKELGFQ]</div><div class='input'><span class='fu'><a href='AbstractTopDownSet-class.html'>colData</a></span>(<span class='no'>ncb</span>)</div><div class='output co'>#&gt; DataFrame with 222 rows and 57 columns
 #&gt;                                             Scan PeaksCount TotIonCurrent
 #&gt;                                        &lt;integer&gt;  &lt;numeric&gt;     &lt;numeric&gt;
 #&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1        13       34.0     6076019.0
@@ -619,19 +631,19 @@ for technical details about the coverage storage.</p></li>
 #&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00   1211.7                    43.14
 #&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1 1211.7                    43.14
 #&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1 1211.7                    43.14
-#&gt;                                           Sample Charge
-#&gt;                                        &lt;numeric&gt;  &lt;Rle&gt;
-#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1         1     14
-#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1         2     14
-#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1         3     14
-#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1         4     14
-#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1         5     14
-#&gt; ...                                          ...    ...
-#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1       218     14
-#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00         219     14
-#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00         220     14
-#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1       221     14
-#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1       222     14</div><div class='input'><span class='fu'>assayData</span>(<span class='no'>ncb</span>)</div><div class='output co'>#&gt; 152 x 222 sparse Matrix of class "dgCMatrix"</div><div class='output co'>#&gt; <span class='message'>   [[ suppressing 222 column names ‘C1211.70_1.0e+05_0.0e+00_00.00_00_07_1’, ‘C1211.70_1.0e+05_0.0e+00_00.00_00_14_1’, ‘C1211.70_1.0e+05_0.0e+00_00.00_00_21_1’ ... ]]</span></div><div class='output co'>#&gt;                                                                                
+#&gt;                                           Sample Charge AssignedIntensity
+#&gt;                                        &lt;numeric&gt;  &lt;Rle&gt;         &lt;numeric&gt;
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_07_1         1     14          168910.9
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_14_1         2     14         2227781.1
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_21_1         3     14          186325.5
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_28_1         4     14               0.0
+#&gt; C1211.70_1.0e+05_0.0e+00_00.00_00_35_1         5     14               0.0
+#&gt; ...                                          ...    ...               ...
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_07_00_1       218     14         106892.80
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_14_00         219     14          37990.61
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_21_00         220     14         167788.59
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_28_00_1       221     14         159579.23
+#&gt; C1211.70_1.0e+06_1.0e+06_50.00_35_00_1       222     14         152760.43</div><div class='input'><span class='fu'>assayData</span>(<span class='no'>ncb</span>)</div><div class='output co'>#&gt; 152 x 222 sparse Matrix of class "dgCMatrix"</div><div class='output co'>#&gt; <span class='message'>   [[ suppressing 222 column names ‘C1211.70_1.0e+05_0.0e+00_00.00_00_07_1’, ‘C1211.70_1.0e+05_0.0e+00_00.00_00_14_1’, ‘C1211.70_1.0e+05_0.0e+00_00.00_00_21_1’ ... ]]</span></div><div class='output co'>#&gt;                                                                                
 #&gt; bond001 2 . . . . . . . . . . . 2 . . . . 2 . 2 . . 2 . . . 2 . . . . . 2 . . .
 #&gt; bond002 . 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 #&gt; bond003 . 2 . . . . . . . 2 . . . . . . . . . . . . 2 . . . . . . . . . . . . .
@@ -1719,16 +1731,16 @@ for technical details about the coverage storage.</p></li>
 #&gt; - - - Condition data - - -
 #&gt; Number of conditions: 222 
 #&gt; Number of scans: 222 
-#&gt; Condition variables (56): Scan, PeaksCount, ..., Sample, Charge
+#&gt; Condition variables (57): Scan, PeaksCount, ..., Charge, AssignedIntensity
 #&gt; - - - Assay data - - -
 #&gt; Size of array: 100x222 (8.64% != 0)
 #&gt; - - - Processing information - - -
 #&gt; [2017-10-05 10:28:55] 6185 fragments [2700;351] matched (tolerance: 5 ppm).
-#&gt; [2017-10-16 22:13:07] Aggregated 6185 fragments [2700;351] to 4771 fragments [2700;222].
-#&gt; [2017-10-16 22:13:07] Coerced TopDownSet into an NCBSet object; 3878 fragments [152;222].
-#&gt; [2017-10-16 22:13:08] Subsetted 3878 fragments [152;222] to 1918 fragments [100;222]. </div><div class='input'>
+#&gt; [2017-12-02 21:52:38] Aggregated 6185 fragments [2700;351] to 4771 fragments [2700;222].
+#&gt; [2017-12-02 21:52:38] Coerced TopDownSet into an NCBSet object; 3878 fragments [152;222].
+#&gt; [2017-12-02 21:52:39] Subsetted 3878 fragments [152;222] to 1918 fragments [100;222]. </div><div class='input'>
 <span class='co'># Just bond 152</span>
-<span class='no'>ncb</span>[<span class='st'>"bond152"</span>]</div><div class='output co'>#&gt; NCBSet object (0.22 Mb)
+<span class='no'>ncb</span>[<span class='st'>"bond152"</span>]</div><div class='output co'>#&gt; NCBSet object (0.23 Mb)
 #&gt; - - - Protein data - - -
 #&gt; Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
 #&gt; - - - Fragment data - - -
@@ -1738,14 +1750,14 @@ for technical details about the coverage storage.</p></li>
 #&gt; - - - Condition data - - -
 #&gt; Number of conditions: 222 
 #&gt; Number of scans: 222 
-#&gt; Condition variables (56): Scan, PeaksCount, ..., Sample, Charge
+#&gt; Condition variables (57): Scan, PeaksCount, ..., Charge, AssignedIntensity
 #&gt; - - - Assay data - - -
 #&gt; Size of array: 1x222 (34.23% != 0)
 #&gt; - - - Processing information - - -
 #&gt; [2017-10-05 10:28:55] 6185 fragments [2700;351] matched (tolerance: 5 ppm).
-#&gt; [2017-10-16 22:13:07] Aggregated 6185 fragments [2700;351] to 4771 fragments [2700;222].
-#&gt; [2017-10-16 22:13:07] Coerced TopDownSet into an NCBSet object; 3878 fragments [152;222].
-#&gt; [2017-10-16 22:13:08] Subsetted 3878 fragments [152;222] to 76 fragments [1;222]. </div><div class='input'>
+#&gt; [2017-12-02 21:52:38] Aggregated 6185 fragments [2700;351] to 4771 fragments [2700;222].
+#&gt; [2017-12-02 21:52:38] Coerced TopDownSet into an NCBSet object; 3878 fragments [152;222].
+#&gt; [2017-12-02 21:52:39] Subsetted 3878 fragments [152;222] to 76 fragments [1;222]. </div><div class='input'>
 <span class='co'># Condition 1 to 10</span>
 <span class='no'>ncb</span>[, <span class='fl'>1</span>:<span class='fl'>10</span>]</div><div class='output co'>#&gt; NCBSet object (0.08 Mb)
 #&gt; - - - Protein data - - -
@@ -1757,16 +1769,16 @@ for technical details about the coverage storage.</p></li>
 #&gt; - - - Condition data - - -
 #&gt; Number of conditions: 10 
 #&gt; Number of scans: 10 
-#&gt; Condition variables (56): Scan, PeaksCount, ..., Sample, Charge
+#&gt; Condition variables (57): Scan, PeaksCount, ..., Charge, AssignedIntensity
 #&gt; - - - Assay data - - -
 #&gt; Size of array: 152x10 (15.72% != 0)
 #&gt; - - - Processing information - - -
 #&gt; [2017-10-05 10:28:55] 6185 fragments [2700;351] matched (tolerance: 5 ppm).
-#&gt; [2017-10-16 22:13:07] Aggregated 6185 fragments [2700;351] to 4771 fragments [2700;222].
-#&gt; [2017-10-16 22:13:07] Coerced TopDownSet into an NCBSet object; 3878 fragments [152;222].
-#&gt; [2017-10-16 22:13:08] Subsetted 3878 fragments [152;222] to 239 fragments [152;10]. </div><div class='input'>
+#&gt; [2017-12-02 21:52:38] Aggregated 6185 fragments [2700;351] to 4771 fragments [2700;222].
+#&gt; [2017-12-02 21:52:38] Coerced TopDownSet into an NCBSet object; 3878 fragments [152;222].
+#&gt; [2017-12-02 21:52:39] Subsetted 3878 fragments [152;222] to 239 fragments [152;10]. </div><div class='input'>
 <span class='co'># Plot fragmentation map</span>
-<span class='fu'>fragmentationMap</span>(<span class='no'>ncb</span>)</div><div class='img'><img src='NCBSet-class-4.png' alt='' width='700' height='432.632880098887' /></div></pre>
+<span class='fu'>fragmentationMap</span>(<span class='no'>ncb</span>)</div><div class='img'><img src='NCBSet-class-1.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
