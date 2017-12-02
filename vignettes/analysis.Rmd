@@ -351,10 +351,10 @@ barplot(
 ```
 
 The two parameters having the lowest overall impact in the `myoglobin`
-dataset across all conditions are ETD reagent Target (`EtdReagentTarget`) and
-CID activation energy (`CidActivation`),
-while ETD reaction time (`EtdReactionTime`)
-demonstrates the highest overall impact.
+dataset across all conditions are ETD reagent target (`EtdReagentTarget`),
+CID activation energy (`CidActivation`) and AGC target (`AgcTarget`),
+while ETD reaction energy (`EtdActivation`) and HCD activation energy
+(`HcdActivation`) demonstrate the highest overall impact.
 
 ## Combining Fragmentation Conditions to Maximize Coverage
 
