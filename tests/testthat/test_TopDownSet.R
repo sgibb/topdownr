@@ -397,7 +397,7 @@ test_that("as(\"NCBSet\")", {
     ncb <- new("NCBSet",
                rowViews=Views(AAString("ACE"), start=1, width=1:2,
                               names=paste0("bond", 1:2)),
-               colData=tds@colData,
+               colData=DataFrame(tds@colData, AssignedIntensity=c(5, 15, 7:9)),
                assay=sparseMatrix(i=rep(1:2, c(3, 4)),
                                   j=c(1:3, 1:2, 4:5),
                                   x=c(rep(1, 4), 3, 2, 1),
