@@ -153,9 +153,11 @@ cat0 <- function(...) {
 #' @noRd
 .fragmentationMethod <- function(x) {
     methods <- c(
-        "None", "ETD", "CID", "ETcid", "HCD", "EThcd", "HCD/CID", "All"
+        "None", "ETD", "CID", "ETcid", "HCD", "EThcd", "CID/HCD",
+        "ETD/CID/HCD", "UVPD", rep(NA_character_, 6), "All"
     )
-    v <- c(EtdActivation=1L, CidActivation=2L, HcdActivation=4L)
+    v <- c(EtdActivation=1L, CidActivation=2L, HcdActivation=4L,
+           UvpdActivation=8L)
     stopifnot(all(colnames(x) %in% names(v)))
     x <- x[, names(v)]
     apply(x, 1L, function(i)methods[sum(v[as.logical(i)]) + 1L])
@@ -333,7 +335,11 @@ cat0 <- function(...) {
 #' @return `integer`
 #' @noRd
 .ndigits <- function(x) {
-    trunc(log10(abs(x)) + 1L)
+    if (all(x == 0L)) {
+        1L
+    } else {
+        trunc(log10(abs(x)) + 1L)
+    }
 }
 
 #' similar to lengths but for rows

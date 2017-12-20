@@ -82,11 +82,12 @@ test_that(".formatNumbers", {
 test_that(".fragmentationMethod", {
     d <- expand.grid(EtdActivation=0:1,
                      CidActivation=0:1,
-                     HcdActivation=0:1)
+                     HcdActivation=0:1,
+                     UvpdActivation=0:1)
     expect_error(topdownr:::.fragmentationMethod(cbind(d, foo=1L)))
     expect_equal(topdownr:::.fragmentationMethod(d),
-                 c("None", "ETD", "CID", "ETcid", "HCD", "EThcd", "HCD/CID",
-                   "All"))
+                 c("None", "ETD", "CID", "ETcid", "HCD", "EThcd", "CID/HCD",
+                   "ETD/CID/HCD", "UVPD", rep(NA_character_, 6), "All"))
 })
 
 test_that(".groupBy", {
@@ -203,6 +204,7 @@ test_that(".ndigits", {
     expect_equal(topdownr:::.ndigits(rep(10^(1:6), each=2) - c(0, 1)),
                  rep(2:7, each=2) - c(0, 1))
     expect_equal(topdownr:::.ndigits(-c(1, 10)), 1:2)
+    expect_equal(topdownr:::.ndigits(0), 1)
 })
 
 test_that(".nrows", {
