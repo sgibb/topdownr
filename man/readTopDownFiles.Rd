@@ -9,8 +9,8 @@ readTopDownFiles(path, pattern = ".*", type = c("a", "b", "c", "x", "y",
   adducts = data.frame(), neutralLoss = MSnbase::defaultNeutralLoss(),
   sequenceOrder = c("original", "random", "inverse"), tolerance = 5e-06,
   dropNonInformativeColumns = TRUE, sampleColumns = c("Mz", "AgcTarget",
-  "EtdReagentTarget", "EtdActivation", "CidActivation", "HcdActivation"),
-  verbose = interactive())
+  "EtdReagentTarget", "EtdActivation", "CidActivation", "HcdActivation",
+  "UvpdActivation"), verbose = interactive())
 }
 \arguments{
 \item{path}{\code{character},
