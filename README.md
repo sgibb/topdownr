@@ -6,7 +6,7 @@
 [![license](http://img.shields.io/badge/license-GPL%20%28%3E=%203%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-3.0.html)
 
 [![years in bioc](http://bioconductor.org/shields/years-in-bioc/topdownr.svg)](http://bioconductor.org/packages/release/bioc/html/topdownr.html)
-[![bioc downloads](http://bioconductor.org/shields/downloads/topdownr.svg)](http://bioconductor.org/packages/stats/bioc/topdownr.html)
+[![bioc downloads](http://bioconductor.org/shields/downloads/topdownr.svg)](https://bioconductor.org/packages/stats/bioc/topdownr/)
 Release: [![build release](http://bioconductor.org/shields/build/release/bioc/topdownr.svg)](http://bioconductor.org/checkResults/release/bioc-LATEST/topdownr/)
 Devel: [![build devel](http://bioconductor.org/shields/build/devel/bioc/topdownr.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/topdownr/)
 
