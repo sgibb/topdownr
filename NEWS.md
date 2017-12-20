@@ -5,6 +5,8 @@
   and `fragmentationMap`
   (closes [#62](https://github.com/sgibb/topdownr/issues/62)) [2017-12-02].
 - Fix explanation of random forest barchart in analysis vignette [2017-12-02].
+- Create all fragmentation methods in `.readScanHeadsTable` to avoid error if
+    any is missing (fixes #68) [2017-12-20].
 
 ## Changes in version 1.1.0
 - New version for Bioc 3.7 (devel)

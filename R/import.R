@@ -150,21 +150,27 @@
 
     d[is.na(d)] <- 0L
 
+    activation <- c("ETD", "CID", "HCD", "UVPD")
+    activationColumns <- .camelCase(paste0(activation, "Activation"))
+    d[, activationColumns] <- 0L
+
+    ## first activation
     d$EtdActivation[d$Activation1 == "ETD"] <-
         d$Energy1[d$Activation1 == "ETD"]
     d$CidActivation[d$Activation1 == "CID"] <-
         d$Energy1[d$Activation1 == "CID"]
-    d$CidActivation[d$Activation2 == "CID"] <-
-        d$Energy2[d$Activation2 == "CID"]
     d$HcdActivation[d$Activation1 == "HCD"] <-
         d$Energy1[d$Activation1 == "HCD"]
+    d$UvpdActivation[d$Activation1 == "UVPD"] <-
+        d$Energy1[d$Activation1 == "UVPD"]
+
+    ## second activation
+    d$CidActivation[d$Activation2 == "CID"] <-
+        d$Energy2[d$Activation2 == "CID"]
     d$HcdActivation[d$Activation2 == "HCD"] <-
         d$Energy2[d$Activation2 == "HCD"]
 
-    d[is.na(d)] <- 0L
-
-    d$Activation <-
-        .fragmentationMethod(d[, paste0(c("Etd", "Cid", "Hcd"), "Activation")])
+    d$Activation <- .fragmentationMethod(d[, activationColumns])
 
     d$File <- gsub(.topDownFileExtRx("txt"), "", basename(file))
     d
