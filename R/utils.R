@@ -305,20 +305,6 @@ cat0 <- function(...) {
     as.integer(substring(x, n - idDigits + 1L, n))
 }
 
-#' Median Ion Injection Time for a specific Mz and AgcTarget
-#'
-#' @param x `data.frame`, with three columns (InjectionTimeMs, Mz,
-#' AGCTarget), all but the first would be used for grouping
-#' @return `double`, median injection time with `length() == nrow(x)`
-#' @noRd
-.medianIonInjectionTime <- function(x) {
-    stopifnot(is.data.frame(x) || is(x, "DataFrame"))
-    stopifnot(all(c("IonInjectionTimeMs", "Mz", "AgcTarget") %in% colnames(x)))
-    ave(x$IonInjectionTimeMs,
-        as.factor(x$Mz), as.factor(x$AgcTarget),
-        FUN=median, na.rm=TRUE)
-}
-
 #' verbose output
 #'
 #' @param \ldots arguments passed to `message`

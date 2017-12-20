@@ -151,7 +151,6 @@ readTopDownFiles <- function(path, pattern=".*",
     )
 
     header <- .mergeSpectraAndHeaderInformation(mzmlHeader, scanHeadsman)
-    header$MedianIonInjectionTimeMs <- .medianIonInjectionTime(header)
 
     o <- .orderByColumns(header, sampleColumns)
     header <- header[o, ]
@@ -176,10 +175,11 @@ readTopDownFiles <- function(path, pattern=".*",
         files=basename(unlist(unname(files))),
         tolerance=tolerance
     )
-    .atdsLogMsg(
+    tds <- .atdsLogMsg(
         tds, .logdim(tds), " matched (tolerance: ",
         round(tolerance/1e-6, 1L), " ppm).", addDim=FALSE
     )
+    updateMedianInjectionTime(tds)
 }
 
 #' Test for TopDownSet class

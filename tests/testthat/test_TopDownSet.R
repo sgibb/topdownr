@@ -358,6 +358,26 @@ test_that("summary", {
     expect_equal(summary(tds, "fragments"), dr)
 })
 
+test_that("updateMedianInjectionTime", {
+    tdn <- tds
+    tdn@colData$IonInjectionTimeMs <- 1:5
+    tdn@colData$Mz <- tdn@colData$AgcTarget <- rep(1:2, 3:2)
+    expect_error(updateMedianInjectionTime(tdn, 1:10), "data length")
+    tdr <- tdn
+    tdr@colData$MedianIonInjectionTimeMs <- rep(c(2, 4.5), 3:2)
+    tdr@processing <- c(tdr@processing,
+                        paste0("[2017-12-20 21:00:00] ",
+                               "Recalculate median injection time ",
+                               "based on: Mz, AgcTarget."))
+    expect_equal_TDS(updateMedianInjectionTime(tdn), tdr)
+    tdr@colData$Mz <- tdn@colData$Mz <- 1
+    tdr@colData$MedianIonInjectionTimeMs <- 3
+    tdr@processing <- c(tdn@processing,
+                        paste0("[2017-12-20 21:00:00] ",
+                               "Recalculate median injection time."))
+    expect_equal_TDS(updateMedianInjectionTime(tdn, by=tdn$Mz), tdr)
+})
+
 test_that("validObject", {
     tdn <- tds
     tdn@assay <- tdn@assay[1,,drop=FALSE]
