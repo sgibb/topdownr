@@ -132,7 +132,11 @@ experiment.</p>
 
 <span class='co'># S4 method for TopDownSet</span>
 <span class='fu'>summary</span>(<span class='no'>object</span>, <span class='kw'>what</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"conditions"</span>, <span class='st'>"fragments"</span>),
-  <span class='no'>...</span>)</pre>
+  <span class='no'>...</span>)
+
+<span class='co'># S4 method for TopDownSet</span>
+<span class='fu'>updateMedianInjectionTime</span>(<span class='no'>object</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>Mz</span> <span class='kw'>=</span>
+  <span class='no'>object</span>$<span class='no'>Mz</span>, <span class='kw'>AgcTarget</span> <span class='kw'>=</span> <span class='no'>object</span>$<span class='no'>AgcTarget</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -244,6 +248,12 @@ The normalisation ist done per scans/conditions (column-wise normalisation).</p>
 with some statistics: number of fragments,
 total/min/first quartile/median/mean/third quartile/maximum of
 intensity values.</p></li>
+<li><p><code>updateMedianInjectionTime</code>: Update median ion injection times.</p>
+<p>Recalculates median ion injection times by a user given grouping variable
+(default: Mz, AgcTarget). This is useful if you acquire new data and the ion
+injection time differs across the runs. Use the <code>by</code> argument to provide a
+<code>list</code>/<code>data.frame</code> of grouping variables, e.g.
+<code>by=colData(object)[, c("Mz", "AgcTarget", "File")]</code>.</p></li>
 </ul>
     
     <h2 class="hasAnchor" id="slots"><a class="anchor" href="#slots"></a>Slots</h2>
@@ -11878,7 +11888,7 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 #&gt; Intensity range: [407.50;56063.52]
 #&gt; - - - Processing information - - -
 #&gt; [2017-10-05 10:28:55] 6185 fragments [2700;351] matched (tolerance: 5 ppm).
-#&gt; [2017-12-02 21:52:48] Subsetted 6185 fragments [2700;351] to 366 fragments [100;351]. </div><div class='input'>
+#&gt; [2017-12-20 22:21:10] Subsetted 6185 fragments [2700;351] to 366 fragments [100;351]. </div><div class='input'>
 <span class='co'># All c fragments</span>
 <span class='no'>tds</span>[<span class='st'>"c"</span>]</div><div class='output co'>#&gt; TopDownSet object (0.31 Mb)
 #&gt; - - - Protein data - - -
@@ -11899,7 +11909,7 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 #&gt; Intensity range: [775.78;664294.75]
 #&gt; - - - Processing information - - -
 #&gt; [2017-10-05 10:28:55] 6185 fragments [2700;351] matched (tolerance: 5 ppm).
-#&gt; [2017-12-02 21:52:48] Subsetted 6185 fragments [2700;351] to 159 fragments [152;351]. </div><div class='input'>
+#&gt; [2017-12-20 22:21:10] Subsetted 6185 fragments [2700;351] to 159 fragments [152;351]. </div><div class='input'>
 <span class='co'># Just c 152</span>
 <span class='no'>tds</span>[<span class='st'>"c152"</span>]</div><div class='output co'>#&gt; TopDownSet object (0.29 Mb)
 #&gt; - - - Protein data - - -
@@ -11920,7 +11930,7 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 #&gt; Intensity range: [979.57;664294.75]
 #&gt; - - - Processing information - - -
 #&gt; [2017-10-05 10:28:55] 6185 fragments [2700;351] matched (tolerance: 5 ppm).
-#&gt; [2017-12-02 21:52:48] Subsetted 6185 fragments [2700;351] to 93 fragments [1;351]. </div><div class='input'>
+#&gt; [2017-12-20 22:21:10] Subsetted 6185 fragments [2700;351] to 93 fragments [1;351]. </div><div class='input'>
 <span class='co'># Condition 1 to 10</span>
 <span class='no'>tds</span>[, <span class='fl'>1</span>:<span class='fl'>10</span>]</div><div class='output co'>#&gt; TopDownSet object (0.44 Mb)
 #&gt; - - - Protein data - - -
@@ -11941,7 +11951,7 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 #&gt; Intensity range: [1566.07;158090.86]
 #&gt; - - - Processing information - - -
 #&gt; [2017-10-05 10:28:55] 6185 fragments [2700;351] matched (tolerance: 5 ppm).
-#&gt; [2017-12-02 21:52:48] Subsetted 6185 fragments [2700;351] to 134 fragments [2700;10]. </div><div class='input'>
+#&gt; [2017-12-20 22:21:10] Subsetted 6185 fragments [2700;351] to 134 fragments [2700;10]. </div><div class='input'>
 <span class='co'># Filtering</span>
 <span class='co'># Filter all intensities that don't have at least 10 % of the highest</span>
 <span class='co'># intensity per fragment.</span>
@@ -11992,14 +12002,14 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 #&gt; Size of array: 152x220 (2.22% != 0)
 #&gt; - - - Processing information - - -
 #&gt; [2017-10-05 10:28:55] 6185 fragments [2700;351] matched (tolerance: 5 ppm).
-#&gt; [2017-12-02 21:52:48] 2121 intensity values &lt; 0.1 (relative) filtered; 4064 fragments [2700;351].
-#&gt; [2017-12-02 21:52:48] 274 fragments with CV &gt; 30% filtered; 3790 fragments [2700;351].
-#&gt; [2017-12-02 21:52:48] Subsetted 3790 fragments [2700;351] to 3785 fragments [2700;345].
-#&gt; [2017-12-02 21:52:48] 6 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 3785 fragments [2700;345].
-#&gt; [2017-12-02 21:52:48] 2195 intensity values of fragments replicated &lt; 2 times filtered; 1590 fragments [2700;345].
-#&gt; [2017-12-02 21:52:48] Intensity values normalized to TIC.
-#&gt; [2017-12-02 21:52:48] Aggregated 1590 fragments [2700;345] to 795 fragments [2700;220].
-#&gt; [2017-12-02 21:52:48] Coerced TopDownSet into an NCBSet object; 741 fragments [152;220]. </div><div class='input'>
+#&gt; [2017-12-20 22:21:10] 2121 intensity values &lt; 0.1 (relative) filtered; 4064 fragments [2700;351].
+#&gt; [2017-12-20 22:21:10] 274 fragments with CV &gt; 30% filtered; 3790 fragments [2700;351].
+#&gt; [2017-12-20 22:21:10] Subsetted 3790 fragments [2700;351] to 3785 fragments [2700;345].
+#&gt; [2017-12-20 22:21:10] 6 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 3785 fragments [2700;345].
+#&gt; [2017-12-20 22:21:10] 2195 intensity values of fragments replicated &lt; 2 times filtered; 1590 fragments [2700;345].
+#&gt; [2017-12-20 22:21:10] Intensity values normalized to TIC.
+#&gt; [2017-12-20 22:21:11] Aggregated 1590 fragments [2700;345] to 795 fragments [2700;220].
+#&gt; [2017-12-20 22:21:11] Coerced TopDownSet into an NCBSet object; 741 fragments [152;220]. </div><div class='input'>
 <span class='kw'>if</span> (<span class='fu'>require</span>(<span class='st'>"MSnbase"</span>)) {
     <span class='fu'><a href='http://www.rdocumentation.org/packages/MSnbase/topics/mzRident2dfr'>as</a></span>(<span class='no'>tds</span>, <span class='st'>"MSnSet"</span>)
 }</div><div class='output co'>#&gt; <span class='message'>Loading required package: MSnbase</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: Biobase</span></div><div class='output co'>#&gt; <span class='message'>Welcome to Bioconductor</span>
@@ -12031,13 +12041,13 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 #&gt; Annotation:  
 #&gt; - - - Processing information - - -
 #&gt; [2017-10-05 10:28:55] 6185 fragments [2700;351] matched (tolerance: 5 ppm). 
-#&gt; [2017-12-02 21:52:48] 2121 intensity values &lt; 0.1 (relative) filtered; 4064 fragments [2700;351]. 
-#&gt; [2017-12-02 21:52:48] 274 fragments with CV &gt; 30% filtered; 3790 fragments [2700;351]. 
-#&gt; [2017-12-02 21:52:48] Subsetted 3790 fragments [2700;351] to 3785 fragments [2700;345]. 
-#&gt; [2017-12-02 21:52:48] 6 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 3785 fragments [2700;345]. 
-#&gt; [2017-12-02 21:52:48] 2195 intensity values of fragments replicated &lt; 2 times filtered; 1590 fragments [2700;345]. 
-#&gt; [2017-12-02 21:52:48] Intensity values normalized to TIC. 
-#&gt; [2017-12-02 21:52:48] Aggregated 1590 fragments [2700;345] to 795 fragments [2700;220]. 
+#&gt; [2017-12-20 22:21:10] 2121 intensity values &lt; 0.1 (relative) filtered; 4064 fragments [2700;351]. 
+#&gt; [2017-12-20 22:21:10] 274 fragments with CV &gt; 30% filtered; 3790 fragments [2700;351]. 
+#&gt; [2017-12-20 22:21:10] Subsetted 3790 fragments [2700;351] to 3785 fragments [2700;345]. 
+#&gt; [2017-12-20 22:21:10] 6 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 3785 fragments [2700;345]. 
+#&gt; [2017-12-20 22:21:10] 2195 intensity values of fragments replicated &lt; 2 times filtered; 1590 fragments [2700;345]. 
+#&gt; [2017-12-20 22:21:10] Intensity values normalized to TIC. 
+#&gt; [2017-12-20 22:21:11] Aggregated 1590 fragments [2700;345] to 795 fragments [2700;220]. 
 #&gt;  MSnbase version: 2.5.0 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

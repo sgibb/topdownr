@@ -106,12 +106,23 @@
     <div id="topdownr-1-1" class="section level1">
 <h1 class="hasAnchor">
 <a href="#topdownr-1-1" class="anchor"></a>topdownr 1.1</h1>
+<div id="changes-in-version-1-1-2" class="section level2">
+<h2 class="hasAnchor">
+<a href="#changes-in-version-1-1-2" class="anchor"></a>Changes in version 1.1.2</h2>
+<ul>
+<li>Nothing yet.</li>
+</ul>
+</div>
 <div id="changes-in-version-1-1-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#changes-in-version-1-1-1" class="anchor"></a>Changes in version 1.1.1</h2>
 <ul>
 <li>Respect assigned intensity in conditions for <code>bestConditions,NCBSet-method</code> and <code>fragmentationMap</code> (closes <a href="https://github.com/sgibb/topdownr/issues/62">#62</a>) [2017-12-02].</li>
 <li>Fix explanation of random forest barchart in analysis vignette [2017-12-02].</li>
+<li>Create all fragmentation methods in <code>.readScanHeadsTable</code> to avoid error if any is missing (fixes #68) [2017-12-20].</li>
+<li>Never remove Activation column in <code>colData</code> (even not if <code><a href="../reference/readTopDownFiles.html">readTopDownFiles(..., dropNonInformativeColumns=TRUE)</a></code>) [2017-12-20].</li>
+<li>Allow UVPD in <code>fragmentationMap,NCBSet-method</code> [2017-12-20].</li>
+<li>Add new method: <code>updateMedianInjectionTime,TopDownSet-method</code> (closes #66) [2017-12-20].</li>
 </ul>
 </div>
 <div id="changes-in-version-1-1-0" class="section level2">
