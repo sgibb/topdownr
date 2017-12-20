@@ -9,6 +9,7 @@
   any is missing (fixes #68) [2017-12-20].
 - Never remove Activation column in `colData` (even not if
   `readTopDownFiles(..., dropNonInformativeColumns=TRUE)`) [2017-12-20].
+- Allow UVPD in `fragmentationMap,NCBSet-method` [2017-12-20].
 
 ## Changes in version 1.1.0
 - New version for Bioc 3.7 (devel)

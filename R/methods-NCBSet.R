@@ -88,7 +88,7 @@ setMethod("fragmentationMap", "NCBSet",
     d$Activation <-
         factor(
             d$Activation,
-            levels=c("CID", "HCD", "ETD", "ETcid", "EThcd", "Cmb"),
+            levels=c("CID", "HCD", "ETD", "ETcid", "EThcd", "UVPD", "Cmb"),
             ordered=TRUE
         )
     names(labels) <- seq_along(labels)
