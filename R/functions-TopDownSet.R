@@ -158,7 +158,7 @@ readTopDownFiles <- function(path, pattern=".*",
     rownames(header) <- .makeRowNames(header[, sampleColumns, drop=FALSE])
 
     if (dropNonInformativeColumns) {
-        header <- .dropNonInformativeColumns(header)
+        header <- .dropNonInformativeColumns(header, keep=c("Activation", "Mz"))
     }
 
     header$Charge <- round(fragmentViews@metadata$mass / header$Mz)
