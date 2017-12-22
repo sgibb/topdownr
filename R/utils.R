@@ -154,8 +154,12 @@ cat0 <- function(...) {
 #' @return `character`
 #' @noRd
 .formatNumbers <- function(x, asInteger=NA_integer_, nScientific=5L, na2zero=FALSE) {
-    n <- .ndigits(max(x, na.rm=TRUE))
+    n <- .ndigits(max(abs(x), 0, na.rm=TRUE))
     na <- is.na(x)
+
+    if (isTRUE(any(x < 0L))) {
+        n <- n + 1
+    }
 
     if (na2zero) {
         x[na] <- 0

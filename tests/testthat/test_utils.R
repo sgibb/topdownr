@@ -100,6 +100,7 @@ test_that(".formatNumbers", {
                  sprintf("%.1e", c(1, 1000, 1e6, NA)))
     expect_equal(topdownr:::.formatNumbers(c(1, 1000, 1e6, NA), na2zero=TRUE),
                  sprintf("%.1e", c(1, 1000, 1e6, 0)))
+    expect_equal(topdownr:::.formatNumbers(c(1, -1000)), c("00001", "-1000"))
 })
 
 test_that(".fragmentationMethod", {
