@@ -110,7 +110,10 @@
 <h2 class="hasAnchor">
 <a href="#changes-in-version-1-1-2" class="anchor"></a>Changes in version 1.1.2</h2>
 <ul>
-<li>Nothing yet.</li>
+<li>Add <code>.rbind</code> to combine scan and method information with different number of colums (could happen when CID/HCD and UVPD scans are taken independently with different software versions) [2017-12-22].</li>
+<li>Don’t replace NA values with zeros in the <code>colData</code> [2017-12-22].</li>
+<li>Convert On/Off <code>character</code> columns in scan and method information to <code>logical</code> [2017-12-22].</li>
+<li>Fix <code>.camelCase</code> to avoid “TIC” to “TIc” and “UseCalibratedUVPDTimeMs2” to “UseCalibrateduvpdTimems2” conversion (now: “Tic” and “UseCalibratedUvpdTimeMs2”) [2017-12-22].</li>
 </ul>
 </div>
 <div id="changes-in-version-1-1-1" class="section level2">
@@ -119,10 +122,10 @@
 <ul>
 <li>Respect assigned intensity in conditions for <code>bestConditions,NCBSet-method</code> and <code>fragmentationMap</code> (closes <a href="https://github.com/sgibb/topdownr/issues/62">#62</a>) [2017-12-02].</li>
 <li>Fix explanation of random forest barchart in analysis vignette [2017-12-02].</li>
-<li>Create all fragmentation methods in <code>.readScanHeadsTable</code> to avoid error if any is missing (fixes #68) [2017-12-20].</li>
+<li>Create all fragmentation methods in <code>.readScanHeadsTable</code> to avoid error if any is missing (fixes <a href="https://github.com/sgibb/topdownr/issues/68">#68</a>) [2017-12-20].</li>
 <li>Never remove Activation column in <code>colData</code> (even not if <code><a href="../reference/readTopDownFiles.html">readTopDownFiles(..., dropNonInformativeColumns=TRUE)</a></code>) [2017-12-20].</li>
 <li>Allow UVPD in <code>fragmentationMap,NCBSet-method</code> [2017-12-20].</li>
-<li>Add new method: <code>updateMedianInjectionTime,TopDownSet-method</code> (closes #66) [2017-12-20].</li>
+<li>Add new method: <code>updateMedianInjectionTime,TopDownSet-method</code> (closes <a href="https://github.com/sgibb/topdownr/issues/66">#66</a>) [2017-12-20].</li>
 </ul>
 </div>
 <div id="changes-in-version-1-1-0" class="section level2">
