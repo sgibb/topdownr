@@ -36,6 +36,24 @@ cat0 <- function(...) {
     cat(..., sep="", append=TRUE)
 }
 
+#' Convert character with On/Off, True/False to logical
+#'
+#' @param x `character`
+#' @param na.strings `character`
+#' @return `logical`/`character`
+#' @noRd
+.characterToLogical <- function(x, na.strings=c("NA", "N/A")) {
+    stopifnot(is.character(x))
+    y <- gsub("^on$", "TRUE", x, ignore.case=TRUE)
+    y <- gsub("^off$", "FALSE", y, ignore.case=TRUE)
+    l <- as.logical(y)
+    if (all(grepl(paste0(na.strings, collapse="|"), y) == is.na(l))) {
+        l
+    } else {
+        x
+    }
+}
+
 #' file extension
 #'
 #' @param x `character`, file path

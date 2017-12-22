@@ -19,6 +19,21 @@ test_that("cat0", {
     expect_output(topdownr:::cat0("foo", "bar"), "foobar")
 })
 
+test_that("characterToLogical", {
+    expect_error(topdownr:::.characterToLogical(1:2))
+    expect_equal(topdownr:::.characterToLogical(c("FOO", "BAR")),
+                 c("FOO", "BAR"))
+    expect_equal(topdownr:::.characterToLogical(c("On", "Off", "NA")),
+                 c(TRUE, FALSE, NA))
+    expect_equal(topdownr:::.characterToLogical(c("On", "Off", "NA"),
+                                                na.strings="FOO"),
+                 c("On", "Off", "NA"))
+    expect_equal(topdownr:::.characterToLogical(c("true", "False", "N/A")),
+                 c(TRUE, FALSE, NA))
+    expect_equal(topdownr:::.characterToLogical(c("true", "on", "ON")),
+                 rep(TRUE, 3))
+})
+
 test_that(".fileExt", {
     f <- c("foo.bar", "foo.bar.gz")
     expect_equal(topdownr:::.fileExt(f), c("bar", "bar"))

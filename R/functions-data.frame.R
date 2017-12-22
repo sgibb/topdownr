@@ -28,6 +28,17 @@
     x
 }
 
+#' Convert DataFrame columns to logical
+#'
+#' @param x `DataFrame`
+#' @return `DataFrame`
+#' @noRd
+.colsToLogical <- function(x) {
+    toConvert <- .isCharacterCol(x)
+    x[toConvert] <- lapply(x[toConvert], .characterToLogical)
+    x
+}
+
 #' Convert DataFrame columns to Rle
 #'
 #' @param x `DataFrame`
@@ -61,6 +72,18 @@
 .dropNonInformativeColumns <- function(x, keep="Mz") {
     keep <- !.vapply1l(x, .allIdentical) | colnames(x) %in% keep
     x[, keep, drop=FALSE]
+}
+
+#' Test for character columns
+#'
+#' @param x `data.frame`
+#' @return `logical`
+#' @noRd
+.isCharacterCol <- function(x) {
+    .vapply1l(x, function(column) {
+        is.character(column) ||
+            (is(column, "Rle") && is.character(runValue(column)))
+    })
 }
 
 #' Test for numeric columns

@@ -12,6 +12,12 @@ test_that(".aggregateDataFrame", {
                                                ignoreNumCols="id"), r)
 })
 
+test_that(".colsToLogical", {
+    d <- DataFrame(a=1:10, b=rep(c("On", "Off"), 5), c=rep(c("foo", "bar"), 5))
+    r <- DataFrame(a=1:10, b=rep(c(TRUE, FALSE), 5), c=rep(c("foo", "bar"), 5))
+    expect_equal(topdownr:::.colsToLogical(d), r)
+})
+
 test_that(".colsToRle", {
     d <- DataFrame(a=1:10, b=rep(1, 10), c=rep(c("foo", "bar"), each=5))
     r <- DataFrame(a=1:10, b=Rle(rep(1, 10)),
@@ -42,6 +48,13 @@ test_that(".dropNonInformativeColumns", {
                     d=Rle(rep("foo", 10)))
     expect_equal(topdownr:::.dropNonInformativeColumns(d), r)
     expect_equal(topdownr:::.dropNonInformativeColumns(d, keep="d"), r2)
+})
+
+test_that(".isCharacterCol", {
+    d <- DataFrame(a=LETTERS[1:10], b=factor(rep(1, 10)),
+                   c=Rle(rep(c("foo", "bar"), each=5)),
+                   d=Rle(rep(1:2, each=5)))
+    expect_equal(topdownr:::.isCharacterCol(d), c(TRUE, FALSE, TRUE, FALSE))
 })
 
 test_that(".isNumCol", {
