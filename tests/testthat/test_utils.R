@@ -9,10 +9,14 @@ test_that(".camelCase", {
     expect_equal(topdownr:::.camelCase(c("Monoisotopic M/Z", "SPS Mass 2",
                                         "RT (min)", "MSLevel", "peaksCount",
                                         "Multi.Inject.Info", "RF.Comp...ppm",
-                                        "SupplementalActivationCE")),
+                                        "SupplementalActivationCE",
+                                        "TIC", "UseCalibratedUVPDTime",
+                                        "UseCalibratedUVPDTimeMS2", "EThcD")),
                  c("MonoisotopicMz", "SpsMass2", "RtMin", "MsLevel",
                    "PeaksCount", "MultiInjectInfo", "RfCompPpm",
-                   "SupplementalActivationCe"))
+                   "SupplementalActivationCe", "Tic",
+                   "UseCalibratedUvpdTime", "UseCalibratedUvpdTimeMs2",
+                   "Ethcd"))
 })
 
 test_that("cat0", {

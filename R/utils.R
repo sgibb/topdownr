@@ -20,7 +20,10 @@
     x <- gsub("[[:punct:]]+", "", x)
     ## split AGCTarget to AGC Target and/or
     ## SupplementalActivationCE to Supplemental Activation CE
-    x <- gsub("([A-Z])(?=([a-z]|[A-Z]$))", " \\1", x, perl=TRUE)
+    x <- gsub("([A-Z]+)(?=([a-z]|[0-9]|[A-Z]$))", " \\1", x, perl=TRUE)
+    ## Don't allow UPVDTime but
+    ## don't split TIC/ETD to single letters (that's why [^ ])
+    x <- gsub("(?<=[^ ][A-Z])([A-Z])(?=[a-z])", " \\1", x, perl=TRUE)
     ## just capitalize the first letter in a word
     x <- gsub("(?<=\\b)([a-z])", "\\U\\1", tolower(x), perl=TRUE)
     ## remove whitespace

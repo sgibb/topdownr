@@ -7,6 +7,9 @@
 - Don't replace NA values with zeros in the `colData` [2017-12-22].
 - Convert On/Off `character` columns in scan and method information to
   `logical` [2017-12-22].
+- Fix `.camelCase` to avoid "TIC" to "TIc" and "UseCalibratedUVPDTimeMs2" to
+  "UseCalibrateduvpdTimems2" conversion (now: "Tic" and
+  "UseCalibratedUvpdTimeMs2") [2017-12-22].
 
 ## Changes in version 1.1.1
 - Respect assigned intensity in conditions for `bestConditions,NCBSet-method`
