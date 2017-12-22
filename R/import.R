@@ -63,7 +63,7 @@
 #' @noRd
 .readExperimentCsv <- function(file, verbose=interactive()) {
     stopifnot(.fileExt(file) == "csv")
-    d <- read.csv(file, stringsAsFactors=FALSE)
+    d <- read.csv(file, na.strings=c("NA", "N/A"), stringsAsFactors=FALSE)
     colnames(d) <- .camelCase(colnames(d))
 
     .msg(verbose,
@@ -72,8 +72,6 @@
 
     ## drop MS1
     d <- d[d$MsLevel == 2L, ]
-
-    d[is.na(d)] <- 0L
 
     d$Condition <- seq_len(nrow(d))
     d$Mz <- .targetedMassListToMz(d$TargetedMassList)
@@ -109,7 +107,7 @@
 #' @noRd
 .readScanHeadsTable <- function(file, verbose=interactive()) {
     stopifnot(.fileExt(file) == "txt")
-    d <- read.csv(file, stringsAsFactors=FALSE)
+    d <- read.csv(file, na.strings=c("NA", "N/A"), stringsAsFactors=FALSE)
     colnames(d) <- .camelCase(colnames(d))
 
     .msg(verbose,
@@ -148,27 +146,26 @@
         )
     }
 
-    d[is.na(d)] <- 0L
-
     activation <- c("ETD", "CID", "HCD", "UVPD")
     activationColumns <- .camelCase(paste0(activation, "Activation"))
-    d[, activationColumns] <- 0L
+    d[, activationColumns] <- NA_real_
 
-    ## first activation
-    d$EtdActivation[d$Activation1 == "ETD"] <-
-        d$Energy1[d$Activation1 == "ETD"]
-    d$CidActivation[d$Activation1 == "CID"] <-
-        d$Energy1[d$Activation1 == "CID"]
-    d$HcdActivation[d$Activation1 == "HCD"] <-
-        d$Energy1[d$Activation1 == "HCD"]
-    d$UvpdActivation[d$Activation1 == "UVPD"] <-
-        d$Energy1[d$Activation1 == "UVPD"]
-
-    ## second activation
-    d$CidActivation[d$Activation2 == "CID"] <-
-        d$Energy2[d$Activation2 == "CID"]
-    d$HcdActivation[d$Activation2 == "HCD"] <-
-        d$Energy2[d$Activation2 == "HCD"]
+    for (i in seq(along=activation)) {
+        ## first activation
+        sel <- d$Activation1 == activation[i]
+        if (sum(sel)) {
+            d[sel, activationColumns[i]] <- d$Energy1[sel]
+        }
+        ## second activation
+        if (activation[i] %in% c("CID", "HCD") &&
+            "Activation2" %in% names(d)) {
+            sel <- d$Activation2 == activation[i]
+            sel[is.na(sel)] <- FALSE
+            if (sum(sel)) {
+                d[sel, activationColumns[i]] <- d$Energy2[sel]
+            }
+        }
+    }
 
     d$Activation <- .fragmentationMethod(d[, activationColumns])
 
@@ -241,12 +238,17 @@
         by=c("File", "Condition"),
         suffixes=c(".ScanCondition", ".HeaderInformation")
     )
-    if (!all(
-        (d$SupplementalActivationCe == d$CidActivation) |
-        (d$SupplementalActivationCe == d$HcdActivation))) {
+    naSACe <- is.na(d$SupplementalActivationCe)
+    naCid <- is.na(d$CidActivation)
+    naHcd <- is.na(d$HcdActivation)
+    if (any(d$SupplementalActivationCe[!naSACe] != d$Energy2[!naSACe]) ||
+        any(d$SupplementalActivationCe[!(naSACe | naCid)] !=
+            d$CidActivation[!(naSACe | naCid)]) ||
+        any(d$SupplementalActivationCe[!(naSACe | naHcd)] !=
+            d$HcdActivation[!(naSACe | naHcd)])) {
         stop("Merging of header and method information failed. ",
-            "Differences in 'SupplementalActivationCe', 'CidActivation' ",
-            "and 'HcdActivation' found.")
+             "Differences in 'SupplementalActivationCe', 'Energy2', ",
+             "'CidActivation' and/or 'HcdActivation' found.")
     }
     d
 }

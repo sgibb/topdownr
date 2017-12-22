@@ -42,7 +42,7 @@ test_that(".listTopDownFiles", {
 test_that(".readExperimentCsv", {
     fn <- paste0(tempfile(), ".experiments.csv")
     d <- data.frame(MSLevel=c(1, 2, 2),
-                    NaColumn=NA,
+                    NaColumn=c("", "N/A", "NA"),
                     TargetedMassList=paste0("(mz=933.100", 1:3, " z=2 name=)"),
                     stringsAsFactors=FALSE)
     write.csv(d, file=fn, row.names=FALSE)
@@ -52,7 +52,7 @@ test_that(".readExperimentCsv", {
                  c("MsLevel", "NaColumn", "TargetedMassList", "Condition",
                    "Mz", "File"))
     expect_equal(e$MsLevel, rep(2, 2))
-    expect_equal(e$NaColumn, rep(0, 2))
+    expect_equal(e$NaColumn, rep(NA, 2))
     expect_equal(e$Condition, 1:2)
     expect_equal(e$Mz, rep(933.1, 2))
     expect_equal(e$File, rep(gsub("\\.experiments.csv", "", basename(fn)), 2))
@@ -91,9 +91,9 @@ test_that(".readScanHeadsTable", {
                    "EtdActivation", "CidActivation", "HcdActivation",
                    "UvpdActivation", "Activation", "File"))
     expect_equal(h$MsOrder, rep(2, 4))
-    expect_equal(h$EtdActivation, c(50, 50, 0, 0))
-    expect_equal(h$CidActivation, c(0, 0, 20, 20))
-    expect_equal(h$HcdActivation, c(30, 30, 0, 10))
+    expect_equal(h$EtdActivation, c(50, 50, NA, NA))
+    expect_equal(h$CidActivation, c(NA, NA, 20, 20))
+    expect_equal(h$HcdActivation, c(30, 30, NA, 10))
     expect_equal(h$Condition, c(1, 1, 7, 9))
     expect_equal(h$File, rep(gsub("\\.txt$", "", basename(fn)), 4))
 
@@ -149,7 +149,8 @@ test_that(".mergeScanConditionAndHeaderInformation", {
     sc <- data.frame(FOO=1:3, Condition=c(1:2, 1), Both=1,
                      File=c("foo", "foo", "bar"),
                      CidActivation=1:3,
-                     HcdActivation=rep(0, 3))
+                     HcdActivation=NA,
+                     Energy2=1:3)
     hi <- data.frame(BAR=1:5, Condition=c(1, 1, 2, 2, 1), Both=2,
                      File=c("bar", "bar", "bar", "foo", "foo"),
                      SupplementalActivationCe=c(3, 3, 3, 2:1))
@@ -157,7 +158,9 @@ test_that(".mergeScanConditionAndHeaderInformation", {
                     Condition=c(1, 1, 1, 2), FOO=c(3, 3, 1, 2),
                     Both.ScanCondition=c(1, 1, 1, 1),
                     CidActivation=c(3, 3, 1:2),
-                    HcdActivation=0, BAR=c(1:2, 5:4),
+                    HcdActivation=NA,
+                    Energy2=c(3, 3, 1:2),
+                    BAR=c(1:2, 5:4),
                     Both.HeaderInformation=2,
                     SupplementalActivationCe=c(3, 3, 1, 2))
     expect_equal(topdownr:::.mergeScanConditionAndHeaderInformation(sc, hi), r)

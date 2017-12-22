@@ -333,8 +333,13 @@ foi <- c(
     "Charge"
 )
 
+rfTable <- as.data.frame(colData(myoglobin)[foi])
+
+## set NA to zero
+rfTable[is.na(rfTable)] <- 0
+
 rfTable <- as.data.frame(cbind(
-    scale(as.data.frame(colData(myoglobin)[foi])),
+    scale(rfTable),
     Fragments = nFragments
 ))
 
@@ -415,9 +420,10 @@ and ETD reagent target of `1e7` for ETD
 
 ```{r fragmentationMap}
 sel <-
-    myoglobin$Mz == 707.3 &
-    myoglobin$AgcTarget == 1e6 &
-    myoglobin$EtdReagentTarget == 1e7
+    myoglobinNcb$Mz == 707.3 &
+    myoglobinNcb$AgcTarget == 1e6 &
+    (myoglobinNcb$EtdReagentTarget == 1e7 &
+     !is.na(myoglobinNcb$EtdReagentTarget))
 
 myoglobinNcbSub <- myoglobinNcb[, sel]
 
