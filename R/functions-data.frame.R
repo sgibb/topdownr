@@ -136,6 +136,9 @@
         if (length(cnMissing)) {
             l[[i]][, cnMissing] <- NA
         }
+        ## rbind,DataFrame-method doesn't sort columns and will throw an error
+        ## about non-matching names
+        l[[i]] <- l[[i]][allcn]
     }
     do.call(rbind, l)
 }

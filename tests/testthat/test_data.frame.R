@@ -83,7 +83,8 @@ test_that(".rbind", {
         data.frame(a=6:9, c=TRUE, stringsAsFactors=FALSE),
         data.frame(b=letters[6:9], c=TRUE, stringsAsFactors=FALSE),
         data.frame(b=letters[6:9], c=TRUE, d=LETTERS[1:4],
-                   stringsAsFactors=FALSE)
+                   stringsAsFactors=FALSE),
+        DataFrame(a0=6:9, a=6:9, a1=6:9, c=TRUE)
     )
     r <- list(
         data.frame(a=1:9, b=letters[1:9], c=c(l, rep(NA, 4)),
@@ -95,7 +96,12 @@ test_that(".rbind", {
         data.frame(a=c(1:5, rep(NA_real_, 4)), b=letters[1:9],
                    c=c(l, rep(TRUE, 4)),
                    d=c(rep(NA_character_, 5), LETTERS[1:4]),
-                   stringsAsFactors=FALSE)
+                   stringsAsFactors=FALSE),
+        DataFrame(a=1:9,
+                  b=c(letters[1:5], rep(NA_character_, 4)),
+                  c=c(l, rep(TRUE, 4)),
+                  a0=c(rep(NA_real_, 5), 6:9),
+                  a1=c(rep(NA_real_, 5), 6:9))
     )
     expect_error(topdownr:::.rbind(1:10, x))
     expect_error(topdownr:::.rbind(x, 1:10))
