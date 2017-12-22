@@ -77,13 +77,17 @@ test_that(".formatNumbers", {
                  sprintf("%.1e", c(1, 1000, 1e6)))
     expect_equal(topdownr:::.formatNumbers(c(1, 1000, 1e6), nScientific=10),
                  sprintf("%07d", c(1, 1000, 1e6)))
+    expect_equal(topdownr:::.formatNumbers(c(1, 1000, 1e6, NA)),
+                 sprintf("%.1e", c(1, 1000, 1e6, NA)))
+    expect_equal(topdownr:::.formatNumbers(c(1, 1000, 1e6, NA), na2zero=TRUE),
+                 sprintf("%.1e", c(1, 1000, 1e6, 0)))
 })
 
 test_that(".fragmentationMethod", {
-    d <- expand.grid(EtdActivation=0:1,
-                     CidActivation=0:1,
-                     HcdActivation=0:1,
-                     UvpdActivation=0:1)
+    d <- expand.grid(EtdActivation=c(NA, 1),
+                     CidActivation=c(NA, 1),
+                     HcdActivation=c(NA, 1),
+                     UvpdActivation=c(NA, 1))
     expect_error(topdownr:::.fragmentationMethod(cbind(d, foo=1L)))
     expect_equal(topdownr:::.fragmentationMethod(d),
                  c("None", "ETD", "CID", "ETcid", "HCD", "EThcd", "CID/HCD",
@@ -155,9 +159,10 @@ test_that(".makeNames", {
 })
 
 test_that(".makeRowNames", {
-    d <- data.frame(a=c(1e5, 1e6, 1e7), b=letters[1:3], c=8:10)
+    d <- data.frame(a=c(1e5, 1e6, 1e7, NA), b=letters[1:4], c=8:11)
     expect_equal(topdownr:::.makeRowNames(d),
-                 c("C1.0e+05_a_08", "C1.0e+06_b_09", "C1.0e+07_c_10"))
+                 c("C1.0e+05_a_08", "C1.0e+06_b_09",
+                   "C1.0e+07_c_10", "C0.0e+00_d_11"))
     expect_equal(topdownr:::.makeRowNames(data.frame(a=LETTERS[1:3])),
                  paste0("C", LETTERS[1:3]))
     expect_equal(topdownr:::.makeRowNames(data.frame(a=1:3)),
@@ -195,6 +200,8 @@ test_that(".ndigits", {
                  rep(2:7, each=2) - c(0, 1))
     expect_equal(topdownr:::.ndigits(-c(1, 10)), 1:2)
     expect_equal(topdownr:::.ndigits(0), 1)
+    expect_equal(topdownr:::.ndigits(c(NA, 30)), 2)
+    expect_equal(topdownr:::.ndigits(c(NA)), 1)
 })
 
 test_that(".nrows", {

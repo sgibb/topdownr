@@ -128,13 +128,21 @@ cat0 <- function(...) {
 #'
 #' @param x `double`
 #' @param asInteger `logical`
+#' @param nScientific `numeric`
+#' @param na2zero `logical`
 #' @return `character`
 #' @noRd
-.formatNumbers <- function(x, asInteger=NA_integer_, nScientific=5L) {
-    n <- .ndigits(max(x))
+.formatNumbers <- function(x, asInteger=NA_integer_, nScientific=5L, na2zero=FALSE) {
+    n <- .ndigits(max(x, na.rm=TRUE))
+    na <- is.na(x)
+
+    if (na2zero) {
+        x[na] <- 0
+    }
 
     asInteger <- isTRUE(asInteger) ||
-        (is.na(asInteger) && all(abs(x - as.integer(x)) < .Machine$double.eps))
+        (is.na(asInteger) &&
+         all(abs(x[!na] - as.integer(x[!na])) < .Machine$double.eps))
 
     if (asInteger && n <= nScientific) {
         sprintf(paste0("%0", n, "d"), as.integer(x))
@@ -160,7 +168,7 @@ cat0 <- function(...) {
            UvpdActivation=8L)
     stopifnot(all(colnames(x) %in% names(v)))
     x <- x[, names(v)]
-    apply(x, 1L, function(i)methods[sum(v[as.logical(i)]) + 1L])
+    apply(x, 1L, function(i)methods[sum(v[as.logical(i)], na.rm=TRUE) + 1L])
 }
 
 #' Split list/data.frame
@@ -261,7 +269,7 @@ cat0 <- function(...) {
 #' @noRd
 .makeRowNames <- function(x) {
     isNumCol <- .isNumCol(x)
-    x[isNumCol] <- lapply(x[isNumCol], .formatNumbers)
+    x[isNumCol] <- lapply(x[isNumCol], .formatNumbers, na2zero=TRUE)
     .makeNames(.groupByLabels(x, sep="_"), prefix="C", sep="_")
 }
 
@@ -321,7 +329,8 @@ cat0 <- function(...) {
 #' @return `integer`
 #' @noRd
 .ndigits <- function(x) {
-    if (all(x == 0L)) {
+    x <- x[!is.na(x)]
+    if (!length(x) || all(x == 0L)) {
         1L
     } else {
         trunc(log10(abs(x)) + 1L)
