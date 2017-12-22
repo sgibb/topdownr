@@ -86,3 +86,33 @@
     stopifnot(all(cols %in% colnames(x)))
     do.call(order, x[cols])
 }
+
+#' Combine data.frames rowwise, similar to base::rbind but creates missing
+#' columns
+#'
+#' @param ... `data.frame`s
+#' @noRd
+.rbind <- function(...) {
+    l <- list(...)
+
+    if (length(l) == 1L) {
+        l <- l[[1L]]
+    }
+
+    stopifnot(
+        all(.vapply1l(l, function(ll) {
+            is.data.frame(ll) || inherits(ll, "DataFrame")
+        }))
+    )
+
+    nms <- lapply(l, names)
+    allcn <- unique(unlist(nms))
+
+    for (i in seq(along=l)) {
+        cnMissing <- setdiff(allcn, nms[[i]])
+        if (length(cnMissing)) {
+            l[[i]][, cnMissing] <- NA
+        }
+    }
+    do.call(rbind, l)
+}

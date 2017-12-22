@@ -59,3 +59,36 @@ test_that(".orderByColumns", {
     expect_error(topdownr:::.orderByColumns(d, c("foo", "bar")))
     expect_equal(topdownr:::.orderByColumns(d, c("c", "a")), 10:1)
 })
+
+test_that(".rbind", {
+    l <- rep(c(TRUE, FALSE), 3:2)
+    x <- data.frame(a=1:5, b=letters[1:5], c=l, stringsAsFactors=FALSE)
+    r <- data.frame(a=1:9, b=letters[1:9], c=c(l, rep(NA, 4)),
+                    stringsAsFactors=FALSE)
+    y <- list(
+        data.frame(a=6:9, b=letters[6:9], stringsAsFactors=FALSE),
+        data.frame(a=6:9, c=TRUE, stringsAsFactors=FALSE),
+        data.frame(b=letters[6:9], c=TRUE, stringsAsFactors=FALSE),
+        data.frame(b=letters[6:9], c=TRUE, d=LETTERS[1:4],
+                   stringsAsFactors=FALSE)
+    )
+    r <- list(
+        data.frame(a=1:9, b=letters[1:9], c=c(l, rep(NA, 4)),
+                   stringsAsFactors=FALSE),
+        data.frame(a=1:9, b=c(letters[1:5], rep(NA_character_, 4)),
+                   c=c(l, rep(TRUE, 4)), stringsAsFactors=FALSE),
+        data.frame(a=c(1:5, rep(NA_real_, 4)), b=letters[1:9],
+                   c=c(l, rep(TRUE, 4)), stringsAsFactors=FALSE),
+        data.frame(a=c(1:5, rep(NA_real_, 4)), b=letters[1:9],
+                   c=c(l, rep(TRUE, 4)),
+                   d=c(rep(NA_character_, 5), LETTERS[1:4]),
+                   stringsAsFactors=FALSE)
+    )
+    expect_error(topdownr:::.rbind(1:10, x))
+    expect_error(topdownr:::.rbind(x, 1:10))
+    for (i in seq(along=y)) {
+        expect_equal(topdownr:::.rbind(x, y[[i]]), r[[i]])
+    }
+    expect_equal(topdownr:::.rbind(list(x, x, y[[1]])),
+                 topdownr:::.rbind(x, x, y[[1]]))
+})

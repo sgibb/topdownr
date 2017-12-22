@@ -124,13 +124,11 @@ readTopDownFiles <- function(path, pattern=".*",
         verbose=verbose
     )
 
-    scanConditions <- do.call(
-        rbind, lapply(files$txt, .readScanHeadsTable, verbose=verbose)
-    )
+    scanConditions <-
+        .rbind(lapply(files$txt, .readScanHeadsTable, verbose=verbose))
 
-    headerInformation <- do.call(
-        rbind, lapply(files$csv, .readExperimentCsv, verbose=verbose)
-    )
+    headerInformation <-
+        .rbind(lapply(files$csv, .readExperimentCsv, verbose=verbose))
 
     mzml <- mapply(
         .readMzMl,
