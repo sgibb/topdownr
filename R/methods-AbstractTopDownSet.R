@@ -72,10 +72,8 @@ setMethod("[", c("AbstractTopDownSet", "ANY", "ANY"),
 
     ld1 <- .logdim(x)
 
-    x <- .atdsLogMsg(x, "Subsetted ", ld0, " to ", ld1, ".", addDim=FALSE)
-
     if (validObject(x)) {
-        x
+        .atdsLogMsg(x, "Subsetted ", ld0, " to ", ld1, ".", addDim=FALSE)
     }
 })
 

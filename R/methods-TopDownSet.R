@@ -34,10 +34,8 @@ setMethod("aggregate", "TopDownSet",
 
     d1 <- .logdim(x)
 
-    x <- .atdsLogMsg(x, "Aggregated ", d0, " to ", d1, ".", addDim=FALSE)
-
     if (validObject(x)) {
-        x
+        .atdsLogMsg(x, "Aggregated ", d0, " to ", d1, ".", addDim=FALSE)
     }
 })
 
