@@ -54,8 +54,11 @@ if (is.null(getGeneric("removeEmptyConditions"))) {
     setGeneric("removeEmptyConditions",
         function(object, ...)standardGeneric("removeEmptyConditions"))
 }
+if (is.null(getGeneric("updateConditionNames"))) {
+    setGeneric("updateConditionNames",
+        function(object, ...)standardGeneric("updateConditionNames"))
+}
 if (is.null(getGeneric("updateMedianInjectionTime"))) {
     setGeneric("updateMedianInjectionTime",
         function(object, ...)standardGeneric("updateMedianInjectionTime"))
 }
-

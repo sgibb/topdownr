@@ -15,7 +15,10 @@ tds <- new("TopDownSet",
                                   start=1:3, width=c(1:2, 1),
                                   names=c("c1", "c2", "x1")),
            colData=DataFrame(Scan=1:5, File=Rle(c(rep("foo", 3),
-                                                  "bar", "bar"))),
+                                                  "bar", "bar")),
+                             row.names=paste("condition",
+                                             rep_len(1:3, 5),
+                                             rep(1:2, c(3, 2)), sep="_")),
            assay=sparseMatrix(i=c(1:2, 1:3, 1, 3, 2),
                               j=rep(1:5, c(2, 3, 1, 1, 1)),
                               x=2:9),
@@ -30,7 +33,10 @@ test_that("[", {
                                        start=1:2, width=1:2,
                                        names=c("c1", "c2")),
                colData=DataFrame(Scan=1:5, File=Rle(c(rep("foo", 3),
-                                                      "bar", "bar"))),
+                                                      "bar", "bar")),
+                                 row.names=paste("condition",
+                                                 rep_len(1:3, 5),
+                                                 rep(1:2, c(3, 2)), sep="_")),
                assay=sparseMatrix(i=rep(1:2, 3),
                                    j=rep(c(1:3, 5), c(2, 2, 1, 1)),
                                    x=c(2:5, 7, 9)),
@@ -45,7 +51,10 @@ test_that("[", {
                  rowViews=FragmentViews("ACE", mass=100, type="c",
                                         start=1, width=1, names="c1"),
                 colData=DataFrame(Scan=1:5, File=Rle(c(rep("foo", 3),
-                                                       "bar", "bar"))),
+                                                       "bar", "bar")),
+                                  row.names=paste("condition",
+                                                  rep_len(1:3, 5),
+                                                  rep(1:2, c(3, 2)), sep="_")),
                 assay=sparseMatrix(i=rep(1, 3),
                                     j=1:3,
                                     x=c(2, 4, 7),
@@ -63,7 +72,9 @@ test_that("[", {
                                        type=c("c", "c", "x"),
                                        start=1:3, width=c(1:2, 1),
                                        names=c("c1", "c2", "x1")),
-                colData=DataFrame(Scan=1:3, File=Rle(rep("foo", 3))),
+                colData=DataFrame(Scan=1:3, File=Rle(rep("foo", 3)),
+                                  row.names=paste("condition", 1:3, rep(1, 3),
+                                                  sep="_")),
                 assay=sparseMatrix(i=c(1:2, 1:3, 1),
                                     j=rep(1:3, c(2, 3, 1)),
                                     x=2:7),
@@ -121,7 +132,8 @@ test_that("aggregate", {
                                       start=1:3, width=c(1:2, 1),
                                       names=c("c1", "c2", "x1")),
                colData=DataFrame(Scan=c(1, 4), File=Rle(c("foo", "bar")),
-                                 Sample=c(2, 10)),
+                                 Sample=c(2, 10),
+                                 row.names=paste0("condition_1_", 1:2)),
                assay=sparseMatrix(i=c(1:3, 2:3),
                                    j=rep(1:2, 3:2),
                                    x=c(13/3, 4, 6, 9, 8)),
@@ -136,12 +148,22 @@ test_that("aggregate", {
     expect_equal_TDS(aggregate(tds, by=list(rep(c(2, 10), c(3, 2)))), tda)
 })
 
+test_that("conditionNames", {
+    expect_equal(conditionNames(tds),
+                 paste("condition",
+                       rep_len(1:3, 5),
+                       rep(1:2, c(3, 2)), sep="_"))
+})
+
 test_that("dim", {
     expect_equal(dim(tds), c(3, 5))
 })
 
 test_that("dimnames", {
-    expect_equal(dimnames(tds), list(c("c1", "c2", "x1"), NULL))
+    expect_equal(dimnames(tds), list(c("c1", "c2", "x1"),
+                                     paste("condition",
+                                           rep_len(1:3, 5),
+                                           rep(1:2, c(3, 2)), sep="_")))
 })
 
 test_that("filterCv", {
@@ -269,7 +291,7 @@ test_that(".ncbMap", {
                       j=c(1:3, 1:2, 4:5),
                       x=c(rep(1, 4), 3:1),
                       dims=c(2, 5),
-                      dimnames=list(paste0("bond", 1:2), c()))
+                      dimnames=list(paste0("bond", 1:2), colnames(tds)))
 
     r1 <- sparseMatrix(i=c(1:2, 1, 1:2),
                        j=c(1, 1, 2, 3, 3),
@@ -358,6 +380,26 @@ test_that("summary", {
     expect_equal(summary(tds, "fragments"), dr)
 })
 
+test_that("updateConditionNames", {
+    expect_error(updateConditionNames(tds, "Foo"), "must contain names")
+    expect_message(updateConditionNames(tds, c("Foo", "Bar", "File"),
+                                        verbose=TRUE),
+                   "Foo, Bar is/are not present and ignored.")
+    expect_message(updateConditionNames(tds, c("File", "Scan"),
+                                        verbose=TRUE),
+                   "Order of conditions changed.")
+    tdn <- tds[, c(4:5, 1:3)]
+    colnames(tdn@assay) <- rownames(tdn@colData) <-
+        paste0("C", rep(c("bar", "foo"), 2:3), "_", c(4:5, 1:3))
+    tdn$Sample <- 1:5
+    tdn@processing <- c("[2017-12-23 19:40:00] Data created.",
+                        paste0("[2017-12-23 19:40:01] Condition names updated ",
+                               "based on: File, Scan. ",
+                               "Order of conditions changed. 5 conditions."))
+    expect_equal_TDS(updateConditionNames(tds, c("File", "Scan"),
+                                          verbose=FALSE), tdn)
+})
+
 test_that("updateMedianInjectionTime", {
     tdn <- tds
     tdn@colData$IonInjectionTimeMs <- 1:5
@@ -397,9 +439,11 @@ test_that("validObject", {
 
 test_that("as(\"MSnSet\")", {
     msn <- new("MSnSet",
-               exprs=matrix(c(2:3, 0, 4:6, 7, rep(0, 4), 8, 0, 9, 0), nrow=3),
+               exprs=matrix(c(2:3, 0, 4:6, 7, rep(0, 4), 8, 0, 9, 0), nrow=3,
+                            dimnames=dimnames(tds)),
                phenoData=as(data.frame(Scan=1:5,
-                                       File=Rle(rep(c("foo", "bar"), 3:2))),
+                                       File=Rle(rep(c("foo", "bar"), 3:2)),
+                                       row.names=colnames(tds)),
                             "AnnotatedDataFrame"),
                featureData=as(data.frame(fragment=c("A", "CE", "E"),
                                          start=1:3, end=c(1, 3, 3), width=c(1, 2, 1),
@@ -417,11 +461,18 @@ test_that("as(\"NCBSet\")", {
     ncb <- new("NCBSet",
                rowViews=Views(AAString("ACE"), start=1, width=1:2,
                               names=paste0("bond", 1:2)),
-               colData=DataFrame(tds@colData, AssignedIntensity=c(5, 15, 7:9)),
+               colData=DataFrame(tds@colData, AssignedIntensity=c(5, 15, 7:9),
+                                 row.names=paste("condition",
+                                                 rep_len(1:3, 5),
+                                                 rep(1:2, c(3, 2)), sep="_")),
                assay=sparseMatrix(i=rep(1:2, c(3, 4)),
                                   j=c(1:3, 1:2, 4:5),
                                   x=c(rep(1, 4), 3, 2, 1),
-                                  dimnames=list(c("bond1", "bond2"), NULL)),
+                                  dimnames=list(c("bond1", "bond2"),
+                                                paste("condition",
+                                                      rep_len(1:3, 5),
+                                                      rep(1:2, c(3, 2)),
+                                                      sep="_"))),
                files=tds@files,
                processing=c(tds@processing,
                             paste("[2017-08-20 16:30:00]",

@@ -341,3 +341,70 @@ setMethod("summary", "AbstractTopDownSet",
           function(object, what=c("rows", "columns"), ...) {
     .summary(object@assay, what=what)
 })
+
+#' @describeIn AbstractTopDownSet Update condition names.
+#'
+#' Updates condition names based on `sampleColumns` from
+#' `conditionData`/`colData`. Columns with just identical entries are ignored.
+#' This method will create/update the `colData(object)$Sample` column that
+#' identifies technical replicates and could be used in other methods.
+#'
+## @param object `AbstractTopDownSet`
+#' @param sampleColumns `character`,
+#' column names of the [colData()]
+#' used to define a sample (technical replicate). This is used to add the
+#' `Sample` column (used for easier aggregation, etc.).
+#' @param verbose `logical`, verbose output?
+#' @aliases updateConditionNames updateConditionNames,AbstractTopDownSet-method
+#' @export
+setMethod("updateConditionNames", "AbstractTopDownSet",
+          function(object, sampleColumns=c("Mz", "AgcTarget",
+                                           "EtdReagentTarget",
+                                           "EtdActivation",
+                                           "CidActivation",
+                                           "HcdActivation",
+                                           "UvpdActivation"),
+                   verbose=interactive()) {
+
+    isColPresent <- sampleColumns %in% colnames(object@colData)
+
+    .msg(
+        verbose & any(!isColPresent),
+        paste0(sampleColumns[!isColPresent], collapse=", "),
+        " is/are not present and ignored."
+    )
+
+    if (all(!isColPresent)) {
+        stop("'sampleColumns' must contain names from 'colnames(colData(x))'")
+    }
+
+    sampleColumns <- sampleColumns[isColPresent]
+
+    o <- .orderByColumns(object@colData, cols=sampleColumns)
+
+    resorted <- is.unsorted(o)
+    .msg(verbose & resorted, "Order of conditions changed.")
+
+    object@colData <- object@colData[o, ]
+    object@colData$Sample <- .groupId(object@colData, cols=sampleColumns)
+    object@assay <- object@assay[, o]
+    rn <- rownames(object@colData)
+    colnames(object@assay) <-
+        rownames(object@colData) <-
+            .makeRowNames(object@colData[, sampleColumns, drop=FALSE])
+
+    if (is.null(rn) || any(rn != rownames(object@colData))) {
+        object <- .atdsLogMsg(
+            object,
+            "Condition names updated based on: ",
+            paste0(sampleColumns, collapse=", "), ".",
+            if (resorted) { " Order of conditions changed." },
+            " ", length(unique(object@colData$Sample)), " conditions.",
+            addDim=FALSE
+        )
+    }
+
+    if (validObject(object)) {
+        object
+    }
+})

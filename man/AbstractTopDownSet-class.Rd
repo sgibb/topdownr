@@ -29,6 +29,8 @@
 \alias{rowViews}
 \alias{show,AbstractTopDownSet-method}
 \alias{summary,AbstractTopDownSet-method}
+\alias{updateConditionNames,AbstractTopDownSet-method}
+\alias{updateConditionNames}
 \title{The AbstractTopDownSet class}
 \usage{
 \S4method{[}{AbstractTopDownSet,ANY,ANY,ANY}(x, i, j, ..., drop = FALSE)
@@ -65,6 +67,11 @@
 
 \S4method{summary}{AbstractTopDownSet}(object, what = c("rows", "columns"),
   ...)
+
+\S4method{updateConditionNames}{AbstractTopDownSet}(object,
+  sampleColumns = c("Mz", "AgcTarget", "EtdReagentTarget", "EtdActivation",
+  "CidActivation", "HcdActivation", "UvpdActivation"),
+  verbose = interactive())
 }
 \arguments{
 \item{i, j}{\code{numeric}, \code{logical} or \code{character},
@@ -80,6 +87,13 @@ indices specifying elements to extract or replace.}
 
 \item{what}{\code{character},
 specifies whether \code{"rows"} or \code{"columns"} should be summarized.}
+
+\item{sampleColumns}{\code{character},
+column names of the \code{\link[=colData]{colData()}}
+used to define a sample (technical replicate). This is used to add the
+\code{Sample} column (used for easier aggregation, etc.).}
+
+\item{verbose}{\code{logical}, verbose output?}
 
 \item{\ldots}{arguments passed to internal/other methods.}
 }
@@ -194,6 +208,13 @@ or an \link[Biostrings:XStringViews]{Biostrings::XStringViews} object for
 Returns a \code{matrix} with some statistics: number of fragments,
 total/min/first quartile/median/mean/third quartile/maximum of intensity
 values.
+
+\item \code{updateConditionNames}: Update condition names.
+
+Updates condition names based on \code{sampleColumns} from
+\code{conditionData}/\code{colData}. Columns with just identical entries are ignored.
+This method will create/update the \code{colData(object)$Sample} column that
+identifies technical replicates and could be used in other methods.
 }}
 
 \section{Slots}{

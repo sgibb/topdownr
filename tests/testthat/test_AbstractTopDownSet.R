@@ -53,4 +53,3 @@ test_that(".logdim", {
     expect_equal(topdownr:::.logdim(new("TopDownSet")), "0 fragments [0;0]")
     expect_equal(topdownr:::.logdim(tds), "8 fragments [3;5]")
 })
-

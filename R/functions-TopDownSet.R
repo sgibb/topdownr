@@ -150,11 +150,6 @@ readTopDownFiles <- function(path, pattern=".*",
 
     header <- .mergeSpectraAndHeaderInformation(mzmlHeader, scanHeadsman)
 
-    o <- .orderByColumns(header, sampleColumns)
-    header <- header[o, ]
-    header$Sample <- .groupId(header, cols=sampleColumns)
-    rownames(header) <- .makeRowNames(header[, sampleColumns, drop=FALSE])
-
     if (dropNonInformativeColumns) {
         header <- .dropNonInformativeColumns(header, keep=c("Activation", "Mz"))
     }
@@ -162,7 +157,6 @@ readTopDownFiles <- function(path, pattern=".*",
     header$Charge <- round(fragmentViews@metadata$mass / header$Mz)
 
     assay <- do.call(cbind, lapply(mzml, "[[", "m"))
-    assay <- assay[, o]
     dimnames(assay) <- list(names(fragmentViews), rownames(header))
 
     tds <- new(
@@ -177,6 +171,7 @@ readTopDownFiles <- function(path, pattern=".*",
         tds, .logdim(tds), " matched (tolerance: ",
         round(tolerance / 1e-6, 1L), " ppm).", addDim=FALSE
     )
+    tds <- updateConditionNames(tds, sampleColumns=sampleColumns, verbose=FALSE)
     updateMedianInjectionTime(tds)
 }
 
