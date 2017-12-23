@@ -233,7 +233,7 @@ cat0 <- function(...) {
 #' @return `integer`
 #' @noRd
 .groupId <- function(x, cols) {
-    stopifnot(is.data.frame(x))
+    stopifnot(is.data.frame(x) || inherits(x, "DataFrame"))
     groups <- .groupByLabels(x, cols)
     ugroups <- unique(groups)
     match(groups, ugroups)

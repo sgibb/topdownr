@@ -104,7 +104,7 @@
 #' @return `character`
 #' @noRd
 .makeRowNames <- function(x) {
-    stopifnot(is.data.frame(x))
+    stopifnot(is.data.frame(x) || inherits(x, "DataFrame"))
     x <- .dropNonInformativeColumns(x, keep=character())
 
     if (ncol(x)) {
