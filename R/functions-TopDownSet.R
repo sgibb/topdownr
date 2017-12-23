@@ -175,7 +175,7 @@ readTopDownFiles <- function(path, pattern=".*",
     )
     tds <- .atdsLogMsg(
         tds, .logdim(tds), " matched (tolerance: ",
-        round(tolerance/1e-6, 1L), " ppm).", addDim=FALSE
+        round(tolerance / 1e-6, 1L), " ppm).", addDim=FALSE
     )
     updateMedianInjectionTime(tds)
 }
