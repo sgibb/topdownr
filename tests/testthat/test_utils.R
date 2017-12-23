@@ -178,17 +178,6 @@ test_that(".makeNames", {
                  c("DA_1", "DA_2", "DB", sprintf("DC_%02d", 1:10)))
 })
 
-test_that(".makeRowNames", {
-    d <- data.frame(a=c(1e5, 1e6, 1e7, NA), b=letters[1:4], c=8:11)
-    expect_equal(topdownr:::.makeRowNames(d),
-                 c("C1.0e+05_a_08", "C1.0e+06_b_09",
-                   "C1.0e+07_c_10", "C0.0e+00_d_11"))
-    expect_equal(topdownr:::.makeRowNames(data.frame(a=LETTERS[1:3])),
-                 paste0("C", LETTERS[1:3]))
-    expect_equal(topdownr:::.makeRowNames(data.frame(a=1:3)),
-                 paste0("C", 1:3))
-})
-
 test_that(".massLabel", {
     expect_equal(topdownr:::.massLabel(c(750, 1000.76), c(1, 245)),
                  c(750.0001, 1000.8245))

@@ -64,6 +64,24 @@ test_that(".isNumCol", {
     expect_equal(topdownr:::.isNumCol(d), c(TRUE, FALSE, FALSE, TRUE))
 })
 
+test_that(".makeRowNames", {
+    d <- data.frame(a=c(1e5, 1e6, 1e7, NA), b=letters[1:4], c=8:11)
+    expect_error(topdownr:::.makeRowNames(1:3))
+    expect_equal(topdownr:::.makeRowNames(d),
+                 c("C1.0e+05_a_08", "C1.0e+06_b_09",
+                   "C1.0e+07_c_10", "C0.0e+00_d_11"))
+    expect_equal(topdownr:::.makeRowNames(data.frame(a=LETTERS[1:3])),
+                 paste0("C", LETTERS[1:3]))
+    expect_equal(topdownr:::.makeRowNames(data.frame(a=1:3)),
+                 paste0("C", 1:3))
+    expect_equal(topdownr:::.makeRowNames(
+            data.frame(a=rep(1e5, 4), b=letters[1:4], c=8:11)
+        ), c("Ca_08", "Cb_09", "Cc_10", "Cd_11")
+    )
+    expect_equal(topdownr:::.makeRowNames(data.frame(a=rep(1e5, 10), b="a", c=8)),
+                 sprintf("C%02d", 1:10))
+})
+
 test_that(".orderByColumns", {
     d <- DataFrame(a=10:1, b=c(1:3, 7:1),
                    c=Rle(rep(c("foo", "bar"), each=5)),

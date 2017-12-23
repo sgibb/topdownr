@@ -98,6 +98,24 @@
     })
 }
 
+#' Make row.names
+#'
+#' @param x `data.frame`
+#' @return `character`
+#' @noRd
+.makeRowNames <- function(x) {
+    stopifnot(is.data.frame(x))
+    x <- .dropNonInformativeColumns(x, keep=character())
+
+    if (ncol(x)) {
+        isNumCol <- .isNumCol(x)
+        x[isNumCol] <- lapply(x[isNumCol], .formatNumbers, na2zero=TRUE)
+        .makeNames(.groupByLabels(x, sep="_"), prefix="C", sep="_")
+    } else {
+        paste0("C", .formatNumbers(seq_len(nrow(x))))
+    }
+}
+
 #' Order data.frame by multiple columns given as character vector
 #'
 #' @param x `data.frame`

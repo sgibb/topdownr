@@ -287,17 +287,6 @@ cat0 <- function(...) {
     })
 }
 
-#' Make row.names
-#'
-#' @param x `data.frame`
-#' @return `character`
-#' @noRd
-.makeRowNames <- function(x) {
-    isNumCol <- .isNumCol(x)
-    x[isNumCol] <- lapply(x[isNumCol], .formatNumbers, na2zero=TRUE)
-    .makeNames(.groupByLabels(x, sep="_"), prefix="C", sep="_")
-}
-
 #' Create mass label
 #'
 #' Identifying the experiments by the running time/order is complicated.
