@@ -222,6 +222,18 @@ setReplaceMethod("conditionData", "AbstractTopDownSet",
     }
 })
 
+#' @describeIn AbstractTopDownSet Accessor for condition names.
+#'
+#' Returns a `character` with names for the conditions/runs (columns).
+#'
+## @param object `AbstractTopDownSet`
+## @return `character`
+#' @aliases conditionNames conditionNames,AbstractTopDownSet-method
+#' @export
+setMethod("conditionNames", "AbstractTopDownSet", function(object) {
+    dimnames(object)[[2L]]
+})
+
 #' @describeIn AbstractTopDownSet Accessor for dimensions.
 #'
 #' Returns a `numeric` with number of fragments/bonds (rows) and

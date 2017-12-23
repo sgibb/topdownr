@@ -22,6 +22,10 @@ if (is.null(getGeneric("conditionData<-"))) {
     setGeneric("conditionData<-",
         function(object, ..., value)standardGeneric("conditionData<-"))
 }
+if (is.null(getGeneric("conditionNames"))) {
+    setGeneric("conditionNames",
+        function(object)standardGeneric("conditionNames"))
+}
 if (is.null(getGeneric("bestConditions"))) {
     setGeneric("bestConditions",
         function(object, ...)standardGeneric("bestConditions"))

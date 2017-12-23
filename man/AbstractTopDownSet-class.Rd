@@ -19,6 +19,8 @@
 \alias{conditionData}
 \alias{conditionData<-,AbstractTopDownSet-method}
 \alias{conditionData<-}
+\alias{conditionNames,AbstractTopDownSet-method}
+\alias{conditionNames}
 \alias{dim,AbstractTopDownSet-method}
 \alias{dimnames,AbstractTopDownSet-method}
 \alias{removeEmptyConditions,AbstractTopDownSet-method}
@@ -48,6 +50,8 @@
 \S4method{conditionData}{AbstractTopDownSet}(object, ...)
 
 \S4method{conditionData}{AbstractTopDownSet}(object, ...) <- value
+
+\S4method{conditionNames}{AbstractTopDownSet}(object)
 
 \S4method{dim}{AbstractTopDownSet}(x)
 
@@ -156,6 +160,10 @@ An alias for \code{colData}.
 \item \code{conditionData<-}: Setter for the \code{colData} slot.
 
 An alias for \code{colData&lt;-}.
+
+\item \code{conditionNames}: Accessor for condition names.
+
+Returns a \code{character} with names for the conditions/runs (columns).
 
 \item \code{dim}: Accessor for dimensions.
 
