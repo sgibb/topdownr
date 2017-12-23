@@ -132,7 +132,7 @@ head(summary(ncb))
 # Accessing slots
 rowViews(ncb)
 colData(ncb)
-assayData(ncb)
+head(assayData(ncb))
 
 # Accessing colData
 ncb$Mz

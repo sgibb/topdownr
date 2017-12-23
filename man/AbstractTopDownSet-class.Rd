@@ -259,7 +259,7 @@ head(summary(tds))
 # Accessing slots
 rowViews(tds)
 colData(tds)
-assayData(tds)
+head(assayData(tds))
 
 # Accessing colData
 tds$Mz

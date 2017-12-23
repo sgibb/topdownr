@@ -89,7 +89,7 @@ setClass(
 #' # Accessing slots
 #' rowViews(tds)
 #' colData(tds)
-#' assayData(tds)
+#' head(assayData(tds))
 #'
 #' # Accessing colData
 #' tds$Mz
@@ -176,7 +176,7 @@ setClass(
 #' # Accessing slots
 #' rowViews(tds)
 #' colData(tds)
-#' assayData(tds)
+#' head(assayData(tds))
 #'
 #' # Accessing colData
 #' tds$Mz
@@ -282,7 +282,7 @@ setClass(
 #' # Accessing slots
 #' rowViews(ncb)
 #' colData(ncb)
-#' assayData(ncb)
+#' head(assayData(ncb))
 #'
 #' # Accessing colData
 #' ncb$Mz
