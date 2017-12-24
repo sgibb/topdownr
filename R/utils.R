@@ -154,6 +154,9 @@ cat0 <- function(...) {
 #' @return `character`
 #' @noRd
 .formatNumbers <- function(x, asInteger=NA_integer_, nScientific=5L, na2zero=FALSE) {
+    ## sprintf("%02.2f", Rle(c(1.2, 2.2), 2:3)) == "01" instead c("1.20", "1.20",
+    ## "2.20", "2.20", "2.20"); so we need to decode
+    x <- decode(x)
     n <- .ndigits(max(abs(x), 0, na.rm=TRUE))
     na <- is.na(x)
 

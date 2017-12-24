@@ -101,6 +101,8 @@ test_that(".formatNumbers", {
     expect_equal(topdownr:::.formatNumbers(c(1, 1000, 1e6, NA), na2zero=TRUE),
                  sprintf("%.1e", c(1, 1000, 1e6, 0)))
     expect_equal(topdownr:::.formatNumbers(c(1, -1000)), c("00001", "-1000"))
+    expect_equal(topdownr:::.formatNumbers(Rle(c(1.1, 2.1), 2:3)),
+                 rep(c("1.10", "2.10"), 2:3))
 })
 
 test_that(".fragmentationMethod", {
