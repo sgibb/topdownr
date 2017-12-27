@@ -34,7 +34,14 @@ test_that("characterToLogical", {
                  c("On", "Off", "NA"))
     expect_equal(topdownr:::.characterToLogical(c("true", "False", "N/A")),
                  c(TRUE, FALSE, NA))
+    expect_equal(topdownr:::.characterToLogical(c("true", "False", "N/A",
+                                                  NA_character_)),
+                 c(TRUE, FALSE, NA, NA))
     expect_equal(topdownr:::.characterToLogical(c("true", "on", "ON")),
+                 rep(TRUE, 3))
+    expect_equal(topdownr:::.characterToLogical(Rle(c("true", "False", "N/A"))),
+                 c(TRUE, FALSE, NA))
+    expect_equal(topdownr:::.characterToLogical(Rle(c("true", "on", "ON"))),
                  rep(TRUE, 3))
 })
 

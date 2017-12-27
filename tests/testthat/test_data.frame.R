@@ -14,8 +14,10 @@ test_that(".aggregateDataFrame", {
 
 test_that(".colsToLogical", {
     d <- DataFrame(a=1:10, b=rep(c("On", "Off"), 5), c=rep(c("foo", "bar"), 5))
+    d1 <- DataFrame(a=1:10, b=Rle(rep(c("On", "Off"), 5)), c=rep(c("foo", "bar"), 5))
     r <- DataFrame(a=1:10, b=rep(c(TRUE, FALSE), 5), c=rep(c("foo", "bar"), 5))
     expect_equal(topdownr:::.colsToLogical(d), r)
+    expect_equal(topdownr:::.colsToLogical(d1), r)
 })
 
 test_that(".colsToRle", {

@@ -46,11 +46,16 @@ cat0 <- function(...) {
 #' @return `logical`/`character`
 #' @noRd
 .characterToLogical <- function(x, na.strings=c("NA", "N/A")) {
-    stopifnot(is.character(x))
-    y <- gsub("^on$", "TRUE", x, ignore.case=TRUE)
-    y <- gsub("^off$", "FALSE", y, ignore.case=TRUE)
+    stopifnot(is.character(x) || (is(x, "Rle") && is.character(runValue(x))))
+    y <- gsub("^[[:space:]]*on[[:space:]]*$", "TRUE", decode(x),
+              ignore.case=TRUE)
+    y <- gsub("^[[:space:]]*off[[:space:]]*$", "FALSE", y, ignore.case=TRUE)
+
     l <- as.logical(y)
-    if (all(grepl(paste0(na.strings, collapse="|"), y) == is.na(l))) {
+
+    if (all(
+        grepl(paste0(na.strings, collapse="|"), y) | is.na(y) == is.na(l))
+    ) {
         l
     } else {
         x
