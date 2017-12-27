@@ -45,8 +45,9 @@
 #' @return `DataFrame`
 #' @noRd
 .colsToRle <- function(x) {
-    toConvert <- .vapply1l(x, function(xx)length(unique(xx)) < nrow(x) / 4L)
-    x[toConvert] <- lapply(x[toConvert], Rle)
+    r <- lapply(x, Rle)
+    toConvert <- .vapply1l(r, function(rr)length(rr) >= 2L * nrun(rr))
+    x[toConvert] <- r[toConvert]
     x
 }
 
