@@ -5,6 +5,9 @@
   `rownames(colData(tds))` [2017-12-23].
 - Add `updateConditionNames,AbstractTopDownSet-method`
   (closes [#60](https://github.com/sgibb/topdownr/issues/60)) [2017-12-23].
+- Turn `updateMedianInjectionTime,TopDownSet-method` into
+  `updateMedianInjectionTime,AbstractTopDownSet-method` to work with
+  `TopDownSet` and `NCBSet` objects [2017-12-27].
 
 ## Changes in version 1.1.2
 - Add `.rbind` to combine scan and method information with different number of

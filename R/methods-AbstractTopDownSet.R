@@ -408,3 +408,36 @@ setMethod("updateConditionNames", "AbstractTopDownSet",
         object
     }
 })
+
+#' @describeIn AbstractTopDownSet Update median ion injection times.
+#'
+#' Recalculates median ion injection times by a user given grouping variable
+#' (default: Mz, AgcTarget). This is useful if you acquire new data and the ion
+#' injection time differs across the runs. Use the `by` argument to provide a
+#' `list`/`data.frame` of grouping variables, e.g.
+#' `by=colData(object)[, c("Mz", "AgcTarget", "File")]`.
+#'
+## @param object `TopDownSet`
+#' @param by `list`, grouping information.
+## @return `AbstractTopDownSet`
+#' @aliases updateMedianInjectionTime
+#' updateMedianInjectionTime,TopDownSet-method
+#' @export
+setMethod("updateMedianInjectionTime", "TopDownSet",
+          function(object, by=list(Mz=object$Mz, AgcTarget=object$AgcTarget)) {
+    object@colData$MedianIonInjectionTimeMs <- tryCatch(
+        ave(
+            object@colData$IonInjectionTimeMs,
+            .groupByLabels(by),
+            FUN=function(x)median(x, na.rm=TRUE)
+        ),
+        warning=function(w) {
+            stop("converted from warning: ", conditionMessage(w))
+        }
+    )
+    msg <- "Recalculate median injection time"
+    if (length(names(by))) {
+        msg <- paste0(msg, " based on: ", paste0(names(by), collapse=", "))
+    }
+    .atdsLogMsg(object, msg, ".", addDim=FALSE)
+})
