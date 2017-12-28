@@ -1,13 +1,3 @@
-#' Test for file existence with error message.
-#' @param file filename
-#' @noRd
-.fileExists <- function(file) {
-    if (!file.exists(file)) {
-        stop(file, " doesn't exists!")
-    }
-    TRUE
-}
-
 #' List TopDown files
 #'
 #' List all TopDown files:

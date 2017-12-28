@@ -1,13 +1,5 @@
 context("import")
 
-test_that(".fileExists", {
-    expect_error(topdownr:::.fileExists("foo.bar"))
-    fn <- tempfile()
-    file.create(fn)
-    expect_true(topdownr:::.fileExists(fn))
-    unlink(fn)
-})
-
 test_that(".listTopDownFiles", {
     fns <- tempfile(pattern=c("fileA_", "fileB_"))
     fasta <- tempfile(pattern="fileA_", fileext=".fasta")
