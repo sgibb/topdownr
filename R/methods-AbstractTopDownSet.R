@@ -387,6 +387,7 @@ setMethod("updateConditionNames", "AbstractTopDownSet",
 
     object@colData <- object@colData[o, ]
     object@colData$Sample <- .groupId(object@colData, cols=sampleColumns)
+    object@colData <- .colsToRle(object@colData)
     object@assay <- object@assay[, o]
     rn <- rownames(object@colData)
     colnames(object@assay) <-
@@ -435,6 +436,9 @@ setMethod("updateMedianInjectionTime", "TopDownSet",
             stop("converted from warning: ", conditionMessage(w))
         }
     )
+    object@colData$MedianIonInjectionTimeMs <- .colsToRle(
+        object@colData[, "MedianIonInjectionTimeMs", drop=FALSE]
+    )$MedianIonInjectionTimeMs
     msg <- "Recalculate median injection time"
     if (length(names(by))) {
         msg <- paste0(msg, " based on: ", paste0(names(by), collapse=", "))
