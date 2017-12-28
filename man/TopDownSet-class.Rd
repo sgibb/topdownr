@@ -15,8 +15,6 @@
 \alias{normalize,TopDownSet-method}
 \alias{show,TopDownSet-method}
 \alias{summary,TopDownSet-method}
-\alias{updateMedianInjectionTime,TopDownSet-method}
-\alias{updateMedianInjectionTime}
 \alias{coerce,TopDownSet,MSnSet-method}
 \alias{coerce,TopDownSet,NCBSet-method}
 \title{The TopDownSet class}
@@ -40,9 +38,6 @@
 
 \S4method{summary}{TopDownSet}(object, what = c("conditions", "fragments"),
   ...)
-
-\S4method{updateMedianInjectionTime}{TopDownSet}(object, by = list(Mz =
-  object$Mz, AgcTarget = object$AgcTarget))
 }
 \arguments{
 \item{x, object}{\code{TopDownSet}}
@@ -144,14 +139,6 @@ Returns a \code{matrix}
 with some statistics: number of fragments,
 total/min/first quartile/median/mean/third quartile/maximum of
 intensity values.
-
-\item \code{updateMedianInjectionTime}: Update median ion injection times.
-
-Recalculates median ion injection times by a user given grouping variable
-(default: Mz, AgcTarget). This is useful if you acquire new data and the ion
-injection time differs across the runs. Use the \code{by} argument to provide a
-\code{list}/\code{data.frame} of grouping variables, e.g.
-\code{by=colData(object)[, c("Mz", "AgcTarget", "File")]}.
 }}
 
 \section{Slots}{

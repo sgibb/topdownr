@@ -15,6 +15,8 @@
 \alias{colData}
 \alias{colData<-,AbstractTopDownSet-method}
 \alias{colData<-}
+\alias{combine,AbstractTopDownSet,AbstractTopDownSet-method}
+\alias{combine}
 \alias{conditionData,AbstractTopDownSet-method}
 \alias{conditionData}
 \alias{conditionData<-,AbstractTopDownSet-method}
@@ -31,6 +33,8 @@
 \alias{summary,AbstractTopDownSet-method}
 \alias{updateConditionNames,AbstractTopDownSet-method}
 \alias{updateConditionNames}
+\alias{updateMedianInjectionTime,TopDownSet-method}
+\alias{updateMedianInjectionTime}
 \title{The AbstractTopDownSet class}
 \usage{
 \S4method{[}{AbstractTopDownSet,ANY,ANY,ANY}(x, i, j, ..., drop = FALSE)
@@ -48,6 +52,8 @@
 \S4method{colData}{AbstractTopDownSet}(object)
 
 \S4method{colData}{AbstractTopDownSet}(object, ...) <- value
+
+\S4method{combine}{AbstractTopDownSet,AbstractTopDownSet}(x, y)
 
 \S4method{conditionData}{AbstractTopDownSet}(object, ...)
 
@@ -72,6 +78,9 @@
   sampleColumns = c("Mz", "AgcTarget", "EtdReagentTarget", "EtdActivation",
   "CidActivation", "HcdActivation", "UvpdActivation"),
   verbose = interactive())
+
+\S4method{updateMedianInjectionTime}{TopDownSet}(object, by = list(Mz =
+  object$Mz, AgcTarget = object$AgcTarget))
 }
 \arguments{
 \item{i, j}{\code{numeric}, \code{logical} or \code{character},
@@ -85,6 +94,8 @@ indices specifying elements to extract or replace.}
 
 \item{object, x}{\code{AbstractTopDownSet}}
 
+\item{y}{\code{AbstractTopDownSet}}
+
 \item{what}{\code{character},
 specifies whether \code{"rows"} or \code{"columns"} should be summarized.}
 
@@ -94,6 +105,8 @@ used to define a sample (technical replicate). This is used to add the
 \code{Sample} column (used for easier aggregation, etc.).}
 
 \item{verbose}{\code{logical}, verbose output?}
+
+\item{by}{\code{list}, grouping information.}
 
 \item{\ldots}{arguments passed to internal/other methods.}
 }
@@ -167,6 +180,17 @@ metadata for the conditons/runs (columns) of the
 Replaces metadata for the conditons/runs (columns) of the
 \linkS4class{AbstractTopDownSet} object.
 
+\item \code{combine}: Combine \code{AbstractTopDownSet} objects.
+
+If the \code{rowViews} are identically \code{combine} allows to combine two or more
+\code{AbstractTopDownSet} objects. Please note that it uses the default
+\code{sampleColumns} to define technical replicates (see \code{\link[=readTopDownFiles]{readTopDownFiles()}}).and
+the default \code{by} argument to group ion injection times for the calculation of
+the median time (see \code{\link[=updateMedianInjectionTime]{updateMedianInjectionTime()}}). Both could be modified
+after \code{combine} by calling \code{\link[=updateConditionNames]{updateConditionNames()}} (with modified
+\code{sampleColumns} argument) and \code{\link[=updateMedianInjectionTime]{updateMedianInjectionTime()}} (with modified
+\code{by} argument).
+
 \item \code{conditionData}: Accessor for the \code{colData} slot.
 
 An alias for \code{colData}.
@@ -215,6 +239,14 @@ Updates condition names based on \code{sampleColumns} from
 \code{conditionData}/\code{colData}. Columns with just identical entries are ignored.
 This method will create/update the \code{colData(object)$Sample} column that
 identifies technical replicates and could be used in other methods.
+
+\item \code{updateMedianInjectionTime}: Update median ion injection times.
+
+Recalculates median ion injection times by a user given grouping variable
+(default: Mz, AgcTarget). This is useful if you acquire new data and the ion
+injection time differs across the runs. Use the \code{by} argument to provide a
+\code{list}/\code{data.frame} of grouping variables, e.g.
+\code{by=colData(object)[, c("Mz", "AgcTarget", "File")]}.
 }}
 
 \section{Slots}{
