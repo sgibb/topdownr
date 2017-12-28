@@ -1,7 +1,9 @@
 # topdownr 1.1
 
 ## Changes in version 1.1.4
-- Nothing yet.
+- Add missing export of `combine` and documentation [2017-12-28].
+- Resave `tds` example data set to reflect changes in `colData` introduced in
+  version 1.1.2 [2017-12-28].
 
 ## Changes in version 1.1.3
 - Add `conditionNames,AbstractTopDownSet-method` to access

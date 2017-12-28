@@ -5,7 +5,7 @@
 \alias{tds}
 \title{TopDownSet Example Data}
 \format{A \linkS4class{TopDownSet}
-with 2700 fragments and 351 conditions.}
+with 14901 fragments \link{1949;351}}
 \source{
 Subset taken from the
 \link[topdownrdata:topdownrdata-package]{topdownrdata::topdownrdata-package}
@@ -27,7 +27,7 @@ follows:\preformatted{tds <- readTopDownFiles(
    ## file and files from m/z == 1211, ETD reagent
    ## target 1e6 and first replicate to keep runtime
    ## of the example short
-   pattern=".*fasta.gz$|1211_.*1e\\+06_1",
+   pattern=".*fasta.gz$|1211_.*1e6_1",
    adducts=data.frame(mass=1.008, name="zpH", to="z"),
    neutralLoss=MSnbase::defaultNeutralLoss(
        disableWaterLoss=c("Cterm", "D", "E", "S", "T")),

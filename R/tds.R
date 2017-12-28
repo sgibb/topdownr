@@ -14,7 +14,7 @@
 #'    ## file and files from m/z == 1211, ETD reagent
 #'    ## target 1e6 and first replicate to keep runtime
 #'    ## of the example short
-#'    pattern=".*fasta.gz$|1211_.*1e\\+06_1",
+#'    pattern=".*fasta.gz$|1211_.*1e6_1",
 #'    adducts=data.frame(mass=1.008, name="zpH", to="z"),
 #'    neutralLoss=MSnbase::defaultNeutralLoss(
 #'        disableWaterLoss=c("Cterm", "D", "E", "S", "T")),
@@ -22,7 +22,7 @@
 #' ```
 #'
 #' @format A [TopDownSet-class]
-#' with 2700 fragments and 351 conditions.
+#' with 14901 fragments [1949;351]
 #' @source Subset taken from the
 #' [topdownrdata::topdownrdata-package]
 #' package.
