@@ -112,7 +112,7 @@ dataset available in
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
     <p>A <a href='TopDownSet-class.html'>TopDownSet</a>
-with 2700 fragments and 351 conditions.</p>
+with 14901 fragments 1949;351</p>
     
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
@@ -129,7 +129,7 @@ follows:</p><pre>tds &lt;- readTopDownFiles(
    ## file and files from m/z == 1211, ETD reagent
    ## target 1e6 and first replicate to keep runtime
    ## of the example short
-   pattern=".*fasta.gz$|1211_.*1e\+06_1",
+   pattern=".*fasta.gz$|1211_.*1e6_1",
    adducts=data.frame(mass=1.008, name="zpH", to="z"),
    neutralLoss=MSnbase::defaultNeutralLoss(
        disableWaterLoss=c("Cterm", "D", "E", "S", "T")),

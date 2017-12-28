@@ -194,7 +194,7 @@ myoglobin &lt;-<span class="st"> </span><span class="kw"><a href="../reference/r
 ## Number of matched fragments: 372991 
 ## Intensity range: [87.61;10704001.00]
 ## - - - Processing information - - -
-## [2017-12-22 22:45:04] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).</code></pre>
+## [2017-12-28 16:53:05] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).</code></pre>
 </div>
 <div id="the-topdownset-anatomy" class="section level2">
 <h2 class="hasAnchor">
@@ -344,8 +344,8 @@ myoglobin[<span class="dv">1</span>:<span class="dv">100</span>]</code></pre></d
 ## Number of matched fragments: 56956 
 ## Intensity range: [105.70;1076768.00]
 ## - - - Processing information - - -
-## [2017-12-22 22:45:04] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
-## [2017-12-22 22:45:05] Subsetted 372991 fragments [1216;5882] to 56956 fragments [100;5882].</code></pre>
+## [2017-12-28 16:53:05] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
+## [2017-12-28 16:53:05] Subsetted 372991 fragments [1216;5882] to 56956 fragments [100;5882].</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># select all "c" fragments</span>
 myoglobin[<span class="st">"c"</span>]</code></pre></div>
 <pre><code>## TopDownSet object (4.33 Mb)
@@ -366,8 +366,8 @@ myoglobin[<span class="st">"c"</span>]</code></pre></div>
 ## Number of matched fragments: 139458 
 ## Intensity range: [87.61;1203763.75]
 ## - - - Processing information - - -
-## [2017-12-22 22:45:04] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
-## [2017-12-22 22:45:05] Subsetted 372991 fragments [1216;5882] to 139458 fragments [304;5882].</code></pre>
+## [2017-12-28 16:53:05] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
+## [2017-12-28 16:53:05] Subsetted 372991 fragments [1216;5882] to 139458 fragments [304;5882].</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># select just the 100. "c" fragment</span>
 myoglobin[<span class="st">"c100"</span>]</code></pre></div>
 <pre><code>## TopDownSet object (2.69 Mb)
@@ -388,8 +388,8 @@ myoglobin[<span class="st">"c100"</span>]</code></pre></div>
 ## Number of matched fragments: 5 
 ## Intensity range: [1276.91;17056.12]
 ## - - - Processing information - - -
-## [2017-12-22 22:45:04] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
-## [2017-12-22 22:45:05] Subsetted 372991 fragments [1216;5882] to 5 fragments [1;5882].</code></pre>
+## [2017-12-28 16:53:05] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
+## [2017-12-28 16:53:05] Subsetted 372991 fragments [1216;5882] to 5 fragments [1;5882].</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># select all "a" and "b" fragments but just the first 100 "c"</span>
 myoglobin[<span class="kw">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="kw">paste0</span>(<span class="st">"c"</span>, <span class="dv">1</span>:<span class="dv">100</span>))]</code></pre></div>
 <pre><code>## TopDownSet object (4.41 Mb)
@@ -410,8 +410,8 @@ myoglobin[<span class="kw">c</span>(<span class="st">"a"</span>, <span class="st
 ## Number of matched fragments: 145348 
 ## Intensity range: [87.61;1630533.12]
 ## - - - Processing information - - -
-## [2017-12-22 22:45:04] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
-## [2017-12-22 22:45:05] Subsetted 372991 fragments [1216;5882] to 145348 fragments [404;5882].</code></pre>
+## [2017-12-28 16:53:05] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
+## [2017-12-28 16:53:06] Subsetted 372991 fragments [1216;5882] to 145348 fragments [404;5882].</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># select condition/run 1 to 10</span>
 myoglobin[, <span class="dv">1</span>:<span class="dv">10</span>]</code></pre></div>
 <pre><code>## TopDownSet object (0.25 Mb)
@@ -432,8 +432,8 @@ myoglobin[, <span class="dv">1</span>:<span class="dv">10</span>]</code></pre></
 ## Number of matched fragments: 271 
 ## Intensity range: [7996.26;5499596.00]
 ## - - - Processing information - - -
-## [2017-12-22 22:45:04] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
-## [2017-12-22 22:45:05] Subsetted 372991 fragments [1216;5882] to 271 fragments [1216;10].</code></pre>
+## [2017-12-28 16:53:05] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
+## [2017-12-28 16:53:06] Subsetted 372991 fragments [1216;5882] to 271 fragments [1216;10].</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># select all conditions from one file</span>
 myoglobin[, myoglobin$File ==<span class="st"> "myo_1211_ETDReagentTarget_1e+06_1"</span>]</code></pre></div>
 <pre><code>## TopDownSet object (0.24 Mb)
@@ -446,8 +446,8 @@ myoglobin[, myoglobin$File ==<span class="st"> "myo_1211_ETDReagentTarget_1e+06_
 ## Theoretical fragment types (6): a, b, c, x, y, z
 ## Theoretical mass range: [30.03;16910.93]
 ## - - - Processing information - - -
-## [2017-12-22 22:45:04] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
-## [2017-12-22 22:45:05] Subsetted 372991 fragments [1216;5882] to 0 fragments [1216;0].</code></pre>
+## [2017-12-28 16:53:05] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
+## [2017-12-28 16:53:06] Subsetted 372991 fragments [1216;5882] to 0 fragments [1216;0].</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># select all "c" fragments from a single file</span>
 myoglobin[<span class="st">"c"</span>, myoglobin$File ==<span class="st"> "myo_1211_ETDReagentTarget_1e+06_1"</span>]</code></pre></div>
 <pre><code>## TopDownSet object (0.11 Mb)
@@ -460,8 +460,8 @@ myoglobin[<span class="st">"c"</span>, myoglobin$File ==<span class="st"> "myo_1
 ## Theoretical fragment types (1): c
 ## Theoretical mass range: [74.05;16883.97]
 ## - - - Processing information - - -
-## [2017-12-22 22:45:04] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
-## [2017-12-22 22:45:05] Subsetted 372991 fragments [1216;5882] to 0 fragments [304;0].</code></pre>
+## [2017-12-28 16:53:05] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
+## [2017-12-28 16:53:06] Subsetted 372991 fragments [1216;5882] to 0 fragments [304;0].</code></pre>
 </div>
 </div>
 <div id="fragmentation-data-analysis-of-myoglobin" class="section level1">
@@ -509,9 +509,9 @@ myoglobin</code></pre></div>
 ## Number of matched fragments: 256215 
 ## Intensity range: [109.29;8493567.00]
 ## - - - Processing information - - -
-## [2017-12-22 22:45:04] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
-## [2017-12-22 22:45:05] Subsetted 372991 fragments [1216;5882] to 256215 fragments [1216;3696].
-## [2017-12-22 22:45:05] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 256215 fragments [1216;3696].</code></pre>
+## [2017-12-28 16:53:05] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
+## [2017-12-28 16:53:06] Subsetted 372991 fragments [1216;5882] to 256215 fragments [1216;3696].
+## [2017-12-28 16:53:06] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 256215 fragments [1216;3696].</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">injTimeAfter &lt;-<span class="st"> </span><span class="kw"><a href="../reference/AbstractTopDownSet-class.html">colData</a></span>(myoglobin)
 injTimeAfter$Status &lt;-<span class="st"> "after filtering"</span>
 
@@ -552,10 +552,10 @@ myoglobin</code></pre></div>
 ## Number of matched fragments: 216651 
 ## Intensity range: [109.29;8493567.00]
 ## - - - Processing information - - -
-## [2017-12-22 22:45:04] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
-## [2017-12-22 22:45:05] Subsetted 372991 fragments [1216;5882] to 256215 fragments [1216;3696].
-## [2017-12-22 22:45:05] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 256215 fragments [1216;3696].
-## [2017-12-22 22:45:07] 39564 fragments with CV &gt; 30% filtered; 216651 fragments [1216;3696].</code></pre>
+## [2017-12-28 16:53:05] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
+## [2017-12-28 16:53:06] Subsetted 372991 fragments [1216;5882] to 256215 fragments [1216;3696].
+## [2017-12-28 16:53:06] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 256215 fragments [1216;3696].
+## [2017-12-28 16:53:08] 39564 fragments with CV &gt; 30% filtered; 216651 fragments [1216;3696].</code></pre>
 </div>
 <div id="filter-fragments-on-intensity" class="section level2">
 <h2 class="hasAnchor">
@@ -582,11 +582,11 @@ myoglobin</code></pre></div>
 ## Number of matched fragments: 141020 
 ## Intensity range: [219.52;8493567.00]
 ## - - - Processing information - - -
-## [2017-12-22 22:45:04] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
-## [2017-12-22 22:45:05] Subsetted 372991 fragments [1216;5882] to 256215 fragments [1216;3696].
-## [2017-12-22 22:45:05] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 256215 fragments [1216;3696].
-## [2017-12-22 22:45:07] 39564 fragments with CV &gt; 30% filtered; 216651 fragments [1216;3696].
-## [2017-12-22 22:45:07] 75631 intensity values &lt; 0.1 (relative) filtered; 141020 fragments [1216;3696].</code></pre>
+## [2017-12-28 16:53:05] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
+## [2017-12-28 16:53:06] Subsetted 372991 fragments [1216;5882] to 256215 fragments [1216;3696].
+## [2017-12-28 16:53:06] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 256215 fragments [1216;3696].
+## [2017-12-28 16:53:08] 39564 fragments with CV &gt; 30% filtered; 216651 fragments [1216;3696].
+## [2017-12-28 16:53:08] 75631 intensity values &lt; 0.1 (relative) filtered; 141020 fragments [1216;3696].</code></pre>
 </div>
 <div id="data-aggregation" class="section level2">
 <h2 class="hasAnchor">
@@ -612,12 +612,12 @@ myoglobin</code></pre></div>
 ## Number of matched fragments: 89063 
 ## Intensity range: [219.52;8492743.50]
 ## - - - Processing information - - -
-## [2017-12-22 22:45:04] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
-## [2017-12-22 22:45:05] Subsetted 372991 fragments [1216;5882] to 256215 fragments [1216;3696].
-## [2017-12-22 22:45:05] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 256215 fragments [1216;3696].
-## [2017-12-22 22:45:07] 39564 fragments with CV &gt; 30% filtered; 216651 fragments [1216;3696].
-## [2017-12-22 22:45:07] 75631 intensity values &lt; 0.1 (relative) filtered; 141020 fragments [1216;3696].
-## [2017-12-22 22:45:08] Aggregated 141020 fragments [1216;3696] to 89063 fragments [1216;1852].</code></pre>
+## [2017-12-28 16:53:05] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
+## [2017-12-28 16:53:06] Subsetted 372991 fragments [1216;5882] to 256215 fragments [1216;3696].
+## [2017-12-28 16:53:06] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 256215 fragments [1216;3696].
+## [2017-12-28 16:53:08] 39564 fragments with CV &gt; 30% filtered; 216651 fragments [1216;3696].
+## [2017-12-28 16:53:08] 75631 intensity values &lt; 0.1 (relative) filtered; 141020 fragments [1216;3696].
+## [2017-12-28 16:53:09] Aggregated 141020 fragments [1216;3696] to 89063 fragments [1216;1852].</code></pre>
 </div>
 <div id="random-forest" class="section level2">
 <h2 class="hasAnchor">
@@ -705,13 +705,13 @@ myoglobinNcb</code></pre></div>
 ## - - - Assay data - - -
 ## Size of array: 152x1852 (24.67% != 0)
 ## - - - Processing information - - -
-## [2017-12-22 22:45:04] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
-## [2017-12-22 22:45:05] Subsetted 372991 fragments [1216;5882] to 256215 fragments [1216;3696].
-## [2017-12-22 22:45:05] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 256215 fragments [1216;3696].
-## [2017-12-22 22:45:07] 39564 fragments with CV &gt; 30% filtered; 216651 fragments [1216;3696].
-## [2017-12-22 22:45:07] 75631 intensity values &lt; 0.1 (relative) filtered; 141020 fragments [1216;3696].
-## [2017-12-22 22:45:08] Aggregated 141020 fragments [1216;3696] to 89063 fragments [1216;1852].
-## [2017-12-22 22:45:09] Coerced TopDownSet into an NCBSet object; 69454 fragments [152;1852].</code></pre>
+## [2017-12-28 16:53:05] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
+## [2017-12-28 16:53:06] Subsetted 372991 fragments [1216;5882] to 256215 fragments [1216;3696].
+## [2017-12-28 16:53:06] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 256215 fragments [1216;3696].
+## [2017-12-28 16:53:08] 39564 fragments with CV &gt; 30% filtered; 216651 fragments [1216;3696].
+## [2017-12-28 16:53:08] 75631 intensity values &lt; 0.1 (relative) filtered; 141020 fragments [1216;3696].
+## [2017-12-28 16:53:09] Aggregated 141020 fragments [1216;3696] to 89063 fragments [1216;1852].
+## [2017-12-28 16:53:10] Coerced TopDownSet into an NCBSet object; 69454 fragments [152;1852].</code></pre>
 <p>An <code>NCBSet</code> is very similar to a <code>TopDownSet</code> but instead of an <code>FragmentViews</code> the <code>rowViews</code> are an <code>XStringViews</code> for the former. Another difference is that the <code>NCBSet</code> has one row per bond instead one row per fragment. Also the <code>assayData</code> contains no intensity information but a <code>1</code> for an <em>N</em>-terminal, a <code>2</code> for a <em>C</em>-terminal and a <code>3</code> for bidirectional fragments.</p>
 <p>The <code>NCBSet</code> can be used to select the combination of conditions that provide the best fragment coverage. While computing coverage <code>topdownr</code> awards 1 point for every fragment going from every bond in either <em>N</em> or <em>C</em> directions. This means that bonds covered in both directions increase the score of a condition by 2 points. For the myoglobin fragmentation example we get the following table for the best three conditions:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/NCBSet-class.html">bestConditions</a></span>(myoglobinNcb, <span class="dt">n=</span><span class="dv">3</span>)</code></pre></div>
@@ -768,7 +768,7 @@ myoglobinNcbSub &lt;-<span class="st"> </span>myoglobinNcb[, sel]
 ##  [1] BiocStyle_2.7.2     ggplot2_2.2.1       ranger_0.8.0       
 ##  [4] topdownrdata_1.1.0  topdownr_1.1.1      Biostrings_2.47.0  
 ##  [7] XVector_0.19.1      IRanges_2.13.4      S4Vectors_0.17.12  
-## [10] BiocGenerics_0.25.0
+## [10] BiocGenerics_0.25.0 nvimcom_0.9-46     
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] Rcpp_0.12.14          highr_0.6             BiocInstaller_1.29.2 
