@@ -35,6 +35,45 @@ test_that(".atdsLogMsg", {
                  c("Data created.", "foobar"))
 })
 
+test_that("combine", {
+    tds$Mz <- 100
+    tds$AgcTarget <- 1e5
+    tds$EtdReagentTarget <- 1e6
+    tds$EtdActivation <- tds$CidActivation <- tds$HcdActivation <- NA_real_
+    tds$UvpdActivation <- (1:5) * 1000
+    tds$IonInjectionTimeMs <- 1:5
+    tds@tolerance <- 5e-6
+    tds <- updateConditionNames(tds)
+    tds1 <- tds2 <- tds
+    o <- c(matrix(1:10, nrow=2, byrow=TRUE))
+    a <- cbind(tds1@assay, tds2@assay)[, o]
+    cd <- .colsToRle(rbind(tds1@colData, tds2@colData)[o, ])
+    colnames(a) <- rownames(cd) <- paste0("C", rep((1:5) * 1000, each=2), "_",
+                                          rep(1:2, 5))
+    tdsr <- new("TopDownSet",
+                rowViews=tds@rowViews,
+                colData=cd,
+                assay=a,
+                tolerance=5e-6,
+                files=unique(tds1@files, tds2@files),
+                processing=c(tds1@processing, tds2@processing,
+                             paste("[2017-12-28 15:30:00]",
+                                   "Condition names updated based on: Mz,",
+                                   "AgcTarget, EtdReagentTarget,",
+                                   "EtdActivation, CidActivation,",
+                                   "HcdActivation, UvpdActivation. Order of",
+                                   "conditions changed. 5 conditions."),
+                             paste("[2017-12-28 15:30:01]",
+                                   "Recalculate median injection time based",
+                                   "on: Mz, AgcTarget."),
+                             paste("[2017-12-28 15:30:02]",
+                                   "Combined 8 fragments [3;5] and 8 fragments",
+                                   "[3;5] into a 16 fragments [3;10]",
+                                   "TopDownSet object.")))
+    tdsr$MedianIonInjectionTimeMs <- Rle(3, 10)
+    expect_equal_TDS(combine(tds1, tds2), tdsr)
+})
+
 test_that("fragmentMass", {
     expect_error(fragmentMass(1L), "doesn't inherit 'AbstractTopDownSet'")
     expect_equal(fragmentMass(tds), 1:3 * 100)

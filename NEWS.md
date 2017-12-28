@@ -8,6 +8,8 @@
 - Turn `updateMedianInjectionTime,TopDownSet-method` into
   `updateMedianInjectionTime,AbstractTopDownSet-method` to work with
   `TopDownSet` and `NCBSet` objects [2017-12-27].
+- Add `combine,AbstractTopDownSet-method` to combine multiple
+  `TopDownSet`/`NCBSet` objects (closes [#69](https://github.com/sgibb/topdownr/issues/69)) [2017-12-28].
 
 ## Changes in version 1.1.2
 - Add `.rbind` to combine scan and method information with different number of

@@ -194,6 +194,50 @@ setReplaceMethod("colData", "AbstractTopDownSet", function(object, ..., value) {
     }
 })
 
+#' @describeIn AbstractTopDownSet Combine `AbstractTopDownSet` objects.
+#'
+#' If the `rowViews` are identically `combine` allows to combine two or more
+#' `AbstractTopDownSet` objects. Please note that it uses the default
+#' `sampleColumns` to define technical replicates (see [readTopDownFiles()]).and
+#' the default `by` argument to group ion injection times for the calculation of
+#' the median time (see [updateMedianInjectionTime()]). Both could be modified
+#' after `combine` by calling [updateConditionNames()] (with modified
+#' `sampleColumns` argument) and [updateMedianInjectionTime()] (with modified
+#' `by` argument).
+#'
+## @param x `AbstractTopDownSet`
+#' @param y `AbstractTopDownSet`
+## @param \ldots
+#' @aliases combine combine,AbstractTopDownSet,AbstractTopDownSet-method
+#' @export
+setMethod("combine",
+          signature(x="AbstractTopDownSet", y="AbstractTopDownSet"),
+          function(x, y) {
+    if (class(x) != class(y)) {
+        stop(paste0("Objects must be the same class, but are ",
+                    class(x), ", ", class(y), "."))
+    }
+    if (!identical(x@rowViews, y@rowViews)) {
+        stop("`rowViews` must be identical")
+    }
+    ldx0 <- .logdim(x)
+    ldy0 <- .logdim(y)
+    x@colData <- .colsToRle(.colsToLogical(.rbind(x@colData, y@colData)))
+    x@assay <- cbind(x@assay, y@assay)
+    x@files <- unique(x@files, y@files)
+    x@tolerance <- max(x@tolerance, y@tolerance)
+    x@processing <- c(x@processing, y@processing)
+    x <- updateConditionNames(x)
+    x <- updateMedianInjectionTime(x)
+
+    if (validObject(x)) {
+        x <- .atdsLogMsg(
+            x, "Combined ", ldx0, " and ", ldy0, " into a ", .logdim(x), " ",
+            class(x), " object.", addDim=FALSE
+        )
+    }
+})
+
 #' @describeIn AbstractTopDownSet Accessor for the `colData` slot.
 #'
 #' An alias for `colData`.
