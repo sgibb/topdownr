@@ -33,7 +33,7 @@
 #' scale_fill_manual scale_alpha scale_x_discrete scale_y_continuous geom_vline
 #' geom_hline ggtitle theme element_text element_blank element_rect
 #'
-#' @importFrom mzR openMSfile close header peaks
+#' @importFrom mzR openMSfile close header peaks runInfo
 #' @importFrom MSnbase calculateFragments defaultNeutralLoss get.amino.acids
 #' @importClassesFrom MSnbase MSnSet
 #' @importFrom stats ave median setNames quantile

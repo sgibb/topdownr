@@ -137,6 +137,18 @@ test_that(".readScanHeadsTable", {
     expect_equal(h$Condition, c(1, 1:3))
 })
 
+test_that(".readSpectrum", {
+    expect_error(topdownr:::.readSpectrum(tempfile()), "File .* not found")
+
+    skip_if_not_installed("topdownrdata", "0.2")
+    f <- file.path(topdownrdata::topDownDataPath("myoglobin"),
+                   "mzml", "myo_1211_ETDReagentTarget_1e6_1.mzML.gz")
+    expect_error(topdownr:::.readSpectrum(f, 0L), "Invalid .* 1:351")
+    expect_error(topdownr:::.readSpectrum(f, 1e3L), "Invalid .* 1:351")
+    expect_equal(topdownr:::.readSpectrum(f, 1L),
+                 matrix(c(16941.06087, 18979506.00), nrow=1))
+})
+
 test_that(".mergeScanConditionAndHeaderInformation", {
     sc <- data.frame(FOO=1:3, Condition=c(1:2, 1), Both=1,
                      File=c("foo", "foo", "bar"),

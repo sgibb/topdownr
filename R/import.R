@@ -214,6 +214,23 @@
     list(hd=hd, m=m)
 }
 
+#' Read single (complete) MS2 Spectrum (mzML)
+#'
+#' @param file `character`, filename
+#' @param i `integer`, scan idx (in file)
+#' @return `matrix` (`mzR::peaks`)
+#' @noRd
+.readSpectrum <- function(file, i) {
+    fh <- openMSfile(file)
+    on.exit(close(fh))
+
+    if (i <= 0L || i > runInfo(fh)$scanCount) {
+        stop("Invalid spectrum index. It has to be 1:",
+             runInfo(fh)$scanCount, ".")
+    }
+    peaks(fh, i)
+}
+
 #' Merge ScanCondition and HeaderInformation
 #'
 #' @param sc data.frame, scan conditions
