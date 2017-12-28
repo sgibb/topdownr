@@ -1,5 +1,8 @@
 # topdownr 1.1
 
+## Changes in version 1.1.5
+- Nothing yet.
+
 ## Changes in version 1.1.4
 - Add missing export of `combine` and documentation [2017-12-28].
 - Resave `tds` example data set to reflect changes in `colData` introduced in
