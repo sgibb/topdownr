@@ -164,7 +164,7 @@ readTopDownFiles <- function(path, pattern=".*",
         rowViews=fragmentViews,
         colData=.colsToRle(.colsToLogical(as(header, "DataFrame"))),
         assay=assay,
-        files=basename(unlist(unname(files))),
+        files=unlist(unname(files)),
         tolerance=tolerance
     )
     tds <- .atdsLogMsg(
