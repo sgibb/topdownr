@@ -22,7 +22,7 @@
 #' ```
 #'
 #' @format A [TopDownSet-class]
-#' with 14901 fragments [1949;351]
+#' with 14901 fragments (1949 rows, 351 columns).
 #' @source Subset taken from the
 #' [topdownrdata::topdownrdata-package]
 #' package.
