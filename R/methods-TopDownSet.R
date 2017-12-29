@@ -249,6 +249,16 @@ setMethod("normalize", "TopDownSet",
     }
 })
 
+#' @describeIn TopDownSet Plotting.
+#'
+#' Plots an [TopDownSet-class] object.
+#'
+## @param x `TopDownSet`
+setMethod("plot", signature(x="TopDownSet", y="missing"),
+          function(x, y, ...) {
+    .plot(x)
+})
+
 #' @rdname TopDownSet-class
 #' @aliases show,TopDownSet-method
 #' @export

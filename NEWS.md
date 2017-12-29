@@ -3,6 +3,7 @@
 ## Changes in version 1.1.5
 - Keep full filename (before `basename` was used) in `AbstractTopDownSet`
   objects [2017-12-28].
+- Add `plot,TopDownSet-method` [2017-12-29].
 
 ## Changes in version 1.1.4
 - Add missing export of `combine` and documentation [2017-12-28].

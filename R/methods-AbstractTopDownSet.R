@@ -68,7 +68,9 @@ setMethod("[", c("AbstractTopDownSet", "ANY", "ANY"),
         x@rowViews@elementMetadata <- .droplevels(x@rowViews@elementMetadata)
     }
     isFasta <- grepl(.topDownFileExtRx("fasta"), x@files)
-    x@files <- x@files[.subsetFiles(x@files, unique(x@colData$File)) | isFasta]
+    x@files <- x@files[
+        .subsetFiles(basename(x@files), unique(x@colData$File)) | isFasta
+    ]
 
     ld1 <- .logdim(x)
 

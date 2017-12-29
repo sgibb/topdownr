@@ -13,6 +13,7 @@
 \alias{filterNonReplicatedFragments,TopDownSet-method}
 \alias{filterNonReplicatedFragments}
 \alias{normalize,TopDownSet-method}
+\alias{plot,TopDownSet,missing-method}
 \alias{show,TopDownSet-method}
 \alias{summary,TopDownSet-method}
 \alias{coerce,TopDownSet,MSnSet-method}
@@ -33,6 +34,8 @@
   by = object$Sample, ...)
 
 \S4method{normalize}{TopDownSet}(object, method = "TIC", ...)
+
+\S4method{plot}{TopDownSet,missing}(x, y, ...)
 
 \S4method{show}{TopDownSet}(object)
 
@@ -132,6 +135,10 @@ technical replicates.
 Applies \emph{T}otal \emph{I}on \emph{C}urrent normalisation to a
 \linkS4class{TopDownSet} object.
 The normalisation ist done per scans/conditions (column-wise normalisation).
+
+\item \code{plot}: Plotting.
+
+Plots an \linkS4class{TopDownSet} object.
 
 \item \code{summary}: Summary statistics.
 
