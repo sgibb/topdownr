@@ -251,12 +251,46 @@ setMethod("normalize", "TopDownSet",
 
 #' @describeIn TopDownSet Plotting.
 #'
-#' Plots an [TopDownSet-class] object.
+#' Plots an [TopDownSet-class] object. The function returns a `list`
+#' of `ggplot` objects (one item per condtion).
+#' Use `pdf` or another non-interactive device to plot the list of `ggplot`
+#' objects (see example section).
 #'
 ## @param x `TopDownSet`
+#' @param y `missing`, not used.
+#' @param verbose `logical`, verbose output?
+#' @examples
+#' \dontrun{
+#' # plot a single condition
+#' # pseudo-code (replace topdownset with your object)
+#' plot(topdownset[,1])
+#'
+#' # plot the whole object
+#' pdf("topdown-spectra.pdf", paper="a4r", width=12)
+#' # pseudo-code (replace topdownset with your object)
+#' plot(topdownset)
+#' dev.off()
+#' }
 setMethod("plot", signature(x="TopDownSet", y="missing"),
-          function(x, y, ...) {
-    .plot(x)
+          function(x, y, ..., verbose=interactive()) {
+
+    if (verbose) {
+        pb <- txtProgressBar(0L, ncol(x), style=3L)
+    }
+
+    l <- vector(mode="list", length=ncol(x))
+    for (i in seq(along=l)) {
+        l[[i]] <- .plot(x[, i])
+
+        if (verbose) {
+            setTxtProgressBar(pb, i)
+        }
+    }
+
+    if (verbose) {
+        close(pb)
+    }
+    l
 })
 
 #' @rdname TopDownSet-class

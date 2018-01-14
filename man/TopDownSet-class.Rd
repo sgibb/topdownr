@@ -35,7 +35,7 @@
 
 \S4method{normalize}{TopDownSet}(object, method = "TIC", ...)
 
-\S4method{plot}{TopDownSet,missing}(x, y, ...)
+\S4method{plot}{TopDownSet,missing}(x, y, ..., verbose = interactive())
 
 \S4method{show}{TopDownSet}(object)
 
@@ -71,6 +71,10 @@ normalisation method, currently just \code{"TIC"}
 for \emph{T}otal \emph{I}on \emph{C}urrent
 normalisation of the scans/conditions (column-wise normalisation)
 is supported.}
+
+\item{y}{\code{missing}, not used.}
+
+\item{verbose}{\code{logical}, verbose output?}
 
 \item{what}{\code{character},
 specifies whether \code{"conditions"} (columns; default)
@@ -138,7 +142,10 @@ The normalisation ist done per scans/conditions (column-wise normalisation).
 
 \item \code{plot}: Plotting.
 
-Plots an \linkS4class{TopDownSet} object.
+Plots an \linkS4class{TopDownSet} object. The function returns a \code{list}
+of \code{ggplot} objects (one item per condtion).
+Use \code{pdf} or another non-interactive device to plot the list of \code{ggplot}
+objects (see example section).
 
 \item \code{summary}: Summary statistics.
 
@@ -242,6 +249,17 @@ as(tds, "NCBSet")
 
 if (require("MSnbase")) {
     as(tds, "MSnSet")
+}
+\dontrun{
+# plot a single condition
+# pseudo-code (replace topdownset with your object)
+plot(topdownset[,1])
+
+# plot the whole object
+pdf("topdown-spectra.pdf", paper="a4r", width=12)
+# pseudo-code (replace topdownset with your object)
+plot(topdownset)
+dev.off()
 }
 }
 \seealso{

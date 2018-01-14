@@ -33,6 +33,7 @@
 #' facet_grid geom_hline geom_raster geom_segment geom_text geom_vline ggplot
 #' ggtitle labs scale_alpha scale_color_manual scale_fill_manual
 #' scale_x_discrete scale_y_continuous theme theme_classic
+#' @importFrom grDevices pdf dev.off
 #' @importFrom mzR openMSfile close header peaks runInfo
 #' @importFrom MSnbase calculateFragments defaultNeutralLoss get.amino.acids
 #' @importClassesFrom MSnbase MSnSet

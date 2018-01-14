@@ -44,7 +44,7 @@ createTngFusionMethFiles <- function(template,
     }
 
     if (verbose) {
-        pb <- txtProgressBar(0L, length(xml))
+        pb <- txtProgressBar(0L, length(xml), style=3L)
     }
 
     for (i in seq(along=xml)) {

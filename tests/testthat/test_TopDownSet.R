@@ -167,8 +167,8 @@ test_that("condition2data.frame", {
         neutralLoss=NULL,
         tolerance=25e-6
     ))
-    s <- topdownr::.readSpectrum(tds@files[grep("mzML.gz", tds@files)],
-                                 tds$SpectrumIndex[3])
+    s <- topdownr:::.readSpectrum(tds@files[grep("mzML.gz", tds@files)],
+                                  tds$SpectrumIndex[3])
     d <- data.frame(
         mz=s[,1], intensity=s[,2], fragment="",
         type=factor(
@@ -184,8 +184,8 @@ test_that("condition2data.frame", {
     d$type[i] <- paste0(c("C", "C", "C", "C", "C", "C", "N", "N", "C", "C",
         "C", "C", "C", "C", "C", "C", "N"), "-terminal")
     expect_equal(topdownr:::.condition2data.frame(tds[, 3]), d)
-    s <- topdownr::.readSpectrum(tds@files[grep("mzML.gz", tds@files)],
-                                 tds$SpectrumIndex[103])
+    s <- topdownr:::.readSpectrum(tds@files[grep("mzML.gz", tds@files)],
+                                  tds$SpectrumIndex[103])
     d <- data.frame(
         mz=s[,1], intensity=s[,2], fragment="",
         type=factor(
