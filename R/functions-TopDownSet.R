@@ -151,7 +151,9 @@ readTopDownFiles <- function(path, pattern=".*",
     header <- .mergeSpectraAndHeaderInformation(mzmlHeader, scanHeadsman)
 
     if (dropNonInformativeColumns) {
-        header <- .dropNonInformativeColumns(header, keep=c("Activation", "Mz"))
+        header <- .dropNonInformativeColumns(
+            header, keep=c("File", "Scan", "SpectrumIndex", "Activation", "Mz")
+        )
     }
 
     header$Charge <- round(fragmentViews@metadata$mass / header$Mz)
