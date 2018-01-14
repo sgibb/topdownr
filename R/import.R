@@ -183,12 +183,11 @@
 
     hd <- header(fh)
     i <- which(hd$msLevel == 2L & hd$acquisitionNum %in% scans)
-    cn <- colnames(hd)
-    hd <- hd[i, !grepl("injectionTime", cn, fixed=TRUE), drop=FALSE]
-    colnames(hd)[grepl("acquisitionNum", cn, fixed=TRUE)] <- "Scan"
-    colnames(hd)[grepl("seqNum", cn, fixed=TRUE)] <- "SpectrumIndex"
+    hd <- hd[i, !grepl("injectionTime", colnames(hd), fixed=TRUE), drop=FALSE]
+    colnames(hd)[grepl("acquisitionNum", colnames(hd), fixed=TRUE)] <- "Scan"
+    colnames(hd)[grepl("seqNum", colnames(hd), fixed=TRUE)] <- "SpectrumIndex"
     hd$File <- gsub(.topDownFileExtRx("mzml"), "", basename(file))
-    colnames(hd) <- .camelCase(cn)
+    colnames(hd) <- .camelCase(colnames(hd))
 
     nr <- nrow(hd)
     m <- Matrix(0L, nrow=length(fmass), ncol=nr, sparse=TRUE)
