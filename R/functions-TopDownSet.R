@@ -177,6 +177,55 @@ readTopDownFiles <- function(path, pattern=".*",
     updateMedianInjectionTime(tds)
 }
 
+#' Turn condition into a data.frame
+#'
+#' @param object `TopDownSet`
+#' @return `data.frame`
+#' @noRd
+.condition2data.frame <- function(object) {
+    .isTopDownSet(object)
+
+    if (ncol(object) != 1L) {
+        stop("Converting more than one condition is currently not implemented.")
+    }
+
+    s <- .readSpectrum(
+        object@files[grep(
+            paste0(object$File[1L], .topDownFileExtRx("mzml")), object@files
+        )],
+        object$SpectrumIndex[1L]
+    )
+    nr <- nrow(s)
+    fragment <- character(nr)
+    type <- rep.int("None", nr)
+
+    k <- .matchFragments(
+        s[, 1L],
+        elementMetadata(object@rowViews)$mass,
+        tolerance=object@tolerance
+    )
+
+    notNA <- !is.na(k)
+    if (sum(notNA)) {
+        fragment[notNA] <- names(object@rowViews)[k[notNA]]
+        type[notNA] <- ifelse(
+            fragmentType(object)[k[notNA]] %in% c("a", "b", "c"),
+            "N-terminal", "C-terminal"
+        )
+    }
+    data.frame(
+        mz=s[, 1L],
+        intensity=s[, 2L],
+        fragment=fragment,
+        type=factor(
+            type,
+            levels=c("None", "N-terminal", "C-terminal", "Bidirectional"),
+            ordered=TRUE
+        ),
+        stringsAsFactors=FALSE
+    )
+}
+
 #' Test for TopDownSet class
 #'
 #' @param object object to test
@@ -224,50 +273,20 @@ readTopDownFiles <- function(path, pattern=".*",
 .plot <- function(x) {
     .isTopDownSet(x)
 
-    if (ncol(x) != 1L) {
-        stop("Plotting more than one condition is currently not implemented.")
-    }
-
-    f <- x@files[grep(paste0(x$File[1L], .topDownFileExtRx("mzml")), x@files)]
-    i <- x$Scan[1L]
-    s <- setNames(as.data.frame(.readSpectrum(f, i)), c("mz", "intensity"))
-    s$fragment <- ""
-    s$type <- "None"
-
-    k <- .matchFragments(
-        s[, 1L],
-        elementMetadata(x@rowViews)$mass,
-        tolerance=x@tolerance
-    )
-
-    notNA <- !is.na(k)
-    if (sum(notNA)) {
-        s$fragment[notNA] <- names(x@rowViews)[k[notNA]]
-        s$type[notNA] <- ifelse(
-            fragmentType(x)[k[notNA]] %in% c("a", "b", "c"),
-            "N-terminal", "C-terminal"
-        )
-    }
-    s$type <- factor(
-        s$type,
-        levels=c("None", "N-terminal", "C-terminal", "Bidirectional"),
-        ordered=TRUE
-    )
-
-    gg <- ggplot(data=s, aes(x=mz, y=intensity, fragment=fragment, color=type)) +
-        geom_segment(aes(xend=mz, yend=0L)) +
-        geom_text(aes(label=fragment), vjust=0, nudge_y=max(s$intensity) / 100L) +
-        scale_color_manual(
-            name="Observed Fragments",
-            labels=c("none", "N-terminal", "C-terminal", "Bidirectional"),
-            values=c("#000000", "#1b9e77", "#d95f02", "#7570b3"),
-            guide=FALSE
-        ) +
-        theme_classic() +
-        theme(
-            plot.title=element_text(hjust=0.5, face="bold"),
-            legend.position="none",
-        ) +
-        labs(title=colnames(x)[1L], x="m/z", y="intensity")
-    gg
+    d <- .condition2data.frame(x)
+    ggplot(data=d, aes(x=mz, y=intensity, fragment=fragment, color=type)) +
+    geom_segment(aes(xend=mz, yend=0L)) +
+    geom_text(aes(label=fragment), vjust=0, nudge_y=max(d$intensity) / 100L) +
+    scale_color_manual(
+        name="Observed Fragments",
+        labels=c("none", "N-terminal", "C-terminal", "Bidirectional"),
+        values=c("#000000", "#1b9e77", "#d95f02", "#7570b3"),
+        guide=FALSE
+    ) +
+    theme_classic() +
+    theme(
+        plot.title=element_text(hjust=0.5, face="bold"),
+        legend.position="none",
+    ) +
+    labs(title=colnames(x)[1L], x="m/z", y="intensity")
 }

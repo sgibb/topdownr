@@ -155,6 +155,52 @@ test_that("conditionNames", {
                        rep(1:2, c(3, 2)), sep="_"))
 })
 
+test_that("condition2data.frame", {
+    expect_error(topdownr:::.condition2data.frame(1:10),
+                 "has to be an 'TopDownSet' object")
+    expect_error(topdownr:::.condition2data.frame(tds),
+                 "more than one condition")
+    skip_if_not_installed("topdownrdata", "0.2")
+    suppressWarnings(tds <- readTopDownFiles(
+        topdownrdata::topDownDataPath("myoglobin"),
+        pattern=".*fasta.gz$|1211_.*1e6_1",
+        neutralLoss=NULL,
+        tolerance=25e-6
+    ))
+    s <- topdownr::.readSpectrum(tds@files[grep("mzML.gz", tds@files)],
+                                 tds$SpectrumIndex[3])
+    d <- data.frame(
+        mz=s[,1], intensity=s[,2], fragment="",
+        type=factor(
+            "None",
+            levels=c("None", "N-terminal", "C-terminal", "Bidirectional"),
+            ordered=TRUE
+        ),
+        stringsAsFactors=FALSE
+    )
+    i <- c(29, 34, 42, 45, 60, 76, 77, 78, 84, 85, 95, 97, 98, 99, 100, 114, 117)
+    d$fragment[i] <- c("y48", "y51", "y58", "x60", "y75", "z90", "b89", "c89",
+        "y94", "x94", "y101", "y105", "z106", "y106", "y112", "y152", "c152")
+    d$type[i] <- paste0(c("C", "C", "C", "C", "C", "C", "N", "N", "C", "C",
+        "C", "C", "C", "C", "C", "C", "N"), "-terminal")
+    expect_equal(topdownr:::.condition2data.frame(tds[, 3]), d)
+    s <- topdownr::.readSpectrum(tds@files[grep("mzML.gz", tds@files)],
+                                 tds$SpectrumIndex[103])
+    d <- data.frame(
+        mz=s[,1], intensity=s[,2], fragment="",
+        type=factor(
+            "None",
+            levels=c("None", "N-terminal", "C-terminal", "Bidirectional"),
+            ordered=TRUE
+        ),
+        stringsAsFactors=FALSE
+    )
+    i <- c(23, 26)
+    d$fragment[i] <- c("z152", "b152")
+    d$type[i] <- paste0(c("C", "N"), "-terminal")
+    expect_equal(topdownr:::.condition2data.frame(tds[, 103]), d)
+})
+
 test_that("dim", {
     expect_equal(dim(tds), c(3, 5))
 })
