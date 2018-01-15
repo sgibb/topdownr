@@ -111,12 +111,13 @@ and/or bidirectional fragments (encoded as <code>3</code>).</p>
     
 
     <pre class="usage"><span class='co'># S4 method for NCBSet</span>
-<span class='fu'>bestConditions</span>(<span class='no'>object</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fu'>ncol</span>(<span class='no'>object</span>), <span class='kw'>minN</span> <span class='kw'>=</span> <span class='fl'>0L</span>, <span class='no'>...</span>)
+<span class='fu'>bestConditions</span>(<span class='no'>object</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fu'>ncol</span>(<span class='no'>object</span>), <span class='kw'>minN</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
+  <span class='kw'>maximise</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"fragments"</span>, <span class='st'>"bonds"</span>), <span class='no'>...</span>)
 
 <span class='co'># S4 method for NCBSet</span>
 <span class='fu'>fragmentationMap</span>(<span class='no'>object</span>, <span class='kw'>nCombinations</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>cumCoverage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'>colnames</span>(<span class='no'>object</span>), <span class='kw'>alphaIntensity</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>)
+  <span class='kw'>cumCoverage</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>maximise</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"fragments"</span>, <span class='st'>"bonds"</span>),
+  <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'>colnames</span>(<span class='no'>object</span>), <span class='kw'>alphaIntensity</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='co'># S4 method for NCBSet</span>
 <span class='fu'>show</span>(<span class='no'>object</span>)
@@ -139,6 +140,11 @@ and/or bidirectional fragments (encoded as <code>3</code>).</p>
       <th>minN</th>
       <td><p><code>integer</code>,
 stop if there are less than <code>minN</code> additional fragments</p></td>
+    </tr>
+    <tr>
+      <th>maximise</th>
+      <td><p><code>character</code>, optimisation targeting for the highest number of
+<code>"fragments"</code> (default) or <code>"bonds"</code>.</p></td>
     </tr>
     <tr>
       <th>nCombinations</th>
@@ -182,9 +188,9 @@ newly added fragments third column: number of newly covered bonds.</p></td>
 
     <ul>
 <li><p><code>bestConditions</code>: Best combination of conditions.</p>
-<p>Finds the best combination of conditions for highest coverage of bonds. If
-there are two (or more conditions) that would add the same number of
-fragments the one with the highest assigned intensity is used. Use
+<p>Finds the best combination of conditions for highest coverage of fragments or
+bonds. If there are two (or more conditions) that would add the same number
+of fragments/bonds the one with the highest assigned intensity is used. Use
 <code>n</code> to limit the number of iterations and combinations that should be
 returned.
 If <code>minN</code> is set at least <code>minN</code> fragments have to be added to the
@@ -263,8 +269,8 @@ for technical details about the coverage storage.</p></li>
 #&gt; [2017-12-28 16:44:52] 14901 fragments [1949;351] matched (tolerance: 25 ppm).
 #&gt; [2017-12-28 16:44:52] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
 #&gt; [2017-12-28 16:44:52] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2017-12-28 16:52:28] Aggregated 14901 fragments [1949;351] to 11259 fragments [1949;222].
-#&gt; [2017-12-28 16:52:28] Coerced TopDownSet into an NCBSet object; 8375 fragments [152;222]. </div><div class='input'>
+#&gt; [2018-01-15 19:55:04] Aggregated 14901 fragments [1949;351] to 11259 fragments [1949;222].
+#&gt; [2018-01-15 19:55:04] Coerced TopDownSet into an NCBSet object; 8375 fragments [152;222]. </div><div class='input'>
 <span class='fu'>head</span>(<span class='fu'>summary</span>(<span class='no'>ncb</span>))</div><div class='output co'>#&gt;                                Fragments Total Min Q1 Median      Mean Q3 Max
 #&gt; C1.0e+05_1.0e+06_02.50_07_00_1        51   101   1  2      2 0.6644737  2   3
 #&gt; C1.0e+05_1.0e+06_02.50_14_00_1        48    93   1  2      2 0.6118421  2   2
@@ -659,9 +665,9 @@ for technical details about the coverage storage.</p></li>
 #&gt; [2017-12-28 16:44:52] 14901 fragments [1949;351] matched (tolerance: 25 ppm).
 #&gt; [2017-12-28 16:44:52] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
 #&gt; [2017-12-28 16:44:52] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2017-12-28 16:52:28] Aggregated 14901 fragments [1949;351] to 11259 fragments [1949;222].
-#&gt; [2017-12-28 16:52:28] Coerced TopDownSet into an NCBSet object; 8375 fragments [152;222].
-#&gt; [2017-12-28 16:52:28] Subsetted 8375 fragments [152;222] to 4327 fragments [100;222]. </div><div class='input'>
+#&gt; [2018-01-15 19:55:04] Aggregated 14901 fragments [1949;351] to 11259 fragments [1949;222].
+#&gt; [2018-01-15 19:55:04] Coerced TopDownSet into an NCBSet object; 8375 fragments [152;222].
+#&gt; [2018-01-15 19:55:05] Subsetted 8375 fragments [152;222] to 4327 fragments [100;222]. </div><div class='input'>
 <span class='co'># Just bond 152</span>
 <span class='no'>ncb</span>[<span class='st'>"bond152"</span>]</div><div class='output co'>#&gt; NCBSet object (0.22 Mb)
 #&gt; - - - Protein data - - -
@@ -680,9 +686,9 @@ for technical details about the coverage storage.</p></li>
 #&gt; [2017-12-28 16:44:52] 14901 fragments [1949;351] matched (tolerance: 25 ppm).
 #&gt; [2017-12-28 16:44:52] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
 #&gt; [2017-12-28 16:44:52] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2017-12-28 16:52:28] Aggregated 14901 fragments [1949;351] to 11259 fragments [1949;222].
-#&gt; [2017-12-28 16:52:28] Coerced TopDownSet into an NCBSet object; 8375 fragments [152;222].
-#&gt; [2017-12-28 16:52:28] Subsetted 8375 fragments [152;222] to 100 fragments [1;222]. </div><div class='input'>
+#&gt; [2018-01-15 19:55:04] Aggregated 14901 fragments [1949;351] to 11259 fragments [1949;222].
+#&gt; [2018-01-15 19:55:04] Coerced TopDownSet into an NCBSet object; 8375 fragments [152;222].
+#&gt; [2018-01-15 19:55:05] Subsetted 8375 fragments [152;222] to 100 fragments [1;222]. </div><div class='input'>
 <span class='co'># Condition 1 to 10</span>
 <span class='no'>ncb</span>[, <span class='fl'>1</span>:<span class='fl'>10</span>]</div><div class='output co'>#&gt; NCBSet object (0.08 Mb)
 #&gt; - - - Protein data - - -
@@ -701,9 +707,9 @@ for technical details about the coverage storage.</p></li>
 #&gt; [2017-12-28 16:44:52] 14901 fragments [1949;351] matched (tolerance: 25 ppm).
 #&gt; [2017-12-28 16:44:52] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
 #&gt; [2017-12-28 16:44:52] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2017-12-28 16:52:28] Aggregated 14901 fragments [1949;351] to 11259 fragments [1949;222].
-#&gt; [2017-12-28 16:52:28] Coerced TopDownSet into an NCBSet object; 8375 fragments [152;222].
-#&gt; [2017-12-28 16:52:28] Subsetted 8375 fragments [152;222] to 377 fragments [152;10]. </div><div class='input'>
+#&gt; [2018-01-15 19:55:04] Aggregated 14901 fragments [1949;351] to 11259 fragments [1949;222].
+#&gt; [2018-01-15 19:55:04] Coerced TopDownSet into an NCBSet object; 8375 fragments [152;222].
+#&gt; [2018-01-15 19:55:05] Subsetted 8375 fragments [152;222] to 377 fragments [152;10]. </div><div class='input'>
 <span class='co'># Plot fragmentation map</span>
 <span class='fu'>fragmentationMap</span>(<span class='no'>ncb</span>)</div><div class='img'><img src='NCBSet-class-1.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
