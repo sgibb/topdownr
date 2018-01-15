@@ -190,9 +190,10 @@ readTopDownFiles <- function(path, pattern=".*",
     }
 
     s <- .readSpectrum(
-        object@files[grep(
-            paste0(object$File[1L], .topDownFileExtRx("mzml")), object@files
-        )],
+        object@files[
+            .subsetFiles(basename(object@files), object@colData$File[1L]) &
+            grepl(.topDownFileExtRx("mzml"), object@files)
+        ],
         object$SpectrumIndex[1L]
     )
     nr <- nrow(s)
