@@ -1,38 +1,3 @@
-#' find best combination of columns for highest coverage
-#'
-#' @param x `dgCMatrix`
-#' @param intensity `double` total intensity
-#' @param n `integer`, max number of combinations/iterations
-#' @param minN `integer` stop if there are less than `minN` non-zero
-#' elements added by the next column.
-#' @return `matrix`, first column: index, second column: number of fragments.
-#' @noRd
-.bestNcbCoverageCombination <- function(x, intensity=NULL,
-                                        n=ncol(x), minN=0L) {
-    stopifnot(is(x, "dgCMatrix"))
-    if (is.null(intensity)) {
-        intensity <- rep(0L, ncol(x))
-    }
-    stopifnot(ncol(x) == length(intensity))
-    m <- matrix(NA_real_, nrow=n, ncol=2L,
-                dimnames=list(NULL, c("index", "fragments")))
-
-    for (i in seq_len(n)) {
-        hc <- .highestNcbCoverage(x, intensity=intensity)
-        x <- .removeNcbCombinations(x, hc[1L])
-        m[i, ] <- hc
-
-        if (!nnzero(x) && hc[2L] >= minN) {
-            m <- m[seq_len(i), , drop=FALSE]
-            break
-        } else if (hc[2L] < minN) {
-            m <- m[seq_len(i - 1L), , drop=FALSE]
-            break
-        }
-    }
-    m
-}
-
 #' Column index
 #'
 #' @param x `dgCMatrix`
@@ -177,37 +142,6 @@
     drop0(x, tol=0L, is.Csparse=TRUE)
 }
 
-#' highest NCB coverage
-#'
-#' Find column with highest coverage of NCB fragments, B fragments count twice.
-#' If multiple max. are found choose the one with the highest total intensity.
-#'
-#' @param x `dgCMatrix`
-#' @param intensity `double` total intensity
-#' @param maximise `character`, maximise fragment/bond coverage
-#' @return `numeric`, first element: index of column with highest coverage,
-#' second element: number fragments, third element: number of bonds
-#' @noRd
-.highestNcbCoverage <- function(x, intensity=rep(0L, ncol(x)),
-                                maximise=c("fragments", "bonds")) {
-    maximise <- match.arg(maximise)
-    nf <- .countFragments(x)
-    nb <- .colCounts(x)
-
-    ## we don't use `which.max` because if there are multiple matches we want to
-    ## select the one with the highest intensity and not the first one.
-    if (maximise == "fragments") {
-        i <- which(nf == max(nf))
-    } else {
-        i <- which(nb == max(nb))
-    }
-
-    if (length(i) > 1L) {
-        i <- i[which.max(intensity[i])]
-    }
-    c(index=i, fragments=nf[i], bonds=nb[i])
-}
-
 #' normalise (col-wise scale)
 #'
 #' @param x `dgCMatrix`
@@ -232,31 +166,6 @@
     )
     x@x <- x@x / scale[.row(x)]
     x
-}
-
-#' Remove NCB combinations
-#'
-#' @param x `dgCMatrix`
-#' @param i `integer`, column with highest coverage
-#' @return `dgCMatrix`, coverage reduced
-#' @noRd
-.removeNcbCombinations <- function(x, i) {
-    stopifnot(is(x, "dgCMatrix"))
-    stopifnot(!any(x@x > 3L))
-    r <- .row(x[, i, drop=FALSE])
-    hc <- x[r, i]
-    r <- r - 1L
-    ## if 3 (bidirectional) remove all
-    x@x[x@i %in% r[hc == 3L]] <- 0L
-    ## if 1 (N) keep 2 (C) and reduce 3 (bidirectional) to 2 (C)
-    isN <- x@i %in% r[hc == 1L]
-    isN <- isN & x@x != 2L
-    x@x[isN] <- x@x[isN] - 1L
-    ## if 2 (C) keep 1 (N) and reduce 3 (bidirectional) to 1 (N)
-    isC <- x@i %in% r[hc == 2L]
-    isC <- isC & x@x != 1L
-    x@x[isC] <- x@x[isC] - 2L
-    drop0(x)
 }
 
 #' Row index

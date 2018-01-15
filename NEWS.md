@@ -4,6 +4,9 @@
 - Keep full filename (before `basename` was used) in `AbstractTopDownSet`
   objects [2017-12-28].
 - Add `plot,TopDownSet-method` [2017-12-29].
+- `bestConditions,NCBSet-method` gains a new argument `maximise` that allows to
+  optimise for number of fragments or bonds covered (default: `"fragments"`);
+  see [#52](https://github.com/sgibb/topdownr/issues/52) [2018-01-15].
 
 ## Changes in version 1.1.4
 - Add missing export of `combine` and documentation [2017-12-28].

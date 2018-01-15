@@ -1,8 +1,8 @@
 #' @describeIn NCBSet Best combination of conditions.
 #'
-#' Finds the best combination of conditions for highest coverage of bonds. If
-#' there are two (or more conditions) that would add the same number of
-#' fragments the one with the highest assigned intensity is used. Use
+#' Finds the best combination of conditions for highest coverage of fragments or
+#' bonds. If there are two (or more conditions) that would add the same number
+#' of fragments/bonds the one with the highest assigned intensity is used. Use
 #' `n` to limit the number of iterations and combinations that should be
 #' returned.
 #' If `minN` is set at least `minN` fragments have to be added to the
@@ -14,6 +14,8 @@
 #' @param n `integer`, max number of combinations/iterations.
 #' @param minN `integer`,
 #' stop if there are less than `minN` additional fragments
+#' @param maximise `character`, optimisation targeting for the highest number of
+#' `"fragments"` (default) or `"bonds"`.
 #' @param \ldots arguments passed to internal/other methods.
 #' added.
 ## @return `matrix`, first column: index of condition, second column: number of
@@ -21,12 +23,14 @@
 #' @aliases bestConditions bestConditions,NCBSet-method
 #' @export
 setMethod("bestConditions", "NCBSet",
-          function(object, n=ncol(object), minN=0L, ...) {
+          function(object, n=ncol(object), minN=0L,
+                   maximise=c("fragments", "bonds"), ...) {
     m <- .bestNcbCoverageCombination(
         object@assay,
         intensity=object@colData$AssignedIntensity,
         n=n,
-        minN=minN
+        minN=minN,
+        maximise=maximise
     )
     rownames(m) <- colnames(object)[m[, "index"]]
     m
@@ -45,6 +49,8 @@ setMethod("bestConditions", "NCBSet",
 #' number of combinations to show (0 to avoid plotting them at all).
 #' @param cumCoverage `logical`,
 #' if `TRUE` (default) cumulative coverage of combinations is shown.
+## @param maximise `character`, optimisation targeting for the highest number of
+## `"fragments"` (default) or `"bonds"`.
 #' @param labels `character`, overwrite x-axis labels.
 #' @param alphaIntensity `logical`, if `TRUE` (default) the alpha level of the
 #' color is used to show the `colData(object)$AssignedIntensity`. If `FALSE` the
@@ -53,7 +59,8 @@ setMethod("bestConditions", "NCBSet",
 #' @export
 setMethod("fragmentationMap", "NCBSet",
           function(object, nCombinations=10, cumCoverage=TRUE,
-                   labels=colnames(object), alphaIntensity=TRUE, ...) {
+                   maximise=c("fragments", "bonds"), labels=colnames(object),
+                   alphaIntensity=TRUE, ...) {
 
     if (length(labels) != ncol(object)) {
         stop("The number of elements in 'labels' has to be the same as ",
@@ -64,7 +71,8 @@ setMethod("fragmentationMap", "NCBSet",
     d$AssignedIntensity <- object$AssignedIntensity[d$col]
 
     if (nCombinations) {
-        i <- bestConditions(object, nCombinations)[, "index"]
+        i <- bestConditions(object, n=nCombinations,
+                            maximise=maximise)[, "index"]
         combinations <- object[, i]
         labels <- c(labels, labels[i])
 

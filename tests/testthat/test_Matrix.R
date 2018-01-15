@@ -2,22 +2,6 @@ context("Matrix")
 
 m <- sparseMatrix(i=rep(1:4, each=5), j=rep(1:10, 2), x=1:20)
 
-test_that(".bestNcbCoverageCombination", {
-    m1 <- sparseMatrix(i=c(1, 2, 2, 3, 5, 5, 6, 9, 8, 9, 8),
-                       j=c(1, 5, 3, 4, 4, 5, 4, 4, 5, 5, 1),
-                       x=c(1, 1, 3, 1, 1, 2, 2, 2, 3, 1, 2))
-    expect_equal(topdownr:::.bestNcbCoverageCombination(m1),
-                 cbind(index=c(5:4, 1, 3), fragments=c(5:4, 1, 1)))
-    expect_equal(topdownr:::.bestNcbCoverageCombination(m1, intensity=1:5),
-                 cbind(index=c(5:3, 1), fragments=c(5:4, 1, 1)))
-    expect_equal(topdownr:::.bestNcbCoverageCombination(m1, minN=3),
-                 cbind(index=c(5:4), fragments=c(5, 4)))
-    expect_equal(topdownr:::.bestNcbCoverageCombination(m1, n=3),
-                 cbind(index=c(5:4, 1), fragments=c(5:4, 1)))
-    expect_equal(topdownr:::.bestNcbCoverageCombination(m1, minN=5),
-                 cbind(index=5, fragments=5))
-})
-
 test_that(".col", {
     expect_error(topdownr:::.col(matrix(1:10, ncol=2)))
     expect_equal(topdownr:::.col(m), rep(1:10, each=2))
@@ -126,27 +110,6 @@ test_that(".dropNA", {
     expect_equal(topdownr:::.dropNA(n), r)
 })
 
-test_that(".highestNcbCoverage", {
-    m1 <- sparseMatrix(i=c(1:10, 2), j=c(1, 5, 3, 4, 4, 5, 4, 5, 5, 5, 1),
-                       x=c(1, 1, 3, 1, 1, 2, 2, 2, 3, 1, 1))
-    expect_error(topdownr:::.highestNcbCoverage(as.matrix(1:10)))
-    expect_error(topdownr:::.highestNcbCoverage(m))
-    expect_equal(topdownr:::.highestNcbCoverage(m1, intensity=1:5),
-                 c(index=5, fragments=6, bonds=5))
-    expect_equal(topdownr:::.highestNcbCoverage(t(m1)),
-                 c(index=2, fragments=2, bonds=2))
-    expect_equal(topdownr:::.highestNcbCoverage(t(m1)),
-                 c(index=2, fragments=2, bonds=2))
-    expect_equal(topdownr:::.highestNcbCoverage(m1[,1:3], intensity=1:3),
-                 c(index=3, fragments=2, bonds=1))
-    expect_equal(topdownr:::.highestNcbCoverage(m1[,1:3], intensity=1:3,
-                                                maximise="fragments"),
-                 c(index=3, fragments=2, bonds=1))
-    expect_equal(topdownr:::.highestNcbCoverage(m1[,1:3], intensity=1:3,
-                                                maximise="bonds"),
-                 c(index=1, fragments=2, bonds=2))
-})
-
 test_that(".normaliseCols", {
     expect_error(topdownr:::.normaliseCols(matrix(1:10, nrow=2)))
     expect_error(topdownr:::.normaliseCols(m, "A"))
@@ -169,22 +132,6 @@ test_that(".normaliseRows", {
     expect_equal(topdownr:::.normaliseRows(m, 1:4),
                  as((t(scale(t(m), center=FALSE, scale=1:4))),
                     "dgCMatrix"))
-})
-
-test_that(".removeNcbCombinations", {
-    m1 <- sparseMatrix(i=c(1, 2, 2, 3, 5, 5, 6, 9, 8, 9, 8),
-                       j=c(1, 5, 3, 4, 4, 5, 4, 4, 5, 5, 1),
-                       x=c(1, 1, 3, 1, 1, 2, 2, 2, 3, 1, 2))
-    r1 <- sparseMatrix(i=c(1, 2, 3, 5, 6, 9),
-                       j=c(1, 3, 4, 4, 4, 4),
-                       x=c(1, 2, 1, 1, 2, 2), dims=c(9, 5))
-    r2 <- sparseMatrix(i=c(1, 2, 2, 5, 8, 9, 8),
-                       j=c(1, 5, 3, 5, 5, 5, 1),
-                       x=c(1, 1, 3, 2, 3, 1, 2))
-    expect_error(topdownr:::.removeNcbCombinations(matrix(1:10, ncol=2), 2))
-    expect_error(topdownr:::.removeNcbCombinations(m, 2))
-    expect_equal(topdownr:::.removeNcbCombinations(m1, 5), r1)
-    expect_equal(topdownr:::.removeNcbCombinations(m1, 4), r2)
 })
 
 test_that(".row", {

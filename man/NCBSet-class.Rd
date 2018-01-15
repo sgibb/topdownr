@@ -11,11 +11,12 @@
 \alias{summary,NCBSet-method}
 \title{The NCBSet class}
 \usage{
-\S4method{bestConditions}{NCBSet}(object, n = ncol(object), minN = 0L, ...)
+\S4method{bestConditions}{NCBSet}(object, n = ncol(object), minN = 0L,
+  maximise = c("fragments", "bonds"), ...)
 
 \S4method{fragmentationMap}{NCBSet}(object, nCombinations = 10,
-  cumCoverage = TRUE, labels = colnames(object), alphaIntensity = TRUE,
-  ...)
+  cumCoverage = TRUE, maximise = c("fragments", "bonds"),
+  labels = colnames(object), alphaIntensity = TRUE, ...)
 
 \S4method{show}{NCBSet}(object)
 
@@ -28,6 +29,9 @@
 
 \item{minN}{\code{integer},
 stop if there are less than \code{minN} additional fragments}
+
+\item{maximise}{\code{character}, optimisation targeting for the highest number of
+\code{"fragments"} (default) or \code{"bonds"}.}
 
 \item{nCombinations}{\code{integer},
 number of combinations to show (0 to avoid plotting them at all).}
@@ -64,9 +68,9 @@ and/or bidirectional fragments (encoded as \code{3}).
 \itemize{
 \item \code{bestConditions}: Best combination of conditions.
 
-Finds the best combination of conditions for highest coverage of bonds. If
-there are two (or more conditions) that would add the same number of
-fragments the one with the highest assigned intensity is used. Use
+Finds the best combination of conditions for highest coverage of fragments or
+bonds. If there are two (or more conditions) that would add the same number
+of fragments/bonds the one with the highest assigned intensity is used. Use
 \code{n} to limit the number of iterations and combinations that should be
 returned.
 If \code{minN} is set at least \code{minN} fragments have to be added to the
