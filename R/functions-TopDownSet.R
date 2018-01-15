@@ -274,9 +274,16 @@ readTopDownFiles <- function(path, pattern=".*",
     .isTopDownSet(x)
 
     d <- .condition2data.frame(x)
-    ggplot(data=d, aes(x=mz, y=intensity, fragment=fragment, color=type)) +
-    geom_segment(aes(xend=mz, yend=0L)) +
-    geom_text(aes(label=fragment), vjust=0, nudge_y=max(d$intensity) / 100L) +
+    ggplot(
+        data=d,
+        aes_string(x="mz", y="intensity", fragment="fragment", color="type")
+    ) +
+    geom_segment(aes_string(xend="mz", yend=0L)) +
+    geom_text(
+        aes_string(label="fragment"),
+        vjust=0L,
+        nudge_y=max(d$intensity) / 100L
+    ) +
     scale_color_manual(
         name="Observed Fragments",
         labels=c("none", "N-terminal", "C-terminal", "Bidirectional"),
