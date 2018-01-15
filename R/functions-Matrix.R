@@ -184,18 +184,28 @@
 #'
 #' @param x `dgCMatrix`
 #' @param intensity `double` total intensity
+#' @param maximise `character`, maximise fragment/bond coverage
 #' @return `numeric`, first element: index of column with highest coverage,
 #' second element: number fragments, third element: number of bonds
 #' @noRd
-.highestNcbCoverage <- function(x, intensity=rep(0L, ncol(x))) {
+.highestNcbCoverage <- function(x, intensity=rep(0L, ncol(x)),
+                                maximise=c("fragments", "bonds")) {
+    maximise <- match.arg(maximise)
     nf <- .countFragments(x)
-    mf <- max(nf)
-    i <- which(nf == mf)
+    nb <- .colCounts(x)
+
+    ## we don't use `which.max` because if there are multiple matches we want to
+    ## select the one with the highest intensity and not the first one.
+    if (maximise == "fragments") {
+        i <- which(nf == max(nf))
+    } else {
+        i <- which(nb == max(nb))
+    }
 
     if (length(i) > 1L) {
         i <- i[which.max(intensity[i])]
     }
-    c(index=i, fragments=nf[i])
+    c(index=i, fragments=nf[i], bonds=nb[i])
 }
 
 #' normalise (col-wise scale)

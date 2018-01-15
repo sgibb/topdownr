@@ -132,9 +132,19 @@ test_that(".highestNcbCoverage", {
     expect_error(topdownr:::.highestNcbCoverage(as.matrix(1:10)))
     expect_error(topdownr:::.highestNcbCoverage(m))
     expect_equal(topdownr:::.highestNcbCoverage(m1, intensity=1:5),
-                 c(index=5, fragments=6))
+                 c(index=5, fragments=6, bonds=5))
     expect_equal(topdownr:::.highestNcbCoverage(t(m1)),
-                 c(index=2, fragments=2))
+                 c(index=2, fragments=2, bonds=2))
+    expect_equal(topdownr:::.highestNcbCoverage(t(m1)),
+                 c(index=2, fragments=2, bonds=2))
+    expect_equal(topdownr:::.highestNcbCoverage(m1[,1:3], intensity=1:3),
+                 c(index=3, fragments=2, bonds=1))
+    expect_equal(topdownr:::.highestNcbCoverage(m1[,1:3], intensity=1:3,
+                                                maximise="fragments"),
+                 c(index=3, fragments=2, bonds=1))
+    expect_equal(topdownr:::.highestNcbCoverage(m1[,1:3], intensity=1:3,
+                                                maximise="bonds"),
+                 c(index=1, fragments=2, bonds=2))
 })
 
 test_that(".normaliseCols", {
