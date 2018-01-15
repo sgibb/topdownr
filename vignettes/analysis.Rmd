@@ -205,6 +205,25 @@ myoglobin[, myoglobin$File == "myo_1211_ETDReagentTarget_1e+06_1"]
 myoglobin["c", myoglobin$File == "myo_1211_ETDReagentTarget_1e+06_1"]
 ```
 
+## Plotting a `TopDownSet`
+
+Each condition represents one spectrum. We could plot a single condition
+interactively or all spectra into a `pdf` file
+(or any other *R* device that supports multiple pages/plots).
+
+```{r plotting, eval=1:2}
+# plot a single condition
+plot(myoglobin[, "C0707.30_1.0e+05_1.0e+06_10.00_00_28_3"])
+# example to plot the first ten conditions into a pdf
+# (not evaluated in the vignette)
+pdf("topdown-conditions.pdf", paper="a4r", width=12)
+plot(myoglobin[, 1:10])
+dev.off()
+```
+
+`plot` returns a `list` (an item per condition) of `ggplot` objects which could
+further modified or investigated interactively by calling `plotly::ggplotly()`.
+
 # Fragmentation Data Analysis of Myoglobin
 
 We follow the following workflow:
