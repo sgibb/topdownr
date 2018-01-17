@@ -282,7 +282,9 @@ readTopDownFiles <- function(path, pattern=".*",
     geom_segment(aes_string(xend="mz", yend=0L)) +
     geom_text(
         aes_string(label="fragment"),
-        vjust=0L,
+        angle=90L,
+        hjust=0.2,
+        vjust=0.5,
         nudge_y=max(d$intensity) / 100L
     ) +
     scale_color_manual(
