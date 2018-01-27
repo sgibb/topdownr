@@ -220,7 +220,7 @@ setMethod("combine",
                     class(x), ", ", class(y), "."))
     }
     if (!identical(x@rowViews, y@rowViews)) {
-        stop("`rowViews` must be identical")
+        stop("'rowViews' must be identical")
     }
     ldx0 <- .logdim(x)
     ldy0 <- .logdim(y)

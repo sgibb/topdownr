@@ -1,5 +1,32 @@
 #' @rdname FragmentViews-class
-#' @param object FragmentViews
+#' @param object,x,y FragmentViews
+#' @aliases combine,FragmentViews-method
+#' @export
+setMethod("combine", signature(x="FragmentViews", y="FragmentViews"),
+          function(x, y) {
+    if (!identical(x@subject, y@subject)) {
+        stop("'subject' must be identical")
+    }
+    if (!identical(x@metadata$mass, y@metadata$mass)) {
+        stop("'metadata(...)$mass' must be identical")
+    }
+    if (!identical(x@metadata$modifications, y@metadata$modifications)) {
+        stop("'metadata(...)$modifications' must be identical")
+    }
+    un <- union(names(x), names(y))
+    xn <- intersect(names(x), un)
+    yn <- intersect(names(y), un)
+    x@elementMetadata <- rbind(elementMetadata(x[xn]), elementMetadata(y[yn]))
+    x@ranges <- c(x@ranges[xn], y@ranges[yn])
+    x@metadata <- modifyList(metadata(x), metadata(y))
+    x <- x[order(elementMetadata(x)$mass)]
+    if (validObject(x)) {
+        x
+    }
+})
+
+#' @rdname FragmentViews-class
+## @param object FragmentViews
 #' @aliases show,FragmentViews-method
 #' @export
 setMethod("show", "FragmentViews", function(object) {

@@ -7,6 +7,37 @@ fv <- FragmentViews("AACE", start=1, end=1:3, names=paste0("b", 1:3),
                                                   "Acetyl", "Met-loss"),
                                   mass=473.158029))
 
+test_that("combine", {
+    fve <- FragmentViews("BCE", start=1, end=1:2, names=paste0("b", 1:2),
+                         mass=as.double(1:2), type=rep("b", 2), z=rep(1, 2))
+    expect_error(combine(fv, fve), ".*subject.* must be identical")
+    fve@subject <- AAString("AACE")
+    expect_error(combine(fv, fve), ".*mass.* must be identical")
+    fve@metadata <- list(mass=3.5)
+    expect_error(combine(fv, fve), ".*mass.* must be identical")
+    fve@metadata <- list(mass=473.158029)
+    expect_error(combine(fv, fve), ".*modifications.* must be identical")
+    fve@metadata <- list(mass=473.158029, modifications="Acetyl")
+    expect_error(combine(fv, fve), ".*modifications.* must be identical")
+    fv2 <- FragmentViews("AACE", start=4:2, end=4, names=paste0("y", 1:3),
+                         mass=c(148.060431, 308.091085, 379.128195),
+                         type=rep("y", 3), z=rep(1, 3),
+                         metadata=list(modifications=c("Carbamidomethyl",
+                                                       "Acetyl", "Met-loss"),
+                         mass=473.158029))
+    fvc <- FragmentViews("AACE",
+                         start=c(1, 4, 1, 3, 1, 2),
+                         width=rep(1:3, each=2),
+                         names=paste0(c("b", "y"), rep(1:3, each=2)),
+                         mass=c(114.054951, 148.060431, 185.092061,
+                                308.091085, 345.122711, 379.128195),
+                         type=rep(c("b", "y"), 3), z=rep(1, 6),
+                         metadata=list(modifications=c("Carbamidomethyl",
+                                                       "Acetyl", "Met-loss"),
+                         mass=473.158029))
+    expect_equal(combine(fv, fv2), fvc)
+})
+
 test_that("constructor", {
     expect_error(topdownr:::.calculateFragments("AACE", modifications="FOO"))
     expect_equal(topdownr:::.calculateFragments("MAACE", type="b"), fv)

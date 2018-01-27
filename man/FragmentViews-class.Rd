@@ -5,12 +5,16 @@
 \name{FragmentViews-class}
 \alias{FragmentViews-class}
 \alias{FragmentViews}
+\alias{combine,FragmentViews,FragmentViews-method}
+\alias{combine,FragmentViews-method}
 \alias{show,FragmentViews-method}
 \alias{coerce,FragmentViews,data.frame-method}
 \title{The FragmentViews class}
 \usage{
 FragmentViews(sequence, mass, type, z = 1L, start = NULL, end = NULL,
   width = NULL, names = NULL, metadata = list())
+
+\S4method{combine}{FragmentViews,FragmentViews}(x, y)
 
 \S4method{show}{FragmentViews}(object)
 }
@@ -46,7 +50,7 @@ names of the fragments, same length as \code{start}/\code{end}/width`.}
 
 \item{metadata}{\code{list}, metadata like modifications.}
 
-\item{object}{FragmentViews}
+\item{object, x, y}{FragmentViews}
 }
 \value{
 An \linkS4class{FragmentViews} object.
