@@ -470,7 +470,7 @@ setMethod("updateConditionNames", "AbstractTopDownSet",
 #' @aliases updateMedianInjectionTime
 #' updateMedianInjectionTime,TopDownSet-method
 #' @export
-setMethod("updateMedianInjectionTime", "TopDownSet",
+setMethod("updateMedianInjectionTime", "AbstractTopDownSet",
           function(object, by=list(Mz=object$Mz, AgcTarget=object$AgcTarget)) {
     object@colData$MedianIonInjectionTimeMs <- tryCatch(
         ave(

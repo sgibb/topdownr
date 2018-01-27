@@ -2,6 +2,9 @@
 
 ## Changes in version 1.1.6
 - Rotate fragment labels (vertical orientation) in `plot` [2018-01-17].
+- Replace signature for `updateMedianInjectionTime,TopDownSet-method` to
+  `updateMedianInjectionTime,AbstractTopDownSet-method`; closes [#69](https://github.com/sgibb/topdownr/issues/69); see
+  also [#71](https://github.com/sgibb/topdownr/issues/71) [2018-01-27].
 
 ## Changes in version 1.1.5
 - Keep full filename (before `basename` was used) in `AbstractTopDownSet`
