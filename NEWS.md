@@ -6,6 +6,8 @@
   `updateMedianInjectionTime,AbstractTopDownSet-method`; closes [#69](https://github.com/sgibb/topdownr/issues/69); see
   also [#71](https://github.com/sgibb/topdownr/issues/71) [2018-01-27].
 - Fix `.matchFragments` for `length(fmass) == 0` [2018-01-27].
+- Just plot fragments that are present in current `TopDownSet` see [#70](https://github.com/sgibb/topdownr/issues/70)
+  [2018-01-27].
 
 ## Changes in version 1.1.5
 - Keep full filename (before `basename` was used) in `AbstractTopDownSet`

@@ -199,18 +199,19 @@ readTopDownFiles <- function(path, pattern=".*",
     nr <- nrow(s)
     fragment <- character(nr)
     type <- rep.int("None", nr)
+    fv <- object@rowViews[object@assay[, 1L] > 0L]
 
     k <- .matchFragments(
         s[, 1L],
-        elementMetadata(object@rowViews)$mass,
+        elementMetadata(fv)$mass,
         tolerance=object@tolerance
     )
 
     notNA <- !is.na(k)
     if (sum(notNA)) {
-        fragment[notNA] <- names(object@rowViews)[k[notNA]]
+        fragment[notNA] <- names(fv)[k[notNA]]
         type[notNA] <- ifelse(
-            fragmentType(object)[k[notNA]] %in% c("a", "b", "c"),
+            elementMetadata(fv)$type[k[notNA]] %in% c("a", "b", "c"),
             "N-terminal", "C-terminal"
         )
     }
