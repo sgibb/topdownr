@@ -141,7 +141,10 @@
 #' @noRd
 .matchFragments <- function(mz, fmass, tolerance=5e-6) {
     if (!length(mz)) {
-        integer()
+        return(integer())
+    }
+    if (!length(fmass)) {
+        return(rep.int(NA_integer_, length(mz)))
     }
     m <- MSnbase:::relaxedMatch(
         mz, fmass, nomatch=NA, tolerance=tolerance, relative=TRUE

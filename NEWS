@@ -5,6 +5,7 @@ Changes in version 1.1.6
 - Replace signature for `updateMedianInjectionTime,TopDownSet-method` to
   `updateMedianInjectionTime,AbstractTopDownSet-method`; closes #69; see
   also #71 [2018-01-27].
+- Fix `.matchFragments` for `length(fmass) == 0` [2018-01-27].
 
 Changes in version 1.1.5
 - Keep full filename (before `basename` was used) in `AbstractTopDownSet`

@@ -20,6 +20,8 @@ test_that(".addAdducts", {
 
 test_that(".matchFragments", {
     expect_equal(topdownr:::.matchFragments(mz=integer(), fmass=1:3), integer())
+    expect_equal(topdownr:::.matchFragments(mz=1:3, fmass=integer()),
+                 rep(NA_integer_, 3))
     expect_equal(topdownr:::.matchFragments(c(1, 99, 101), fmass=c(1.1, 100),
                                            tolerance=0.2),
                  as.integer(c(1, 2, NA)))
