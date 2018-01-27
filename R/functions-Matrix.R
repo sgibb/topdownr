@@ -1,3 +1,35 @@
+#' Similar to Matrix::cbind but creates missing rows (based on rownames)
+#' @param ... `Matrix` objects
+#' @noRd
+.cbind <- function(...) {
+    l <- list(...)
+
+    if (length(l) == 1L) {
+        l <- l[[1L]]
+    }
+
+    stopifnot(all(.vapply1l(l, function(ll)inherits(ll, "Matrix"))))
+    nms <- lapply(l, rownames)
+    stopifnot(all(lengths(nms)))
+    allrn <- unique(unlist(nms))
+
+    for (i in seq(along=l)) {
+        diffrn <- setdiff(allrn, nms[[i]])
+        if (length(diffrn)) {
+            l[[i]] <- rbind(
+                l[[i]],
+                sparseMatrix(
+                    i={}, j={},
+                    dims=c(length(diffrn), ncol(l[[i]])),
+                    dimnames=list(diffrn, colnames(l[[i]]))
+                )
+            )
+        }
+        l[[i]] <- l[[i]][allrn,]
+    }
+    do.call(cbind, l)
+}
+
 #' Column index
 #'
 #' @param x `dgCMatrix`

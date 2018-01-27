@@ -2,6 +2,19 @@ context("Matrix")
 
 m <- sparseMatrix(i=rep(1:4, each=5), j=rep(1:10, 2), x=1:20)
 
+test_that(".cbind", {
+    expect_error(topdownr:::.cbind(m, matrix(1:10, ncol=2)))
+    expect_error(topdownr:::.cbind(m, m))
+    m1 <- sparseMatrix(i=1:4, j=1:4, x=1:4,
+                       dimnames=list(LETTERS[1:4], NULL))
+    expect_equal(topdownr:::.cbind(m1, m1), cbind(m1, m1))
+    m2 <- sparseMatrix(i=1:4, j=1:4, x=c(1:2, 5:6),
+                       dimnames=list(LETTERS[c(1:2, 5:6)], NULL))
+    mr <- sparseMatrix(i=c(1:4, 1:2, 5:6), j=1:8, x=c(1:4, 1:2, 5:6),
+                       dimnames=list(LETTERS[1:6], NULL))
+    expect_equal(topdownr:::.cbind(m1, m2), mr)
+})
+
 test_that(".col", {
     expect_error(topdownr:::.col(matrix(1:10, ncol=2)))
     expect_equal(topdownr:::.col(m), rep(1:10, each=2))

@@ -151,9 +151,9 @@
     allcn <- unique(unlist(nms))
 
     for (i in seq(along=l)) {
-        cnMissing <- setdiff(allcn, nms[[i]])
-        if (length(cnMissing)) {
-            l[[i]][, cnMissing] <- NA
+        diffcn <- setdiff(allcn, nms[[i]])
+        if (length(diffcn)) {
+            l[[i]][, diffcn] <- NA
         }
         ## rbind,DataFrame-method doesn't sort columns and will throw an error
         ## about non-matching names
