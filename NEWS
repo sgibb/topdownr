@@ -9,6 +9,8 @@ Changes in version 1.1.6
 - Just plot fragments that are present in current `TopDownSet` see #70
   [2018-01-27].
 - Add `combine,FragmentViews,FragmentViews-method` [2018-01-27].
+- Allow to `combine` `TopDownSet` objects with different fragment types;
+  closes #71 [2018-01-27].
 
 Changes in version 1.1.5
 - Keep full filename (before `basename` was used) in `AbstractTopDownSet`

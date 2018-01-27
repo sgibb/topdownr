@@ -43,6 +43,7 @@ test_that("combine", {
     tds$UvpdActivation <- (1:5) * 1000
     tds$IonInjectionTimeMs <- 1:5
     tds@tolerance <- 5e-6
+    rownames(tds@assay) <- rownames(tds)
     tds <- updateConditionNames(tds)
     tds1 <- tds2 <- tds
     o <- c(matrix(1:10, nrow=2, byrow=TRUE))
@@ -71,6 +72,30 @@ test_that("combine", {
                                    "[3;5] into a 16 fragments [3;10]",
                                    "TopDownSet object.")))
     tdsr$MedianIonInjectionTimeMs <- Rle(3, 10)
+    expect_equal_TDS(combine(tds1, tds2), tdsr)
+
+    tds2@rowViews <- FragmentViews("ACE", mass=1:3*90,
+                                   type=c("b", "b", "z"),
+                                   start=1:3, width=c(1:2, 1),
+                                   names=c("b1", "b2", "z1"))
+    rownames(tds2@assay) <- c("b1", "b2", "z1")
+
+    tdsr@rowViews <- FragmentViews("ACE", mass=rep(1:3, each=2) * c(90, 100),
+                                   type=c("b", "c", "b", "c", "z", "x"),
+                                   start=rep(1:3, each=2),
+                                   width=rep(c(1:2, 1), each=2),
+                                   names=c("b1", "c1", "b2", "c2", "z1", "x1"))
+    tdsr@assay <- sparseMatrix(
+        i=c(rep(1:4, each=3), rep(5:6, each=2)),
+        j=c(2, 4, 6, 1, 3, 5, 2, 4, 10, 1, 3, 9, 4, 8, 3, 7),
+        x=c(rep(c(2, 4, 7), 2), rep(c(3, 5, 9), 2), rep(c(6, 8), 2)),
+        dimnames=list(c("b1", "c1", "b2", "c2", "z1", "x1"), colnames(a))
+    )
+    tdsr@processing[7] <- paste("[2017-12-28 15:30:02]",
+                                "Combined 8 fragments [3;5] and 8 fragments",
+                                "[3;5] into a 16 fragments [6;10]",
+                                "TopDownSet object.")
+
     expect_equal_TDS(combine(tds1, tds2), tdsr)
 })
 

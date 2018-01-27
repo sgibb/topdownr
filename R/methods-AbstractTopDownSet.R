@@ -219,13 +219,11 @@ setMethod("combine",
         stop(paste0("Objects must be the same class, but are ",
                     class(x), ", ", class(y), "."))
     }
-    if (!identical(x@rowViews, y@rowViews)) {
-        stop("'rowViews' must be identical")
-    }
     ldx0 <- .logdim(x)
     ldy0 <- .logdim(y)
+    x@rowViews <- combine(x@rowViews, y@rowViews)
     x@colData <- .colsToRle(.colsToLogical(.rbind(x@colData, y@colData)))
-    x@assay <- cbind(x@assay, y@assay)
+    x@assay <- .cbind(x@assay, y@assay)[names(x@rowViews),]
     x@files <- unique(x@files, y@files)
     x@tolerance <- max(x@tolerance, y@tolerance)
     x@processing <- c(x@processing, y@processing)

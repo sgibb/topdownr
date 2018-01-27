@@ -35,7 +35,9 @@ FragmentViews <- function(sequence, mass, type, z=1L,
         start=start, end=end, width=width,
         names=names
     )
-    d <- DataFrame(mass=mass, type=factor(type), z=Rle(z))
+    d <- DataFrame(mass=mass,
+                   type=factor(type, levels=sort(unique(type))),
+                   z=Rle(z))
     elementMetadata(v) <- d
     metadata(v) <- metadata
     new("FragmentViews", v[order(d$mass)])

@@ -17,6 +17,13 @@ setMethod("combine", signature(x="FragmentViews", y="FragmentViews"),
     xn <- intersect(names(x), un)
     yn <- setdiff(un, xn)
     x@elementMetadata <- rbind(elementMetadata(x[xn]), elementMetadata(y[yn]))
+    if (!is.null(x@elementMetadata$type) &&
+        is.factor(x@elementMetadata$type)) {
+        x@elementMetadata$type <- factor(
+            x@elementMetadata$type,
+            levels=sort(levels(x@elementMetadata$type))
+        )
+    }
     x@ranges <- c(x@ranges[xn], y@ranges[yn])
     x@metadata <- modifyList(metadata(x), metadata(y))
     x <- x[order(elementMetadata(x)$mass)]
