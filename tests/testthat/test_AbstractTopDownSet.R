@@ -1,14 +1,5 @@
 context("AbstractTopDownSet")
 
-expect_equal_TDS <- function(object, expected, ..., date=FALSE,
-                            info=NULL, label=NULL) {
-    if (!date) {
-        object@processing <- gsub("^\\[[^]]+\\] *", "", object@processing)
-        expected@processing <- gsub("^\\[[^]]+\\] *", "", expected@processing)
-    }
-    expect_equal(object, expected, ..., info=info, label=label)
-}
-
 tds <- new("TopDownSet",
            rowViews=FragmentViews("ACE", mass=1:3 * 100,
                                   type=c("c", "c", "x"),
@@ -72,7 +63,7 @@ test_that("combine", {
                                    "[3;5] into a 16 fragments [3;10]",
                                    "TopDownSet object.")))
     tdsr$MedianIonInjectionTimeMs <- Rle(3, 10)
-    expect_equal_TDS(combine(tds1, tds2), tdsr)
+    expect_equal(combine(tds1, tds2), tdsr)
 
     tds2@rowViews <- FragmentViews("ACE", mass=1:3*90,
                                    type=c("b", "b", "z"),
@@ -96,7 +87,7 @@ test_that("combine", {
                                 "[3;5] into a 16 fragments [6;10]",
                                 "TopDownSet object.")
 
-    expect_equal_TDS(combine(tds1, tds2), tdsr)
+    expect_equal(combine(tds1, tds2), tdsr)
 })
 
 test_that("fragmentMass", {
@@ -143,8 +134,8 @@ test_that("updateConditionNames", {
                         paste0("[2017-12-23 19:40:01] Condition names updated ",
                                "based on: File, Scan. ",
                                "Order of conditions changed. 5 conditions."))
-    expect_equal_TDS(updateConditionNames(tds, c("File", "Scan"),
-                                          verbose=FALSE), tdn)
+    expect_equal(updateConditionNames(tds, c("File", "Scan"), verbose=FALSE),
+                 tdn)
 })
 
 test_that("updateMedianInjectionTime", {
@@ -158,11 +149,11 @@ test_that("updateMedianInjectionTime", {
                         paste0("[2017-12-20 21:00:00] ",
                                "Recalculate median injection time ",
                                "based on: Mz, AgcTarget."))
-    expect_equal_TDS(updateMedianInjectionTime(tdn), tdr)
+    expect_equal(updateMedianInjectionTime(tdn), tdr)
     tdr@colData$Mz <- tdn@colData$Mz <- 1
     tdr@colData$MedianIonInjectionTimeMs <- Rle(3, 5)
     tdr@processing <- c(tdn@processing,
                         paste0("[2017-12-20 21:00:00] ",
                                "Recalculate median injection time."))
-    expect_equal_TDS(updateMedianInjectionTime(tdn, by=tdn$Mz), tdr)
+    expect_equal(updateMedianInjectionTime(tdn, by=tdn$Mz), tdr)
 })

@@ -1,14 +1,5 @@
 context("NCBSet")
 
-expect_equal_NCBSet <- function(object, expected, ..., date=FALSE,
-                                info=NULL, label=NULL) {
-    if (!date) {
-        object@processing <- gsub("^\\[[^]]+\\] *", "", object@processing)
-        expected@processing <- gsub("^\\[[^]]+\\] *", "", expected@processing)
-    }
-    expect_equal(object, expected, ..., info=info, label=label)
-}
-
 ncb <- new("NCBSet",
            rowViews=Views(AAString("ACED"), start=1, width=1:3,
                                   names=paste0("bond", 1:3)),
@@ -48,9 +39,9 @@ test_that("[", {
                                     "Subsetted 8 fragments [3;5] to ",
                                     "6 fragments [3;3].")))
 
-    expect_equal_NCBSet(ncb["bond1"], ncb1)
-    expect_equal_NCBSet(ncb[1,], ncb1)
-    expect_equal_NCBSet(ncb[,1:3], ncb3)
+    expect_equal(ncb["bond1"], ncb1)
+    expect_equal(ncb[1,], ncb1)
+    expect_equal(ncb[,1:3], ncb3)
     expect_warning(ncb[3:1,], "row order")
     expect_warning(ncb[1, drop=TRUE], "'drop' is ignored")
 })
@@ -121,7 +112,7 @@ test_that("removeEmptyConditions", {
                                  "6 fragments [3;3]."))
     #ncbr@assay[cbind(c(1, 3), 3:4)] <- 0L
     #ncbr@assay <- drop0(ncbr@assay)
-    expect_equal_NCBSet(removeEmptyConditions(ncbr), ncbrr)
+    expect_equal(removeEmptyConditions(ncbr), ncbrr)
 })
 
 test_that("show", {

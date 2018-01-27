@@ -1,14 +1,5 @@
 context("TopDownSet")
 
-expect_equal_TDS <- function(object, expected, ..., date=FALSE,
-                            info=NULL, label=NULL) {
-    if (!date) {
-        object@processing <- gsub("^\\[[^]]+\\] *", "", object@processing)
-        expected@processing <- gsub("^\\[[^]]+\\] *", "", expected@processing)
-    }
-    expect_equal(object, expected, ..., info=info, label=label)
-}
-
 tds <- new("TopDownSet",
            rowViews=FragmentViews("ACE", mass=1:3 * 100,
                                   type=c("c", "c", "x"),
@@ -84,11 +75,11 @@ test_that("[", {
                              paste0("[2017-07-16 14:00:03] ",
                                     "Subsetted 8 fragments [3;5] to ",
                                     "6 fragments [3;3].")))
-    expect_equal_TDS(tds["c"], tdsc)
-    expect_equal_TDS(tds["c",], tdsc)
-    expect_equal_TDS(tds["c1"], tdsc1)
-    expect_equal_TDS(tds[,1:3], tdsf)
-    expect_equal_TDS(tds[,Rle(1:3, rep(1, 3))], tdsf)
+    expect_equal(tds["c"], tdsc)
+    expect_equal(tds["c",], tdsc)
+    expect_equal(tds["c1"], tdsc1)
+    expect_equal(tds[,1:3], tdsf)
+    expect_equal(tds[,Rle(1:3, rep(1, 3))], tdsf)
     expect_warning(tds[3:1,], "row order")
     expect_warning(tds[1, drop=TRUE], "'drop' is ignored")
 })
@@ -143,9 +134,9 @@ test_that("aggregate", {
                                    "8 fragments [3;5] to ",
                                    "5 fragments [3;2].")))
     expect_error(aggregate(tds, by="FooBar"), "same length")
-    expect_equal_TDS(aggregate(tds, by=list(tds$File)), tda)
-    expect_equal_TDS(aggregate(tds, by=list(rep(1:2, c(3, 2)))), tda)
-    expect_equal_TDS(aggregate(tds, by=list(rep(c(2, 10), c(3, 2)))), tda)
+    expect_equal(aggregate(tds, by=list(tds$File)), tda)
+    expect_equal(aggregate(tds, by=list(rep(1:2, c(3, 2)))), tda)
+    expect_equal(aggregate(tds, by=list(rep(c(2, 10), c(3, 2)))), tda)
 })
 
 test_that("conditionNames", {
@@ -230,7 +221,7 @@ test_that("filterCv", {
     tdfitr@processing <- c(tdfitr@processing,
                            paste0("[2017-08-04 18:05:00] 3 fragments with ",
                                   "CV > 40% filtered; 5 fragments [3;5]."))
-    expect_equal_TDS(filterCv(tdfit, threshold=40), tdfitr)
+    expect_equal(filterCv(tdfit, threshold=40), tdfitr)
 })
 
 test_that("filterInjectionTime", {
@@ -253,22 +244,22 @@ test_that("filterInjectionTime", {
                            paste0("[2017-07-28 16:00:02] 3 scans filtered ",
                                   "with injection time deviation >= 0.5 or ",
                                   "rank >= 6; 3 fragments [3;2]."))
-    expect_equal_TDS(filterInjectionTime(tdfit, maxDeviation=0.5, keepTopN=5),
-                     tdfitr)
+    expect_equal(filterInjectionTime(tdfit, maxDeviation=0.5, keepTopN=5),
+                 tdfitr)
     tdfitr <- tdfit[, -3]
     tdfitr@processing <- c(tdfitr@processing,
                            paste0("[2017-07-28 16:00:02] 1 scan filtered ",
                                   "with injection time deviation >= 5 or ",
                                   "rank >= 3; 7 fragments [3;4]."))
-    expect_equal_TDS(filterInjectionTime(tdfit, maxDeviation=5, keepTopN=2),
-                     tdfitr)
+    expect_equal(filterInjectionTime(tdfit, maxDeviation=5, keepTopN=2),
+                 tdfitr)
     tdfitr <- tdfit[, -(2:3)]
     tdfitr@processing <- c(tdfitr@processing,
                            paste0("[2017-07-28 16:00:02] 2 scans filtered ",
                                   "with injection time deviation >= 0.6 or ",
                                   "rank >= 3; 4 fragments [3;3]."))
-    expect_equal_TDS(filterInjectionTime(tdfit, maxDeviation=0.6, keepTopN=2),
-                     tdfitr)
+    expect_equal(filterInjectionTime(tdfit, maxDeviation=0.6, keepTopN=2),
+                 tdfitr)
 })
 
 test_that("filterIntensity", {
@@ -282,11 +273,11 @@ test_that("filterIntensity", {
    expect_error(filterIntensity(tds, "c"), "numeric")
    expect_error(filterIntensity(tds, 2), "between 0 and 1")
    expect_error(filterIntensity(tds, -1), "between 0 and 1")
-   expect_equal_TDS(filterIntensity(tds, 7, relative=FALSE), tdl)
+   expect_equal(filterIntensity(tds, 7, relative=FALSE), tdl)
    tdl@processing[2L] <- paste0("[2017-07-16 14:00:02] ",
                                 "5 intensity values < 0.8 (relative) filtered; ",
                                 "3 fragments [3;5].")
-   expect_equal_TDS(filterIntensity(tds, 0.8), tdl)
+   expect_equal(filterIntensity(tds, 0.8), tdl)
 })
 
 test_that("filterNonReplicatedFragments", {
@@ -308,7 +299,7 @@ test_that("filterNonReplicatedFragments", {
                            paste0("[2017-07-31 22:15:00] 3 intensity values ",
                                   "of fragments replicated < 2 times ",
                                   "filtered; 5 fragments [3;5]."))
-    expect_equal_TDS(filterNonReplicatedFragments(tdfit, minN=2), tdfitr)
+    expect_equal(filterNonReplicatedFragments(tdfit, minN=2), tdfitr)
 })
 
 test_that(".isTopDownSet", {
@@ -357,7 +348,7 @@ test_that("normalize", {
                         paste0("[2017-08-06 14:50:00] ",
                                "Intensity values normalized ",
                                "to TIC."))
-    expect_equal_TDS(normalize(tds, method="TIC"), tdn)
+    expect_equal(normalize(tds, method="TIC"), tdn)
 })
 
 test_that("readTopDownFiles", {
@@ -374,7 +365,7 @@ test_that("removeEmptyConditions", {
                          paste0("[2017-08-01 22:25:00] ",
                                 "2 empty conditions removed; ",
                                 "6 fragments [3;3]."))
-    expect_equal_TDS(removeEmptyConditions(tdr), tdrr)
+    expect_equal(removeEmptyConditions(tdr), tdrr)
 })
 
 test_that("show", {
@@ -484,5 +475,5 @@ test_that("as(\"NCBSet\")", {
                             paste("[2017-08-20 16:30:00]",
                                   "Coerced TopDownSet into an NCBSet object;",
                                   "7 fragments [2;5].")))
-    expect_equal_TDS(as(tds, "NCBSet"), ncb)
+    expect_equal(as(tds, "NCBSet"), ncb)
 })

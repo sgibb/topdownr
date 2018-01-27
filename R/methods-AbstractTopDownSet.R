@@ -152,6 +152,20 @@ setReplaceMethod("$", "AbstractTopDownSet", function(x, name, value) {
     x
 })
 
+#' @describeIn AbstractTopDownSet Test if two objects are equal.
+#'
+#' @param target, current `AbstractTopDownSet`
+#' @return Either 'TRUE' or a the return value of `all.equal.default`.
+#' @noRd
+#' @export
+all.equal.AbstractTopDownSet <- function(target, current, ..., check.date=FALSE) {
+    if (!check.date) {
+        target@processing <- gsub("^\\[[^]]+\\] *", "", target@processing)
+        current@processing <- gsub("^\\[[^]]+\\] *", "", current@processing)
+    }
+    all.equal.default(target, current, ...)
+}
+
 #' @describeIn AbstractTopDownSet Accessor for the `assay` slot.
 #'
 #' Returns a [Matrix::dgCMatrix-class] that stores the
