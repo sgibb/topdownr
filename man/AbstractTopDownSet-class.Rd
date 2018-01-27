@@ -33,8 +33,9 @@
 \alias{summary,AbstractTopDownSet-method}
 \alias{updateConditionNames,AbstractTopDownSet-method}
 \alias{updateConditionNames}
-\alias{updateMedianInjectionTime,TopDownSet-method}
+\alias{updateMedianInjectionTime,AbstractTopDownSet-method}
 \alias{updateMedianInjectionTime}
+\alias{updateMedianInjectionTime,TopDownSet-method}
 \title{The AbstractTopDownSet class}
 \usage{
 \S4method{[}{AbstractTopDownSet,ANY,ANY,ANY}(x, i, j, ..., drop = FALSE)
@@ -79,8 +80,8 @@
   "CidActivation", "HcdActivation", "UvpdActivation"),
   verbose = interactive())
 
-\S4method{updateMedianInjectionTime}{TopDownSet}(object, by = list(Mz =
-  object$Mz, AgcTarget = object$AgcTarget))
+\S4method{updateMedianInjectionTime}{AbstractTopDownSet}(object, by = list(Mz
+  = object$Mz, AgcTarget = object$AgcTarget))
 }
 \arguments{
 \item{i, j}{\code{numeric}, \code{logical} or \code{character},
