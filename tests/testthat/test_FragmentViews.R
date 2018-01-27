@@ -36,6 +36,7 @@ test_that("combine", {
                                                        "Acetyl", "Met-loss"),
                          mass=473.158029))
     expect_equal(combine(fv, fv2), fvc)
+    expect_equal(combine(fv, fv), fv)
 })
 
 test_that("constructor", {

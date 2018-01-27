@@ -15,7 +15,7 @@ setMethod("combine", signature(x="FragmentViews", y="FragmentViews"),
     }
     un <- union(names(x), names(y))
     xn <- intersect(names(x), un)
-    yn <- intersect(names(y), un)
+    yn <- setdiff(un, xn)
     x@elementMetadata <- rbind(elementMetadata(x[xn]), elementMetadata(y[yn]))
     x@ranges <- c(x@ranges[xn], y@ranges[yn])
     x@metadata <- modifyList(metadata(x), metadata(y))
