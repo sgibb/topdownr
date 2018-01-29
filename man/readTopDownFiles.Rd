@@ -8,6 +8,8 @@ readTopDownFiles(path, pattern = ".*", type = c("a", "b", "c", "x", "y",
   "z"), modifications = c("Carbamidomethyl", "Acetyl", "Met-loss"),
   adducts = data.frame(), neutralLoss = MSnbase::defaultNeutralLoss(),
   sequenceOrder = c("original", "random", "inverse"), tolerance = 5e-06,
+  redundantIonMatch = c("remove", "closest"),
+  redundantFragmentMatch = c("remove", "closest"),
   dropNonInformativeColumns = TRUE, sampleColumns = c("Mz", "AgcTarget",
   "EtdReagentTarget", "EtdActivation", "CidActivation", "HcdActivation",
   "UvpdActivation"), verbose = interactive())
@@ -56,6 +58,15 @@ order of the sequence before fragment calculation and matching is done.
 \item{tolerance}{\code{double},
 tolerance in \emph{ppm} that is used to match the
 theoretical fragments with the observed ones.}
+
+\item{redundantIonMatch}{\code{character}, a mz could be matched to one, two or
+more fragments. If it is matched against more than one fragment the match
+could be \code{"remove"}d or the match to the \code{"closest"} fragment could be
+chosen.}
+
+\item{redundantFragmentMatch}{\code{character}, one or more mz could be matched to
+the same fragment, these matches could be \code{"remove"}d or the match to the
+\code{"closest"} mz is chosen.}
 
 \item{dropNonInformativeColumns}{logical,
 should columns with just one identical value across all runs be removed?}

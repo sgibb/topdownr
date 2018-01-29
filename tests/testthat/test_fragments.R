@@ -23,11 +23,68 @@ test_that(".matchFragments", {
     expect_equal(topdownr:::.matchFragments(mz=1:3, fmass=integer()),
                  rep(NA_integer_, 3))
     expect_equal(topdownr:::.matchFragments(c(1, 99, 101), fmass=c(1.1, 100),
-                                           tolerance=0.2),
+                                            redundantFragmentMatch="closest",
+                                            tolerance=0.2),
                  as.integer(c(1, 2, NA)))
     expect_equal(topdownr:::.matchFragments(c(1, 98, 101), fmass=c(1.1, 100),
-                                           tolerance=0.2),
+                                            redundantFragmentMatch="closest",
+                                            tolerance=0.2),
                  as.integer(c(1, NA, 2)))
+    expect_equal(topdownr:::.matchFragments(1:2, 1.5, 1,
+                                            redundantFragmentMatch="ignore",
+                                            redundantIonMatch="closest",
+                                            relative=FALSE),
+                 c(1L, 1L))
+    expect_equal(topdownr:::.matchFragments(1:2, 1.5, 0.4,
+                                            redundantFragmentMatch="closest",
+                                            redundantIonMatch="closest",
+                                            relative=TRUE),
+                 c(1L, NA_integer_))
+    expect_equal(topdownr:::.matchFragments(1:2, 1.5, 1,
+                                            redundantFragmentMatch="remove",
+                                            relative=FALSE),
+                 c(NA_integer_, NA_integer_))
+    expect_equal(topdownr:::.matchFragments(1:2, 1.5, 1,
+                                            redundantFragmentMatch="closest",
+                                            relative=FALSE),
+                 c(1L, NA_integer_))
+    expect_equal(topdownr:::.matchFragments(1.5, 1:2, 1,
+                                            redundantIonMatch="remove",
+                                            relative=FALSE),
+                 NA_integer_)
+    expect_equal(topdownr:::.matchFragments(1.5, 1:2, 1,
+                                            redundantIonMatch="closest",
+                                            relative=FALSE),
+                 2L)
+
+    mz <- c(3.4, 3.5, 3.6, 3.7, 8.8, 9.1, 10.9)
+    fmass <- 1:10
+    tolerance=0.7
+    expect_equal(topdownr:::.matchFragments(mz, fmass, tolerance,
+                                            redundantIonMatch="remove",
+                                            redundantFragmentMatch="remove"),
+                 topdownr:::.matchFragments(mz, fmass, tolerance))
+    expect_equal(topdownr:::.matchFragments(mz, fmass, tolerance,
+                                            relative=FALSE),
+                 rep(NA_integer_, 7))
+    expect_equal(topdownr:::.matchFragments(mz, fmass, tolerance,
+                                            redundantFragmentMatch="closest",
+                                            relative=FALSE),
+                 as.integer(c(NA, NA, NA, 4, NA, 9, NA)))
+    expect_equal(topdownr:::.matchFragments(mz, fmass, tolerance,
+                                            redundantIonMatch="closest",
+                                            relative=FALSE),
+                 as.integer(c(3, rep(NA, 6))))
+    expect_equal(topdownr:::.matchFragments(mz, fmass, tolerance,
+                                            redundantFragmentMatch="ignore",
+                                            redundantIonMatch="closest",
+                                            relative=FALSE),
+                 as.integer(c(3, 4, 4, 4, 9, 9, NA)))
+    expect_equal(topdownr:::.matchFragments(mz, fmass, tolerance,
+                                            redundantFragmentMatch="closest",
+                                            redundantIonMatch="closest",
+                                            relative=FALSE),
+                 as.integer(c(3, NA, NA, 4, NA, 9, NA)))
 })
 
 test_that(".reorderSequence", {

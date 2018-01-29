@@ -12,6 +12,11 @@ Changes in version 1.1.6
 - Allow to `combine` `TopDownSet` objects with different fragment types;
   closes #71 [2018-01-27].
 - Add `all.equal` for `AbstractTopDownSet` objects [2018-01-27].
+- Allow the user to decide how to handle redundant fragment matching. Current
+  default is `redundantFragmentMatch="remove"` and
+  `redundantIonMatch="remove"`. This will reduce the number of fragment
+  matches. Choose `"closest"` for both to get the old behaviour.
+  See also #72 [2018-01-29].
 
 Changes in version 1.1.5
 - Keep full filename (before `basename` was used) in `AbstractTopDownSet`

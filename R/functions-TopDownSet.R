@@ -66,6 +66,13 @@
 #' @param tolerance `double`,
 #' tolerance in *ppm* that is used to match the
 #' theoretical fragments with the observed ones.
+#' @param redundantIonMatch `character`, a mz could be matched to one, two or
+#' more fragments. If it is matched against more than one fragment the match
+#' could be `"remove"`d or the match to the `"closest"` fragment could be
+#' chosen.
+#' @param redundantFragmentMatch `character`, one or more mz could be matched to
+#' the same fragment, these matches could be `"remove"`d or the match to the
+#' `"closest"` mz is chosen.
 #' @param dropNonInformativeColumns logical,
 #' should columns with just one identical value across all runs be removed?
 #' @param sampleColumns `character`,
@@ -101,6 +108,8 @@ readTopDownFiles <- function(path, pattern=".*",
                              neutralLoss=MSnbase::defaultNeutralLoss(),
                              sequenceOrder=c("original", "random", "inverse"),
                              tolerance=5e-6,
+                             redundantIonMatch=c("remove", "closest"),
+                             redundantFragmentMatch=c("remove", "closest"),
                              dropNonInformativeColumns=TRUE,
                              sampleColumns=c("Mz", "AgcTarget",
                                              "EtdReagentTarget",
@@ -137,6 +146,8 @@ readTopDownFiles <- function(path, pattern=".*",
         MoreArgs=list(
             fmass=elementMetadata(fragmentViews)$mass,
             tolerance=tolerance,
+            redundantIonMatch=match.arg(redundantIonMatch),
+            redundantFragmentMatch=match.arg(redundantFragmentMatch),
             verbose=verbose
         ),
         SIMPLIFY=FALSE, USE.NAMES=FALSE

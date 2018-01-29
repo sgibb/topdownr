@@ -134,28 +134,72 @@
 
 #' Match fragments and measured mz values.
 #'
+#' Similar to MALDIquant:::.match.closest but we need to reimplement it here,
+#' because @pavel_shliaha asks for handling duplicated matches differently: see
+#' https://github.com/sgibb/topdownr/issues/72
+#'
 #' @param mz `double`, measured mz.
 #' @param fmass `double`, fragment mass
 #' @param tolerance `double`, allowed tolerance
+#' @param redundantIonMatch `character`, a mz could be matched to two or more
+#' fragments, it would be removed or matched to the closest fragment.
+#' @param redundantFragmentMatch `character`, multiple mz could be matched to
+#' the same fragment, these matches would be removed or the closest mz is
+#' chosen.
+#' @param relative `logical`, relative tolerance?
 #' @return `integer`
 #' @noRd
-.matchFragments <- function(mz, fmass, tolerance=5e-6) {
+.matchFragments <- function(mz, fmass, tolerance=5e-6,
+                            redundantIonMatch=c("remove", "closest"),
+                            redundantFragmentMatch=c("remove", "closest",
+                                                     "ignore"),
+                            relative=TRUE) {
     if (!length(mz)) {
         return(integer())
     }
     if (!length(fmass)) {
         return(rep.int(NA_integer_, length(mz)))
     }
-    m <- MSnbase:::relaxedMatch(
-        mz, fmass, nomatch=NA, tolerance=tolerance, relative=TRUE
-    )
-    if (anyDuplicated(m)) {
-        o <- order(abs(mz - fmass[m]))
-        sortedMatches <- m[o]
-        sortedMatches[which(duplicated(sortedMatches))] <- NA
-        m[o] <- sortedMatches
+
+    lIdx <- findInterval(mz, fmass, rightmost.closed=FALSE, all.inside=TRUE)
+    rIdx <- lIdx + 1L
+    lIdx[lIdx == 0L] <- 1L
+    lDiff <- abs(fmass[lIdx] - mz)
+    rDiff <- abs(fmass[rIdx] - mz)
+    tolerance <- rep_len(tolerance, length(fmass))
+    if (relative) {
+        tolerance <- tolerance * fmass
     }
-    as.integer(m)
+    lDiff[lDiff > tolerance[lIdx]] <- Inf
+    rDiff[rDiff > tolerance[rIdx]] <- Inf
+
+    d <- which(lDiff >= rDiff)
+    lIdx[d] <- rIdx[d]
+
+    ## no match at all
+    lIdx[is.infinite(lDiff) & is.infinite(rDiff)] <- NA_integer_
+
+    ## multiple mz to one fragment?
+    if (anyDuplicated(lIdx)) {
+        redundantFragmentMatch <- match.arg(redundantFragmentMatch)
+        if (redundantFragmentMatch == "remove") {
+            lIdx[duplicated(lIdx) | duplicated(lIdx, fromLast=TRUE)] <- NA_integer_
+        } else if (redundantFragmentMatch == "closest") {
+            o <- order(abs(mz - fmass[lIdx]))
+            m <- lIdx[o]
+            m[duplicated(m)] <- NA_integer_
+            lIdx[o] <- m
+        }
+        ## ignore
+    }
+    ## multiple fragments to one mz (closest is default because of
+    ## which(lDiff >= rDiff); "ignore" isn't possible here
+    redundantIonMatch <- match.arg(redundantIonMatch)
+    if (redundantIonMatch == "remove") {
+        lIdx[is.finite(lDiff) & is.finite(rDiff)] <- NA_integer_
+    }
+
+    as.integer(lIdx)
 }
 
 #' Reorder protein sequence.
