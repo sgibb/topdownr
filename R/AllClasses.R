@@ -53,9 +53,6 @@ setClass(
 #' columns to the condition/run. It just stores values that are
 #' different from zero.
 #' @slot files `character`, files that were imported.
-#' @slot tolerance `double`,
-#' tolerance in *ppm* that were used for matching the experimental
-#' *m/z* values to the theoretical fragments.
 #' @slot processing `character`, log messages.
 #'
 #' @return This is an *Abstract/VIRTUAL* class
@@ -117,7 +114,6 @@ setClass(
         colData="DataFrame",
         assay="dgCMatrix",
         files="character",
-        tolerance="numeric",
         processing="character"
     ),
     prototype=prototype(
@@ -125,7 +121,6 @@ setClass(
         colData=new("DataFrame"),
         assay=new("dgCMatrix"),
         files=character(),
-        tolerance=double(),
         processing=character()),
         validity=function(object).validateAbstractTopDownSet(object)
 )
@@ -153,6 +148,9 @@ setClass(
 #' @slot tolerance `double`,
 #' tolerance in *ppm* that were used for matching the
 #' experimental mz values to the theoretical fragments.
+#' @slot redundantMatching `character`, matching strategies for redundant
+#' ion/fragment matches. See `redundantIonMatch` and
+#' `redundantFragmentMatch` in [readTopDownFiles()] for details.
 #' @slot processing `character`, log messages.
 #'
 #' @return An [TopDownSet-class] object.
@@ -227,7 +225,15 @@ setClass(
 setClass(
     "TopDownSet",
     contains="AbstractTopDownSet",
-    prototype=prototype(rowViews=new("FragmentViews"))
+    slots=c(
+        tolerance="numeric",
+        redundantMatching="character"
+    ),
+    prototype=prototype(
+        rowViews=new("FragmentViews"),
+        tolerance=double(),
+        redundantMatching=rep.int("remove", 2L)
+    )
 )
 
 #' The NCBSet class
@@ -251,9 +257,6 @@ setClass(
 #' with `1`, by an C-terminal fragmentl with `2` and
 #' by both fragment types/bidirectional by `3` respectively.
 #' @slot files `character`, files that were imported.
-#' @slot tolerance `double`,
-#' tolerance in *ppm* that were used for matching the experimental mz values
-#' to the theoretical fragments.
 #' @slot processing `character`, log messages.
 #'
 #' @return An [NCBSet-class] object.

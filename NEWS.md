@@ -17,6 +17,10 @@
   `redundantIonMatch="remove"`. This will reduce the number of fragment
   matches. Choose `"closest"` for both to get the old behaviour.
   See also [#72](https://github.com/sgibb/topdownr/issues/72) [2018-01-29].
+- `TopDownSet` object store the matching `tolerance` and strategies
+  (`redundantIonMatch`, `redundantFragmentMatch`). `AbstractTopDownSet` and
+  `NCBSet` lost their `tolerance` slot. Saved objects need to be recreated
+  [2018-01-30].
 
 ## Changes in version 1.1.5
 - Keep full filename (before `basename` was used) in `AbstractTopDownSet`

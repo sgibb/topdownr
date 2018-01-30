@@ -112,10 +112,6 @@ by both fragment types/bidirectional by \code{3} respectively.}
 
 \item{\code{files}}{\code{character}, files that were imported.}
 
-\item{\code{tolerance}}{\code{double},
-tolerance in \emph{ppm} that were used for matching the experimental mz values
-to the theoretical fragments.}
-
 \item{\code{processing}}{\code{character}, log messages.}
 }}
 

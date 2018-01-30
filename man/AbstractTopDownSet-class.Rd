@@ -183,8 +183,8 @@ Replaces metadata for the conditons/runs (columns) of the
 
 \item \code{combine}: Combine \code{AbstractTopDownSet} objects.
 
-If the \code{rowViews} are identically \code{combine} allows to combine two or more
-\code{AbstractTopDownSet} objects. Please note that it uses the default
+\code{combine} allows to combine two or more \code{AbstractTopDownSet} objects.
+Please note that it uses the default
 \code{sampleColumns} to define technical replicates (see \code{\link[=readTopDownFiles]{readTopDownFiles()}}).and
 the default \code{by} argument to group ion injection times for the calculation of
 the median time (see \code{\link[=updateMedianInjectionTime]{updateMedianInjectionTime()}}). Both could be modified
@@ -268,10 +268,6 @@ columns to the condition/run. It just stores values that are
 different from zero.}
 
 \item{\code{files}}{\code{character}, files that were imported.}
-
-\item{\code{tolerance}}{\code{double},
-tolerance in \emph{ppm} that were used for matching the experimental
-\emph{m/z} values to the theoretical fragments.}
 
 \item{\code{processing}}{\code{character}, log messages.}
 }}

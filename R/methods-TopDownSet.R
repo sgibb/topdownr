@@ -39,6 +39,45 @@ setMethod("aggregate", "TopDownSet",
     }
 })
 
+#' @describeIn TopDownSet Combine `TopDownSet` objects.
+#'
+#' `combine` allows to combine two or more `TopDownSet` objects.
+#' Please note that it uses the default
+#' `sampleColumns` to define technical replicates (see [readTopDownFiles()]).and
+#' the default `by` argument to group ion injection times for the calculation of
+#' the median time (see [updateMedianInjectionTime()]). Both could be modified
+#' after `combine` by calling [updateConditionNames()] (with modified
+#' `sampleColumns` argument) and [updateMedianInjectionTime()] (with modified
+#' `by` argument).
+#'
+## @param x `TopDownSet`
+## @param y `TopDownSet`
+## @param \ldots
+#' @aliases combine,TopDownSet,TopDownSet-method
+#' @export
+setMethod("combine",
+          signature(x="TopDownSet", y="TopDownSet"),
+          function(x, y) {
+
+    x <- callNextMethod()
+
+    if (x@tolerance != y@tolerance) {
+        warning("Matching tolerance differs, choosing the larger one.")
+    }
+    x@tolerance <- max(x@tolerance, y@tolerance)
+
+    if (any(x@redundantMatching != y@redundantMatching)) {
+        warning(
+            "Matching strategies differ, ",
+            "keeping the strategy of object 'x'."
+        )
+    }
+
+    if (validObject(x)) {
+        x
+    }
+})
+
 #' @describeIn TopDownSet Filter by CV.
 #'
 #' Filtering is done by coefficient of variation across technical replicates
@@ -411,7 +450,6 @@ setAs("TopDownSet", "NCBSet", function(from) {
         colData=from@colData,
         assay=assay,
         files=from@files,
-        tolerance=from@tolerance,
         processing=from@processing
     )
     colData(ncb)$AssignedIntensity <- Matrix::colSums(from@assay)

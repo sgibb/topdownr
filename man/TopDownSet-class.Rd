@@ -4,6 +4,7 @@
 \name{TopDownSet-class}
 \alias{TopDownSet-class}
 \alias{aggregate,TopDownSet-method}
+\alias{combine,TopDownSet,TopDownSet-method}
 \alias{filterCv,TopDownSet-method}
 \alias{filterCv}
 \alias{filterInjectionTime,TopDownSet-method}
@@ -21,6 +22,8 @@
 \title{The TopDownSet class}
 \usage{
 \S4method{aggregate}{TopDownSet}(x, by = x$Sample, ...)
+
+\S4method{combine}{TopDownSet,TopDownSet}(x, y)
 
 \S4method{filterCv}{TopDownSet}(object, threshold, by = object$Sample, ...)
 
@@ -48,6 +51,8 @@
 \item{by}{\code{list},
 grouping variable, in general it refers to technical}
 
+\item{y}{\code{missing}, not used.}
+
 \item{threshold}{\code{double}, threshold variable.}
 
 \item{maxDeviation}{\code{double},
@@ -71,8 +76,6 @@ normalisation method, currently just \code{"TIC"}
 for \emph{T}otal \emph{I}on \emph{C}urrent
 normalisation of the scans/conditions (column-wise normalisation)
 is supported.}
-
-\item{y}{\code{missing}, not used.}
 
 \item{verbose}{\code{logical}, verbose output?}
 
@@ -109,6 +112,17 @@ which has the same value for technical replicates).
 It combines intensity values and numeric metadata of the grouped
 conditions/runs (columns) by \code{mean} and returns a reduced
 \linkS4class{TopDownSet} object.
+
+\item \code{combine}: Combine \code{TopDownSet} objects.
+
+\code{combine} allows to combine two or more \code{TopDownSet} objects.
+Please note that it uses the default
+\code{sampleColumns} to define technical replicates (see \code{\link[=readTopDownFiles]{readTopDownFiles()}}).and
+the default \code{by} argument to group ion injection times for the calculation of
+the median time (see \code{\link[=updateMedianInjectionTime]{updateMedianInjectionTime()}}). Both could be modified
+after \code{combine} by calling \code{\link[=updateConditionNames]{updateConditionNames()}} (with modified
+\code{sampleColumns} argument) and \code{\link[=updateMedianInjectionTime]{updateMedianInjectionTime()}} (with modified
+\code{by} argument).
 
 \item \code{filterCv}: Filter by CV.
 
@@ -175,6 +189,10 @@ just stores values that are different from zero.}
 \item{\code{tolerance}}{\code{double},
 tolerance in \emph{ppm} that were used for matching the
 experimental mz values to the theoretical fragments.}
+
+\item{\code{redundantMatching}}{\code{character}, matching strategies for redundant
+ion/fragment matches. See \code{redundantIonMatch} and
+\code{redundantFragmentMatch} in \code{\link[=readTopDownFiles]{readTopDownFiles()}} for details.}
 
 \item{\code{processing}}{\code{character}, log messages.}
 }}

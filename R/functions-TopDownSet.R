@@ -119,6 +119,10 @@ readTopDownFiles <- function(path, pattern=".*",
                                              "UvpdActivation"),
                              verbose=interactive()) {
 
+
+    redundantIonMatch <- match.arg(redundantIonMatch)
+    redundantFragmentMatch <- match.arg(redundantFragmentMatch)
+
     files <- .listTopDownFiles(path, pattern=pattern)
 
     sequence <- .readFasta(files$fasta, verbose=verbose)
@@ -146,8 +150,8 @@ readTopDownFiles <- function(path, pattern=".*",
         MoreArgs=list(
             fmass=elementMetadata(fragmentViews)$mass,
             tolerance=tolerance,
-            redundantIonMatch=match.arg(redundantIonMatch),
-            redundantFragmentMatch=match.arg(redundantFragmentMatch),
+            redundantIonMatch=redundantIonMatch,
+            redundantFragmentMatch=redundantFragmentMatch,
             verbose=verbose
         ),
         SIMPLIFY=FALSE, USE.NAMES=FALSE
@@ -178,11 +182,16 @@ readTopDownFiles <- function(path, pattern=".*",
         colData=.colsToRle(.colsToLogical(as(header, "DataFrame"))),
         assay=assay,
         files=unlist(unname(files)),
-        tolerance=tolerance
+        tolerance=tolerance,
+        redundantMatching=c(
+            ion=redundantIonMatch,
+            fragment=redundantFragmentMatch
+        )
     )
     tds <- .atdsLogMsg(
         tds, .logdim(tds), " matched (tolerance: ",
-        round(tolerance / 1e-6, 1L), " ppm).", addDim=FALSE
+        round(tolerance / 1e-6, 1L), " ppm, strategies ion/fragment: ",
+        redundantIonMatch, "/", redundantFragmentMatch, ").", addDim=FALSE
     )
     tds <- updateConditionNames(tds, sampleColumns=sampleColumns, verbose=FALSE)
     updateMedianInjectionTime(tds)
@@ -215,7 +224,9 @@ readTopDownFiles <- function(path, pattern=".*",
     k <- .matchFragments(
         s[, 1L],
         elementMetadata(fv)$mass,
-        tolerance=object@tolerance
+        tolerance=object@tolerance,
+        redundantIonMatch=object@redundantMatching[1L],
+        redundantFragmentMatch=object@redundantMatching[2L]
     )
 
     notNA <- !is.na(k)

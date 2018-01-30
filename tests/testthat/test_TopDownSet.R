@@ -139,6 +139,54 @@ test_that("aggregate", {
     expect_equal(aggregate(tds, by=list(rep(c(2, 10), c(3, 2)))), tda)
 })
 
+test_that("combine", {
+    tds$Mz <- 100
+    tds$AgcTarget <- 1e5
+    tds$EtdReagentTarget <- 1e6
+    tds$EtdActivation <- tds$CidActivation <- tds$HcdActivation <- NA_real_
+    tds$UvpdActivation <- (1:5) * 1000
+    tds$IonInjectionTimeMs <- 1:5
+    tds@tolerance <- 5e-6
+    tds@redundantMatching <- c("remove", "remove")
+    rownames(tds@assay) <- rownames(tds)
+    tds <- updateConditionNames(tds)
+    tds1 <- tds2 <- tds
+    o <- c(matrix(1:10, nrow=2, byrow=TRUE))
+    a <- cbind(tds1@assay, tds2@assay)[, o]
+    cd <- .colsToRle(rbind(tds1@colData, tds2@colData)[o, ])
+    colnames(a) <- rownames(cd) <- paste0("C", rep((1:5) * 1000, each=2), "_",
+                                          rep(1:2, 5))
+    tdsr <- new("TopDownSet",
+                rowViews=tds@rowViews,
+                colData=cd,
+                assay=a,
+                tolerance=5e-6,
+                files=unique(tds1@files, tds2@files),
+                processing=c(tds1@processing, tds2@processing,
+                             paste("[2017-12-28 15:30:00]",
+                                   "Condition names updated based on: Mz,",
+                                   "AgcTarget, EtdReagentTarget,",
+                                   "EtdActivation, CidActivation,",
+                                   "HcdActivation, UvpdActivation. Order of",
+                                   "conditions changed. 5 conditions."),
+                             paste("[2017-12-28 15:30:01]",
+                                   "Recalculate median injection time based",
+                                   "on: Mz, AgcTarget."),
+                             paste("[2017-12-28 15:30:02]",
+                                   "Combined 8 fragments [3;5] and 8 fragments",
+                                   "[3;5] into a 16 fragments [3;10]",
+                                   "TopDownSet object.")))
+    tdsr$MedianIonInjectionTimeMs <- Rle(3, 10)
+    expect_equal(combine(tds1, tds2), tdsr)
+    tds2@tolerance <- 1e-6
+    expect_warning(combine(tds1, tds2), "Matching tolerance differs")
+    expect_equal(suppressWarnings(combine(tds1, tds2)), tdsr)
+    tds2@tolerance <- tds1@tolerance
+    tds2@redundantMatching <- c("closest", "closest")
+    expect_warning(combine(tds1, tds2), "Matching strategies differ")
+    expect_equal(suppressWarnings(combine(tds1, tds2)), tdsr)
+})
+
 test_that("conditionNames", {
     expect_equal(conditionNames(tds),
                  paste("condition",

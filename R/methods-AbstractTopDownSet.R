@@ -212,8 +212,8 @@ setReplaceMethod("colData", "AbstractTopDownSet", function(object, ..., value) {
 
 #' @describeIn AbstractTopDownSet Combine `AbstractTopDownSet` objects.
 #'
-#' If the `rowViews` are identically `combine` allows to combine two or more
-#' `AbstractTopDownSet` objects. Please note that it uses the default
+#' `combine` allows to combine two or more `AbstractTopDownSet` objects.
+#' Please note that it uses the default
 #' `sampleColumns` to define technical replicates (see [readTopDownFiles()]).and
 #' the default `by` argument to group ion injection times for the calculation of
 #' the median time (see [updateMedianInjectionTime()]). Both could be modified
@@ -239,7 +239,6 @@ setMethod("combine",
     x@colData <- .colsToRle(.colsToLogical(.rbind(x@colData, y@colData)))
     x@assay <- .cbind(x@assay, y@assay)[names(x@rowViews),]
     x@files <- unique(x@files, y@files)
-    x@tolerance <- max(x@tolerance, y@tolerance)
     x@processing <- c(x@processing, y@processing)
     x <- updateConditionNames(x)
     x <- updateMedianInjectionTime(x)
