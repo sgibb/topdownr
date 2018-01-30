@@ -6,9 +6,11 @@
 #' `n` to limit the number of iterations and combinations that should be
 #' returned.
 #' If `minN` is set at least `minN` fragments have to be added to the
-#' combinations. The function returns a 2-column matrix. The first column
-#' contains the index of the condition (column number) and the second one the
-#' newly added number of fragments.
+#' combinations. The function returns a 5-column matrix. The first column
+#' contains the index (`Index`) of the condition (column number). The next
+#' columns contain the newly added number of fragments or bonds
+#' (`FragmentsAddedToCombination`, `BondsAddedToCombination`) and the fragments
+#' or bonds in the condition (`FragmentsInCondition`, `BondsInCondition`).
 #'
 #' @param object `NCBSet`
 #' @param n `integer`, max number of combinations/iterations.
@@ -18,8 +20,8 @@
 #' `"fragments"` (default) or `"bonds"`.
 #' @param \ldots arguments passed to internal/other methods.
 #' added.
-## @return `matrix`, first column: index of condition, second column: number of
-#' newly added fragments third column: number of newly covered bonds.
+## @return `matrix`, first column: index of condition (`Index`), second column: number of
+## newly added fragments third column: number of newly covered bonds.
 #' @aliases bestConditions bestConditions,NCBSet-method
 #' @export
 setMethod("bestConditions", "NCBSet",
@@ -32,7 +34,21 @@ setMethod("bestConditions", "NCBSet",
         minN=minN,
         maximise=maximise
     )
-    rownames(m) <- colnames(object)[m[, "index"]]
+    m <- cbind(
+        m,
+        .countFragments(object@assay[, m[, "index"], drop=FALSE]),
+        .colCounts(object@assay[, m[, "index"], drop=FALSE])
+    )
+    dimnames(m) <- list(
+        colnames(object)[m[, "index"]],
+        c(
+            "Index",
+            paste0(
+                c("Fragments", "Bonds"),
+                rep(c("AddedToCombination", "InCondition"), each=2L)
+            )
+        )
+    )
     m
 })
 
@@ -72,7 +88,7 @@ setMethod("fragmentationMap", "NCBSet",
 
     if (nCombinations) {
         i <- bestConditions(object, n=nCombinations,
-                            maximise=maximise)[, "index"]
+                            maximise=maximise)[, "Index"]
         combinations <- object[, i]
         labels <- c(labels, labels[i])
 

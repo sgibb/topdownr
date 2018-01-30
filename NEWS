@@ -21,6 +21,9 @@ Changes in version 1.1.6
   (`redundantIonMatch`, `redundantFragmentMatch`). `AbstractTopDownSet` and
   `NCBSet` lost their `tolerance` slot. Saved objects need to be recreated
   [2018-01-30].
+- `bestConditions,NCBSet-method` returns a 5-column matrix now.
+  Colums are: Index, FragmentsAddedToCombination, BondsAddedToCombination,
+  FragmentsInCondition, BondsInCondition; see #52 [2018-01-30].
 
 Changes in version 1.1.5
 - Keep full filename (before `basename` was used) in `AbstractTopDownSet`

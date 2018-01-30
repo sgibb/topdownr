@@ -6,7 +6,8 @@
 #' @param minN `integer` stop if there are less than `minN` non-zero
 #' elements added by the next column.
 #' @param maximise `character`, maximise fragment/bond coverage
-#' @return `matrix`, first column: index, second column: number of fragments.
+#' @return `matrix`, first column: index, second column: number of fragments,
+#' third column: number of bonds
 #' @noRd
 .bestNcbCoverageCombination <- function(x, intensity=NULL,
                                         n=ncol(x), minN=0L,
