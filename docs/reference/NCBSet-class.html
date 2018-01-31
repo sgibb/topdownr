@@ -175,8 +175,7 @@ specifies whether <code>"conditions"</code> (columns; default) or
     <tr>
       <th>&#8230;</th>
       <td><p>arguments passed to internal/other methods.
-added.
-newly added fragments third column: number of newly covered bonds.</p></td>
+added.</p></td>
     </tr>
     </table>
     
@@ -194,9 +193,11 @@ of fragments/bonds the one with the highest assigned intensity is used. Use
 <code>n</code> to limit the number of iterations and combinations that should be
 returned.
 If <code>minN</code> is set at least <code>minN</code> fragments have to be added to the
-combinations. The function returns a 2-column matrix. The first column
-contains the index of the condition (column number) and the second one the
-newly added number of fragments.</p></li>
+combinations. The function returns a 5-column matrix. The first column
+contains the index (<code>Index</code>) of the condition (column number). The next
+columns contain the newly added number of fragments or bonds
+(<code>FragmentsAddedToCombination</code>, <code>BondsAddedToCombination</code>) and the fragments
+or bonds in the condition (<code>FragmentsInCondition</code>, <code>BondsInCondition</code>).</p></li>
 <li><p><code>fragmentationMap</code>: Plot fragmentation map.</p>
 <p>Plots a fragmentation map of the Protein.
 Use <code>nCombinations</code> to add another
@@ -225,9 +226,6 @@ from zero. If a bond is covered by an N-terminal fragment its encoded
 with <code>1</code>, by an C-terminal fragmentl with <code>2</code> and
 by both fragment types/bidirectional by <code>3</code> respectively.</p></dd>
     <dt><code>files</code></dt><dd><p><code>character</code>, files that were imported.</p></dd>
-    <dt><code>tolerance</code></dt><dd><p><code>double</code>,
-tolerance in <em>ppm</em> that were used for matching the experimental mz values
-to the theoretical fragments.</p></dd>
     <dt><code>processing</code></dt><dd><p><code>character</code>, log messages.</p></dd>
 </dl>
     
@@ -256,28 +254,28 @@ for technical details about the coverage storage.</p></li>
 #&gt; - - - Protein data - - -
 #&gt; Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
 #&gt; - - - Fragment data - - -
-#&gt; Number of N-terminal fragments: 364
-#&gt; Number of C-terminal fragments: 7923
-#&gt; Number of N- and C-terminal fragments: 88
+#&gt; Number of N-terminal fragments: 353
+#&gt; Number of C-terminal fragments: 7798
+#&gt; Number of N- and C-terminal fragments: 83
 #&gt; - - - Condition data - - -
 #&gt; Number of conditions: 222 
 #&gt; Number of scans: 222 
-#&gt; Condition variables (58): Scan, PeaksCount, ..., MedianIonInjectionTimeMs, AssignedIntensity
+#&gt; Condition variables (60): File, Scan, ..., MedianIonInjectionTimeMs, AssignedIntensity
 #&gt; - - - Assay data - - -
-#&gt; Size of array: 152x222 (24.82% != 0)
+#&gt; Size of array: 152x222 (24.40% != 0)
 #&gt; - - - Processing information - - -
-#&gt; [2017-12-28 16:44:52] 14901 fragments [1949;351] matched (tolerance: 25 ppm).
-#&gt; [2017-12-28 16:44:52] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
-#&gt; [2017-12-28 16:44:52] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2018-01-15 19:55:04] Aggregated 14901 fragments [1949;351] to 11259 fragments [1949;222].
-#&gt; [2018-01-15 19:55:04] Coerced TopDownSet into an NCBSet object; 8375 fragments [152;222]. </div><div class='input'>
+#&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
+#&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
+#&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
+#&gt; [2018-01-30 13:29:41] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
+#&gt; [2018-01-30 13:29:41] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222]. </div><div class='input'>
 <span class='fu'>head</span>(<span class='fu'>summary</span>(<span class='no'>ncb</span>))</div><div class='output co'>#&gt;                                Fragments Total Min Q1 Median      Mean Q3 Max
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1        51   101   1  2      2 0.6644737  2   3
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1        48    93   1  2      2 0.6118421  2   2
+#&gt; C1.0e+05_1.0e+06_02.50_07_00_1        48    96   1  2      2 0.6315789  2   3
+#&gt; C1.0e+05_1.0e+06_02.50_14_00_1        47    91   1  2      2 0.5986842  2   2
 #&gt; C1.0e+05_1.0e+06_02.50_21_00          44    88   1  2      2 0.5789474  2   3
 #&gt; C1.0e+05_1.0e+06_02.50_28_00_1        51   100   1  2      2 0.6578947  2   2
-#&gt; C1.0e+05_1.0e+06_02.50_35_00_1        52   102   1  2      2 0.6710526  2   2
-#&gt; C1.0e+05_1.0e+06_02.50_00_07          61   120   1  2      2 0.7894737  2   2</div><div class='input'>
+#&gt; C1.0e+05_1.0e+06_02.50_35_00_1        50    99   1  2      2 0.6513158  2   2
+#&gt; C1.0e+05_1.0e+06_02.50_00_07          60   118   1  2      2 0.7763158  2   2</div><div class='input'>
 <span class='co'># Accessing slots</span>
 <span class='fu'><a href='AbstractTopDownSet-class.html'>rowViews</a></span>(<span class='no'>ncb</span>)</div><div class='output co'>#&gt;   Views on a 153-letter AAString subject
 #&gt; subject: GLSDGEWQQVLNVWGKVEADIAGHGQEVLIRLFT...PGDFGADAQGAMTKALELFRNDIAAKYKELGFQG
@@ -293,46 +291,72 @@ for technical details about the coverage storage.</p></li>
 #&gt; [149]     1 149   149 [GLSDGEWQQVLNVWGKVEADIAGHGQE...GADAQGAMTKALELFRNDIAAKYKEL]
 #&gt; [150]     1 150   150 [GLSDGEWQQVLNVWGKVEADIAGHGQE...ADAQGAMTKALELFRNDIAAKYKELG]
 #&gt; [151]     1 151   151 [GLSDGEWQQVLNVWGKVEADIAGHGQE...DAQGAMTKALELFRNDIAAKYKELGF]
-#&gt; [152]     1 152   152 [GLSDGEWQQVLNVWGKVEADIAGHGQE...AQGAMTKALELFRNDIAAKYKELGFQ]</div><div class='input'><span class='fu'><a href='AbstractTopDownSet-class.html'>colData</a></span>(<span class='no'>ncb</span>)</div><div class='output co'>#&gt; DataFrame with 222 rows and 58 columns
-#&gt;                                     Scan PeaksCount TotIonCurrent RetentionTime
-#&gt;                                &lt;integer&gt;  &lt;numeric&gt;     &lt;numeric&gt;     &lt;numeric&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1        33      134.0      14353074      380.4386
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1        36      134.0      14563102      434.3265
-#&gt; C1.0e+05_1.0e+06_02.50_21_00          40      148.0      14008273      497.2891
-#&gt; C1.0e+05_1.0e+06_02.50_28_00_1        43      136.0      14285122      560.2883
-#&gt; C1.0e+05_1.0e+06_02.50_35_00_1        46      134.5      14827734      614.1264
-#&gt; ...                                  ...        ...           ...           ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_07_1       257       50.0      731470.4      4641.376
-#&gt; C1.0e+06_0.0e+00_00.00_00_14_1       260      368.5     5725744.8      4690.678
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_1       264      520.0     3477378.6      4756.434
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1       268      202.5     2015615.1      4822.080
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1       271      198.5     2889646.9      4870.885
-#&gt;                                BasePeakMz BasePeakIntensity.SpectraInformation
-#&gt;                                 &lt;numeric&gt;                            &lt;numeric&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1   16942.99                              4867514
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1   16943.01                              5007425
-#&gt; C1.0e+05_1.0e+06_02.50_21_00     16942.98                              4605146
-#&gt; C1.0e+05_1.0e+06_02.50_28_00_1   16942.99                              4835166
-#&gt; C1.0e+05_1.0e+06_02.50_35_00_1   16943.00                              5029054
-#&gt; ...                                   ...                                  ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_07_1  9065.4610                             31445.26
-#&gt; C1.0e+06_0.0e+00_00.00_00_14_1 16940.9242                            297300.95
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_1   231.1233                             54766.11
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1   231.1231                            100368.13
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1   231.1232                            249724.28
-#&gt;                                    LowMz    HighMz PrecursorMz
-#&gt;                                &lt;numeric&gt; &lt;numeric&gt;   &lt;numeric&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1  762.3909  17146.08    1211.701
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1  762.3911  17146.08    1211.701
-#&gt; C1.0e+05_1.0e+06_02.50_21_00    762.3912  17146.11    1211.702
-#&gt; C1.0e+05_1.0e+06_02.50_28_00_1  762.3908  17146.59    1211.702
-#&gt; C1.0e+05_1.0e+06_02.50_35_00_1  762.3904  17146.06    1211.702
-#&gt; ...                                  ...       ...         ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_07_1 1146.1138 16941.014    1211.715
-#&gt; C1.0e+06_0.0e+00_00.00_00_14_1  244.6340 16940.924    1211.716
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_1  200.1387  5468.805    1211.716
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1  200.1386  1406.276    1211.716
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1  200.1386  1049.079    1211.716
+#&gt; [152]     1 152   152 [GLSDGEWQQVLNVWGKVEADIAGHGQE...AQGAMTKALELFRNDIAAKYKELGFQ]</div><div class='input'><span class='fu'><a href='AbstractTopDownSet-class.html'>colData</a></span>(<span class='no'>ncb</span>)</div><div class='output co'>#&gt; DataFrame with 222 rows and 60 columns
+#&gt;                                                           File      Scan
+#&gt;                                                          &lt;Rle&gt; &lt;integer&gt;
+#&gt; C1.0e+05_1.0e+06_02.50_07_00_1 myo_1211_ETDReagentTarget_1e6_1        33
+#&gt; C1.0e+05_1.0e+06_02.50_14_00_1 myo_1211_ETDReagentTarget_1e6_1        36
+#&gt; C1.0e+05_1.0e+06_02.50_21_00   myo_1211_ETDReagentTarget_1e6_1        40
+#&gt; C1.0e+05_1.0e+06_02.50_28_00_1 myo_1211_ETDReagentTarget_1e6_1        43
+#&gt; C1.0e+05_1.0e+06_02.50_35_00_1 myo_1211_ETDReagentTarget_1e6_1        46
+#&gt; ...                                                        ...       ...
+#&gt; C1.0e+06_0.0e+00_00.00_00_07_1 myo_1211_ETDReagentTarget_1e6_1       257
+#&gt; C1.0e+06_0.0e+00_00.00_00_14_1 myo_1211_ETDReagentTarget_1e6_1       260
+#&gt; C1.0e+06_0.0e+00_00.00_00_21_1 myo_1211_ETDReagentTarget_1e6_1       264
+#&gt; C1.0e+06_0.0e+00_00.00_00_28_1 myo_1211_ETDReagentTarget_1e6_1       268
+#&gt; C1.0e+06_0.0e+00_00.00_00_35_1 myo_1211_ETDReagentTarget_1e6_1       271
+#&gt;                                SpectrumIndex PeaksCount TotIonCurrent
+#&gt;                                    &lt;numeric&gt;  &lt;numeric&gt;     &lt;numeric&gt;
+#&gt; C1.0e+05_1.0e+06_02.50_07_00_1          23.5      134.0      14353074
+#&gt; C1.0e+05_1.0e+06_02.50_14_00_1          26.5      134.0      14563102
+#&gt; C1.0e+05_1.0e+06_02.50_21_00            30.0      148.0      14008273
+#&gt; C1.0e+05_1.0e+06_02.50_28_00_1          33.5      136.0      14285122
+#&gt; C1.0e+05_1.0e+06_02.50_35_00_1          36.5      134.5      14827734
+#&gt; ...                                      ...        ...           ...
+#&gt; C1.0e+06_0.0e+00_00.00_00_07_1         241.5       50.0      731470.4
+#&gt; C1.0e+06_0.0e+00_00.00_00_14_1         244.5      368.5     5725744.8
+#&gt; C1.0e+06_0.0e+00_00.00_00_21_1         248.5      520.0     3477378.6
+#&gt; C1.0e+06_0.0e+00_00.00_00_28_1         252.5      202.5     2015615.1
+#&gt; C1.0e+06_0.0e+00_00.00_00_35_1         255.5      198.5     2889646.9
+#&gt;                                RetentionTime BasePeakMz
+#&gt;                                    &lt;numeric&gt;  &lt;numeric&gt;
+#&gt; C1.0e+05_1.0e+06_02.50_07_00_1      380.4386   16942.99
+#&gt; C1.0e+05_1.0e+06_02.50_14_00_1      434.3265   16943.01
+#&gt; C1.0e+05_1.0e+06_02.50_21_00        497.2891   16942.98
+#&gt; C1.0e+05_1.0e+06_02.50_28_00_1      560.2883   16942.99
+#&gt; C1.0e+05_1.0e+06_02.50_35_00_1      614.1264   16943.00
+#&gt; ...                                      ...        ...
+#&gt; C1.0e+06_0.0e+00_00.00_00_07_1      4641.376  9065.4610
+#&gt; C1.0e+06_0.0e+00_00.00_00_14_1      4690.678 16940.9242
+#&gt; C1.0e+06_0.0e+00_00.00_00_21_1      4756.434   231.1233
+#&gt; C1.0e+06_0.0e+00_00.00_00_28_1      4822.080   231.1231
+#&gt; C1.0e+06_0.0e+00_00.00_00_35_1      4870.885   231.1232
+#&gt;                                BasePeakIntensity.SpectraInformation     LowMz
+#&gt;                                                           &lt;numeric&gt; &lt;numeric&gt;
+#&gt; C1.0e+05_1.0e+06_02.50_07_00_1                              4867514  762.3909
+#&gt; C1.0e+05_1.0e+06_02.50_14_00_1                              5007425  762.3911
+#&gt; C1.0e+05_1.0e+06_02.50_21_00                                4605146  762.3912
+#&gt; C1.0e+05_1.0e+06_02.50_28_00_1                              4835166  762.3908
+#&gt; C1.0e+05_1.0e+06_02.50_35_00_1                              5029054  762.3904
+#&gt; ...                                                             ...       ...
+#&gt; C1.0e+06_0.0e+00_00.00_00_07_1                             31445.26 1146.1138
+#&gt; C1.0e+06_0.0e+00_00.00_00_14_1                            297300.95  244.6340
+#&gt; C1.0e+06_0.0e+00_00.00_00_21_1                             54766.11  200.1387
+#&gt; C1.0e+06_0.0e+00_00.00_00_28_1                            100368.13  200.1386
+#&gt; C1.0e+06_0.0e+00_00.00_00_35_1                            249724.28  200.1386
+#&gt;                                   HighMz PrecursorMz
+#&gt;                                &lt;numeric&gt;   &lt;numeric&gt;
+#&gt; C1.0e+05_1.0e+06_02.50_07_00_1  17146.08    1211.701
+#&gt; C1.0e+05_1.0e+06_02.50_14_00_1  17146.08    1211.701
+#&gt; C1.0e+05_1.0e+06_02.50_21_00    17146.11    1211.702
+#&gt; C1.0e+05_1.0e+06_02.50_28_00_1  17146.59    1211.702
+#&gt; C1.0e+05_1.0e+06_02.50_35_00_1  17146.06    1211.702
+#&gt; ...                                  ...         ...
+#&gt; C1.0e+06_0.0e+00_00.00_00_07_1 16941.014    1211.715
+#&gt; C1.0e+06_0.0e+00_00.00_00_14_1 16940.924    1211.716
+#&gt; C1.0e+06_0.0e+00_00.00_00_21_1  5468.805    1211.716
+#&gt; C1.0e+06_0.0e+00_00.00_00_28_1  1406.276    1211.716
+#&gt; C1.0e+06_0.0e+00_00.00_00_35_1  1049.079    1211.716
 #&gt;                                                                  SpectrumId
 #&gt;                                                                 &lt;character&gt;
 #&gt; C1.0e+05_1.0e+06_02.50_07_00_1  controllerType=0 controllerNumber=1 scan=33
@@ -582,14 +606,14 @@ for technical details about the coverage storage.</p></li>
 #&gt; C1.0e+06_0.0e+00_00.00_00_35_1 (mz=1211.7162 z=1 name=) 1211.7     14       222
 #&gt;                                MedianIonInjectionTimeMs AssignedIntensity
 #&gt;                                                   &lt;Rle&gt;         &lt;numeric&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1                    4.837           3684762
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1                    4.837           3704417
+#&gt; C1.0e+05_1.0e+06_02.50_07_00_1                    4.837           3584559
+#&gt; C1.0e+05_1.0e+06_02.50_14_00_1                    4.837           3693918
 #&gt; C1.0e+05_1.0e+06_02.50_21_00                      4.837           3590927
-#&gt; C1.0e+05_1.0e+06_02.50_28_00_1                    4.837           3868132
-#&gt; C1.0e+05_1.0e+06_02.50_35_00_1                    4.837           3825467
+#&gt; C1.0e+05_1.0e+06_02.50_28_00_1                    4.837           3935368
+#&gt; C1.0e+05_1.0e+06_02.50_35_00_1                    4.837           3773703
 #&gt; ...                                                 ...               ...
 #&gt; C1.0e+06_0.0e+00_00.00_00_07_1                    43.14         105927.57
-#&gt; C1.0e+06_0.0e+00_00.00_00_14_1                    43.14        1795060.93
+#&gt; C1.0e+06_0.0e+00_00.00_00_14_1                    43.14        1786586.10
 #&gt; C1.0e+06_0.0e+00_00.00_00_21_1                    43.14         400658.53
 #&gt; C1.0e+06_0.0e+00_00.00_00_28_1                    43.14          53932.96
 #&gt; C1.0e+06_0.0e+00_00.00_00_35_1                    43.14          56438.17</div><div class='input'><span class='fu'>head</span>(<span class='fu'>assayData</span>(<span class='no'>ncb</span>))</div><div class='output co'>#&gt; 6 x 222 sparse Matrix of class "dgCMatrix"</div><div class='output co'>#&gt; <span class='message'>   [[ suppressing 222 column names ‘C1.0e+05_1.0e+06_02.50_07_00_1’, ‘C1.0e+05_1.0e+06_02.50_14_00_1’, ‘C1.0e+05_1.0e+06_02.50_21_00’ ... ]]</span></div><div class='output co'>#&gt;                                                                                
@@ -608,7 +632,7 @@ for technical details about the coverage storage.</p></li>
 #&gt; bond006 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 . 2 . . . .
 #&gt;                                                                                
 #&gt; bond001 2 2 . 2 2 . . . . 2 2 . 2 . . 2 2 . . . . . . . . . 2 2 . . . . . . . .
-#&gt; bond002 . . . . 2 . 2 . 1 . 2 . 2 . 2 2 2 2 . 1 2 . 2 . . . 2 2 . . . . . . . 2
+#&gt; bond002 . . . . 2 . 2 . 1 . 2 . 2 . 2 2 2 2 . 1 2 . . . . . 2 2 . . . . . . . 2
 #&gt; bond003 . 2 . . 2 . 2 1 1 . . . . . . 2 2 . . 1 . . . . . . 2 . . . . . . . . .
 #&gt; bond004 . . . . . . . . 1 . . . . . . . . . . . . . . . . . . 2 . . . . . . . .
 #&gt; bond005 . . . . 2 . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . . .
@@ -621,14 +645,14 @@ for technical details about the coverage storage.</p></li>
 #&gt; bond005 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 2 . 2 .
 #&gt; bond006 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2 .
 #&gt;                                                                                
-#&gt; bond001 . . 2 . 2 . . 2 . . . . 2 2 2 2 2 2 2 . . . . 2 . . 2 . . 2 2 2 . . . .
-#&gt; bond002 1 1 . . . . . . 2 2 . 1 2 2 2 2 2 . . 2 2 . 1 2 2 . 2 . 2 2 2 2 . . . .
+#&gt; bond001 . . 2 . 2 . . 2 . . . . 2 . 2 2 2 2 2 . . . . . . . 2 . . 2 2 2 . . . .
+#&gt; bond002 1 1 . . . . . . 2 2 . 1 2 2 2 2 2 . . 2 2 . 1 2 2 . 2 . 2 2 . 2 . . . .
 #&gt; bond003 1 1 . . . . . 2 2 2 1 1 . . . . . . 2 2 2 1 1 2 . . . . . 2 . . . 1 . .
 #&gt; bond004 . . . . . . . 2 . 2 1 1 . . . . . . . . 2 . . . . . . . . . . . . . . .
 #&gt; bond005 . . . . . . . 2 . . . . . . . . . . 2 . . . . . . . . . . 2 . . . 1 . .
 #&gt; bond006 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 #&gt;                                                                                
-#&gt; bond001 . . . . 2 2 . 2 . . . . . . . 2 2 . . . . . . . . . . . . . . . 2 2 . .
+#&gt; bond001 . . . . 2 2 . 2 . . . . . . . 2 2 . . . . . . . . . . . . . . . 2 . . .
 #&gt; bond002 . . 2 . 2 2 2 2 . . . . . 2 . . 2 . . . . . . . . . . . . . . . . . . 2
 #&gt; bond003 . . . . 2 2 . . 1 2 . . . . . . . . . 1 . . . . . . . . . . . . . . . .
 #&gt; bond004 . . . . . 2 . 1 . . . . . . . . 2 . 1 . . . . . . . . . . . . . . . . 2
@@ -652,64 +676,64 @@ for technical details about the coverage storage.</p></li>
 #&gt; - - - Protein data - - -
 #&gt; Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
 #&gt; - - - Fragment data - - -
-#&gt; Number of N-terminal fragments: 197
-#&gt; Number of C-terminal fragments: 4057
-#&gt; Number of N- and C-terminal fragments: 73
+#&gt; Number of N-terminal fragments: 192
+#&gt; Number of C-terminal fragments: 3974
+#&gt; Number of N- and C-terminal fragments: 69
 #&gt; - - - Condition data - - -
 #&gt; Number of conditions: 222 
 #&gt; Number of scans: 222 
-#&gt; Condition variables (58): Scan, PeaksCount, ..., MedianIonInjectionTimeMs, AssignedIntensity
+#&gt; Condition variables (60): File, Scan, ..., MedianIonInjectionTimeMs, AssignedIntensity
 #&gt; - - - Assay data - - -
-#&gt; Size of array: 100x222 (19.49% != 0)
+#&gt; Size of array: 100x222 (19.08% != 0)
 #&gt; - - - Processing information - - -
-#&gt; [2017-12-28 16:44:52] 14901 fragments [1949;351] matched (tolerance: 25 ppm).
-#&gt; [2017-12-28 16:44:52] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
-#&gt; [2017-12-28 16:44:52] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2018-01-15 19:55:04] Aggregated 14901 fragments [1949;351] to 11259 fragments [1949;222].
-#&gt; [2018-01-15 19:55:04] Coerced TopDownSet into an NCBSet object; 8375 fragments [152;222].
-#&gt; [2018-01-15 19:55:05] Subsetted 8375 fragments [152;222] to 4327 fragments [100;222]. </div><div class='input'>
+#&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
+#&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
+#&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
+#&gt; [2018-01-30 13:29:41] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
+#&gt; [2018-01-30 13:29:41] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222].
+#&gt; [2018-01-30 13:29:41] Subsetted 8234 fragments [152;222] to 4235 fragments [100;222]. </div><div class='input'>
 <span class='co'># Just bond 152</span>
 <span class='no'>ncb</span>[<span class='st'>"bond152"</span>]</div><div class='output co'>#&gt; NCBSet object (0.22 Mb)
 #&gt; - - - Protein data - - -
 #&gt; Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
 #&gt; - - - Fragment data - - -
-#&gt; Number of N-terminal fragments: 100
+#&gt; Number of N-terminal fragments: 96
 #&gt; Number of C-terminal fragments: 0
 #&gt; Number of N- and C-terminal fragments: 0
 #&gt; - - - Condition data - - -
 #&gt; Number of conditions: 222 
 #&gt; Number of scans: 222 
-#&gt; Condition variables (58): Scan, PeaksCount, ..., MedianIonInjectionTimeMs, AssignedIntensity
+#&gt; Condition variables (60): File, Scan, ..., MedianIonInjectionTimeMs, AssignedIntensity
 #&gt; - - - Assay data - - -
-#&gt; Size of array: 1x222 (45.05% != 0)
+#&gt; Size of array: 1x222 (43.24% != 0)
 #&gt; - - - Processing information - - -
-#&gt; [2017-12-28 16:44:52] 14901 fragments [1949;351] matched (tolerance: 25 ppm).
-#&gt; [2017-12-28 16:44:52] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
-#&gt; [2017-12-28 16:44:52] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2018-01-15 19:55:04] Aggregated 14901 fragments [1949;351] to 11259 fragments [1949;222].
-#&gt; [2018-01-15 19:55:04] Coerced TopDownSet into an NCBSet object; 8375 fragments [152;222].
-#&gt; [2018-01-15 19:55:05] Subsetted 8375 fragments [152;222] to 100 fragments [1;222]. </div><div class='input'>
+#&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
+#&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
+#&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
+#&gt; [2018-01-30 13:29:41] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
+#&gt; [2018-01-30 13:29:41] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222].
+#&gt; [2018-01-30 13:29:41] Subsetted 8234 fragments [152;222] to 96 fragments [1;222]. </div><div class='input'>
 <span class='co'># Condition 1 to 10</span>
 <span class='no'>ncb</span>[, <span class='fl'>1</span>:<span class='fl'>10</span>]</div><div class='output co'>#&gt; NCBSet object (0.08 Mb)
 #&gt; - - - Protein data - - -
 #&gt; Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
 #&gt; - - - Fragment data - - -
-#&gt; Number of N-terminal fragments: 14
-#&gt; Number of C-terminal fragments: 361
+#&gt; Number of N-terminal fragments: 11
+#&gt; Number of C-terminal fragments: 355
 #&gt; Number of N- and C-terminal fragments: 2
 #&gt; - - - Condition data - - -
 #&gt; Number of conditions: 10 
 #&gt; Number of scans: 10 
-#&gt; Condition variables (58): Scan, PeaksCount, ..., MedianIonInjectionTimeMs, AssignedIntensity
+#&gt; Condition variables (60): File, Scan, ..., MedianIonInjectionTimeMs, AssignedIntensity
 #&gt; - - - Assay data - - -
-#&gt; Size of array: 152x10 (24.80% != 0)
+#&gt; Size of array: 152x10 (24.21% != 0)
 #&gt; - - - Processing information - - -
-#&gt; [2017-12-28 16:44:52] 14901 fragments [1949;351] matched (tolerance: 25 ppm).
-#&gt; [2017-12-28 16:44:52] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
-#&gt; [2017-12-28 16:44:52] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2018-01-15 19:55:04] Aggregated 14901 fragments [1949;351] to 11259 fragments [1949;222].
-#&gt; [2018-01-15 19:55:04] Coerced TopDownSet into an NCBSet object; 8375 fragments [152;222].
-#&gt; [2018-01-15 19:55:05] Subsetted 8375 fragments [152;222] to 377 fragments [152;10]. </div><div class='input'>
+#&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
+#&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
+#&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
+#&gt; [2018-01-30 13:29:41] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
+#&gt; [2018-01-30 13:29:41] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222].
+#&gt; [2018-01-30 13:29:41] Subsetted 8234 fragments [152;222] to 368 fragments [152;10]. </div><div class='input'>
 <span class='co'># Plot fragmentation map</span>
 <span class='fu'>fragmentationMap</span>(<span class='no'>ncb</span>)</div><div class='img'><img src='NCBSet-class-1.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
@@ -742,7 +766,7 @@ Sebastian Gibb <a href='mailto:mail@sebastiangibb.de'>mail@sebastiangibb.de</a>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>

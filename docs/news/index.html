@@ -106,6 +106,24 @@
     <div id="topdownr-1-1" class="section level1">
 <h1 class="hasAnchor">
 <a href="#topdownr-1-1" class="anchor"></a>topdownr 1.1</h1>
+<div id="changes-in-version-1-1-6" class="section level2">
+<h2 class="hasAnchor">
+<a href="#changes-in-version-1-1-6" class="anchor"></a>Changes in version 1.1.6</h2>
+<ul>
+<li>Rotate fragment labels (vertical orientation) in <code>plot</code> [2018-01-17].</li>
+<li>Replace signature for <code>updateMedianInjectionTime,TopDownSet-method</code> to <code>updateMedianInjectionTime,AbstractTopDownSet-method</code>; closes <a href="https://github.com/sgibb/topdownr/issues/69">#69</a>; see also <a href="https://github.com/sgibb/topdownr/issues/71">#71</a> [2018-01-27].</li>
+<li>Fix <code>.matchFragments</code> for <code>length(fmass) == 0</code> [2018-01-27].</li>
+<li>Just plot fragments that are present in current <code>TopDownSet</code> see <a href="https://github.com/sgibb/topdownr/issues/70">#70</a> [2018-01-27].</li>
+<li>Add <code>combine,FragmentViews,FragmentViews-method</code> [2018-01-27].</li>
+<li>Allow to <code>combine</code> <code>TopDownSet</code> objects with different fragment types; closes <a href="https://github.com/sgibb/topdownr/issues/71">#71</a> [2018-01-27].</li>
+<li>Add <code>all.equal</code> for <code>AbstractTopDownSet</code> objects [2018-01-27].</li>
+<li>Allow the user to decide how to handle redundant fragment matching. Current default is <code>redundantFragmentMatch="remove"</code> and <code>redundantIonMatch="remove"</code>. This will reduce the number of fragment matches. Choose <code>"closest"</code> for both to get the old behaviour. See also <a href="https://github.com/sgibb/topdownr/issues/72">#72</a> [2018-01-29].</li>
+<li>
+<code>TopDownSet</code> object store the matching <code>tolerance</code> and strategies (<code>redundantIonMatch</code>, <code>redundantFragmentMatch</code>). <code>AbstractTopDownSet</code> and <code>NCBSet</code> lost their <code>tolerance</code> slot. Saved objects need to be recreated [2018-01-30].</li>
+<li>
+<code>bestConditions,NCBSet-method</code> returns a 5-column matrix now. Colums are: Index, FragmentsAddedToCombination, BondsAddedToCombination, FragmentsInCondition, BondsInCondition; see <a href="https://github.com/sgibb/topdownr/issues/52">#52</a> [2018-01-30].</li>
+</ul>
+</div>
 <div id="changes-in-version-1-1-5" class="section level2">
 <h2 class="hasAnchor">
 <a href="#changes-in-version-1-1-5" class="anchor"></a>Changes in version 1.1.5</h2>
@@ -208,7 +226,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>

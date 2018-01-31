@@ -176,7 +176,7 @@ myoglobin &lt;-<span class="st"> </span><span class="kw"><a href="../reference/r
 ## Warning in FUN(X[[i]], ...): ID in FilterString are not sorted in ascending
 ## order. Introduce own condition ID via 'cumsum'.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myoglobin</code></pre></div>
-<pre><code>## TopDownSet object (7.10 Mb)
+<pre><code>## TopDownSet object (7.05 Mb)
 ## - - - Protein data - - -
 ## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAG...MTKALELFRNDIAAKYKELGFQG 
 ## Mass : 16922.95
@@ -190,13 +190,13 @@ myoglobin &lt;-<span class="st"> </span><span class="kw"><a href="../reference/r
 ## Number of scans: 5882 
 ## Condition variables (60): File, Scan, ..., Sample, MedianIonInjectionTimeMs
 ## - - - Intensity data - - -
-## Size of array: 1216x5882 (5.21% != 0)
-## Number of matched fragments: 372991 
+## Size of array: 1216x5882 (5.15% != 0)
+## Number of matched fragments: 368296 
 ## Intensity range: [87.61;10704001.00]
 ## - - - Processing information - - -
-## [2018-01-15 19:55:42] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
-## [2018-01-15 19:55:42] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2018-01-15 19:55:43] Recalculate median injection time based on: Mz, AgcTarget.</code></pre>
+## [2018-01-30 13:30:18] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2018-01-30 13:30:18] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2018-01-30 13:30:18] Recalculate median injection time based on: Mz, AgcTarget.</code></pre>
 </div>
 <div id="the-topdownset-anatomy" class="section level2">
 <h2 class="hasAnchor">
@@ -343,16 +343,16 @@ myoglobin[<span class="dv">1</span>:<span class="dv">100</span>]</code></pre></d
 ## Condition variables (60): File, Scan, ..., Sample, MedianIonInjectionTimeMs
 ## - - - Intensity data - - -
 ## Size of array: 100x5882 (9.68% != 0)
-## Number of matched fragments: 56956 
+## Number of matched fragments: 56955 
 ## Intensity range: [105.70;1076768.00]
 ## - - - Processing information - - -
-## [2018-01-15 19:55:42] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
-## [2018-01-15 19:55:42] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2018-01-15 19:55:43] Recalculate median injection time based on: Mz, AgcTarget.
-## [2018-01-15 19:55:43] Subsetted 372991 fragments [1216;5882] to 56956 fragments [100;5882].</code></pre>
+## [2018-01-30 13:30:18] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2018-01-30 13:30:18] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2018-01-30 13:30:18] Recalculate median injection time based on: Mz, AgcTarget.
+## [2018-01-30 13:30:18] Subsetted 368296 fragments [1216;5882] to 56955 fragments [100;5882].</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># select all "c" fragments</span>
 myoglobin[<span class="st">"c"</span>]</code></pre></div>
-<pre><code>## TopDownSet object (4.30 Mb)
+<pre><code>## TopDownSet object (4.28 Mb)
 ## - - - Protein data - - -
 ## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAG...MTKALELFRNDIAAKYKELGFQG 
 ## Mass : 16922.95
@@ -366,14 +366,14 @@ myoglobin[<span class="st">"c"</span>]</code></pre></div>
 ## Number of scans: 5882 
 ## Condition variables (60): File, Scan, ..., Sample, MedianIonInjectionTimeMs
 ## - - - Intensity data - - -
-## Size of array: 304x5882 (7.80% != 0)
-## Number of matched fragments: 139458 
+## Size of array: 304x5882 (7.69% != 0)
+## Number of matched fragments: 137461 
 ## Intensity range: [87.61;1203763.75]
 ## - - - Processing information - - -
-## [2018-01-15 19:55:42] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
-## [2018-01-15 19:55:42] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2018-01-15 19:55:43] Recalculate median injection time based on: Mz, AgcTarget.
-## [2018-01-15 19:55:43] Subsetted 372991 fragments [1216;5882] to 139458 fragments [304;5882].</code></pre>
+## [2018-01-30 13:30:18] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2018-01-30 13:30:18] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2018-01-30 13:30:18] Recalculate median injection time based on: Mz, AgcTarget.
+## [2018-01-30 13:30:18] Subsetted 368296 fragments [1216;5882] to 137461 fragments [304;5882].</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># select just the 100. "c" fragment</span>
 myoglobin[<span class="st">"c100"</span>]</code></pre></div>
 <pre><code>## TopDownSet object (2.66 Mb)
@@ -394,13 +394,13 @@ myoglobin[<span class="st">"c100"</span>]</code></pre></div>
 ## Number of matched fragments: 5 
 ## Intensity range: [1276.91;17056.12]
 ## - - - Processing information - - -
-## [2018-01-15 19:55:42] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
-## [2018-01-15 19:55:42] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2018-01-15 19:55:43] Recalculate median injection time based on: Mz, AgcTarget.
-## [2018-01-15 19:55:43] Subsetted 372991 fragments [1216;5882] to 5 fragments [1;5882].</code></pre>
+## [2018-01-30 13:30:18] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2018-01-30 13:30:18] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2018-01-30 13:30:18] Recalculate median injection time based on: Mz, AgcTarget.
+## [2018-01-30 13:30:18] Subsetted 368296 fragments [1216;5882] to 5 fragments [1;5882].</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># select all "a" and "b" fragments but just the first 100 "c"</span>
 myoglobin[<span class="kw">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="kw">paste0</span>(<span class="st">"c"</span>, <span class="dv">1</span>:<span class="dv">100</span>))]</code></pre></div>
-<pre><code>## TopDownSet object (4.38 Mb)
+<pre><code>## TopDownSet object (4.36 Mb)
 ## - - - Protein data - - -
 ## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAG...MTKALELFRNDIAAKYKELGFQG 
 ## Mass : 16922.95
@@ -414,14 +414,14 @@ myoglobin[<span class="kw">c</span>(<span class="st">"a"</span>, <span class="st
 ## Number of scans: 5882 
 ## Condition variables (60): File, Scan, ..., Sample, MedianIonInjectionTimeMs
 ## - - - Intensity data - - -
-## Size of array: 404x5882 (6.12% != 0)
-## Number of matched fragments: 145348 
+## Size of array: 404x5882 (6.04% != 0)
+## Number of matched fragments: 143582 
 ## Intensity range: [87.61;1630533.12]
 ## - - - Processing information - - -
-## [2018-01-15 19:55:42] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
-## [2018-01-15 19:55:42] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2018-01-15 19:55:43] Recalculate median injection time based on: Mz, AgcTarget.
-## [2018-01-15 19:55:43] Subsetted 372991 fragments [1216;5882] to 145348 fragments [404;5882].</code></pre>
+## [2018-01-30 13:30:18] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2018-01-30 13:30:18] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2018-01-30 13:30:18] Recalculate median injection time based on: Mz, AgcTarget.
+## [2018-01-30 13:30:18] Subsetted 368296 fragments [1216;5882] to 143582 fragments [404;5882].</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># select condition/run 1 to 10</span>
 myoglobin[, <span class="dv">1</span>:<span class="dv">10</span>]</code></pre></div>
 <pre><code>## TopDownSet object (0.26 Mb)
@@ -438,14 +438,14 @@ myoglobin[, <span class="dv">1</span>:<span class="dv">10</span>]</code></pre></
 ## Number of scans: 10 
 ## Condition variables (60): File, Scan, ..., Sample, MedianIonInjectionTimeMs
 ## - - - Intensity data - - -
-## Size of array: 1216x10 (8.40% != 0)
-## Number of matched fragments: 1022 
+## Size of array: 1216x10 (8.38% != 0)
+## Number of matched fragments: 1019 
 ## Intensity range: [7872.05;1036892.19]
 ## - - - Processing information - - -
-## [2018-01-15 19:55:42] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
-## [2018-01-15 19:55:42] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2018-01-15 19:55:43] Recalculate median injection time based on: Mz, AgcTarget.
-## [2018-01-15 19:55:43] Subsetted 372991 fragments [1216;5882] to 1022 fragments [1216;10].</code></pre>
+## [2018-01-30 13:30:18] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2018-01-30 13:30:18] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2018-01-30 13:30:18] Recalculate median injection time based on: Mz, AgcTarget.
+## [2018-01-30 13:30:19] Subsetted 368296 fragments [1216;5882] to 1019 fragments [1216;10].</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># select all conditions from one file</span>
 myoglobin[, myoglobin$File ==<span class="st"> "myo_1211_ETDReagentTarget_1e+06_1"</span>]</code></pre></div>
 <pre><code>## TopDownSet object (0.24 Mb)
@@ -458,10 +458,10 @@ myoglobin[, myoglobin$File ==<span class="st"> "myo_1211_ETDReagentTarget_1e+06_
 ## Theoretical fragment types (6): a, b, c, x, y, z
 ## Theoretical mass range: [30.03;16910.93]
 ## - - - Processing information - - -
-## [2018-01-15 19:55:42] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
-## [2018-01-15 19:55:42] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2018-01-15 19:55:43] Recalculate median injection time based on: Mz, AgcTarget.
-## [2018-01-15 19:55:43] Subsetted 372991 fragments [1216;5882] to 0 fragments [1216;0].</code></pre>
+## [2018-01-30 13:30:18] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2018-01-30 13:30:18] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2018-01-30 13:30:18] Recalculate median injection time based on: Mz, AgcTarget.
+## [2018-01-30 13:30:19] Subsetted 368296 fragments [1216;5882] to 0 fragments [1216;0].</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># select all "c" fragments from a single file</span>
 myoglobin[<span class="st">"c"</span>, myoglobin$File ==<span class="st"> "myo_1211_ETDReagentTarget_1e+06_1"</span>]</code></pre></div>
 <pre><code>## TopDownSet object (0.11 Mb)
@@ -474,10 +474,10 @@ myoglobin[<span class="st">"c"</span>, myoglobin$File ==<span class="st"> "myo_1
 ## Theoretical fragment types (1): c
 ## Theoretical mass range: [74.05;16883.97]
 ## - - - Processing information - - -
-## [2018-01-15 19:55:42] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
-## [2018-01-15 19:55:42] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2018-01-15 19:55:43] Recalculate median injection time based on: Mz, AgcTarget.
-## [2018-01-15 19:55:43] Subsetted 372991 fragments [1216;5882] to 0 fragments [304;0].</code></pre>
+## [2018-01-30 13:30:18] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2018-01-30 13:30:18] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2018-01-30 13:30:18] Recalculate median injection time based on: Mz, AgcTarget.
+## [2018-01-30 13:30:19] Subsetted 368296 fragments [1216;5882] to 0 fragments [304;0].</code></pre>
 </div>
 <div id="plotting-a-topdownset" class="section level2">
 <h2 class="hasAnchor">
@@ -486,13 +486,14 @@ myoglobin[<span class="st">"c"</span>, myoglobin$File ==<span class="st"> "myo_1
 <p>Each condition represents one spectrum. We could plot a single condition interactively or all spectra into a <code>pdf</code> file (or any other <em>R</em> device that supports multiple pages/plots).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot a single condition</span>
 <span class="kw">plot</span>(myoglobin[, <span class="st">"C0707.30_1.0e+05_1.0e+06_10.00_00_28_3"</span>])</code></pre></div>
+<pre><code>## [[1]]</code></pre>
 <p><img src="analysis_files/figure-html/plotting-1.png" width="672"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## # example to plot the first ten conditions into a pdf
 ## # (not evaluated in the vignette)
 ## pdf("topdown-conditions.pdf", paper="a4r", width=12)
 ## plot(myoglobin[, 1:10])
 ## dev.off()</code></pre></div>
-<p><code>plot</code> returns a <code>list</code> (an item per condition) of <code>ggplot</code> objects which could further modified or investigated interactively by calling <code><a href="http://www.rdocumentation.org/packages/plotly/topics/ggplotly">plotly::ggplotly()</a></code>.</p>
+<p><code>plot</code> returns a <code>list</code> (an item per condition) of <code>ggplot</code> objects which could further modified or investigated interactively by calling <code>plotly::ggplotly()</code>.</p>
 </div>
 </div>
 <div id="fragmentation-data-analysis-of-myoglobin" class="section level1">
@@ -522,7 +523,7 @@ myoglobin &lt;-<span class="st"> </span><span class="kw"><a href="../reference/T
 )
 
 myoglobin</code></pre></div>
-<pre><code>## TopDownSet object (4.98 Mb)
+<pre><code>## TopDownSet object (4.94 Mb)
 ## - - - Protein data - - -
 ## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAG...MTKALELFRNDIAAKYKELGFQG 
 ## Mass : 16922.95
@@ -536,15 +537,15 @@ myoglobin</code></pre></div>
 ## Number of scans: 3696 
 ## Condition variables (60): File, Scan, ..., Sample, MedianIonInjectionTimeMs
 ## - - - Intensity data - - -
-## Size of array: 1216x3696 (5.70% != 0)
-## Number of matched fragments: 256215 
+## Size of array: 1216x3696 (5.63% != 0)
+## Number of matched fragments: 252897 
 ## Intensity range: [109.29;8493567.00]
 ## - - - Processing information - - -
-## [2018-01-15 19:55:42] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
-## [2018-01-15 19:55:42] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2018-01-15 19:55:43] Recalculate median injection time based on: Mz, AgcTarget.
-## [2018-01-15 19:55:45] Subsetted 372991 fragments [1216;5882] to 256215 fragments [1216;3696].
-## [2018-01-15 19:55:45] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 256215 fragments [1216;3696].</code></pre>
+## [2018-01-30 13:30:18] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2018-01-30 13:30:18] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2018-01-30 13:30:18] Recalculate median injection time based on: Mz, AgcTarget.
+## [2018-01-30 13:30:20] Subsetted 368296 fragments [1216;5882] to 252897 fragments [1216;3696].
+## [2018-01-30 13:30:20] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 252897 fragments [1216;3696].</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">injTimeAfter &lt;-<span class="st"> </span><span class="kw"><a href="../reference/AbstractTopDownSet-class.html">colData</a></span>(myoglobin)
 injTimeAfter$Status &lt;-<span class="st"> "after filtering"</span>
 
@@ -567,7 +568,7 @@ injTime &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<spa
 <p>High CV of intensity for a fragment suggests either fragment contamination by another <em>m/z</em> species or problems with deisotoping and we recommend removing all fragments with CV &gt; 30, as shown below.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myoglobin &lt;-<span class="st"> </span><span class="kw"><a href="../reference/TopDownSet-class.html">filterCv</a></span>(myoglobin, <span class="dt">threshold=</span><span class="dv">30</span>)
 myoglobin</code></pre></div>
-<pre><code>## TopDownSet object (4.53 Mb)
+<pre><code>## TopDownSet object (4.51 Mb)
 ## - - - Protein data - - -
 ## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAG...MTKALELFRNDIAAKYKELGFQG 
 ## Mass : 16922.95
@@ -581,16 +582,16 @@ myoglobin</code></pre></div>
 ## Number of scans: 3696 
 ## Condition variables (60): File, Scan, ..., Sample, MedianIonInjectionTimeMs
 ## - - - Intensity data - - -
-## Size of array: 1216x3696 (4.82% != 0)
-## Number of matched fragments: 216651 
+## Size of array: 1216x3696 (4.80% != 0)
+## Number of matched fragments: 215569 
 ## Intensity range: [109.29;8493567.00]
 ## - - - Processing information - - -
-## [2018-01-15 19:55:42] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
-## [2018-01-15 19:55:42] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2018-01-15 19:55:43] Recalculate median injection time based on: Mz, AgcTarget.
-## [2018-01-15 19:55:45] Subsetted 372991 fragments [1216;5882] to 256215 fragments [1216;3696].
-## [2018-01-15 19:55:45] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 256215 fragments [1216;3696].
-## [2018-01-15 19:55:47] 39564 fragments with CV &gt; 30% filtered; 216651 fragments [1216;3696].</code></pre>
+## [2018-01-30 13:30:18] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2018-01-30 13:30:18] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2018-01-30 13:30:18] Recalculate median injection time based on: Mz, AgcTarget.
+## [2018-01-30 13:30:20] Subsetted 368296 fragments [1216;5882] to 252897 fragments [1216;3696].
+## [2018-01-30 13:30:20] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 252897 fragments [1216;3696].
+## [2018-01-30 13:30:22] 37328 fragments with CV &gt; 30% filtered; 215569 fragments [1216;3696].</code></pre>
 </div>
 <div id="filter-fragments-on-intensity" class="section level2">
 <h2 class="hasAnchor">
@@ -613,17 +614,17 @@ myoglobin</code></pre></div>
 ## Number of scans: 3696 
 ## Condition variables (60): File, Scan, ..., Sample, MedianIonInjectionTimeMs
 ## - - - Intensity data - - -
-## Size of array: 1216x3696 (3.14% != 0)
-## Number of matched fragments: 141020 
+## Size of array: 1216x3696 (3.13% != 0)
+## Number of matched fragments: 140483 
 ## Intensity range: [219.52;8493567.00]
 ## - - - Processing information - - -
-## [2018-01-15 19:55:42] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
-## [2018-01-15 19:55:42] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2018-01-15 19:55:43] Recalculate median injection time based on: Mz, AgcTarget.
-## [2018-01-15 19:55:45] Subsetted 372991 fragments [1216;5882] to 256215 fragments [1216;3696].
-## [2018-01-15 19:55:45] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 256215 fragments [1216;3696].
-## [2018-01-15 19:55:47] 39564 fragments with CV &gt; 30% filtered; 216651 fragments [1216;3696].
-## [2018-01-15 19:55:47] 75631 intensity values &lt; 0.1 (relative) filtered; 141020 fragments [1216;3696].</code></pre>
+## [2018-01-30 13:30:18] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2018-01-30 13:30:18] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2018-01-30 13:30:18] Recalculate median injection time based on: Mz, AgcTarget.
+## [2018-01-30 13:30:20] Subsetted 368296 fragments [1216;5882] to 252897 fragments [1216;3696].
+## [2018-01-30 13:30:20] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 252897 fragments [1216;3696].
+## [2018-01-30 13:30:22] 37328 fragments with CV &gt; 30% filtered; 215569 fragments [1216;3696].
+## [2018-01-30 13:30:22] 75086 intensity values &lt; 0.1 (relative) filtered; 140483 fragments [1216;3696].</code></pre>
 </div>
 <div id="data-aggregation" class="section level2">
 <h2 class="hasAnchor">
@@ -645,18 +646,18 @@ myoglobin</code></pre></div>
 ## Number of scans: 1852 
 ## Condition variables (60): File, Scan, ..., Sample, MedianIonInjectionTimeMs
 ## - - - Intensity data - - -
-## Size of array: 1216x1852 (3.95% != 0)
-## Number of matched fragments: 89063 
+## Size of array: 1216x1852 (3.96% != 0)
+## Number of matched fragments: 89230 
 ## Intensity range: [219.52;8492743.50]
 ## - - - Processing information - - -
-## [2018-01-15 19:55:42] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
-## [2018-01-15 19:55:42] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2018-01-15 19:55:43] Recalculate median injection time based on: Mz, AgcTarget.
-## [2018-01-15 19:55:45] Subsetted 372991 fragments [1216;5882] to 256215 fragments [1216;3696].
-## [2018-01-15 19:55:45] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 256215 fragments [1216;3696].
-## [2018-01-15 19:55:47] 39564 fragments with CV &gt; 30% filtered; 216651 fragments [1216;3696].
-## [2018-01-15 19:55:47] 75631 intensity values &lt; 0.1 (relative) filtered; 141020 fragments [1216;3696].
-## [2018-01-15 19:55:48] Aggregated 141020 fragments [1216;3696] to 89063 fragments [1216;1852].</code></pre>
+## [2018-01-30 13:30:18] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2018-01-30 13:30:18] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2018-01-30 13:30:18] Recalculate median injection time based on: Mz, AgcTarget.
+## [2018-01-30 13:30:20] Subsetted 368296 fragments [1216;5882] to 252897 fragments [1216;3696].
+## [2018-01-30 13:30:20] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 252897 fragments [1216;3696].
+## [2018-01-30 13:30:22] 37328 fragments with CV &gt; 30% filtered; 215569 fragments [1216;3696].
+## [2018-01-30 13:30:22] 75086 intensity values &lt; 0.1 (relative) filtered; 140483 fragments [1216;3696].
+## [2018-01-30 13:30:23] Aggregated 140483 fragments [1216;3696] to 89230 fragments [1216;1852].</code></pre>
 </div>
 <div id="random-forest" class="section level2">
 <h2 class="hasAnchor">
@@ -669,11 +670,11 @@ myoglobin</code></pre></div>
 <span class="kw">head</span>(<span class="kw">summary</span>(myoglobin))</code></pre></div>
 <pre><code>##   Fragments    Total      Min       Q1   Median     Mean       Q3      Max
 ## 1       114 20287547 15477.93 50676.35 117379.4 16683.84 284206.6 889160.9
-## 2       113 20655699  9950.82 51026.21 129936.0 16986.59 279673.6 880548.7
-## 3       109 21219420  7872.05 46998.91 135528.9 17450.18 297095.7 945866.1
-## 4       111 19739257 13521.25 50439.39 116946.1 16232.94 275273.6 874603.0
-## 5       112 19475154 11322.55 53119.46 110377.2 16015.75 272772.3 882041.0
-## 6       112 19985714 15506.45 65169.60 115588.4 16435.62 265405.2 950459.8</code></pre>
+## 2       112 20647046  9950.82 52033.36 130829.6 16979.48 280873.9 880548.7
+## 3       107 21156793  7872.05 51000.28 137816.3 17398.68 299479.5 945866.1
+## 4       112 20148236 13521.25 50698.44 118552.1 16569.27 280191.6 874603.0
+## 5       113 19598593 11322.55 53494.00 113005.6 16117.26 272462.7 882041.0
+## 6       110 19913901 15506.45 65573.98 119684.7 16376.56 265715.7 950459.8</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## number of fragments
 nFragments &lt;-<span class="st"> </span><span class="kw">summary</span>(myoglobin)$Fragments
 
@@ -727,32 +728,44 @@ myoglobinNcb</code></pre></div>
 ## - - - Protein data - - -
 ## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAG...MTKALELFRNDIAAKYKELGFQG 
 ## - - - Fragment data - - -
-## Number of N-terminal fragments: 30569
-## Number of C-terminal fragments: 29579
-## Number of N- and C-terminal fragments: 9306
+## Number of N-terminal fragments: 30592
+## Number of C-terminal fragments: 29456
+## Number of N- and C-terminal fragments: 9506
 ## - - - Condition data - - -
 ## Number of conditions: 1852 
 ## Number of scans: 1852 
 ## Condition variables (61): File, Scan, ..., MedianIonInjectionTimeMs, AssignedIntensity
 ## - - - Assay data - - -
-## Size of array: 152x1852 (24.67% != 0)
+## Size of array: 152x1852 (24.71% != 0)
 ## - - - Processing information - - -
-## [2018-01-15 19:55:42] 372991 fragments [1216;5882] matched (tolerance: 5 ppm).
-## [2018-01-15 19:55:42] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2018-01-15 19:55:43] Recalculate median injection time based on: Mz, AgcTarget.
-## [2018-01-15 19:55:45] Subsetted 372991 fragments [1216;5882] to 256215 fragments [1216;3696].
-## [2018-01-15 19:55:45] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 256215 fragments [1216;3696].
-## [2018-01-15 19:55:47] 39564 fragments with CV &gt; 30% filtered; 216651 fragments [1216;3696].
-## [2018-01-15 19:55:47] 75631 intensity values &lt; 0.1 (relative) filtered; 141020 fragments [1216;3696].
-## [2018-01-15 19:55:48] Aggregated 141020 fragments [1216;3696] to 89063 fragments [1216;1852].
-## [2018-01-15 19:55:49] Coerced TopDownSet into an NCBSet object; 69454 fragments [152;1852].</code></pre>
+## [2018-01-30 13:30:18] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2018-01-30 13:30:18] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2018-01-30 13:30:18] Recalculate median injection time based on: Mz, AgcTarget.
+## [2018-01-30 13:30:20] Subsetted 368296 fragments [1216;5882] to 252897 fragments [1216;3696].
+## [2018-01-30 13:30:20] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 252897 fragments [1216;3696].
+## [2018-01-30 13:30:22] 37328 fragments with CV &gt; 30% filtered; 215569 fragments [1216;3696].
+## [2018-01-30 13:30:22] 75086 intensity values &lt; 0.1 (relative) filtered; 140483 fragments [1216;3696].
+## [2018-01-30 13:30:23] Aggregated 140483 fragments [1216;3696] to 89230 fragments [1216;1852].
+## [2018-01-30 13:30:24] Coerced TopDownSet into an NCBSet object; 69554 fragments [152;1852].</code></pre>
 <p>An <code>NCBSet</code> is very similar to a <code>TopDownSet</code> but instead of an <code>FragmentViews</code> the <code>rowViews</code> are an <code>XStringViews</code> for the former. Another difference is that the <code>NCBSet</code> has one row per bond instead one row per fragment. Also the <code>assayData</code> contains no intensity information but a <code>1</code> for an <em>N</em>-terminal, a <code>2</code> for a <em>C</em>-terminal and a <code>3</code> for bidirectional fragments.</p>
 <p>The <code>NCBSet</code> can be used to select the combination of conditions that provide the best fragment coverage. While computing coverage <code>topdownr</code> awards 1 point for every fragment going from every bond in either <em>N</em> or <em>C</em> directions. This means that bonds covered in both directions increase the score of a condition by 2 points. For the myoglobin fragmentation example we get the following table for the best three conditions:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/NCBSet-class.html">bestConditions</a></span>(myoglobinNcb, <span class="dt">n=</span><span class="dv">3</span>)</code></pre></div>
-<pre><code>##                                         index fragments
-## C0893.10_1.0e+06_1.0e+06_05.00_14_00_1   1049       143
-## C1211.70_1.0e+05_0.0e+00_00.00_28_00_05  1431        63
-## C0707.30_1.0e+06_1.0e+07_05.00_00_00_1    570        27</code></pre>
+<pre><code>##                                         Index FragmentsAddedToCombination
+## C0893.10_1.0e+06_1.0e+06_05.00_14_00_1   1049                         143
+## C1211.70_1.0e+05_0.0e+00_00.00_28_00_05  1431                          62
+## C0707.30_5.0e+05_5.0e+06_02.50_07_00_1    275                          28
+##                                         BondsAddedToCombination
+## C0893.10_1.0e+06_1.0e+06_05.00_14_00_1                       98
+## C1211.70_1.0e+05_0.0e+00_00.00_28_00_05                      36
+## C0707.30_5.0e+05_5.0e+06_02.50_07_00_1                       10
+##                                         FragmentsInCondition
+## C0893.10_1.0e+06_1.0e+06_05.00_14_00_1                   143
+## C1211.70_1.0e+05_0.0e+00_00.00_28_00_05                  108
+## C0707.30_5.0e+05_5.0e+06_02.50_07_00_1                   132
+##                                         BondsInCondition
+## C0893.10_1.0e+06_1.0e+06_05.00_14_00_1                98
+## C1211.70_1.0e+05_0.0e+00_00.00_28_00_05               82
+## C0707.30_5.0e+05_5.0e+06_02.50_07_00_1                97</code></pre>
 </div>
 <div id="building-a-fragmentation-map" class="section level2">
 <h2 class="hasAnchor">
@@ -778,7 +791,7 @@ myoglobinNcbSub &lt;-<span class="st"> </span>myoglobinNcb[, sel]
 <h1 class="hasAnchor">
 <a href="#session-information" class="anchor"></a>Session Information</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sessionInfo</span>()</code></pre></div>
-<pre><code>## R Under development (unstable) (2017-11-23 r73778)
+<pre><code>## R Under development (unstable) (2018-01-15 r74124)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Debian GNU/Linux 9 (stretch)
 ## 
@@ -799,29 +812,29 @@ myoglobinNcbSub &lt;-<span class="st"> </span>myoglobinNcb[, sel]
 ## [8] methods   base     
 ## 
 ## other attached packages:
-##  [1] BiocStyle_2.7.2     ggplot2_2.2.1.9000  ranger_0.8.0       
-##  [4] topdownrdata_1.1.0  topdownr_1.1.5      Biostrings_2.47.1  
-##  [7] XVector_0.19.5      IRanges_2.13.10     S4Vectors_0.17.21  
+##  [1] BiocStyle_2.7.8     ggplot2_2.2.1       ranger_0.9.0       
+##  [4] topdownrdata_1.1.0  topdownr_1.1.6      Biostrings_2.47.7  
+##  [7] XVector_0.19.8      IRanges_2.13.16     S4Vectors_0.17.28  
 ## [10] BiocGenerics_0.25.1
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.14          highr_0.6             BiocInstaller_1.29.3 
-##  [4] compiler_3.5.0        pillar_1.0.1          plyr_1.8.4           
+##  [1] Rcpp_0.12.15          highr_0.6             BiocInstaller_1.29.4 
+##  [4] compiler_3.5.0        pillar_1.1.0          plyr_1.8.4           
 ##  [7] iterators_1.0.9       ProtGenerics_1.11.0   tools_3.5.0          
-## [10] zlibbioc_1.25.0       MALDIquant_1.17       digest_0.6.13        
-## [13] preprocessCore_1.41.0 evaluate_0.10.1       tibble_1.4.1         
+## [10] zlibbioc_1.25.0       MALDIquant_1.17       digest_0.6.15        
+## [13] preprocessCore_1.41.0 evaluate_0.10.1       tibble_1.4.2         
 ## [16] gtable_0.2.0          lattice_0.20-35       rlang_0.1.6.9003     
 ## [19] Matrix_1.2-12         foreach_1.4.4         yaml_2.1.16          
-## [22] stringr_1.2.0         knitr_1.18            rprojroot_1.3-2      
-## [25] grid_3.5.0            Biobase_2.39.1        impute_1.53.0        
+## [22] stringr_1.2.0         knitr_1.19            rprojroot_1.3-2      
+## [25] grid_3.5.0            Biobase_2.39.2        impute_1.53.0        
 ## [28] XML_3.98-1.9          BiocParallel_1.13.1   rmarkdown_1.8        
-## [31] limma_3.35.5          reshape2_1.4.3        mzR_2.13.3           
+## [31] limma_3.35.6          reshape2_1.4.3        mzR_2.13.3           
 ## [34] magrittr_1.5          pcaMethods_1.71.0     backports_1.1.2      
-## [37] scales_0.5.0.9000     codetools_0.2-15      htmltools_0.3.6      
-## [40] mzID_1.17.0           MSnbase_2.5.3         colorspace_1.3-2     
+## [37] scales_0.5.0          codetools_0.2-15      htmltools_0.3.6      
+## [40] mzID_1.17.0           MSnbase_2.5.6         colorspace_1.3-2     
 ## [43] labeling_0.3          affy_1.57.0           stringi_1.1.6        
 ## [46] doParallel_1.0.11     lazyeval_0.2.1        munsell_0.4.3        
-## [49] vsn_3.47.0            affyio_1.49.1</code></pre>
+## [49] vsn_3.47.1            affyio_1.49.1</code></pre>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1 class="hasAnchor">
@@ -879,7 +892,7 @@ myoglobinNcbSub &lt;-<span class="st"> </span>myoglobinNcb[, sel]
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>

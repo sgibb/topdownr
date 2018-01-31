@@ -110,6 +110,9 @@ it keeps information about mass, type and charge of the fragments.</p>
     <pre class="usage"><span class='fu'>FragmentViews</span>(<span class='no'>sequence</span>, <span class='no'>mass</span>, <span class='no'>type</span>, <span class='kw'>z</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>names</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>metadata</span> <span class='kw'>=</span> <span class='fu'>list</span>())
 
+<span class='co'># S4 method for FragmentViews,FragmentViews</span>
+<span class='fu'><a href='AbstractTopDownSet-class.html'>combine</a></span>(<span class='no'>x</span>, <span class='no'>y</span>)
+
 <span class='co'># S4 method for FragmentViews</span>
 <span class='fu'>show</span>(<span class='no'>object</span>)</pre>
     
@@ -166,7 +169,7 @@ names of the fragments, same length as <code>start</code>/<code>end</code>/width
       <td><p><code>list</code>, metadata like modifications.</p></td>
     </tr>
     <tr>
-      <th>object</th>
+      <th>object, x, y</th>
       <td><p>FragmentViews</p></td>
     </tr>
     </table>
@@ -256,7 +259,7 @@ Sebastian Gibb <a href='mailto:mail@sebastiangibb.de'>mail@sebastiangibb.de</a>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>

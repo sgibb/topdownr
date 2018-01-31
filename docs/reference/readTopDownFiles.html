@@ -109,6 +109,8 @@
   <span class='st'>"z"</span>), <span class='kw'>modifications</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Carbamidomethyl"</span>, <span class='st'>"Acetyl"</span>, <span class='st'>"Met-loss"</span>),
   <span class='kw'>adducts</span> <span class='kw'>=</span> <span class='fu'>data.frame</span>(), <span class='kw'>neutralLoss</span> <span class='kw'>=</span> <span class='kw pkg'>MSnbase</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/MSnbase/topics/calculateFragments-methods'>defaultNeutralLoss</a></span>(),
   <span class='kw'>sequenceOrder</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"original"</span>, <span class='st'>"random"</span>, <span class='st'>"inverse"</span>), <span class='kw'>tolerance</span> <span class='kw'>=</span> <span class='fl'>5e-06</span>,
+  <span class='kw'>redundantIonMatch</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"remove"</span>, <span class='st'>"closest"</span>),
+  <span class='kw'>redundantFragmentMatch</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"remove"</span>, <span class='st'>"closest"</span>),
   <span class='kw'>dropNonInformativeColumns</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>sampleColumns</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Mz"</span>, <span class='st'>"AgcTarget"</span>,
   <span class='st'>"EtdReagentTarget"</span>, <span class='st'>"EtdActivation"</span>, <span class='st'>"CidActivation"</span>, <span class='st'>"HcdActivation"</span>,
   <span class='st'>"UvpdActivation"</span>), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fu'>interactive</span>())</pre>
@@ -175,6 +177,19 @@ order of the sequence before fragment calculation and matching is done.
       <td><p><code>double</code>,
 tolerance in <em>ppm</em> that is used to match the
 theoretical fragments with the observed ones.</p></td>
+    </tr>
+    <tr>
+      <th>redundantIonMatch</th>
+      <td><p><code>character</code>, a mz could be matched to one, two or
+more fragments. If it is matched against more than one fragment the match
+could be <code>"remove"</code>d or the match to the <code>"closest"</code> fragment could be
+chosen.</p></td>
+    </tr>
+    <tr>
+      <th>redundantFragmentMatch</th>
+      <td><p><code>character</code>, one or more mz could be matched to
+the same fragment, these matches could be <code>"remove"</code>d or the match to the
+<code>"closest"</code> mz is chosen.</p></td>
     </tr>
     <tr>
       <th>dropNonInformativeColumns</th>
@@ -270,7 +285,7 @@ additional rows, e.g.:
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
