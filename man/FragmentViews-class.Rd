@@ -7,6 +7,7 @@
 \alias{FragmentViews}
 \alias{combine,FragmentViews,FragmentViews-method}
 \alias{combine,FragmentViews-method}
+\alias{mz,FragmentViews-method}
 \alias{show,FragmentViews-method}
 \alias{coerce,FragmentViews,data.frame-method}
 \title{The FragmentViews class}
@@ -15,6 +16,8 @@ FragmentViews(sequence, mass, type, z = 1L, start = NULL, end = NULL,
   width = NULL, names = NULL, metadata = list())
 
 \S4method{combine}{FragmentViews,FragmentViews}(x, y)
+
+\S4method{mz}{FragmentViews}(object, ...)
 
 \S4method{show}{FragmentViews}(object)
 }

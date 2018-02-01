@@ -17,6 +17,7 @@ Depends:
     R (>= 3.4),
     methods,
     BiocGenerics (>= 0.20.0),
+    ProtGenerics (>= 1.10.0),
     Biostrings (>= 2.42.1),
     S4Vectors (>= 0.12.2)
 Imports:

@@ -1,7 +1,7 @@
 # topdownr 1.1
 
 Changes in version 1.1.7
-- Nothing yet.
+- Add `mz,FragmentViews-methods` [2018-02-01].
 
 Changes in version 1.1.6
 - Rotate fragment labels (vertical orientation) in `plot` [2018-01-17].

@@ -74,6 +74,10 @@ test_that("constructor", {
                                                modifications=NULL), fv4)
 })
 
+test_that("mz", {
+    expect_equal(mz(fv), c(114.054951, 185.092061, 345.122711))
+})
+
 test_that("show", {
     expect_output(show(fv),
                   paste(c("FragmentViews on a 4-letter sequence:",
