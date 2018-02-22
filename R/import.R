@@ -198,21 +198,23 @@
     hd$File <- gsub(.topDownFileExtRx("mzml"), "", basename(file))
     colnames(hd) <- .camelCase(colnames(hd))
 
+    ## depending on the used processing software the header column totIonCurrent
+    ## doesn't take deisotoping and charge state reduction into account; so we
+    ## calculate TIC for our own here
+    hd$TotIonCurrent <- NA_real_
+
     nr <- nrow(hd)
     m <- Matrix(0L, nrow=length(fmass), ncol=nr, sparse=TRUE)
 
     for (j in seq_along(i)) {
-        k <- .matchFragments(peaks(fh, i[j])[, 1L], fmass, ...)
+        pks <- peaks(fh, i[j])
+        k <- .matchFragments(pks[, 1L], fmass, ...)
         notNA <- !is.na(k)
         if (sum(notNA)) {
-            m[k[notNA], j] <- peaks(fh, i[j])[notNA, 2L]
+            m[k[notNA], j] <- pks[notNA, 2L]
+            hd[j, "TotIonCurrent"] <- sum(pks[, 2L])
         }
     }
-
-    ## depending on the used processing software the header column totIonCurrent
-    ## doesn't take deisotoping and charge state reduction into account; so we
-    ## calculate TIC for our own here
-    hd$TotIonCurrent <- .vapply1d(peaks(fh)[i], function(ii)sum(ii))
 
     .msg(verbose,
         sprintf(

@@ -7,6 +7,7 @@
   of the "acquisitionNum") because ProteomDiscover generates non-standard
   "spectrumId" and proteowizard fails to translated it into a valid
   "acquisitionNum". See [#71](https://github.com/sgibb/topdownr/issues/71) for details [2018-02-22].
+- Recalculate TotIonCurrent in the main loop of `.readMzMl` [2018-02-22].
 
 ## Changes in version 1.1.6
 - Rotate fragment labels (vertical orientation) in `plot` [2018-01-17].
