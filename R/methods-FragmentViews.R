@@ -34,6 +34,7 @@ setMethod("combine", signature(x="FragmentViews", y="FragmentViews"),
 
 #' @rdname FragmentViews-class
 ## @param object FragmentViews
+#' @param \ldots arguments passed to internal/other methods.
 #' @aliases mz,FragmentViews-method
 #' @export
 setMethod("mz", "FragmentViews", function(object, ...) {

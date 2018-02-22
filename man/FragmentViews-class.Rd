@@ -54,6 +54,8 @@ names of the fragments, same length as \code{start}/\code{end}/width`.}
 \item{metadata}{\code{list}, metadata like modifications.}
 
 \item{object, x, y}{FragmentViews}
+
+\item{\ldots}{arguments passed to internal/other methods.}
 }
 \value{
 An \linkS4class{FragmentViews} object.
