@@ -331,3 +331,23 @@ test_that(".topIdx", {
     expect_equal(topdownr:::.topIdx(d, groupBy=g, n=2),
                  c(10, 7, 8, 5, 9, 6))
 })
+
+test_that(".translateThermoIdToScanId", {
+    expect_error(topdownr:::.translateThermoIdToScanId(NULL))
+    expect_error(topdownr:::.translateThermoIdToScanId(1:10))
+    expect_error(topdownr:::.translateThermoIdToScanId(c("", "")))
+    expect_equal(topdownr:::.translateThermoIdToScanId(c(
+        "controllerType=0 controllerNumber=1 scan=11",
+        "controllerType=0 controllerNumber=1 scan=12",
+        "controllerType=0 controllerNumber=1 scan=13",
+        "controllerType=0 controllerNumber=1 scan=14",
+        "controllerType=0 controllerNumber=1 scan=15",
+        "controllerType=0 controllerNumber=1 scan=16")), 11:16)
+    expect_equal(topdownr:::.translateThermoIdToScanId(c(
+        "scan=21 file=191",
+        "scan=22 file=191",
+        "scan=23 file=191",
+        "scan=24 file=191",
+        "scan=25 file=191",
+        "scan=26 file=191")), 21:26)
+})

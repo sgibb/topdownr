@@ -544,6 +544,22 @@ cat0 <- function(...) {
     i[!is.na(i)]
 }
 
+#' Due to changes in ProteomDiscover some mzML files have a different
+#' `spectrumId` format that is not supported by proteowizard (and hence by
+#' mzR), e.g. "scan=[acquisitionNum], file=[fileId]" vs the supported
+#' "controllerType=0 controllerNumber=1 scan=[acquisitionNum]".
+#' As fallback solution proteowizard just use 1:n as acquisitionNum which cause
+#' mismatches to the ScanHeadsman output. See
+#' https://github.com/sgibb/topdownr/issues/73 for details.
+#'
+#' @param x `character`
+#' @return `double`
+#' @noRd
+.translateThermoIdToScanId <- function(x) {
+    stopifnot(is.character(x) && nzchar(x))
+    as.double(gsub("^.*scan=([0-9]+).*$", "\\1", x))
+}
+
 #' wrapper around vapply for FUN.VALUE=double(1L)
 #' @noRd
 .vapply1d <- function(X, FUN, ..., USE.NAMES=FALSE) {

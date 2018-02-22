@@ -182,9 +182,18 @@
     on.exit(close(fh))
 
     hd <- header(fh)
-    i <- which(hd$msLevel == 2L & hd$acquisitionNum %in% scans)
+    hd$Scan <- .translateThermoIdToScanId(hd$spectrumId)
+    if (any(hd$acquisitionNum != hd$Scan)) {
+        ## to insert a newline (we use appendLF=FALSE before
+        .msg(verbose, "")
+        warning(
+            "Using spectrumId scan information because ",
+            "acquisitionNum entries aren't valid.", immediate.=verbose
+        )
+    }
+    i <- which(hd$msLevel == 2L & hd$Scan %in% scans)
     hd <- hd[i, !grepl("injectionTime", colnames(hd), fixed=TRUE), drop=FALSE]
-    colnames(hd)[grepl("acquisitionNum", colnames(hd), fixed=TRUE)] <- "Scan"
+    hd[, c("acquisitionNum", "injectionTime")] <- NULL
     colnames(hd)[grepl("seqNum", colnames(hd), fixed=TRUE)] <- "SpectrumIndex"
     hd$File <- gsub(.topDownFileExtRx("mzml"), "", basename(file))
     colnames(hd) <- .camelCase(colnames(hd))

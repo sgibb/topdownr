@@ -3,6 +3,10 @@
 ## Changes in version 1.1.7
 - Add `mz,FragmentViews-methods` [2018-02-01].
 - Remove internal `fragmentMass` and `fragmentNames` functions [2018-02-22].
+- Parse "spectrumId" column of the mzML header to find the scan number (instead
+  of the "acquisitionNum") because ProteomDiscover generates non-standard
+  "spectrumId" and proteowizard fails to translated it into a valid
+  "acquisitionNum". See [#71](https://github.com/sgibb/topdownr/issues/71) for details [2018-02-22].
 
 ## Changes in version 1.1.6
 - Rotate fragment labels (vertical orientation) in `plot` [2018-01-17].
