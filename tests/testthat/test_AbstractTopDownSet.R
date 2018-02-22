@@ -90,16 +90,6 @@ test_that("combine", {
     expect_equal(combine(tds1, tds2), tdsr)
 })
 
-test_that("fragmentMass", {
-    expect_error(fragmentMass(1L), "doesn't inherit 'AbstractTopDownSet'")
-    expect_equal(fragmentMass(tds), 1:3 * 100)
-})
-
-test_that("fragmentNames", {
-    expect_error(fragmentNames(1L), "doesn't inherit 'AbstractTopDownSet'")
-    expect_equal(fragmentNames(tds), c("c1", "c2", "x1"))
-})
-
 test_that("fragmentTypes", {
     expect_error(fragmentType(1L), "doesn't inherit 'AbstractTopDownSet'")
     expect_equal(fragmentType(tds), factor(c("c", "c", "x")))

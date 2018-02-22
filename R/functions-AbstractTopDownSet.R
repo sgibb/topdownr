@@ -18,26 +18,6 @@
     object
 }
 
-#' Get fragment mass
-#'
-#' @param object `AbstractTopDownSet`
-#' @return `double`
-#' @noRd
-fragmentMass <- function(object) {
-    .inheritsAbstractTopDownSet(object)
-    elementMetadata(object@rowViews)$mass
-}
-
-#' Get fragment names
-#'
-#' @param object `AbstractTopDownSet`
-#' @return `character`
-#' @noRd
-fragmentNames <- function(object) {
-    .inheritsAbstractTopDownSet(object)
-    names(object@rowViews)
-}
-
 #' Get fragment types
 #'
 #' @param object `AbstractTopDownSet`

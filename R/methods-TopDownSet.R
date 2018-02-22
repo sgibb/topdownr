@@ -344,7 +344,7 @@ setMethod("show", "TopDownSet", function(object) {
         fragments <- fragmentType(object)
         cat0("Theoretical fragment types (", nlevels(fragments), "): ",
             paste0(.hft(levels(fragments), n=5), collapse=", "), "\n")
-        mass <- range(fragmentMass(object))
+        mass <- range(mz(object@rowViews))
         cat(sprintf(
             "Theoretical mass range: [%.2f;%.2f]\n", mass[1L], mass[2L])
         )
