@@ -90,7 +90,7 @@ cat0 <- function(...) {
 
 #' Ensure unique, increasing ids in FilterStrings
 #'
-#' The ScanHeadsman output ocntains some FilterStrings that have wrong IDs (the
+#' The ScanHeadsman output contains some FilterStrings that have wrong IDs (the
 #' id from the previous or next run), e.g.:
 #'
 #' FTMS + p NSI Full ms2 1162.0007@cid28.00 [100.0000-2000.0000]
