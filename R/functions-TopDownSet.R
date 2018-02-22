@@ -148,7 +148,7 @@ readTopDownFiles <- function(path, pattern=".*",
         file=files$mzML,
         scans=split(scanConditions$Scan, scanConditions$File),
         MoreArgs=list(
-            fmass=elementMetadata(fragmentViews)$mass,
+            fmass=mz(fragmentViews),
             tolerance=tolerance,
             redundantIonMatch=redundantIonMatch,
             redundantFragmentMatch=redundantFragmentMatch,
@@ -223,7 +223,7 @@ readTopDownFiles <- function(path, pattern=".*",
 
     k <- .matchFragments(
         s[, 1L],
-        elementMetadata(fv)$mass,
+        mz(fv),
         tolerance=object@tolerance,
         redundantIonMatch=object@redundantMatching[1L],
         redundantFragmentMatch=object@redundantMatching[2L]
