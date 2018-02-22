@@ -6,11 +6,13 @@
 #' `n` to limit the number of iterations and combinations that should be
 #' returned.
 #' If `minN` is set at least `minN` fragments have to be added to the
-#' combinations. The function returns a 5-column matrix. The first column
+#' combinations. The function returns a 7-column matrix. The first column
 #' contains the index (`Index`) of the condition (column number). The next
 #' columns contain the newly added number of fragments or bonds
-#' (`FragmentsAddedToCombination`, `BondsAddedToCombination`) and the fragments
-#' or bonds in the condition (`FragmentsInCondition`, `BondsInCondition`).
+#' (`FragmentsAddedToCombination`, `BondsAddedToCombination`), the fragments
+#' or bonds in the condition (`FragmentsInCondition`, `BondsInCondition`), and
+#' the cumulative coverage fragments or bonds (`FragmentCoverage`,
+#' `BondCoverage`).
 #'
 #' @param object `NCBSet`
 #' @param n `integer`, max number of combinations/iterations.
@@ -21,7 +23,9 @@
 #' @param \ldots arguments passed to internal/other methods.
 #' added.
 ## @return `matrix`, first column: index of condition (`Index`), second column: number of
-## newly added fragments third column: number of newly covered bonds.
+## newly added fragments third column: number of newly covered bonds, fourth and
+## fifth column: fragments/bonds in the condition; sixth and seventh column:
+## fragment/bond coverage
 #' @aliases bestConditions bestConditions,NCBSet-method
 #' @export
 setMethod("bestConditions", "NCBSet",
@@ -37,7 +41,9 @@ setMethod("bestConditions", "NCBSet",
     m <- cbind(
         m,
         .countFragments(object@assay[, m[, "index"], drop=FALSE]),
-        .colCounts(object@assay[, m[, "index"], drop=FALSE])
+        .colCounts(object@assay[, m[, "index"], drop=FALSE]),
+        cumsum(m[, "fragments"])/(2L * nrow(object@assay)),
+        cumsum(m[, "bonds"])/nrow(object@assay)
     )
     dimnames(m) <- list(
         colnames(object)[m[, "index"]],
@@ -46,7 +52,8 @@ setMethod("bestConditions", "NCBSet",
             paste0(
                 c("Fragments", "Bonds"),
                 rep(c("AddedToCombination", "InCondition"), each=2L)
-            )
+            ),
+            paste0(c("Fragment", "Bond"), "Coverage")
         )
     )
     m

@@ -1,13 +1,15 @@
 # topdownr 1.1
 
 Changes in version 1.1.7
-- Add `mz,FragmentViews-methods` [2018-02-01].
+- Add `mz,FragmentViews-method` [2018-02-01].
 - Remove internal `fragmentMass` and `fragmentNames` functions [2018-02-22].
 - Parse "spectrumId" column of the mzML header to find the scan number (instead
   of the "acquisitionNum") because ProteomDiscover generates non-standard
   "spectrumId" and proteowizard fails to translated it into a valid
   "acquisitionNum". See #73 for details [2018-02-22].
 - Recalculate TotIonCurrent in the main loop of `.readMzMl` [2018-02-22].
+- Add `FragmentCoverage` and `BondCoverage` columns to
+  `bestConditions,NCBSet-method` [2018-02-23].
 
 Changes in version 1.1.6
 - Rotate fragment labels (vertical orientation) in `plot` [2018-01-17].

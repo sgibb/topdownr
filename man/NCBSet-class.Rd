@@ -73,11 +73,13 @@ of fragments/bonds the one with the highest assigned intensity is used. Use
 \code{n} to limit the number of iterations and combinations that should be
 returned.
 If \code{minN} is set at least \code{minN} fragments have to be added to the
-combinations. The function returns a 5-column matrix. The first column
+combinations. The function returns a 7-column matrix. The first column
 contains the index (\code{Index}) of the condition (column number). The next
 columns contain the newly added number of fragments or bonds
-(\code{FragmentsAddedToCombination}, \code{BondsAddedToCombination}) and the fragments
-or bonds in the condition (\code{FragmentsInCondition}, \code{BondsInCondition}).
+(\code{FragmentsAddedToCombination}, \code{BondsAddedToCombination}), the fragments
+or bonds in the condition (\code{FragmentsInCondition}, \code{BondsInCondition}), and
+the cumulative coverage fragments or bonds (\code{FragmentCoverage},
+\code{BondCoverage}).
 
 \item \code{fragmentationMap}: Plot fragmentation map.
 
