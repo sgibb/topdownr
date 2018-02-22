@@ -34,6 +34,14 @@ setMethod("combine", signature(x="FragmentViews", y="FragmentViews"),
 
 #' @rdname FragmentViews-class
 ## @param object FragmentViews
+#' @aliases mz,FragmentViews-method
+#' @export
+setMethod("mz", "FragmentViews", function(object, ...) {
+    elementMetadata(object)$mass
+})
+
+#' @rdname FragmentViews-class
+## @param object FragmentViews
 #' @aliases show,FragmentViews-method
 #' @export
 setMethod("show", "FragmentViews", function(object) {

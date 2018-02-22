@@ -23,6 +23,7 @@
 #'
 #' @import methods
 #' @import BiocGenerics
+#' @import ProtGenerics
 #' @import Biostrings
 #' @import S4Vectors
 #' @importClassesFrom Matrix Matrix dgCMatrix
