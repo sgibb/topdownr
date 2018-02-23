@@ -209,10 +209,7 @@
     }
 
     .msg(verbose,
-        sprintf(
-            " (%02.1f%%)",
-            round(sum(m != 0L) / sum(hd$PeaksCount) * 100, 1L)
-        )
+        sprintf(" (%02.1f%%)", round(nnzero(m) / sum(hd$PeaksCount) * 100, 1L))
     )
 
     list(hd=hd, m=m)
