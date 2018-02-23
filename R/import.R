@@ -184,8 +184,8 @@
     hd <- header(fh)
     hd$Scan <- .translateThermoIdToScanId(hd$spectrumId)
     i <- which(hd$msLevel == 2L & hd$Scan %in% scans)
-    hd <- hd[i, !grepl("injectionTime", colnames(hd), fixed=TRUE), drop=FALSE]
-    hd[, c("acquisitionNum", "injectionTime")] <- NULL
+    hd <- hd[i, , drop=FALSE]
+    hd$acquisitionNum <- NULL
     colnames(hd)[grepl("seqNum", colnames(hd), fixed=TRUE)] <- "SpectrumIndex"
     hd$File <- gsub(.topDownFileExtRx("mzml"), "", basename(file))
     colnames(hd) <- .camelCase(colnames(hd))
