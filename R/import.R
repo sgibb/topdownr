@@ -279,9 +279,13 @@
 #' @return merged data.frame
 #' @noRd
 .mergeSpectraAndHeaderInformation <- function(mzml, scdm) {
-    merge(
+    d <- merge(
         mzml, scdm, sort=FALSE,
         by=c("File", "Scan"),
         suffixes=c(".SpectraInformation", ".HeaderInformation")
     )
+    if (!.isEqual(d$RetentionTime, d$RtMin * 60, tolerance=1e-3)) {
+        stop("The retention times from header and spectra files differ.")
+    }
+    d
 }

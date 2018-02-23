@@ -262,6 +262,19 @@ cat0 <- function(...) {
     }
 }
 
+#' Test for numeric similarity/equality (similar to all.equal)
+#'
+#' @param x `numeric`
+#' @param y `numeric`
+#' @param tolerance `double`
+#' @return TRUE/FALSE
+#' @noRd
+.isEqual <- function(x, y, tolerance=1e-3) {
+    stopifnot(is.numeric(x) && is.numeric(y))
+    stopifnot(length(x) == length(y) || length(x) == 1L || length(y) == 1L)
+    isTRUE(all(abs(y - x) < tolerance))
+}
+
 #' Add log message.
 #'
 #' @param ... arguments passed to `paste0`

@@ -10,6 +10,8 @@
 - Recalculate TotIonCurrent in the main loop of `.readMzMl` [2018-02-22].
 - Add `FragmentCoverage` and `BondCoverage` columns to
   `bestConditions,NCBSet-method` [2018-02-23].
+- Use retention times to test for correct matching between ScanHeadsman .txt
+  output and mzML files; closes [#74](https://github.com/sgibb/topdownr/issues/74); [2018-02-23].
 
 ## Changes in version 1.1.6
 - Rotate fragment labels (vertical orientation) in `plot` [2018-01-17].

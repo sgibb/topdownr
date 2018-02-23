@@ -170,6 +170,16 @@ test_that(".hft", {
                  c("a", "b", "c", "d", "w", "x", "y", "z"))
 })
 
+test_that(".isEqual", {
+    expect_error(topdownr:::.isEqual("foo", 1:2))
+    expect_error(topdownr:::.isEqual(1:2, "foo"))
+    expect_error(topdownr:::.isEqual(1:2, 1:3))
+    expect_true(topdownr:::.isEqual(1:3, 1:3))
+    expect_true(topdownr:::.isEqual(1, rep(1, 3)))
+    expect_true(topdownr:::.isEqual(1:3, (1:3)+1e-5))
+    expect_false(topdownr:::.isEqual(1:3, (1:3)+1e-5, tolerance=1e-6))
+})
+
 test_that(".logmsg", {
     rxDate <-paste("^\\[20[0-9]{2}-[01][0-9]-[0-3][0-9]",
                    "[0-2][0-9]:[0-5][0-9]:[0-5][0-9]\\]")

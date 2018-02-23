@@ -175,15 +175,22 @@ test_that(".mergeScanConditionAndHeaderInformation", {
 })
 
 test_that(".mergeSpectraAndHeaderInformation", {
-    fd <- data.frame(x=1:2, Scan=1:2, File="foo", spectrum=1:2, z=1:2)
-    hi <- data.frame(File="foo", Scan=1:2, y=3:4, z=3:4,
+    fd <- data.frame(x=1:2, Scan=1:2, File="foo", spectrum=1:2, z=1:2,
+                     RetentionTime=1:2)
+    hi <- data.frame(File="foo", Scan=1:2, y=3:4, z=3:4, RtMin=1:2,
                      stringsAsFactors=FALSE)
+
+    expect_error(topdownr:::.mergeSpectraAndHeaderInformation(fd, hi),
+                 "The retention times .* differ.")
+    fd$RetentionTime <- (1:2) * 60
     r <- fd
     r$Scan <- 1:2
     r$y <- 3:4
     r$z.SpectraInformation <- r$z
     r$z.HeaderInformation <- 3:4
+    r$RtMin <- 1:2
     r <- r[, c("File", "Scan", "x", "spectrum",
-               "z.SpectraInformation", "y", "z.HeaderInformation")]
+               "z.SpectraInformation", "RetentionTime",
+               "y", "z.HeaderInformation", "RtMin")]
     expect_equal(topdownr:::.mergeSpectraAndHeaderInformation(fd, hi), r)
 })
