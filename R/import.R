@@ -183,14 +183,6 @@
 
     hd <- header(fh)
     hd$Scan <- .translateThermoIdToScanId(hd$spectrumId)
-    if (any(hd$acquisitionNum != hd$Scan)) {
-        ## to insert a newline (we use appendLF=FALSE before
-        .msg(verbose, "")
-        warning(
-            "Using spectrumId scan information because ",
-            "acquisitionNum entries aren't valid.", immediate.=verbose
-        )
-    }
     i <- which(hd$msLevel == 2L & hd$Scan %in% scans)
     hd <- hd[i, !grepl("injectionTime", colnames(hd), fixed=TRUE), drop=FALSE]
     hd[, c("acquisitionNum", "injectionTime")] <- NULL
