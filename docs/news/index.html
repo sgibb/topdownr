@@ -106,6 +106,18 @@
     <div id="topdownr-1-1" class="section level1">
 <h1 class="hasAnchor">
 <a href="#topdownr-1-1" class="anchor"></a>topdownr 1.1</h1>
+<div id="changes-in-version-1-1-7" class="section level2">
+<h2 class="hasAnchor">
+<a href="#changes-in-version-1-1-7" class="anchor"></a>Changes in version 1.1.7</h2>
+<ul>
+<li>Add <code>mz,FragmentViews-method</code> [2018-02-01].</li>
+<li>Remove internal <code>fragmentMass</code> and <code>fragmentNames</code> functions [2018-02-22].</li>
+<li>Parse “spectrumId” column of the mzML header to find the scan number (instead of the “acquisitionNum”) because ProteomDiscover generates non-standard “spectrumId” and proteowizard fails to translated it into a valid “acquisitionNum”. See <a href="https://github.com/sgibb/topdownr/issues/73">#73</a> for details [2018-02-22].</li>
+<li>Recalculate TotIonCurrent in the main loop of <code>.readMzMl</code> [2018-02-22].</li>
+<li>Add <code>FragmentCoverage</code> and <code>BondCoverage</code> columns to <code>bestConditions,NCBSet-method</code> [2018-02-23].</li>
+<li>Use retention times to test for correct matching between ScanHeadsman .txt output and mzML files; closes <a href="https://github.com/sgibb/topdownr/issues/74">#74</a>; [2018-02-23].</li>
+</ul>
+</div>
 <div id="changes-in-version-1-1-6" class="section level2">
 <h2 class="hasAnchor">
 <a href="#changes-in-version-1-1-6" class="anchor"></a>Changes in version 1.1.6</h2>
@@ -193,9 +205,9 @@
 </ul>
 </div>
 </div>
-    <div id="msnbase-0-9" class="section level1">
+    <div id="topdownr-0-9" class="section level1">
 <h1 class="hasAnchor">
-<a href="#msnbase-0-9" class="anchor"></a>MSnbase 0.9</h1>
+<a href="#topdownr-0-9" class="anchor"></a>topdownr 0.9</h1>
 <div id="changes-in-version-0-99-0" class="section level2">
 <h2 class="hasAnchor">
 <a href="#changes-in-version-0-99-0" class="anchor"></a>Changes in version 0.99.0</h2>
@@ -213,7 +225,7 @@
       <ul class="nav nav-pills nav-stacked">
         <li><a href="#topdownr-1-1">1.1</a></li>
         <li><a href="#topdownr-1-0">1.0</a></li>
-        <li><a href="#msnbase-0-9">0.9</a></li>
+        <li><a href="#topdownr-0-9">0.9</a></li>
       </ul>
     </div>
   </div>
