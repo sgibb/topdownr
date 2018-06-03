@@ -1,7 +1,18 @@
-# topdownr 1.1
+# topdownr 1.3
 
-## Changes in version 1.1.8
-- Nothing yet.
+## Changes in version 1.3.1
+- Adapt to `MSnbase 2.7.2` with internal fragments; see
+    [#82](https://github.com/lgatto/MSnbase/issues/82).
+
+## Changes in version 1.3.0
+- New version for Bioc 3.8 (devel)
+
+# topdownr 1.2
+
+## Changes in version 1.2.0
+- New version for Bioc 3.7 (release)
+
+# topdownr 1.1
 
 ## Changes in version 1.1.7
 - Add `mz,FragmentViews-method` [2018-02-01].
