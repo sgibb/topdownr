@@ -114,8 +114,13 @@
     n <- nchar(csequence)
     FragmentViews(
         csequence, mass=d$mz, type=d$type, z=Rle(d$z), names=d$ion,
-        start=ifelse(startsWith(csequence, d$seq), 1L, n-d$pos + 1L),
-        width=d$pos, metadata=list(modifications=modifications, mass=mass)
+        start=ifelse(
+            startsWith(csequence, d$seq),
+            1L,
+            ifelse(endsWith(csequence, d$seq), n-d$pos + 1L, d$pos)
+        ),
+        width=nchar(d$seq),
+        metadata=list(modifications=modifications, mass=mass)
     )
 }
 
