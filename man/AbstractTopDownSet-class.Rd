@@ -149,7 +149,7 @@ subsetting is done on the condition/run (column) level.
 
 \item \code{[[<-}: Setter for a column in the \code{colData} slot.
 
-The \code{[[&lt;-} operator is used to add/replace
+The \code{[[<-} operator is used to add/replace
 a single column of the \code{colData} \code{DataFrame}.
 
 \item \code{$}: Accessor for columns in the \code{colData} slot.
@@ -160,9 +160,9 @@ It is identical to the \code{[[} operator.
 
 \item \code{$<-}: Setter for a column in the \code{colData} slot.
 
-The \code{$&lt;-} operator is used to add/replace a single column
+The \code{$<-} operator is used to add/replace a single column
 of the \code{colData} \code{DataFrame}.
-It is identical to the \code{[[&lt;-} operator.
+It is identical to the \code{[[<-} operator.
 
 \item \code{assayData}: Accessor for the \code{assay} slot.
 
@@ -198,7 +198,7 @@ An alias for \code{colData}.
 
 \item \code{conditionData<-}: Setter for the \code{colData} slot.
 
-An alias for \code{colData&lt;-}.
+An alias for \code{colData<-}.
 
 \item \code{conditionNames}: Accessor for condition names.
 

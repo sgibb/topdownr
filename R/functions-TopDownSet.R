@@ -35,10 +35,8 @@
 #' @param pattern `character`,
 #' a filename pattern, the default `.*` means all files.
 #' @param type `character`,
-#' type of fragments, currently *a-c* and *x-z* are
-#' supported, see
-#' [MSnbase::calculateFragments()]
-#' for details.
+#' type of fragments, currently *a*, *b* *c*, *x*, *y*, *z*, *aIx*, *bIy* and
+#' *cIz* are supported, see [MSnbase::calculateFragments()] for details.
 #' @param modifications `character`,
 #' unimod names of modifications that should be applied.
 #' Currenlty just *Acetyl* (Unimod:1 but just protein N-term),
