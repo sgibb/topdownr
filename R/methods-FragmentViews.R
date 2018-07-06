@@ -16,7 +16,10 @@ setMethod("combine", signature(x="FragmentViews", y="FragmentViews"),
     un <- union(names(x), names(y))
     xn <- intersect(names(x), un)
     yn <- setdiff(un, xn)
-    x@elementMetadata <- rbind(elementMetadata(x[xn]), elementMetadata(y[yn]))
+    x@elementMetadata <- rbind(
+        elementMetadata(x[xn], use.names=FALSE),
+        elementMetadata(y[yn], use.names=FALSE)
+    )
     if (!is.null(x@elementMetadata$type) &&
         is.factor(x@elementMetadata$type)) {
         x@elementMetadata$type <- factor(

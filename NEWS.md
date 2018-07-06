@@ -6,6 +6,9 @@
 - Fix `FragmentViews` start/end/width and labels for internal fragments
     [2018-06-03].
 - Fix `as(tds, "MSnSet")` unit test [2018-07-06].
+- Use `elementMetadata(..., use.names=FALSE)` in
+  `combine,FragmentViews,FragmentViews-method` to avoid duplicated rownames in
+  elementMetadata slot [2018-07-06].
 
 ## Changes in version 1.3.0
 - New version for Bioc 3.8 (devel)
