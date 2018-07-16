@@ -18,13 +18,26 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Create Orbitrap Fusion method.xml files. — writeMethodXmls" />
+
+<meta property="og:description" content="This function is used to create Orbitrap Fusion method files from
+all combinations of a user-given set of MS1 and MS2 settings." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +60,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">topdownr</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">topdownr</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.2</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -76,18 +93,19 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/sgibb/topdownr/">
+  <a href="https://github.com/sgibb/topdownr">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,23 +113,27 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Create Orbitrap Fusion method.xml files.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/sgibb/topdownr/blob/master/R/method-xml.R'><code>R/method-xml.R</code></a></small>
+    <div class="hidden name"><code>writeMethodXmls.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>This function is used to create Orbitrap Fusion method files from
 all combinations of a user-given set of MS1 and MS2 settings.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>writeMethodXmls</span>(<span class='no'>ms1Settings</span>, <span class='no'>ms2Settings</span>, <span class='kw'>groupBy</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"replication"</span>,
   <span class='st'>"ETDReactionTime"</span>), <span class='kw'>replications</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='no'>mz</span>, <span class='kw'>massLabeling</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>nMs2perMs1</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>duration</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>randomise</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>"method_%s.xml"</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fu'>interactive</span>())</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -200,8 +222,8 @@ It must contain a <code>"%s"</code> that is replaced by the conditions defined i
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='default-functions.html'>defaultMs1Settings()</a></code>,
-<code><a href='default-functions.html'>defaultMs2Settings()</a></code></p>
+    <div class='dont-index'><p><code><a href='default-functions.html'>defaultMs1Settings()</a></code>,
+<code><a href='default-functions.html'>defaultMs2Settings()</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -210,7 +232,7 @@ It must contain a <code>"%s"</code> that is replaced by the conditions defined i
                 <span class='kw'>mz</span><span class='kw'>=</span><span class='fu'>cbind</span>(<span class='kw'>mass</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>609.21</span>, <span class='fl'>700.45</span>, <span class='fl'>823.95</span>), <span class='kw'>z</span><span class='kw'>=</span><span class='fl'>10</span>),
                 <span class='kw'>groupBy</span><span class='kw'>=</span><span class='st'>"ETDReactionTime"</span>,
                 <span class='kw'>replications</span><span class='kw'>=</span><span class='fl'>1</span>,
-                <span class='kw'>pattern</span><span class='kw'>=</span><span class='st'>"method_firstmass_400_%s.xml"</span>)</div><div class='output co'>#&gt; <span class='message'>Generated 648 MS2 experiments splitted into 6 groups.</span></div><div class='output co'>#&gt; <span class='message'>That are 119 MS1/MS2 experiments per file with a scan time of 59.5 minutes.</span></div><div class='output co'>#&gt; <span class='message'>01/06 method_firstmass_400_10.xml</span></div><div class='output co'>#&gt; <span class='message'>02/06 method_firstmass_400_15.xml</span></div><div class='output co'>#&gt; <span class='message'>03/06 method_firstmass_400_2.5.xml</span></div><div class='output co'>#&gt; <span class='message'>04/06 method_firstmass_400_30.xml</span></div><div class='output co'>#&gt; <span class='message'>05/06 method_firstmass_400_5.xml</span></div><div class='output co'>#&gt; <span class='message'>06/06 method_firstmass_400_50.xml</span></div></pre>
+                <span class='kw'>pattern</span><span class='kw'>=</span><span class='st'>"method_firstmass_400_%s.xml"</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -246,5 +268,8 @@ Sebastian Gibb <a href='mailto:mail@sebastiangibb.de'>mail@sebastiangibb.de</a>,
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

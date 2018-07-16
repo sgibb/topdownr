@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>All news • topdownr</title>
+<title>Changelog • topdownr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,13 +18,22 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Changelog" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +56,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">topdownr</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">topdownr</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.2</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -76,18 +89,19 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/sgibb/topdownr/">
+  <a href="https://github.com/sgibb/topdownr">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,16 +109,54 @@
       
       </header>
 
-      <div class="row">
-
-  <div class="col-md-9">
+<div class="row">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Change log <small>All releases</small></h1>
+      <h1>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/sgibb/topdownr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="contents">
+    <div id="topdownr-1-3" class="section level1">
+<h1 class="page-header">
+<a href="#topdownr-1-3" class="anchor"></a>topdownr 1.3</h1>
+<div id="changes-in-version-1-3-2" class="section level2">
+<h2 class="hasAnchor">
+<a href="#changes-in-version-1-3-2" class="anchor"></a>Changes in version 1.3.2</h2>
+<ul>
+<li>Use <code><a href="http://www.rdocumentation.org/packages/BiocManager/topics/install">BiocManager::install</a></code> [2018-07-16].</li>
+</ul>
+</div>
+<div id="changes-in-version-1-3-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#changes-in-version-1-3-1" class="anchor"></a>Changes in version 1.3.1</h2>
+<ul>
+<li>Adapt to <code>MSnbase 2.7.2</code> with internal fragments; see <a href="https://github.com/lgatto/MSnbase/issues/82"><a href='https://github.com/sgibb/topdownr/issues/82'>#82</a></a> [2018-06-03].</li>
+<li>Fix <code>FragmentViews</code> start/end/width and labels for internal fragments [2018-06-03].</li>
+<li>Fix <code>as(tds, "MSnSet")</code> unit test [2018-07-06].</li>
+<li>Use <code>elementMetadata(..., use.names=FALSE)</code> in <code>combine,FragmentViews,FragmentViews-method</code> to avoid duplicated rownames in elementMetadata slot [2018-07-06].</li>
+</ul>
+</div>
+<div id="changes-in-version-1-3-0" class="section level2">
+<h2 class="hasAnchor">
+<a href="#changes-in-version-1-3-0" class="anchor"></a>Changes in version 1.3.0</h2>
+<ul>
+<li>New version for Bioc 3.8 (devel)</li>
+</ul>
+</div>
+</div>
+    <div id="topdownr-1-2" class="section level1">
+<h1 class="page-header">
+<a href="#topdownr-1-2" class="anchor"></a>topdownr 1.2</h1>
+<div id="changes-in-version-1-2-0" class="section level2">
+<h2 class="hasAnchor">
+<a href="#changes-in-version-1-2-0" class="anchor"></a>Changes in version 1.2.0</h2>
+<ul>
+<li>New version for Bioc 3.7 (release)</li>
+</ul>
+</div>
+</div>
     <div id="topdownr-1-1" class="section level1">
-<h1 class="hasAnchor">
+<h1 class="page-header">
 <a href="#topdownr-1-1" class="anchor"></a>topdownr 1.1</h1>
 <div id="changes-in-version-1-1-7" class="section level2">
 <h2 class="hasAnchor">
@@ -112,10 +164,10 @@
 <ul>
 <li>Add <code>mz,FragmentViews-method</code> [2018-02-01].</li>
 <li>Remove internal <code>fragmentMass</code> and <code>fragmentNames</code> functions [2018-02-22].</li>
-<li>Parse “spectrumId” column of the mzML header to find the scan number (instead of the “acquisitionNum”) because ProteomDiscover generates non-standard “spectrumId” and proteowizard fails to translated it into a valid “acquisitionNum”. See <a href="https://github.com/sgibb/topdownr/issues/73">#73</a> for details [2018-02-22].</li>
+<li>Parse “spectrumId” column of the mzML header to find the scan number (instead of the “acquisitionNum”) because ProteomDiscover generates non-standard “spectrumId” and proteowizard fails to translated it into a valid “acquisitionNum”. See <a href="https://github.com/sgibb/topdownr/issues/73"><a href='https://github.com/sgibb/topdownr/issues/73'>#73</a></a> for details [2018-02-22].</li>
 <li>Recalculate TotIonCurrent in the main loop of <code>.readMzMl</code> [2018-02-22].</li>
 <li>Add <code>FragmentCoverage</code> and <code>BondCoverage</code> columns to <code>bestConditions,NCBSet-method</code> [2018-02-23].</li>
-<li>Use retention times to test for correct matching between ScanHeadsman .txt output and mzML files; closes <a href="https://github.com/sgibb/topdownr/issues/74">#74</a>; [2018-02-23].</li>
+<li>Use retention times to test for correct matching between ScanHeadsman .txt output and mzML files; closes <a href="https://github.com/sgibb/topdownr/issues/74"><a href='https://github.com/sgibb/topdownr/issues/74'>#74</a></a>; [2018-02-23].</li>
 </ul>
 </div>
 <div id="changes-in-version-1-1-6" class="section level2">
@@ -123,17 +175,17 @@
 <a href="#changes-in-version-1-1-6" class="anchor"></a>Changes in version 1.1.6</h2>
 <ul>
 <li>Rotate fragment labels (vertical orientation) in <code>plot</code> [2018-01-17].</li>
-<li>Replace signature for <code>updateMedianInjectionTime,TopDownSet-method</code> to <code>updateMedianInjectionTime,AbstractTopDownSet-method</code>; closes <a href="https://github.com/sgibb/topdownr/issues/69">#69</a>; see also <a href="https://github.com/sgibb/topdownr/issues/71">#71</a> [2018-01-27].</li>
+<li>Replace signature for <code>updateMedianInjectionTime,TopDownSet-method</code> to <code>updateMedianInjectionTime,AbstractTopDownSet-method</code>; closes <a href="https://github.com/sgibb/topdownr/issues/69"><a href='https://github.com/sgibb/topdownr/issues/69'>#69</a></a>; see also <a href="https://github.com/sgibb/topdownr/issues/71"><a href='https://github.com/sgibb/topdownr/issues/71'>#71</a></a> [2018-01-27].</li>
 <li>Fix <code>.matchFragments</code> for <code>length(fmass) == 0</code> [2018-01-27].</li>
-<li>Just plot fragments that are present in current <code>TopDownSet</code> see <a href="https://github.com/sgibb/topdownr/issues/70">#70</a> [2018-01-27].</li>
+<li>Just plot fragments that are present in current <code>TopDownSet</code> see <a href="https://github.com/sgibb/topdownr/issues/70"><a href='https://github.com/sgibb/topdownr/issues/70'>#70</a></a> [2018-01-27].</li>
 <li>Add <code>combine,FragmentViews,FragmentViews-method</code> [2018-01-27].</li>
-<li>Allow to <code>combine</code> <code>TopDownSet</code> objects with different fragment types; closes <a href="https://github.com/sgibb/topdownr/issues/71">#71</a> [2018-01-27].</li>
+<li>Allow to <code>combine</code> <code>TopDownSet</code> objects with different fragment types; closes <a href="https://github.com/sgibb/topdownr/issues/71"><a href='https://github.com/sgibb/topdownr/issues/71'>#71</a></a> [2018-01-27].</li>
 <li>Add <code>all.equal</code> for <code>AbstractTopDownSet</code> objects [2018-01-27].</li>
-<li>Allow the user to decide how to handle redundant fragment matching. Current default is <code>redundantFragmentMatch="remove"</code> and <code>redundantIonMatch="remove"</code>. This will reduce the number of fragment matches. Choose <code>"closest"</code> for both to get the old behaviour. See also <a href="https://github.com/sgibb/topdownr/issues/72">#72</a> [2018-01-29].</li>
+<li>Allow the user to decide how to handle redundant fragment matching. Current default is <code>redundantFragmentMatch="remove"</code> and <code>redundantIonMatch="remove"</code>. This will reduce the number of fragment matches. Choose <code>"closest"</code> for both to get the old behaviour. See also <a href="https://github.com/sgibb/topdownr/issues/72"><a href='https://github.com/sgibb/topdownr/issues/72'>#72</a></a> [2018-01-29].</li>
 <li>
 <code>TopDownSet</code> object store the matching <code>tolerance</code> and strategies (<code>redundantIonMatch</code>, <code>redundantFragmentMatch</code>). <code>AbstractTopDownSet</code> and <code>NCBSet</code> lost their <code>tolerance</code> slot. Saved objects need to be recreated [2018-01-30].</li>
 <li>
-<code>bestConditions,NCBSet-method</code> returns a 5-column matrix now. Colums are: Index, FragmentsAddedToCombination, BondsAddedToCombination, FragmentsInCondition, BondsInCondition; see <a href="https://github.com/sgibb/topdownr/issues/52">#52</a> [2018-01-30].</li>
+<code>bestConditions,NCBSet-method</code> returns a 5-column matrix now. Colums are: Index, FragmentsAddedToCombination, BondsAddedToCombination, FragmentsInCondition, BondsInCondition; see <a href="https://github.com/sgibb/topdownr/issues/52"><a href='https://github.com/sgibb/topdownr/issues/52'>#52</a></a> [2018-01-30].</li>
 </ul>
 </div>
 <div id="changes-in-version-1-1-5" class="section level2">
@@ -143,7 +195,7 @@
 <li>Keep full filename (before <code>basename</code> was used) in <code>AbstractTopDownSet</code> objects [2017-12-28].</li>
 <li>Add <code>plot,TopDownSet-method</code> [2017-12-29].</li>
 <li>
-<code>bestConditions,NCBSet-method</code> gains a new argument <code>maximise</code> that allows to optimise for number of fragments or bonds covered (default: <code>"fragments"</code>); see <a href="https://github.com/sgibb/topdownr/issues/52">#52</a> [2018-01-15].</li>
+<code>bestConditions,NCBSet-method</code> gains a new argument <code>maximise</code> that allows to optimise for number of fragments or bonds covered (default: <code>"fragments"</code>); see <a href="https://github.com/sgibb/topdownr/issues/52"><a href='https://github.com/sgibb/topdownr/issues/52'>#52</a></a> [2018-01-15].</li>
 </ul>
 </div>
 <div id="changes-in-version-1-1-4" class="section level2">
@@ -159,9 +211,9 @@
 <a href="#changes-in-version-1-1-3" class="anchor"></a>Changes in version 1.1.3</h2>
 <ul>
 <li>Add <code>conditionNames,AbstractTopDownSet-method</code> to access <code>rownames(colData(tds))</code> [2017-12-23].</li>
-<li>Add <code>updateConditionNames,AbstractTopDownSet-method</code> (closes <a href="https://github.com/sgibb/topdownr/issues/60">#60</a>) [2017-12-23].</li>
+<li>Add <code>updateConditionNames,AbstractTopDownSet-method</code> (closes <a href="https://github.com/sgibb/topdownr/issues/60"><a href='https://github.com/sgibb/topdownr/issues/60'>#60</a></a>) [2017-12-23].</li>
 <li>Turn <code>updateMedianInjectionTime,TopDownSet-method</code> into <code>updateMedianInjectionTime,AbstractTopDownSet-method</code> to work with <code>TopDownSet</code> and <code>NCBSet</code> objects [2017-12-27].</li>
-<li>Add <code>combine,AbstractTopDownSet-method</code> to combine multiple <code>TopDownSet</code>/<code>NCBSet</code> objects (closes <a href="https://github.com/sgibb/topdownr/issues/69">#69</a>) [2017-12-28].</li>
+<li>Add <code>combine,AbstractTopDownSet-method</code> to combine multiple <code>TopDownSet</code>/<code>NCBSet</code> objects (closes <a href="https://github.com/sgibb/topdownr/issues/69"><a href='https://github.com/sgibb/topdownr/issues/69'>#69</a></a>) [2017-12-28].</li>
 </ul>
 </div>
 <div id="changes-in-version-1-1-2" class="section level2">
@@ -178,12 +230,12 @@
 <h2 class="hasAnchor">
 <a href="#changes-in-version-1-1-1" class="anchor"></a>Changes in version 1.1.1</h2>
 <ul>
-<li>Respect assigned intensity in conditions for <code>bestConditions,NCBSet-method</code> and <code>fragmentationMap</code> (closes <a href="https://github.com/sgibb/topdownr/issues/62">#62</a>) [2017-12-02].</li>
+<li>Respect assigned intensity in conditions for <code>bestConditions,NCBSet-method</code> and <code>fragmentationMap</code> (closes <a href="https://github.com/sgibb/topdownr/issues/62"><a href='https://github.com/sgibb/topdownr/issues/62'>#62</a></a>) [2017-12-02].</li>
 <li>Fix explanation of random forest barchart in analysis vignette [2017-12-02].</li>
-<li>Create all fragmentation methods in <code>.readScanHeadsTable</code> to avoid error if any is missing (fixes <a href="https://github.com/sgibb/topdownr/issues/68">#68</a>) [2017-12-20].</li>
+<li>Create all fragmentation methods in <code>.readScanHeadsTable</code> to avoid error if any is missing (fixes <a href="https://github.com/sgibb/topdownr/issues/68"><a href='https://github.com/sgibb/topdownr/issues/68'>#68</a></a>) [2017-12-20].</li>
 <li>Never remove Activation column in <code>colData</code> (even not if <code><a href="../reference/readTopDownFiles.html">readTopDownFiles(..., dropNonInformativeColumns=TRUE)</a></code>) [2017-12-20].</li>
 <li>Allow UVPD in <code>fragmentationMap,NCBSet-method</code> [2017-12-20].</li>
-<li>Add new method: <code>updateMedianInjectionTime,TopDownSet-method</code> (closes <a href="https://github.com/sgibb/topdownr/issues/66">#66</a>) [2017-12-20].</li>
+<li>Add new method: <code>updateMedianInjectionTime,TopDownSet-method</code> (closes <a href="https://github.com/sgibb/topdownr/issues/66"><a href='https://github.com/sgibb/topdownr/issues/66'>#66</a></a>) [2017-12-20].</li>
 </ul>
 </div>
 <div id="changes-in-version-1-1-0" class="section level2">
@@ -195,7 +247,7 @@
 </div>
 </div>
     <div id="topdownr-1-0" class="section level1">
-<h1 class="hasAnchor">
+<h1 class="page-header">
 <a href="#topdownr-1-0" class="anchor"></a>topdownr 1.0</h1>
 <div id="changes-in-version-1-0-0" class="section level2">
 <h2 class="hasAnchor">
@@ -206,7 +258,7 @@
 </div>
 </div>
     <div id="topdownr-0-9" class="section level1">
-<h1 class="hasAnchor">
+<h1 class="page-header">
 <a href="#topdownr-0-9" class="anchor"></a>topdownr 0.9</h1>
 <div id="changes-in-version-0-99-0" class="section level2">
 <h2 class="hasAnchor">
@@ -216,13 +268,14 @@
 </ul>
 </div>
 </div>
-    </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#topdownr-1-3">1.3</a></li>
+        <li><a href="#topdownr-1-2">1.2</a></li>
         <li><a href="#topdownr-1-1">1.1</a></li>
         <li><a href="#topdownr-1-0">1.0</a></li>
         <li><a href="#topdownr-0-9">0.9</a></li>
@@ -244,5 +297,8 @@
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

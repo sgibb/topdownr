@@ -6,8 +6,9 @@
 \alias{runScanHeadsman}
 \title{Windows specific functions.}
 \usage{
-createTngFusionMethFiles(template, xml = list.files(pattern = ".*\\\\.xml$"),
-  executable = "XmlMethodChanger.exe", verbose = interactive())
+createTngFusionMethFiles(template, xml = list.files(pattern =
+  ".*\\\\.xml$"), executable = "XmlMethodChanger.exe",
+  verbose = interactive())
 
 runXmlMethodChanger(template, xml = list.files(pattern = ".*\\\\.xml$"),
   executable = "XmlMethodChanger.exe", verbose = interactive())

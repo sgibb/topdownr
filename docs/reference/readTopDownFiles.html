@@ -18,13 +18,25 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Read top-down files. — readTopDownFiles" />
+
+<meta property="og:description" content="It creates an TopDownSet object and is its only constructor." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +59,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">topdownr</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">topdownr</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.2</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -76,18 +92,19 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/sgibb/topdownr/">
+  <a href="https://github.com/sgibb/topdownr">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,27 +112,31 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Read top-down files.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/sgibb/topdownr/blob/master/R/functions-TopDownSet.R'><code>R/functions-TopDownSet.R</code></a></small>
+    <div class="hidden name"><code>readTopDownFiles.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>It creates an <a href='TopDownSet-class.html'>TopDownSet</a> object and is its only constructor.</p>
     
+    </div>
 
-    <pre class="usage"><span class='fu'>readTopDownFiles</span>(<span class='no'>path</span>, <span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>".*"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>, <span class='st'>"x"</span>, <span class='st'>"y"</span>,
-  <span class='st'>"z"</span>), <span class='kw'>modifications</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Carbamidomethyl"</span>, <span class='st'>"Acetyl"</span>, <span class='st'>"Met-loss"</span>),
+    <pre class="usage"><span class='fu'>readTopDownFiles</span>(<span class='no'>path</span>, <span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>".*"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>, <span class='st'>"x"</span>,
+  <span class='st'>"y"</span>, <span class='st'>"z"</span>), <span class='kw'>modifications</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Carbamidomethyl"</span>, <span class='st'>"Acetyl"</span>, <span class='st'>"Met-loss"</span>),
   <span class='kw'>adducts</span> <span class='kw'>=</span> <span class='fu'>data.frame</span>(), <span class='kw'>neutralLoss</span> <span class='kw'>=</span> <span class='kw pkg'>MSnbase</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/MSnbase/topics/calculateFragments-methods'>defaultNeutralLoss</a></span>(),
-  <span class='kw'>sequenceOrder</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"original"</span>, <span class='st'>"random"</span>, <span class='st'>"inverse"</span>), <span class='kw'>tolerance</span> <span class='kw'>=</span> <span class='fl'>5e-06</span>,
-  <span class='kw'>redundantIonMatch</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"remove"</span>, <span class='st'>"closest"</span>),
+  <span class='kw'>sequenceOrder</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"original"</span>, <span class='st'>"random"</span>, <span class='st'>"inverse"</span>),
+  <span class='kw'>tolerance</span> <span class='kw'>=</span> <span class='fl'>5e-06</span>, <span class='kw'>redundantIonMatch</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"remove"</span>, <span class='st'>"closest"</span>),
   <span class='kw'>redundantFragmentMatch</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"remove"</span>, <span class='st'>"closest"</span>),
-  <span class='kw'>dropNonInformativeColumns</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>sampleColumns</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Mz"</span>, <span class='st'>"AgcTarget"</span>,
-  <span class='st'>"EtdReagentTarget"</span>, <span class='st'>"EtdActivation"</span>, <span class='st'>"CidActivation"</span>, <span class='st'>"HcdActivation"</span>,
-  <span class='st'>"UvpdActivation"</span>), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fu'>interactive</span>())</pre>
+  <span class='kw'>dropNonInformativeColumns</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>sampleColumns</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"Mz"</span>,
+  <span class='st'>"AgcTarget"</span>, <span class='st'>"EtdReagentTarget"</span>, <span class='st'>"EtdActivation"</span>, <span class='st'>"CidActivation"</span>,
+  <span class='st'>"HcdActivation"</span>, <span class='st'>"UvpdActivation"</span>), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fu'>interactive</span>())</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -131,10 +152,8 @@ a filename pattern, the default <code>.*</code> means all files.</p></td>
     <tr>
       <th>type</th>
       <td><p><code>character</code>,
-type of fragments, currently <em>a-c</em> and <em>x-z</em> are
-supported, see
-<code><a href='http://www.rdocumentation.org/packages/MSnbase/topics/calculateFragments-methods'>MSnbase::calculateFragments()</a></code>
-for details.</p></td>
+type of fragments, currently <em>a</em>, <em>b</em> <em>c</em>, <em>x</em>, <em>y</em>, <em>z</em>, <em>aIx</em>, <em>bIy</em> and
+<em>cIz</em> are supported, see <code><a href='http://www.rdocumentation.org/packages/MSnbase/topics/calculateFragments-methods'>MSnbase::calculateFragments()</a></code> for details.</p></td>
     </tr>
     <tr>
       <th>modifications</th>
@@ -220,7 +239,8 @@ used to define a sample (technical replicate). This is used to add the
 <li><p><code>.mzML</code> (spectra)</p></li>
 <li><p><code>.experiments.csv</code> (method/fragmentation conditions)</p></li>
 <li><p><code>.txt</code> (scan header information)</p></li>
-</ul><p><code>adducts</code>: <em>Thermo's Xtract</em>
+</ul>
+    <p><code>adducts</code>: <em>Thermo's Xtract</em>
 allows some mistakes in deisotoping, mostly it
 allows <code>+/- C13-C12</code> and <code>+/- H+</code>.
 The <code>adducts</code> argument takes a
@@ -229,8 +249,8 @@ that should assign to these
 new fragments and an information <code>to</code>
 whom the modification should be
 applied, e.g. for <code>H+</code> on <code>z</code>,
-<code>data.frame(mass=1.008, name="zpH", to="z")</code>.
-    <em>Please note:</em> The <code>adducts</code> are added to the output of
+<code>data.frame(mass=1.008, name="zpH", to="z")</code>.</p>
+<p><em>Please note:</em> The <code>adducts</code> are added to the output of
 <code><a href='http://www.rdocumentation.org/packages/MSnbase/topics/calculateFragments-methods'>MSnbase::calculateFragments()</a></code>.
 That has some limitations, e.g.
 neutral loss calculation could not be done in
@@ -241,8 +261,8 @@ additional rows, e.g.:
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='http://www.rdocumentation.org/packages/MSnbase/topics/calculateFragments-methods'>MSnbase::calculateFragments()</a></code>,
-<code><a href='http://www.rdocumentation.org/packages/MSnbase/topics/calculateFragments-methods'>MSnbase::defaultNeutralLoss()</a></code></p>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/MSnbase/topics/calculateFragments-methods'>MSnbase::calculateFragments()</a></code>,
+<code><a href='http://www.rdocumentation.org/packages/MSnbase/topics/calculateFragments-methods'>MSnbase::defaultNeutralLoss()</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -291,5 +311,8 @@ additional rows, e.g.:
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

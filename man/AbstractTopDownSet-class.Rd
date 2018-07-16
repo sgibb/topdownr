@@ -72,16 +72,16 @@
 
 \S4method{show}{AbstractTopDownSet}(object)
 
-\S4method{summary}{AbstractTopDownSet}(object, what = c("rows", "columns"),
-  ...)
+\S4method{summary}{AbstractTopDownSet}(object, what = c("rows",
+  "columns"), ...)
 
 \S4method{updateConditionNames}{AbstractTopDownSet}(object,
-  sampleColumns = c("Mz", "AgcTarget", "EtdReagentTarget", "EtdActivation",
-  "CidActivation", "HcdActivation", "UvpdActivation"),
+  sampleColumns = c("Mz", "AgcTarget", "EtdReagentTarget",
+  "EtdActivation", "CidActivation", "HcdActivation", "UvpdActivation"),
   verbose = interactive())
 
-\S4method{updateMedianInjectionTime}{AbstractTopDownSet}(object, by = list(Mz
-  = object$Mz, AgcTarget = object$AgcTarget))
+\S4method{updateMedianInjectionTime}{AbstractTopDownSet}(object,
+  by = list(Mz = object$Mz, AgcTarget = object$AgcTarget))
 }
 \arguments{
 \item{i, j}{\code{numeric}, \code{logical} or \code{character},

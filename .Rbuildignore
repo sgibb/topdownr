@@ -9,3 +9,4 @@
 ^playground$
 ^notes$
 ^docs$
+^_pkgdown\.yml$

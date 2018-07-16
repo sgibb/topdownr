@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Authors • topdownr</title>
+<title>Contributing • topdownr</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="Authors" />
+<meta property="og:title" content="Contributing" />
 
 
 
@@ -46,7 +46,7 @@
   </head>
 
   <body>
-    <div class="container template-authors">
+    <div class="container template-title-body">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -112,23 +112,42 @@
 <div class="row">
   <div class="contents col-md-9">
     <div class="page-header">
-      <h1>Authors</h1>
+      <h1>Contributing</h1>
     </div>
 
-    <ul class="list-unstyled">
-      <li>
-        <p><strong>Sebastian Gibb</strong>. Author, maintainer. <a href='https://orcid.org/0000-0001-7406-4443' target='orcid.widget'><img src='https://members.orcid.org/sites/default/files/vector_iD_icon.svg' class='orcid' height='16'></a>
-        </p>
-      </li>
-      <li>
-        <p><strong>Pavel Shliaha</strong>. Author. 
-        </p>
-      </li>
-      <li>
-        <p><strong>Ole Nørregaard Jensen</strong>. Author. 
-        </p>
-      </li>
-    </ul>
+
+<div id="contributing" class="section level1">
+
+<p>You are welcome to:</p>
+<ul>
+<li>submit suggestions and bug-reports at: <a href="https://github.com/sgibb/topdownr/issues" class="uri">https://github.com/sgibb/topdownr/issues</a>
+</li>
+<li>send a pull request on: <a href="https://github.com/sgibb/topdownr/compare" class="uri">https://github.com/sgibb/topdownr/compare</a>
+</li>
+<li>compose an e-mail to: <a href="mailto:mail@sebastiangibb.de">mail@sebastiangibb.de</a>
+</li>
+</ul>
+</div>
+<div id="how-to-contribute-code" class="section level1">
+<h1 class="hasAnchor">
+<a href="#how-to-contribute-code" class="anchor"></a>How to contribute code</h1>
+<p><a href="https://help.github.com/articles/fork-a-repo/">Fork</a>, then clone the repository:</p>
+<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r">git clone git@github.com:your-username/topdownr.git</code></pre></div>
+<p>Make sure all checks and tests pass:</p>
+<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r">R CMD build topdownr &amp;&amp;<span class="st"> </span>CMD check --as-cran --no-stop-on-test-error topdownr_*.tar.gz</code></pre></div>
+<p>Make your changes and write tests …</p>
+<p>Ensure all checks and tests pass:</p>
+<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r">R CMD build topdownr &amp;&amp;<span class="st"> </span>CMD check --as-cran --no-stop-on-test-error topdownr_*.tar.gz</code></pre></div>
+<p>Push to your fork and submit a <a href="https://help.github.com/articles/about-pull-requests/">pull request</a></p>
+<p>Waiting for our response. We may suggest some changes and/or improvements.</p>
+<p>If you want to increase the chance that your pull request is accepted:</p>
+<ul>
+<li>Use the <a href="https://www.bioconductor.org/developers/how-to/coding-style/">Bioconductor Coding Style</a>.</li>
+<li>Write <a href="https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message">good commit messages</a>.</li>
+<li>Write unit tests using the <code>testthat</code> package.</li>
+</ul>
+</div>
+
 
   </div>
 

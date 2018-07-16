@@ -18,13 +18,22 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="Function reference" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +56,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">topdownr</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">topdownr</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.2</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -76,18 +89,19 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/sgibb/topdownr/">
+  <a href="https://github.com/sgibb/topdownr">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,94 +109,90 @@
       
       </header>
 
-      <div class="row">
-  <div class="col-md-9">
+<div class="row">
+  <div class="contents col-md-9">
     <div class="page-header">
-      <h1>
-        Reference
-        <small>version&nbsp;1.1.7</small>
-      </h1>
+      <h1>Reference</h1>
     </div>
 
-    <div class="contents">
-      <table class="ref-index">
+    <table class="ref-index">
 
-      <colgroup>
-        <col class="alias" />
-        <col class="title" />
-      </colgroup>
+    <colgroup>
+      
+      <col class="alias" />
+      <col class="title" />
+    </colgroup>
 
-      <tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="AbstractTopDownSet-class.html">AbstractTopDownSet-class</a></code> </p>
-          </td>
-          <td><p>The AbstractTopDownSet class</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="default-functions.html">defaultMs1Settings</a></code> <code><a href="default-functions.html">defaultMs2Settings</a></code> </p>
-          </td>
-          <td><p>Settings for MS1/2 parameters.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="FragmentViews-class.html">FragmentViews</a></code> <code><a href="FragmentViews-class.html">combine</a></code> <code><a href="FragmentViews-class.html">mz</a></code> <code><a href="FragmentViews-class.html">show</a></code> </p>
-          </td>
-          <td><p>The FragmentViews class</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="NCBSet-class.html">bestConditions</a></code> <code><a href="NCBSet-class.html">fragmentationMap</a></code> <code><a href="NCBSet-class.html">show</a></code> <code><a href="NCBSet-class.html">summary</a></code> </p>
-          </td>
-          <td><p>The NCBSet class</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="readTopDownFiles.html">readTopDownFiles</a></code> </p>
-          </td>
-          <td><p>Read top-down files.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="tds.html">tds</a></code> </p>
-          </td>
-          <td><p>TopDownSet Example Data</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="topdownr-package.html">topdownr-package</a></code> </p>
-          </td>
-          <td><p>Investigation of Fragmentation Conditions in Top-Down Proteomics</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="TopDownSet-class.html">aggregate</a></code> <code><a href="TopDownSet-class.html">combine</a></code> <code><a href="TopDownSet-class.html">filterCv</a></code> <code><a href="TopDownSet-class.html">filterInjectionTime</a></code> <code><a href="TopDownSet-class.html">filterIntensity</a></code> <code><a href="TopDownSet-class.html">filterNonReplicatedFragments</a></code> <code><a href="TopDownSet-class.html">normalize</a></code> <code><a href="TopDownSet-class.html">plot</a></code> <code><a href="TopDownSet-class.html">show</a></code> <code><a href="TopDownSet-class.html">summary</a></code> </p>
-          </td>
-          <td><p>The TopDownSet class</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="windows-specific-functions.html">createTngFusionMethFiles</a></code> <code><a href="windows-specific-functions.html">runXmlMethodChanger</a></code> <code><a href="windows-specific-functions.html">runScanHeadsman</a></code> </p>
-          </td>
-          <td><p>Windows specific functions.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="writeMethodXmls.html">writeMethodXmls</a></code> </p>
-          </td>
-          <td><p>Create Orbitrap Fusion method.xml files.</p></td>
-        </tr>
-      </tbody>
-      </table>
-    </div>
+    <tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="AbstractTopDownSet-class.html">`[`(<i>&lt;AbstractTopDownSet&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;ANY&gt;</i>)</a></code> <code><a href="AbstractTopDownSet-class.html">`[[`(<i>&lt;AbstractTopDownSet&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;missing&gt;</i>)</a></code> <code><a href="AbstractTopDownSet-class.html">`[[<-`(<i>&lt;AbstractTopDownSet&gt;</i>,<i>&lt;ANY&gt;</i>,<i>&lt;missing&gt;</i>)</a></code> <code><a href="AbstractTopDownSet-class.html">`$`(<i>&lt;AbstractTopDownSet&gt;</i>)</a></code> <code><a href="AbstractTopDownSet-class.html">`$<-`(<i>&lt;AbstractTopDownSet&gt;</i>)</a></code> <code><a href="AbstractTopDownSet-class.html">assayData(<i>&lt;AbstractTopDownSet&gt;</i>)</a></code> <code><a href="AbstractTopDownSet-class.html">colData(<i>&lt;AbstractTopDownSet&gt;</i>)</a></code> <code><a href="AbstractTopDownSet-class.html">`colData<-`(<i>&lt;AbstractTopDownSet&gt;</i>)</a></code> <code><a href="AbstractTopDownSet-class.html">combine(<i>&lt;AbstractTopDownSet&gt;</i>,<i>&lt;AbstractTopDownSet&gt;</i>)</a></code> <code><a href="AbstractTopDownSet-class.html">conditionData(<i>&lt;AbstractTopDownSet&gt;</i>)</a></code> <code><a href="AbstractTopDownSet-class.html">`conditionData<-`(<i>&lt;AbstractTopDownSet&gt;</i>)</a></code> <code><a href="AbstractTopDownSet-class.html">conditionNames(<i>&lt;AbstractTopDownSet&gt;</i>)</a></code> <code><a href="AbstractTopDownSet-class.html">dim(<i>&lt;AbstractTopDownSet&gt;</i>)</a></code> <code><a href="AbstractTopDownSet-class.html">dimnames(<i>&lt;AbstractTopDownSet&gt;</i>)</a></code> <code><a href="AbstractTopDownSet-class.html">removeEmptyConditions(<i>&lt;AbstractTopDownSet&gt;</i>)</a></code> <code><a href="AbstractTopDownSet-class.html">rowViews(<i>&lt;AbstractTopDownSet&gt;</i>)</a></code> <code><a href="AbstractTopDownSet-class.html">show(<i>&lt;AbstractTopDownSet&gt;</i>)</a></code> <code><a href="AbstractTopDownSet-class.html">summary(<i>&lt;AbstractTopDownSet&gt;</i>)</a></code> <code><a href="AbstractTopDownSet-class.html">updateConditionNames(<i>&lt;AbstractTopDownSet&gt;</i>)</a></code> <code><a href="AbstractTopDownSet-class.html">updateMedianInjectionTime(<i>&lt;AbstractTopDownSet&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>The AbstractTopDownSet class</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="FragmentViews-class.html">FragmentViews()</a></code> <code><a href="FragmentViews-class.html">combine(<i>&lt;FragmentViews&gt;</i>,<i>&lt;FragmentViews&gt;</i>)</a></code> <code><a href="FragmentViews-class.html">mz(<i>&lt;FragmentViews&gt;</i>)</a></code> <code><a href="FragmentViews-class.html">show(<i>&lt;FragmentViews&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>The FragmentViews class</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="NCBSet-class.html">bestConditions(<i>&lt;NCBSet&gt;</i>)</a></code> <code><a href="NCBSet-class.html">fragmentationMap(<i>&lt;NCBSet&gt;</i>)</a></code> <code><a href="NCBSet-class.html">show(<i>&lt;NCBSet&gt;</i>)</a></code> <code><a href="NCBSet-class.html">summary(<i>&lt;NCBSet&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>The NCBSet class</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="TopDownSet-class.html">aggregate(<i>&lt;TopDownSet&gt;</i>)</a></code> <code><a href="TopDownSet-class.html">combine(<i>&lt;TopDownSet&gt;</i>,<i>&lt;TopDownSet&gt;</i>)</a></code> <code><a href="TopDownSet-class.html">filterCv(<i>&lt;TopDownSet&gt;</i>)</a></code> <code><a href="TopDownSet-class.html">filterInjectionTime(<i>&lt;TopDownSet&gt;</i>)</a></code> <code><a href="TopDownSet-class.html">filterIntensity(<i>&lt;TopDownSet&gt;</i>)</a></code> <code><a href="TopDownSet-class.html">filterNonReplicatedFragments(<i>&lt;TopDownSet&gt;</i>)</a></code> <code><a href="TopDownSet-class.html">normalize(<i>&lt;TopDownSet&gt;</i>)</a></code> <code><a href="TopDownSet-class.html">plot(<i>&lt;TopDownSet&gt;</i>,<i>&lt;missing&gt;</i>)</a></code> <code><a href="TopDownSet-class.html">show(<i>&lt;TopDownSet&gt;</i>)</a></code> <code><a href="TopDownSet-class.html">summary(<i>&lt;TopDownSet&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>The TopDownSet class</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="default-functions.html">defaultMs1Settings()</a></code> <code><a href="default-functions.html">defaultMs2Settings()</a></code> </p>
+        </td>
+        <td><p>Settings for MS1/2 parameters.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="readTopDownFiles.html">readTopDownFiles()</a></code> </p>
+        </td>
+        <td><p>Read top-down files.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="tds.html">tds</a></code> </p>
+        </td>
+        <td><p>TopDownSet Example Data</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="topdownr-package.html">topdownr-package</a></code> </p>
+        </td>
+        <td><p>Investigation of Fragmentation Conditions in Top-Down Proteomics</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="windows-specific-functions.html">createTngFusionMethFiles()</a></code> <code><a href="windows-specific-functions.html">runXmlMethodChanger()</a></code> <code><a href="windows-specific-functions.html">runScanHeadsman()</a></code> </p>
+        </td>
+        <td><p>Windows specific functions.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="writeMethodXmls.html">writeMethodXmls()</a></code> </p>
+        </td>
+        <td><p>Create Orbitrap Fusion method.xml files.</p></td>
+      </tr>
+    </tbody>
+    </table>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -205,5 +215,8 @@
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

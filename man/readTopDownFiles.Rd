@@ -4,15 +4,15 @@
 \alias{readTopDownFiles}
 \title{Read top-down files.}
 \usage{
-readTopDownFiles(path, pattern = ".*", type = c("a", "b", "c", "x", "y",
-  "z"), modifications = c("Carbamidomethyl", "Acetyl", "Met-loss"),
+readTopDownFiles(path, pattern = ".*", type = c("a", "b", "c", "x",
+  "y", "z"), modifications = c("Carbamidomethyl", "Acetyl", "Met-loss"),
   adducts = data.frame(), neutralLoss = MSnbase::defaultNeutralLoss(),
-  sequenceOrder = c("original", "random", "inverse"), tolerance = 5e-06,
-  redundantIonMatch = c("remove", "closest"),
+  sequenceOrder = c("original", "random", "inverse"),
+  tolerance = 5e-06, redundantIonMatch = c("remove", "closest"),
   redundantFragmentMatch = c("remove", "closest"),
-  dropNonInformativeColumns = TRUE, sampleColumns = c("Mz", "AgcTarget",
-  "EtdReagentTarget", "EtdActivation", "CidActivation", "HcdActivation",
-  "UvpdActivation"), verbose = interactive())
+  dropNonInformativeColumns = TRUE, sampleColumns = c("Mz",
+  "AgcTarget", "EtdReagentTarget", "EtdActivation", "CidActivation",
+  "HcdActivation", "UvpdActivation"), verbose = interactive())
 }
 \arguments{
 \item{path}{\code{character},

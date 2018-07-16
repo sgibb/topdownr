@@ -18,13 +18,26 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+
+
+
+<meta property="og:title" content="The TopDownSet class — TopDownSet-class" />
+
+<meta property="og:description" content="The TopDownSet class is a container for a whole top-down proteomics
+experiment." />
+<meta name="twitter:card" content="summary" />
+
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -47,8 +60,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">topdownr</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">topdownr</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.3.2</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -76,18 +93,19 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/sgibb/topdownr/">
+  <a href="https://github.com/sgibb/topdownr">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -95,16 +113,20 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>The TopDownSet class</h1>
+    <small class="dont-index">Source: <a href='https://github.com/sgibb/topdownr/blob/master/R/AllClasses.R'><code>R/AllClasses.R</code></a>, <a href='https://github.com/sgibb/topdownr/blob/master/R/methods-TopDownSet.R'><code>R/methods-TopDownSet.R</code></a></small>
+    <div class="hidden name"><code>TopDownSet-class.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>The TopDownSet class is a container for a whole top-down proteomics
 experiment.</p>
     
+    </div>
 
     <pre class="usage"><span class='co'># S4 method for TopDownSet</span>
 <span class='fu'>aggregate</span>(<span class='no'>x</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>x</span>$<span class='no'>Sample</span>, <span class='no'>...</span>)
@@ -113,15 +135,16 @@ experiment.</p>
 <span class='fu'><a href='AbstractTopDownSet-class.html'>combine</a></span>(<span class='no'>x</span>, <span class='no'>y</span>)
 
 <span class='co'># S4 method for TopDownSet</span>
-<span class='fu'>filterCv</span>(<span class='no'>object</span>, <span class='no'>threshold</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>object</span>$<span class='no'>Sample</span>, <span class='no'>...</span>)
-
-<span class='co'># S4 method for TopDownSet</span>
-<span class='fu'>filterInjectionTime</span>(<span class='no'>object</span>, <span class='kw'>maxDeviation</span> <span class='kw'>=</span> <span class='fu'>log2</span>(<span class='fl'>3</span>),
-  <span class='kw'>keepTopN</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>object</span>$<span class='no'>Sample</span>, <span class='no'>...</span>)
-
-<span class='co'># S4 method for TopDownSet</span>
-<span class='fu'>filterIntensity</span>(<span class='no'>object</span>, <span class='no'>threshold</span>, <span class='kw'>relative</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+<span class='fu'>filterCv</span>(<span class='no'>object</span>, <span class='no'>threshold</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>object</span>$<span class='no'>Sample</span>,
   <span class='no'>...</span>)
+
+<span class='co'># S4 method for TopDownSet</span>
+<span class='fu'>filterInjectionTime</span>(<span class='no'>object</span>,
+  <span class='kw'>maxDeviation</span> <span class='kw'>=</span> <span class='fu'>log2</span>(<span class='fl'>3</span>), <span class='kw'>keepTopN</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='no'>object</span>$<span class='no'>Sample</span>, <span class='no'>...</span>)
+
+<span class='co'># S4 method for TopDownSet</span>
+<span class='fu'>filterIntensity</span>(<span class='no'>object</span>, <span class='no'>threshold</span>,
+  <span class='kw'>relative</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='co'># S4 method for TopDownSet</span>
 <span class='fu'>filterNonReplicatedFragments</span>(<span class='no'>object</span>, <span class='kw'>minN</span> <span class='kw'>=</span> <span class='fl'>2</span>,
@@ -137,10 +160,10 @@ experiment.</p>
 <span class='fu'>show</span>(<span class='no'>object</span>)
 
 <span class='co'># S4 method for TopDownSet</span>
-<span class='fu'>summary</span>(<span class='no'>object</span>, <span class='kw'>what</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"conditions"</span>, <span class='st'>"fragments"</span>),
-  <span class='no'>...</span>)</pre>
+<span class='fu'>summary</span>(<span class='no'>object</span>, <span class='kw'>what</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"conditions"</span>,
+  <span class='st'>"fragments"</span>), <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -216,7 +239,7 @@ replicates (that's why the default is the
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>See <code><a href='https://cran.rstudio.com/web/packages/topdownr/vignettes/analysis.html'>vignette("analysis", package="topdownr")</a></code>
+    <p>See <code><a href='../articles/analysis.html'>vignette("analysis", package="topdownr")</a></code>
 for a detailed example how to work with
 <code>TopDownSet</code> objects.</p>
     
@@ -233,8 +256,8 @@ which has the same value for technical replicates).
 It combines intensity values and numeric metadata of the grouped
 conditions/runs (columns) by <code>mean</code> and returns a reduced
 TopDownSet object.</p></li>
-<li><p><code>combine</code>: Combine <code>TopDownSet</code> objects.
-    <code>combine</code> allows to combine two or more <code>TopDownSet</code> objects.
+<li><p><code>combine</code>: Combine <code>TopDownSet</code> objects.</p>
+<p><code>combine</code> allows to combine two or more <code>TopDownSet</code> objects.
 Please note that it uses the default
 <code>sampleColumns</code> to define technical replicates (see <code><a href='readTopDownFiles.html'>readTopDownFiles()</a></code>).and
 the default <code>by</code> argument to group ion injection times for the calculation of
@@ -247,7 +270,7 @@ after <code>combine</code> by calling <code><a href='AbstractTopDownSet-class.ht
 (defined by the <code>by</code> argument).
 All fragments below a given <code>threshold</code>
 are removed. The <code>threshold</code> is the maximal allowed CV in percent
-(<code>sd/mean * 100 &amp;lt; threshold</code>).</p></li>
+(<code>sd/mean * 100 &lt; threshold</code>).</p></li>
 <li><p><code>filterInjectionTime</code>: Filter by ion injection time.</p>
 <p>Filtering is done by maximal allowed deviation and just the technical
 <code>keepTopN</code> replicates with the lowest deviation from the median ion
@@ -307,14 +330,14 @@ ion/fragment matches. See <code>redundantIonMatch</code> and
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <ul>
+    <div class='dont-index'><ul>
 <li><p><a href='FragmentViews-class.html'>FragmentViews</a>
 for the row view interface.</p></li>
 <li><p><a href='http://www.rdocumentation.org/packages/Matrix/topics/dgCMatrix-class'>Matrix::dgCMatrix</a>
 for technical details about the intensity storage.</p></li>
 <li><p><code>?vignette("analysis", package="topdownr")</code>
 for a full documented example of an analysis using <code>topdownr</code>.</p></li>
-</ul>
+</ul></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -800,7 +823,7 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 #&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
 #&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
 #&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2018-02-24 23:01:05] Subsetted 14518 fragments [1949;351] to 1157 fragments [100;351]. </div><div class='input'>
+#&gt; [2018-07-16 20:53:18] Subsetted 14518 fragments [1949;351] to 1157 fragments [100;351]. </div><div class='input'>
 <span class='co'># All c fragments</span>
 <span class='no'>tds</span>[<span class='st'>"c"</span>]</div><div class='output co'>#&gt; TopDownSet object (0.31 Mb)
 #&gt; - - - Protein data - - -
@@ -823,7 +846,7 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 #&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
 #&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
 #&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2018-02-24 23:01:05] Subsetted 14518 fragments [1949;351] to 338 fragments [152;351]. </div><div class='input'>
+#&gt; [2018-07-16 20:53:18] Subsetted 14518 fragments [1949;351] to 338 fragments [152;351]. </div><div class='input'>
 <span class='co'># Just c 152</span>
 <span class='no'>tds</span>[<span class='st'>"c152"</span>]</div><div class='output co'>#&gt; TopDownSet object (0.28 Mb)
 #&gt; - - - Protein data - - -
@@ -846,7 +869,7 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 #&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
 #&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
 #&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2018-02-24 23:01:05] Subsetted 14518 fragments [1949;351] to 119 fragments [1;351]. </div><div class='input'>
+#&gt; [2018-07-16 20:53:18] Subsetted 14518 fragments [1949;351] to 119 fragments [1;351]. </div><div class='input'>
 <span class='co'># Condition 1 to 10</span>
 <span class='no'>tds</span>[, <span class='fl'>1</span>:<span class='fl'>10</span>]</div><div class='output co'>#&gt; TopDownSet object (0.35 Mb)
 #&gt; - - - Protein data - - -
@@ -869,7 +892,7 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 #&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
 #&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
 #&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2018-02-24 23:01:05] Subsetted 14518 fragments [1949;351] to 524 fragments [1949;10]. </div><div class='input'>
+#&gt; [2018-07-16 20:53:18] Subsetted 14518 fragments [1949;351] to 524 fragments [1949;10]. </div><div class='input'>
 <span class='co'># Filtering</span>
 <span class='co'># Filter all intensities that don't have at least 10 % of the highest</span>
 <span class='co'># intensity per fragment.</span>
@@ -922,14 +945,14 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 #&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
 #&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
 #&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2018-02-24 23:01:05] 3579 intensity values &lt; 0.1 (relative) filtered; 10939 fragments [1949;351].
-#&gt; [2018-02-24 23:01:05] 750 fragments with CV &gt; 30% filtered; 10189 fragments [1949;351].
-#&gt; [2018-02-24 23:01:05] Subsetted 10189 fragments [1949;351] to 10158 fragments [1949;345].
-#&gt; [2018-02-24 23:01:05] 6 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 10158 fragments [1949;345].
-#&gt; [2018-02-24 23:01:05] 5604 intensity values of fragments replicated &lt; 2 times filtered; 4554 fragments [1949;345].
-#&gt; [2018-02-24 23:01:05] Intensity values normalized to TIC.
-#&gt; [2018-02-24 23:01:05] Aggregated 4554 fragments [1949;345] to 2277 fragments [1949;220].
-#&gt; [2018-02-24 23:01:06] Coerced TopDownSet into an NCBSet object; 2003 fragments [152;220]. </div><div class='input'>
+#&gt; [2018-07-16 20:53:18] 3579 intensity values &lt; 0.1 (relative) filtered; 10939 fragments [1949;351].
+#&gt; [2018-07-16 20:53:18] 750 fragments with CV &gt; 30% filtered; 10189 fragments [1949;351].
+#&gt; [2018-07-16 20:53:18] Subsetted 10189 fragments [1949;351] to 10158 fragments [1949;345].
+#&gt; [2018-07-16 20:53:18] 6 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 10158 fragments [1949;345].
+#&gt; [2018-07-16 20:53:18] 5604 intensity values of fragments replicated &lt; 2 times filtered; 4554 fragments [1949;345].
+#&gt; [2018-07-16 20:53:18] Intensity values normalized to TIC.
+#&gt; [2018-07-16 20:53:18] Aggregated 4554 fragments [1949;345] to 2277 fragments [1949;220].
+#&gt; [2018-07-16 20:53:18] Coerced TopDownSet into an NCBSet object; 2003 fragments [152;220]. </div><div class='input'>
 <span class='kw'>if</span> (<span class='fu'>require</span>(<span class='st'>"MSnbase"</span>)) {
     <span class='fu'><a href='http://www.rdocumentation.org/packages/MSnbase/topics/mzRident2dfr'>as</a></span>(<span class='no'>tds</span>, <span class='st'>"MSnSet"</span>)
 }</div><div class='output co'>#&gt; <span class='message'>Loading required package: MSnbase</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: Biobase</span></div><div class='output co'>#&gt; <span class='message'>Welcome to Bioconductor</span>
@@ -937,40 +960,13 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 #&gt; <span class='message'>    Vignettes contain introductory material; view with</span>
 #&gt; <span class='message'>    'browseVignettes()'. To cite Bioconductor, see</span>
 #&gt; <span class='message'>    'citation("Biobase")', and for packages 'citation("pkgname")'.</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: mzR</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: Rcpp</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: BiocParallel</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>This is MSnbase version 2.5.8 </span>
+#&gt; <span class='message'>This is MSnbase version 2.7.2 </span>
 #&gt; <span class='message'>  Visit https://lgatto.github.io/MSnbase/ to get started.</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: ‘MSnbase’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:stats’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    smooth</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:base’:</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    trimws</span></div><div class='output co'>#&gt; MSnSet (storageMode: lockedEnvironment)
-#&gt; assayData: 1949 features, 220 samples 
-#&gt;   element names: exprs 
-#&gt; protocolData: none
-#&gt; phenoData
-#&gt;   sampleNames: C1.0e+05_1.0e+06_02.50_07_00_1
-#&gt;     C1.0e+05_1.0e+06_02.50_14_00_1 ... C1.0e+06_0.0e+00_00.00_00_35_1
-#&gt;     (220 total)
-#&gt;   varLabels: File Scan ... MedianIonInjectionTimeMs (59 total)
-#&gt;   varMetadata: labelDescription
-#&gt; featureData
-#&gt;   featureNames: a1 b1 ... c152 (1949 total)
-#&gt;   fvarLabels: fragment start ... z (8 total)
-#&gt;   fvarMetadata: labelDescription
-#&gt; experimentData: use 'experimentData(object)'
-#&gt; Annotation:  
-#&gt; - - - Processing information - - -
-#&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove). 
-#&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions. 
-#&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget. 
-#&gt; [2018-02-24 23:01:05] 3579 intensity values &lt; 0.1 (relative) filtered; 10939 fragments [1949;351]. 
-#&gt; [2018-02-24 23:01:05] 750 fragments with CV &gt; 30% filtered; 10189 fragments [1949;351]. 
-#&gt; [2018-02-24 23:01:05] Subsetted 10189 fragments [1949;351] to 10158 fragments [1949;345]. 
-#&gt; [2018-02-24 23:01:05] 6 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 10158 fragments [1949;345]. 
-#&gt; [2018-02-24 23:01:05] 5604 intensity values of fragments replicated &lt; 2 times filtered; 4554 fragments [1949;345]. 
-#&gt; [2018-02-24 23:01:05] Intensity values normalized to TIC. 
-#&gt; [2018-02-24 23:01:05] Aggregated 4554 fragments [1949;345] to 2277 fragments [1949;220]. 
-#&gt;  MSnbase version: 2.5.8 </div><span class='co'># NOT RUN {</span>
+#&gt; <span class='message'>    trimws</span></div><div class='output co'>#&gt; <span class='error'>Error in (function (classes, fdef, mtable) {    methods &lt;- .findInheritedMethods(classes, fdef, mtable)    if (length(methods) == 1L)         return(methods[[1L]])    else if (length(methods) == 0L) {        cnames &lt;- paste0("\"", vapply(classes, as.character,             ""), "\"", collapse = ", ")        stop(gettextf("unable to find an inherited method for function %s for signature %s",             sQuote(fdef@generic), sQuote(cnames)), domain = NA)    }    else stop("Internal error in finding inherited methods; didn't return a unique method",         domain = NA)})(list(structure("MSnSet", package = "MSnbase")), new("standardGeneric",     .Data = function (object)     standardGeneric("assayData"), generic = structure("assayData", package = "Biobase"),     package = "Biobase", group = list(), valueClass = character(0),     signature = "object", default = NULL, skeleton = (function (object)     stop("invalid call in method dispatch to 'assayData' (no default method)",         domain = NA))(object)), &lt;environment&gt;): unable to find an inherited method for function ‘assayData’ for signature ‘"MSnSet"’</span></div><span class='co'># NOT RUN {</span>
 <span class='co'># plot a single condition</span>
 <span class='co'># pseudo-code (replace topdownset with your object)</span>
 <span class='fu'><a href='http://www.rdocumentation.org/packages/MSnbase/topics/plot-methods'>plot</a></span>(<span class='no'>topdownset</span>[,<span class='fl'>1</span>])
@@ -1021,5 +1017,8 @@ Sebastian Gibb <a href='mailto:mail@sebastiangibb.de'>mail@sebastiangibb.de</a>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
