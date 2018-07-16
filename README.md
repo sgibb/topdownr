@@ -13,16 +13,18 @@ Devel: [![build devel](http://bioconductor.org/shields/build/devel/bioc/topdownr
 ## Installation
 
 ```r
-source("https://bioconductor.org/biocLite.R")
-biocLite("topdownr")
+if (!require("BiocManager"))
+    install.packages("BiocManager")
+BiocManager::install("topdownr")
 ```
 
 If you want to install the development version from github
 (not recommended unless you know what you are doing):
 
 ```r
-source("https://bioconductor.org/biocLite.R")
-biocLite("sgibb/topdownr")
+if (!require("BiocManager"))
+    install.packages("BiocManager")
+BiocManager::install("sgibb/topdownr")
 ```
 
 ## Documentation
