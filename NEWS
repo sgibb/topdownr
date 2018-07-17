@@ -1,5 +1,9 @@
 # topdownr 1.3
 
+Changes in version 1.3.3
+- Revert commit c6e8dfd: "Adapt to `MSnbase 2.7.2` with internal fragments; see
+    #82 [2018-06-03]."
+
 Changes in version 1.3.2
 - Use `BiocManager::install` [2018-07-16].
 
