@@ -38,8 +38,7 @@
 #' @param verbose `logical`, verbose output?
 #' @return `FragmentViews`
 #' @noRd
-.calculateFragments <- function(sequence, type=c("a", "b", "c", "x", "y", "z",
-                                                 "aIx", "bIy", "cIz"),
+.calculateFragments <- function(sequence, type=c("a", "b", "c", "x", "y", "z"),
                                 modifications=c(
                                     "Carbamidomethyl", "Acetyl",
                                     "Met-loss"

@@ -131,7 +131,7 @@ Filtering is done by coefficient of variation across technical replicates
 (defined by the \code{by} argument).
 All fragments below a given \code{threshold}
 are removed. The \code{threshold} is the maximal allowed CV in percent
-(\code{sd/mean * 100 < threshold}).
+(\code{sd/mean * 100 &lt; threshold}).
 
 \item \code{filterInjectionTime}: Filter by ion injection time.
 

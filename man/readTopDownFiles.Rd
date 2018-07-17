@@ -22,8 +22,10 @@ path to directory that contains the top-down files.}
 a filename pattern, the default \code{.*} means all files.}
 
 \item{type}{\code{character},
-type of fragments, currently \emph{a}, \emph{b} \emph{c}, \emph{x}, \emph{y}, \emph{z}, \emph{aIx}, \emph{bIy} and
-\emph{cIz} are supported, see \code{\link[MSnbase:calculateFragments]{MSnbase::calculateFragments()}} for details.}
+type of fragments, currently \emph{a-c} and \emph{x-z} are
+supported, see
+\code{\link[MSnbase:calculateFragments]{MSnbase::calculateFragments()}}
+for details.}
 
 \item{modifications}{\code{character},
 unimod names of modifications that should be applied.
