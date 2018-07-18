@@ -1,0 +1,4317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MethodModifications Version="1" Model="OrbitrapFusion" Family="Calcium" Type="SL">
+<Modification Order="1">
+  <Experiment ExperimentIndex="0">
+    <FullMSScan>
+      <FirstMass>400</FirstMass>
+      <LastMass>1200</LastMass>
+      <Microscans>10</Microscans>
+    </FullMSScan>
+  </Experiment>
+</Modification>
+<Modification Order="2">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="3">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="4">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="5">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="6">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="7">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="8">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="9">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="10">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="11">
+  <CopyAndAppendExperiment SourceExperimentIndex="0"/>
+</Modification>
+<Modification Order="12">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="13">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="14">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="15">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="16">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="17">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="18">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="19">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="20">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="21">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="22">
+  <CopyAndAppendExperiment SourceExperimentIndex="0"/>
+</Modification>
+<Modification Order="23">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="24">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="25">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="26">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="27">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="28">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="29">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="30">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="31">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="32">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="33">
+  <CopyAndAppendExperiment SourceExperimentIndex="0"/>
+</Modification>
+<Modification Order="34">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="35">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="36">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="37">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="38">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="39">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="40">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="41">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="42">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="43">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="44">
+  <CopyAndAppendExperiment SourceExperimentIndex="0"/>
+</Modification>
+<Modification Order="45">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="46">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="47">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="48">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="49">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="50">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="51">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="52">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="53">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="54">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="55">
+  <CopyAndAppendExperiment SourceExperimentIndex="0"/>
+</Modification>
+<Modification Order="56">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="57">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="58">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="59">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="60">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="61">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="62">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="63">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="64">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="65">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="66">
+  <CopyAndAppendExperiment SourceExperimentIndex="0"/>
+</Modification>
+<Modification Order="67">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="68">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="69">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="70">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="71">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="72">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="73">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="74">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="75">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="76">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="77">
+  <CopyAndAppendExperiment SourceExperimentIndex="0"/>
+</Modification>
+<Modification Order="78">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="79">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="80">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="81">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="82">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="83">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="84">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="85">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="86">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="87">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="88">
+  <CopyAndAppendExperiment SourceExperimentIndex="0"/>
+</Modification>
+<Modification Order="89">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="90">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="91">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="92">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="93">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="94">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="95">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="96">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="97">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="98">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="99">
+  <CopyAndAppendExperiment SourceExperimentIndex="0"/>
+</Modification>
+<Modification Order="100">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="101">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="102">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="103">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="104">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="105">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="106">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="107">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="108">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="109">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="110">
+  <CopyAndAppendExperiment SourceExperimentIndex="0"/>
+</Modification>
+<Modification Order="111">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="112">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="113">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="114">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="115">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="116">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="117">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="118">
+  <CopyAndAppendExperiment SourceExperimentIndex="1"/>
+</Modification>
+<Modification Order="119">
+  <Experiment ExperimentIndex="0">
+    <StartTimeMin>0.01</StartTimeMin>
+    <EndTimeMin>0.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="120">
+  <Experiment ExperimentIndex="1">
+    <StartTimeMin>0.51</StartTimeMin>
+    <EndTimeMin>1</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="121">
+  <Experiment ExperimentIndex="2">
+    <StartTimeMin>1.01</StartTimeMin>
+    <EndTimeMin>1.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="122">
+  <Experiment ExperimentIndex="3">
+    <StartTimeMin>1.51</StartTimeMin>
+    <EndTimeMin>2</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="123">
+  <Experiment ExperimentIndex="4">
+    <StartTimeMin>2.01</StartTimeMin>
+    <EndTimeMin>2.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="124">
+  <Experiment ExperimentIndex="5">
+    <StartTimeMin>2.51</StartTimeMin>
+    <EndTimeMin>3</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="125">
+  <Experiment ExperimentIndex="6">
+    <StartTimeMin>3.01</StartTimeMin>
+    <EndTimeMin>3.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="126">
+  <Experiment ExperimentIndex="7">
+    <StartTimeMin>3.51</StartTimeMin>
+    <EndTimeMin>4</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="127">
+  <Experiment ExperimentIndex="8">
+    <StartTimeMin>4.01</StartTimeMin>
+    <EndTimeMin>4.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="128">
+  <Experiment ExperimentIndex="9">
+    <StartTimeMin>4.51</StartTimeMin>
+    <EndTimeMin>5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="129">
+  <Experiment ExperimentIndex="10">
+    <StartTimeMin>5.01</StartTimeMin>
+    <EndTimeMin>5.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="130">
+  <Experiment ExperimentIndex="11">
+    <StartTimeMin>5.51</StartTimeMin>
+    <EndTimeMin>6</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="131">
+  <Experiment ExperimentIndex="12">
+    <StartTimeMin>6.01</StartTimeMin>
+    <EndTimeMin>6.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="132">
+  <Experiment ExperimentIndex="13">
+    <StartTimeMin>6.51</StartTimeMin>
+    <EndTimeMin>7</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="133">
+  <Experiment ExperimentIndex="14">
+    <StartTimeMin>7.01</StartTimeMin>
+    <EndTimeMin>7.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="134">
+  <Experiment ExperimentIndex="15">
+    <StartTimeMin>7.51</StartTimeMin>
+    <EndTimeMin>8</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="135">
+  <Experiment ExperimentIndex="16">
+    <StartTimeMin>8.01</StartTimeMin>
+    <EndTimeMin>8.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="136">
+  <Experiment ExperimentIndex="17">
+    <StartTimeMin>8.51</StartTimeMin>
+    <EndTimeMin>9</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="137">
+  <Experiment ExperimentIndex="18">
+    <StartTimeMin>9.01</StartTimeMin>
+    <EndTimeMin>9.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="138">
+  <Experiment ExperimentIndex="19">
+    <StartTimeMin>9.51</StartTimeMin>
+    <EndTimeMin>10</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="139">
+  <Experiment ExperimentIndex="20">
+    <StartTimeMin>10.01</StartTimeMin>
+    <EndTimeMin>10.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="140">
+  <Experiment ExperimentIndex="21">
+    <StartTimeMin>10.51</StartTimeMin>
+    <EndTimeMin>11</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="141">
+  <Experiment ExperimentIndex="22">
+    <StartTimeMin>11.01</StartTimeMin>
+    <EndTimeMin>11.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="142">
+  <Experiment ExperimentIndex="23">
+    <StartTimeMin>11.51</StartTimeMin>
+    <EndTimeMin>12</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="143">
+  <Experiment ExperimentIndex="24">
+    <StartTimeMin>12.01</StartTimeMin>
+    <EndTimeMin>12.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="144">
+  <Experiment ExperimentIndex="25">
+    <StartTimeMin>12.51</StartTimeMin>
+    <EndTimeMin>13</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="145">
+  <Experiment ExperimentIndex="26">
+    <StartTimeMin>13.01</StartTimeMin>
+    <EndTimeMin>13.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="146">
+  <Experiment ExperimentIndex="27">
+    <StartTimeMin>13.51</StartTimeMin>
+    <EndTimeMin>14</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="147">
+  <Experiment ExperimentIndex="28">
+    <StartTimeMin>14.01</StartTimeMin>
+    <EndTimeMin>14.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="148">
+  <Experiment ExperimentIndex="29">
+    <StartTimeMin>14.51</StartTimeMin>
+    <EndTimeMin>15</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="149">
+  <Experiment ExperimentIndex="30">
+    <StartTimeMin>15.01</StartTimeMin>
+    <EndTimeMin>15.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="150">
+  <Experiment ExperimentIndex="31">
+    <StartTimeMin>15.51</StartTimeMin>
+    <EndTimeMin>16</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="151">
+  <Experiment ExperimentIndex="32">
+    <StartTimeMin>16.01</StartTimeMin>
+    <EndTimeMin>16.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="152">
+  <Experiment ExperimentIndex="33">
+    <StartTimeMin>16.51</StartTimeMin>
+    <EndTimeMin>17</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="153">
+  <Experiment ExperimentIndex="34">
+    <StartTimeMin>17.01</StartTimeMin>
+    <EndTimeMin>17.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="154">
+  <Experiment ExperimentIndex="35">
+    <StartTimeMin>17.51</StartTimeMin>
+    <EndTimeMin>18</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="155">
+  <Experiment ExperimentIndex="36">
+    <StartTimeMin>18.01</StartTimeMin>
+    <EndTimeMin>18.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="156">
+  <Experiment ExperimentIndex="37">
+    <StartTimeMin>18.51</StartTimeMin>
+    <EndTimeMin>19</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="157">
+  <Experiment ExperimentIndex="38">
+    <StartTimeMin>19.01</StartTimeMin>
+    <EndTimeMin>19.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="158">
+  <Experiment ExperimentIndex="39">
+    <StartTimeMin>19.51</StartTimeMin>
+    <EndTimeMin>20</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="159">
+  <Experiment ExperimentIndex="40">
+    <StartTimeMin>20.01</StartTimeMin>
+    <EndTimeMin>20.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="160">
+  <Experiment ExperimentIndex="41">
+    <StartTimeMin>20.51</StartTimeMin>
+    <EndTimeMin>21</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="161">
+  <Experiment ExperimentIndex="42">
+    <StartTimeMin>21.01</StartTimeMin>
+    <EndTimeMin>21.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="162">
+  <Experiment ExperimentIndex="43">
+    <StartTimeMin>21.51</StartTimeMin>
+    <EndTimeMin>22</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="163">
+  <Experiment ExperimentIndex="44">
+    <StartTimeMin>22.01</StartTimeMin>
+    <EndTimeMin>22.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="164">
+  <Experiment ExperimentIndex="45">
+    <StartTimeMin>22.51</StartTimeMin>
+    <EndTimeMin>23</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="165">
+  <Experiment ExperimentIndex="46">
+    <StartTimeMin>23.01</StartTimeMin>
+    <EndTimeMin>23.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="166">
+  <Experiment ExperimentIndex="47">
+    <StartTimeMin>23.51</StartTimeMin>
+    <EndTimeMin>24</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="167">
+  <Experiment ExperimentIndex="48">
+    <StartTimeMin>24.01</StartTimeMin>
+    <EndTimeMin>24.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="168">
+  <Experiment ExperimentIndex="49">
+    <StartTimeMin>24.51</StartTimeMin>
+    <EndTimeMin>25</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="169">
+  <Experiment ExperimentIndex="50">
+    <StartTimeMin>25.01</StartTimeMin>
+    <EndTimeMin>25.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="170">
+  <Experiment ExperimentIndex="51">
+    <StartTimeMin>25.51</StartTimeMin>
+    <EndTimeMin>26</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="171">
+  <Experiment ExperimentIndex="52">
+    <StartTimeMin>26.01</StartTimeMin>
+    <EndTimeMin>26.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="172">
+  <Experiment ExperimentIndex="53">
+    <StartTimeMin>26.51</StartTimeMin>
+    <EndTimeMin>27</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="173">
+  <Experiment ExperimentIndex="54">
+    <StartTimeMin>27.01</StartTimeMin>
+    <EndTimeMin>27.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="174">
+  <Experiment ExperimentIndex="55">
+    <StartTimeMin>27.51</StartTimeMin>
+    <EndTimeMin>28</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="175">
+  <Experiment ExperimentIndex="56">
+    <StartTimeMin>28.01</StartTimeMin>
+    <EndTimeMin>28.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="176">
+  <Experiment ExperimentIndex="57">
+    <StartTimeMin>28.51</StartTimeMin>
+    <EndTimeMin>29</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="177">
+  <Experiment ExperimentIndex="58">
+    <StartTimeMin>29.01</StartTimeMin>
+    <EndTimeMin>29.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="178">
+  <Experiment ExperimentIndex="59">
+    <StartTimeMin>29.51</StartTimeMin>
+    <EndTimeMin>30</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="179">
+  <Experiment ExperimentIndex="60">
+    <StartTimeMin>30.01</StartTimeMin>
+    <EndTimeMin>30.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="180">
+  <Experiment ExperimentIndex="61">
+    <StartTimeMin>30.51</StartTimeMin>
+    <EndTimeMin>31</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="181">
+  <Experiment ExperimentIndex="62">
+    <StartTimeMin>31.01</StartTimeMin>
+    <EndTimeMin>31.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="182">
+  <Experiment ExperimentIndex="63">
+    <StartTimeMin>31.51</StartTimeMin>
+    <EndTimeMin>32</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="183">
+  <Experiment ExperimentIndex="64">
+    <StartTimeMin>32.01</StartTimeMin>
+    <EndTimeMin>32.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="184">
+  <Experiment ExperimentIndex="65">
+    <StartTimeMin>32.51</StartTimeMin>
+    <EndTimeMin>33</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="185">
+  <Experiment ExperimentIndex="66">
+    <StartTimeMin>33.01</StartTimeMin>
+    <EndTimeMin>33.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="186">
+  <Experiment ExperimentIndex="67">
+    <StartTimeMin>33.51</StartTimeMin>
+    <EndTimeMin>34</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="187">
+  <Experiment ExperimentIndex="68">
+    <StartTimeMin>34.01</StartTimeMin>
+    <EndTimeMin>34.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="188">
+  <Experiment ExperimentIndex="69">
+    <StartTimeMin>34.51</StartTimeMin>
+    <EndTimeMin>35</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="189">
+  <Experiment ExperimentIndex="70">
+    <StartTimeMin>35.01</StartTimeMin>
+    <EndTimeMin>35.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="190">
+  <Experiment ExperimentIndex="71">
+    <StartTimeMin>35.51</StartTimeMin>
+    <EndTimeMin>36</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="191">
+  <Experiment ExperimentIndex="72">
+    <StartTimeMin>36.01</StartTimeMin>
+    <EndTimeMin>36.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="192">
+  <Experiment ExperimentIndex="73">
+    <StartTimeMin>36.51</StartTimeMin>
+    <EndTimeMin>37</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="193">
+  <Experiment ExperimentIndex="74">
+    <StartTimeMin>37.01</StartTimeMin>
+    <EndTimeMin>37.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="194">
+  <Experiment ExperimentIndex="75">
+    <StartTimeMin>37.51</StartTimeMin>
+    <EndTimeMin>38</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="195">
+  <Experiment ExperimentIndex="76">
+    <StartTimeMin>38.01</StartTimeMin>
+    <EndTimeMin>38.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="196">
+  <Experiment ExperimentIndex="77">
+    <StartTimeMin>38.51</StartTimeMin>
+    <EndTimeMin>39</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="197">
+  <Experiment ExperimentIndex="78">
+    <StartTimeMin>39.01</StartTimeMin>
+    <EndTimeMin>39.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="198">
+  <Experiment ExperimentIndex="79">
+    <StartTimeMin>39.51</StartTimeMin>
+    <EndTimeMin>40</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="199">
+  <Experiment ExperimentIndex="80">
+    <StartTimeMin>40.01</StartTimeMin>
+    <EndTimeMin>40.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="200">
+  <Experiment ExperimentIndex="81">
+    <StartTimeMin>40.51</StartTimeMin>
+    <EndTimeMin>41</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="201">
+  <Experiment ExperimentIndex="82">
+    <StartTimeMin>41.01</StartTimeMin>
+    <EndTimeMin>41.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="202">
+  <Experiment ExperimentIndex="83">
+    <StartTimeMin>41.51</StartTimeMin>
+    <EndTimeMin>42</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="203">
+  <Experiment ExperimentIndex="84">
+    <StartTimeMin>42.01</StartTimeMin>
+    <EndTimeMin>42.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="204">
+  <Experiment ExperimentIndex="85">
+    <StartTimeMin>42.51</StartTimeMin>
+    <EndTimeMin>43</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="205">
+  <Experiment ExperimentIndex="86">
+    <StartTimeMin>43.01</StartTimeMin>
+    <EndTimeMin>43.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="206">
+  <Experiment ExperimentIndex="87">
+    <StartTimeMin>43.51</StartTimeMin>
+    <EndTimeMin>44</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="207">
+  <Experiment ExperimentIndex="88">
+    <StartTimeMin>44.01</StartTimeMin>
+    <EndTimeMin>44.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="208">
+  <Experiment ExperimentIndex="89">
+    <StartTimeMin>44.51</StartTimeMin>
+    <EndTimeMin>45</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="209">
+  <Experiment ExperimentIndex="90">
+    <StartTimeMin>45.01</StartTimeMin>
+    <EndTimeMin>45.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="210">
+  <Experiment ExperimentIndex="91">
+    <StartTimeMin>45.51</StartTimeMin>
+    <EndTimeMin>46</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="211">
+  <Experiment ExperimentIndex="92">
+    <StartTimeMin>46.01</StartTimeMin>
+    <EndTimeMin>46.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="212">
+  <Experiment ExperimentIndex="93">
+    <StartTimeMin>46.51</StartTimeMin>
+    <EndTimeMin>47</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="213">
+  <Experiment ExperimentIndex="94">
+    <StartTimeMin>47.01</StartTimeMin>
+    <EndTimeMin>47.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="214">
+  <Experiment ExperimentIndex="95">
+    <StartTimeMin>47.51</StartTimeMin>
+    <EndTimeMin>48</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="215">
+  <Experiment ExperimentIndex="96">
+    <StartTimeMin>48.01</StartTimeMin>
+    <EndTimeMin>48.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="216">
+  <Experiment ExperimentIndex="97">
+    <StartTimeMin>48.51</StartTimeMin>
+    <EndTimeMin>49</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="217">
+  <Experiment ExperimentIndex="98">
+    <StartTimeMin>49.01</StartTimeMin>
+    <EndTimeMin>49.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="218">
+  <Experiment ExperimentIndex="99">
+    <StartTimeMin>49.51</StartTimeMin>
+    <EndTimeMin>50</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="219">
+  <Experiment ExperimentIndex="100">
+    <StartTimeMin>50.01</StartTimeMin>
+    <EndTimeMin>50.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="220">
+  <Experiment ExperimentIndex="101">
+    <StartTimeMin>50.51</StartTimeMin>
+    <EndTimeMin>51</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="221">
+  <Experiment ExperimentIndex="102">
+    <StartTimeMin>51.01</StartTimeMin>
+    <EndTimeMin>51.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="222">
+  <Experiment ExperimentIndex="103">
+    <StartTimeMin>51.51</StartTimeMin>
+    <EndTimeMin>52</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="223">
+  <Experiment ExperimentIndex="104">
+    <StartTimeMin>52.01</StartTimeMin>
+    <EndTimeMin>52.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="224">
+  <Experiment ExperimentIndex="105">
+    <StartTimeMin>52.51</StartTimeMin>
+    <EndTimeMin>53</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="225">
+  <Experiment ExperimentIndex="106">
+    <StartTimeMin>53.01</StartTimeMin>
+    <EndTimeMin>53.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="226">
+  <Experiment ExperimentIndex="107">
+    <StartTimeMin>53.51</StartTimeMin>
+    <EndTimeMin>54</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="227">
+  <Experiment ExperimentIndex="108">
+    <StartTimeMin>54.01</StartTimeMin>
+    <EndTimeMin>54.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="228">
+  <Experiment ExperimentIndex="109">
+    <StartTimeMin>54.51</StartTimeMin>
+    <EndTimeMin>55</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="229">
+  <Experiment ExperimentIndex="110">
+    <StartTimeMin>55.01</StartTimeMin>
+    <EndTimeMin>55.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="230">
+  <Experiment ExperimentIndex="111">
+    <StartTimeMin>55.51</StartTimeMin>
+    <EndTimeMin>56</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="231">
+  <Experiment ExperimentIndex="112">
+    <StartTimeMin>56.01</StartTimeMin>
+    <EndTimeMin>56.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="232">
+  <Experiment ExperimentIndex="113">
+    <StartTimeMin>56.51</StartTimeMin>
+    <EndTimeMin>57</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="233">
+  <Experiment ExperimentIndex="114">
+    <StartTimeMin>57.01</StartTimeMin>
+    <EndTimeMin>57.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="234">
+  <Experiment ExperimentIndex="115">
+    <StartTimeMin>57.51</StartTimeMin>
+    <EndTimeMin>58</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="235">
+  <Experiment ExperimentIndex="116">
+    <StartTimeMin>58.01</StartTimeMin>
+    <EndTimeMin>58.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="236">
+  <Experiment ExperimentIndex="117">
+    <StartTimeMin>58.51</StartTimeMin>
+    <EndTimeMin>59</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="237">
+  <Experiment ExperimentIndex="118">
+    <StartTimeMin>59.01</StartTimeMin>
+    <EndTimeMin>59.5</EndTimeMin>
+  </Experiment>
+</Modification>
+<Modification Order="238">
+  <Experiment ExperimentIndex="1">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>21</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2001</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5001</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0001</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="239">
+  <Experiment ExperimentIndex="2">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>14</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2002</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5002</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0002</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="240">
+  <Experiment ExperimentIndex="3">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>0</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2003</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5003</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0003</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="241">
+  <Experiment ExperimentIndex="4">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>35</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2004</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5004</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0004</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="242">
+  <Experiment ExperimentIndex="5">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>14</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2005</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5005</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0005</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="243">
+  <Experiment ExperimentIndex="6">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>35</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2006</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5006</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0006</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="244">
+  <Experiment ExperimentIndex="7">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>21</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2007</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5007</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0007</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="245">
+  <Experiment ExperimentIndex="8">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>14</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2008</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5008</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0008</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="246">
+  <Experiment ExperimentIndex="9">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>14</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2009</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5009</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0009</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="247">
+  <Experiment ExperimentIndex="10">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>0</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.201</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.501</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.001</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="248">
+  <Experiment ExperimentIndex="12">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>35</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2012</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5012</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0012</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="249">
+  <Experiment ExperimentIndex="13">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>21</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2013</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5013</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0013</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="250">
+  <Experiment ExperimentIndex="14">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>35</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2014</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5014</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0014</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="251">
+  <Experiment ExperimentIndex="15">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>35</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2015</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5015</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0015</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="252">
+  <Experiment ExperimentIndex="16">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>21</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2016</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5016</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0016</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="253">
+  <Experiment ExperimentIndex="17">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>14</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2017</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5017</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0017</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="254">
+  <Experiment ExperimentIndex="18">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>35</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2018</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5018</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0018</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="255">
+  <Experiment ExperimentIndex="19">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>21</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2019</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5019</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0019</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="256">
+  <Experiment ExperimentIndex="20">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>7</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.202</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.502</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.002</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="257">
+  <Experiment ExperimentIndex="21">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>7</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2021</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5021</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0021</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="258">
+  <Experiment ExperimentIndex="23">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>28</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2023</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5023</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0023</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="259">
+  <Experiment ExperimentIndex="24">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>14</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2024</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5024</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0024</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="260">
+  <Experiment ExperimentIndex="25">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>0</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2025</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5025</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0025</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="261">
+  <Experiment ExperimentIndex="26">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>28</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2026</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5026</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0026</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="262">
+  <Experiment ExperimentIndex="27">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>21</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2027</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5027</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0027</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="263">
+  <Experiment ExperimentIndex="28">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>0</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2028</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5028</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0028</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="264">
+  <Experiment ExperimentIndex="29">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>14</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2029</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5029</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0029</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="265">
+  <Experiment ExperimentIndex="30">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>21</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.203</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.503</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.003</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="266">
+  <Experiment ExperimentIndex="31">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>28</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2031</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5031</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0031</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="267">
+  <Experiment ExperimentIndex="32">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>35</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2032</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5032</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0032</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="268">
+  <Experiment ExperimentIndex="34">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>28</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2034</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5034</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0034</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="269">
+  <Experiment ExperimentIndex="35">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>7</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2035</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5035</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0035</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="270">
+  <Experiment ExperimentIndex="36">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>0</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2036</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5036</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0036</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="271">
+  <Experiment ExperimentIndex="37">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>0</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2037</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5037</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0037</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="272">
+  <Experiment ExperimentIndex="38">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>14</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2038</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5038</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0038</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="273">
+  <Experiment ExperimentIndex="39">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>35</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2039</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5039</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0039</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="274">
+  <Experiment ExperimentIndex="40">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>21</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.204</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.504</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.004</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="275">
+  <Experiment ExperimentIndex="41">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>35</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2041</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5041</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0041</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="276">
+  <Experiment ExperimentIndex="42">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>7</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2042</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5042</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0042</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="277">
+  <Experiment ExperimentIndex="43">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>0</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2043</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5043</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0043</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="278">
+  <Experiment ExperimentIndex="45">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>7</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2045</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5045</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0045</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="279">
+  <Experiment ExperimentIndex="46">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>14</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2046</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5046</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0046</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="280">
+  <Experiment ExperimentIndex="47">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>7</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2047</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5047</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0047</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="281">
+  <Experiment ExperimentIndex="48">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>7</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2048</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5048</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0048</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="282">
+  <Experiment ExperimentIndex="49">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>0</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2049</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5049</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0049</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="283">
+  <Experiment ExperimentIndex="50">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>28</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.205</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.505</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.005</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="284">
+  <Experiment ExperimentIndex="51">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>14</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2051</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5051</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0051</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="285">
+  <Experiment ExperimentIndex="52">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>28</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2052</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5052</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0052</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="286">
+  <Experiment ExperimentIndex="53">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>35</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2053</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5053</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0053</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="287">
+  <Experiment ExperimentIndex="54">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>14</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2054</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5054</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0054</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="288">
+  <Experiment ExperimentIndex="56">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>0</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2056</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5056</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0056</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="289">
+  <Experiment ExperimentIndex="57">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>28</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2057</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5057</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0057</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="290">
+  <Experiment ExperimentIndex="58">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>0</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2058</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5058</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0058</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="291">
+  <Experiment ExperimentIndex="59">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>35</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2059</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5059</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0059</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="292">
+  <Experiment ExperimentIndex="60">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>28</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.206</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.506</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.006</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="293">
+  <Experiment ExperimentIndex="61">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>28</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2061</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5061</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0061</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="294">
+  <Experiment ExperimentIndex="62">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>14</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2062</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5062</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0062</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="295">
+  <Experiment ExperimentIndex="63">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>0</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2063</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5063</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0063</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="296">
+  <Experiment ExperimentIndex="64">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>35</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2064</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5064</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0064</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="297">
+  <Experiment ExperimentIndex="65">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>7</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2065</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5065</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0065</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="298">
+  <Experiment ExperimentIndex="67">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>35</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2067</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5067</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0067</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="299">
+  <Experiment ExperimentIndex="68">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>7</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2068</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5068</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0068</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="300">
+  <Experiment ExperimentIndex="69">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>0</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2069</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5069</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0069</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="301">
+  <Experiment ExperimentIndex="70">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>14</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.207</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.507</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.007</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="302">
+  <Experiment ExperimentIndex="71">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>14</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2071</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5071</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0071</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="303">
+  <Experiment ExperimentIndex="72">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>35</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2072</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5072</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0072</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="304">
+  <Experiment ExperimentIndex="73">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>35</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2073</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5073</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0073</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="305">
+  <Experiment ExperimentIndex="74">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>0</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2074</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5074</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0074</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="306">
+  <Experiment ExperimentIndex="75">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>7</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2075</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5075</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0075</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="307">
+  <Experiment ExperimentIndex="76">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>21</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2076</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5076</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0076</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="308">
+  <Experiment ExperimentIndex="78">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>28</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2078</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5078</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0078</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="309">
+  <Experiment ExperimentIndex="79">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>7</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2079</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5079</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0079</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="310">
+  <Experiment ExperimentIndex="80">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>7</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.208</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.508</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.008</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="311">
+  <Experiment ExperimentIndex="81">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>35</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2081</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5081</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0081</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="312">
+  <Experiment ExperimentIndex="82">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>7</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2082</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5082</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0082</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="313">
+  <Experiment ExperimentIndex="83">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>21</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2083</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5083</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0083</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="314">
+  <Experiment ExperimentIndex="84">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>21</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2084</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5084</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0084</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="315">
+  <Experiment ExperimentIndex="85">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>35</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2085</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5085</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0085</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="316">
+  <Experiment ExperimentIndex="86">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>35</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2086</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5086</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0086</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="317">
+  <Experiment ExperimentIndex="87">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>14</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2087</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5087</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0087</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="318">
+  <Experiment ExperimentIndex="89">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>28</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2089</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5089</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0089</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="319">
+  <Experiment ExperimentIndex="90">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>0</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.209</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.509</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.009</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="320">
+  <Experiment ExperimentIndex="91">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>7</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2091</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5091</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0091</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="321">
+  <Experiment ExperimentIndex="92">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>28</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2092</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5092</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0092</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="322">
+  <Experiment ExperimentIndex="93">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>21</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2093</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5093</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0093</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="323">
+  <Experiment ExperimentIndex="94">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>0</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2094</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5094</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0094</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="324">
+  <Experiment ExperimentIndex="95">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>21</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2095</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5095</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0095</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="325">
+  <Experiment ExperimentIndex="96">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>21</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2096</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5096</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0096</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="326">
+  <Experiment ExperimentIndex="97">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>14</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2097</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5097</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0097</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="327">
+  <Experiment ExperimentIndex="98">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>21</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2098</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5098</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0098</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="328">
+  <Experiment ExperimentIndex="100">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>14</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.21</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.51</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.01</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="329">
+  <Experiment ExperimentIndex="101">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>0</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2101</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5101</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0101</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="330">
+  <Experiment ExperimentIndex="102">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>7</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2102</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5102</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0102</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="331">
+  <Experiment ExperimentIndex="103">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>21</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2103</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5103</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0103</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="332">
+  <Experiment ExperimentIndex="104">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>0</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2104</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5104</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0104</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="333">
+  <Experiment ExperimentIndex="105">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>7</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2105</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5105</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0105</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="334">
+  <Experiment ExperimentIndex="106">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>28</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2106</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5106</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0106</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="335">
+  <Experiment ExperimentIndex="107">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>28</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2107</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5107</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0107</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="336">
+  <Experiment ExperimentIndex="108">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>0</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2108</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5108</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0108</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="337">
+  <Experiment ExperimentIndex="109">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>28</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2109</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5109</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0109</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="338">
+  <Experiment ExperimentIndex="111">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+06</AgcTarget>
+      <ETDReagentTarget>5e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>28</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2111</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5111</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0111</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="339">
+  <Experiment ExperimentIndex="112">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>7</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2112</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5112</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0112</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="340">
+  <Experiment ExperimentIndex="113">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>14</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2113</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5113</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0113</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="341">
+  <Experiment ExperimentIndex="114">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>7</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2114</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5114</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0114</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="342">
+  <Experiment ExperimentIndex="115">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>21</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2115</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5115</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0115</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="343">
+  <Experiment ExperimentIndex="116">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>5e+05</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>28</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2116</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5116</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0116</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="344">
+  <Experiment ExperimentIndex="117">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>1e+06</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>ETciD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>28</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2117</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5117</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0117</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+<Modification Order="345">
+  <Experiment ExperimentIndex="118">
+    <TMSnScan>
+      <ActivationType>ETD</ActivationType>
+      <AgcTarget>1e+05</AgcTarget>
+      <ETDReagentTarget>1e+07</ETDReagentTarget>
+      <ETDReactionTime>50</ETDReactionTime>
+      <ETDSupplementalActivation>EThcD</ETDSupplementalActivation>
+      <ETDSupplementalActivationEnergy>21</ETDSupplementalActivationEnergy>
+      <IsolationWindow>1</IsolationWindow>
+      <MaxITTimeInMS>200</MaxITTimeInMS>
+      <Microscans>40</Microscans>
+      <OrbitrapResolution>R120K</OrbitrapResolution>
+      <MassList>
+        <MassListRecord>
+          <MOverZ>609.2118</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>700.5118</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+        <MassListRecord>
+          <MOverZ>824.0118</MOverZ>
+          <Z>10</Z>
+        </MassListRecord>
+      </MassList>
+    </TMSnScan>
+  </Experiment>
+</Modification>
+</MethodModifications>
