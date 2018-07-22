@@ -37,7 +37,8 @@ Suggests:
     knitr,
     ranger,
     testthat,
-    BiocStyle
+    BiocStyle,
+    xml2
 License: GPL (>= 3)
 URL: https://github.com/sgibb/topdownr/
 BugReports: https://github.com/sgibb/topdownr/issues/
