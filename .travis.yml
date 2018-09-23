@@ -25,7 +25,7 @@ r_packages:
   - pkgdown
 
 r_github_packages:
-  - sgibb/topdowndata
+  - sgibb/topdownrdata
 
 after_success:
   - Rscript -e 'covr::codecov()'
