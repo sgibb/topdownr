@@ -156,9 +156,10 @@ cat0 <- function(...) {
 #' @return `list`
 #' @noRd
 .flatten <- function(x) {
-    while(any(.vapply1l(x, is.list))) {
+    .is.list <- function(x)class(x) == "list"
+    while(any(.vapply1l(x, .is.list))) {
         x <- unlist(
-            lapply(x, function(y) { if (is.list(y)) { y } else { list(y) } }),
+            lapply(x, function(y) { if (.is.list(y)) { y } else { list(y) } }),
             recursive=FALSE
         )
     }

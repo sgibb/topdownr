@@ -85,9 +85,9 @@ test_that(".fixFilterStringId", {
 
 test_that(".flatten", {
     l <- list(a=1:3, list(foo=c("a", "b", "c"), bar=c("d", "e", "f")),
-              list(parent=list(child1=1, child2=2)))
+              list(parent=list(child1=1, child2=2)), d=data.frame(a=1:3, b=1:3))
     r <- list(a=1:3, foo=c("a", "b", "c"), bar=c("d", "e", "f"),
-              parent.child1=1, parent.child2=2)
+              parent.child1=1, parent.child2=2, d=data.frame(a=1:3, b=1:3))
     expect_equal(topdownr:::.flatten(l), r)
 })
 
