@@ -44,7 +44,7 @@ createExperimentsFragmentOptimisation <- function(
 
     times <- .startEndTime(nMs2=mnrs, nMs2perMs1=nMs2perMs1, duration=duration)
     l <- vector(mode="list", length(ms2))
-    names(l) <- rep("MethodModifications", length(ms2))
+    names(l) <- names(ms2)
 
     for (i in seq(along=l)) {
         n <- ceiling(nrs[i] * 1L/nMs2perMs1) + nrs[i]
@@ -70,7 +70,8 @@ createExperimentsFragmentOptimisation <- function(
                 ms2[[i]][condId,],
                 expId=j - 1L,
                 condId=condId,
-                times=sbtimes[j, 2L:3L]
+                times=sbtimes[j, 2L:3L],
+                massLabeling=massLabeling
             )
             attr(l[[i]][[j]], "Order") <- j
         }
