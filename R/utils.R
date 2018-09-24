@@ -150,6 +150,20 @@ cat0 <- function(...) {
     x
 }
 
+#' Flat nested lists to unnested one
+#'
+#' @param x `list`
+#' @return `list`
+.flatten <- function(x) {
+    while(any(.vapply1l(x, is.list))) {
+        x <- unlist(
+            lapply(x, function(y) { if (is.list(y)) { y } else { list(y) } }),
+            recursive=FALSE
+        )
+    }
+    x
+}
+
 #' Convert number to string and prepend zeros
 #'
 #' @param x `double`

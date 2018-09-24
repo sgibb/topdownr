@@ -83,6 +83,14 @@ test_that(".fixFilterStringId", {
                  c(4:6, 8:10))
 })
 
+test_that(".flatten", {
+    l <- list(a=1:3, list(foo=c("a", "b", "c"), bar=c("d", "e", "f")),
+              list(parent=list(child1=1, child2=2)))
+    r <- list(a=1:3, foo=c("a", "b", "c"), bar=c("d", "e", "f"),
+              parent.child1=1, parent.child2=2)
+    expect_equal(topdownr:::.flatten(l), r)
+})
+
 test_that(".formatNumbers", {
     expect_equal(topdownr:::.formatNumbers(1:10), sprintf("%02d", 1:10))
     expect_equal(topdownr:::.formatNumbers(c(1, 100.1)),
