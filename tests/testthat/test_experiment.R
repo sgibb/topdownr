@@ -1,5 +1,11 @@
 context("experiment")
 
+test_that(".collapseMassList", {
+    expect_error(.collapseMassList(1:10))
+    expect_error(.collapseMassList(cbind(1:3, 1:3, 1:3)))
+    expect_equal(.collapseMassList(cbind(c(10, 20), 1:2)), "10/1 20/2")
+})
+
 test_that(".validateMsSetting", {
     expect_true(topdownr:::.validateMsSetting(
         "OrbitrapResolution", c("R15K", "R500K", "R50K"), "MS2"
@@ -28,4 +34,13 @@ test_that(".validateMsSetting", {
     expect_true(grepl("should be of class 'integer'",
         topdownr:::.validateMsSetting("Microscans", 10, "MS1")
     ))
+})
+
+test_that(".validateMsSettings", {
+    expect_true(topdownr:::.validateMsSettings(
+        "MS2", list(OrbitrapResolution=c("R15K", "R50K", "R500K"), MinAgcTarget=TRUE)
+    ))
+    expect_error(topdownr:::.validateMsSettings(
+        "MS2", list(FirstMass=1000, OrbitrapResolution=c("R15K", "R50K", "R500K"))
+    ), "of type 'MS2'")
 })

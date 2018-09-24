@@ -154,6 +154,7 @@ cat0 <- function(...) {
 #'
 #' @param x `list`
 #' @return `list`
+#' @noRd
 .flatten <- function(x) {
     while(any(.vapply1l(x, is.list))) {
         x <- unlist(
