@@ -18,7 +18,7 @@ createExperimentsFragmentOptimisation <- function(
     ms1, ..., groupBy=c("AgcTarget", "replication"), nMs2perMs1=10, duration=0.5,
     replications=2, randomise=TRUE, massLabeling=TRUE) {
 
-    ms2 <- do.call(.rbind, list(...))
+    ms2 <- do.call(.rbind, .flatten(list(...)))
     nr <- nrow(ms2)
     ms2 <- ms2[rep(seq_len(nr), replications),, drop=FALSE]
     ms2$replication <- rep(seq_len(replications), each=nr)
