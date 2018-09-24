@@ -392,7 +392,7 @@ cat0 <- function(...) {
 #' @param x `list` of `data.frames`/`matrices`
 #' @noRd
 .nrows <- function(x) {
-    stopifnot(is.list(x))
+    stopifnot(class(x) == "list")
     .vapply1d(x, nrow)
 }
 

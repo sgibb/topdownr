@@ -242,6 +242,7 @@ test_that(".ndigits", {
 
 test_that(".nrows", {
     expect_error(topdownr:::.nrows(matrix(nrow=2, ncol=2)))
+    expect_error(topdownr:::.nrows(data.frame(a=1, b=1)))
     expect_equal(topdownr:::.nrows(list(matrix(nrow=2, ncol=2),
                                        matrix(nrow=3, ncol=2))), 2:3)
 })
