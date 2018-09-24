@@ -29,7 +29,7 @@ expandMs1Conditions <- function(...) {
 #'
 #' TODO:
 #'
-#' @param massList `matrix`, 2 columns (mass, z).
+#' @param MassList `matrix`, 2 columns (mass, z).
 #' @param ActivationType `character`, *ActivationType* for MS2 one of CID, HCD, ETD, or
 #' UVPD.
 #' @param ... further named arguments, used to create the combination of
@@ -38,7 +38,7 @@ expandMs1Conditions <- function(...) {
 #' @export
 #' @examples
 #' expandMs2Conditions(
-#'      massList=cbind(mz=c(560.6, 700.5, 933.7), z=rep(1, 3)),
+#'      MassList=cbind(mz=c(560.6, 700.5, 933.7), z=rep(1, 3)),
 #'      ActivationType="CID",
 #'      OrbitrapResolution="R120K",
 #'      IsolationWindow=1,
@@ -47,7 +47,7 @@ expandMs1Conditions <- function(...) {
 #'      AgcTarget=c(1e5, 5e5, 1e6),
 #'      CIDCollisionEnergy=c(NA, seq(7, 35, 7))
 #' )
-expandMs2Conditions <- function(massList,
+expandMs2Conditions <- function(MassList,
                                 ActivationType=c("CID", "HCD", "ETD", "UVPD"),
                                 ...) {
     ActivationType <- match.arg(ActivationType)
@@ -55,7 +55,7 @@ expandMs2Conditions <- function(massList,
     .validateMsSettings(type=ActivationType, settings)
     expand.grid(
         c(
-            MassList=.collapseMassList(massList),
+            MassList=.collapseMassList(MassList),
             ActivationType=ActivationType,
             settings
         ),

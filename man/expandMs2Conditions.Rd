@@ -4,11 +4,11 @@
 \alias{expandMs2Conditions}
 \title{Expand MS2 Conditions}
 \usage{
-expandMs2Conditions(massList, ActivationType = c("CID", "HCD", "ETD",
+expandMs2Conditions(MassList, ActivationType = c("CID", "HCD", "ETD",
   "UVPD"), ...)
 }
 \arguments{
-\item{massList}{\code{matrix}, 2 columns (mass, z).}
+\item{MassList}{\code{matrix}, 2 columns (mass, z).}
 
 \item{ActivationType}{\code{character}, \emph{ActivationType} for MS2 one of CID, HCD, ETD, or
 UVPD.}
@@ -20,11 +20,11 @@ conditions.}
 \code{data.frame}
 }
 \description{
-Expand MS2 Conditions
+TODO:
 }
 \examples{
 expandMs2Conditions(
-     massList=cbind(mz=c(560.6, 700.5, 933.7), z=rep(1, 3)),
+     MassList=cbind(mz=c(560.6, 700.5, 933.7), z=rep(1, 3)),
      ActivationType="CID",
      OrbitrapResolution="R120K",
      IsolationWindow=1,
