@@ -10,7 +10,7 @@ expandMs2Conditions(MassList, ActivationType = c("CID", "HCD", "ETD",
 \arguments{
 \item{MassList}{\code{matrix}, 2 columns (mass, z).}
 
-\item{ActivationType}{\code{character}, \emph{ActivationType} for MS2 one of CID, HCD, ETD, or
+\item{ActivationType}{\code{character}, \emph{ActivationType} for MS2, either CID, HCD, ETD, or
 UVPD.}
 
 \item{...}{further named arguments, used to create the combination of

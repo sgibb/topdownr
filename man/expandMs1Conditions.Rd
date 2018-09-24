@@ -9,9 +9,6 @@ expandMs1Conditions(...)
 \arguments{
 \item{...}{further named arguments, used to create the combination of
 conditions.}
-
-\item{type}{\code{character}, \emph{ActivationType} for MS2 one of CID, HCD, ETD, or
-UVPD.}
 }
 \value{
 \code{data.frame}

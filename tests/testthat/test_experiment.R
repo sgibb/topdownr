@@ -6,6 +6,14 @@ test_that(".collapseMassList", {
     expect_equal(.collapseMassList(cbind(c(10, 20), 1:2)), "10/1 20/2")
 })
 
+test_that(".expandMassList", {
+    expect_error(.expandMassList(1:10))
+    expect_equal(
+        .expandMassList("10/1 20/2"),
+        matrix(c(10, 20, 1:2), ncol=2, dimnames=list(NULL, c("mz", "z")))
+    )
+})
+
 test_that(".validateMsSetting", {
     expect_true(topdownr:::.validateMsSetting(
         "OrbitrapResolution", c("R15K", "R500K", "R50K"), "MS2"

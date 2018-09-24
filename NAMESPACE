@@ -3,6 +3,7 @@
 S3method(.DollarNames,AbstractTopDownSet)
 S3method(all,equal.AbstractTopDownSet)
 export(FragmentViews)
+export(createExperimentsFragmentOptimisation)
 export(createTngFusionMethFiles)
 export(defaultMs1Settings)
 export(defaultMs2Settings)
