@@ -16,7 +16,7 @@ abstract: >
     of the `topdownr` package.
 output:
     BiocStyle::html_document:
-        toc_float: true
+        toc_float: TRUE
         tidy: TRUE
 bibliography: topdownr.bib
 vignette: >
@@ -38,7 +38,13 @@ suppressPackageStartupMessages(library("BiocStyle"))
 # Foreword {-}
 
 [*topdownr*](http://bioconductor.org/packages/topdownr) is free and
-open-source software.
+open-source software. If you use it, please support the project by
+citing it in publications:
+
+```{r citation, echo=FALSE, results="asis"}
+ct <- format(citation("topdownr"), "textVersion")
+cat(gsub("DOI: *(.*)$", "DOI: [\\1](https://doi.org/\\1)", ct), "\n")
+```
 
 # Questions and bugs {-}
 
