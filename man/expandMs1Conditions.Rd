@@ -16,3 +16,9 @@ conditions.}
 \description{
 TODO:
 }
+\examples{
+expandMs1Conditions(FirstMass=100, LastMass=400)
+}
+\seealso{
+\code{\link[=validMs1Settings]{validMs1Settings()}}
+}

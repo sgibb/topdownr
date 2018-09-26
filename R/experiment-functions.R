@@ -177,7 +177,10 @@ createExperimentsFragmentOptimisation <- function(
 #' @param ... further named arguments, used to create the combination of
 #' conditions.
 #' @return `data.frame`
+#' @seealso [validMs1Settings()]
 #' @export
+#' @examples
+#' expandMs1Conditions(FirstMass=100, LastMass=400)
 expandMs1Conditions <- function(...) {
     settings <- .flatten(list(...))
     .validateMsSettings(type="MS1", settings)
@@ -194,6 +197,7 @@ expandMs1Conditions <- function(...) {
 #' @param ... further named arguments, used to create the combination of
 #' conditions.
 #' @return `data.frame`
+#' @seealso [validMs2Settings()]
 #' @export
 #' @examples
 #' expandMs2Conditions(

@@ -34,3 +34,6 @@ expandMs2Conditions(
      CIDCollisionEnergy=c(NA, seq(7, 35, 7))
 )
 }
+\seealso{
+\code{\link[=validMs2Settings]{validMs2Settings()}}
+}
