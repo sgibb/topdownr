@@ -1,14 +1,14 @@
 # topdownr
 
-[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![build status](https://travis-ci.org/sgibb/topdownr.svg?branch=master)](https://travis-ci.org/sgibb/topdownr?branch=master)
 [![codecov.io](https://img.shields.io/codecov/c/github/sgibb/topdownr.svg?branch=master)](https://codecov.io/github/sgibb/topdownr/?branch=master)
-[![license](http://img.shields.io/badge/license-GPL%20%28%3E=%203%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-3.0.html)
+[![license](https://img.shields.io/badge/license-GPL%20%28%3E=%203%29-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/gpl-3.0.html)
 
-[![years in bioc](http://bioconductor.org/shields/years-in-bioc/topdownr.svg)](http://bioconductor.org/packages/release/bioc/html/topdownr.html)
-[![bioc downloads](http://bioconductor.org/shields/downloads/topdownr.svg)](https://bioconductor.org/packages/stats/bioc/topdownr/)
-Release: [![build release](http://bioconductor.org/shields/build/release/bioc/topdownr.svg)](http://bioconductor.org/checkResults/release/bioc-LATEST/topdownr/)
-Devel: [![build devel](http://bioconductor.org/shields/build/devel/bioc/topdownr.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/topdownr/)
+[![years in bioc](https://bioconductor.org/shields/years-in-bioc/topdownr.svg)](https://bioconductor.org/packages/release/bioc/html/topdownr.html)
+[![bioc downloads](https://bioconductor.org/shields/downloads/topdownr.svg)](https://bioconductor.org/packages/stats/bioc/topdownr/)
+Release: [![build release](https://bioconductor.org/shields/build/release/bioc/topdownr.svg)](https://bioconductor.org/checkResults/release/bioc-LATEST/topdownr/)
+Devel: [![build devel](https://bioconductor.org/shields/build/devel/bioc/topdownr.svg)](https://bioconductor.org/checkResults/devel/bioc-LATEST/topdownr/)
 
 ## Installation
 
