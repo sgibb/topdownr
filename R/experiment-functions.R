@@ -50,37 +50,34 @@ createExperimentsFragmentOptimisation <- function(
         n <- ceiling(nrs[i] * 1L/nMs2perMs1) + nrs[i]
         sbtimes <- times[seq_len(n),]
         sbtimes$Id <- seq_len(n)
-        l[[i]] <- vector(mode="list", length=n)
-        names(l[[i]]) <- rep("Modification", n)
+        l[[i]] <- list(MethodModifications=vector(mode="list", length=n))
+        names(l[[i]][[1L]]) <- rep("Modification", n)
 
-        l[[i]][[1L]] <- .ms1ConditionToTree(ms1, times=sbtimes[1L, 2L:3L])
-        attr(l[[i]][[1L]], "Order") <- 1L
+        l[[i]][[1L]][[1L]] <- .ms1ConditionToTree(ms1, times=sbtimes[1L, 2L:3L])
+        attr(l[[i]][[1L]][[1L]], "Order") <- 1L
         idMs1 <- which(sbtimes$Type[-1L] == "MS1") + 1L
         idMs2 <- which(sbtimes$Type == "MS2")
 
         for (j in idMs1) {
-            l[[i]][[j]] <-
+            l[[i]][[1L]][[j]] <-
                 .ms1CopyAndAppendExperiment(j - 1L, sbtimes[j, 2L:3L])
-            attr(l[[i]][[j]], "Order") <- j
+            attr(l[[i]][[1L]][[j]], "Order") <- j
         }
-        condId <- 0L
-        for (j in idMs2) {
-            condId <- condId + 1L
-            l[[i]][[j]] <- .ms2ConditionToTree(
-                ms2[[i]][condId,],
+        for (j in seq(along=idMs2)) {
+            l[[i]][[1L]][[idMs2[j]]] <- .ms2ConditionToTree(
+                ms2[[i]][j,],
                 expId=j - 1L,
-                condId=condId,
-                times=sbtimes[j, 2L:3L],
+                condId=j,
+                times=sbtimes[idMs2[j], 2L:3L],
                 massLabeling=massLabeling
             )
-            attr(l[[i]][[j]], "Order") <- j
+            attr(l[[i]][[1L]][[idMs2[j]]], "Order") <- idMs2[j]
         }
 
-        attr(l[[i]], "Version") <- 2L
-        attr(l[[i]], "Model") <- "OrbitrapFusionLumos"
-        attr(l[[i]], "Family") <- "Calcium"
-        attr(l[[i]], "Type") <- "SL"
-
+        attr(l[[i]][[1L]], "Version") <- 2L
+        attr(l[[i]][[1L]], "Model") <- "OrbitrapFusionLumos"
+        attr(l[[i]][[1L]], "Family") <- "Calcium"
+        attr(l[[i]][[1L]], "Type") <- "SL"
     }
     l
 }
@@ -225,6 +222,54 @@ expandMs2Conditions <- function(MassList,
     )
 }
 
+#' List valid MS settings.
+#'
+#' These functions list settings for MS1 or MS2 that are supported by
+#' *Thermo's XmlMethodChanger*.
+#'
+#' @return `matrix` with three columns:
+#'  - name: element name
+#'  - class: expected R class of the value
+#'  - type: MS/ActivationType, e.g. MS1/MS2/ETD/...
+#' @rdname validMsSettings
+#' @export
+#' @examples
+#' validMs1Settings()
+validMs1Settings <- function() {
+    .validMsSettings("MS1")
+}
+
+#' @rdname validMsSettings
+#'
+#' @param type `character`, type of activation.
+#' @export
+#' @examples
+#' validMs2Settings()
+#' validMs2Settings("MS2")
+#' validMs2Settings("ETD")
+#' validMs2Settings(c("MS2", "ETD"))
+validMs2Settings <- function(type=c("All", "MS2", "ETD", "CID", "HCD",
+                                    "UVPD")) {
+    type <- match.arg(type, several.ok=TRUE)
+    if ("All" %in% type) {
+        type <- c("MS2", "ETD", "CID", "HCD", "UVPD")
+    }
+    .validMsSettings(type)
+}
+
+#' List valid MS settings
+#'
+#' @param type `character`, MS1/MS2/Activation
+#' @param version `character`, currently just Calcium3.1 supported
+#' @return `matrix`
+#' @noRd
+.validMsSettings <- function(type, version="Calcium3.1") {
+    stopifnot(is.character(type))
+    stopifnot(is.character(version))
+    m <- get(paste0(".validMsSettings", version))
+    m[m[, "type"] %in% type,, drop=FALSE]
+}
+
 #' Validate a single MS setting against internal .validMsSettings (derivated
 #' from XSD)
 #'
@@ -234,38 +279,42 @@ expandMs2Conditions <- function(MassList,
 #' @return `TRUE` if valid, else message
 #' @noRd
 .validateMsSetting <- function(name, value, type) {
-    isValidEntry <- .validMsSettings[, "name"] == name &
-        (.validMsSettings[, "type"] == type |
-         .validMsSettings[, "type"] == "MS2" &
-         type != "MS1")
+    if (type %in% c("ETD", "CID", "HCD", "UVPD")) {
+        type <- c("MS2", type)
+    }
+    settings <- .validMsSettings(type)
+    entry <- settings[settings[, "name"] == name,]
 
-    if (!any(isValidEntry)) {
+    if (!length(entry)) {
         return(
             paste0(
-                name, " is not a valid element of type '", type, "'",
-                " and/or not defined in MethodModification.xsd."
+                name, " is not a valid element of type ",
+                paste0("'", type, "'", collapse="/"),
+                " and/or not defined in MethodModification.xsd.\n",
+                "  Run `validMs", ifelse(all(type == "MS1"), "1", "2"),
+                "Settings()` for a complete list of possible settings."
             )
         )
     }
 
-    entry <- .validMsSettings[isValidEntry, "class"]
+    tcl <- entry["class"]
     cl <- typeof(value)
 
     if (isTRUE(cl == "character")) {
         isValidValue <-
-            .vapply1l(value, function(x)grepl(paste0("(^|:)", x, "(:|$)"), entry))
+            .vapply1l(value, function(x)grepl(paste0("(^|:)", x, "(:|$)"), tcl))
 
         if (any(!isValidValue)) {
             return(
                 paste0(
                     name, " could not be '", paste0(value[!isValidValue]),
-                    "'. Should be one of '", gsub(":", ", ", entry), "'."
+                    "'. Should be one of '", gsub(":", ", ", tcl), "'."
                 )
             )
         }
-    } else if (cl != entry) {
+    } else if (cl != tcl) {
         return(
-            paste0(name, " should be of class '", entry, "' but is '", cl, "'.")
+            paste0(name, " should be of class '", tcl, "' but is '", cl, "'.")
         )
     }
     TRUE
@@ -294,5 +343,3 @@ expandMs2Conditions <- function(MassList,
     }
     TRUE
 }
-
-
