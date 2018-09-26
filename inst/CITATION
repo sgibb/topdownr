@@ -1,0 +1,31 @@
+bibentry(
+    bibtype="Article",
+    title="Maximizing Sequence Coverage in Top-Down Proteomics By Automated Multi-modal Gas-phase Protein Fragmentation.",
+    author=c(
+        person(c("Pavel", "Vyacheslavovich"), "Shliaha", role="aut", email="pavels@bmb.sdu.dk"),
+        person("Sebastian", "Gibb", role="aut", email="mail@sebastiangibb.de", comment=c(ORCID="0000-0001-7406-4443")),
+    person("Vladimir", "Gorshkov", role="aut"),
+    person(c("Malena", "Schack"), "Jespersen", role="aut"),
+    person(c("Gregers", "R."), "Andersen", role="aut"),
+    person("Derek", "Bailey", role="aut"),
+    person("Jacob", "Schwartz", role="aut"),
+    person("Shannon", "Eliuk", role="aut"),
+    person("Veit", "Schwämmle", role="aut"),
+    person(c("Ole", "Nørregaard"), "Jensen", role="aut", email="jenseno@bmb.sdu.dk")
+  ),
+  #volume="",
+  #number="",
+  pages="--",
+  year="2018",
+  doi="10.1021/acs.analchem.8b02344",
+  url="https://pubs.acs.org/doi/10.1021/acs.analchem.8b02344",
+  eprint="https://pubs.acs.org/doi/pdf/10.1021/acs.analchem.8b02344",
+  journal="Analytical Chemistry",
+  publisher= "American Chemical Society",
+  key="topdownr",
+  header="To cite the topdownr package in publications use:",
+  textVersion=paste("P.V. Shliaha, S. Gibb, V. Gorshkov, M.S. Jespersen, G.R. Andersen, D. Bailey, J. Schwartz, S. Eliuk, V. Schwämmle, and O.N. Jensen. 2018.",
+                    "Maximizing Sequence Coverage in Top-Down Proteomics By Automated Multi-modal Gas-phase Protein Fragmentation.",
+                    "Analytical Chemistry.",
+                    "DOI: 10.1021/acs.analchem.8b02344")
+)
