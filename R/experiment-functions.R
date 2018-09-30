@@ -34,7 +34,7 @@ createExperimentsFragmentOptimisation <- function(
     nrs <- .nrows(ms2)
     mnrs <- max(nrs)
 
-    if (mnrs > 999) {
+    if (mnrs > 999L) {
         stop(
             "Please choose a different 'groupBy' value or reduce the number ",
             "of combinations. We can't label more than 999 conditions and ",
@@ -66,7 +66,7 @@ createExperimentsFragmentOptimisation <- function(
         for (j in seq(along=idMs2)) {
             l[[i]][[1L]][[idMs2[j]]] <- .ms2ConditionToTree(
                 ms2[[i]][j,],
-                expId=j - 1L,
+                expId=idMs2[j] - 1L,
                 condId=j,
                 times=sbtimes[idMs2[j], 2L:3L],
                 massLabeling=massLabeling
