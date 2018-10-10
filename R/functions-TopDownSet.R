@@ -22,7 +22,7 @@
 #' `data.frame(mass=1.008, name="zpH", to="z")`.
 #'
 #' *Please note:* The `adducts` are added to the output of
-#' [MSnbase::calculateFragments()].
+#' [`MSnbase::calculateFragments()`][MSnbase::calculateFragments-methods].
 #' That has some limitations, e.g.
 #' neutral loss calculation could not be done in
 #' [topdownr-package].
@@ -37,7 +37,7 @@
 #' @param type `character`,
 #' type of fragments, currently *a-c* and *x-z* are
 #' supported, see
-#' [MSnbase::calculateFragments()]
+#' [`MSnbase::calculateFragments()`][MSnbase::calculateFragments-methods]
 #' for details.
 #' @param modifications `character`,
 #' unimod names of modifications that should be applied.
@@ -55,8 +55,8 @@
 #' with 3 columns, namely: mass, name, to, see details section.
 #' @param neutralLoss `list`,
 #' neutral loss that should be applied, see
-#' [MSnbase::calculateFragments()] and
-#' [MSnbase::defaultNeutralLoss()]
+#' [`MSnbase::calculateFragments()`][MSnbase::calculateFragments-methods] and
+#' [`MSnbase::defaultNeutralLoss()`][MSnbase::calculateFragments-methods]
 #' for details.
 #' @param sequenceOrder `character`,
 #' order of the sequence before fragment calculation and matching is done.
@@ -82,8 +82,8 @@
 #' @param verbose `logical`, verbose output?
 #' @return A `TopDownSet` object.
 #' @export
-#' @seealso [MSnbase::calculateFragments()],
-#' [MSnbase::defaultNeutralLoss()]
+#' @seealso [`MSnbase::calculateFragments()`][MSnbase::calculateFragments-methods],
+#' [`MSnbase::defaultNeutralLoss()`][MSnbase::calculateFragments-methods]
 #' @examples
 #' if (require("topdownrdata")) {
 #'     # add H+ to z and no neutral loss of water

@@ -10,7 +10,7 @@
 #' [IRanges::IRanges-class]
 #' object to store start/end
 #' location on a sequence, an
-#' [Biostrings::AAString] object.
+#' [Biostrings::AAString-class] object.
 #'
 #' @seealso [Biostrings::XStringViews-class]
 #' @author Sebastian Gibb \email{mail@@sebastiangibb.de}

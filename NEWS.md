@@ -1,5 +1,9 @@
 # topdownr 1.3
 
+## Changes in version 1.3.5
+- Fix format of roxygen links to foreign packages to avoid link warning in
+  `R CMD check` [2018-10-10].
+
 ## Changes in version 1.3.4
 - Add inst/CITATION file [2018-09-26].
 

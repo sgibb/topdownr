@@ -225,7 +225,7 @@ It returns a modified \linkS4class{AbstractTopDownSet} object.
 Depending on the implementation it returns an
 \linkS4class{FragmentViews} object for
 \linkS4class{TopDownSet} objects
-or an \link[Biostrings:XStringViews]{Biostrings::XStringViews} object for
+or an \link[Biostrings:XStringViews-class]{Biostrings::XStringViews} object for
 \linkS4class{NCBSet} objects.
 
 \item \code{summary}: Summary statistics.

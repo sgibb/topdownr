@@ -340,7 +340,7 @@ setMethod("removeEmptyConditions", "AbstractTopDownSet",
 #' Depending on the implementation it returns an
 #' [FragmentViews-class] object for
 #' [TopDownSet-class] objects
-#' or an [Biostrings::XStringViews] object for
+#' or an [Biostrings::XStringViews-class] object for
 #' [NCBSet-class] objects.
 #'
 ## @param object `AbstractTopDownSet`

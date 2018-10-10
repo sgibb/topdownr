@@ -24,7 +24,7 @@ a filename pattern, the default \code{.*} means all files.}
 \item{type}{\code{character},
 type of fragments, currently \emph{a-c} and \emph{x-z} are
 supported, see
-\code{\link[MSnbase:calculateFragments]{MSnbase::calculateFragments()}}
+\code{\link[MSnbase:calculateFragments-methods]{MSnbase::calculateFragments()}}
 for details.}
 
 \item{modifications}{\code{character},
@@ -45,8 +45,8 @@ with 3 columns, namely: mass, name, to, see details section.}
 
 \item{neutralLoss}{\code{list},
 neutral loss that should be applied, see
-\code{\link[MSnbase:calculateFragments]{MSnbase::calculateFragments()}} and
-\code{\link[MSnbase:defaultNeutralLoss]{MSnbase::defaultNeutralLoss()}}
+\code{\link[MSnbase:calculateFragments-methods]{MSnbase::calculateFragments()}} and
+\code{\link[MSnbase:calculateFragments-methods]{MSnbase::defaultNeutralLoss()}}
 for details.}
 
 \item{sequenceOrder}{\code{character},
@@ -105,7 +105,7 @@ applied, e.g. for \code{H+} on \code{z},
 \code{data.frame(mass=1.008, name="zpH", to="z")}.
 
 \emph{Please note:} The \code{adducts} are added to the output of
-\code{\link[MSnbase:calculateFragments]{MSnbase::calculateFragments()}}.
+\code{\link[MSnbase:calculateFragments-methods]{MSnbase::calculateFragments()}}.
 That has some limitations, e.g.
 neutral loss calculation could not be done in
 \link{topdownr-package}.
@@ -131,6 +131,6 @@ if (require("topdownrdata")) {
 }
 }
 \seealso{
-\code{\link[MSnbase:calculateFragments]{MSnbase::calculateFragments()}},
-\code{\link[MSnbase:defaultNeutralLoss]{MSnbase::defaultNeutralLoss()}}
+\code{\link[MSnbase:calculateFragments-methods]{MSnbase::calculateFragments()}},
+\code{\link[MSnbase:calculateFragments-methods]{MSnbase::defaultNeutralLoss()}}
 }

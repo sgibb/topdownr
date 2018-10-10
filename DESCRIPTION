@@ -42,6 +42,6 @@ BugReports: https://github.com/sgibb/topdownr/issues/
 LazyData: true
 VignetteBuilder: knitr
 Roxygen: list(markdown=TRUE)
-RoxygenNote: 6.0.1.9000
+RoxygenNote: 6.1.0
 biocViews: Infrastructure, Proteomics, MassSpectrometry, Coverage
 Encoding: UTF-8

@@ -72,7 +72,7 @@ In short it combines an
 \link[IRanges:IRanges-class]{IRanges::IRanges}
 object to store start/end
 location on a sequence, an
-\link[Biostrings:AAString]{Biostrings::AAString} object.
+\link[Biostrings:AAString-class]{Biostrings::AAString} object.
 }
 \section{Functions}{
 \itemize{
