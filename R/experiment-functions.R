@@ -119,11 +119,13 @@ createExperimentsFragmentOptimisation <- function(
 .ms2ConditionToTree <- function(x, expId, condId, times, ...) {
     l <- list(Experiment=vector(mode="list", length=4L))
     names(l$Experiment) <- c(
-        "TMSnScan", "TargetedInclusionMassListFilter",
+        "TMSnScan", "MassListFilter",
         "StartTimeMin", "EndTimeMin"
     )
-    l$Experiment$TargetedInclusionMassListFilter <-
+    l$Experiment$MassListFilter <-
         .massListToTree(x$MassList, id=condId, ...)
+    attr(l$Experiment$MassListFilter, "MassListType") <-
+        "TargetedMassInclusion"
     x[, c("MassList", "replication")] <- NA
     l$Experiment$TMSnScan <- lapply(x[, !is.na(x)], as.list)
     l$Experiment[c("StartTimeMin", "EndTimeMin")] <- lapply(times, as.list)
