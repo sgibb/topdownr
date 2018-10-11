@@ -306,7 +306,7 @@ validMs2Settings <- function(type=c("All", "MS2", "ETD", "CID", "HCD",
     tcl <- entry["class"]
     cl <- typeof(value)
 
-    if (isTRUE(cl == "character")) {
+    if (isTRUE(cl == "character" && grepl(":", tcl))) {
         isValidValue <-
             .vapply1l(value, function(x)grepl(paste0("(^|:)", x, "(:|$)"), tcl))
 
