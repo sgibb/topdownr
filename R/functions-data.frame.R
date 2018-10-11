@@ -141,6 +141,11 @@
         l <- l[[1L]]
     }
 
+    ## do nothing for a single data.frame
+    if (is.data.frame(l) || inherits(l, "DataFrame")) {
+        return(l)
+    }
+
     stopifnot(
         all(.vapply1l(l, function(ll) {
             is.data.frame(ll) || inherits(ll, "DataFrame")

@@ -89,6 +89,8 @@ test_that(".flatten", {
     r <- list(a=1:3, foo=c("a", "b", "c"), bar=c("d", "e", "f"),
               parent.child1=1, parent.child2=2, d=data.frame(a=1:3, b=1:3))
     expect_equal(topdownr:::.flatten(l), r)
+    d <- data.frame(a=1:3, b=LETTERS[1:3], stringsAsFactors=FALSE)
+    expect_equal(topdownr:::.flatten(d), d)
 })
 
 test_that(".formatNumbers", {

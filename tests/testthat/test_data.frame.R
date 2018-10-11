@@ -128,6 +128,7 @@ test_that(".rbind", {
     for (i in seq(along=y)) {
         expect_equal(topdownr:::.rbind(x, y[[i]]), r[[i]])
     }
+    expect_equal(topdownr:::.rbind(x), x)
     expect_equal(topdownr:::.rbind(list(x, x, y[[1]])),
                  topdownr:::.rbind(x, x, y[[1]]))
 })
