@@ -122,10 +122,12 @@ createExperimentsFragmentOptimisation <- function(
         "TMSnScan", "MassListFilter",
         "StartTimeMin", "EndTimeMin"
     )
-    l$Experiment$MassListFilter <-
-        .massListToTree(x$MassList, id=condId, ...)
-    attr(l$Experiment$MassListFilter, "MassListType") <-
-        "TargetedMassInclusion"
+    if (!is.null(x$MassList)) {
+        l$Experiment$MassListFilter <-
+            .massListToTree(x$MassList, id=condId, ...)
+        attr(l$Experiment$MassListFilter, "MassListType") <-
+            "TargetedMassInclusion"
+    }
     x[, c("MassList", "replication")] <- NA
     l$Experiment$TMSnScan <- lapply(x[, !is.na(x)], as.list)
     l$Experiment[c("StartTimeMin", "EndTimeMin")] <- lapply(times, as.list)
