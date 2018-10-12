@@ -39,6 +39,12 @@ test_that(".droplevels", {
     expect_equal(topdownr:::.droplevels(d[1:5,]), r)
 })
 
+test_that(".dropNaColumns", {
+    d <- DataFrame(a=1:10, b=NA, c=Rle(rep(c("foo", "bar"), each=5)))
+    r <- DataFrame(a=1:10, c=Rle(rep(c("foo", "bar"), each=5)))
+    expect_equal(topdownr:::.dropNaColumns(d), r)
+})
+
 test_that(".dropNonInformativeColumns", {
     d <- DataFrame(a=1:10, b=factor(rep(1, 10)),
                    c=Rle(rep(c("foo", "bar"), each=5)),

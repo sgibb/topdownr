@@ -64,6 +64,17 @@
     x
 }
 
+#' Drop NA only columns (all rows are NA)
+#'
+#' @param x `data.frame`/`DataFrame`
+#' @return x, without columns that are NA
+#' @noRd
+.dropNaColumns <- function(x) {
+    keep <- !.vapply1l(x, function(xx)all(is.na(xx)))
+    x[, keep, drop=FALSE]
+}
+
+
 #' Drop non informative columns (all rows are identical)
 #'
 #' @param x `data.frame`/`DataFrame`
