@@ -487,7 +487,7 @@ test_that("as(\"MSnSet\")", {
                exprs=matrix(c(2:3, 0, 4:6, 7, rep(0, 4), 8, 0, 9, 0), nrow=3,
                             dimnames=dimnames(tds)),
                phenoData=as(data.frame(Scan=1:5,
-                                       File=rep(c("foo", "bar"), 3:2),
+                                       File=factor(rep(c("foo", "bar"), 3:2)),
                                        row.names=colnames(tds),
                                        stringsAsFactors=FALSE),
                             "AnnotatedDataFrame"),
