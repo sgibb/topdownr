@@ -1,5 +1,8 @@
 # topdownr 1.3
 
+## Changes in version 1.3.6
+- Add Pavel's and Ole's ORCID to DESCRIPTION [2018-10-23].
+
 ## Changes in version 1.3.5
 - Fix format of roxygen links to foreign packages to avoid link warning in
   `R CMD check` [2018-10-10].
