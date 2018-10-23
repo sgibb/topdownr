@@ -23,7 +23,7 @@ r_github_packages:
 
 after_success:
   - Rscript -e 'covr::codecov()'
-  - Rscript -e 'pkgdown::build_site()'
+  - if [ ${TRAVIS_BRANCH} = "master" ] && [ -z "${TRAVIS_PULL_REQUEST_BRANCH}" ] ; then Rscript -e 'pkgdown::build_site()' ; fi
 
 deploy:
   provider: pages
