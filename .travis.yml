@@ -23,8 +23,9 @@ r_github_packages:
 
 after_success:
   - Rscript -e 'covr::codecov()'
-  - if [ ${TRAVIS_BRANCH} = "master" ] && [ -z "${TRAVIS_PULL_REQUEST_BRANCH}" ] ; then Rscript -e 'pkgdown::build_site()' ; fi
 
+before_deploy:
+  - if [ ${TRAVIS_BRANCH} = "master" ] && [ -z "${TRAVIS_PULL_REQUEST_BRANCH}" ] ; then R CMD INSTALL . && Rscript -e 'pkgdown::build_site()' ; fi
 deploy:
   provider: pages
   skip-cleanup: true
