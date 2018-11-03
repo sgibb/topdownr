@@ -28,14 +28,14 @@ vignette: >
     %\VignettePackage{topdownr}
 ---
 
-```{r environment, echo=FALSE}
-suppressPackageStartupMessages(library("topdownr"))
-suppressPackageStartupMessages(library("BiocStyle"))
+```{r environment, echo=FALSE, message=FALSE, warning=FALSE}
+library("topdownr")
+library("BiocStyle")
 ```
 
 # Foreword {-}
 
-[*topdownr*](http://bioconductor.org/packages/topdownr) is free and
+`r BiocStyle::Biocpkg("topdownr")` is free and
 open-source software. If you use it, please support the project by
 citing it in publications:
 
