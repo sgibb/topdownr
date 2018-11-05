@@ -2,6 +2,7 @@
 ^CONTRIBUTING\.md$
 ^README\.md$
 ^SUPPORT\.md$
+^\.editorconfig$
 ^\.git$
 ^\.gitignore$
 ^\.lintr$
