@@ -198,7 +198,7 @@ setMethod("filterIntensity", "TopDownSet",
 
     if (relative) {
         if (1L < threshold || threshold < 0L) {
-            stop("'threshold hast to be between 0 and 1.")
+            stop("'threshold has to be between 0 and 1.")
         }
         object@assay <- .drop0rowLt(
             object@assay, tol=.rowMax(object@assay) * threshold
