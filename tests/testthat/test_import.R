@@ -135,6 +135,25 @@ test_that(".readScanHeadsTable", {
     expect_warning(h <- topdownr:::.readScanHeadsTable(fn, verbose=FALSE),
                    "not sorted in ascending order")
     expect_equal(h$Condition, c(1, 1:3))
+
+    ## test conditions argument
+    expect_error(topdownr:::.readScanHeadsTable(
+                    fn, conditions="FOO", verbose=FALSE),
+                 "should be one of .*FilterString.*")
+    expect_error(topdownr:::.readScanHeadsTable(
+        fn, conditions=TRUE, verbose=FALSE),
+                 "'conditions' has to be a 'character' or 'numeric'")
+    expect_error(topdownr:::.readScanHeadsTable(
+        fn, conditions=1:2, verbose=FALSE),
+                 "'conditions' has to be a 'character' or 'numeric'")
+    expect_warning(h <- topdownr:::.readScanHeadsTable(
+                        fn, conditions="FilterString", verbose=FALSE),
+                   "not sorted in ascending order")
+    expect_equal(h$Condition, c(1, 1:3))
+    expect_equal(topdownr:::.readScanHeadsTable(
+        fn, conditions=4, verbose=FALSE)$Condition, 1:4)
+    expect_equal(topdownr:::.readScanHeadsTable(
+        fn, conditions=2, verbose=FALSE)$Condition, c(1:2, 1:2))
 })
 
 test_that(".readSpectrum", {

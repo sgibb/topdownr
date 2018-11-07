@@ -88,14 +88,18 @@
 
 #' Read ScanHeadMans header (txt) output.
 #'
-#' 1 row per scan (could have more rows than experiment.csv, because multiple
+#' 1 row per scan (could have more rows than experiments.csv, because multiple
 #' scans per condition are possible).
 #'
-#' @param file character, filename
-#' @param verbose logical, verbose output?
+#' @param file `character`, filename
+#' @param conditions `character`/`numeric`, how to calculate condition IDs.
+#' Conditions could be calculated on `"FilterString"` or by a given number of
+#' conditions.
+#' @param verbose `logical`, verbose output?
 #' @return data.frame
 #' @noRd
-.readScanHeadsTable <- function(file, verbose=interactive()) {
+.readScanHeadsTable <- function(file, conditions="FilterString",
+                                verbose=interactive()) {
     stopifnot(.fileExt(file) == "txt")
     d <- read.csv(file, na.strings=c("NA", "N/A"), stringsAsFactors=FALSE)
     colnames(d) <- .camelCase(colnames(d))
@@ -107,33 +111,45 @@
     ## drop MS1
     d <- d[d$MsOrder == 2L, ]
 
-    ## Somehow the FilterString doesn't always contains the right mass
-    ## label and we have to correct them.
-    ## See also:
-    ## - https://github.com/sgibb/topdownr/issues/25
-    fixedFilterStrings <- .fixFilterString(d$FilterString)
-    if (nFixed <- sum(fixedFilterStrings != d$FilterString)) {
-        warning(
-            nFixed, " FilterString entries modified because of ",
-            "duplicated ID for different conditions.", immediate.=verbose
-        )
-    }
-    d$FilterString <- fixedFilterStrings
+    if (is.character(conditions)) {
+        ## maybe more will follow
+        conditions <- match.arg(conditions, "FilterString")
 
-    d$Condition <- as.integer(.filterStringToId(d$FilterString))
+        if (conditions == "FilterString") {
+            ## Somehow the FilterString doesn't always contains the right mass
+            ## label and we have to correct them.
+            ## See also:
+            ## - https://github.com/sgibb/topdownr/issues/25
+            fixedFilterStrings <- .fixFilterString(d$FilterString)
+            if (nFixed <- sum(fixedFilterStrings != d$FilterString)) {
+                warning(
+                    nFixed, " FilterString entries modified because of ",
+                    "duplicated ID for different conditions.",
+                    immediate.=verbose
+                )
+            }
+            d$FilterString <- fixedFilterStrings
+            d$Condition <- as.integer(.filterStringToId(d$FilterString))
 
-    ## Sometimes skips happen and the ID is not the same as in the FilterString
-    ## (happens often in the missing_scans files)
-    ## See also:
-    ## - https://github.com/sgibb/topdownr/issues/14
-    if (is.unsorted(d$Condition)) {
-        warning(
-            "ID in FilterString are not sorted in ascending order. ",
-            "Introduce own condition ID via 'cumsum'.", immediate.=verbose
-        )
-        d$Condition <- cumsum(
-            c(TRUE, d$FilterString[-1L] != d$FilterString[-nrow(d)])
-        )
+            ## Sometimes skips happen and the ID is not the same as in the
+            ## FilterString (happens often in the missing_scans files)
+            ## See also:
+            ## - https://github.com/sgibb/topdownr/issues/14
+            if (is.unsorted(d$Condition)) {
+                warning(
+                    "ID in FilterString are not sorted in ascending order. ",
+                    "Introduce own condition ID via 'cumsum'.",
+                    immediate.=verbose
+                )
+                d$Condition <- cumsum(
+                    c(TRUE, d$FilterString[-1L] != d$FilterString[-nrow(d)])
+                )
+            }
+        }
+    } else if (is.numeric(conditions) && length(conditions) == 1L) {
+        d$Condition <- rep_len(seq_len(conditions), nrow(d))
+    } else {
+        stop("'conditions' has to be a 'character' or 'numeric' of length one.")
     }
 
     activation <- c("ETD", "CID", "HCD", "UVPD")

@@ -1,6 +1,11 @@
 # topdownr 1.5
 - New version for Bioc 3.9 (devel)
 
+## Changes in version 1.5.1
+- `readTopDownFiles` gains the argument `conditions` to control wheter
+  "FilterStrings" or a given number of conditions is used to create condition
+  IDs; see [#77](https://github.com/sgibb/topdownr/issues/77) [2018-11-07].
+
 # topdownr 1.4
 - New version for Bioc 3.8 (release)
 

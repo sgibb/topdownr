@@ -12,7 +12,8 @@ readTopDownFiles(path, pattern = ".*", type = c("a", "b", "c", "x",
   redundantFragmentMatch = c("remove", "closest"),
   dropNonInformativeColumns = TRUE, sampleColumns = c("Mz",
   "AgcTarget", "EtdReagentTarget", "EtdActivation", "CidActivation",
-  "HcdActivation", "UvpdActivation"), verbose = interactive())
+  "HcdActivation", "UvpdActivation"), conditions = "FilterString",
+  verbose = interactive())
 }
 \arguments{
 \item{path}{\code{character},
@@ -75,6 +76,14 @@ should columns with just one identical value across all runs be removed?}
 column names of the \code{\link[=colData]{colData()}}
 used to define a sample (technical replicate). This is used to add the
 \code{Sample} column (used for easier aggregation, etc.).}
+
+\item{conditions}{\code{character}/\code{numeric}, one of:
+\itemize{
+\item \code{"FilterString"} (default): create condition IDs based on mass labels in
+the \emph{FilterString} column (see \emph{massLabeling} in \code{\link[=writeMethodXmls]{writeMethodXmls()}} for
+details).
+\item A single \code{numeric} value giving the number of conditions.
+}}
 
 \item{verbose}{\code{logical}, verbose output?}
 }
