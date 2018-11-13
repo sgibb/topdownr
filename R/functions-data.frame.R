@@ -74,7 +74,6 @@
     x[, keep, drop=FALSE]
 }
 
-
 #' Drop non informative columns (all rows are identical)
 #'
 #' @param x `data.frame`/`DataFrame`

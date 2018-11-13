@@ -1,17 +1,37 @@
 context("experiment")
 
 test_that(".collapseMassList", {
-    expect_error(.collapseMassList(1:10))
-    expect_error(.collapseMassList(cbind(1:3, 1:3, 1:3)))
-    expect_equal(.collapseMassList(cbind(c(10, 20), 1:2)), "10/1 20/2")
+    expect_error(topdownr:::.collapseMassList(1:10))
+    expect_error(topdownr:::.collapseMassList(cbind(1:3, 1:3, 1:3)))
+    expect_equal(topdownr:::.collapseMassList(cbind(c(10, 20), 1:2)), "10/1 20/2")
 })
 
 test_that(".expandMassList", {
-    expect_error(.expandMassList(1:10))
+    expect_error(topdownr:::.expandMassList(1:10))
     expect_equal(
-        .expandMassList("10/1 20/2"),
+        topdownr:::.expandMassList("10/1 20/2"),
         matrix(c(10, 20, 1:2), ncol=2, dimnames=list(NULL, c("mz", "z")))
     )
+})
+
+test_that(".validMsSettings", {
+    expect_error(topdownr:::.validMsSettings(1))
+    expect_error(topdownr:::.validMsSettings(FALSE))
+    expect_error(topdownr:::.validMsSettings("MS1", family=1))
+    expect_error(topdownr:::.validMsSettings("MS1", family="FOO"))
+    expect_error(topdownr:::.validMsSettings("MS1", family="Calcium",
+                                             version=3))
+    expect_error(topdownr:::.validMsSettings("MS1", family="Calcium",
+                                             version="foo"))
+    expect_true(all(grepl("UVPD.*ActivationTime",
+        topdownr:::.validMsSettings("UVPD", family="Calcium",
+                                    version="3.2")[, "name"])))
+    expect_true(any(grepl("ScanDescription",
+        topdownr:::.validMsSettings("MS2", family="Calcium",
+                                    version="3.2")[, "name"])))
+    expect_false(any(grepl("ScanDescription",
+        topdownr:::.validMsSettings("MS2", family="Calcium",
+                                    version="3.1")[, "name"])))
 })
 
 test_that(".validateMsSetting", {

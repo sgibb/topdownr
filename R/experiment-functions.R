@@ -154,8 +154,7 @@ createExperimentsFragmentOptimisation <- function(
 #' @return `character`
 #' @noRd
 .collapseMassList <- function(x) {
-    stopifnot(is.matrix(x))
-    stopifnot(ncol(x) == 2L)
+    stopifnot(is.matrix(x), ncol(x) == 2L)
     paste0(apply(x, 1L, paste0, collapse="/"), collapse=" ")
 }
 
@@ -180,14 +179,16 @@ createExperimentsFragmentOptimisation <- function(
 #'
 #' @param ... further named arguments, used to create the combination of
 #' conditions.
+#' @param family `character`, currently just Calcium is supported
+#' @param version `character`, currently 3.1, 3.2 [default], 3.3 are supported
 #' @return `data.frame`
 #' @seealso [validMs1Settings()]
 #' @export
 #' @examples
 #' expandMs1Conditions(FirstMass=100, LastMass=400)
-expandMs1Conditions <- function(...) {
+expandMs1Conditions <- function(..., family="Calcium", version="3.2") {
     settings <- .flatten(list(...))
-    .validateMsSettings(type="MS1", settings)
+    .validateMsSettings(type="MS1", settings, family=family, version=version)
     expand.grid(settings, stringsAsFactors=FALSE)
 }
 
@@ -200,6 +201,8 @@ expandMs1Conditions <- function(...) {
 #' UVPD.
 #' @param ... further named arguments, used to create the combination of
 #' conditions.
+#' @param family `character`, currently just Calcium is supported
+#' @param version `character`, currently 3.1, 3.2 [default], 3.3 are supported
 #' @return `data.frame`
 #' @seealso [validMs2Settings()]
 #' @export
@@ -216,10 +219,17 @@ expandMs1Conditions <- function(...) {
 #' )
 expandMs2Conditions <- function(MassList,
                                 ActivationType=c("CID", "HCD", "ETD", "UVPD"),
-                                ...) {
+                                ..., family="Calcium", version="3.2") {
     ActivationType <- match.arg(ActivationType)
     settings <- .flatten(list(...))
-    .validateMsSettings(type=ActivationType, settings)
+
+    .validateMsSettings(
+        type=ActivationType,
+        settings,
+        family=family,
+        version=version
+    )
+
     expand.grid(
         c(
             MassList=.collapseMassList(MassList),
@@ -235,6 +245,8 @@ expandMs2Conditions <- function(MassList,
 #' These functions list settings for MS1 or MS2 that are supported by
 #' *Thermo's XmlMethodChanger*.
 #'
+#' @param family `character`, currently just Calcium is supported
+#' @param version `character`, currently 3.1, 3.2 [default], 3.3 are supported
 #' @return `matrix` with three columns:
 #'  - name: element name
 #'  - class: expected R class of the value
@@ -243,38 +255,45 @@ expandMs2Conditions <- function(MassList,
 #' @export
 #' @examples
 #' validMs1Settings()
-validMs1Settings <- function() {
-    .validMsSettings("MS1")
+validMs1Settings <- function(family="Calcium", version="3.2") {
+    .validMsSettings("MS1", family=family, version=version)
 }
 
 #' @rdname validMsSettings
 #'
 #' @param type `character`, type of activation.
+#' @param family `character`, currently just Calcium is supported
+#' @param version `character`, currently 3.1, 3.2 [default], 3.3 are supported
 #' @export
 #' @examples
 #' validMs2Settings()
 #' validMs2Settings("MS2")
 #' validMs2Settings("ETD")
 #' validMs2Settings(c("MS2", "ETD"))
-validMs2Settings <- function(type=c("All", "MS2", "ETD", "CID", "HCD",
-                                    "UVPD")) {
+validMs2Settings <- function(type=c("All", "MS2", "ETD", "CID", "HCD", "UVPD"),
+                             family="Calcium", version="3.2") {
     type <- match.arg(type, several.ok=TRUE)
     if ("All" %in% type) {
         type <- c("MS2", "ETD", "CID", "HCD", "UVPD")
     }
-    .validMsSettings(type)
+    .validMsSettings(type, family=family, version=version)
 }
 
 #' List valid MS settings
 #'
 #' @param type `character`, MS1/MS2/Activation
-#' @param version `character`, currently just Calcium3.1 supported
+#' @param family `character`, currently just Calcium is supported
+#' @param version `character`, currently 3.1, 3.2 [default], 3.3 are supported
 #' @return `matrix`
 #' @noRd
-.validMsSettings <- function(type, version="Calcium3.1") {
-    stopifnot(is.character(type))
-    stopifnot(is.character(version))
-    m <- get(paste0(".validMsSettings", version))
+.validMsSettings <- function(type, family="Calcium", version="3.2") {
+    stopifnot(
+        is.character(type),
+        is.character(family) && family %in% names(.validMsSettingsXsd),
+        is.character(version) &&
+            version %in% names(.validMsSettingsXsd[[family]])
+    )
+    m <- .validMsSettingsXsd[[family]][[version]]
     m[m[, "type"] %in% type,, drop=FALSE]
 }
 
@@ -284,13 +303,16 @@ validMs2Settings <- function(type=c("All", "MS2", "ETD", "CID", "HCD",
 #' @param name `character`, element name
 #' @param value any type, value of element
 #' @param type `character`, type of setting
+#' @param family `character`, currently just Calcium is supported
+#' @param version `character`, currently 3.1, 3.2 [default], 3.3 are supported
 #' @return `TRUE` if valid, else message
 #' @noRd
-.validateMsSetting <- function(name, value, type) {
+.validateMsSetting <- function(name, value, type, family="Calcium",
+                               version="3.2") {
     if (type %in% c("ETD", "CID", "HCD", "UVPD")) {
         type <- c("MS2", type)
     }
-    settings <- .validMsSettings(type)
+    settings <- .validMsSettings(type, family=family, version=version)
     entry <- settings[settings[, "name"] == name,]
 
     if (!length(entry)) {
@@ -332,16 +354,21 @@ validMs2Settings <- function(type=c("All", "MS2", "ETD", "CID", "HCD",
 #'
 #' @param type `character`, MS1/MS2/ActivationType
 #' @param settings `list`, named arguments used for validation
+#' @param family `character`, currently just Calcium is supported
+#' @param version `character`, currently 3.1, 3.2 [default], 3.3 are supported
 #' @return `TRUE` if valid, else stops with an error
 #' @noRd
-.validateMsSettings <- function(type=c("MS1", "MS2", "ETD", "CID", "HCD", "UVPD"),
-                                settings) {
+.validateMsSettings <- function(type=c("MS1", "MS2", "ETD", "CID", "HCD",
+                                       "UVPD"),
+                                settings, family="Calcium", version="3.2") {
     type <- match.arg(type)
     validation <- mapply(
         .validateMsSetting,
         name=names(settings),
         value=settings,
         type=type,
+        family=family,
+        version=version,
         SIMPLIFY=FALSE
     )
     isValid <- .vapply1l(validation, isTRUE)
