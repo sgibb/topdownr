@@ -21,12 +21,13 @@ xsd <- '<?xml version="1.0" encoding="utf-8"?>
     <xs:complexType>
       <xs:all>
         <xs:element name="AgcTarget" type="xs:double" minOccurs="0" maxOccurs="1" />
-        <!-- ETD Params -->
         <xs:element name="ETDReactionTime" type="xs:double" minOccurs="0" maxOccurs="1" />
         <xs:element name="CIDCollisionEnergy" type="xs:double" minOccurs="0" maxOccurs="1"/>
         <xs:element name="CIDActivationQ" type="xs:double" minOccurs="0" maxOccurs="1"/>
         <xs:element name="Ms2CIDCollisionEnergy" type="xs:double" minOccurs="0" maxOccurs="1"/>
         <xs:element name="Ms2CIDActivationQ" type="xs:double" minOccurs="0" maxOccurs="1"/>
+        <xs:element ref="MassList" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="ScanDescription" minOccurs="0" maxOccurs="1"/>
       </xs:all>
     </xs:complexType>
   </xs:element>
@@ -51,16 +52,16 @@ test_that(".xmlEnumeration", {
     )
 })
 
-test_that(".xmlTmsnScanParamters", {
+test_that(".xmlTmsnScanParameters", {
     skip_if_not_installed("xml2")
     expect_equal(
-        topdownr:::.xmlTmsnScanParamters(xml2::read_xml(xsd)),
+        topdownr:::.xmlTmsnScanParameters(xml2::read_xml(xsd)),
         cbind(
             name=c(
                 "AgcTarget", "ETDReactionTime", "CIDCollisionEnergy",
-                "CIDActivationQ"
+                "CIDActivationQ", "MassList", "ScanDescription"
             ),
-            class=rep("double", 4)
+            class=c(rep("double", 4), "MassListRecord", "character")
         )
     )
 })
@@ -72,10 +73,14 @@ test_that(".xmlValidMsSettings", {
         cbind(
             name=c(
                 "FirstMass", "LastMass", "Microscans", "AgcTarget",
-                "ETDReactionTime", "CIDCollisionEnergy", "CIDActivationQ"
+                "ETDReactionTime", "CIDCollisionEnergy", "CIDActivationQ",
+                "MassList", "ScanDescription"
             ),
-            class=rep(c("double", "integer", "double"), c(2, 1, 4)),
-            type=rep(c("MS1", "MS2", "ETD", "CID"), c(3, 1, 1, 2))
+            class=rep(
+                c("double", "integer", "double", "MassListRecord", "character"),
+                c(2, 1, 4, 1, 1)
+            ),
+            type=rep(c("MS1", "MS2", "ETD", "CID", "MS2"), c(3, 1, 1, 2, 2))
         )
     )
 })

@@ -9,19 +9,28 @@
     requireNamespace("xml2")
     nds <- xml2::xml_find_all(
         xsd,
-        sprintf(".//xs:element[@name = '%s']//xs:element", name)
+        sprintf(".//xs:element[@name = '%s']//xs:element[@name|@ref]", name)
     )
-    attrs <- xml2::xml_attrs(nds)
-    m <- do.call(rbind, lapply(attrs, "[", c("name", "type")))
+    attrs <- lapply(xml2::xml_attrs(nds), function(a) {
+        name <- if (is.na(a["name"])) a["ref"] else a["name"]
+        type <- a["type"]
+        if (is.na(type) && name == "MassList") {
+            type <- "MassListRecord"
+        } else if (is.na(type) && name == "ScanDescription") {
+            type <- "character"
+        }
+        c(name, type)
+    })
+    m <- do.call(rbind, attrs)
+    colnames(m) <- c("name", "class")
     repl <- matrix(c("double$", "double",
                      "int.*$", "integer",
                      "boolean$", "logical",
-                     "string$", "character"), byrow=TRUE, nrow=4)
+                     "string$", "character"), byrow=TRUE, nrow=4L)
     repl[, 1L] <- paste0("^xs:", repl[, 1L])
     for (i in seq_len(nrow(repl))) {
-        m[, "type"] <- sub(repl[i, 1L], repl[i, 2L], m[, "type"])
+        m[, "class"] <- sub(repl[i, 1L], repl[i, 2L], m[, "class"])
     }
-    colnames(m) <- c("name", "class")
     m
 }
 
@@ -47,10 +56,10 @@
 #'
 #' @return `matrix` (`character`)
 #' @noRd
-.xmlTmsnScanParamters <- function(xsd) {
+.xmlTmsnScanParameters <- function(xsd) {
     param <- .xmlChildrenNameType(xsd, "TMSnScan")
-    isEnum <-
-        !param[, "class"] %in% c("logical", "integer", "double", "character")
+    isEnum <- !param[, "class"] %in%
+        c("logical", "integer", "double", "character", "MassListRecord")
     param[isEnum, "class"] <- vapply(
         param[isEnum, "class"],
         function(tt)paste0(.xmlEnumeration(xsd, tt), collapse=":"),
@@ -68,7 +77,7 @@
 .xmlValidMsSettings <- function(xsd) {
     settings <- rbind(
         cbind(.xmlChildrenNameType(xsd, "FullMSScan"), type="MS1"),
-        cbind(.xmlTmsnScanParamters(xsd), type="MS2"))
+        cbind(.xmlTmsnScanParameters(xsd), type="MS2"))
 
     for (actType in c("ETD", "CID", "HCD", "UVPD")) {
         isType <- grepl(actType, settings[, "name"])
