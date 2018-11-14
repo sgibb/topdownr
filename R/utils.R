@@ -397,6 +397,36 @@ cat0 <- function(...) {
     .vapply1d(x, nrow)
 }
 
+#' generate valid scan description
+#'
+#' @param x `data.frame`
+#' @param replications `numeric`, number of replications
+#' @param prefix `character`, prefix
+#' @return unique names
+#' @noRd
+.scanDescription <- function(n, replications=1L, prefix="C") {
+    stopifnot(
+        is.numeric(n), length(n) == 1L,
+        is.numeric(replications), length(replications) == 1L, replications > 0L,
+        is.character(prefix), length(prefix) == 1L || length(prefix) == n,
+        nzchar(prefix)
+    )
+    desc <- paste0(
+        prefix,
+        rep.int(.formatNumbers(seq_len(n)), replications)
+    )
+    if (replications > 1L) {
+        desc <- paste0(desc, "R", rep(seq_len(replications), each=n))
+    }
+    if (any(nchar(desc) > 16L)) {
+        stop("Calcium devices accept just 16 characters for 'ScanDescription'.")
+    }
+    if (anyDuplicated(desc)) {
+        stop("Duplicated 'ScanDescription' are not allowed.")
+    }
+    desc
+}
+
 #' shortend string to width and place "..." in the middle
 #'
 #' @param x `character`

@@ -249,6 +249,24 @@ test_that(".nrows", {
                                        matrix(nrow=3, ncol=2))), 2:3)
 })
 
+test_that(".scanDescription", {
+    expect_error(.scanDescription("FOO"))
+    expect_error(.scanDescription(1:3))
+    expect_error(.scanDescription(1, replications="FOO"))
+    expect_error(.scanDescription(1, replications=0))
+    expect_error(.scanDescription(1, replications=1:2))
+    expect_error(.scanDescription(1, replications=2, prefix=1))
+    expect_error(.scanDescription(1, replications=2, prefix=c("C", "D")))
+    expect_error(.scanDescription(1, prefix="AAAAAAAAAAAAAAAA"),
+                 "Calcium devices accept just 16 characters")
+    expect_equal(.scanDescription(2), c("C1", "C2"))
+    expect_equal(.scanDescription(2, replications=2),
+                 c("C1R1", "C2R1", "C1R2", "C2R2"))
+    expect_equal(.scanDescription(2, replications=1, prefix=c("C", "D")),
+                 c("C1", "D2"))
+    expect_equal(.scanDescription(10), sprintf("C%02d", 1:10))
+})
+
 test_that(".snippet", {
     L <- paste0(LETTERS[1:26], collapse="")
     l <- paste0(letters[1:26], collapse="")
