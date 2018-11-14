@@ -97,6 +97,30 @@ test_that("expandMs2Conditions", {
                  ms2)
 })
 
+test_that("validMs1Settings", {
+    expect_error(validMs1Settings(family=1))
+    expect_error(validMs1Settings(family="FOO"))
+    expect_error(validMs1Settings(version="xx"))
+    m <- validMs1Settings()
+    expect_true(class(m) == "matrix")
+    expect_equal(colnames(m), c("name", "class", "type"))
+    expect_equal(m[1:3, "name"], c("FirstMass", "LastMass", "Microscans"))
+    expect_equal(m[1:3, "class"], c("double", "double", "integer"))
+    expect_equal(m[1:3, "type"], rep("MS1", 3))
+})
+
+test_that("validMs2Settings", {
+    expect_error(validMs2Settings("FOO"))
+    expect_error(validMs2Settings(family=1))
+    expect_error(validMs2Settings(family="FOO"))
+    expect_error(validMs2Settings(version="xx"))
+    m <- validMs2Settings()
+    expect_true(class(m) == "matrix")
+    expect_equal(colnames(m), c("name", "class", "type"))
+    expect_equal(validMs2Settings("All"),
+                 validMs2Settings(c("MS2", "ETD", "CID", "HCD", "UVPD")))
+})
+
 test_that(".validMsSettings", {
     expect_error(.validMsSettings(1))
     expect_error(.validMsSettings(FALSE))
