@@ -3,7 +3,7 @@
 #' @param ms1 `data.frame`, MS1 settings.
 #' @param ... further named arguments with `data.frame`s containing the MS2
 #' settings.
-#' @param groupyBy `character`, group experiments by columns in the MS2
+#' @param groupBy `character`, group experiments by columns in the MS2
 #' `data.frame`s. The columns have to be present in all `data.frame`s. Each
 #' group will be written to its own XML file.
 #' @param nMs2perMs1 `integer`, how many MS2 scans should be run after a MS1
@@ -221,7 +221,7 @@ createExperimentsFragmentOptimisation <-
 #' @param ... further named arguments, used to create the combination of
 #' conditions.
 #' @param family `character`, currently just Calcium is supported
-#' @param version `character`, currently 3.1, 3.2 [default], 3.3 are supported
+#' @param version `character`, currently 3.1, 3.2 (default), 3.3 are supported
 #' @return `data.frame` with all possible combinations of conditions/settings.
 #' @seealso [validMs1Settings()]
 #' @rdname expandMsConditions
@@ -238,8 +238,6 @@ expandMs1Conditions <- function(..., family="Calcium", version="3.2") {
 #' @rdname expandMsConditions
 #' @param ActivationType `character`, *ActivationType* for MS2,
 #' either CID, HCD, ETD, or UVPD.
-#' @param ... further named arguments, used to create the combination of
-#' conditions.
 #' @param MassList `matrix`, 2 columns (mass, z) for targeted mass list,
 #' or `NULL` (default) to not overwrite targeted mass.
 #' @export
@@ -289,7 +287,7 @@ expandMs2Conditions <- function(ActivationType=c("CID", "HCD", "ETD", "UVPD"),
 #' *Thermo's XmlMethodChanger*.
 #'
 #' @param family `character`, currently just Calcium is supported
-#' @param version `character`, currently 3.1, 3.2 [default], 3.3 are supported
+#' @param version `character`, currently 3.1, 3.2 (default), 3.3 are supported
 #' @return `matrix` with three columns:
 #'  - name: element name
 #'  - class: expected R class of the value
@@ -305,8 +303,6 @@ validMs1Settings <- function(family="Calcium", version="3.2") {
 #' @rdname validMsSettings
 #'
 #' @param type `character`, type of activation.
-#' @param family `character`, currently just Calcium is supported
-#' @param version `character`, currently 3.1, 3.2 [default], 3.3 are supported
 #' @export
 #' @examples
 #' validMs2Settings()

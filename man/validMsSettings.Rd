@@ -5,11 +5,16 @@
 \alias{validMs2Settings}
 \title{List valid MS settings.}
 \usage{
-validMs1Settings()
+validMs1Settings(family = "Calcium", version = "3.2")
 
-validMs2Settings(type = c("All", "MS2", "ETD", "CID", "HCD", "UVPD"))
+validMs2Settings(type = c("All", "MS2", "ETD", "CID", "HCD", "UVPD"),
+  family = "Calcium", version = "3.2")
 }
 \arguments{
+\item{family}{\code{character}, currently just Calcium is supported}
+
+\item{version}{\code{character}, currently 3.1, 3.2 (default), 3.3 are supported}
+
 \item{type}{\code{character}, type of activation.}
 }
 \value{
