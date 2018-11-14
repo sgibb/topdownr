@@ -6,22 +6,35 @@
 #' @param groupyBy `character`, group experiments by columns in the MS2
 #' `data.frame`s. The columns have to be present in all `data.frame`s. Each
 #' group will be written to its own XML file.
-#' @param nMs2perMs1 `integer`,
-#' @param duration `double`, how long should the scan be?
+#' @param nMs2perMs1 `integer`, how many MS2 scans should be run after a MS1
+#' scan?
+#' @param scanDuration `double`, if greater than zero (e.g. `scanDuration=0.5`)
+#' the Start/EndTime are overwritten with a duration of `scanDuration`. If
+#' `scanDuration` is zero (default) Start/EndTime are not overwritten.
 #' @param replications `integer`, number of replications.
 #' @param randomise `logical`, should the MS2 scan settings randomised?
-#' @param massLabeling `logical`,
-#' how many MS2 scans should be run after a MS1 scan?
 #' @return `list`, able to be written via [xml2::as_xml_document()]
 #' @export
-createExperimentsFragmentOptimisation <- function(
-    ms1, ..., groupBy=c("AgcTarget", "replication"), nMs2perMs1=10, duration=0.5,
-    replications=2, randomise=TRUE, massLabeling=TRUE) {
+createExperimentsFragmentOptimisation <-
+    function(ms1, ...,
+             groupBy=c("AgcTarget", "replication"),
+             nMs2perMs1=10, scanDuration=0,
+             replications=2, randomise=TRUE) {
+
+    stopifnot(
+        is.numeric(nMs2perMs1), length(nMs2perMs1) != 1,
+        is.numeric(scanDuration), length(scanDuration) != 1,
+        is.numeric(replications), length(replications) != 1,
+        is.logical(randomise), length(randomise) != 1
+    )
 
     ms2 <- do.call(.rbind, .flatten(list(...)))
     nr <- nrow(ms2)
+
     ms2 <- ms2[rep(seq_len(nr), replications),, drop=FALSE]
     ms2$replication <- rep(seq_len(replications), each=nr)
+    ms2$ScanDescription <- .scanDescription(n=nr, replications=replications)
+
     if (length(ms2)) {
         ms2 <- .groupBy(ms2, groupBy)
     } else {
@@ -34,27 +47,30 @@ createExperimentsFragmentOptimisation <- function(
     nrs <- .nrows(ms2)
     mnrs <- max(nrs)
 
-    if (mnrs > 999L) {
-        stop(
-            "Please choose a different 'groupBy' value or reduce the number ",
-            "of combinations. We can't label more than 999 conditions and ",
-            "you ask for ", mnrs, "."
+    if (scanDuration) {
+        times <- .startEndTime(
+            nMs2=mnrs, nMs2perMs1=nMs2perMs1, duration=scanDuration
         )
+    } else {
+        ## subsetting NULL is allowed: NULL[1, 2:3] is valid
+        times <- NULL
     }
 
-    times <- .startEndTime(nMs2=mnrs, nMs2perMs1=nMs2perMs1, duration=duration)
     l <- vector(mode="list", length(ms2))
     names(l) <- names(ms2)
 
     for (i in seq(along=l)) {
         n <- ceiling(nrs[i] * 1L/nMs2perMs1) + nrs[i]
+
         sbtimes <- times[seq_len(n),]
         sbtimes$Id <- seq_len(n)
+
         l[[i]] <- list(MethodModifications=vector(mode="list", length=n))
         names(l[[i]][[1L]]) <- rep("Modification", n)
 
         l[[i]][[1L]][[1L]] <- .ms1ConditionToTree(ms1, times=sbtimes[1L, 2L:3L])
         attr(l[[i]][[1L]][[1L]], "Order") <- 1L
+
         idMs1 <- which(sbtimes$Type[-1L] == "MS1") + 1L
         idMs2 <- which(sbtimes$Type == "MS2")
 
@@ -66,10 +82,8 @@ createExperimentsFragmentOptimisation <- function(
         for (j in seq(along=idMs2)) {
             l[[i]][[1L]][[idMs2[j]]] <- .ms2ConditionToTree(
                 ms2[[i]][j,],
-                expId=idMs2[j] - 1L,
-                condId=j,
-                times=sbtimes[idMs2[j], 2L:3L],
-                massLabeling=massLabeling
+                id=idMs2[j] - 1L,
+                times=sbtimes[idMs2[j], 2L:3L]
             )
             attr(l[[i]][[1L]][[idMs2[j]]], "Order") <- idMs2[j]
         }
@@ -82,70 +96,95 @@ createExperimentsFragmentOptimisation <- function(
     l
 }
 
-.ms1ConditionToTree <- function(x, expId=0L, times, ...) {
-    l <- list(Experiment=vector(mode="list", length=3L))
-    names(l$Experiment) <- c(
-        "FullMSScan", "StartTimeMin", "EndTimeMin"
-    )
+#' Create a FullMSScan node in a nested list
+#'
+#' @param x `data.frame` row
+#' @param id `integer`, experiment id
+#' @param times `integer(2)`, start/end time
+#' @param \dots arguments passed to internal functions
+#' @return nested `list`
+#' @noRd
+.ms1ConditionToTree <- function(x, id=0L, times, ...) {
+    if (is.null(times)) {
+        l <- list(Experiment=list(FullMSScan=NULL))
+    } else {
+        l <- list(Experiment=vector(mode="list", length=3L))
+        names(l$Experiment) <- c(
+            "FullMSScan", "StartTimeMin", "EndTimeMin"
+        )
+        l$Experiment$StartTimeMin <- list(times[1L])
+        l$Experiment$EndTimeMin <- list(times[2L])
+    }
     l$Experiment$FullMSScan <- lapply(x[, !is.na(x)], as.list)
-    l$Experiment[c("StartTimeMin", "EndTimeMin")] <- lapply(times, as.list)
-    attr(l$Experiment, "ExperimentIndex") <- expId
+    attr(l$Experiment, "ExperimentIndex") <- id
     l
 }
 
-.ms1CopyAndAppendExperiment <- function(expId, times, ...) {
-    l <- vector(mode="list", length=2L)
-    names(l) <- c("CopyAndAppendExperiment", "Experiment")
-    l$CopyAndAppendExperiment <- list()
+#' Create a CopyAndAppendExperiment node in a nested list
+#'
+#' @param id `integer`, experiment id
+#' @param times `integer(2)`, start/end time
+#' @param \dots arguments passed to internal functions
+#' @return nested `list`
+#' @noRd
+.ms1CopyAndAppendExperiment <- function(id, times, ...) {
+    l <- list(CopyAndAppendExperiment=list(), Experiment=list())
+    if (!is.null(times)) {
+        l$Experiment <- list(
+            StartTimeMin=list(times[1L]),
+            EndTimeMin=list(times[2L])
+        )
+    }
     attr(l$CopyAndAppendExperiment, "SourceExperimentIndex") <- 0L
-    l$Experiment <- list(
-        StartTimeMin=list(times[1L]),
-        EndTimeMin=list(times[2L])
-    )
-    attr(l$Experiment, "ExperimentIndex") <- expId
+    attr(l$Experiment, "ExperimentIndex") <- id
     l
 }
 
 #' Convert single data.frame row (condition) to nested list
 #'
 #' @param x `data.frame` row
-#' @param expId `integer`, experiment id
-#' @param condId `integer`, condition id
-#' @param startTime `integer`, start time
-#' @param endTime `integer`, end time
+#' @param id `integer`, experiment id
+#' @param times `integer(2)`, start/end time
 #' @param \dots arguments passed to internal functions
 #' @return nested `list`
 #' @noRd
-.ms2ConditionToTree <- function(x, expId, condId, times, ...) {
-    l <- list(Experiment=vector(mode="list", length=4L))
-    names(l$Experiment) <- c(
-        "TMSnScan", "MassListFilter",
-        "StartTimeMin", "EndTimeMin"
-    )
+.ms2ConditionToTree <- function(x, id, times, ...) {
+    nms <- "TMSnScan"
+    if (!is.null(times)) {
+        nms <- c(nms, "StartTimeMin", "EndTimeMin")
+    }
     if (!is.null(x$MassList)) {
-        l$Experiment$MassListFilter <-
-            .massListToTree(x$MassList, id=condId, ...)
-        attr(l$Experiment$MassListFilter, "MassListType") <-
-            "TargetedMassInclusion"
+        nms <- c(nms, "MassList")
+    }
+    l <- list(Experiment=vector(mode="list", length=length(nms)))
+    names(l$Experiment) <- nms
+
+    if (!is.null(times)) {
+        l$Experiment$StartTimeMin <- list(times[1L])
+        l$Experiment$EndTimeMin <- list(times[2L])
+    }
+    if (!is.null(x$MassList)) {
+        l$Experiment$MassList <- .massListToTree(x$MassList)
     }
     x[, c("MassList", "replication")] <- NA
     l$Experiment$TMSnScan <- lapply(x[, !is.na(x)], as.list)
-    l$Experiment[c("StartTimeMin", "EndTimeMin")] <- lapply(times, as.list)
-    attr(l$Experiment, "ExperimentIndex") <- expId
+    attr(l$Experiment, "ExperimentIndex") <- id
     l
 }
 
-.massListToTree <- function(x, id, massLabeling=TRUE) {
+#' Convert collapsed MassList into xml2 ready tree like list structure
+#'
+#' @param x `character`, collapsed MassList (output of `.collapseMassList`)
+#' @return `list`
+#' @noRd
+.massListToTree <- function(x) {
     x <- unname(.expandMassList(x))
-    if (massLabeling) {
-        x[, 1L] <- .massLabel(x[, 1L], id)
-    }
     l <- vector(mode="list", length=nrow(x))
     names(l) <- rep("MassListRecord", length(l))
     for (i in seq(along=l)) {
         l[[i]] <- list(MOverZ=list(x[i, 1L]), Z=list(x[i, 2L]))
     }
-    list(MassList=l)
+    l
 }
 
 #' Collapse MassList
@@ -173,53 +212,52 @@ createExperimentsFragmentOptimisation <- function(
     )
 }
 
-#' Expand MS1 Conditions
+#' Expand MS Conditions
 #'
-#' TODO:
+#' Create a `data.frame` of all possible combinations of the given arguments.
+#' It ensures that just arguments are applied that yield a valid
+#' MethodModification.xml file.
 #'
 #' @param ... further named arguments, used to create the combination of
 #' conditions.
 #' @param family `character`, currently just Calcium is supported
 #' @param version `character`, currently 3.1, 3.2 [default], 3.3 are supported
-#' @return `data.frame`
+#' @return `data.frame` with all possible combinations of conditions/settings.
 #' @seealso [validMs1Settings()]
+#' @rdname expandMsConditions
+#' @seealso [validMs2Settings()], [expand.grid()]
 #' @export
 #' @examples
 #' expandMs1Conditions(FirstMass=100, LastMass=400)
 expandMs1Conditions <- function(..., family="Calcium", version="3.2") {
     settings <- .flatten(list(...))
     .validateMsSettings(type="MS1", settings, family=family, version=version)
-    expand.grid(settings, stringsAsFactors=FALSE)
+    expand.grid(settings, KEEP.OUT.ATTRS=FALSE, stringsAsFactors=FALSE)
 }
 
-#' Expand MS2 Conditions
-#'
-#' TODO:
-#'
-#' @param MassList `matrix`, 2 columns (mass, z).
-#' @param ActivationType `character`, *ActivationType* for MS2, either CID, HCD, ETD, or
-#' UVPD.
+#' @rdname expandMsConditions
+#' @param ActivationType `character`, *ActivationType* for MS2,
+#' either CID, HCD, ETD, or UVPD.
 #' @param ... further named arguments, used to create the combination of
 #' conditions.
-#' @param family `character`, currently just Calcium is supported
-#' @param version `character`, currently 3.1, 3.2 [default], 3.3 are supported
-#' @return `data.frame`
-#' @seealso [validMs2Settings()]
+#' @param MassList `matrix`, 2 columns (mass, z) for targeted mass list,
+#' or `NULL` (default) to not overwrite targeted mass.
 #' @export
 #' @examples
 #' expandMs2Conditions(
-#'      MassList=cbind(mz=c(560.6, 700.5, 933.7), z=rep(1, 3)),
 #'      ActivationType="CID",
 #'      OrbitrapResolution="R120K",
 #'      IsolationWindow=1,
 #'      MaxITTimeInMS=200,
 #'      Microscans=as.integer(40),
 #'      AgcTarget=c(1e5, 5e5, 1e6),
-#'      CIDCollisionEnergy=c(NA, seq(7, 35, 7))
+#'      CIDCollisionEnergy=c(NA, seq(7, 35, 7)),
+#'      MassList=cbind(mz=c(560.6, 700.5, 933.7), z=rep(1, 3))
 #' )
-expandMs2Conditions <- function(MassList,
-                                ActivationType=c("CID", "HCD", "ETD", "UVPD"),
-                                ..., family="Calcium", version="3.2") {
+expandMs2Conditions <- function(ActivationType=c("CID", "HCD", "ETD", "UVPD"),
+                                ...,
+                                MassList=NULL,
+                                family="Calcium", version="3.2") {
     ActivationType <- match.arg(ActivationType)
     settings <- .flatten(list(...))
 
@@ -230,12 +268,17 @@ expandMs2Conditions <- function(MassList,
         version=version
     )
 
+    if (!is.null(MassList)) {
+        MassList <- .collapseMassList(MassList)
+    }
+
     expand.grid(
         c(
-            MassList=.collapseMassList(MassList),
+            MassList=MassList,
             ActivationType=ActivationType,
             settings
         ),
+        KEEP.OUT.ATTRS=FALSE,
         stringsAsFactors=FALSE
     )
 }
