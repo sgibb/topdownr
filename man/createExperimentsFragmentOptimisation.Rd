@@ -130,6 +130,6 @@ exps <- createExperimentsFragmentOptimisation(
 }
 \seealso{
 \code{\link[=writeMethodXmls]{writeMethodXmls()}},
-\code{\link[=expandMsConditions]{expandMs1Conditions()}},
-\code{\link[=expandMsConditions]{expandTms2Conditions()}}
+\code{\link[=expandMs1Conditions]{expandMs1Conditions()}},
+\code{\link[=expandMs1Conditions]{expandTms2Conditions()}}
 }

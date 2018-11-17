@@ -93,19 +93,19 @@ common <- list(
     Microscans=as.integer(40),
     AgcTarget=c(1e5, 5e5, 1e6)
 )
-cid <- expandMs2Conditions(
+cid <- expandTms2Conditions(
     MassList=targetMz,
     common,
     ActivationType="CID",
     CIDCollisionEnergy=seq(7, 35, 7)
 )
-hcd <- expandMs2Conditions(
+hcd <- expandTms2Conditions(
     MassList=targetMz,
     common,
     ActivationType="HCD",
     HCDCollisionEnergy=seq(7, 35, 7)
 )
-etd <- expandMs2Conditions(
+etd <- expandTms2Conditions(
     MassList=targetMz,
     common,
     ActivationType="ETD",

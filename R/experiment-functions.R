@@ -21,8 +21,8 @@
 #' @return `list`, able to be written via [xml2::as_xml_document()]
 #' @export
 #' @seealso [writeMethodXmls()],
-#' [`expandMs1Conditions()`][expandMsConditions],
-#' [`expandTms2Conditions()`][expandMsConditions]
+#' [`expandMs1Conditions()`][expandMs1Conditions],
+#' [`expandTms2Conditions()`][expandMs1Conditions]
 #' @examples
 #' ## build experiments within R
 #' ms1 <- expandMs1Conditions(
