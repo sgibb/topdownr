@@ -15,13 +15,13 @@ tds <- new("TopDownSet",
            processing="[2017-07-16 14:00:00] Data created.")
 
 test_that(".atdsLogMsg", {
-    expect_error(topdownr:::.atdsLogMsg(1L, "foo"),
+    expect_error(.atdsLogMsg(1L, "foo"),
                  "has to be an 'AbstractTopDownSet' object")
     expect_equal(gsub("^\\[[^]]+\\] *", "",
-                      topdownr:::.atdsLogMsg(tds, "foobar")@processing),
+                      .atdsLogMsg(tds, "foobar")@processing),
                  c("Data created.", "foobar; 8 fragments [3;5]."))
     expect_equal(gsub("^\\[[^]]+\\] *", "",
-                      topdownr:::.atdsLogMsg(tds, "foobar",
+                      .atdsLogMsg(tds, "foobar",
                                             addDim=FALSE)@processing),
                  c("Data created.", "foobar"))
 })
@@ -96,16 +96,16 @@ test_that("fragmentTypes", {
 })
 
 test_that(".inheritsAbstractTopDownSet", {
-    expect_true(topdownr:::.inheritsAbstractTopDownSet(new("TopDownSet")))
-    expect_true(topdownr:::.inheritsAbstractTopDownSet(new("NCBSet")))
-    expect_error(topdownr:::.inheritsAbstractTopDownSet(1L),
+    expect_true(.inheritsAbstractTopDownSet(new("TopDownSet")))
+    expect_true(.inheritsAbstractTopDownSet(new("NCBSet")))
+    expect_error(.inheritsAbstractTopDownSet(1L),
                  "doesn't inherit 'AbstractTopDownSet'")
 })
 
 test_that(".logdim", {
-    expect_error(topdownr:::.logdim(1L))
-    expect_equal(topdownr:::.logdim(new("TopDownSet")), "0 fragments [0;0]")
-    expect_equal(topdownr:::.logdim(tds), "8 fragments [3;5]")
+    expect_error(.logdim(1L))
+    expect_equal(.logdim(new("TopDownSet")), "0 fragments [0;0]")
+    expect_equal(.logdim(tds), "8 fragments [3;5]")
 })
 
 test_that("updateConditionNames", {

@@ -36,7 +36,7 @@ xsd <- '<?xml version="1.0" encoding="utf-8"?>
 test_that(".xmlChildrenNameType", {
     skip_if_not_installed("xml2")
     expect_equal(
-        topdownr:::.xmlChildrenNameType(xml2::read_xml(xsd), "FullMSScan"),
+        .xmlChildrenNameType(xml2::read_xml(xsd), "FullMSScan"),
         cbind(
             name=c("FirstMass", "LastMass", "Microscans"),
             class=c("double", "double", "integer")
@@ -47,7 +47,7 @@ test_that(".xmlChildrenNameType", {
 test_that(".xmlEnumeration", {
     skip_if_not_installed("xml2")
     expect_equal(
-        topdownr:::.xmlEnumeration(xml2::read_xml(xsd), "Version"),
+        .xmlEnumeration(xml2::read_xml(xsd), "Version"),
         c("1", "2")
     )
 })
@@ -55,7 +55,7 @@ test_that(".xmlEnumeration", {
 test_that(".xmlTmsnScanParameters", {
     skip_if_not_installed("xml2")
     expect_equal(
-        topdownr:::.xmlTmsnScanParameters(xml2::read_xml(xsd)),
+        .xmlTmsnScanParameters(xml2::read_xml(xsd)),
         cbind(
             name=c(
                 "AgcTarget", "ETDReactionTime", "CIDCollisionEnergy",
@@ -69,7 +69,7 @@ test_that(".xmlTmsnScanParameters", {
 test_that(".xmlValidMsSettings", {
     skip_if_not_installed("xml2")
     expect_equal(
-        topdownr:::.xmlValidMsSettings(xml2::read_xml(xsd)),
+        .xmlValidMsSettings(xml2::read_xml(xsd)),
         cbind(
             name=c(
                 "FirstMass", "LastMass", "Microscans", "AgcTarget",

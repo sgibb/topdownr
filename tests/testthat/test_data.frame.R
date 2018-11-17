@@ -6,9 +6,9 @@ test_that(".aggregateDataFrame", {
     r <- data.frame(id=c(1, 3), col1=c(1.5, 3.5), col2=c(5.5, 7.5),
                     col3=LETTERS[c(1, 3)],
                     stringsAsFactors=FALSE, row.names=letters[c(1, 3)])
-    expect_equal(topdownr:::.aggregateDataFrame(d, rep(1:2, each=2),
+    expect_equal(.aggregateDataFrame(d, rep(1:2, each=2),
                                                ignoreNumCols="id"), r)
-    expect_equal(topdownr:::.aggregateDataFrame(d, rep(c(10, 2), each=2),
+    expect_equal(.aggregateDataFrame(d, rep(c(10, 2), each=2),
                                                ignoreNumCols="id"), r)
 })
 
@@ -16,15 +16,15 @@ test_that(".colsToLogical", {
     d <- DataFrame(a=1:10, b=rep(c("On", "Off"), 5), c=rep(c("foo", "bar"), 5))
     d1 <- DataFrame(a=1:10, b=Rle(rep(c("On", "Off"), 5)), c=rep(c("foo", "bar"), 5))
     r <- DataFrame(a=1:10, b=rep(c(TRUE, FALSE), 5), c=rep(c("foo", "bar"), 5))
-    expect_equal(topdownr:::.colsToLogical(d), r)
-    expect_equal(topdownr:::.colsToLogical(d1), r)
+    expect_equal(.colsToLogical(d), r)
+    expect_equal(.colsToLogical(d1), r)
 })
 
 test_that(".colsToRle", {
     d <- DataFrame(a=1:10, b=rep(1, 10), c=rep(c("foo", "bar"), each=5))
     r <- DataFrame(a=1:10, b=Rle(rep(1, 10)),
                    c=Rle(rep(c("foo", "bar"), each=5)))
-    expect_equal(topdownr:::.colsToRle(d), r)
+    expect_equal(.colsToRle(d), r)
 })
 
 test_that(".droplevels", {
@@ -36,13 +36,13 @@ test_that(".droplevels", {
                    c=Rle(rep("foo", 5)),
                    d=Rle(factor(rep("foo", 5))),
                    e=factor(rep(1, 5)))
-    expect_equal(topdownr:::.droplevels(d[1:5,]), r)
+    expect_equal(.droplevels(d[1:5,]), r)
 })
 
 test_that(".dropNaColumns", {
     d <- DataFrame(a=1:10, b=NA, c=Rle(rep(c("foo", "bar"), each=5)))
     r <- DataFrame(a=1:10, c=Rle(rep(c("foo", "bar"), each=5)))
-    expect_equal(topdownr:::.dropNaColumns(d), r)
+    expect_equal(.dropNaColumns(d), r)
 })
 
 test_that(".dropNonInformativeColumns", {
@@ -54,39 +54,39 @@ test_that(".dropNonInformativeColumns", {
     r2 <- DataFrame(a=1:10,
                     c=Rle(rep(c("foo", "bar"), each=5)),
                     d=Rle(rep("foo", 10)))
-    expect_equal(topdownr:::.dropNonInformativeColumns(d), r)
-    expect_equal(topdownr:::.dropNonInformativeColumns(d, keep="d"), r2)
+    expect_equal(.dropNonInformativeColumns(d), r)
+    expect_equal(.dropNonInformativeColumns(d, keep="d"), r2)
 })
 
 test_that(".isCharacterCol", {
     d <- DataFrame(a=LETTERS[1:10], b=factor(rep(1, 10)),
                    c=Rle(rep(c("foo", "bar"), each=5)),
                    d=Rle(rep(1:2, each=5)))
-    expect_equal(topdownr:::.isCharacterCol(d), c(TRUE, FALSE, TRUE, FALSE))
+    expect_equal(.isCharacterCol(d), c(TRUE, FALSE, TRUE, FALSE))
 })
 
 test_that(".isNumCol", {
     d <- DataFrame(a=1:10, b=factor(rep(1, 10)),
                    c=Rle(rep(c("foo", "bar"), each=5)),
                    d=Rle(rep(1:2, each=5)))
-    expect_equal(topdownr:::.isNumCol(d), c(TRUE, FALSE, FALSE, TRUE))
+    expect_equal(.isNumCol(d), c(TRUE, FALSE, FALSE, TRUE))
 })
 
 test_that(".makeRowNames", {
     d <- data.frame(a=c(1e5, 1e6, 1e7, NA), b=letters[1:4], c=8:11)
-    expect_error(topdownr:::.makeRowNames(1:3))
-    expect_equal(topdownr:::.makeRowNames(d),
+    expect_error(.makeRowNames(1:3))
+    expect_equal(.makeRowNames(d),
                  c("C1.0e+05_a_08", "C1.0e+06_b_09",
                    "C1.0e+07_c_10", "C0.0e+00_d_11"))
-    expect_equal(topdownr:::.makeRowNames(data.frame(a=LETTERS[1:3])),
+    expect_equal(.makeRowNames(data.frame(a=LETTERS[1:3])),
                  paste0("C", LETTERS[1:3]))
-    expect_equal(topdownr:::.makeRowNames(data.frame(a=1:3)),
+    expect_equal(.makeRowNames(data.frame(a=1:3)),
                  paste0("C", 1:3))
-    expect_equal(topdownr:::.makeRowNames(
+    expect_equal(.makeRowNames(
             data.frame(a=rep(1e5, 4), b=letters[1:4], c=8:11)
         ), c("Ca_08", "Cb_09", "Cc_10", "Cd_11")
     )
-    expect_equal(topdownr:::.makeRowNames(data.frame(a=rep(1e5, 10), b="a", c=8)),
+    expect_equal(.makeRowNames(data.frame(a=rep(1e5, 10), b="a", c=8)),
                  sprintf("C%02d", 1:10))
 })
 
@@ -94,9 +94,9 @@ test_that(".orderByColumns", {
     d <- DataFrame(a=10:1, b=c(1:3, 7:1),
                    c=Rle(rep(c("foo", "bar"), each=5)),
                    d=Rle(rep("foo", 10)))
-    expect_error(topdownr:::.orderByColumns(1:10))
-    expect_error(topdownr:::.orderByColumns(d, c("foo", "bar")))
-    expect_equal(topdownr:::.orderByColumns(d, c("c", "a")), 10:1)
+    expect_error(.orderByColumns(1:10))
+    expect_error(.orderByColumns(d, c("foo", "bar")))
+    expect_equal(.orderByColumns(d, c("c", "a")), 10:1)
 })
 
 test_that(".rbind", {
@@ -129,12 +129,12 @@ test_that(".rbind", {
                   a0=c(rep(NA_real_, 5), 6:9),
                   a1=c(rep(NA_real_, 5), 6:9))
     )
-    expect_error(topdownr:::.rbind(1:10, x))
-    expect_error(topdownr:::.rbind(x, 1:10))
+    expect_error(.rbind(1:10, x))
+    expect_error(.rbind(x, 1:10))
     for (i in seq(along=y)) {
-        expect_equal(topdownr:::.rbind(x, y[[i]]), r[[i]])
+        expect_equal(.rbind(x, y[[i]]), r[[i]])
     }
-    expect_equal(topdownr:::.rbind(x), x)
-    expect_equal(topdownr:::.rbind(list(x, x, y[[1]])),
-                 topdownr:::.rbind(x, x, y[[1]]))
+    expect_equal(.rbind(x), x)
+    expect_equal(.rbind(list(x, x, y[[1]])),
+                 .rbind(x, x, y[[1]]))
 })

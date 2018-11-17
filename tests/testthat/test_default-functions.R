@@ -1,14 +1,14 @@
 context("settings-functions")
 
 test_that(".defaultSettings", {
-    expect_equal(topdownr:::.defaultSettings(default=list(foo=2, bar="x"),
+    expect_equal(.defaultSettings(default=list(foo=2, bar="x"),
                                             valid=c("foo", "bar")),
                  list(foo=2, bar="x"))
-    expect_equal(topdownr:::.defaultSettings(foo=1,
+    expect_equal(.defaultSettings(foo=1,
                                             default=list(foo=2, bar="x"),
                                             valid=c("foo", "bar")),
                  list(foo=1, bar="x"))
-    expect_error(topdownr:::.defaultSettings(foo=1, BAR=2,
+    expect_error(.defaultSettings(foo=1, BAR=2,
                                             default=list(foo=2, bar="x"),
                                             valid=c("foo", "bar")),
                  "The following setting\\(s\\) is/are not valid: BAR")

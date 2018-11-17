@@ -11,21 +11,21 @@ test_that(".listTopDownFiles", {
     r <- split(fns, c("csv", "mzML", "txt"))
     r$fasta <- fasta
     r <- r[order(names(r))]
-    expect_equal(topdownr:::.listTopDownFiles(tempdir()), r)
-    expect_equal(topdownr:::.listTopDownFiles(tempdir(), pattern="^fileA_.*"),
+    expect_equal(.listTopDownFiles(tempdir()), r)
+    expect_equal(.listTopDownFiles(tempdir(), pattern="^fileA_.*"),
                  lapply(r, "[", 1L))
-    expect_error(topdownr:::.listTopDownFiles(tempdir(), pattern="^fileB_.*"),
+    expect_error(.listTopDownFiles(tempdir(), pattern="^fileB_.*"),
                  "Could not find any fasta files")
-    expect_error(topdownr:::.listTopDownFiles(tempdir(), pattern="^fileC_.*"),
+    expect_error(.listTopDownFiles(tempdir(), pattern="^fileC_.*"),
                  "Could not find any csv, fasta, mzML, txt files")
     fasta2 <- tempfile(pattern="fileB_", fileext=".fasta")
     file.create(fasta2)
-    expect_error(topdownr:::.listTopDownFiles(tempdir()),
+    expect_error(.listTopDownFiles(tempdir()),
                  "More than one fasta file")
     fns2 <- tempfile("fileA_")
     fns2 <- paste(fns2, c("mzML", "txt"), sep=".")
     file.create(fns2)
-    expect_error(topdownr:::.listTopDownFiles(tempdir(), pattern="^fileA_.*"),
+    expect_error(.listTopDownFiles(tempdir(), pattern="^fileA_.*"),
                  paste0("There have to be the same number .*",
                         "Found: csv=1, mzML=2, txt=2", collapse=""))
     unlink(c(fasta, fasta2, fns, fns2))
@@ -38,7 +38,7 @@ test_that(".readExperimentCsv", {
                     TargetedMassList=paste0("(mz=933.100", 1:3, " z=2 name=)"),
                     stringsAsFactors=FALSE)
     write.csv(d, file=fn, row.names=FALSE)
-    expect_message(e <- topdownr:::.readExperimentCsv(fn, verbose=TRUE),
+    expect_message(e <- .readExperimentCsv(fn, verbose=TRUE),
                    "Reading 3 experiment conditions from file")
     expect_equal(colnames(e),
                  c("MsLevel", "NaColumn", "TargetedMassList", "Condition",
@@ -54,11 +54,11 @@ test_that(".readExperimentCsv", {
 test_that(".readFasta", {
     fn <- paste0(tempfile(), ".fasta")
     writeLines(c("> FOOBAR", "Sequence"), fn)
-    expect_message(s <- topdownr:::.readFasta(fn, verbose=TRUE),
+    expect_message(s <- .readFasta(fn, verbose=TRUE),
                    "Reading sequence from fasta file")
     expect_equal(s, AAString("Sequence"))
     writeLines(c("> FOOBAR", "> Sequence"), fn)
-    expect_error(topdownr:::.readFasta(fn), "No sequence found")
+    expect_error(.readFasta(fn), "No sequence found")
     unlink(fn)
 })
 
@@ -75,7 +75,7 @@ test_that(".readScanHeadsTable", {
                     stringsAsFactors=FALSE)
     write.csv(d, file=fn, row.names=FALSE)
     on.exit(unlink(fn))
-    expect_message(h <- topdownr:::.readScanHeadsTable(fn, verbose=TRUE),
+    expect_message(h <- .readScanHeadsTable(fn, verbose=TRUE),
                    "Reading 5 header information from file")
     expect_equal(colnames(h),
                  c("MsOrder", "FilterString", "Activation1", "Activation2",
@@ -100,7 +100,7 @@ test_that(".readScanHeadsTable", {
                     Energy2=c(NA, 30, 30, 20, 10),
                     stringsAsFactors=FALSE)
     write.csv(d, file=fn, row.names=FALSE)
-    expect_warning(h <- topdownr:::.readScanHeadsTable(fn, verbose=TRUE),
+    expect_warning(h <- .readScanHeadsTable(fn, verbose=TRUE),
                    "1 FilterString entries modified")
     expect_equal(h$Condition, c(1, 1:3))
 
@@ -116,7 +116,7 @@ test_that(".readScanHeadsTable", {
                     Energy2=c(NA, 30, 30, 20, 10),
                     stringsAsFactors=FALSE)
     write.csv(d, file=fn, row.names=FALSE)
-    expect_warning(h <- topdownr:::.readScanHeadsTable(fn, verbose=TRUE),
+    expect_warning(h <- .readScanHeadsTable(fn, verbose=TRUE),
                    "1 FilterString entries modified")
     expect_equal(h$Condition, c(1, 1:3))
 
@@ -132,39 +132,39 @@ test_that(".readScanHeadsTable", {
                     Energy2=c(NA, 30, 30, 20, 10),
                     stringsAsFactors=FALSE)
     write.csv(d, file=fn, row.names=FALSE)
-    expect_warning(h <- topdownr:::.readScanHeadsTable(fn, verbose=FALSE),
+    expect_warning(h <- .readScanHeadsTable(fn, verbose=FALSE),
                    "not sorted in ascending order")
     expect_equal(h$Condition, c(1, 1:3))
 
     ## test conditions argument
-    expect_error(topdownr:::.readScanHeadsTable(
+    expect_error(.readScanHeadsTable(
                     fn, conditions="FOO", verbose=FALSE),
                  "should be one of .*FilterString.*")
-    expect_error(topdownr:::.readScanHeadsTable(
+    expect_error(.readScanHeadsTable(
         fn, conditions=TRUE, verbose=FALSE),
                  "'conditions' has to be a 'character' or 'numeric'")
-    expect_error(topdownr:::.readScanHeadsTable(
+    expect_error(.readScanHeadsTable(
         fn, conditions=1:2, verbose=FALSE),
                  "'conditions' has to be a 'character' or 'numeric'")
-    expect_warning(h <- topdownr:::.readScanHeadsTable(
+    expect_warning(h <- .readScanHeadsTable(
                         fn, conditions="FilterString", verbose=FALSE),
                    "not sorted in ascending order")
     expect_equal(h$Condition, c(1, 1:3))
-    expect_equal(topdownr:::.readScanHeadsTable(
+    expect_equal(.readScanHeadsTable(
         fn, conditions=4, verbose=FALSE)$Condition, 1:4)
-    expect_equal(topdownr:::.readScanHeadsTable(
+    expect_equal(.readScanHeadsTable(
         fn, conditions=2, verbose=FALSE)$Condition, c(1:2, 1:2))
 })
 
 test_that(".readSpectrum", {
-    expect_error(topdownr:::.readSpectrum(tempfile()), "File .* not found")
+    expect_error(.readSpectrum(tempfile()), "File .* not found")
 
     skip_if_not_installed("topdownrdata", "0.2")
     f <- file.path(topdownrdata::topDownDataPath("myoglobin"),
                    "mzml", "myo_1211_ETDReagentTarget_1e6_1.mzML.gz")
-    expect_error(topdownr:::.readSpectrum(f, 0L), "Invalid .* 1:351")
-    expect_error(topdownr:::.readSpectrum(f, 1e3L), "Invalid .* 1:351")
-    expect_equal(topdownr:::.readSpectrum(f, 1L),
+    expect_error(.readSpectrum(f, 0L), "Invalid .* 1:351")
+    expect_error(.readSpectrum(f, 1e3L), "Invalid .* 1:351")
+    expect_equal(.readSpectrum(f, 1L),
                  matrix(c(16941.06087, 18979506.00), nrow=1))
 })
 
@@ -186,10 +186,10 @@ test_that(".mergeScanConditionAndHeaderInformation", {
                     BAR=c(1:2, 5:4),
                     Both.HeaderInformation=2,
                     SupplementalActivationCe=c(3, 3, 1, 2))
-    expect_equal(topdownr:::.mergeScanConditionAndHeaderInformation(sc, hi), r)
+    expect_equal(.mergeScanConditionAndHeaderInformation(sc, hi), r)
     sc$CidActivation <- 0
     sc$HcdActivation <- 11:13
-    expect_error(topdownr:::.mergeScanConditionAndHeaderInformation(sc, hi),
+    expect_error(.mergeScanConditionAndHeaderInformation(sc, hi),
                  "Merging of header and method information failed")
 })
 
@@ -199,7 +199,7 @@ test_that(".mergeSpectraAndHeaderInformation", {
     hi <- data.frame(File="foo", Scan=1:2, y=3:4, z=3:4, RtMin=1:2,
                      stringsAsFactors=FALSE)
 
-    expect_error(topdownr:::.mergeSpectraAndHeaderInformation(fd, hi),
+    expect_error(.mergeSpectraAndHeaderInformation(fd, hi),
                  "The retention times .* differ.")
     fd$RetentionTime <- (1:2) * 60
     r <- fd
@@ -211,5 +211,5 @@ test_that(".mergeSpectraAndHeaderInformation", {
     r <- r[, c("File", "Scan", "x", "spectrum",
                "z.SpectraInformation", "RetentionTime",
                "y", "z.HeaderInformation", "RtMin")]
-    expect_equal(topdownr:::.mergeSpectraAndHeaderInformation(fd, hi), r)
+    expect_equal(.mergeSpectraAndHeaderInformation(fd, hi), r)
 })

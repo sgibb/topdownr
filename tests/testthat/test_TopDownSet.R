@@ -195,9 +195,9 @@ test_that("conditionNames", {
 })
 
 test_that("condition2data.frame", {
-    expect_error(topdownr:::.condition2data.frame(1:10),
+    expect_error(.condition2data.frame(1:10),
                  "has to be an 'TopDownSet' object")
-    expect_error(topdownr:::.condition2data.frame(tds),
+    expect_error(.condition2data.frame(tds),
                  "more than one condition")
     skip_if_not_installed("topdownrdata", "0.2")
     suppressWarnings(tds <- readTopDownFiles(
@@ -206,7 +206,7 @@ test_that("condition2data.frame", {
         neutralLoss=NULL,
         tolerance=25e-6
     ))
-    s <- topdownr:::.readSpectrum(tds@files[grep("mzML.gz", tds@files)],
+    s <- .readSpectrum(tds@files[grep("mzML.gz", tds@files)],
                                   tds$SpectrumIndex[3])
     d <- data.frame(
         mz=s[,1], intensity=s[,2], fragment="",
@@ -222,8 +222,8 @@ test_that("condition2data.frame", {
         "y94", "x94", "y101", "y105", "z106", "y106", "y112", "y152", "c152")
     d$type[i] <- paste0(c("C", "C", "C", "C", "C", "C", "N", "N", "C", "C",
         "C", "C", "C", "C", "C", "C", "N"), "-terminal")
-    expect_equal(topdownr:::.condition2data.frame(tds[, 3]), d)
-    s <- topdownr:::.readSpectrum(tds@files[grep("mzML.gz", tds@files)],
+    expect_equal(.condition2data.frame(tds[, 3]), d)
+    s <- .readSpectrum(tds@files[grep("mzML.gz", tds@files)],
                                   tds$SpectrumIndex[103])
     d <- data.frame(
         mz=s[,1], intensity=s[,2], fragment="",
@@ -237,7 +237,7 @@ test_that("condition2data.frame", {
     i <- c(23, 26)
     d$fragment[i] <- c("z152", "b152")
     d$type[i] <- paste0(c("C", "N"), "-terminal")
-    expect_equal(topdownr:::.condition2data.frame(tds[, 103]), d)
+    expect_equal(.condition2data.frame(tds[, 103]), d)
 })
 
 test_that("dim", {
@@ -351,9 +351,9 @@ test_that("filterNonReplicatedFragments", {
 })
 
 test_that(".isTopDownSet", {
-    expect_true(topdownr:::.isTopDownSet(new("TopDownSet")))
-    expect_true(topdownr:::.isTopDownSet(tds))
-    expect_error(topdownr:::.isTopDownSet(1L),
+    expect_true(.isTopDownSet(new("TopDownSet")))
+    expect_true(.isTopDownSet(tds))
+    expect_error(.isTopDownSet(1L),
                  "has to be an 'TopDownSet' object")
 })
 
@@ -384,8 +384,8 @@ test_that(".ncbMap", {
                        dims=c(3, 4),
                        dimnames=list(paste0("bond", 1:3), c()))
 
-    expect_equal(topdownr:::.ncbMap(tds), r)
-    expect_equal(topdownr:::.ncbMap(tds1), r1)
+    expect_equal(.ncbMap(tds), r)
+    expect_equal(.ncbMap(tds1), r1)
 })
 
 test_that("normalize", {

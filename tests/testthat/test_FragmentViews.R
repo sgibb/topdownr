@@ -40,11 +40,11 @@ test_that("combine", {
 })
 
 test_that("constructor", {
-    expect_error(topdownr:::.calculateFragments("AACE", modifications="FOO"))
-    expect_equal(topdownr:::.calculateFragments("MAACE", type="b"), fv)
+    expect_error(.calculateFragments("AACE", modifications="FOO"))
+    expect_equal(.calculateFragments("MAACE", type="b"), fv)
 
     ## default: Acetylation, Carboxyamidomethylation and Met-loss
-    expect_equal(topdownr:::.calculateFragments("MAACE", type="b"),
+    expect_equal(.calculateFragments("MAACE", type="b"),
                  fv)
 
     ## Acetylation but no Carboxyamidomethylation/Met-loss
@@ -52,7 +52,7 @@ test_that("constructor", {
     fv2@metadata$mass <- fv@metadata$mass - 57.021464
     fv2@elementMetadata$mass[3] <- fv@elementMetadata$mass[3] - 57.021464
     fv2@metadata$modifications <- c("Acetyl")
-    expect_equal(topdownr:::.calculateFragments("AACE", type="b",
+    expect_equal(.calculateFragments("AACE", type="b",
                                                modifications="Acetyl"),
                  fv2)
     ## just Met-loss without Acetylation
@@ -61,7 +61,7 @@ test_that("constructor", {
     fv3@elementMetadata$mass <- fv@elementMetadata$mass - 42.010565
     fv3@elementMetadata$mass[3] <- fv3@elementMetadata$mass[3] - 57.021464
     fv3@metadata$modifications <- c("Met-loss")
-    expect_equal(topdownr:::.calculateFragments("MAACE", type="b",
+    expect_equal(.calculateFragments("MAACE", type="b",
                                                modifications="Met-loss"),
                  fv3)
     ## no modification
@@ -70,7 +70,7 @@ test_that("constructor", {
     fv4@elementMetadata$mass[3] <- fv4@elementMetadata$mass[3] - 57.021464
     fv4@metadata <- list(modifications=NULL,
                          mass=fv@metadata$mass - 57.021464 - 42.010565)
-    expect_equal(topdownr:::.calculateFragments("AACE", type="b",
+    expect_equal(.calculateFragments("AACE", type="b",
                                                modifications=NULL), fv4)
 })
 
