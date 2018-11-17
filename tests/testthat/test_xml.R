@@ -80,7 +80,7 @@ test_that(".xmlValidMsSettings", {
                 c("double", "integer", "double", "MassListRecord", "character"),
                 c(2, 1, 4, 1, 1)
             ),
-            type=rep(c("MS1", "MS2", "ETD", "CID", "MS2"), c(3, 1, 1, 2, 2))
+            type=rep(c("MS1", "TMS2", "ETD", "CID", "TMS2"), c(3, 1, 1, 2, 2))
         )
     )
 })
