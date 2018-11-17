@@ -1,28 +1,28 @@
 #' Create fragment optimisation experiment
 #'
 #' This function is used to create a tree-like `list` of
-#' all combinations of a user-given set of MS1 and MS2 settings for an
+#' all combinations of a user-given set of MS1 and TMS2 settings for an
 #' fragment optimisation experiment. The list could be written to an
 #' Orbitrap Fusion Lumos method xml file using [writeMethodXmls()].
 #'
 #' @param ms1 `data.frame`, MS1 settings.
-#' @param ... further named arguments with `data.frame`s containing the MS2
+#' @param ... further named arguments with `data.frame`s containing the TMS2
 #' settings.
-#' @param groupBy `character`, group experiments by columns in the MS2
+#' @param groupBy `character`, group experiments by columns in the TMS2
 #' `data.frame`s. The columns have to be present in all `data.frame`s. Each
 #' group will be written to its own XML file.
-#' @param nMs2perMs1 `integer`, how many MS2 scans should be run after a MS1
+#' @param nMs2perMs1 `integer`, how many TMS2 scans should be run after a MS1
 #' scan?
 #' @param scanDuration `double`, if greater than zero (e.g. `scanDuration=0.5`)
 #' the Start/EndTimeMin are overwritten with a duration of `scanDuration`. If
 #' `scanDuration` is zero (default) Start/EndTimeMin are not overwritten.
 #' @param replications `integer`, number of replications.
-#' @param randomise `logical`, should the MS2 scan settings randomised?
+#' @param randomise `logical`, should the TMS2 scan settings randomised?
 #' @return `list`, able to be written via [xml2::as_xml_document()]
 #' @export
 #' @seealso [writeMethodXmls()],
 #' [`expandMs1Conditions()`][expandMsConditions],
-#' [`expandMs2Conditions()`][expandMsConditions]
+#' [`expandTms2Conditions()`][expandMsConditions]
 #' @examples
 #' ## build experiments within R
 #' ms1 <- expandMs1Conditions(
@@ -40,19 +40,19 @@
 #'     AgcTarget=c(1e5, 5e5, 1e6)
 #' )
 #'
-#' cid <- expandMs2Conditions(
+#' cid <- expandTms2Conditions(
 #'     MassList=targetMz,
 #'     common,
 #'     ActivationType="CID",
 #'     CIDCollisionEnergy=seq(7, 35, 7)
 #' )
-#' hcd <- expandMs2Conditions(
+#' hcd <- expandTms2Conditions(
 #'     MassList=targetMz,
 #'     common,
 #'     ActivationType="HCD",
 #'     HCDCollisionEnergy=seq(7, 35, 7)
 #' )
-#' etd <- expandMs2Conditions(
+#' etd <- expandTms2Conditions(
 #'     MassList=targetMz,
 #'     common,
 #'     ActivationType="ETD",
@@ -61,7 +61,7 @@
 #'     ETDSupplementalActivation=c("None", "ETciD", "EThcD"),
 #'     ETDSupplementalActivationEnergy=seq(7, 35, 7)
 #' )
-#' uvpd <- expandMs2Conditions(
+#' uvpd <- expandTms2Conditions(
 #'     MassList=targetMz,
 #'     common,
 #'     ActivationType="UVPD"
@@ -74,13 +74,13 @@
 #' )
 #'
 #' ## use different settings for CID
-#' cid560 <- expandMs2Conditions(
+#' cid560 <- expandTms2Conditions(
 #'     MassList=cbind(560.6, 1),
 #'     common,
 #'     ActivationType="CID",
 #'     CIDCollisionEnergy=seq(7, 21, 7)
 #' )
-#' cid700 <- expandMs2Conditions(
+#' cid700 <- expandTms2Conditions(
 #'     MassList=cbind(700.5, 1),
 #'     common,
 #'     ActivationType="CID",
@@ -107,7 +107,7 @@
 #'
 #' exps <- createExperimentsFragmentOptimisation(
 #'     ms1 = data.frame(FirstMass=500, LastMass=1000),
-#'     ## MS2
+#'     ## TMS2
 #'     myCsvSettings,
 #'     ## other arguments
 #'     groupBy="ActivationType"
@@ -193,7 +193,7 @@ createExperimentsFragmentOptimisation <-
         }
         for (j in seq(along=idMs2)) {
             l[[i]][[1L]][[idMs2[j]]] <- structure(
-                .ms2ConditionToTree(
+                .tms2ConditionToTree(
                     ms2[[i]][j,],
                     id=idMs2[j] - 1L,
                     times=unlist(
@@ -263,7 +263,7 @@ createExperimentsFragmentOptimisation <-
 #' @param \dots arguments passed to internal functions
 #' @return nested `list`
 #' @noRd
-.ms2ConditionToTree <- function(x, id, times=NA_real_, ...) {
+.tms2ConditionToTree <- function(x, id, times=NA_real_, ...) {
     nms <- "TMSnScan"
     if (!anyNA(times)) {
         nms <- c(nms, "StartTimeMin", "EndTimeMin")
@@ -340,7 +340,7 @@ createExperimentsFragmentOptimisation <-
 #' @return `data.frame` with all possible combinations of conditions/settings.
 #' @seealso [validMs1Settings()]
 #' @rdname expandMsConditions
-#' @seealso [validMs2Settings()], [expand.grid()]
+#' @seealso [validTms2Settings()], [expand.grid()]
 #' @export
 #' @examples
 #' expandMs1Conditions(FirstMass=100, LastMass=400)
@@ -351,13 +351,13 @@ expandMs1Conditions <- function(..., family="Calcium", version="3.2") {
 }
 
 #' @rdname expandMsConditions
-#' @param ActivationType `character`, *ActivationType* for MS2,
+#' @param ActivationType `character`, *ActivationType* for TMS2,
 #' either CID, HCD, ETD, or UVPD.
 #' @param MassList `matrix`, 2 columns (mass, z) for targeted mass list,
 #' or `NULL` (default) to not overwrite targeted mass.
 #' @export
 #' @examples
-#' expandMs2Conditions(
+#' expandTms2Conditions(
 #'      ActivationType="CID",
 #'      OrbitrapResolution="R120K",
 #'      IsolationWindow=1,
@@ -367,10 +367,10 @@ expandMs1Conditions <- function(..., family="Calcium", version="3.2") {
 #'      CIDCollisionEnergy=c(NA, seq(7, 35, 7)),
 #'      MassList=cbind(mz=c(560.6, 700.5, 933.7), z=rep(1, 3))
 #' )
-expandMs2Conditions <- function(ActivationType=c("CID", "HCD", "ETD", "UVPD"),
-                                ...,
-                                MassList=NULL,
-                                family="Calcium", version="3.2") {
+expandTms2Conditions <- function(ActivationType=c("CID", "HCD", "ETD", "UVPD"),
+                                 ...,
+                                 MassList=NULL,
+                                 family="Calcium", version="3.2") {
     ActivationType <- match.arg(ActivationType)
     settings <- .flatten(list(...))
 
@@ -398,7 +398,7 @@ expandMs2Conditions <- function(ActivationType=c("CID", "HCD", "ETD", "UVPD"),
 
 #' List valid MS settings.
 #'
-#' These functions list settings for MS1 or MS2 that are supported by
+#' These functions list settings for MS1 or TMS2 that are supported by
 #' *Thermo's XmlMethodChanger*.
 #'
 #' @param family `character`, currently just Calcium is supported
@@ -406,7 +406,7 @@ expandMs2Conditions <- function(ActivationType=c("CID", "HCD", "ETD", "UVPD"),
 #' @return `matrix` with three columns:
 #'  - name: element name
 #'  - class: expected R class of the value
-#'  - type: MS/ActivationType, e.g. MS1/MS2/ETD/...
+#'  - type: MS/ActivationType, e.g. MS1/TMS2/ETD/...
 #' @rdname validMsSettings
 #' @export
 #' @examples
@@ -420,22 +420,22 @@ validMs1Settings <- function(family="Calcium", version="3.2") {
 #' @param type `character`, type of activation.
 #' @export
 #' @examples
-#' validMs2Settings()
-#' validMs2Settings("MS2")
-#' validMs2Settings("ETD")
-#' validMs2Settings(c("MS2", "ETD"))
-validMs2Settings <- function(type=c("All", "MS2", "ETD", "CID", "HCD", "UVPD"),
-                             family="Calcium", version="3.2") {
+#' validTms2Settings()
+#' validTms2Settings("TMS2")
+#' validTms2Settings("ETD")
+#' validTms2Settings(c("TMS2", "ETD"))
+validTms2Settings <- function(type=c("All", "TMS2", "ETD", "CID", "HCD", "UVPD"),
+                              family="Calcium", version="3.2") {
     type <- match.arg(type, several.ok=TRUE)
     if ("All" %in% type) {
-        type <- c("MS2", "ETD", "CID", "HCD", "UVPD")
+        type <- c("TMS2", "ETD", "CID", "HCD", "UVPD")
     }
     .validMsSettings(type, family=family, version=version)
 }
 
 #' List valid MS settings
 #'
-#' @param type `character`, MS1/MS2/Activation
+#' @param type `character`, MS1/TMS2/Activation
 #' @param family `character`, currently just Calcium is supported
 #' @param version `character`, currently 3.1, 3.2 [default], 3.3 are supported
 #' @return `matrix`
@@ -464,7 +464,7 @@ validMs2Settings <- function(type=c("All", "MS2", "ETD", "CID", "HCD", "UVPD"),
 .validateMsSetting <- function(name, value, type, family="Calcium",
                                version="3.2") {
     if (type %in% c("ETD", "CID", "HCD", "UVPD")) {
-        type <- c("MS2", type)
+        type <- c("TMS2", type)
     }
     settings <- .validMsSettings(type, family=family, version=version)
     entry <- settings[settings[, "name"] == name,]
@@ -506,13 +506,13 @@ validMs2Settings <- function(type=c("All", "MS2", "ETD", "CID", "HCD", "UVPD"),
 
 #' Validate MS settings
 #'
-#' @param type `character`, MS1/MS2/ActivationType
+#' @param type `character`, MS1/TMS2/ActivationType
 #' @param settings `list`, named arguments used for validation
 #' @param family `character`, currently just Calcium is supported
 #' @param version `character`, currently 3.1, 3.2 [default], 3.3 are supported
 #' @return `TRUE` if valid, else stops with an error
 #' @noRd
-.validateMsSettings <- function(type=c("MS1", "MS2", "ETD", "CID", "HCD",
+.validateMsSettings <- function(type=c("MS1", "TMS2", "ETD", "CID", "HCD",
                                        "UVPD"),
                                 settings, family="Calcium", version="3.2") {
     type <- match.arg(type)

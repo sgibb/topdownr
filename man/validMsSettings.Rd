@@ -2,12 +2,12 @@
 % Please edit documentation in R/experiment-functions.R
 \name{validMs1Settings}
 \alias{validMs1Settings}
-\alias{validMs2Settings}
+\alias{validTms2Settings}
 \title{List valid MS settings.}
 \usage{
 validMs1Settings(family = "Calcium", version = "3.2")
 
-validMs2Settings(type = c("All", "MS2", "ETD", "CID", "HCD", "UVPD"),
+validTms2Settings(type = c("All", "TMS2", "ETD", "CID", "HCD", "UVPD"),
   family = "Calcium", version = "3.2")
 }
 \arguments{
@@ -22,17 +22,17 @@ validMs2Settings(type = c("All", "MS2", "ETD", "CID", "HCD", "UVPD"),
 \itemize{
 \item name: element name
 \item class: expected R class of the value
-\item type: MS/ActivationType, e.g. MS1/MS2/ETD/...
+\item type: MS/ActivationType, e.g. MS1/TMS2/ETD/...
 }
 }
 \description{
-These functions list settings for MS1 or MS2 that are supported by
+These functions list settings for MS1 or TMS2 that are supported by
 \emph{Thermo's XmlMethodChanger}.
 }
 \examples{
 validMs1Settings()
-validMs2Settings()
-validMs2Settings("MS2")
-validMs2Settings("ETD")
-validMs2Settings(c("MS2", "ETD"))
+validTms2Settings()
+validTms2Settings("TMS2")
+validTms2Settings("ETD")
+validTms2Settings(c("TMS2", "ETD"))
 }

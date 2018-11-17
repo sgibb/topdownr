@@ -11,14 +11,14 @@ createExperimentsFragmentOptimisation(ms1, ..., groupBy = c("AgcTarget",
 \arguments{
 \item{ms1}{\code{data.frame}, MS1 settings.}
 
-\item{...}{further named arguments with \code{data.frame}s containing the MS2
+\item{...}{further named arguments with \code{data.frame}s containing the TMS2
 settings.}
 
-\item{groupBy}{\code{character}, group experiments by columns in the MS2
+\item{groupBy}{\code{character}, group experiments by columns in the TMS2
 \code{data.frame}s. The columns have to be present in all \code{data.frame}s. Each
 group will be written to its own XML file.}
 
-\item{nMs2perMs1}{\code{integer}, how many MS2 scans should be run after a MS1
+\item{nMs2perMs1}{\code{integer}, how many TMS2 scans should be run after a MS1
 scan?}
 
 \item{scanDuration}{\code{double}, if greater than zero (e.g. \code{scanDuration=0.5})
@@ -27,14 +27,14 @@ the Start/EndTimeMin are overwritten with a duration of \code{scanDuration}. If
 
 \item{replications}{\code{integer}, number of replications.}
 
-\item{randomise}{\code{logical}, should the MS2 scan settings randomised?}
+\item{randomise}{\code{logical}, should the TMS2 scan settings randomised?}
 }
 \value{
 \code{list}, able to be written via \code{\link[xml2:as_xml_document]{xml2::as_xml_document()}}
 }
 \description{
 This function is used to create a tree-like \code{list} of
-all combinations of a user-given set of MS1 and MS2 settings for an
+all combinations of a user-given set of MS1 and TMS2 settings for an
 fragment optimisation experiment. The list could be written to an
 Orbitrap Fusion Lumos method xml file using \code{\link[=writeMethodXmls]{writeMethodXmls()}}.
 }
@@ -55,19 +55,19 @@ common <- list(
     AgcTarget=c(1e5, 5e5, 1e6)
 )
 
-cid <- expandMs2Conditions(
+cid <- expandTms2Conditions(
     MassList=targetMz,
     common,
     ActivationType="CID",
     CIDCollisionEnergy=seq(7, 35, 7)
 )
-hcd <- expandMs2Conditions(
+hcd <- expandTms2Conditions(
     MassList=targetMz,
     common,
     ActivationType="HCD",
     HCDCollisionEnergy=seq(7, 35, 7)
 )
-etd <- expandMs2Conditions(
+etd <- expandTms2Conditions(
     MassList=targetMz,
     common,
     ActivationType="ETD",
@@ -76,7 +76,7 @@ etd <- expandMs2Conditions(
     ETDSupplementalActivation=c("None", "ETciD", "EThcD"),
     ETDSupplementalActivationEnergy=seq(7, 35, 7)
 )
-uvpd <- expandMs2Conditions(
+uvpd <- expandTms2Conditions(
     MassList=targetMz,
     common,
     ActivationType="UVPD"
@@ -89,13 +89,13 @@ exps <- createExperimentsFragmentOptimisation(
 )
 
 ## use different settings for CID
-cid560 <- expandMs2Conditions(
+cid560 <- expandTms2Conditions(
     MassList=cbind(560.6, 1),
     common,
     ActivationType="CID",
     CIDCollisionEnergy=seq(7, 21, 7)
 )
-cid700 <- expandMs2Conditions(
+cid700 <- expandTms2Conditions(
     MassList=cbind(700.5, 1),
     common,
     ActivationType="CID",
@@ -122,7 +122,7 @@ myCsvSettings
 
 exps <- createExperimentsFragmentOptimisation(
     ms1 = data.frame(FirstMass=500, LastMass=1000),
-    ## MS2
+    ## TMS2
     myCsvSettings,
     ## other arguments
     groupBy="ActivationType"
@@ -131,5 +131,5 @@ exps <- createExperimentsFragmentOptimisation(
 \seealso{
 \code{\link[=writeMethodXmls]{writeMethodXmls()}},
 \code{\link[=expandMsConditions]{expandMs1Conditions()}},
-\code{\link[=expandMsConditions]{expandMs2Conditions()}}
+\code{\link[=expandMsConditions]{expandTms2Conditions()}}
 }

@@ -290,7 +290,7 @@ test_that("writeMethodXmls", {
     expect_error(suppressWarnings(topdownr:::writeMethodXmls(defaultMs1Settings(), list(1:3))),
                  ".*ms2Settings.* has to be a named list")
     expect_error(suppressWarnings(topdownr:::writeMethodXmls(defaultMs1Settings(),
-                                           list(foo=1:3)),
+                                           list(foo=1:3))),
                  "is/are no valid MS2 tag")
     expect_error(suppressWarnings(topdownr:::writeMethodXmls(defaultMs1Settings(),
                                            defaultMs2Settings(),
@@ -377,7 +377,7 @@ test_that("writeMethodXmls", {
              '</MethodModifications>')
 
     tdir <- tempdir()
-    expect_silent(writeMethodXmls(list(FirstMass=100),
+    expect_silent(suppressWarnings(writeMethodXmls(list(FirstMass=100),
                                   list(ActivationType="ETD",
                                        AgcTarget=c(10000, 20000),
                                        ETDReactionTime=c(10, 20)),
@@ -386,13 +386,13 @@ test_that("writeMethodXmls", {
                                   mz=cbind(100, 2),
                                   randomise=FALSE,
                                   pattern=file.path(tdir, "method_%s.xml"),
-                                  verbose=FALSE))
+                                  verbose=FALSE)))
 
     expect_equal(readLines(file.path(tdir, "method_10.xml")), xml)
     expect_equal(readLines(file.path(tdir, "method_20.xml")),
                  gsub("<ETDReactionTime>10", "<ETDReactionTime>20", xml))
 
-    expect_message(writeMethodXmls(list(FirstMass=100),
+    expect_message(suppressWarnings(writeMethodXmls(list(FirstMass=100),
                                    list(ActivationType="ETD",
                                         AgcTarget=c(10000, 20000),
                                         ETDReactionTime=c(10, 20)),
@@ -401,9 +401,9 @@ test_that("writeMethodXmls", {
                                    mz=cbind(100, 2),
                                    randomise=FALSE,
                                    pattern=file.path(tdir, "method_%s.xml"),
-                                   verbose=TRUE))
+                                   verbose=TRUE)))
 
-    expect_message(writeMethodXmls(list(FirstMass=100),
+    expect_message(suppressWarnings(writeMethodXmls(list(FirstMass=100),
                                    list(ActivationType="ETD",
                                         AgcTarget=c(10000, 20000),
                                         ETDReactionTime=c(10, 20)),
@@ -412,7 +412,7 @@ test_that("writeMethodXmls", {
                                    mz=cbind(100, 2),
                                    randomise=FALSE,
                                    pattern=file.path(tdir, "method_%s.xml"),
-                                   verbose=TRUE))
+                                   verbose=TRUE)))
 
     xml <- c('<?xml version="1.0" encoding="utf-8"?>',
              '<MethodModifications Version="1" Model="OrbitrapFusion" Family="Calcium" Type="SL">',

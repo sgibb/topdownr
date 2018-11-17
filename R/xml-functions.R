@@ -77,7 +77,7 @@
 .xmlValidMsSettings <- function(xsd) {
     settings <- rbind(
         cbind(.xmlChildrenNameType(xsd, "FullMSScan"), type="MS1"),
-        cbind(.xmlTmsnScanParameters(xsd), type="MS2"))
+        cbind(.xmlTmsnScanParameters(xsd), type="TMS2"))
 
     for (actType in c("ETD", "CID", "HCD", "UVPD")) {
         isType <- grepl(actType, settings[, "name"])

@@ -100,7 +100,7 @@ test_that(".ms1CopyAndAppendExperiment", {
     expect_equal(.ms1CopyAndAppendExperiment(2, times=1:2), l2)
 })
 
-test_that(".ms2ConditionToTree", {
+test_that(".tms2ConditionToTree", {
     d <- data.frame(ActivationType="CID", AgcTarget=1e5, stringsAsFactors=FALSE)
     d2 <- cbind(MassList="10/1", d, stringsAsFactors=FALSE)
     l1 <- list(Experiment=list(TMSnScan=list(ActivationType=list("CID"),
@@ -114,10 +114,10 @@ test_that(".ms2ConditionToTree", {
                                                        Z=list(1)))
     l4 <- l2
     l4$Experiment$MassList <- l3$Experiment$MassList
-    expect_equal(.ms2ConditionToTree(d, 2, times=NA), l1)
-    expect_equal(.ms2ConditionToTree(d, 2, times=1:2), l2)
-    expect_equal(.ms2ConditionToTree(d2, 2, times=NA), l3)
-    expect_equal(.ms2ConditionToTree(d2, 2, times=1:2), l4)
+    expect_equal(.tms2ConditionToTree(d, 2, times=NA), l1)
+    expect_equal(.tms2ConditionToTree(d, 2, times=1:2), l2)
+    expect_equal(.tms2ConditionToTree(d2, 2, times=NA), l3)
+    expect_equal(.tms2ConditionToTree(d2, 2, times=1:2), l4)
 })
 
 test_that(".collapseMassList", {
@@ -152,22 +152,22 @@ test_that("expandMs1Conditions", {
                  data.frame(FirstMass=100, LastMass=200), )
 })
 
-test_that("expandMs2Conditions", {
-    expect_error(expandMs2Conditions(FOO=1), "FOO is not a valid element")
-    expect_error(expandMs2Conditions(ActivationType="CID", AgcTarget=1,
+test_that("expandTms2Conditions", {
+    expect_error(expandTms2Conditions(FOO=1), "FOO is not a valid element")
+    expect_error(expandTms2Conditions(ActivationType="CID", AgcTarget=1,
                                      family="FOO"))
-    expect_error(expandMs2Conditions(ActivationType="CID", AgcTarget=1,
+    expect_error(expandTms2Conditions(ActivationType="CID", AgcTarget=1,
                                      version="xx"))
     ms2 <- data.frame(MassList="10/1 20/2",
                       ActivationType="CID",
                       AgcTarget=rep(c(1e5, 5e5), 2),
                       OrbitrapResolution=rep(c("R120K", "R60K"), each=2),
                       stringsAsFactors=FALSE)
-    expect_equal(expandMs2Conditions(ActivationType="CID",
+    expect_equal(expandTms2Conditions(ActivationType="CID",
                                      AgcTarget=c(1e5, 5e5),
                                      OrbitrapResolution=c("R120K", "R60K")),
                  ms2[-1])
-    expect_equal(expandMs2Conditions(MassList=cbind(mz=c(10, 20), z=1:2),
+    expect_equal(expandTms2Conditions(MassList=cbind(mz=c(10, 20), z=1:2),
                                      ActivationType="CID",
                                      AgcTarget=c(1e5, 5e5),
                                      OrbitrapResolution=c("R120K", "R60K")),
@@ -186,16 +186,16 @@ test_that("validMs1Settings", {
     expect_equal(m[1:3, "type"], rep("MS1", 3))
 })
 
-test_that("validMs2Settings", {
-    expect_error(validMs2Settings("FOO"))
-    expect_error(validMs2Settings(family=1))
-    expect_error(validMs2Settings(family="FOO"))
-    expect_error(validMs2Settings(version="xx"))
-    m <- validMs2Settings()
+test_that("validTms2Settings", {
+    expect_error(validTms2Settings("FOO"))
+    expect_error(validTms2Settings(family=1))
+    expect_error(validTms2Settings(family="FOO"))
+    expect_error(validTms2Settings(version="xx"))
+    m <- validTms2Settings()
     expect_true(class(m) == "matrix")
     expect_equal(colnames(m), c("name", "class", "type"))
-    expect_equal(validMs2Settings("All"),
-                 validMs2Settings(c("MS2", "ETD", "CID", "HCD", "UVPD")))
+    expect_equal(validTms2Settings("All"),
+                 validTms2Settings(c("TMS2", "ETD", "CID", "HCD", "UVPD")))
 })
 
 test_that(".validMsSettings", {
@@ -209,34 +209,34 @@ test_that(".validMsSettings", {
     expect_true(all(grepl("UVPD.*ActivationTime",
         .validMsSettings("UVPD", family="Calcium", version="3.2")[, "name"])))
     expect_true(any(grepl("ScanDescription",
-        .validMsSettings("MS2", family="Calcium", version="3.2")[, "name"])))
+        .validMsSettings("TMS2", family="Calcium", version="3.2")[, "name"])))
     expect_false(any(grepl("ScanDescription",
-        .validMsSettings("MS2", family="Calcium", version="3.1")[, "name"])))
+        .validMsSettings("TMS2", family="Calcium", version="3.1")[, "name"])))
 })
 
 test_that(".validateMsSetting", {
     expect_true(.validateMsSetting(
-        "OrbitrapResolution", c("R15K", "R500K", "R50K"), "MS2"))
+        "OrbitrapResolution", c("R15K", "R500K", "R50K"), "TMS2"))
     expect_true(.validateMsSetting(
         "OrbitrapResolution", c("R15K", "R500K", "R50K"), "ETD"))
     expect_true(.validateMsSetting("FirstMass", 1000, "MS1"))
     expect_true(.validateMsSetting("Microscans", 40L, "MS1"))
-    expect_true(.validateMsSetting("MinAgcTarget", TRUE, "MS2"))
+    expect_true(.validateMsSetting("MinAgcTarget", TRUE, "TMS2"))
     expect_true(grepl("FooBar is not a valid element",
         .validateMsSetting("FooBar", TRUE, "MS2")))
     expect_true(grepl("of type 'MS1'",
         .validateMsSetting("OrbitrapResolution", TRUE, "MS1")))
     expect_true(grepl("could not be 'R40K'",
-        .validateMsSetting("OrbitrapResolution", c("R15K", "R40K"), "MS2")))
+        .validateMsSetting("OrbitrapResolution", c("R15K", "R40K"), "TMS2")))
     expect_true(grepl("should be of class 'integer'",
         .validateMsSetting("Microscans", 10, "MS1")))
 })
 
 test_that(".validateMsSettings", {
-    expect_true(.validateMsSettings("MS2",
+    expect_true(.validateMsSettings("TMS2",
         list(OrbitrapResolution=c("R15K", "R50K", "R500K"), MinAgcTarget=TRUE)))
-    expect_error(.validateMsSettings("MS2",
+    expect_error(.validateMsSettings("TMS2",
         list(FirstMass=1000, OrbitrapResolution=c("R15K", "R50K", "R500K"))),
-        "of type 'MS2'"
+        "of type 'TMS2'"
     )
 })

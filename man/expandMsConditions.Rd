@@ -2,13 +2,13 @@
 % Please edit documentation in R/experiment-functions.R
 \name{expandMs1Conditions}
 \alias{expandMs1Conditions}
-\alias{expandMs2Conditions}
+\alias{expandTms2Conditions}
 \title{Expand MS Conditions}
 \usage{
 expandMs1Conditions(..., family = "Calcium", version = "3.2")
 
-expandMs2Conditions(ActivationType = c("CID", "HCD", "ETD", "UVPD"), ...,
-  MassList = NULL, family = "Calcium", version = "3.2")
+expandTms2Conditions(ActivationType = c("CID", "HCD", "ETD", "UVPD"),
+  ..., MassList = NULL, family = "Calcium", version = "3.2")
 }
 \arguments{
 \item{...}{further named arguments, used to create the combination of
@@ -18,7 +18,7 @@ conditions.}
 
 \item{version}{\code{character}, currently 3.1, 3.2 (default), 3.3 are supported}
 
-\item{ActivationType}{\code{character}, \emph{ActivationType} for MS2,
+\item{ActivationType}{\code{character}, \emph{ActivationType} for TMS2,
 either CID, HCD, ETD, or UVPD.}
 
 \item{MassList}{\code{matrix}, 2 columns (mass, z) for targeted mass list,
@@ -34,7 +34,7 @@ MethodModification.xml file.
 }
 \examples{
 expandMs1Conditions(FirstMass=100, LastMass=400)
-expandMs2Conditions(
+expandTms2Conditions(
      ActivationType="CID",
      OrbitrapResolution="R120K",
      IsolationWindow=1,
@@ -48,5 +48,5 @@ expandMs2Conditions(
 \seealso{
 \code{\link[=validMs1Settings]{validMs1Settings()}}
 
-\code{\link[=validMs2Settings]{validMs2Settings()}}, \code{\link[=expand.grid]{expand.grid()}}
+\code{\link[=validTms2Settings]{validTms2Settings()}}, \code{\link[=expand.grid]{expand.grid()}}
 }
