@@ -22,8 +22,8 @@ group will be written to its own XML file.}
 scan?}
 
 \item{scanDuration}{\code{double}, if greater than zero (e.g. \code{scanDuration=0.5})
-the Start/EndTime are overwritten with a duration of \code{scanDuration}. If
-\code{scanDuration} is zero (default) Start/EndTime are not overwritten.}
+the Start/EndTimeMin are overwritten with a duration of \code{scanDuration}. If
+\code{scanDuration} is zero (default) Start/EndTimeMin are not overwritten.}
 
 \item{replications}{\code{integer}, number of replications.}
 
@@ -33,5 +33,103 @@ the Start/EndTime are overwritten with a duration of \code{scanDuration}. If
 \code{list}, able to be written via \code{\link[xml2:as_xml_document]{xml2::as_xml_document()}}
 }
 \description{
-Create fragment optimisation experiment
+This function is used to create a tree-like \code{list} of
+all combinations of a user-given set of MS1 and MS2 settings for an
+fragment optimisation experiment. The list could be written to an
+Orbitrap Fusion Lumos method xml file using \code{\link[=writeMethodXmls]{writeMethodXmls()}}.
+}
+\examples{
+## build experiments within R
+ms1 <- expandMs1Conditions(
+    FirstMass=400,
+    LastMass=1200,
+    Microscans=as.integer(10)
+)
+
+targetMz <- cbind(mz=c(560.6, 700.5, 933.7), z=rep(1, 3))
+common <- list(
+    OrbitrapResolution="R120K",
+    IsolationWindow=1,
+    MaxITTimeInMS=200,
+    Microscans=as.integer(40),
+    AgcTarget=c(1e5, 5e5, 1e6)
+)
+
+cid <- expandMs2Conditions(
+    MassList=targetMz,
+    common,
+    ActivationType="CID",
+    CIDCollisionEnergy=seq(7, 35, 7)
+)
+hcd <- expandMs2Conditions(
+    MassList=targetMz,
+    common,
+    ActivationType="HCD",
+    HCDCollisionEnergy=seq(7, 35, 7)
+)
+etd <- expandMs2Conditions(
+    MassList=targetMz,
+    common,
+    ActivationType="ETD",
+    ETDReagentTarget=c(1e6, 5e6, 1e7),
+    ETDReactionTime=c(2.5, 5, 10, 15, 30, 50),
+    ETDSupplementalActivation=c("None", "ETciD", "EThcD"),
+    ETDSupplementalActivationEnergy=seq(7, 35, 7)
+)
+uvpd <- expandMs2Conditions(
+    MassList=targetMz,
+    common,
+    ActivationType="UVPD"
+)
+
+exps <- createExperimentsFragmentOptimisation(
+    ms1=ms1, cid, hcd, etd, uvpd,
+    groupBy=c("AgcTarget", "replication"), nMs2perMs1=10, scanDuration=0.5,
+    replications=2, randomise=TRUE
+)
+
+## use different settings for CID
+cid560 <- expandMs2Conditions(
+    MassList=cbind(560.6, 1),
+    common,
+    ActivationType="CID",
+    CIDCollisionEnergy=seq(7, 21, 7)
+)
+cid700 <- expandMs2Conditions(
+    MassList=cbind(700.5, 1),
+    common,
+    ActivationType="CID",
+    CIDCollisionEnergy=seq(21, 35, 7)
+)
+
+exps <- createExperimentsFragmentOptimisation(
+    ms1=ms1, cid560, cid700,
+    groupBy=c("AgcTarget", "replication"), nMs2perMs1=10, scanDuration=0.5,
+    replications=2, randomise=TRUE
+)
+
+## use a CSV (or excel) file as input
+myCsvContent <- "
+ActivationType, ETDReactionTime, UVPDActivationTime
+UVPD,,1000
+ETD,1000,
+"
+myCsvSettings <- read.csv(text=myCsvContent, stringsAsFactors=FALSE)
+myCsvSettings
+#   ActivationType ETDReactionTime UVPDActivationTime
+# 1           UVPD              NA               1000
+# 2            ETD            1000                 NA
+
+exps <- createExperimentsFragmentOptimisation(
+    ms1 = data.frame(FirstMass=500, LastMass=1000),
+    ## MS2
+    myCsvSettings,
+    ## other arguments
+    groupBy="ActivationType"
+)
+}
+\seealso{
+\code{\link[=writeMethodXmls]{writeMethodXmls()}},
+\code{\link[=expandMsConditions]{expandMs1Conditions()}},
+\code{\link[=expandMsConditions]{expandMs2Conditions()}}
 }

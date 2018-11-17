@@ -1,5 +1,10 @@
 #' Create fragment optimisation experiment
 #'
+#' This function is used to create a tree-like `list` of
+#' all combinations of a user-given set of MS1 and MS2 settings for an
+#' fragment optimisation experiment. The list could be written to an
+#' Orbitrap Fusion Lumos method xml file using [writeMethodXmls()].
+#'
 #' @param ms1 `data.frame`, MS1 settings.
 #' @param ... further named arguments with `data.frame`s containing the MS2
 #' settings.
@@ -9,12 +14,104 @@
 #' @param nMs2perMs1 `integer`, how many MS2 scans should be run after a MS1
 #' scan?
 #' @param scanDuration `double`, if greater than zero (e.g. `scanDuration=0.5`)
-#' the Start/EndTime are overwritten with a duration of `scanDuration`. If
-#' `scanDuration` is zero (default) Start/EndTime are not overwritten.
+#' the Start/EndTimeMin are overwritten with a duration of `scanDuration`. If
+#' `scanDuration` is zero (default) Start/EndTimeMin are not overwritten.
 #' @param replications `integer`, number of replications.
 #' @param randomise `logical`, should the MS2 scan settings randomised?
 #' @return `list`, able to be written via [xml2::as_xml_document()]
 #' @export
+#' @seealso [writeMethodXmls()],
+#' [`expandMs1Conditions()`][expandMsConditions],
+#' [`expandMs2Conditions()`][expandMsConditions]
+#' @examples
+#' ## build experiments within R
+#' ms1 <- expandMs1Conditions(
+#'     FirstMass=400,
+#'     LastMass=1200,
+#'     Microscans=as.integer(10)
+#' )
+#'
+#' targetMz <- cbind(mz=c(560.6, 700.5, 933.7), z=rep(1, 3))
+#' common <- list(
+#'     OrbitrapResolution="R120K",
+#'     IsolationWindow=1,
+#'     MaxITTimeInMS=200,
+#'     Microscans=as.integer(40),
+#'     AgcTarget=c(1e5, 5e5, 1e6)
+#' )
+#'
+#' cid <- expandMs2Conditions(
+#'     MassList=targetMz,
+#'     common,
+#'     ActivationType="CID",
+#'     CIDCollisionEnergy=seq(7, 35, 7)
+#' )
+#' hcd <- expandMs2Conditions(
+#'     MassList=targetMz,
+#'     common,
+#'     ActivationType="HCD",
+#'     HCDCollisionEnergy=seq(7, 35, 7)
+#' )
+#' etd <- expandMs2Conditions(
+#'     MassList=targetMz,
+#'     common,
+#'     ActivationType="ETD",
+#'     ETDReagentTarget=c(1e6, 5e6, 1e7),
+#'     ETDReactionTime=c(2.5, 5, 10, 15, 30, 50),
+#'     ETDSupplementalActivation=c("None", "ETciD", "EThcD"),
+#'     ETDSupplementalActivationEnergy=seq(7, 35, 7)
+#' )
+#' uvpd <- expandMs2Conditions(
+#'     MassList=targetMz,
+#'     common,
+#'     ActivationType="UVPD"
+#' )
+#'
+#' exps <- createExperimentsFragmentOptimisation(
+#'     ms1=ms1, cid, hcd, etd, uvpd,
+#'     groupBy=c("AgcTarget", "replication"), nMs2perMs1=10, scanDuration=0.5,
+#'     replications=2, randomise=TRUE
+#' )
+#'
+#' ## use different settings for CID
+#' cid560 <- expandMs2Conditions(
+#'     MassList=cbind(560.6, 1),
+#'     common,
+#'     ActivationType="CID",
+#'     CIDCollisionEnergy=seq(7, 21, 7)
+#' )
+#' cid700 <- expandMs2Conditions(
+#'     MassList=cbind(700.5, 1),
+#'     common,
+#'     ActivationType="CID",
+#'     CIDCollisionEnergy=seq(21, 35, 7)
+#' )
+#'
+#' exps <- createExperimentsFragmentOptimisation(
+#'     ms1=ms1, cid560, cid700,
+#'     groupBy=c("AgcTarget", "replication"), nMs2perMs1=10, scanDuration=0.5,
+#'     replications=2, randomise=TRUE
+#' )
+#'
+#' ## use a CSV (or excel) file as input
+#' myCsvContent <- "
+#' ActivationType, ETDReactionTime, UVPDActivationTime
+#' UVPD,,1000
+#' ETD,1000,
+#' "
+#' myCsvSettings <- read.csv(text=myCsvContent, stringsAsFactors=FALSE)
+#' myCsvSettings
+#' #   ActivationType ETDReactionTime UVPDActivationTime
+#' # 1           UVPD              NA               1000
+#' # 2            ETD            1000                 NA
+#'
+#' exps <- createExperimentsFragmentOptimisation(
+#'     ms1 = data.frame(FirstMass=500, LastMass=1000),
+#'     ## MS2
+#'     myCsvSettings,
+#'     ## other arguments
+#'     groupBy="ActivationType"
+#' )
 createExperimentsFragmentOptimisation <-
     function(ms1, ...,
              groupBy=c("AgcTarget", "replication"),
@@ -22,10 +119,10 @@ createExperimentsFragmentOptimisation <-
              replications=2, randomise=TRUE) {
 
     stopifnot(
-        is.numeric(nMs2perMs1), length(nMs2perMs1) != 1,
-        is.numeric(scanDuration), length(scanDuration) != 1,
-        is.numeric(replications), length(replications) != 1,
-        is.logical(randomise), length(randomise) != 1
+        is.numeric(nMs2perMs1), length(nMs2perMs1) == 1,
+        is.numeric(scanDuration), length(scanDuration) == 1,
+        is.numeric(replications), length(replications) == 1,
+        is.logical(randomise), length(randomise) == 1
     )
 
     ms2 <- do.call(.rbind, .flatten(list(...)))
@@ -47,14 +144,11 @@ createExperimentsFragmentOptimisation <-
     nrs <- .nrows(ms2)
     mnrs <- max(nrs)
 
-    if (scanDuration) {
-        times <- .startEndTime(
-            nMs2=mnrs, nMs2perMs1=nMs2perMs1, duration=scanDuration
-        )
-    } else {
-        ## subsetting NULL is allowed: NULL[1, 2:3] is valid
-        times <- NULL
-    }
+    times <- .startEndTime(
+        nMs2=mnrs,
+        nMs2perMs1=nMs2perMs1,
+        duration=scanDuration
+    )
 
     l <- vector(mode="list", length(ms2))
     names(l) <- names(ms2)
@@ -63,29 +157,52 @@ createExperimentsFragmentOptimisation <-
         n <- ceiling(nrs[i] * 1L/nMs2perMs1) + nrs[i]
 
         sbtimes <- times[seq_len(n),]
-        sbtimes$Id <- seq_len(n)
+
+        if (!is.null(times)) {
+            sbtimes$Id <- seq_len(n)
+        }
 
         l[[i]] <- list(MethodModifications=vector(mode="list", length=n))
         names(l[[i]][[1L]]) <- rep("Modification", n)
 
-        l[[i]][[1L]][[1L]] <- .ms1ConditionToTree(ms1, times=sbtimes[1L, 2L:3L])
-        attr(l[[i]][[1L]][[1L]], "Order") <- 1L
+        l[[i]][[1L]][[1L]] <- structure(
+            .ms1ConditionToTree(
+                ms1,
+                times=unlist(
+                    sbtimes[1L, c("StartTimeMin", "EndTimeMin")],
+                    use.names=FALSE
+                )
+            ),
+            Order=1L
+        )
 
         idMs1 <- which(sbtimes$Type[-1L] == "MS1") + 1L
         idMs2 <- which(sbtimes$Type == "MS2")
 
         for (j in idMs1) {
-            l[[i]][[1L]][[j]] <-
-                .ms1CopyAndAppendExperiment(j - 1L, sbtimes[j, 2L:3L])
-            attr(l[[i]][[1L]][[j]], "Order") <- j
+            l[[i]][[1L]][[j]] <- structure(
+                .ms1CopyAndAppendExperiment(
+                    j - 1L,
+                    times=unlist(
+                        sbtimes[j, c("StartTimeMin", "EndTimeMin")],
+                        use.names=FALSE
+                    )
+                ),
+                Order=j
+            )
         }
         for (j in seq(along=idMs2)) {
-            l[[i]][[1L]][[idMs2[j]]] <- .ms2ConditionToTree(
-                ms2[[i]][j,],
-                id=idMs2[j] - 1L,
-                times=sbtimes[idMs2[j], 2L:3L]
+            l[[i]][[1L]][[idMs2[j]]] <- structure(
+                .ms2ConditionToTree(
+                    ms2[[i]][j,],
+                    id=idMs2[j] - 1L,
+                    times=unlist(
+                        sbtimes[idMs2[j], c("StartTimeMin", "EndTimeMin")],
+                        use.names=FALSE
+                    )
+                ),
+                Order=idMs2[j]
             )
-            attr(l[[i]][[1L]][[idMs2[j]]], "Order") <- idMs2[j]
         }
 
         attr(l[[i]][[1L]], "Version") <- 2L
@@ -100,12 +217,12 @@ createExperimentsFragmentOptimisation <-
 #'
 #' @param x `data.frame` row
 #' @param id `integer`, experiment id
-#' @param times `integer(2)`, start/end time
+#' @param times `double(2)`, start/end time
 #' @param \dots arguments passed to internal functions
 #' @return nested `list`
 #' @noRd
-.ms1ConditionToTree <- function(x, id=0L, times, ...) {
-    if (is.null(times)) {
+.ms1ConditionToTree <- function(x, id=0L, times=NA_real_, ...) {
+    if (anyNA(times)) {
         l <- list(Experiment=list(FullMSScan=NULL))
     } else {
         l <- list(Experiment=vector(mode="list", length=3L))
@@ -123,17 +240,15 @@ createExperimentsFragmentOptimisation <-
 #' Create a CopyAndAppendExperiment node in a nested list
 #'
 #' @param id `integer`, experiment id
-#' @param times `integer(2)`, start/end time
+#' @param times `double(2)`, start/end time
 #' @param \dots arguments passed to internal functions
 #' @return nested `list`
 #' @noRd
-.ms1CopyAndAppendExperiment <- function(id, times, ...) {
+.ms1CopyAndAppendExperiment <- function(id, times=NA_real_, ...) {
     l <- list(CopyAndAppendExperiment=list(), Experiment=list())
-    if (!is.null(times)) {
-        l$Experiment <- list(
-            StartTimeMin=list(times[1L]),
-            EndTimeMin=list(times[2L])
-        )
+    if (!anyNA(times)) {
+        l$Experiment$StartTimeMin <- list(times[1L])
+        l$Experiment$EndTimeMin <- list(times[2L])
     }
     attr(l$CopyAndAppendExperiment, "SourceExperimentIndex") <- 0L
     attr(l$Experiment, "ExperimentIndex") <- id
@@ -144,13 +259,13 @@ createExperimentsFragmentOptimisation <-
 #'
 #' @param x `data.frame` row
 #' @param id `integer`, experiment id
-#' @param times `integer(2)`, start/end time
+#' @param times `double(2)`, start/end time
 #' @param \dots arguments passed to internal functions
 #' @return nested `list`
 #' @noRd
-.ms2ConditionToTree <- function(x, id, times, ...) {
+.ms2ConditionToTree <- function(x, id, times=NA_real_, ...) {
     nms <- "TMSnScan"
-    if (!is.null(times)) {
+    if (!anyNA(times)) {
         nms <- c(nms, "StartTimeMin", "EndTimeMin")
     }
     if (!is.null(x$MassList)) {
@@ -159,7 +274,7 @@ createExperimentsFragmentOptimisation <-
     l <- list(Experiment=vector(mode="list", length=length(nms)))
     names(l$Experiment) <- nms
 
-    if (!is.null(times)) {
+    if (!anyNA(times)) {
         l$Experiment$StartTimeMin <- list(times[1L])
         l$Experiment$EndTimeMin <- list(times[2L])
     }

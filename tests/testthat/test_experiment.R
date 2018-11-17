@@ -1,5 +1,82 @@
 context("experiment")
 
+test_that("createExperimentsFragmentOptimisation", {
+    ms1 <- data.frame(FirstMass=100, LastMass=200)
+    ms2 <- data.frame(OrbitrapResolution="120K", ActivationType="CID",
+                      MassList="10/1", stringsAsFactors=FALSE)
+    mods <- list(
+        MethodModifications=structure(list(
+            Modification=structure(list(
+                Experiment=structure(
+                    list(
+                        FullMSScan=list(
+                            FirstMass=list(100),
+                            LastMass=list(200)
+                        ),
+                        StartTimeMin=list(0.01),
+                        EndTimeMin=list(1)
+                    ),
+                    ExperimentIndex=0L
+                )),
+                Order=1L
+            ),
+            Modification=structure(list(
+                Experiment=structure(list(
+                    TMSnScan=list(
+                        OrbitrapResolution=list("120K"),
+                        ActivationType=list("CID"),
+                        ScanDescription=list("C1R1")
+                    ),
+                    StartTimeMin=list(1.01),
+                    EndTimeMin=list(2),
+                    MassList=list(
+                        MassListRecord=list(
+                            MOverZ=list(10),
+                            Z=list(1)
+                        )
+                    )),
+                    ExperimentIndex=1L
+                )),
+                Order=2L
+            )),
+            Version=2L,
+            Model="OrbitrapFusionLumos",
+            Family="Calcium",
+            Type="SL"
+        )
+    )
+
+    exps <- list("1"=mods, "2"=mods)
+    exps[[2]]$MethodModifications[[2]]$Experiment$TMSnScan$ScanDescription  <-
+        list("C1R2")
+    ## No Start/EndTime
+    for (i in seq(along=exps)) {
+        for (j in seq(along=exps[[i]]$MethodModifications)) {
+            exps[[i]]$MethodModifications[[j]]$Experiment$StartTimeMin <- NULL
+            exps[[i]]$MethodModifications[[j]]$Experiment$EndTimeMin <- NULL
+        }
+    }
+    expect_equal(createExperimentsFragmentOptimisation(ms1, ms2,
+                    groupBy="replication", randomise=FALSE), exps)
+    ## No MassList
+    for (i in seq(along=exps)) {
+        exps[[i]]$MethodModifications[[2]]$Experiment$MassList <- NULL
+    }
+    expect_equal(createExperimentsFragmentOptimisation(ms1,
+                    ms2[c("OrbitrapResolution", "ActivationType")],
+                    groupBy="replication", randomise=FALSE), exps)
+
+    exps <- list("1"=mods, "2"=mods)
+    exps[[2]]$MethodModifications[[2]]$Experiment$TMSnScan$ScanDescription  <-
+        list("C1R2")
+    expect_equal(
+        createExperimentsFragmentOptimisation(
+            ms1, ms2, groupBy="replication", scanDuration=1, randomise=FALSE
+        ),
+        exps
+    )
+})
+
 test_that(".ms1ConditionToTree", {
     d <- data.frame(FirstMass=100, LastMass=200)
     l1 <- list(Experiment=list(FullMSScan=list(FirstMass=list(100),
@@ -8,7 +85,7 @@ test_that(".ms1ConditionToTree", {
     l2 <- l1
     l2$Experiment$StartTimeMin <- list(1)
     l2$Experiment$EndTimeMin <- list(2)
-    expect_equal(.ms1ConditionToTree(d, 2, times=NULL), l1)
+    expect_equal(.ms1ConditionToTree(d, 2, times=NA), l1)
     expect_equal(.ms1ConditionToTree(d, 2, times=1:2), l2)
 })
 
@@ -19,7 +96,7 @@ test_that(".ms1CopyAndAppendExperiment", {
     l2 <- l1
     l2$Experiment$StartTimeMin <- list(1)
     l2$Experiment$EndTimeMin <- list(2)
-    expect_equal(.ms1CopyAndAppendExperiment(2, times=NULL), l1)
+    expect_equal(.ms1CopyAndAppendExperiment(2, times=NA), l1)
     expect_equal(.ms1CopyAndAppendExperiment(2, times=1:2), l2)
 })
 
@@ -37,9 +114,9 @@ test_that(".ms2ConditionToTree", {
                                                        Z=list(1)))
     l4 <- l2
     l4$Experiment$MassList <- l3$Experiment$MassList
-    expect_equal(.ms2ConditionToTree(d, 2, times=NULL), l1)
+    expect_equal(.ms2ConditionToTree(d, 2, times=NA), l1)
     expect_equal(.ms2ConditionToTree(d, 2, times=1:2), l2)
-    expect_equal(.ms2ConditionToTree(d2, 2, times=NULL), l3)
+    expect_equal(.ms2ConditionToTree(d2, 2, times=NA), l3)
     expect_equal(.ms2ConditionToTree(d2, 2, times=1:2), l4)
 })
 

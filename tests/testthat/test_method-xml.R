@@ -283,35 +283,35 @@ test_that(".xmlMassListRecord", {
 })
 
 test_that("writeMethodXmls", {
-    expect_error(topdownr:::writeMethodXmls(list(1:3)),
+    expect_error(suppressWarnings(topdownr:::writeMethodXmls(list(1:3))),
                  ".*ms1Settings.* has to be a named list")
-    expect_error(topdownr:::writeMethodXmls(list(foo=1:3)),
+    expect_error(suppressWarnings(topdownr:::writeMethodXmls(list(foo=1:3))),
                  "is/are no valid MS1 tag")
-    expect_error(topdownr:::writeMethodXmls(defaultMs1Settings(), list(1:3)),
+    expect_error(suppressWarnings(topdownr:::writeMethodXmls(defaultMs1Settings(), list(1:3))),
                  ".*ms2Settings.* has to be a named list")
-    expect_error(topdownr:::writeMethodXmls(defaultMs1Settings(),
+    expect_error(suppressWarnings(topdownr:::writeMethodXmls(defaultMs1Settings(),
                                            list(foo=1:3)),
                  "is/are no valid MS2 tag")
-    expect_error(topdownr:::writeMethodXmls(defaultMs1Settings(),
+    expect_error(suppressWarnings(topdownr:::writeMethodXmls(defaultMs1Settings(),
                                            defaultMs2Settings(),
-                                           groupBy="foo"),
+                                           groupBy="foo")),
                  "Items of .*groupBy.* have to be one or more of:")
-    expect_error(topdownr:::writeMethodXmls(defaultMs1Settings(),
+    expect_error(suppressWarnings(topdownr:::writeMethodXmls(defaultMs1Settings(),
                                            defaultMs2Settings(),
-                                           mz=1),
+                                           mz=1)),
                  ".*mz.* has to be a matrix")
-    expect_error(topdownr:::writeMethodXmls(defaultMs1Settings(),
+    expect_error(suppressWarnings(topdownr:::writeMethodXmls(defaultMs1Settings(),
                                            defaultMs2Settings(),
-                                           mz=cbind(1:3, 1:3, 1:3)),
+                                           mz=cbind(1:3, 1:3, 1:3))),
                  ".*mz.* has to be a matrix with two columns")
-    expect_error(topdownr:::writeMethodXmls(defaultMs1Settings(),
+    expect_error(suppressWarnings(topdownr:::writeMethodXmls(defaultMs1Settings(),
                                            defaultMs2Settings(),
-                                           mz=matrix(nrow=0, ncol=2)),
+                                           mz=matrix(nrow=0, ncol=2))),
                  ".*mz.* has to have at least one row")
-    expect_error(topdownr:::writeMethodXmls(defaultMs1Settings(),
+    expect_error(suppressWarnings(topdownr:::writeMethodXmls(defaultMs1Settings(),
                                            defaultMs2Settings(),
                                            mz=cbind(1:3, 1:3),
-                                           pattern="foo.xml"),
+                                           pattern="foo.xml")),
                  " has to contain '%s' to be replaced")
 
     xml <- c('<?xml version="1.0" encoding="utf-8"?>',
