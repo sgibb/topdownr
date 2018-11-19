@@ -264,25 +264,22 @@ createExperimentsFragmentOptimisation <-
 #' @return nested `list`
 #' @noRd
 .tms2ConditionToTree <- function(x, id, times=NA_real_, ...) {
-    nms <- "TMSnScan"
-    if (!anyNA(times)) {
-        nms <- c(nms, "StartTimeMin", "EndTimeMin")
-    }
-    if (!is.null(x$MassList)) {
-        nms <- c(nms, "MassList")
-    }
-    l <- list(Experiment=vector(mode="list", length=length(nms)))
-    names(l$Experiment) <- nms
-
-    if (!anyNA(times)) {
+    if (anyNA(times)) {
+        l <- list(Experiment=list(TMSnScan=NULL))
+    } else {
+        l <- list(Experiment=vector(mode="list", length=3L))
+        names(l$Experiment) <- c(
+            "TMSnScan", "StartTimeMin", "EndTimeMin"
+        )
         l$Experiment$StartTimeMin <- list(times[1L])
         l$Experiment$EndTimeMin <- list(times[2L])
     }
     if (!is.null(x$MassList)) {
-        l$Experiment$MassList <- .massListToTree(x$MassList)
+        l$Experiment$TMSnScan$MassList <- .massListToTree(x$MassList)
     }
     x[, c("MassList", "replication")] <- NA
-    l$Experiment$TMSnScan <- lapply(x[, !is.na(x)], as.list)
+    cn <- colnames(x)[!is.na(x)]
+    l$Experiment$TMSnScan[cn] <- lapply(x[, cn], as.list)
     attr(l$Experiment, "ExperimentIndex") <- id
     l
 }

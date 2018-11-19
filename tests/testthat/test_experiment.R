@@ -21,20 +21,22 @@ test_that("createExperimentsFragmentOptimisation", {
                 Order=1L
             ),
             Modification=structure(list(
-                Experiment=structure(list(
-                    TMSnScan=list(
-                        OrbitrapResolution=list("120K"),
-                        ActivationType=list("CID"),
-                        ScanDescription=list("C1R1")
+                Experiment=structure(
+                    list(
+                        TMSnScan=list(
+                            MassList=list(
+                                MassListRecord=list(
+                                    MOverZ=list(10),
+                                    Z=list(1)
+                                )
+                            ),
+                            OrbitrapResolution=list("120K"),
+                            ActivationType=list("CID"),
+                            ScanDescription=list("C1R1")
+                        ),
+                        StartTimeMin=list(1.01),
+                        EndTimeMin=list(2)
                     ),
-                    StartTimeMin=list(1.01),
-                    EndTimeMin=list(2),
-                    MassList=list(
-                        MassListRecord=list(
-                            MOverZ=list(10),
-                            Z=list(1)
-                        )
-                    )),
                     ExperimentIndex=1L
                 )),
                 Order=2L
@@ -60,7 +62,7 @@ test_that("createExperimentsFragmentOptimisation", {
                     groupBy="replication", randomise=FALSE), exps)
     ## No MassList
     for (i in seq(along=exps)) {
-        exps[[i]]$MethodModifications[[2]]$Experiment$MassList <- NULL
+        exps[[i]]$MethodModifications[[2]]$Experiment$TMSnScan$MassList <- NULL
     }
     expect_equal(createExperimentsFragmentOptimisation(ms1,
                     ms2[c("OrbitrapResolution", "ActivationType")],
@@ -110,10 +112,16 @@ test_that(".tms2ConditionToTree", {
     l2$Experiment$StartTimeMin <- list(1)
     l2$Experiment$EndTimeMin <- list(2)
     l3 <- l1
-    l3$Experiment$MassList <- list(MassListRecord=list(MOverZ=list(10),
+    l3$Experiment$TMSnScan$MassList <- list(MassListRecord=list(MOverZ=list(10),
                                                        Z=list(1)))
     l4 <- l2
-    l4$Experiment$MassList <- l3$Experiment$MassList
+    l4$Experiment$TMSnScan$MassList <- l3$Experiment$TMSnScan$MassList
+    l3$Experiment$TMSnScan <- l3$Experiment$TMSnScan[c("MassList",
+                                                       "ActivationType",
+                                                       "AgcTarget")]
+    l4$Experiment$TMSnScan <- l4$Experiment$TMSnScan[c("MassList",
+                                                       "ActivationType",
+                                                       "AgcTarget")]
     expect_equal(.tms2ConditionToTree(d, 2, times=NA), l1)
     expect_equal(.tms2ConditionToTree(d, 2, times=1:2), l2)
     expect_equal(.tms2ConditionToTree(d2, 2, times=NA), l3)
