@@ -619,6 +619,20 @@ cat0 <- function(...) {
     as.double(gsub("^.*scan=([0-9]+).*$", "\\1", x))
 }
 
+#' Create a valid filename
+#'
+#' According to
+#' https://docs.microsoft.com/de-de/windows/desktop/FileIO/naming-a-file#naming_conventions
+#' ":" etc are not allowed in file names on windows
+#'
+#' @param x `character`
+#' @return `character`
+#' @noRd
+.validFilename <- function(x) {
+    stopifnot(is.character(x) && nzchar(x))
+    gsub("[:;\\<>|\\?\\*]", "-", gsub("\\.+", ".", x))
+}
+
 #' wrapper around vapply for FUN.VALUE=double(1L)
 #' @noRd
 .vapply1d <- function(X, FUN, ..., USE.NAMES=FALSE) {

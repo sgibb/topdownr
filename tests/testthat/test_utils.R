@@ -390,3 +390,16 @@ test_that(".translateThermoIdToScanId", {
         "scan=25 file=191",
         "scan=26 file=191")), 21:26)
 })
+
+test_that(".validFilename", {
+    fn <- c(
+        "foo-bar.xml", "foo_bar.xml", "foo/bar.xml",
+        "foo-bar..xml", "foo:bar.xml", "foo\\bar.xml", "foo<bar.xml",
+        "foo>bar.xml", "foo;bar.xml", "foo|bar.xml", "foo?bar.xml",
+        "foo*bar.xml"
+    )
+    expect_error(.validFilename(FALSE))
+    expect_error(.validFilename(character()))
+    expect_equal(.validFilename(fn), c("foo-bar.xml", "foo_bar.xml",
+                                       "foo/bar.xml", rep("foo-bar.xml", 9)))
+})

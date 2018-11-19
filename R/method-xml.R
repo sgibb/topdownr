@@ -512,7 +512,7 @@ writeMethodXmls <- function(ms1Settings, ms2Settings,
             )
         }
 
-        fn <- sprintf(pattern, names(exps))
+        fn <- .validFilename(sprintf(pattern, names(exps)))
         for (i in seq(along=exps)) {
             if (verbose) {
                 message("Writing ", fn[i])
