@@ -13,9 +13,9 @@ bibentry(
     person("Veit", "Schwämmle", role="aut"),
     person(c("Ole", "Nørregaard"), "Jensen", role="aut", email="jenseno@bmb.sdu.dk")
   ),
-  #volume="",
-  #number="",
-  pages="--",
+  volume="90",
+  number="21",
+  pages="12519--12526",
   year="2018",
   doi="10.1021/acs.analchem.8b02344",
   url="https://pubs.acs.org/doi/10.1021/acs.analchem.8b02344",
