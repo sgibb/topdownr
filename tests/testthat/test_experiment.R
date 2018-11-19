@@ -21,6 +21,18 @@ test_that("createExperimentsFragmentOptimisation", {
                 Order=1L
             ),
             Modification=structure(list(
+                    CopyAndAppendExperiment=structure(
+                        list(),
+                        SourceExperimentIndex=1L
+                    ),
+                    Experiment=structure(
+                        list(),
+                        ExperimentIndex=1L
+                    )
+                ),
+                Order=2L
+            ),
+            Modification=structure(list(
                 Experiment=structure(
                     list(
                         TMSnScan=list(
@@ -39,7 +51,7 @@ test_that("createExperimentsFragmentOptimisation", {
                     ),
                     ExperimentIndex=1L
                 )),
-                Order=2L
+                Order=3L
             )),
             Version=2L,
             Model="OrbitrapFusionLumos",
@@ -49,7 +61,7 @@ test_that("createExperimentsFragmentOptimisation", {
     )
 
     exps <- list("1"=mods, "2"=mods)
-    exps[[2]]$MethodModifications[[2]]$Experiment$TMSnScan$ScanDescription  <-
+    exps[[2]]$MethodModifications[[3]]$Experiment$TMSnScan$ScanDescription  <-
         list("C1R2")
     ## No Start/EndTime
     for (i in seq(along=exps)) {
@@ -62,14 +74,14 @@ test_that("createExperimentsFragmentOptimisation", {
                     groupBy="replication", randomise=FALSE), exps)
     ## No MassList
     for (i in seq(along=exps)) {
-        exps[[i]]$MethodModifications[[2]]$Experiment$TMSnScan$MassList <- NULL
+        exps[[i]]$MethodModifications[[3]]$Experiment$TMSnScan$MassList <- NULL
     }
     expect_equal(createExperimentsFragmentOptimisation(ms1,
                     ms2[c("OrbitrapResolution", "ActivationType")],
                     groupBy="replication", randomise=FALSE), exps)
 
     exps <- list("1"=mods, "2"=mods)
-    exps[[2]]$MethodModifications[[2]]$Experiment$TMSnScan$ScanDescription  <-
+    exps[[2]]$MethodModifications[[3]]$Experiment$TMSnScan$ScanDescription  <-
         list("C1R2")
     expect_equal(
         createExperimentsFragmentOptimisation(
@@ -91,20 +103,20 @@ test_that(".ms1ConditionToTree", {
     expect_equal(.ms1ConditionToTree(d, 2, times=1:2), l2)
 })
 
-test_that(".ms1CopyAndAppendExperiment", {
+test_that(".copyAndAppendExperiment", {
     l1 <- list(CopyAndAppendExperiment=list(), Experiment=list())
     attr(l1$CopyAndAppendExperiment, "SourceExperimentIndex") <- 0
     attr(l1$Experiment, "ExperimentIndex") <- 2
     l2 <- l1
-    l2$Experiment$StartTimeMin <- list(1)
-    l2$Experiment$EndTimeMin <- list(2)
-    expect_equal(.ms1CopyAndAppendExperiment(2, times=NA), l1)
-    expect_equal(.ms1CopyAndAppendExperiment(2, times=1:2), l2)
+    attr(l2$CopyAndAppendExperiment, "SourceExperimentIndex") <- 2
+    expect_equal(.copyAndAppendExperiment(2), l1)
+    expect_equal(.copyAndAppendExperiment(2, srcId=2), l2)
 })
 
 test_that(".tms2ConditionToTree", {
     d <- data.frame(ActivationType="CID", AgcTarget=1e5, stringsAsFactors=FALSE)
     d2 <- cbind(MassList="10/1", d, stringsAsFactors=FALSE)
+    d3 <- data.frame(MassList="10/1", stringsAsFactors=FALSE)
     l1 <- list(Experiment=list(TMSnScan=list(ActivationType=list("CID"),
                                              AgcTarget=list(1e5))))
     attr(l1$Experiment, "ExperimentIndex") <- 2
@@ -122,10 +134,14 @@ test_that(".tms2ConditionToTree", {
     l4$Experiment$TMSnScan <- l4$Experiment$TMSnScan[c("MassList",
                                                        "ActivationType",
                                                        "AgcTarget")]
+    l5 <- list(Experiment=list(TMSnScan=list(MassList=l3$Experiment$TMSnScan$MassList)))
+    attr(l5$Experiment, "ExperimentIndex") <- 2
+
     expect_equal(.tms2ConditionToTree(d, 2, times=NA), l1)
     expect_equal(.tms2ConditionToTree(d, 2, times=1:2), l2)
     expect_equal(.tms2ConditionToTree(d2, 2, times=NA), l3)
     expect_equal(.tms2ConditionToTree(d2, 2, times=1:2), l4)
+    expect_equal(.tms2ConditionToTree(d3, 2), l5)
 })
 
 test_that(".collapseMassList", {

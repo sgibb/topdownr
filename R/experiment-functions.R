@@ -154,16 +154,21 @@ createExperimentsFragmentOptimisation <-
     names(l) <- names(ms2)
 
     for (i in seq(along=l)) {
-        n <- ceiling(nrs[i] * 1L/nMs2perMs1) + nrs[i]
+        nMs1 <- ceiling(nrs[i] * 1L/nMs2perMs1)
+        nMs2 <- nrs[i]
+        n <- nMs1 + nMs2
+        nNodes <- n + nMs2     # CopyAndAppendExperiment
 
         sbtimes <- times[seq_len(n),]
+        sbtimes$ExpId <- seq_len(n) - 1L
+        sbtimes$SrcId <- as.integer(sbtimes$Type == "MS2")
+        sbtimes$Ms2RowId <- cumsum(sbtimes$Type == "MS2")
+        sbtimes$OrderId <- n + sbtimes$Ms2RowId
+        sbtimes$OrderId[sbtimes$Type == "MS1"] <- NA_real_
+        sbtimes$Ms2RowId[sbtimes$Type == "MS1"] <- NA_real_
 
-        if (!is.null(times)) {
-            sbtimes$Id <- seq_len(n)
-        }
-
-        l[[i]] <- list(MethodModifications=vector(mode="list", length=n))
-        names(l[[i]][[1L]]) <- rep("Modification", n)
+        l[[i]] <- list(MethodModifications=vector(mode="list", length=nNodes))
+        names(l[[i]][[1L]]) <- rep("Modification", nNodes)
 
         l[[i]][[1L]][[1L]] <- structure(
             .ms1ConditionToTree(
@@ -176,33 +181,29 @@ createExperimentsFragmentOptimisation <-
             Order=1L
         )
 
-        idMs1 <- which(sbtimes$Type[-1L] == "MS1") + 1L
-        idMs2 <- which(sbtimes$Type == "MS2")
+        sbtimes <- sbtimes[-1L,]
 
-        for (j in idMs1) {
-            l[[i]][[1L]][[j]] <- structure(
-                .ms1CopyAndAppendExperiment(
-                    j - 1L,
-                    times=unlist(
-                        sbtimes[j, c("StartTimeMin", "EndTimeMin")],
-                        use.names=FALSE
-                    )
+        for (j in seq_len(nrow(sbtimes))) {
+            l[[i]][[1L]][[j + 1L]] <- structure(
+                .copyAndAppendExperiment(
+                    id=sbtimes$ExpId[j],
+                    srcId=sbtimes$SrcId[j]
                 ),
-                Order=j
+                Order=j + 1L
             )
-        }
-        for (j in seq(along=idMs2)) {
-            l[[i]][[1L]][[idMs2[j]]] <- structure(
-                .tms2ConditionToTree(
-                    ms2[[i]][j,],
-                    id=idMs2[j] - 1L,
-                    times=unlist(
-                        sbtimes[idMs2[j], c("StartTimeMin", "EndTimeMin")],
-                        use.names=FALSE
-                    )
-                ),
-                Order=idMs2[j]
-            )
+            if (sbtimes$Type[j] == "MS2") {
+                l[[i]][[1L]][[sbtimes$OrderId[j]]] <- structure(
+                    .tms2ConditionToTree(
+                        ms2[[i]][sbtimes$Ms2RowId[j],],
+                        id=sbtimes$ExpId[j],
+                        times=unlist(
+                            sbtimes[j, c("StartTimeMin", "EndTimeMin")],
+                            use.names=FALSE
+                        )
+                    ),
+                    Order=sbtimes$OrderId[j]
+                )
+            }
         }
 
         attr(l[[i]][[1L]], "Version") <- 2L
@@ -240,19 +241,15 @@ createExperimentsFragmentOptimisation <-
 #' Create a CopyAndAppendExperiment node in a nested list
 #'
 #' @param id `integer`, experiment id
-#' @param times `double(2)`, start/end time
+#' @param srcId `integer`, source experiment id
 #' @param \dots arguments passed to internal functions
 #' @return nested `list`
 #' @noRd
-.ms1CopyAndAppendExperiment <- function(id, times=NA_real_, ...) {
-    l <- list(CopyAndAppendExperiment=list(), Experiment=list())
-    if (!anyNA(times)) {
-        l$Experiment$StartTimeMin <- list(times[1L])
-        l$Experiment$EndTimeMin <- list(times[2L])
-    }
-    attr(l$CopyAndAppendExperiment, "SourceExperimentIndex") <- 0L
-    attr(l$Experiment, "ExperimentIndex") <- id
-    l
+.copyAndAppendExperiment <- function(id, srcId=0L, ...) {
+    list(
+        CopyAndAppendExperiment=structure(list(), SourceExperimentIndex=srcId),
+        Experiment=structure(list(), ExperimentIndex=id)
+    )
 }
 
 #' Convert single data.frame row (condition) to nested list
@@ -279,7 +276,9 @@ createExperimentsFragmentOptimisation <-
     }
     x[, c("MassList", "replication")] <- NA
     cn <- colnames(x)[!is.na(x)]
-    l$Experiment$TMSnScan[cn] <- lapply(x[, cn], as.list)
+    if (length(cn)) {
+        l$Experiment$TMSnScan[cn] <- lapply(x[, cn], as.list)
+    }
     attr(l$Experiment, "ExperimentIndex") <- id
     l
 }
