@@ -24,10 +24,6 @@ test_that("createExperimentsFragmentOptimisation", {
                     CopyAndAppendExperiment=structure(
                         list(),
                         SourceExperimentIndex=1L
-                    ),
-                    Experiment=structure(
-                        list(),
-                        ExperimentIndex=2L
                     )
                 ),
                 Order=2L
@@ -130,13 +126,11 @@ test_that(".ms1ConditionToTree", {
 })
 
 test_that(".copyAndAppendExperiment", {
-    l1 <- list(CopyAndAppendExperiment=list(), Experiment=list())
-    attr(l1$CopyAndAppendExperiment, "SourceExperimentIndex") <- 0
-    attr(l1$Experiment, "ExperimentIndex") <- 2
-    l2 <- l1
-    attr(l2$CopyAndAppendExperiment, "SourceExperimentIndex") <- 2
-    expect_equal(.copyAndAppendExperiment(2), l1)
-    expect_equal(.copyAndAppendExperiment(2, srcId=2), l2)
+    l <- list(CopyAndAppendExperiment=list())
+    attr(l$CopyAndAppendExperiment, "SourceExperimentIndex") <- 0
+    expect_equal(.copyAndAppendExperiment(0), l)
+    attr(l$CopyAndAppendExperiment, "SourceExperimentIndex") <- 2
+    expect_equal(.copyAndAppendExperiment(2), l)
 })
 
 test_that(".tms2ConditionToTree", {

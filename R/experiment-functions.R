@@ -181,7 +181,6 @@ createExperimentsFragmentOptimisation <-
             orderId <- j - 1L
             l[[i]][[1L]][[orderId]] <- structure(
                 .copyAndAppendExperiment(
-                    id=sbtimes$ExpId[j],
                     srcId=sbtimes$SrcId[j]
                 ),
                 Order=orderId
@@ -239,15 +238,13 @@ createExperimentsFragmentOptimisation <-
 
 #' Create a CopyAndAppendExperiment node in a nested list
 #'
-#' @param id `integer`, experiment id
 #' @param srcId `integer`, source experiment id
 #' @param \dots arguments passed to internal functions
 #' @return nested `list`
 #' @noRd
-.copyAndAppendExperiment <- function(id, srcId=0L, ...) {
+.copyAndAppendExperiment <- function(srcId=0L, ...) {
     list(
-        CopyAndAppendExperiment=structure(list(), SourceExperimentIndex=srcId),
-        Experiment=structure(list(), ExperimentIndex=id)
+        CopyAndAppendExperiment=structure(list(), SourceExperimentIndex=srcId)
     )
 }
 
