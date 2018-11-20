@@ -2,7 +2,7 @@ context("experiment")
 
 test_that("createExperimentsFragmentOptimisation", {
     ms1 <- data.frame(FirstMass=100, LastMass=200)
-    ms2 <- data.frame(OrbitrapResolution="120K", ActivationType="CID",
+    ms2 <- data.frame(OrbitrapResolution=c("60K", "120K"), ActivationType="CID",
                       MassList="10/1", stringsAsFactors=FALSE)
     mods <- list(
         MethodModifications=structure(list(
@@ -27,7 +27,7 @@ test_that("createExperimentsFragmentOptimisation", {
                     ),
                     Experiment=structure(
                         list(),
-                        ExperimentIndex=1L
+                        ExperimentIndex=2L
                     )
                 ),
                 Order=2L
@@ -42,7 +42,7 @@ test_that("createExperimentsFragmentOptimisation", {
                                     Z=list(1)
                                 )
                             ),
-                            OrbitrapResolution=list("120K"),
+                            OrbitrapResolution=list("60K"),
                             ActivationType=list("CID"),
                             ScanDescription=list("C1R1")
                         ),
@@ -52,6 +52,27 @@ test_that("createExperimentsFragmentOptimisation", {
                     ExperimentIndex=1L
                 )),
                 Order=3L
+            ),
+            Modification=structure(list(
+                Experiment=structure(
+                    list(
+                        TMSnScan=list(
+                            MassList=list(
+                                MassListRecord=list(
+                                    MOverZ=list(10),
+                                    Z=list(1)
+                                )
+                            ),
+                            OrbitrapResolution=list("120K"),
+                            ActivationType=list("CID"),
+                            ScanDescription=list("C2R1")
+                        ),
+                        StartTimeMin=list(2.01),
+                        EndTimeMin=list(3)
+                    ),
+                    ExperimentIndex=2L
+                )),
+                Order=4L
             )),
             Version=2L,
             Model="OrbitrapFusionLumos",
@@ -63,6 +84,8 @@ test_that("createExperimentsFragmentOptimisation", {
     exps <- list("1"=mods, "2"=mods)
     exps[[2]]$MethodModifications[[3]]$Experiment$TMSnScan$ScanDescription  <-
         list("C1R2")
+    exps[[2]]$MethodModifications[[4]]$Experiment$TMSnScan$ScanDescription  <-
+        list("C2R2")
     ## No Start/EndTime
     for (i in seq(along=exps)) {
         for (j in seq(along=exps[[i]]$MethodModifications)) {
@@ -75,6 +98,7 @@ test_that("createExperimentsFragmentOptimisation", {
     ## No MassList
     for (i in seq(along=exps)) {
         exps[[i]]$MethodModifications[[3]]$Experiment$TMSnScan$MassList <- NULL
+        exps[[i]]$MethodModifications[[4]]$Experiment$TMSnScan$MassList <- NULL
     }
     expect_equal(createExperimentsFragmentOptimisation(ms1,
                     ms2[c("OrbitrapResolution", "ActivationType")],
@@ -83,6 +107,8 @@ test_that("createExperimentsFragmentOptimisation", {
     exps <- list("1"=mods, "2"=mods)
     exps[[2]]$MethodModifications[[3]]$Experiment$TMSnScan$ScanDescription  <-
         list("C1R2")
+    exps[[2]]$MethodModifications[[4]]$Experiment$TMSnScan$ScanDescription  <-
+        list("C2R2")
     expect_equal(
         createExperimentsFragmentOptimisation(
             ms1, ms2, groupBy="replication", scanDuration=1, randomise=FALSE

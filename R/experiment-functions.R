@@ -157,15 +157,11 @@ createExperimentsFragmentOptimisation <-
         nMs1 <- ceiling(nrs[i] * 1L/nMs2perMs1)
         nMs2 <- nrs[i]
         n <- nMs1 + nMs2
-        nNodes <- n + nMs2     # CopyAndAppendExperiment
+        nNodes <- n + nMs2 - 1L     # CopyAndAppendExperiment
 
         sbtimes <- times[seq_len(n),]
         sbtimes$ExpId <- seq_len(n) - 1L
         sbtimes$SrcId <- as.integer(sbtimes$Type == "MS2")
-        sbtimes$Ms2RowId <- cumsum(sbtimes$Type == "MS2")
-        sbtimes$OrderId <- n + sbtimes$Ms2RowId
-        sbtimes$OrderId[sbtimes$Type == "MS1"] <- NA_real_
-        sbtimes$Ms2RowId[sbtimes$Type == "MS1"] <- NA_real_
 
         l[[i]] <- list(MethodModifications=vector(mode="list", length=nNodes))
         names(l[[i]][[1L]]) <- rep("Modification", nNodes)
@@ -181,29 +177,32 @@ createExperimentsFragmentOptimisation <-
             Order=1L
         )
 
-        sbtimes <- sbtimes[-1L,]
-
-        for (j in seq_len(nrow(sbtimes))) {
-            l[[i]][[1L]][[j + 1L]] <- structure(
+        for (j in seq_len(nrow(sbtimes) - 2L) + 2L) {
+            orderId <- j - 1L
+            l[[i]][[1L]][[orderId]] <- structure(
                 .copyAndAppendExperiment(
                     id=sbtimes$ExpId[j],
                     srcId=sbtimes$SrcId[j]
                 ),
-                Order=j + 1L
+                Order=orderId
             )
-            if (sbtimes$Type[j] == "MS2") {
-                l[[i]][[1L]][[sbtimes$OrderId[j]]] <- structure(
-                    .tms2ConditionToTree(
-                        ms2[[i]][sbtimes$Ms2RowId[j],],
-                        id=sbtimes$ExpId[j],
-                        times=unlist(
-                            sbtimes[j, c("StartTimeMin", "EndTimeMin")],
-                            use.names=FALSE
-                        )
-                    ),
-                    Order=sbtimes$OrderId[j]
-                )
-            }
+        }
+
+        sbtimes <- sbtimes[sbtimes$Type == "MS2",, drop=FALSE]
+
+        for (j in seq_len(nrow(sbtimes))) {
+            orderId <- n + j - 1L
+            l[[i]][[1L]][[orderId]] <- structure(
+                .tms2ConditionToTree(
+                    ms2[[i]][j,],
+                    id=sbtimes$ExpId[j],
+                    times=unlist(
+                        sbtimes[j, c("StartTimeMin", "EndTimeMin")],
+                        use.names=FALSE
+                    )
+                ),
+                Order=orderId
+            )
         }
 
         attr(l[[i]][[1L]], "Version") <- 2L
