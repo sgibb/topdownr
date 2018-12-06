@@ -71,15 +71,15 @@ etd <- expandTms2Conditions(
     MassList=targetMz,
     common,
     ActivationType="ETD",
-    ETDReactionTime= 1:2,
+    ETDReactionTime=as.double(1:2)
 )
 etcid <- expandTms2Conditions(
     MassList=targetMz,
     common,
     ActivationType="ETD",
-    ETDReactionTime= 1:2,
+    ETDReactionTime=as.double(1:2),
     ETDSupplementalActivation="ETciD",
-    ETDSupplementalActivationEnergy=1:2
+    ETDSupplementalActivationEnergy=as.double(1:2)
 )
 uvpd <- expandTms2Conditions(
     MassList=targetMz,
