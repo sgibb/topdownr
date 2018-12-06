@@ -56,10 +56,15 @@
 #'     MassList=targetMz,
 #'     common,
 #'     ActivationType="ETD",
-#'     ETDReagentTarget=c(1e6, 5e6, 1e7),
-#'     ETDReactionTime=c(2.5, 5, 10, 15, 30, 50),
-#'     ETDSupplementalActivation=c("None", "ETciD", "EThcD"),
-#'     ETDSupplementalActivationEnergy=seq(7, 35, 7)
+#'     ETDReactionTime= 1:2,
+#' )
+#' etcid <- expandTms2Conditions(
+#'     MassList=targetMz,
+#'     common,
+#'     ActivationType="ETD",
+#'     ETDReactionTime= 1:2,
+#'     ETDSupplementalActivation="ETciD",
+#'     ETDSupplementalActivationEnergy=1:2
 #' )
 #' uvpd <- expandTms2Conditions(
 #'     MassList=targetMz,
@@ -68,7 +73,7 @@
 #' )
 #'
 #' exps <- createExperimentsFragmentOptimisation(
-#'     ms1=ms1, cid, hcd, etd, uvpd,
+#'     ms1=ms1, cid, hcd, etd, etcid, uvpd,
 #'     groupBy=c("AgcTarget", "replication"), nMs2perMs1=10, scanDuration=0.5,
 #'     replications=2, randomise=TRUE
 #' )
