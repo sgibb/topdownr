@@ -1,6 +1,17 @@
 # topdownr 1.5
 - New version for Bioc 3.9 (devel)
 
+## Changes in version 1.5.2
+- Add `expandMs1Conditions`, `expandTms2Conditions`,
+  `createExperimentsFragmentOptimisation` functions to allow more flexibility
+  in method creation; see also [#77](https://github.com/sgibb/topdownr/issues/77) [2018-12-07].
+- Modify interface/arguments of `writeMethodXmls` to adapt to new method
+  creation workflow (the old interface will be defunct in Bioconductor 3.10 and
+  removed in 3.11) [2018-12-07].
+- Adapt the `data-generation` vignette to the new workflow [2018-12-07].
+- Deprecated `defaultMs1Settings` and `defaultMs2Settings`. They will be
+  defunct in Bioconductor 3.10 and removed in 3.11 [2018-12-07].
+
 ## Changes in version 1.5.1
 - `readTopDownFiles` gains the argument `conditions` to control wheter
   "FilterStrings" or a given number of conditions is used to create condition
