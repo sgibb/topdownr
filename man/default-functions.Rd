@@ -16,8 +16,8 @@ defaultMs2Settings(...)
 A named \code{list} of settings.
 }
 \description{
-This functions create the default settings for
-\code{\link[=writeMethodXmls]{writeMethodXmls()}}.
+These functions are deprecated. Use \code{\link[=createExperimentsFragmentOptimisation]{createExperimentsFragmentOptimisation()}}
+instead.
 }
 \examples{
 # all default MS1 settings

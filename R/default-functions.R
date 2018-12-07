@@ -19,8 +19,8 @@
 
 #' Settings for MS1/2 parameters.
 #'
-#' This functions create the default settings for
-#' [writeMethodXmls()].
+#' These functions are deprecated. Use [createExperimentsFragmentOptimisation()]
+#' instead.
 #'
 #' @param \ldots named arguments that should be overwritten.
 #' @return A named `list` of settings.
@@ -33,6 +33,7 @@
 #' # overwrite FirstMass and set AgcTarget
 #' defaultMs1Settings(FirstMass=100, AgcTarget=c(1e4, 1e5))
 defaultMs1Settings <- function(...) {
+    .Deprecated("createExperimentsFragmentOptimisation")
     .defaultSettings(...,
         default=list(
             FirstMass=400,
@@ -53,6 +54,7 @@ defaultMs1Settings <- function(...) {
 #' # overwrite AgcTarget
 #' defaultMs2Settings(AgcTarget=c(1e4, 1e5))
 defaultMs2Settings <- function(...) {
+    .Deprecated("createExperimentsFragmentOptimisation")
     .defaultSettings(...,
         default=list(
             ActivationType="ETD",
