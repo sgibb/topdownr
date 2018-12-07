@@ -19,16 +19,3 @@ A named \code{list} of settings.
 These functions are deprecated. Use \code{\link[=createExperimentsFragmentOptimisation]{createExperimentsFragmentOptimisation()}}
 instead.
 }
-\examples{
-# all default MS1 settings
-defaultMs1Settings()
-
-# overwrite FirstMass and set AgcTarget
-defaultMs1Settings(FirstMass=100, AgcTarget=c(1e4, 1e5))
-
-# all default MS2 settings
-defaultMs2Settings()
-
-# overwrite AgcTarget
-defaultMs2Settings(AgcTarget=c(1e4, 1e5))
-}

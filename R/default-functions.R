@@ -26,12 +26,6 @@
 #' @return A named `list` of settings.
 #' @rdname default-functions
 #' @export
-#' @examples
-#' # all default MS1 settings
-#' defaultMs1Settings()
-#'
-#' # overwrite FirstMass and set AgcTarget
-#' defaultMs1Settings(FirstMass=100, AgcTarget=c(1e4, 1e5))
 defaultMs1Settings <- function(...) {
     .Deprecated("createExperimentsFragmentOptimisation")
     .defaultSettings(...,
@@ -46,13 +40,6 @@ defaultMs1Settings <- function(...) {
 #' @rdname default-functions
 #'
 #' @export
-#' @examples
-#'
-#' # all default MS2 settings
-#' defaultMs2Settings()
-#'
-#' # overwrite AgcTarget
-#' defaultMs2Settings(AgcTarget=c(1e4, 1e5))
 defaultMs2Settings <- function(...) {
     .Deprecated("createExperimentsFragmentOptimisation")
     .defaultSettings(...,
