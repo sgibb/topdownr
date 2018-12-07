@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>TopDownSet Example Data — tds • topdownr</title>
+<title>Deprecated functions in topdownr — topdownr-deprecated • topdownr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,11 +30,10 @@
 
 
 
-<meta property="og:title" content="TopDownSet Example Data — tds" />
+<meta property="og:title" content="Deprecated functions in topdownr — topdownr-deprecated" />
 
-<meta property="og:description" content="An example data set for topdownr. It is just a subset of the myoglobin
-dataset available in
-topdownrdata::topdownrdata-package." />
+<meta property="og:description" content="These functions are provided for compatibility with older versions
+of &amp;#8216;MyPkg&amp;#8217; only, and will be defunct at the next release." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -119,47 +118,28 @@ topdownrdata::topdownrdata-package." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>TopDownSet Example Data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/sgibb/topdownr/blob/master/R/tds.R'><code>R/tds.R</code></a></small>
-    <div class="hidden name"><code>tds.Rd</code></div>
+    <h1>Deprecated functions in topdownr</h1>
+    <small class="dont-index">Source: <a href='https://github.com/sgibb/topdownr/blob/master/R/package-deprecated.R'><code>R/package-deprecated.R</code></a></small>
+    <div class="hidden name"><code>topdownr-deprecated.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>An example data set for <code>topdownr</code>. It is just a subset of the myoglobin
-dataset available in
-<a href='https://www.rdocumentation.org/packages/topdownrdata/topics/topdownrdata-package'>topdownrdata::topdownrdata-package</a>.</p>
+    <p>These functions are provided for compatibility with older versions
+of &#8216;MyPkg&#8217; only, and will be defunct at the next release.</p>
     
     </div>
 
-    <pre class="usage"><span class='no'>tds</span></pre>
         
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    <p>A <a href='TopDownSet-class.html'>TopDownSet</a>
-with 14901 fragments (1949 rows, 351 columns).</p>
-    
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
-
-    <p>Subset taken from the
-<a href='https://www.rdocumentation.org/packages/topdownrdata/topics/topdownrdata-package'>topdownrdata::topdownrdata-package</a>
-package.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>It was created as
-follows:</p><pre>tds &lt;- readTopDownFiles(
-   topdownrdata::topDownDataPath("myoglobin"),
-   ## Use an artifical pattern to load just the fasta
-   ## file and files from m/z == 1211, ETD reagent
-   ## target 1e6 and first replicate to keep runtime
-   ## of the example short
-   pattern=".*fasta.gz$|1211_.*1e6_1",
-   adducts=data.frame(mass=1.008, name="zpH", to="z"),
-   neutralLoss=MSnbase::defaultNeutralLoss(
-       disableWaterLoss=c("Cterm", "D", "E", "S", "T")),
-   tolerance=25e-6)
-</pre>
+    <p>The following functions are deprecated and will be made defunct; use
+the replacement indicated below:</p><ul>
+<li><p><code>defaultMs1Settings</code>: <code><a href='expandMsConditions.html'>expandMs1Conditions()</a></code> in combination with
+<code><a href='createExperimentsFragmentOptimisation.html'>createExperimentsFragmentOptimisation()</a></code></p></li>
+<li><p><code>defaultMs2Settings</code>: <code><a href='expandMsConditions.html'>expandTms2Conditions()</a></code> in combination with
+<code><a href='createExperimentsFragmentOptimisation.html'>createExperimentsFragmentOptimisation()</a></code></p></li>
+</ul>
     
 
   </div>
@@ -167,10 +147,6 @@ follows:</p><pre>tds &lt;- readTopDownFiles(
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       
-      <li><a href="#format">Format</a></li>
-
-      <li><a href="#source">Source</a></li>
-
       <li><a href="#details">Details</a></li>
           </ul>
 
