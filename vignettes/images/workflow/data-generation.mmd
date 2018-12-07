@@ -1,22 +1,28 @@
 graph TD
 subgraph Windows
-   tdwmx(`topdownr::writeMethodXmls`) -- Create XML files for different fragmentation conditions --> tdrxmc(`topdownr::runXmlMethodChanger`)
-   tdrxmc --> thxmc(XmlMethodChanger.exe)
-   thxmc --> fMeth>.meth files]
-   fMeth --Run the MS experiment --> fRaw>.raw files]
-   fRaw -- Extract information about scans --> tdsh(`topdownr::runScanHeadsman`)
-   tdsh --> sh(ScanHeadsman.exe)
-   sh -- Method tables --> fCsv>.experiments.csv files]
-   sh -- Scan header tables --> fTxt>.txt files]
-   fRaw --> thxcal(Xcalibur/Xtract)
-   thxcal -- Charge state deconvultion --> fMzMl>.mzML files]
+    tdms1("`ms1 <- topdownr::expandMs1Conditions(...)`") --> tdms2a("`tms2a <-
+    topdownr::expandTms2Conditions(...)`")
+    tdms2a --> tdms2b("`tms2b <- topdownr::expandTms2Conditions(...)`")
+    tdms2b -- ... --> tdms2n("`tms2n <- topdownr::expandTms2Conditions(...)`")
+    tdms2n --> tdexp("`exp <- topdownr::createExperimentsFragmentOptimisation(ms1=ms1, tms2a, tms2b, ... tms2n)`")
+    tdexp --> tdwmx("`topdownr::writeMethodXmls`")
+    tdwmx -- Create XML files for different fragmentation conditions --> tdrxmc("`topdownr::runXmlMethodChanger`")
+    tdrxmc --> thxmc(XmlMethodChanger.exe)
+    thxmc --> fMeth>.meth files]
+    fMeth --Run the MS experiment --> fRaw>.raw files]
+    fRaw -- Extract information about scans --> tdsh("`topdownr::runScanHeadsman`")
+    tdsh --> sh(ScanHeadsman.exe)
+    sh -- Method tables --> fCsv>.experiments.csv files]
+    sh -- Scan header tables --> fTxt>.txt files]
+    fRaw --> thxcal(Xcalibur/Xtract)
+    thxcal -- Charge state deconvultion --> fMzMl>.mzML files]
 end
 
-si[Spectra information] --> tdwmx
+si[Spectra information] -- Create experiment conditions --> tdms1
 
 psi[Protein sequence information] --> fFasta>.fasta file]
 
-fCsv -->  td(`topdownr::readTopDownFiles`)
+fCsv -->  td("`topdownr::readTopDownFiles`")
 fTxt --> td
 fMzMl --> td
 fFasta -- Predict fragments  --> td
@@ -30,7 +36,7 @@ classDef fileClass fill:#FFFFFF,stroke:#808080,stroke-width:2
 classDef infoClass fill:#FFFFFF,stroke:#000000
 classDef unknownClass fill:#B4E0B4,stroke:#004400,stroke-dasharray:5
 
-class tdwmx,tdrxmc,tdsh,td,tds topdownrClass
+class tdms1,tdms2a,tdms2b,tdms2n,tdexp,tdwmx,tdrxmc,tdsh,td,tds topdownrClass
 class thxmc,thxcal thermoClass
 class sh scanheadsmanClass
 class fFasta,fMeth,fRaw,fCsv,fTxt,fMzMl fileClass

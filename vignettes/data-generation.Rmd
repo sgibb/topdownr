@@ -59,7 +59,7 @@ to use the Bioconductor support site: https://support.bioconductor.org/.
 
 ## The `topdownr` Data Generation Workflow
 
-![Data Generation Workflow](images/workflow/data-generation.mmd.png)
+<embed src="images/workflow/data-generation.mmd.svg" type="image/svg+xml" />
 
 # Installation of Additional Software
 
@@ -68,23 +68,15 @@ to use the Bioconductor support site: https://support.bioconductor.org/.
 To create methods the user will have to install and modify Orbitrap Fusion
 LUMOS workstation first:
 
-1. Request `OrbitrapFusionLumosWorkstation.exe` from Thermo Scientific.
-2. Install the workstation by running `OrbitrapFusionLumosWorkstation.exe`.
-3. Run
-    `C:\Thermo\Instruments\TNG\OrbitrapFusionLumos\2.1\System\programs\TNGInstrumentConfigControl.exe`,
-    set *Optional Ion Source* to *ETD and Internal Calibration*,
-    click *Apply* and *OK* (you could ignore the *restart your instrument*
-    message).
-4. Replace
-    `C:\Thermo\Instruments\TNG\OrbitrapFusionLumos\2.1\System\programs\Thermo.TNG.Calcium.MethodXML.dll`
-    by `Thermo.TNG.Calcium.MethodXML.dll`.
+1. Request `TribridSeriesWorkstationSetup-v3.2.exe` from Thermo Scientific.
+2. Install the workstation by running `TribridSeriesWorkstationSetup-v3.2.exe`.
 
 ## Setup XMLMethodChanger
 
 *XMLMethodChanger* is needed to convert the xml methods into `.meth` files. It
 could be found at https://github.com/thermofisherlsms/meth-modifications
 The user has to download and compile it himself (or request it from Thermo
-Scientific as well).
+Scientific as well). You would need at least the *3.2 beta* version.
 
 ## Setup Operating System
 
@@ -121,7 +113,8 @@ described in XML files. Thus the whole process of creating user specified
 methods consists of 2 parts:
 
 1. Construction of XML files with all possible combination of fragmentation
-    parameters (see `topdownr::writeMethodXmls` below).
+    parameters (see `topdownr::createExperimentsFragmentOptimisation`,
+    and `topdownr::writeMethodXmls` below).
 2. Submitting the constructed XML files together with a template
     `.meth` file to *XMLmethodChanger*.
 
@@ -129,7 +122,7 @@ We choose to use targeted MS2 scans (TMS2) as a way to store the
 fragmentation parameters.
 Each TMS2 is stored in a separate experiment. Experiments do not overlap.
 
-![Method Editor - Experiment 21](images/methodeditor-exp21.png)
+![Method Editor](images/methodeditor-exp-tms.png)
 
 # Data preparation with `topdownr`
 
@@ -139,64 +132,68 @@ Shown below is the process of creating XML files and using them to modify the
 ```{r writeMethodXml, eval=FALSE}
 library("topdownr")
 
-## MS1 parameters (you could also use and modify
-## the output of `defaultMs1Settings()`)
-parMS1 <- list(
-    FirstMass = 400,
-    LastMass = 1600,
-    Microscans = 10
+## Create MS1 settings
+ms1 <- expandMs1Conditions(
+    FirstMass=400,
+    LastMass=1200,
+    Microscans=as.integer(10)
 )
 
-## MS2 parameters (you could also use and modify
-## the output of `defaultMs2Settings()`)
-parMS2  <- list(
-    OrbitrapResolution = "R120K",
-    IsolationWindow = 1,
-    MaxITTimeInMS = 200,
-    ETDSupplementalActivation = c("ETciD", "EThcD"),
-    ActivationType = "ETD",
-    Microscans = 40,
-    ETDSupplementalActivationEnergy = seq (0, 35, 7),
-    ETDReactionTime = c (0, 2.5, 5, 10, 15, 30, 50),
-    ETDReagentTarget = c(1e6, 5e6, 1e7),
-    AgcTarget = c(1e5, 5e5, 1e6)
+## Set TargetMass
+targetMz <- cbind(mz=c(560.6, 700.5, 933.7), z=rep(1, 3))
+
+## Set common settings
+common <- list(
+    OrbitrapResolution="R120K",
+    IsolationWindow=1,
+    MaxITTimeInMS=200,
+    Microscans=as.integer(40),
+    AgcTarget=c(1e5, 5e5, 1e6)
 )
 
-## Create the XML files for mz == 707
-writeMethodXmls(ms1Settings = parMS1,
-                ms2Settings = parMS2,
-                replications = 1,
-                groupBy = "ETDReagentTarget",
-                mz = cbind(mass=707.3, z=1),
-                massLabeling = TRUE,
-                nMs2perMs1 = 1000,
-                duration = 0.5,
-                randomise = FALSE,
-                pattern = "method707_%s.xml")
+## Create settings for different fragmentation conditions
+cid <- expandTms2Conditions(
+    MassList=targetMz,
+    common,
+    ActivationType="CID",
+    CIDCollisionEnergy=seq(7, 35, 7)
+)
+hcd <- expandTms2Conditions(
+    MassList=targetMz,
+    common,
+    ActivationType="HCD",
+    HCDCollisionEnergy=seq(7, 35, 7)
+)
+etd <- expandTms2Conditions(
+    MassList=targetMz,
+    common,
+    ActivationType="ETD",
+    ETDReactionTime=as.double(1:2)
+)
+etcid <- expandTms2Conditions(
+    MassList=targetMz,
+    common,
+    ActivationType="ETD",
+    ETDReactionTime=as.double(1:2),
+    ETDSupplementalActivation="ETciD",
+    ETDSupplementalActivationEnergy=as.double(1:2)
+)
+uvpd <- expandTms2Conditions(
+    MassList=targetMz,
+    common,
+    ActivationType="UVPD"
+)
 
-## Create the XML files for mz == 893
-writeMethodXmls(ms1Settings = parMS1,
-                ms2Settings = parMS2,
-                replications = 1,
-                groupBy = "ETDReagentTarget",
-                mz = cbind(mass=893.1, z=1),
-                massLabeling = TRUE,
-                nMs2perMs1 = 1000,
-                duration = 0.5,
-                randomise = FALSE,
-                pattern = "method893_%s.xml")
+## Create experiments with all combinations of the above settings
+## for fragment optimisation
+exps <- createExperimentsFragmentOptimisation(
+    ms1=ms1, cid, hcd, etd, etcid, uvpd,
+    groupBy=c("AgcTarget", "replication"), nMs2perMs1=10, scanDuration=0.5,
+    replications=2, randomise=TRUE
+)
 
-## Create the XML files for mz == 1211
-writeMethodXmls(ms1Settings = parMS1,
-                ms2Settings = parMS2,
-                replications = 1,
-                groupBy = "ETDReagentTarget",
-                mz = cbind(mass=1211.7, z=1),
-                massLabeling = TRUE,
-                nMs2perMs1 = 1000,
-                duration = 0.5,
-                randomise = FALSE,
-                pattern = "method1211_%s.xml")
+## Write experiments to xml files
+writeMethodXmls(exps=exps)
 
 ## Run XMLMethodChanger
 runXmlMethodChanger(
