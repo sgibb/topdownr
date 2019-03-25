@@ -120,7 +120,8 @@
 
     if (ncol(x)) {
         isNumCol <- .isNumCol(x)
-        x[isNumCol] <- lapply(x[isNumCol], .formatNumbers, na2zero=TRUE)
+        if (any(isNumCol))
+            x[isNumCol] <- lapply(x[isNumCol], .formatNumbers, na2zero=TRUE)
         .makeNames(.groupByLabels(x, sep="_"), prefix="C", sep="_")
     } else {
         paste0("C", .formatNumbers(seq_len(nrow(x))))

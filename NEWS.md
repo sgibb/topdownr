@@ -1,6 +1,13 @@
 # topdownr 1.5
 - New version for Bioc 3.9 (devel)
 
+## Changes in version 1.5.4
+- Fix for internal `.makeRowNames` on `DataFrame` without any `numeric` columns.
+
+## Changes in version 1.5.3
+- biocViews: ImmunoOncology added by
+  Kayla-Morrell <kayla.morrell@roswellpark.org> [2019-01-04].
+
 ## Changes in version 1.5.2
 - Add `expandMs1Conditions`, `expandTms2Conditions`,
   `createExperimentsFragmentOptimisation` functions to allow more flexibility

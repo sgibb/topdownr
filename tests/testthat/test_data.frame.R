@@ -78,6 +78,8 @@ test_that(".makeRowNames", {
     expect_equal(.makeRowNames(d),
                  c("C1.0e+05_a_08", "C1.0e+06_b_09",
                    "C1.0e+07_c_10", "C0.0e+00_d_11"))
+    expect_equal(.makeRowNames(DataFrame(d[, "b", drop=FALSE])),
+                 paste0("C", letters[1:4]))
     expect_equal(.makeRowNames(data.frame(a=LETTERS[1:3])),
                  paste0("C", LETTERS[1:3]))
     expect_equal(.makeRowNames(data.frame(a=1:3)),
