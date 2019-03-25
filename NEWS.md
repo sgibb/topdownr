@@ -1,6 +1,9 @@
 # topdownr 1.5
 - New version for Bioc 3.9 (devel)
 
+## Changes in version 1.5.5
+- Depends on R >= 3.5.0 now, because the seralization format changed in R.
+
 ## Changes in version 1.5.4
 - Fix for internal `.makeRowNames`/`.colsToLogical`/`.colsToRle`
   on `DataFrame` without any `numeric`/`character` columns.
