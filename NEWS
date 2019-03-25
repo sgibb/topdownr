@@ -3,6 +3,7 @@
 
 Changes in version 1.5.4
 - Fix for internal `.makeRowNames` on `DataFrame` without any `numeric` columns.
+- Fix unit test that uses `set.seed` (order changed during R-devel upgrade).
 
 Changes in version 1.5.3
 - biocViews: ImmunoOncology added by

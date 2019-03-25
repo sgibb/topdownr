@@ -93,7 +93,7 @@ test_that(".reorderSequence", {
     expect_equal(.reorderSequence("ABCDE", "original"), "ABCDE")
     expect_equal(.reorderSequence("ABCDE", "inverse"), "EDCBA")
     set.seed(2017)
-    expect_equal(.reorderSequence("ABCDE", "random"), "ECBAD")
+    expect_equal(.reorderSequence("ABCDE", "random"), "DABCE")
 })
 
 test_that(".unimod1", {

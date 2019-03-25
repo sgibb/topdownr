@@ -14,11 +14,11 @@ test_that(".ms2Experiments", {
                                  replication=c(1, 1, 2, 2),
                                  stringsAsFactors=FALSE)),
                  check.attributes=FALSE)
-    set.seed(2017) # set.seed(2017); sample(4) # 4 2 1 3
+    set.seed(2017) # set.seed(2017); sample(4) # 4 1 2 3
     expect_equal(.ms2Experiments(list(A=1:2, B="FOO"),
                                            groupBy=character(),
                                            randomise=TRUE),
-                 list(data.frame(A=c(2, 2, 1, 1), B="FOO",
+                 list(data.frame(A=c(2, 1, 2, 1), B="FOO",
                                  replication=c(2, 1, 1, 2),
                                  stringsAsFactors=FALSE)),
                  check.attributes=FALSE)
@@ -73,8 +73,8 @@ test_that(".startEndTime", {
 test_that(".resample", {
     x <- data.frame(A=LETTERS[1:10],
                     B=1:10)
-    set.seed(2017) # set.seed(2017); sample(10); # 10 5 4 3 9 8 1 2 6 7
-    expect_equal(.resample(x), x[c(10, 5:3, 9:8, 1:2, 6:7),])
+    set.seed(2017) # set.seed(2017); sample(10); # 5  4 10  8  2  6  1  9  3  7
+    expect_equal(.resample(x), x[c(5:4, 10, 8, 2, 6, 1, 9, 3, 7),])
     expect_equal(.resample(x, seq), x)
 })
 
