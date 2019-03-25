@@ -2,7 +2,8 @@
 - New version for Bioc 3.9 (devel)
 
 Changes in version 1.5.4
-- Fix for internal `.makeRowNames` on `DataFrame` without any `numeric` columns.
+- Fix for internal `.makeRowNames`/`.colsToLogical`/`.colsToRle`
+  on `DataFrame` without any `numeric`/`character` columns.
 - Fix unit test that uses `set.seed` (order changed during R-devel upgrade).
 
 Changes in version 1.5.3

@@ -35,7 +35,8 @@
 #' @noRd
 .colsToLogical <- function(x) {
     toConvert <- .isCharacterCol(x)
-    x[toConvert] <- lapply(x[toConvert], .characterToLogical)
+    if (any(toConvert))
+        x[toConvert] <- lapply(x[toConvert], .characterToLogical)
     x
 }
 
@@ -47,7 +48,8 @@
 .colsToRle <- function(x) {
     r <- lapply(x, Rle)
     toConvert <- .vapply1l(r, function(rr)length(rr) >= 2L * nrun(rr))
-    x[toConvert] <- r[toConvert]
+    if (any(toConvert))
+        x[toConvert] <- r[toConvert]
     x
 }
 

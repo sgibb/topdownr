@@ -18,6 +18,7 @@ test_that(".colsToLogical", {
     r <- DataFrame(a=1:10, b=rep(c(TRUE, FALSE), 5), c=rep(c("foo", "bar"), 5))
     expect_equal(.colsToLogical(d), r)
     expect_equal(.colsToLogical(d1), r)
+    expect_equal(.colsToLogical(d[, 1, drop=FALSE]), d[, 1, drop=FALSE])
 })
 
 test_that(".colsToRle", {
@@ -25,6 +26,7 @@ test_that(".colsToRle", {
     r <- DataFrame(a=1:10, b=Rle(rep(1, 10)),
                    c=Rle(rep(c("foo", "bar"), each=5)))
     expect_equal(.colsToRle(d), r)
+    expect_equal(.colsToLogical(d[, 1, drop=FALSE]), d[, 1, drop=FALSE])
 })
 
 test_that(".droplevels", {
