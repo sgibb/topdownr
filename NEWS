@@ -1,6 +1,11 @@
 # topdownr 1.5
 - New version for Bioc 3.9 (devel)
 
+Changes in version 1.5.6
+- Revert changes for NULL indices of `DataFrame` introduced in 1.5.4
+  (a419f59, c4bfc1c) because they are fixed upstream in `S4Vectors`.
+  Keep unit tests in place. [2019-03-27]
+
 Changes in version 1.5.5
 - Depends on R >= 3.5.0 now, because the seralization format changed in R.
 
