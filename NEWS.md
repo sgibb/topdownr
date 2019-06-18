@@ -1,3 +1,13 @@
+# topdownr 1.7
+- New version for Bioc 3.10 (devel)
+
+## Changes in version 1.7.1
+- Remove NEWS file (just keep NEWS.md).
+- Never remove `"AgcTarget"` column from `colData` `DataFrame`.
+
+# topdownr 1.6
+- New version for Bioc 3.9 (release)
+
 # topdownr 1.5
 - New version for Bioc 3.9 (devel)
 
