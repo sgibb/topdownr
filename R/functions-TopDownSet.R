@@ -180,7 +180,10 @@ readTopDownFiles <- function(path, pattern=".*",
 
     if (dropNonInformativeColumns) {
         header <- .dropNonInformativeColumns(
-            header, keep=c("File", "Scan", "SpectrumIndex", "Activation", "Mz")
+            header,
+            keep=c(
+                "File", "Scan", "SpectrumIndex", "Activation", "Mz", "AgcTarget"
+            )
         )
     }
 
