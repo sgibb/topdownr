@@ -101,7 +101,10 @@
 .readScanHeadsTable <- function(file, conditions="FilterString",
                                 verbose=interactive()) {
     stopifnot(.fileExt(file) == "txt")
-    d <- read.csv(file, na.strings=c("NA", "N/A"), stringsAsFactors=FALSE)
+    d <- read.csv(
+        file,
+        na.strings=c("NA", "N/A"), stringsAsFactors=FALSE, strip.white=TRUE
+    )
     colnames(d) <- .camelCase(colnames(d))
 
     .msg(verbose,

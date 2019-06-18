@@ -4,6 +4,7 @@
 ## Changes in version 1.7.1
 - Remove NEWS file (just keep NEWS.md).
 - Never remove `"AgcTarget"` column from `colData` `DataFrame`.
+- Strip white spaces from ScanHeadsman output.
 
 # topdownr 1.6
 - New version for Bioc 3.9 (release)
