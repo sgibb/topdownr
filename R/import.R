@@ -116,7 +116,7 @@
 
     if (is.character(conditions)) {
         ## maybe more will follow
-        conditions <- match.arg(conditions, "FilterString")
+        conditions <- match.arg(conditions, c("FilterString", "ScanDescription"))
 
         if (conditions == "FilterString") {
             ## Somehow the FilterString doesn't always contains the right mass
@@ -148,6 +148,8 @@
                     c(TRUE, d$FilterString[-1L] != d$FilterString[-nrow(d)])
                 )
             }
+        } else if (conditions == "ScanDescription") {
+            d$Condition <- match(d$ScanDescription, unique(d$ScanDescription))
         }
     } else if (is.numeric(conditions) && length(conditions) == 1L) {
         d$Condition <- rep_len(seq_len(conditions), nrow(d))

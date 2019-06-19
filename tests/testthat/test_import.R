@@ -130,6 +130,7 @@ test_that(".readScanHeadsTable", {
                     Activation2=c(NA, "HCD", "HCD", "CID", "HCD"),
                     Energy1=c(10, 50, 50, NA, 20),
                     Energy2=c(NA, 30, 30, 20, 10),
+                    ScanDescription=paste0("C0", c(1, 1:4)),
                     stringsAsFactors=FALSE)
     write.csv(d, file=fn, row.names=FALSE)
     expect_warning(h <- .readScanHeadsTable(fn, verbose=FALSE),
@@ -150,6 +151,8 @@ test_that(".readScanHeadsTable", {
                         fn, conditions="FilterString", verbose=FALSE),
                    "not sorted in ascending order")
     expect_equal(h$Condition, c(1, 1:3))
+    expect_equal(.readScanHeadsTable(
+        fn, conditions="ScanDescription", verbose=FALSE)$Condition, 1:4)
     expect_equal(.readScanHeadsTable(
         fn, conditions=4, verbose=FALSE)$Condition, 1:4)
     expect_equal(.readScanHeadsTable(
