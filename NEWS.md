@@ -5,6 +5,8 @@
 - Remove NEWS file (just keep NEWS.md).
 - Never remove `"AgcTarget"` column from `colData` `DataFrame`.
 - Strip white spaces from ScanHeadsman output.
+- Defunct `defaultMs1Settings` and `defaultMs2Settings`. They will be
+  removed in 3.11 [2019-06-19].
 
 # topdownr 1.6
 - New version for Bioc 3.9 (release)

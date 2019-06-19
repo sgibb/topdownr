@@ -397,6 +397,18 @@ cat0 <- function(...) {
     .vapply1d(x, nrow)
 }
 
+#' Resample rows (Experiments) in a data.frame
+#'
+#' @param x `data.frame`
+#' @param fun `function`, to apply on the number of rows, e.g. use `seq` to do
+#' nothing.
+#' @return reordered `data.frame`
+#' @noRd
+.resample <- function(x, fun=sample) {
+    fun <- match.fun(fun)
+    x[fun(nrow(x)), , drop=FALSE]
+}
+
 #' generate valid scan description
 #'
 #' @param x `data.frame`
