@@ -114,14 +114,14 @@
 #' @param x `data.frame`
 #' @return `character`
 #' @noRd
-.makeRowNames <- function(x) {
+.makeRowNames <- function(x, prefix="C") {
     stopifnot(is.data.frame(x) || inherits(x, "DataFrame"))
     x <- .dropNonInformativeColumns(x, keep=character())
 
     if (ncol(x)) {
         isNumCol <- .isNumCol(x)
         x[isNumCol] <- lapply(x[isNumCol], .formatNumbers, na2zero=TRUE)
-        .makeNames(.groupByLabels(x, sep="_"), prefix="C", sep="_")
+        .makeNames(.groupByLabels(x, sep="_"), prefix=prefix, sep="_")
     } else {
         paste0("C", .formatNumbers(seq_len(nrow(x))))
     }
