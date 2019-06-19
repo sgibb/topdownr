@@ -249,6 +249,14 @@ test_that(".nrows", {
                                        matrix(nrow=3, ncol=2))), 2:3)
 })
 
+test_that(".resample", {
+    x <- data.frame(A=LETTERS[1:10],
+                    B=1:10)
+    set.seed(2017) # set.seed(2017); sample(10); # 5  4 10  8  2  6  1  9  3  7
+    expect_equal(.resample(x), x[c(5:4, 10, 8, 2, 6, 1, 9, 3, 7),])
+    expect_equal(.resample(x, seq), x)
+})
+
 test_that(".scanDescription", {
     expect_error(.scanDescription("FOO"))
     expect_error(.scanDescription(1:3))

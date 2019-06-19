@@ -529,3 +529,37 @@ validTms2Settings <- function(type=c("All", "TMS2", "ETD", "CID", "HCD", "UVPD")
     }
     TRUE
 }
+
+#' Calculate Start/End time of each scan
+#'
+#' @param nMs2 `integer`, number of MS2 scans.
+#' @param nMs2perMs1 `integer`, number of MS2 scans for each MS1 scan.
+#' @param duration `double`, duration of scan in minutes.
+#' @param gap `double`, pause between two scans in minutes.
+#' @return `data.frame` with columns type (type of scan), start and end times
+#' in minutes
+#' @noRd
+.startEndTime <- function(nMs2, nMs2perMs1=9L, duration=0.5, gap=0.01) {
+    nMs1 <- ceiling(nMs2 * 1L/nMs2perMs1)
+    n <- nMs2 + nMs1
+
+    if (n > 150) {
+        warning(
+            "More than 150 experiments might cause the MS device ",
+            "to become unresponsive. Choose other ", sQuote("groupBy"),
+            " parameters to reduce number of experiments per file."
+        )
+    }
+
+    if (duration) {
+        start <- seq(gap, by=duration, length.out=n)
+        end <- seq(duration, by=duration, length.out=n)
+    } else {
+        start <- end <- NA_real_
+    }
+
+    type <- rep_len(rep.int(c("MS1", "MS2"), times=c(1L, nMs2perMs1)), n)
+    data.frame(
+        Type=type, StartTimeMin=start, EndTimeMin=end, stringsAsFactors=FALSE
+    )
+}

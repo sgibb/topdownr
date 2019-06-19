@@ -284,3 +284,14 @@ test_that(".validateMsSettings", {
         "of type 'TMS2'"
     )
 })
+
+test_that(".startEndTime", {
+    r <- data.frame(Type=c("MS1", rep("MS2", 12), "MS1", rep("MS2", 8)),
+                    StartTimeMin=seq(0.02, by=0.8, length.out=22),
+                    EndTimeMin=seq(0.8, by=0.8, length.out=22),
+                    stringsAsFactors=FALSE)
+    expect_equal(.startEndTime(nMs2=20, nMs2perMs1=12, duration=0.8,
+                                         gap=0.02), r)
+    expect_warning(.startEndTime(nMs2=201, nMs2perMs1=2),
+                   "More than 150 experiments")
+})
