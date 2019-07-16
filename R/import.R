@@ -184,6 +184,29 @@
     d
 }
 
+#' Translate scan headsman rt to mzml scan numbers
+#'
+#' @param file character, filename
+#' @param rt numeric
+#' @param verbose logical, verbose output?
+#' @return numeric
+#' @noRd
+.rtToScanId <- function(file, rt, verbose=interactive()) {
+    .msg(verbose, "Reading scan information from file ", basename(file))
+
+    fh <- openMSfile(file)
+    on.exit(close(fh))
+
+    hd <- header(fh)
+    ## TODO: replace by MsCoreUtils::closest, because it is maintained and this
+    ## function name is misleading
+    i <- .matchFragments(
+        rt * 60, hd$retentionTime, tolerance=1e3,
+        redundantIonMatch="closest", redundantFragmentMatch="closest"
+    )
+    .translateThermoIdToScanId(hd$spectrumId[i])
+}
+
 #' Read MS2 Spectra (mzML)
 #'
 #' @param file character, filename

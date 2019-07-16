@@ -152,6 +152,16 @@ readTopDownFiles <- function(path, pattern=".*",
         )
     )
 
+    scanConditions$Scan <- unlist(mapply(
+        .rtToScanId,
+        file=files$mzML,
+        rt=split(scanConditions$RtMin, scanConditions$File),
+        MoreArgs=list(
+            verbose=verbose
+        ),
+        SIMPLIFY=FALSE, USE.NAMES=FALSE
+    ))
+
     headerInformation <- .rbind(
         lapply(files$csv, .readExperimentCsv, verbose=verbose)
     )
