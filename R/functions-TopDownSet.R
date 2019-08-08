@@ -83,6 +83,9 @@
 #'  - `"FilterString"` (default): create condition IDs based on mass labels in
 #'    the *FilterString* column (see *massLabeling* in [writeMethodXmls()] for
 #'    details).
+#'  - `"ScanDescription"`: create condition IDs based on the given
+#'    "Scan Description" parameter (set automatically by
+#'    [createExperimentsFragmentOptimisation()]).
 #'  - A single `numeric` value giving the number of conditions.
 #' @param verbose `logical`, verbose output?
 #' @return A `TopDownSet` object.

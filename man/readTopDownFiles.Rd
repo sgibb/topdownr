@@ -82,6 +82,9 @@ used to define a sample (technical replicate). This is used to add the
 \item \code{"FilterString"} (default): create condition IDs based on mass labels in
 the \emph{FilterString} column (see \emph{massLabeling} in \code{\link[=writeMethodXmls]{writeMethodXmls()}} for
 details).
+\item \code{"ScanDescription"}: create condition IDs based on the given
+"Scan Description" parameter (set automatically by
+\code{\link[=createExperimentsFragmentOptimisation]{createExperimentsFragmentOptimisation()}}).
 \item A single \code{numeric} value giving the number of conditions.
 }}
 
