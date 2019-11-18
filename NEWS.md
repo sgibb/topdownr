@@ -1,3 +1,12 @@
+# topdownr 1.9
+- New version for Bioc 3.11 (devel)
+
+## topdownr 1.9.1
+- Remove `defaultMs1Settings` and `defaultMs2Settings` [2019-11-18].
+
+# topdownr 1.8
+- New version for Bioc 3.10 (release)
+
 # topdownr 1.7
 - New version for Bioc 3.10 (devel)
 
@@ -9,7 +18,6 @@
   removed in 3.11 [2019-06-19].
 
 ## Changes in version 1.7.2
-
 - Add `readTopDownSet(..., conditions="ScanDescription")` as a new way to
   read scan conditions (see [#80](https://github.com/sgibb/topdownr/issues/80)/[#81](https://github.com/sgibb/topdownr/issues/81)) [2019-08-08].
 

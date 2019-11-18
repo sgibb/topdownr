@@ -86,32 +86,21 @@
 writeMethodXmls <- function(exps, pattern="method-%s.xml",
                             verbose=interactive()) {
 
-    if (is.list(exps)) {
-        requireNamespace("xml2")
+    requireNamespace("xml2")
 
-        if (!grepl("%s", pattern)) {
-            stop(
-                sQuote("pattern"),
-                " has to contain '%s' to be replaced by the ",
-                "grouping condition."
-            )
-        }
-
-        fn <- .validFilename(sprintf(pattern, names(exps)))
-        for (i in seq(along=exps)) {
-            if (verbose) {
-                message("Writing ", fn[i])
-            }
-            xml2::write_xml(xml2::as_xml_document(exps[[i]]), file=fn[i])
-        }
-    } else {
+    if (!grepl("%s", pattern)) {
         stop(
-            "Using 'writeMethodXmls' to generated a combination of ",
-            "MS settings for fragment optimisation is defunct.\n",
-            "Please use 'expandMs1Conditions', 'expandTms2Conditions', ",
-            "'createExperimentsFragmentOptimisation' instead. After ",
-            "generating the experiments use 'writeMethodXmls' to export ",
-            "them into xml files."
+            sQuote("pattern"),
+            " has to contain '%s' to be replaced by the ",
+            "grouping condition."
         )
+    }
+
+    fn <- .validFilename(sprintf(pattern, names(exps)))
+    for (i in seq(along=exps)) {
+        if (verbose) {
+            message("Writing ", fn[i])
+        }
+        xml2::write_xml(xml2::as_xml_document(exps[[i]]), file=fn[i])
     }
 }
