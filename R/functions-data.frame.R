@@ -152,15 +152,23 @@
     }
 
     ## do nothing for a single data.frame
-    if (is.data.frame(l) || inherits(l, "DataFrame")) {
+    if (is.data.frame(l) || inherits(l, "DFrame")) {
         return(l)
     }
 
     stopifnot(
         all(.vapply1l(l, function(ll) {
-            is.data.frame(ll) || inherits(ll, "DataFrame")
+            is.data.frame(ll) || inherits(ll, "DFrame")
         }))
     )
+
+    ## If `l` contains `data.frame` and `DataFrame`, and the first is a
+    ## `data.frame` the following error is thrown:
+    ## Error in rep(xi, length.out = nvar) :
+    ##  attempt to replicate an object of type 'S4'
+    if (any(.vapply1l(l, inherits, "DFrame"))) {
+        l <- lapply(l, as, "DataFrame")
+    }
 
     nms <- lapply(l, names)
     allcn <- unique(unlist(nms))

@@ -3,6 +3,7 @@
 
 ## topdownr 1.9.1
 - Remove `defaultMs1Settings` and `defaultMs2Settings` [2019-11-18].
+- Fix `.rbind` for lists with mixed `data.frame` and `DataFrame` [2019-11-18].
 
 # topdownr 1.8
 - New version for Bioc 3.10 (release)
