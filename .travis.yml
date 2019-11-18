@@ -18,6 +18,10 @@ r_packages:
   - covr
   - pkgdown
 
+# install topdownr first to allow the installation of topdownrdata
+bioc_packages:
+  - topdownr
+
 r_github_packages:
   - sgibb/topdownrdata
 
