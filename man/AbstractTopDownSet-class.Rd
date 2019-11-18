@@ -72,16 +72,19 @@
 
 \S4method{show}{AbstractTopDownSet}(object)
 
-\S4method{summary}{AbstractTopDownSet}(object, what = c("rows",
-  "columns"), ...)
+\S4method{summary}{AbstractTopDownSet}(object, what = c("rows", "columns"), ...)
 
-\S4method{updateConditionNames}{AbstractTopDownSet}(object,
-  sampleColumns = c("Mz", "AgcTarget", "EtdReagentTarget",
-  "EtdActivation", "CidActivation", "HcdActivation", "UvpdActivation"),
-  verbose = interactive())
+\S4method{updateConditionNames}{AbstractTopDownSet}(
+  object,
+  sampleColumns = c("Mz", "AgcTarget", "EtdReagentTarget", "EtdActivation",
+    "CidActivation", "HcdActivation", "UvpdActivation"),
+  verbose = interactive()
+)
 
-\S4method{updateMedianInjectionTime}{AbstractTopDownSet}(object,
-  by = list(Mz = object$Mz, AgcTarget = object$AgcTarget))
+\S4method{updateMedianInjectionTime}{AbstractTopDownSet}(
+  object,
+  by = list(Mz = object$Mz, AgcTarget = object$AgcTarget)
+)
 }
 \arguments{
 \item{i, j}{\code{numeric}, \code{logical} or \code{character},
@@ -149,20 +152,20 @@ subsetting is done on the condition/run (column) level.
 
 \item \code{[[<-}: Setter for a column in the \code{colData} slot.
 
-The \code{[[<-} operator is used to add/replace
+The \verb{[[<-} operator is used to add/replace
 a single column of the \code{colData} \code{DataFrame}.
 
 \item \code{$}: Accessor for columns in the \code{colData} slot.
 
-The \code{$} simplifies the accession of a single column
+The \verb{$} simplifies the accession of a single column
 of the \code{colData}.
-It is identical to the \code{[[} operator.
+It is identical to the \verb{[[} operator.
 
 \item \code{$<-}: Setter for a column in the \code{colData} slot.
 
-The \code{$<-} operator is used to add/replace a single column
+The \verb{$<-} operator is used to add/replace a single column
 of the \code{colData} \code{DataFrame}.
-It is identical to the \code{[[<-} operator.
+It is identical to the \verb{[[<-} operator.
 
 \item \code{assayData}: Accessor for the \code{assay} slot.
 
@@ -198,7 +201,7 @@ An alias for \code{colData}.
 
 \item \code{conditionData<-}: Setter for the \code{colData} slot.
 
-An alias for \code{colData<-}.
+An alias for \verb{colData<-}.
 
 \item \code{conditionNames}: Accessor for condition names.
 

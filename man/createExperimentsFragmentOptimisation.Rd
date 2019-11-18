@@ -4,9 +4,15 @@
 \alias{createExperimentsFragmentOptimisation}
 \title{Create fragment optimisation experiment}
 \usage{
-createExperimentsFragmentOptimisation(ms1, ..., groupBy = c("AgcTarget",
-  "replication"), nMs2perMs1 = 10, scanDuration = 0,
-  replications = 2, randomise = TRUE)
+createExperimentsFragmentOptimisation(
+  ms1,
+  ...,
+  groupBy = c("AgcTarget", "replication"),
+  nMs2perMs1 = 10,
+  scanDuration = 0,
+  replications = 2,
+  randomise = TRUE
+)
 }
 \arguments{
 \item{ms1}{\code{data.frame}, MS1 settings.}

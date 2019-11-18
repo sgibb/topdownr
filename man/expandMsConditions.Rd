@@ -7,8 +7,13 @@
 \usage{
 expandMs1Conditions(..., family = "Calcium", version = "3.2")
 
-expandTms2Conditions(ActivationType = c("CID", "HCD", "ETD", "UVPD"),
-  ..., MassList = NULL, family = "Calcium", version = "3.2")
+expandTms2Conditions(
+  ActivationType = c("CID", "HCD", "ETD", "UVPD"),
+  ...,
+  MassList = NULL,
+  family = "Calcium",
+  version = "3.2"
+)
 }
 \arguments{
 \item{...}{further named arguments, used to create the combination of

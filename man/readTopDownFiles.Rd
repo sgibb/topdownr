@@ -4,23 +4,30 @@
 \alias{readTopDownFiles}
 \title{Read top-down files.}
 \usage{
-readTopDownFiles(path, pattern = ".*", type = c("a", "b", "c", "x",
-  "y", "z"), modifications = c("Carbamidomethyl", "Acetyl", "Met-loss"),
-  adducts = data.frame(), neutralLoss = MSnbase::defaultNeutralLoss(),
+readTopDownFiles(
+  path,
+  pattern = ".*",
+  type = c("a", "b", "c", "x", "y", "z"),
+  modifications = c("Carbamidomethyl", "Acetyl", "Met-loss"),
+  adducts = data.frame(),
+  neutralLoss = MSnbase::defaultNeutralLoss(),
   sequenceOrder = c("original", "random", "inverse"),
-  tolerance = 5e-06, redundantIonMatch = c("remove", "closest"),
+  tolerance = 5e-06,
+  redundantIonMatch = c("remove", "closest"),
   redundantFragmentMatch = c("remove", "closest"),
-  dropNonInformativeColumns = TRUE, sampleColumns = c("Mz",
-  "AgcTarget", "EtdReagentTarget", "EtdActivation", "CidActivation",
-  "HcdActivation", "UvpdActivation"), conditions = "FilterString",
-  verbose = interactive())
+  dropNonInformativeColumns = TRUE,
+  sampleColumns = c("Mz", "AgcTarget", "EtdReagentTarget", "EtdActivation",
+    "CidActivation", "HcdActivation", "UvpdActivation"),
+  conditions = "FilterString",
+  verbose = interactive()
+)
 }
 \arguments{
 \item{path}{\code{character},
 path to directory that contains the top-down files.}
 
 \item{pattern}{\code{character},
-a filename pattern, the default \code{.*} means all files.}
+a filename pattern, the default \verb{.*} means all files.}
 
 \item{type}{\code{character},
 type of fragments, currently \emph{a-c} and \emph{x-z} are
@@ -107,13 +114,13 @@ It creates an \linkS4class{TopDownSet} object and is its only constructor.
 
 \code{adducts}: \emph{Thermo's Xtract}
 allows some mistakes in deisotoping, mostly it
-allows \code{+/- C13-C12} and \code{+/- H+}.
+allows \verb{+/- C13-C12} and \verb{+/- H+}.
 The \code{adducts} argument takes a
 \code{data.frame} with the \code{mass} to add, the \code{name}
 that should assign to these
 new fragments and an information \code{to}
 whom the modification should be
-applied, e.g. for \code{H+} on \code{z},
+applied, e.g. for \verb{H+} on \code{z},
 \code{data.frame(mass=1.008, name="zpH", to="z")}.
 
 \emph{Please note:} The \code{adducts} are added to the output of

@@ -12,8 +12,17 @@
 \alias{coerce,FragmentViews,data.frame-method}
 \title{The FragmentViews class}
 \usage{
-FragmentViews(sequence, mass, type, z = 1L, start = NULL, end = NULL,
-  width = NULL, names = NULL, metadata = list())
+FragmentViews(
+  sequence,
+  mass,
+  type,
+  z = 1L,
+  start = NULL,
+  end = NULL,
+  width = NULL,
+  names = NULL,
+  metadata = list()
+)
 
 \S4method{combine}{FragmentViews,FragmentViews}(x, y)
 

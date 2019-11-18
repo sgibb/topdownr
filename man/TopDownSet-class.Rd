@@ -25,17 +25,19 @@
 
 \S4method{combine}{TopDownSet,TopDownSet}(x, y)
 
-\S4method{filterCv}{TopDownSet}(object, threshold, by = object$Sample,
-  ...)
+\S4method{filterCv}{TopDownSet}(object, threshold, by = object$Sample, ...)
 
-\S4method{filterInjectionTime}{TopDownSet}(object,
-  maxDeviation = log2(3), keepTopN = 2, by = object$Sample, ...)
+\S4method{filterInjectionTime}{TopDownSet}(
+  object,
+  maxDeviation = log2(3),
+  keepTopN = 2,
+  by = object$Sample,
+  ...
+)
 
-\S4method{filterIntensity}{TopDownSet}(object, threshold,
-  relative = TRUE, ...)
+\S4method{filterIntensity}{TopDownSet}(object, threshold, relative = TRUE, ...)
 
-\S4method{filterNonReplicatedFragments}{TopDownSet}(object, minN = 2,
-  by = object$Sample, ...)
+\S4method{filterNonReplicatedFragments}{TopDownSet}(object, minN = 2, by = object$Sample, ...)
 
 \S4method{normalize}{TopDownSet}(object, method = "TIC", ...)
 
@@ -43,8 +45,7 @@
 
 \S4method{show}{TopDownSet}(object)
 
-\S4method{summary}{TopDownSet}(object, what = c("conditions",
-  "fragments"), ...)
+\S4method{summary}{TopDownSet}(object, what = c("conditions", "fragments"), ...)
 }
 \arguments{
 \item{x, object}{\code{TopDownSet}}

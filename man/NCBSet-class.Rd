@@ -11,12 +11,23 @@
 \alias{summary,NCBSet-method}
 \title{The NCBSet class}
 \usage{
-\S4method{bestConditions}{NCBSet}(object, n = ncol(object), minN = 0L,
-  maximise = c("fragments", "bonds"), ...)
+\S4method{bestConditions}{NCBSet}(
+  object,
+  n = ncol(object),
+  minN = 0L,
+  maximise = c("fragments", "bonds"),
+  ...
+)
 
-\S4method{fragmentationMap}{NCBSet}(object, nCombinations = 10,
-  cumCoverage = TRUE, maximise = c("fragments", "bonds"),
-  labels = colnames(object), alphaIntensity = TRUE, ...)
+\S4method{fragmentationMap}{NCBSet}(
+  object,
+  nCombinations = 10,
+  cumCoverage = TRUE,
+  maximise = c("fragments", "bonds"),
+  labels = colnames(object),
+  alphaIntensity = TRUE,
+  ...
+)
 
 \S4method{show}{NCBSet}(object)
 

@@ -6,12 +6,19 @@
 \alias{runScanHeadsman}
 \title{Windows specific functions.}
 \usage{
-createTngFusionMethFiles(template, xml = list.files(pattern =
-  ".*\\\\.xml$"), executable = "XmlMethodChanger.exe",
-  verbose = interactive())
+createTngFusionMethFiles(
+  template,
+  xml = list.files(pattern = ".*\\\\.xml$"),
+  executable = "XmlMethodChanger.exe",
+  verbose = interactive()
+)
 
-runXmlMethodChanger(template, xml = list.files(pattern = ".*\\\\.xml$"),
-  executable = "XmlMethodChanger.exe", verbose = interactive())
+runXmlMethodChanger(
+  template,
+  xml = list.files(pattern = ".*\\\\.xml$"),
+  executable = "XmlMethodChanger.exe",
+  verbose = interactive()
+)
 
 runScanHeadsman(path = ".", executable = "ScanHeadsman.exe")
 }
@@ -51,11 +58,11 @@ into \code{.experiments.csv} and \code{.txt} files, respectively.
 \examples{
 \dontrun{
 runXmlMethodChanger(templateMeth="TMS2IndependentTemplate240Extended.meth",
-                    modificationXml=list.files(pattern="^method.*\\\\.xml$"),
-                    executable="..\\\\XmlMethodChanger.exe")
+                    modificationXml=list.files(pattern="^method.*\\.xml$"),
+                    executable="..\\XmlMethodChanger.exe")
 }
 \dontrun{
-runScanHeadsman("raw", executable="..\\\\ScanHeadsman.exe")
+runScanHeadsman("raw", executable="..\\ScanHeadsman.exe")
 }
 }
 \references{

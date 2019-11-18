@@ -7,8 +7,11 @@
 \usage{
 validMs1Settings(family = "Calcium", version = "3.2")
 
-validTms2Settings(type = c("All", "TMS2", "ETD", "CID", "HCD", "UVPD"),
-  family = "Calcium", version = "3.2")
+validTms2Settings(
+  type = c("All", "TMS2", "ETD", "CID", "HCD", "UVPD"),
+  family = "Calcium",
+  version = "3.2"
+)
 }
 \arguments{
 \item{family}{\code{character}, currently just Calcium is supported}
