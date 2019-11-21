@@ -14,31 +14,48 @@ addons:
       - netcdf-bin # libnetcdf-dev doesn't contain nc-config in ubuntu 12.04 (in 16.04 [xerus] it is part of libnetcdf-dev)
       - libhdf5-dev
 
-r_packages:
-  - covr
-  - pkgdown
-
-# install topdownr first to allow the installation of topdownrdata
-bioc_packages:
-  - topdownr
-
-r_github_packages:
-  - sgibb/topdownrdata
-
-after_success:
-  - Rscript -e 'covr::codecov()'
-
-before_deploy:
-  - R CMD INSTALL .
-  - Rscript -e 'pkgdown::build_site()'
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_PAT
-  keep-history: true
-  local-dir: docs
-  on:
-    branch: master
+jobs:
+  include:
+    - stage: "Build"
+      r_packages:
+        - covr
+        - pkgdown
+        - testthat
+        - knitr
+      before_install:
+        - mkdir -p ~/.R
+        - echo -e 'MAKEFLAGS = -j2' > ~/.R/Makevars
+        - echo 'options(Ncpus = 2)' > ~/.Rprofile
+      script: true
+      name: "Build dependencies and cache"
+      ## topdownrdata is a cyclic dependency
+    - stage: "Check"
+      r_build_args: --no-build-vignettes --no-manual
+      r_check_args: --as-cran --no-build-vignettes --no-vignettes --no-manual --no-examples --no-tests
+      before_script: rm -rf vignettes
+      install: skip
+      name: "Prelimary Check w/o example/vignette (topdownrdata not available)"
+    - stage: "Check"
+      r_check_args: --as-cran
+      r_github_packages:
+        - sgibb/topdownrdata
+      name: "Full Check"
+    - stage: "Deploy"
+      install: skip
+      script:
+        - travis_wait 20 Rscript -e 'covr::codecov()'
+      name: "codecov and pkgdown (on master)"
+      before_deploy:
+        - R CMD INSTALL .
+        - travis_wait 20 Rscript -e 'pkgdown::build_site()'
+      deploy:
+        provider: pages
+        skip-cleanup: true
+        github-token: $GITHUB_PAT
+        keep-history: true
+        local-dir: docs
+        on:
+          branch: master
 
 notifications:
   email:
