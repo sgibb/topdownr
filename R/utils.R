@@ -641,7 +641,8 @@ cat0 <- function(...) {
 #' @return `character`
 #' @noRd
 .validFilename <- function(x) {
-    stopifnot(is.character(x) && nzchar(x))
+    if(!is.character(x) || !length(x) || !all(nzchar(x)))
+        stop("'x' has to be a non-empty character vector.")
     gsub("[:;\\<>|\\?\\*]", "-", gsub("\\.+", ".", x))
 }
 

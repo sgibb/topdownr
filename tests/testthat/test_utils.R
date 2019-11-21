@@ -406,8 +406,9 @@ test_that(".validFilename", {
         "foo>bar.xml", "foo;bar.xml", "foo|bar.xml", "foo?bar.xml",
         "foo*bar.xml"
     )
-    expect_error(.validFilename(FALSE))
-    expect_error(.validFilename(character()))
+    expect_error(.validFilename(FALSE), "character")
+    expect_error(.validFilename(character()), "non-empty")
+    expect_error(.validFilename(c("foo", "")), "non-empty")
     expect_equal(.validFilename(fn), c("foo-bar.xml", "foo_bar.xml",
                                        "foo/bar.xml", rep("foo-bar.xml", 9)))
 })
