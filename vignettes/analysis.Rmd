@@ -121,7 +121,11 @@ myoglobin <- readTopDownFiles(
     ## don't use neutral loss
     neutralLoss = NULL,
     ## tolerance for fragment matching
-    tolerance = 5e-6
+    tolerance = 5e-6,
+    ## topdownrdata was generate with an older version of topdownr,
+    ## the method files were generated with FilterString identification,
+    ## use `conditions = "ScanDescription"` (default) for recent data.
+    conditions = "FilterString"
 )
 
 myoglobin

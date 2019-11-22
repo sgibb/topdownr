@@ -1,6 +1,9 @@
 # topdownr 1.9
 - New version for Bioc 3.11 (devel)
 
+## Changes in version 1.9.3
+- Adapt analysis vignette to changed `condition` argument [2019-11-22].
+
 ## Changes in version 1.9.2
 - Set `conditions="ScanDescription"` as new default for `readTopDownFiles`.
   The creation of *FilterString* IDs in the method files was deprecated since
