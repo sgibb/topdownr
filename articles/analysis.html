@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fragmentation Analysis with topdownr • topdownr</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Fragmentation Analysis with topdownr">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
@@ -30,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">topdownr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.3</span>
       </span>
     </div>
 
@@ -38,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -67,7 +68,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/sgibb/topdownr">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -80,6 +81,7 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
@@ -107,13 +109,13 @@
 <div id="foreword" class="section level1 unnumbered">
 <h1 class="hasAnchor">
 <a href="#foreword" class="anchor"></a>Foreword</h1>
-<p><em><a href="https://bioconductor.org/packages/3.9/topdownr">topdownr</a></em> is free and open-source software. If you use it, please support the project by citing it in publications:</p>
+<p><em><a href="https://bioconductor.org/packages/3.11/topdownr">topdownr</a></em> is free and open-source software. If you use it, please support the project by citing it in publications:</p>
 <p>P.V. Shliaha, S. Gibb, V. Gorshkov, M.S. Jespersen, G.R. Andersen, D. Bailey, J. Schwartz, S. Eliuk, V. Schwämmle, and O.N. Jensen. 2018. Maximizing Sequence Coverage in Top-Down Proteomics By Automated Multi-modal Gas-phase Protein Fragmentation. Analytical Chemistry. DOI: <a href="https://doi.org/10.1021/acs.analchem.8b02344">10.1021/acs.analchem.8b02344</a></p>
 </div>
 <div id="questions-and-bugs" class="section level1 unnumbered">
 <h1 class="hasAnchor">
 <a href="#questions-and-bugs" class="anchor"></a>Questions and bugs</h1>
-<p>For bugs, typos, suggestions or other questions, please file an issue in our tracking system (<a href="https://github.com/sgibb/topdownr/issues" class="uri">https://github.com/sgibb/topdownr/issues</a>) providing as much information as possible, a reproducible example and the output of <code><a href="https://www.rdocumentation.org/packages/utils/topics/sessionInfo">sessionInfo()</a></code>.</p>
+<p>For bugs, typos, suggestions or other questions, please file an issue in our tracking system (<a href="https://github.com/sgibb/topdownr/issues" class="uri">https://github.com/sgibb/topdownr/issues</a>) providing as much information as possible, a reproducible example and the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code>.</p>
 <p>If you don’t have a GitHub account or wish to reach a broader audience for general questions about proteomics analysis using R, you may want to use the Bioconductor support site: <a href="https://support.bioconductor.org/" class="uri">https://support.bioconductor.org/</a>.</p>
 </div>
 <div id="introductionworking-with-topdownr" class="section level1">
@@ -121,7 +123,7 @@
 <a href="#introductionworking-with-topdownr" class="anchor"></a>Introduction/Working with <code>topdownr</code>
 </h1>
 <p>Load the package.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"topdownr"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"topdownr"</span>)</a></code></pre></div>
 <div id="importing-files" class="section level2">
 <h2 class="hasAnchor">
 <a href="#importing-files" class="anchor"></a>Importing Files</h2>
@@ -151,22 +153,26 @@ $txt
 <a class="sourceLine" id="cb4-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb4-4" data-line-number="4">myoglobin &lt;-<span class="st"> </span><span class="kw"><a href="../reference/readTopDownFiles.html">readTopDownFiles</a></span>(</a>
 <a class="sourceLine" id="cb4-5" data-line-number="5">    ## directory path</a>
-<a class="sourceLine" id="cb4-6" data-line-number="6">    <span class="dt">path =</span> topdownrdata<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/topdownrdata/topics/topDownDataPath">topDownDataPath</a></span>(<span class="st">"myoglobin"</span>),</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">    <span class="dt">path =</span> topdownrdata<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/topdownrdata/man/topDownDataPath.html">topDownDataPath</a></span>(<span class="st">"myoglobin"</span>),</a>
 <a class="sourceLine" id="cb4-7" data-line-number="7">    ## fragmentation types</a>
-<a class="sourceLine" id="cb4-8" data-line-number="8">    <span class="dt">type =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"z"</span>),</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">    <span class="dt">type =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"z"</span>),</a>
 <a class="sourceLine" id="cb4-9" data-line-number="9">    ## adducts (add -H/H to c/z and name</a>
 <a class="sourceLine" id="cb4-10" data-line-number="10">    ## them cmH/zpH (c minus H, z plus H)</a>
-<a class="sourceLine" id="cb4-11" data-line-number="11">    <span class="dt">adducts =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(</a>
-<a class="sourceLine" id="cb4-12" data-line-number="12">        <span class="dt">mass=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="op">-</span>H, H),</a>
-<a class="sourceLine" id="cb4-13" data-line-number="13">        <span class="dt">to=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"c"</span>, <span class="st">"z"</span>),</a>
-<a class="sourceLine" id="cb4-14" data-line-number="14">        <span class="dt">name=</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"cmH"</span>, <span class="st">"zpH"</span>)),</a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">    <span class="dt">adducts =</span> <span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(</a>
+<a class="sourceLine" id="cb4-12" data-line-number="12">        <span class="dt">mass=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="op">-</span>H, H),</a>
+<a class="sourceLine" id="cb4-13" data-line-number="13">        <span class="dt">to=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"c"</span>, <span class="st">"z"</span>),</a>
+<a class="sourceLine" id="cb4-14" data-line-number="14">        <span class="dt">name=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"cmH"</span>, <span class="st">"zpH"</span>)),</a>
 <a class="sourceLine" id="cb4-15" data-line-number="15">    ## initiator methionine removal</a>
 <a class="sourceLine" id="cb4-16" data-line-number="16">    <span class="dt">modifications =</span> <span class="st">"Met-loss"</span>,</a>
 <a class="sourceLine" id="cb4-17" data-line-number="17">    ## don't use neutral loss</a>
 <a class="sourceLine" id="cb4-18" data-line-number="18">    <span class="dt">neutralLoss =</span> <span class="ot">NULL</span>,</a>
 <a class="sourceLine" id="cb4-19" data-line-number="19">    ## tolerance for fragment matching</a>
-<a class="sourceLine" id="cb4-20" data-line-number="20">    <span class="dt">tolerance =</span> <span class="fl">5e-6</span></a>
-<a class="sourceLine" id="cb4-21" data-line-number="21">)</a></code></pre></div>
+<a class="sourceLine" id="cb4-20" data-line-number="20">    <span class="dt">tolerance =</span> <span class="fl">5e-6</span>,</a>
+<a class="sourceLine" id="cb4-21" data-line-number="21">    ## topdownrdata was generate with an older version of topdownr,</a>
+<a class="sourceLine" id="cb4-22" data-line-number="22">    ## the method files were generated with FilterString identification,</a>
+<a class="sourceLine" id="cb4-23" data-line-number="23">    ## use `conditions = "ScanDescription"` (default) for recent data.</a>
+<a class="sourceLine" id="cb4-24" data-line-number="24">    <span class="dt">conditions =</span> <span class="st">"FilterString"</span></a>
+<a class="sourceLine" id="cb4-25" data-line-number="25">)</a></code></pre></div>
 <pre><code>## Warning in FUN(X[[i]], ...): 61 FilterString entries modified because of
 ## duplicated ID for different conditions.</code></pre>
 <pre><code>## Warning in FUN(X[[i]], ...): 63 FilterString entries modified because of
@@ -186,9 +192,9 @@ $txt
 ## Warning in FUN(X[[i]], ...): ID in FilterString are not sorted in ascending
 ## order. Introduce own condition ID via 'cumsum'.</code></pre>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">myoglobin</a></code></pre></div>
-<pre><code>## TopDownSet object (7.12 Mb)
+<pre><code>## TopDownSet object (7.28 Mb)
 ## - - - Protein data - - -
-## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAG...MTKALELFRNDIAAKYKELGFQG 
+## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
 ## Mass : 16922.95
 ## Modifications (1): Met-loss
 ## - - - Fragment data - - -
@@ -198,15 +204,15 @@ $txt
 ## - - - Condition data - - -
 ## Number of conditions: 1852 
 ## Number of scans: 5882 
-## Condition variables (61): File, Scan, ..., Sample, MedianIonInjectionTimeMs
+## Condition variables (66): File, Scan, ..., Sample, MedianIonInjectionTimeMs
 ## - - - Intensity data - - -
 ## Size of array: 1216x5882 (5.15% != 0)
 ## Number of matched fragments: 368296 
 ## Intensity range: [87.61;10704001.00]
 ## - - - Processing information - - -
-## [2019-02-16 21:24:35] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
-## [2019-02-16 21:24:36] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2019-02-16 21:24:36] Recalculate median injection time based on: Mz, AgcTarget.</code></pre>
+## [2019-11-22 20:55:58] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2019-11-22 20:55:59] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2019-11-22 20:55:59] Recalculate median injection time based on: Mz, AgcTarget.</code></pre>
 </div>
 <div id="the-topdownset-anatomy" class="section level2">
 <h2 class="hasAnchor">
@@ -234,24 +240,24 @@ $txt
 <a href="#fragment-data" class="anchor"></a>Fragment data</h3>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="../reference/AbstractTopDownSet-class.html">rowViews</a></span>(myoglobin)</a></code></pre></div>
 <pre><code>## FragmentViews on a 153-letter sequence:
-##   GLSDGEWQQVLNVWGKVEADIAGHGQEVLIRLFTG...HPGDFGADAQGAMTKALELFRNDIAAKYKELGFQG
+##   GLSDGEWQQVLNVWGKVEADIAGHGQEVLIRLFTGHPE...SKHPGDFGADAQGAMTKALELFRNDIAAKYKELGFQG
 ## Mass:
 ##   16922.95406
 ## Modifications:
 ##   Met-loss
 ## Views:
-##        start end width     mass name   type   z                            
-##    [1]     1   1     1    30.03 a1     a      1 [G]                        
-##    [2]     1   1     1    58.03 b1     b      1 [G]                        
-##    [3]     1   1     1    59.01 z1     z      1 [G]                        
-##    [4]     1   1     1    60.02 zpH1   z      1 [G]                        
-##    [5]     1   1     1    74.05 cmH1   c      1 [G]                        
-##    ...   ... ...   ...      ... ...    ...  ... ...                        
-## [1212]     2 153   152 16868.93 zpH152 z      1 [LSDGEWQQVLN...AAKYKELGFQG]
-## [1213]     1 152   152 16882.96 cmH152 c      1 [GLSDGEWQQVL...IAAKYKELGFQ]
-## [1214]     1 152   152 16883.97 c152   c      1 [GLSDGEWQQVL...IAAKYKELGFQ]
-## [1215]     2 153   152 16884.95 y152   y      1 [LSDGEWQQVLN...AAKYKELGFQG]
-## [1216]     2 153   152 16910.93 x152   x      1 [LSDGEWQQVLN...AAKYKELGFQG]</code></pre>
+##        start end width     mass name   type   z                                 
+##    [1]     1   1     1    30.03 a1     a      1 [G]                             
+##    [2]     1   1     1    58.03 b1     b      1 [G]                             
+##    [3]     1   1     1    59.01 z1     z      1 [G]                             
+##    [4]     1   1     1    60.02 zpH1   z      1 [G]                             
+##    [5]     1   1     1    74.05 cmH1   c      1 [G]                             
+##    ...   ... ...   ...      ... ...    ...  ... ...                             
+## [1212]     2 153   152 16868.93 zpH152 z      1 [LSDGEWQQVLNVWG...DIAAKYKELGFQG]
+## [1213]     1 152   152 16882.96 cmH152 c      1 [GLSDGEWQQVLNVW...NDIAAKYKELGFQ]
+## [1214]     1 152   152 16883.97 c152   c      1 [GLSDGEWQQVLNVW...NDIAAKYKELGFQ]
+## [1215]     2 153   152 16884.95 y152   y      1 [LSDGEWQQVLNVWG...DIAAKYKELGFQG]
+## [1216]     2 153   152 16910.93 x152   x      1 [LSDGEWQQVLNVWG...DIAAKYKELGFQG]</code></pre>
 <p>The fragmentation data are represented by an <code>FragmentViews</code> object that is an overloaded <code>XStringViews</code> object. It contains one <code>AAString</code> (the protein sequence) and an <code>IRanges</code> object that stores the <code>start</code>, <code>end</code> (and <code>width</code>) values of the fragments. Additionally it has a <code>DataFrame</code> for the <code>mass</code>, <code>type</code> and <code>z</code> information of each fragment.</p>
 </div>
 <div id="condition-data" class="section level3">
@@ -306,28 +312,28 @@ $txt
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">assayData</span>(myoglobin)[<span class="dv">206</span><span class="op">:</span><span class="dv">215</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</a></code></pre></div>
 <pre><code>## 10 x 10 sparse Matrix of class "dgCMatrix"</code></pre>
 <pre><code>##    [[ suppressing 10 column names 'C0707.30_1.0e+05_1.0e+06_02.50_07_00_1', 'C0707.30_1.0e+05_1.0e+06_02.50_07_00_2', 'C0707.30_1.0e+05_1.0e+06_02.50_07_00_3' ... ]]</code></pre>
-<pre><code>##                                                                     
-## z26        .        .        .        .        .        .        .  
-## zpH26 491328.4 446301.1 407389.1 473200.9 470679.3 493244.8 390025.8
-## y26        .        .        .        .        .        .        .  
-## b27        .        .        .        .        .        .        .  
-## cmH27      .        .        .        .        .        .        .  
-## c27        .        .        .        .        .        .        .  
-## x26        .        .        .        .        .        .        .  
-## z27        .        .        .        .        .        .        .  
-## zpH27 534307.6 534135.1 434296.8 436866.2 550887.3 513038.8 460476.4
-## y27        .        .        .        .        .        .        .  
-##                                  
-## z26        .         .        .  
-## zpH26 389430.25 496551.3 554295.7
-## y26    23648.63      .        .  
-## b27        .         .        .  
-## cmH27      .         .        .  
-## c27        .         .        .  
-## x26        .         .        .  
-## z27        .         .        .  
-## zpH27 456524.97 602207.0 579989.8
-## y27        .         .        .</code></pre>
+<pre><code>##                                                                               
+## z26        .        .        .        .        .        .        .        .   
+## zpH26 491328.4 446301.1 407389.1 473200.9 470679.3 493244.8 390025.8 389430.25
+## y26        .        .        .        .        .        .        .    23648.63
+## b27        .        .        .        .        .        .        .        .   
+## cmH27      .        .        .        .        .        .        .        .   
+## c27        .        .        .        .        .        .        .        .   
+## x26        .        .        .        .        .        .        .        .   
+## z27        .        .        .        .        .        .        .        .   
+## zpH27 534307.6 534135.1 434296.8 436866.2 550887.3 513038.8 460476.4 456524.97
+## y27        .        .        .        .        .        .        .        .   
+##                        
+## z26        .        .  
+## zpH26 496551.3 554295.7
+## y26        .        .  
+## b27        .        .  
+## cmH27      .        .  
+## c27        .        .  
+## x26        .        .  
+## z27        .        .  
+## zpH27 602207.0 579989.8
+## y27        .        .</code></pre>
 <p>Assay data is a <code>sparseMatrix</code> from the <code>Matrix</code> package (in detail a <code>dgCMatrix</code>) where the rows correspond to the fragments, the columns to the runs/conditions and the entries to the intensity values. A <code>sparseMatrix</code> is similar to the classic <code>matrix</code> in <em>R</em> but stores just the values that are different from zero.</p>
 </div>
 </div>
@@ -338,9 +344,9 @@ $txt
 <p>A <code>TopDownSet</code> could be subsetted by the fragment and the condition data.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="co"># select the first 100 fragments</span></a>
 <a class="sourceLine" id="cb21-2" data-line-number="2">myoglobin[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>]</a></code></pre></div>
-<pre><code>## TopDownSet object (3.40 Mb)
+<pre><code>## TopDownSet object (3.56 Mb)
 ## - - - Protein data - - -
-## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAG...MTKALELFRNDIAAKYKELGFQG 
+## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
 ## Mass : 16922.95
 ## Modifications (1): Met-loss
 ## - - - Fragment data - - -
@@ -350,21 +356,21 @@ $txt
 ## - - - Condition data - - -
 ## Number of conditions: 1852 
 ## Number of scans: 5882 
-## Condition variables (61): File, Scan, ..., Sample, MedianIonInjectionTimeMs
+## Condition variables (66): File, Scan, ..., Sample, MedianIonInjectionTimeMs
 ## - - - Intensity data - - -
 ## Size of array: 100x5882 (9.68% != 0)
 ## Number of matched fragments: 56955 
 ## Intensity range: [105.70;1076768.00]
 ## - - - Processing information - - -
-## [2019-02-16 21:24:35] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
-## [2019-02-16 21:24:36] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2019-02-16 21:24:36] Recalculate median injection time based on: Mz, AgcTarget.
-## [2019-02-16 21:24:37] Subsetted 368296 fragments [1216;5882] to 56955 fragments [100;5882].</code></pre>
+## [2019-11-22 20:55:58] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2019-11-22 20:55:59] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2019-11-22 20:55:59] Recalculate median injection time based on: Mz, AgcTarget.
+## [2019-11-22 20:55:59] Subsetted 368296 fragments [1216;5882] to 56955 fragments [100;5882].</code></pre>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="co"># select all "c" fragments</span></a>
 <a class="sourceLine" id="cb23-2" data-line-number="2">myoglobin[<span class="st">"c"</span>]</a></code></pre></div>
-<pre><code>## TopDownSet object (4.35 Mb)
+<pre><code>## TopDownSet object (4.51 Mb)
 ## - - - Protein data - - -
-## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAG...MTKALELFRNDIAAKYKELGFQG 
+## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
 ## Mass : 16922.95
 ## Modifications (1): Met-loss
 ## - - - Fragment data - - -
@@ -374,21 +380,21 @@ $txt
 ## - - - Condition data - - -
 ## Number of conditions: 1852 
 ## Number of scans: 5882 
-## Condition variables (61): File, Scan, ..., Sample, MedianIonInjectionTimeMs
+## Condition variables (66): File, Scan, ..., Sample, MedianIonInjectionTimeMs
 ## - - - Intensity data - - -
 ## Size of array: 304x5882 (7.69% != 0)
 ## Number of matched fragments: 137461 
 ## Intensity range: [87.61;1203763.75]
 ## - - - Processing information - - -
-## [2019-02-16 21:24:35] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
-## [2019-02-16 21:24:36] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2019-02-16 21:24:36] Recalculate median injection time based on: Mz, AgcTarget.
-## [2019-02-16 21:24:37] Subsetted 368296 fragments [1216;5882] to 137461 fragments [304;5882].</code></pre>
+## [2019-11-22 20:55:58] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2019-11-22 20:55:59] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2019-11-22 20:55:59] Recalculate median injection time based on: Mz, AgcTarget.
+## [2019-11-22 20:55:59] Subsetted 368296 fragments [1216;5882] to 137461 fragments [304;5882].</code></pre>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="co"># select just the 100. "c" fragment</span></a>
 <a class="sourceLine" id="cb25-2" data-line-number="2">myoglobin[<span class="st">"c100"</span>]</a></code></pre></div>
-<pre><code>## TopDownSet object (2.73 Mb)
+<pre><code>## TopDownSet object (2.89 Mb)
 ## - - - Protein data - - -
-## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAG...MTKALELFRNDIAAKYKELGFQG 
+## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
 ## Mass : 16922.95
 ## Modifications (1): Met-loss
 ## - - - Fragment data - - -
@@ -398,21 +404,21 @@ $txt
 ## - - - Condition data - - -
 ## Number of conditions: 1852 
 ## Number of scans: 5882 
-## Condition variables (61): File, Scan, ..., Sample, MedianIonInjectionTimeMs
+## Condition variables (66): File, Scan, ..., Sample, MedianIonInjectionTimeMs
 ## - - - Intensity data - - -
 ## Size of array: 1x5882 (0.09% != 0)
 ## Number of matched fragments: 5 
 ## Intensity range: [1276.91;17056.12]
 ## - - - Processing information - - -
-## [2019-02-16 21:24:35] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
-## [2019-02-16 21:24:36] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2019-02-16 21:24:36] Recalculate median injection time based on: Mz, AgcTarget.
-## [2019-02-16 21:24:37] Subsetted 368296 fragments [1216;5882] to 5 fragments [1;5882].</code></pre>
+## [2019-11-22 20:55:58] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2019-11-22 20:55:59] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2019-11-22 20:55:59] Recalculate median injection time based on: Mz, AgcTarget.
+## [2019-11-22 20:55:59] Subsetted 368296 fragments [1216;5882] to 5 fragments [1;5882].</code></pre>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="co"># select all "a" and "b" fragments but just the first 100 "c"</span></a>
-<a class="sourceLine" id="cb27-2" data-line-number="2">myoglobin[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(<span class="st">"c"</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>))]</a></code></pre></div>
-<pre><code>## TopDownSet object (4.43 Mb)
+<a class="sourceLine" id="cb27-2" data-line-number="2">myoglobin[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"c"</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>))]</a></code></pre></div>
+<pre><code>## TopDownSet object (4.59 Mb)
 ## - - - Protein data - - -
-## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAG...MTKALELFRNDIAAKYKELGFQG 
+## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
 ## Mass : 16922.95
 ## Modifications (1): Met-loss
 ## - - - Fragment data - - -
@@ -422,21 +428,21 @@ $txt
 ## - - - Condition data - - -
 ## Number of conditions: 1852 
 ## Number of scans: 5882 
-## Condition variables (61): File, Scan, ..., Sample, MedianIonInjectionTimeMs
+## Condition variables (66): File, Scan, ..., Sample, MedianIonInjectionTimeMs
 ## - - - Intensity data - - -
 ## Size of array: 404x5882 (6.04% != 0)
 ## Number of matched fragments: 143582 
 ## Intensity range: [87.61;1630533.12]
 ## - - - Processing information - - -
-## [2019-02-16 21:24:35] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
-## [2019-02-16 21:24:36] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2019-02-16 21:24:36] Recalculate median injection time based on: Mz, AgcTarget.
-## [2019-02-16 21:24:37] Subsetted 368296 fragments [1216;5882] to 143582 fragments [404;5882].</code></pre>
+## [2019-11-22 20:55:58] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2019-11-22 20:55:59] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2019-11-22 20:55:59] Recalculate median injection time based on: Mz, AgcTarget.
+## [2019-11-22 20:55:59] Subsetted 368296 fragments [1216;5882] to 143582 fragments [404;5882].</code></pre>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="co"># select condition/run 1 to 10</span></a>
 <a class="sourceLine" id="cb29-2" data-line-number="2">myoglobin[, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</a></code></pre></div>
 <pre><code>## TopDownSet object (0.26 Mb)
 ## - - - Protein data - - -
-## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAG...MTKALELFRNDIAAKYKELGFQG 
+## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
 ## Mass : 16922.95
 ## Modifications (1): Met-loss
 ## - - - Fragment data - - -
@@ -446,21 +452,21 @@ $txt
 ## - - - Condition data - - -
 ## Number of conditions: 3 
 ## Number of scans: 10 
-## Condition variables (61): File, Scan, ..., Sample, MedianIonInjectionTimeMs
+## Condition variables (66): File, Scan, ..., Sample, MedianIonInjectionTimeMs
 ## - - - Intensity data - - -
 ## Size of array: 1216x10 (8.38% != 0)
 ## Number of matched fragments: 1019 
 ## Intensity range: [7872.05;1036892.19]
 ## - - - Processing information - - -
-## [2019-02-16 21:24:35] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
-## [2019-02-16 21:24:36] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2019-02-16 21:24:36] Recalculate median injection time based on: Mz, AgcTarget.
-## [2019-02-16 21:24:37] Subsetted 368296 fragments [1216;5882] to 1019 fragments [1216;10].</code></pre>
+## [2019-11-22 20:55:58] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2019-11-22 20:55:59] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2019-11-22 20:55:59] Recalculate median injection time based on: Mz, AgcTarget.
+## [2019-11-22 20:55:59] Subsetted 368296 fragments [1216;5882] to 1019 fragments [1216;10].</code></pre>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="co"># select all conditions from one file</span></a>
 <a class="sourceLine" id="cb31-2" data-line-number="2">myoglobin[, myoglobin<span class="op">$</span>File <span class="op">==</span><span class="st"> "myo_1211_ETDReagentTarget_1e+06_1"</span>]</a></code></pre></div>
 <pre><code>## TopDownSet object (0.24 Mb)
 ## - - - Protein data - - -
-## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAG...MTKALELFRNDIAAKYKELGFQG 
+## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
 ## Mass : 16922.95
 ## Modifications (1): Met-loss
 ## - - - Fragment data - - -
@@ -468,15 +474,15 @@ $txt
 ## Theoretical fragment types (6): a, b, c, x, y, z
 ## Theoretical mass range: [30.03;16910.93]
 ## - - - Processing information - - -
-## [2019-02-16 21:24:35] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
-## [2019-02-16 21:24:36] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2019-02-16 21:24:36] Recalculate median injection time based on: Mz, AgcTarget.
-## [2019-02-16 21:24:37] Subsetted 368296 fragments [1216;5882] to 0 fragments [1216;0].</code></pre>
+## [2019-11-22 20:55:58] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2019-11-22 20:55:59] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2019-11-22 20:55:59] Recalculate median injection time based on: Mz, AgcTarget.
+## [2019-11-22 20:55:59] Subsetted 368296 fragments [1216;5882] to 0 fragments [1216;0].</code></pre>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="co"># select all "c" fragments from a single file</span></a>
 <a class="sourceLine" id="cb33-2" data-line-number="2">myoglobin[<span class="st">"c"</span>, myoglobin<span class="op">$</span>File <span class="op">==</span><span class="st"> "myo_1211_ETDReagentTarget_1e+06_1"</span>]</a></code></pre></div>
 <pre><code>## TopDownSet object (0.11 Mb)
 ## - - - Protein data - - -
-## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAG...MTKALELFRNDIAAKYKELGFQG 
+## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
 ## Mass : 16922.95
 ## Modifications (1): Met-loss
 ## - - - Fragment data - - -
@@ -484,10 +490,10 @@ $txt
 ## Theoretical fragment types (1): c
 ## Theoretical mass range: [74.05;16883.97]
 ## - - - Processing information - - -
-## [2019-02-16 21:24:35] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
-## [2019-02-16 21:24:36] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2019-02-16 21:24:36] Recalculate median injection time based on: Mz, AgcTarget.
-## [2019-02-16 21:24:37] Subsetted 368296 fragments [1216;5882] to 0 fragments [304;0].</code></pre>
+## [2019-11-22 20:55:58] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2019-11-22 20:55:59] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2019-11-22 20:55:59] Recalculate median injection time based on: Mz, AgcTarget.
+## [2019-11-22 20:55:59] Subsetted 368296 fragments [1216;5882] to 0 fragments [304;0].</code></pre>
 </div>
 <div id="plotting-a-topdownset" class="section level2">
 <h2 class="hasAnchor">
@@ -495,7 +501,7 @@ $txt
 </h2>
 <p>Each condition represents one spectrum. We could plot a single condition interactively or all spectra into a <code>pdf</code> file (or any other <em>R</em> device that supports multiple pages/plots).</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="co"># plot a single condition</span></a>
-<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(myoglobin[, <span class="st">"C0707.30_1.0e+05_1.0e+06_10.00_00_28_3"</span>])</a></code></pre></div>
+<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(myoglobin[, <span class="st">"C0707.30_1.0e+05_1.0e+06_10.00_00_28_3"</span>])</a></code></pre></div>
 <pre><code>## [[1]]</code></pre>
 <p><img src="analysis_files/figure-html/plotting-1.png" width="700"></p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">## # example to plot the first ten conditions into a pdf</a>
@@ -528,14 +534,14 @@ $txt
 <a class="sourceLine" id="cb38-6" data-line-number="6">## lowest deviation</a>
 <a class="sourceLine" id="cb38-7" data-line-number="7">myoglobin &lt;-<span class="st"> </span><span class="kw"><a href="../reference/TopDownSet-class.html">filterInjectionTime</a></span>(</a>
 <a class="sourceLine" id="cb38-8" data-line-number="8">    myoglobin,</a>
-<a class="sourceLine" id="cb38-9" data-line-number="9">    <span class="dt">maxDeviation =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Log">log2</a></span>(<span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb38-9" data-line-number="9">    <span class="dt">maxDeviation =</span> <span class="kw"><a href="https://rdrr.io/r/base/Log.html">log2</a></span>(<span class="dv">3</span>),</a>
 <a class="sourceLine" id="cb38-10" data-line-number="10">    <span class="dt">keepTopN =</span> <span class="dv">2</span></a>
 <a class="sourceLine" id="cb38-11" data-line-number="11">)</a>
 <a class="sourceLine" id="cb38-12" data-line-number="12"></a>
 <a class="sourceLine" id="cb38-13" data-line-number="13">myoglobin</a></code></pre></div>
-<pre><code>## TopDownSet object (4.98 Mb)
+<pre><code>## TopDownSet object (5.11 Mb)
 ## - - - Protein data - - -
-## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAG...MTKALELFRNDIAAKYKELGFQG 
+## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
 ## Mass : 16922.95
 ## Modifications (1): Met-loss
 ## - - - Fragment data - - -
@@ -545,27 +551,27 @@ $txt
 ## - - - Condition data - - -
 ## Number of conditions: 1852 
 ## Number of scans: 3696 
-## Condition variables (61): File, Scan, ..., Sample, MedianIonInjectionTimeMs
+## Condition variables (66): File, Scan, ..., Sample, MedianIonInjectionTimeMs
 ## - - - Intensity data - - -
 ## Size of array: 1216x3696 (5.63% != 0)
 ## Number of matched fragments: 252897 
 ## Intensity range: [109.29;8493567.00]
 ## - - - Processing information - - -
-## [2019-02-16 21:24:35] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
-## [2019-02-16 21:24:36] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2019-02-16 21:24:36] Recalculate median injection time based on: Mz, AgcTarget.
-## [2019-02-16 21:24:38] Subsetted 368296 fragments [1216;5882] to 252897 fragments [1216;3696].
-## [2019-02-16 21:24:38] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 252897 fragments [1216;3696].</code></pre>
+## [2019-11-22 20:55:58] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2019-11-22 20:55:59] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2019-11-22 20:55:59] Recalculate median injection time based on: Mz, AgcTarget.
+## [2019-11-22 20:56:00] Subsetted 368296 fragments [1216;5882] to 252897 fragments [1216;3696].
+## [2019-11-22 20:56:00] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 252897 fragments [1216;3696].</code></pre>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">injTimeAfter &lt;-<span class="st"> </span><span class="kw"><a href="../reference/AbstractTopDownSet-class.html">colData</a></span>(myoglobin)</a>
 <a class="sourceLine" id="cb40-2" data-line-number="2">injTimeAfter<span class="op">$</span>Status &lt;-<span class="st"> "after filtering"</span></a>
 <a class="sourceLine" id="cb40-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb40-4" data-line-number="4">injTime &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/as.data.frame">as.data.frame</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cbind">rbind</a></span>(injTimeBefore, injTimeAfter))</a>
+<a class="sourceLine" id="cb40-4" data-line-number="4">injTime &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span>(injTimeBefore, injTimeAfter))</a>
 <a class="sourceLine" id="cb40-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb40-6" data-line-number="6">## use ggplot for visualisation</a>
-<a class="sourceLine" id="cb40-7" data-line-number="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"ggplot2"</span>)</a>
+<a class="sourceLine" id="cb40-7" data-line-number="7"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"ggplot2"</span>)</a>
 <a class="sourceLine" id="cb40-8" data-line-number="8"></a>
 <a class="sourceLine" id="cb40-9" data-line-number="9"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(injTime,</a>
-<a class="sourceLine" id="cb40-10" data-line-number="10">    <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">as.factor</a></span>(AgcTarget),</a>
+<a class="sourceLine" id="cb40-10" data-line-number="10">    <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(AgcTarget),</a>
 <a class="sourceLine" id="cb40-11" data-line-number="11">        <span class="dt">y =</span> IonInjectionTimeMs,</a>
 <a class="sourceLine" id="cb40-12" data-line-number="12">        <span class="dt">group =</span> AgcTarget)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb40-13" data-line-number="13"><span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span>() <span class="op">+</span></a>
@@ -578,9 +584,9 @@ $txt
 <p>High CV of intensity for a fragment suggests either fragment contamination by another <em>m/z</em> species or problems with deisotoping and we recommend removing all fragments with CV &gt; 30, as shown below.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">myoglobin &lt;-<span class="st"> </span><span class="kw"><a href="../reference/TopDownSet-class.html">filterCv</a></span>(myoglobin, <span class="dt">threshold=</span><span class="dv">30</span>)</a>
 <a class="sourceLine" id="cb41-2" data-line-number="2">myoglobin</a></code></pre></div>
-<pre><code>## TopDownSet object (4.56 Mb)
+<pre><code>## TopDownSet object (4.68 Mb)
 ## - - - Protein data - - -
-## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAG...MTKALELFRNDIAAKYKELGFQG 
+## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
 ## Mass : 16922.95
 ## Modifications (1): Met-loss
 ## - - - Fragment data - - -
@@ -590,18 +596,18 @@ $txt
 ## - - - Condition data - - -
 ## Number of conditions: 1852 
 ## Number of scans: 3696 
-## Condition variables (61): File, Scan, ..., Sample, MedianIonInjectionTimeMs
+## Condition variables (66): File, Scan, ..., Sample, MedianIonInjectionTimeMs
 ## - - - Intensity data - - -
 ## Size of array: 1216x3696 (4.80% != 0)
 ## Number of matched fragments: 215569 
 ## Intensity range: [109.29;8493567.00]
 ## - - - Processing information - - -
-## [2019-02-16 21:24:35] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
-## [2019-02-16 21:24:36] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2019-02-16 21:24:36] Recalculate median injection time based on: Mz, AgcTarget.
-## [2019-02-16 21:24:38] Subsetted 368296 fragments [1216;5882] to 252897 fragments [1216;3696].
-## [2019-02-16 21:24:38] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 252897 fragments [1216;3696].
-## [2019-02-16 21:24:40] 37328 fragments with CV &gt; 30% filtered; 215569 fragments [1216;3696].</code></pre>
+## [2019-11-22 20:55:58] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2019-11-22 20:55:59] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2019-11-22 20:55:59] Recalculate median injection time based on: Mz, AgcTarget.
+## [2019-11-22 20:56:00] Subsetted 368296 fragments [1216;5882] to 252897 fragments [1216;3696].
+## [2019-11-22 20:56:00] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 252897 fragments [1216;3696].
+## [2019-11-22 20:56:02] 37328 fragments with CV &gt; 30% filtered; 215569 fragments [1216;3696].</code></pre>
 </div>
 <div id="filter-fragments-on-intensity" class="section level2">
 <h2 class="hasAnchor">
@@ -610,9 +616,9 @@ $txt
 <p>Low intensity is defined relatively to the most intense observation for this fragment (i.e. relatively to the maximum value in an <code>assayData</code> row). In the example below all intensity values, which have less than 10% intensity of the highest intensity to their corresponding fragment (in their corresponding row) are removed.</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1">myoglobin &lt;-<span class="st"> </span><span class="kw"><a href="../reference/TopDownSet-class.html">filterIntensity</a></span>(myoglobin, <span class="dt">threshold=</span><span class="fl">0.1</span>)</a>
 <a class="sourceLine" id="cb43-2" data-line-number="2">myoglobin</a></code></pre></div>
-<pre><code>## TopDownSet object (3.70 Mb)
+<pre><code>## TopDownSet object (3.82 Mb)
 ## - - - Protein data - - -
-## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAG...MTKALELFRNDIAAKYKELGFQG 
+## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
 ## Mass : 16922.95
 ## Modifications (1): Met-loss
 ## - - - Fragment data - - -
@@ -622,29 +628,29 @@ $txt
 ## - - - Condition data - - -
 ## Number of conditions: 1852 
 ## Number of scans: 3696 
-## Condition variables (61): File, Scan, ..., Sample, MedianIonInjectionTimeMs
+## Condition variables (66): File, Scan, ..., Sample, MedianIonInjectionTimeMs
 ## - - - Intensity data - - -
 ## Size of array: 1216x3696 (3.13% != 0)
 ## Number of matched fragments: 140483 
 ## Intensity range: [219.52;8493567.00]
 ## - - - Processing information - - -
-## [2019-02-16 21:24:35] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
-## [2019-02-16 21:24:36] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2019-02-16 21:24:36] Recalculate median injection time based on: Mz, AgcTarget.
-## [2019-02-16 21:24:38] Subsetted 368296 fragments [1216;5882] to 252897 fragments [1216;3696].
-## [2019-02-16 21:24:38] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 252897 fragments [1216;3696].
-## [2019-02-16 21:24:40] 37328 fragments with CV &gt; 30% filtered; 215569 fragments [1216;3696].
-## [2019-02-16 21:24:40] 75086 intensity values &lt; 0.1 (relative) filtered; 140483 fragments [1216;3696].</code></pre>
+## [2019-11-22 20:55:58] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2019-11-22 20:55:59] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2019-11-22 20:55:59] Recalculate median injection time based on: Mz, AgcTarget.
+## [2019-11-22 20:56:00] Subsetted 368296 fragments [1216;5882] to 252897 fragments [1216;3696].
+## [2019-11-22 20:56:00] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 252897 fragments [1216;3696].
+## [2019-11-22 20:56:02] 37328 fragments with CV &gt; 30% filtered; 215569 fragments [1216;3696].
+## [2019-11-22 20:56:02] 75086 intensity values &lt; 0.1 (relative) filtered; 140483 fragments [1216;3696].</code></pre>
 </div>
 <div id="data-aggregation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data-aggregation" class="anchor"></a>Data Aggregation</h2>
 <p>The next step of analysis is aggregating technical replicates of fragmentation conditions (columns of <code>assayData</code>).</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">myoglobin &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/aggregate">aggregate</a></span>(myoglobin)</a>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">myoglobin &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span>(myoglobin)</a>
 <a class="sourceLine" id="cb45-2" data-line-number="2">myoglobin</a></code></pre></div>
-<pre><code>## TopDownSet object (2.18 Mb)
+<pre><code>## TopDownSet object (2.25 Mb)
 ## - - - Protein data - - -
-## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAG...MTKALELFRNDIAAKYKELGFQG 
+## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
 ## Mass : 16922.95
 ## Modifications (1): Met-loss
 ## - - - Fragment data - - -
@@ -654,30 +660,30 @@ $txt
 ## - - - Condition data - - -
 ## Number of conditions: 1852 
 ## Number of scans: 1852 
-## Condition variables (61): File, Scan, ..., Sample, MedianIonInjectionTimeMs
+## Condition variables (66): File, Scan, ..., Sample, MedianIonInjectionTimeMs
 ## - - - Intensity data - - -
 ## Size of array: 1216x1852 (3.96% != 0)
 ## Number of matched fragments: 89230 
 ## Intensity range: [219.52;8492743.50]
 ## - - - Processing information - - -
-## [2019-02-16 21:24:35] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
-## [2019-02-16 21:24:36] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2019-02-16 21:24:36] Recalculate median injection time based on: Mz, AgcTarget.
-## [2019-02-16 21:24:38] Subsetted 368296 fragments [1216;5882] to 252897 fragments [1216;3696].
-## [2019-02-16 21:24:38] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 252897 fragments [1216;3696].
-## [2019-02-16 21:24:40] 37328 fragments with CV &gt; 30% filtered; 215569 fragments [1216;3696].
-## [2019-02-16 21:24:40] 75086 intensity values &lt; 0.1 (relative) filtered; 140483 fragments [1216;3696].
-## [2019-02-16 21:24:42] Aggregated 140483 fragments [1216;3696] to 89230 fragments [1216;1852].</code></pre>
+## [2019-11-22 20:55:58] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2019-11-22 20:55:59] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2019-11-22 20:55:59] Recalculate median injection time based on: Mz, AgcTarget.
+## [2019-11-22 20:56:00] Subsetted 368296 fragments [1216;5882] to 252897 fragments [1216;3696].
+## [2019-11-22 20:56:00] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 252897 fragments [1216;3696].
+## [2019-11-22 20:56:02] 37328 fragments with CV &gt; 30% filtered; 215569 fragments [1216;3696].
+## [2019-11-22 20:56:02] 75086 intensity values &lt; 0.1 (relative) filtered; 140483 fragments [1216;3696].
+## [2019-11-22 20:56:03] Aggregated 140483 fragments [1216;3696] to 89230 fragments [1216;1852].</code></pre>
 </div>
 <div id="random-forest" class="section level2">
 <h2 class="hasAnchor">
 <a href="#random-forest" class="anchor"></a>Random Forest</h2>
 <p>To examine which of the features (fragmentation parameters) have the highest overall impact for a protein we perform random forest machine learning using the <code>ranger</code> <span class="citation">(Wright and Ziegler 2017)</span> <code>R</code>-package.</p>
 <p>Before we compute some fragmentation statistics (number of assigned fragments, total assigned intensity, etc.).</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"ranger"</span>)</a>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"ranger"</span>)</a>
 <a class="sourceLine" id="cb47-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb47-3" data-line-number="3">## statistics</a>
-<a class="sourceLine" id="cb47-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(myoglobin))</a></code></pre></div>
+<a class="sourceLine" id="cb47-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(myoglobin))</a></code></pre></div>
 <pre><code>##   Fragments    Total      Min       Q1   Median     Mean       Q3      Max
 ## 1       114 20287547 15477.93 50676.35 117379.4 16683.84 284206.6 889160.9
 ## 2       112 20647046  9950.82 52033.36 130829.6 16979.48 280873.9 880548.7
@@ -686,10 +692,10 @@ $txt
 ## 5       113 19598593 11322.55 53494.00 113005.6 16117.26 272462.7 882041.0
 ## 6       110 19913901 15506.45 65573.98 119684.7 16376.56 265715.7 950459.8</code></pre>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">## number of fragments</a>
-<a class="sourceLine" id="cb49-2" data-line-number="2">nFragments &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/summary">summary</a></span>(myoglobin)<span class="op">$</span>Fragments</a>
+<a class="sourceLine" id="cb49-2" data-line-number="2">nFragments &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(myoglobin)<span class="op">$</span>Fragments</a>
 <a class="sourceLine" id="cb49-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb49-4" data-line-number="4">## features of interest</a>
-<a class="sourceLine" id="cb49-5" data-line-number="5">foi &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(</a>
+<a class="sourceLine" id="cb49-5" data-line-number="5">foi &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(</a>
 <a class="sourceLine" id="cb49-6" data-line-number="6">    <span class="st">"AgcTarget"</span>,</a>
 <a class="sourceLine" id="cb49-7" data-line-number="7">    <span class="st">"EtdReagentTarget"</span>,</a>
 <a class="sourceLine" id="cb49-8" data-line-number="8">    <span class="st">"EtdActivation"</span>,</a>
@@ -698,24 +704,24 @@ $txt
 <a class="sourceLine" id="cb49-11" data-line-number="11">    <span class="st">"Charge"</span></a>
 <a class="sourceLine" id="cb49-12" data-line-number="12">)</a>
 <a class="sourceLine" id="cb49-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb49-14" data-line-number="14">rfTable &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/as.data.frame">as.data.frame</a></span>(<span class="kw"><a href="../reference/AbstractTopDownSet-class.html">colData</a></span>(myoglobin)[foi])</a>
+<a class="sourceLine" id="cb49-14" data-line-number="14">rfTable &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="kw"><a href="../reference/AbstractTopDownSet-class.html">colData</a></span>(myoglobin)[foi])</a>
 <a class="sourceLine" id="cb49-15" data-line-number="15"></a>
 <a class="sourceLine" id="cb49-16" data-line-number="16">## set NA to zero</a>
-<a class="sourceLine" id="cb49-17" data-line-number="17">rfTable[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/NA">is.na</a></span>(rfTable)] &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb49-17" data-line-number="17">rfTable[<span class="kw"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(rfTable)] &lt;-<span class="st"> </span><span class="dv">0</span></a>
 <a class="sourceLine" id="cb49-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb49-19" data-line-number="19">rfTable &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/as.data.frame">as.data.frame</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cbind">cbind</a></span>(</a>
-<a class="sourceLine" id="cb49-20" data-line-number="20">    <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/scale">scale</a></span>(rfTable),</a>
+<a class="sourceLine" id="cb49-19" data-line-number="19">rfTable &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span>(</a>
+<a class="sourceLine" id="cb49-20" data-line-number="20">    <span class="kw"><a href="https://rdrr.io/r/base/scale.html">scale</a></span>(rfTable),</a>
 <a class="sourceLine" id="cb49-21" data-line-number="21">    <span class="dt">Fragments =</span> nFragments</a>
 <a class="sourceLine" id="cb49-22" data-line-number="22">))</a>
 <a class="sourceLine" id="cb49-23" data-line-number="23"></a>
-<a class="sourceLine" id="cb49-24" data-line-number="24">featureImportance &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ranger/topics/ranger">ranger</a></span>(</a>
+<a class="sourceLine" id="cb49-24" data-line-number="24">featureImportance &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/ranger/man/ranger.html">ranger</a></span>(</a>
 <a class="sourceLine" id="cb49-25" data-line-number="25">    Fragments <span class="op">~</span><span class="st"> </span>.,</a>
 <a class="sourceLine" id="cb49-26" data-line-number="26">    <span class="dt">data =</span> rfTable,</a>
 <a class="sourceLine" id="cb49-27" data-line-number="27">    <span class="dt">importance =</span> <span class="st">"impurity"</span></a>
 <a class="sourceLine" id="cb49-28" data-line-number="28">)<span class="op">$</span>variable.importance</a>
 <a class="sourceLine" id="cb49-29" data-line-number="29"></a>
-<a class="sourceLine" id="cb49-30" data-line-number="30"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/barplot">barplot</a></span>(</a>
-<a class="sourceLine" id="cb49-31" data-line-number="31">    featureImportance<span class="op">/</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(featureImportance),</a>
+<a class="sourceLine" id="cb49-30" data-line-number="30"><span class="kw"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span>(</a>
+<a class="sourceLine" id="cb49-31" data-line-number="31">    featureImportance<span class="op">/</span><span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(featureImportance),</a>
 <a class="sourceLine" id="cb49-32" data-line-number="32">    <span class="dt">cex.names =</span> <span class="fl">0.7</span></a>
 <a class="sourceLine" id="cb49-33" data-line-number="33">)</a></code></pre></div>
 <p><img src="analysis_files/figure-html/randomForest-1.png" width="700"></p>
@@ -734,9 +740,9 @@ $txt
 <p>In <code>topdownr</code> we convert the <code>TopDownSet</code> into an <code>NCBSet</code> object (<em>N</em>-terminal/<em>C</em>-terminal/<em>B</em>idirectional).</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1">myoglobinNcb &lt;-<span class="st"> </span><span class="kw">as</span>(myoglobin, <span class="st">"NCBSet"</span>)</a>
 <a class="sourceLine" id="cb50-2" data-line-number="2">myoglobinNcb</a></code></pre></div>
-<pre><code>## NCBSet object (2.00 Mb)
+<pre><code>## NCBSet object (2.07 Mb)
 ## - - - Protein data - - -
-## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAG...MTKALELFRNDIAAKYKELGFQG 
+## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
 ## - - - Fragment data - - -
 ## Number of N-terminal fragments: 30592
 ## Number of C-terminal fragments: 29456
@@ -744,19 +750,19 @@ $txt
 ## - - - Condition data - - -
 ## Number of conditions: 1852 
 ## Number of scans: 1852 
-## Condition variables (62): File, Scan, ..., MedianIonInjectionTimeMs, AssignedIntensity
+## Condition variables (67): File, Scan, ..., MedianIonInjectionTimeMs, AssignedIntensity
 ## - - - Assay data - - -
 ## Size of array: 152x1852 (24.71% != 0)
 ## - - - Processing information - - -
-## [2019-02-16 21:24:35] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
-## [2019-02-16 21:24:36] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2019-02-16 21:24:36] Recalculate median injection time based on: Mz, AgcTarget.
-## [2019-02-16 21:24:38] Subsetted 368296 fragments [1216;5882] to 252897 fragments [1216;3696].
-## [2019-02-16 21:24:38] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 252897 fragments [1216;3696].
-## [2019-02-16 21:24:40] 37328 fragments with CV &gt; 30% filtered; 215569 fragments [1216;3696].
-## [2019-02-16 21:24:40] 75086 intensity values &lt; 0.1 (relative) filtered; 140483 fragments [1216;3696].
-## [2019-02-16 21:24:42] Aggregated 140483 fragments [1216;3696] to 89230 fragments [1216;1852].
-## [2019-02-16 21:24:43] Coerced TopDownSet into an NCBSet object; 69554 fragments [152;1852].</code></pre>
+## [2019-11-22 20:55:58] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2019-11-22 20:55:59] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2019-11-22 20:55:59] Recalculate median injection time based on: Mz, AgcTarget.
+## [2019-11-22 20:56:00] Subsetted 368296 fragments [1216;5882] to 252897 fragments [1216;3696].
+## [2019-11-22 20:56:00] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 252897 fragments [1216;3696].
+## [2019-11-22 20:56:02] 37328 fragments with CV &gt; 30% filtered; 215569 fragments [1216;3696].
+## [2019-11-22 20:56:02] 75086 intensity values &lt; 0.1 (relative) filtered; 140483 fragments [1216;3696].
+## [2019-11-22 20:56:03] Aggregated 140483 fragments [1216;3696] to 89230 fragments [1216;1852].
+## [2019-11-22 20:56:04] Coerced TopDownSet into an NCBSet object; 69554 fragments [152;1852].</code></pre>
 <p>An <code>NCBSet</code> is very similar to a <code>TopDownSet</code> but instead of an <code>FragmentViews</code> the <code>rowViews</code> are an <code>XStringViews</code> for the former. Another difference is that the <code>NCBSet</code> has one row per bond instead one row per fragment. Also the <code>assayData</code> contains no intensity information but a <code>1</code> for an <em>N</em>-terminal, a <code>2</code> for a <em>C</em>-terminal and a <code>3</code> for bidirectional fragments.</p>
 <p>The <code>NCBSet</code> can be used to select the combination of conditions that provide the best fragment coverage. While computing coverage <code>topdownr</code> awards 1 point for every fragment going from every bond in either <em>N</em> or <em>C</em> directions. This means that bonds covered in both directions increase the score of a condition by 2 points. For the myoglobin fragmentation example we get the following table for the best three conditions:</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="kw"><a href="../reference/NCBSet-class.html">bestConditions</a></span>(myoglobinNcb, <span class="dt">n=</span><span class="dv">3</span>)</a></code></pre></div>
@@ -768,18 +774,14 @@ $txt
 ## C0893.10_1.0e+06_1.0e+06_05.00_14_00_1                       98
 ## C1211.70_1.0e+05_0.0e+00_00.00_28_00_05                      36
 ## C0707.30_5.0e+05_5.0e+06_02.50_07_00_1                       10
-##                                         FragmentsInCondition
-## C0893.10_1.0e+06_1.0e+06_05.00_14_00_1                   143
-## C1211.70_1.0e+05_0.0e+00_00.00_28_00_05                  108
-## C0707.30_5.0e+05_5.0e+06_02.50_07_00_1                   132
-##                                         BondsInCondition FragmentCoverage
-## C0893.10_1.0e+06_1.0e+06_05.00_14_00_1                98        0.4703947
-## C1211.70_1.0e+05_0.0e+00_00.00_28_00_05               82        0.6743421
-## C0707.30_5.0e+05_5.0e+06_02.50_07_00_1                97        0.7664474
-##                                         BondCoverage
-## C0893.10_1.0e+06_1.0e+06_05.00_14_00_1     0.6447368
-## C1211.70_1.0e+05_0.0e+00_00.00_28_00_05    0.8815789
-## C0707.30_5.0e+05_5.0e+06_02.50_07_00_1     0.9473684</code></pre>
+##                                         FragmentsInCondition BondsInCondition
+## C0893.10_1.0e+06_1.0e+06_05.00_14_00_1                   143               98
+## C1211.70_1.0e+05_0.0e+00_00.00_28_00_05                  108               82
+## C0707.30_5.0e+05_5.0e+06_02.50_07_00_1                   132               97
+##                                         FragmentCoverage BondCoverage
+## C0893.10_1.0e+06_1.0e+06_05.00_14_00_1         0.4703947    0.6447368
+## C1211.70_1.0e+05_0.0e+00_00.00_28_00_05        0.6743421    0.8815789
+## C0707.30_5.0e+05_5.0e+06_02.50_07_00_1         0.7664474    0.9473684</code></pre>
 </div>
 <div id="building-a-fragmentation-map" class="section level2">
 <h2 class="hasAnchor">
@@ -789,28 +791,30 @@ $txt
 <a class="sourceLine" id="cb54-2" data-line-number="2"><span class="st">    </span>myoglobinNcb<span class="op">$</span>Mz <span class="op">==</span><span class="st"> </span><span class="fl">707.3</span> <span class="op">&amp;</span></a>
 <a class="sourceLine" id="cb54-3" data-line-number="3"><span class="st">    </span>myoglobinNcb<span class="op">$</span>AgcTarget <span class="op">==</span><span class="st"> </span><span class="fl">1e6</span> <span class="op">&amp;</span></a>
 <a class="sourceLine" id="cb54-4" data-line-number="4"><span class="st">    </span>(myoglobinNcb<span class="op">$</span>EtdReagentTarget <span class="op">==</span><span class="st"> </span><span class="fl">1e7</span> <span class="op">&amp;</span></a>
-<a class="sourceLine" id="cb54-5" data-line-number="5"><span class="st">     </span><span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/NA">is.na</a></span>(myoglobinNcb<span class="op">$</span>EtdReagentTarget))</a>
+<a class="sourceLine" id="cb54-5" data-line-number="5"><span class="st">     </span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(myoglobinNcb<span class="op">$</span>EtdReagentTarget))</a>
 <a class="sourceLine" id="cb54-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb54-7" data-line-number="7">myoglobinNcbSub &lt;-<span class="st"> </span>myoglobinNcb[, sel]</a>
 <a class="sourceLine" id="cb54-8" data-line-number="8"></a>
 <a class="sourceLine" id="cb54-9" data-line-number="9"><span class="kw"><a href="../reference/NCBSet-class.html">fragmentationMap</a></span>(</a>
 <a class="sourceLine" id="cb54-10" data-line-number="10">    myoglobinNcbSub,</a>
 <a class="sourceLine" id="cb54-11" data-line-number="11">    <span class="dt">nCombinations =</span> <span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb54-12" data-line-number="12">    <span class="dt">labels =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq_len</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">ncol</a></span>(myoglobinNcbSub))</a>
+<a class="sourceLine" id="cb54-12" data-line-number="12">    <span class="dt">labels =</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(myoglobinNcbSub))</a>
 <a class="sourceLine" id="cb54-13" data-line-number="13">)</a></code></pre></div>
+<pre><code>## Warning in f(...): Raster pixels are placed at uneven vertical intervals and
+## will be shifted. Consider using geom_tile() instead.</code></pre>
 <p><img src="analysis_files/figure-html/fragmentationMap-1.png" width="700"></p>
 </div>
 </div>
 <div id="session-information" class="section level1">
 <h1 class="hasAnchor">
 <a href="#session-information" class="anchor"></a>Session Information</h1>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/sessionInfo">sessionInfo</a></span>()</a></code></pre></div>
-<pre><code>## R Under development (unstable) (2019-02-16 r76108)
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span>()</a></code></pre></div>
+<pre><code>## R Under development (unstable) (2019-11-22 r77450)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Ubuntu 14.04.5 LTS
 ## 
 ## Matrix products: default
-## BLAS: /home/travis/R-bin/lib/R/lib/libRblas.so
+## BLAS:   /home/travis/R-bin/lib/R/lib/libRblas.so
 ## LAPACK: /home/travis/R-bin/lib/R/lib/libRlapack.so
 ## 
 ## locale:
@@ -826,34 +830,34 @@ $txt
 ## [8] methods   base     
 ## 
 ## other attached packages:
-##  [1] ggplot2_3.1.0       ranger_0.11.1       topdownrdata_1.1.1 
-##  [4] topdownr_1.5.2      Biostrings_2.51.2   XVector_0.23.0     
-##  [7] IRanges_2.17.4      S4Vectors_0.21.10   ProtGenerics_1.15.0
-## [10] BiocGenerics_0.29.1 BiocStyle_2.11.0   
+##  [1] ggplot2_3.2.1       ranger_0.11.2       topdownrdata_1.7.0 
+##  [4] topdownr_1.9.3      Biostrings_2.55.0   XVector_0.27.0     
+##  [7] IRanges_2.21.2      S4Vectors_0.25.0    ProtGenerics_1.19.0
+## [10] BiocGenerics_0.33.0 BiocStyle_2.15.0   
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_1.0.0            lattice_0.20-38       assertthat_0.2.0     
-##  [4] rprojroot_1.3-2       digest_0.6.18         foreach_1.4.4        
-##  [7] R6_2.4.0              plyr_1.8.4            backports_1.1.3      
-## [10] mzID_1.21.1           evaluate_0.13         highr_0.7            
-## [13] pillar_1.3.1          zlibbioc_1.29.0       rlang_0.3.1          
-## [16] lazyeval_0.2.1        Matrix_1.2-15         preprocessCore_1.45.0
-## [19] rmarkdown_1.11        mzR_2.17.1            pkgdown_1.3.0        
-## [22] labeling_0.3          desc_1.2.0            BiocParallel_1.17.13 
-## [25] stringr_1.4.0         munsell_0.5.0         compiler_3.6.0       
-## [28] xfun_0.4              pkgconfig_2.0.2       pcaMethods_1.75.1    
-## [31] htmltools_0.3.6       tibble_2.0.1          roxygen2_6.1.1       
-## [34] bookdown_0.9          codetools_0.2-16      XML_3.98-1.17        
-## [37] withr_2.1.2           crayon_1.3.4          MASS_7.3-51.1        
-## [40] commonmark_1.7        grid_3.6.0            gtable_0.2.0         
-## [43] affy_1.61.0           magrittr_1.5          scales_1.0.0         
-## [46] ncdf4_1.16            stringi_1.3.1         impute_1.57.0        
-## [49] reshape2_1.4.3        fs_1.2.6              affyio_1.53.0        
-## [52] doParallel_1.0.14     limma_3.39.12         xml2_1.2.0           
-## [55] iterators_1.0.10      tools_3.6.0           Biobase_2.43.1       
-## [58] MSnbase_2.9.2         yaml_2.2.0            colorspace_1.4-0     
-## [61] BiocManager_1.30.4    vsn_3.51.0            MALDIquant_1.18      
-## [64] memoise_1.1.0         knitr_1.21</code></pre>
+##  [1] Rcpp_1.0.3            lattice_0.20-38       assertthat_0.2.1     
+##  [4] rprojroot_1.3-2       digest_0.6.22         foreach_1.4.7        
+##  [7] R6_2.4.1              plyr_1.8.4            backports_1.1.5      
+## [10] mzID_1.25.0           evaluate_0.14         highr_0.8            
+## [13] pillar_1.4.2          zlibbioc_1.33.0       rlang_0.4.1          
+## [16] lazyeval_0.2.2        Matrix_1.2-17         preprocessCore_1.49.0
+## [19] rmarkdown_1.17        mzR_2.21.0            pkgdown_1.4.1        
+## [22] labeling_0.3          desc_1.2.0            BiocParallel_1.21.0  
+## [25] stringr_1.4.0         munsell_0.5.0         compiler_4.0.0       
+## [28] xfun_0.11             pkgconfig_2.0.3       pcaMethods_1.79.1    
+## [31] htmltools_0.4.0       tibble_2.1.3          bookdown_0.15        
+## [34] codetools_0.2-16      XML_3.98-1.20         crayon_1.3.4         
+## [37] withr_2.1.2           MASS_7.3-51.4         grid_4.0.0           
+## [40] gtable_0.3.0          lifecycle_0.1.0       affy_1.65.1          
+## [43] magrittr_1.5          scales_1.1.0          ncdf4_1.17           
+## [46] stringi_1.4.3         impute_1.61.0         reshape2_1.4.3       
+## [49] farver_2.0.1          fs_1.3.1              affyio_1.57.0        
+## [52] doParallel_1.0.15     limma_3.43.0          iterators_1.0.12     
+## [55] tools_4.0.0           Biobase_2.47.1        MSnbase_2.13.0       
+## [58] yaml_2.2.0            colorspace_1.4-1      BiocManager_1.30.10  
+## [61] vsn_3.55.0            MALDIquant_1.19.3     memoise_1.1.0        
+## [64] knitr_1.26</code></pre>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1 class="hasAnchor">
@@ -870,6 +874,7 @@ $txt
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
@@ -905,17 +910,20 @@ $txt
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Sebastian Gibb, Pavel Shliaha, Ole Nørregaard Jensen.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>
