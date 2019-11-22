@@ -75,7 +75,8 @@ test_that(".readScanHeadsTable", {
                     stringsAsFactors=FALSE)
     write.csv(d, file=fn, row.names=FALSE)
     on.exit(unlink(fn))
-    expect_message(h <- .readScanHeadsTable(fn, verbose=TRUE),
+    expect_message(h <- .readScanHeadsTable(fn, conditions="FilterString",
+                                            verbose=TRUE),
                    "Reading 5 header information from file")
     expect_equal(colnames(h),
                  c("MsOrder", "FilterString", "Activation1", "Activation2",
@@ -100,7 +101,8 @@ test_that(".readScanHeadsTable", {
                     Energy2=c(NA, 30, 30, 20, 10),
                     stringsAsFactors=FALSE)
     write.csv(d, file=fn, row.names=FALSE)
-    expect_warning(h <- .readScanHeadsTable(fn, verbose=TRUE),
+    expect_warning(h <- .readScanHeadsTable(fn, conditions="FilterString",
+                                            verbose=TRUE),
                    "1 FilterString entries modified")
     expect_equal(h$Condition, c(1, 1:3))
 
@@ -116,7 +118,8 @@ test_that(".readScanHeadsTable", {
                     Energy2=c(NA, 30, 30, 20, 10),
                     stringsAsFactors=FALSE)
     write.csv(d, file=fn, row.names=FALSE)
-    expect_warning(h <- .readScanHeadsTable(fn, verbose=TRUE),
+    expect_warning(h <- .readScanHeadsTable(fn, conditions="FilterString",
+                                            verbose=TRUE),
                    "1 FilterString entries modified")
     expect_equal(h$Condition, c(1, 1:3))
 
@@ -133,7 +136,8 @@ test_that(".readScanHeadsTable", {
                     ScanDescription=paste0("C0", c(1, 1:4)),
                     stringsAsFactors=FALSE)
     write.csv(d, file=fn, row.names=FALSE)
-    expect_warning(h <- .readScanHeadsTable(fn, verbose=FALSE),
+    expect_warning(h <- .readScanHeadsTable(fn, conditions="FilterString",
+                                            verbose=FALSE),
                    "not sorted in ascending order")
     expect_equal(h$Condition, c(1, 1:3))
 

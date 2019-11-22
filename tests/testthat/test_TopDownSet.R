@@ -203,6 +203,7 @@ test_that("condition2data.frame", {
     suppressWarnings(tds <- readTopDownFiles(
         topdownrdata::topDownDataPath("myoglobin"),
         pattern=".*fasta.gz$|1211_.*1e6_1",
+        conditions="FilterString",
         neutralLoss=NULL,
         tolerance=25e-6
     ))

@@ -92,13 +92,13 @@
 #' scans per condition are possible).
 #'
 #' @param file `character`, filename
-#' @param conditions `character`/`numeric`, how to calculate condition IDs.
-#' Conditions could be calculated on `"FilterString"` or by a given number of
-#' conditions.
+#' @param conditions `character`/`numeric`, how to create condition IDs.
+#' Conditions could be read from `"ScanDescription"`, calculated on
+#' `"FilterString"` or by a given number of conditions.
 #' @param verbose `logical`, verbose output?
 #' @return data.frame
 #' @noRd
-.readScanHeadsTable <- function(file, conditions="FilterString",
+.readScanHeadsTable <- function(file, conditions="ScanDescription",
                                 verbose=interactive()) {
     stopifnot(.fileExt(file) == "txt")
     d <- read.csv(
@@ -116,7 +116,7 @@
 
     if (is.character(conditions)) {
         ## maybe more will follow
-        conditions <- match.arg(conditions, c("FilterString", "ScanDescription"))
+        conditions <- match.arg(conditions, c("ScanDescription", "FilterString"))
 
         if (conditions == "FilterString") {
             ## Somehow the FilterString doesn't always contains the right mass

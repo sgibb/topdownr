@@ -80,12 +80,12 @@
 #' used to define a sample (technical replicate). This is used to add the
 #' `Sample` column (used for easier aggregation, etc.).
 #' @param conditions `character`/`numeric`, one of:
-#'  - `"FilterString"` (default): create condition IDs based on mass labels in
-#'    the *FilterString* column (see *massLabeling* in [writeMethodXmls()] for
-#'    details).
-#'  - `"ScanDescription"`: create condition IDs based on the given
+#'  - `"ScanDescription"` (default): create condition IDs based on the given
 #'    "Scan Description" parameter (set automatically by
 #'    [createExperimentsFragmentOptimisation()]).
+#'  - `"FilterString"`: create condition IDs based on mass labels in
+#'    the *FilterString* column (included for backward-compatibilty, used
+#'    in [writeMethodXmls()] prior version 1.5.2 in Dec 2018).
 #'  - A single `numeric` value giving the number of conditions.
 #' @param verbose `logical`, verbose output?
 #' @return A `TopDownSet` object.
@@ -125,7 +125,7 @@ readTopDownFiles <- function(path, pattern=".*",
                                              "CidActivation",
                                              "HcdActivation",
                                              "UvpdActivation"),
-                             conditions="FilterString",
+                             conditions="ScanDescription",
                              verbose=interactive()) {
 
 
