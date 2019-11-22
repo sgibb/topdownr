@@ -1,7 +1,15 @@
 # topdownr 1.9
 - New version for Bioc 3.11 (devel)
 
-## topdownr 1.9.1
+## Changes in version 1.9.2
+- Set `conditions="ScanDescription"` as new default for `readTopDownFiles`.
+  The creation of *FilterString* IDs in the method files was deprecated since
+  over a year. `conditions="FilterString"` is still possible for
+  backward-compatibility [2019-11-22].
+- Fix error message handling in `.validFilename` and
+  `.translateThermoIdToScanId` [2019-11-22].
+
+## Changes in version 1.9.1
 - Remove `defaultMs1Settings` and `defaultMs2Settings` [2019-11-18].
 - Fix `.rbind` for lists with mixed `data.frame` and `DataFrame` [2019-11-18].
 
@@ -11,16 +19,16 @@
 # topdownr 1.7
 - New version for Bioc 3.10 (devel)
 
+## Changes in version 1.7.2
+- Add `readTopDownSet(..., conditions="ScanDescription")` as a new way to
+  read scan conditions (see [#80](https://github.com/sgibb/topdownr/issues/80)/[#81](https://github.com/sgibb/topdownr/issues/81)) [2019-08-08].
+
 ## Changes in version 1.7.1
 - Remove NEWS file (just keep NEWS.md).
 - Never remove `"AgcTarget"` column from `colData` `DataFrame`.
 - Strip white spaces from ScanHeadsman output.
 - Defunct `defaultMs1Settings` and `defaultMs2Settings`. They will be
   removed in 3.11 [2019-06-19].
-
-## Changes in version 1.7.2
-- Add `readTopDownSet(..., conditions="ScanDescription")` as a new way to
-  read scan conditions (see [#80](https://github.com/sgibb/topdownr/issues/80)/[#81](https://github.com/sgibb/topdownr/issues/81)) [2019-08-08].
 
 # topdownr 1.6
 - New version for Bioc 3.9 (release)
