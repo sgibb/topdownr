@@ -380,9 +380,9 @@ test_that(".topIdx", {
 })
 
 test_that(".translateThermoIdToScanId", {
-    expect_error(.translateThermoIdToScanId(NULL))
-    expect_error(.translateThermoIdToScanId(1:10))
-    expect_error(.translateThermoIdToScanId(c("", "")))
+    expect_error(.translateThermoIdToScanId(NULL), "character")
+    expect_error(.translateThermoIdToScanId(1:10), "character")
+    expect_error(.translateThermoIdToScanId(c("", "")), "non-empty")
     expect_equal(.translateThermoIdToScanId(c(
         "controllerType=0 controllerNumber=1 scan=11",
         "controllerType=0 controllerNumber=1 scan=12",
