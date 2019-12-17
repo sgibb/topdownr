@@ -1,6 +1,10 @@
 # topdownr 1.9
 - New version for Bioc 3.11 (devel)
 
+## Changes in version 1.9.4
+- Fix unit tests that check for "matrix" class.
+  (`class(m)` now returns `c("matrix", "array")` in r-devel) [2019-12-17].
+
 ## Changes in version 1.9.3
 - Adapt analysis vignette to changed `condition` argument [2019-11-22].
 
