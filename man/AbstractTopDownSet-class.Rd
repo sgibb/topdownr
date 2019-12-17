@@ -157,9 +157,9 @@ a single column of the \code{colData} \code{DataFrame}.
 
 \item \code{$}: Accessor for columns in the \code{colData} slot.
 
-The \verb{$} simplifies the accession of a single column
+The \code{$} simplifies the accession of a single column
 of the \code{colData}.
-It is identical to the \verb{[[} operator.
+It is identical to the \code{[[} operator.
 
 \item \code{$<-}: Setter for a column in the \code{colData} slot.
 
