@@ -223,7 +223,7 @@ test_that("validMs1Settings", {
     expect_error(validMs1Settings(family="FOO"))
     expect_error(validMs1Settings(version="xx"))
     m <- validMs1Settings()
-    expect_true(class(m) == "matrix")
+    expect_is(m, "matrix")
     expect_equal(colnames(m), c("name", "class", "type"))
     expect_equal(m[1:3, "name"], c("FirstMass", "LastMass", "Microscans"))
     expect_equal(m[1:3, "class"], c("double", "double", "integer"))
@@ -236,7 +236,7 @@ test_that("validTms2Settings", {
     expect_error(validTms2Settings(family="FOO"))
     expect_error(validTms2Settings(version="xx"))
     m <- validTms2Settings()
-    expect_true(class(m) == "matrix")
+    expect_is(m, "matrix")
     expect_equal(colnames(m), c("name", "class", "type"))
     expect_equal(validTms2Settings("All"),
                  validTms2Settings(c("TMS2", "ETD", "CID", "HCD", "UVPD")))
