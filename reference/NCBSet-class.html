@@ -317,8 +317,8 @@ for technical details about the coverage storage.</p></li>
 #&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
 #&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
 #&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2019-11-22 20:54:55] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
-#&gt; [2019-11-22 20:54:55] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222]. </div><div class='input'>
+#&gt; [2019-12-17 19:45:06] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
+#&gt; [2019-12-17 19:45:06] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222]. </div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>ncb</span>))</div><div class='output co'>#&gt;                                Fragments Total Min Q1 Median      Mean Q3 Max
 #&gt; C1.0e+05_1.0e+06_02.50_07_00_1        48    96   1  2      2 0.6315789  2   3
 #&gt; C1.0e+05_1.0e+06_02.50_14_00_1        47    91   1  2      2 0.5986842  2   2
@@ -327,21 +327,21 @@ for technical details about the coverage storage.</p></li>
 #&gt; C1.0e+05_1.0e+06_02.50_35_00_1        50    99   1  2      2 0.6513158  2   2
 #&gt; C1.0e+05_1.0e+06_02.50_00_07          60   118   1  2      2 0.7763158  2   2</div><div class='input'>
 <span class='co'># Accessing slots</span>
-<span class='fu'><a href='AbstractTopDownSet-class.html'>rowViews</a></span>(<span class='no'>ncb</span>)</div><div class='output co'>#&gt;   Views on a 153-letter AAString subject
-#&gt; subject: GLSDGEWQQVLNVWGKVEADIAGHGQEVLIRLFT...PGDFGADAQGAMTKALELFRNDIAAKYKELGFQG
+<span class='fu'><a href='AbstractTopDownSet-class.html'>rowViews</a></span>(<span class='no'>ncb</span>)</div><div class='output co'>#&gt; Views on a 153-letter AAString subject
+#&gt; subject: GLSDGEWQQVLNVWGKVEADIAGHGQEVLIRLFTG…HPGDFGADAQGAMTKALELFRNDIAAKYKELGFQG
 #&gt; views:
-#&gt;       start end width
-#&gt;   [1]     1   1     1 [G]
-#&gt;   [2]     1   2     2 [GL]
-#&gt;   [3]     1   3     3 [GLS]
-#&gt;   [4]     1   4     4 [GLSD]
-#&gt;   [5]     1   5     5 [GLSDG]
-#&gt;   ...   ... ...   ... ...
-#&gt; [148]     1 148   148 [GLSDGEWQQVLNVWGKVEADIAGHGQE...FGADAQGAMTKALELFRNDIAAKYKE]
-#&gt; [149]     1 149   149 [GLSDGEWQQVLNVWGKVEADIAGHGQE...GADAQGAMTKALELFRNDIAAKYKEL]
-#&gt; [150]     1 150   150 [GLSDGEWQQVLNVWGKVEADIAGHGQE...ADAQGAMTKALELFRNDIAAKYKELG]
-#&gt; [151]     1 151   151 [GLSDGEWQQVLNVWGKVEADIAGHGQE...DAQGAMTKALELFRNDIAAKYKELGF]
-#&gt; [152]     1 152   152 [GLSDGEWQQVLNVWGKVEADIAGHGQE...AQGAMTKALELFRNDIAAKYKELGFQ]</div><div class='input'><span class='fu'><a href='AbstractTopDownSet-class.html'>colData</a></span>(<span class='no'>ncb</span>)</div><div class='output co'>#&gt; DataFrame with 222 rows and 60 columns
+#&gt;         start end width
+#&gt;     [1]     1   1     1 [G]
+#&gt;     [2]     1   2     2 [GL]
+#&gt;     [3]     1   3     3 [GLS]
+#&gt;     [4]     1   4     4 [GLSD]
+#&gt;     [5]     1   5     5 [GLSDG]
+#&gt;     ...   ... ...   ... ...
+#&gt;   [148]     1 148   148 [GLSDGEWQQVLNVWGKVEADIAGHGQ…FGADAQGAMTKALELFRNDIAAKYKE]
+#&gt;   [149]     1 149   149 [GLSDGEWQQVLNVWGKVEADIAGHGQ…GADAQGAMTKALELFRNDIAAKYKEL]
+#&gt;   [150]     1 150   150 [GLSDGEWQQVLNVWGKVEADIAGHGQ…ADAQGAMTKALELFRNDIAAKYKELG]
+#&gt;   [151]     1 151   151 [GLSDGEWQQVLNVWGKVEADIAGHGQ…DAQGAMTKALELFRNDIAAKYKELGF]
+#&gt;   [152]     1 152   152 [GLSDGEWQQVLNVWGKVEADIAGHGQ…AQGAMTKALELFRNDIAAKYKELGFQ]</div><div class='input'><span class='fu'><a href='AbstractTopDownSet-class.html'>colData</a></span>(<span class='no'>ncb</span>)</div><div class='output co'>#&gt; DataFrame with 222 rows and 60 columns
 #&gt;                                                           File      Scan
 #&gt;                                                          &lt;Rle&gt; &lt;integer&gt;
 #&gt; C1.0e+05_1.0e+06_02.50_07_00_1 myo_1211_ETDReagentTarget_1e6_1        33
@@ -355,58 +355,58 @@ for technical details about the coverage storage.</p></li>
 #&gt; C1.0e+06_0.0e+00_00.00_00_21_1 myo_1211_ETDReagentTarget_1e6_1       264
 #&gt; C1.0e+06_0.0e+00_00.00_00_28_1 myo_1211_ETDReagentTarget_1e6_1       268
 #&gt; C1.0e+06_0.0e+00_00.00_00_35_1 myo_1211_ETDReagentTarget_1e6_1       271
-#&gt;                                SpectrumIndex PeaksCount    TotIonCurrent
-#&gt;                                    &lt;numeric&gt;  &lt;numeric&gt;        &lt;numeric&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1          23.5        134 14353074.1522197
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1          26.5        134 14563102.0923105
-#&gt; C1.0e+05_1.0e+06_02.50_21_00              30        148 14008273.0611666
-#&gt; C1.0e+05_1.0e+06_02.50_28_00_1          33.5        136 14285121.5135714
-#&gt; C1.0e+05_1.0e+06_02.50_35_00_1          36.5      134.5 14827733.8794987
-#&gt; ...                                      ...        ...              ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_07_1         241.5         50  731470.38825943
-#&gt; C1.0e+06_0.0e+00_00.00_00_14_1         244.5      368.5 5725744.84597768
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_1         248.5        520 3477378.62481132
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1         252.5      202.5 2015615.08009497
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1         255.5      198.5 2889646.87436057
-#&gt;                                   RetentionTime     BasePeakMz
-#&gt;                                       &lt;numeric&gt;      &lt;numeric&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1    380.438646096 16942.98967663
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1    434.326461816 16943.01127663
-#&gt; C1.0e+05_1.0e+06_02.50_21_00      497.289123696 16942.98077663
-#&gt; C1.0e+05_1.0e+06_02.50_28_00_1    560.288335456 16942.99172663
-#&gt; C1.0e+05_1.0e+06_02.50_35_00_1 614.126407839999 16943.00292663
-#&gt; ...                                         ...            ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_07_1   4641.375663776  9065.46102663
-#&gt; C1.0e+06_0.0e+00_00.00_00_14_1   4690.678435784 16940.92417663
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_1   4756.433521704   231.12327663
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1   4822.080427064   231.12312663
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1   4870.884927104   231.12317663
-#&gt;                                BasePeakIntensity.SpectraInformation
-#&gt;                                                           &lt;numeric&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1                          4867513.935
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1                          5007424.645
-#&gt; C1.0e+05_1.0e+06_02.50_21_00                             4605146.35
-#&gt; C1.0e+05_1.0e+06_02.50_28_00_1                           4835166.33
-#&gt; C1.0e+05_1.0e+06_02.50_35_00_1                          5029053.635
-#&gt; ...                                                             ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_07_1                             31445.26
-#&gt; C1.0e+06_0.0e+00_00.00_00_14_1                            297300.95
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_1                            54766.105
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1                            100368.13
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1                           249724.285
-#&gt;                                        LowMz         HighMz      PrecursorMz
-#&gt;                                    &lt;numeric&gt;      &lt;numeric&gt;        &lt;numeric&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1  762.39092663 17146.07972663   1211.701171875
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1  762.39112663 17146.08147663 1211.70141601563
-#&gt; C1.0e+05_1.0e+06_02.50_21_00    762.39117663 17146.11307663 1211.70166015625
-#&gt; C1.0e+05_1.0e+06_02.50_28_00_1  762.39082663 17146.58837663 1211.70178222656
-#&gt; C1.0e+05_1.0e+06_02.50_35_00_1  762.39042663 17146.06147663 1211.70202636719
-#&gt; ...                                      ...            ...              ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_07_1 1146.11382663 16941.01437663 1211.71545410156
-#&gt; C1.0e+06_0.0e+00_00.00_00_14_1  244.63402663 16940.92417663 1211.71557617188
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_1  200.13867663  5468.80477663  1211.7158203125
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1  200.13857663  1406.27557663 1211.71594238281
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1  200.13862663  1049.07907663 1211.71618652344
+#&gt;                                SpectrumIndex PeaksCount TotIonCurrent
+#&gt;                                    &lt;numeric&gt;  &lt;numeric&gt;     &lt;numeric&gt;
+#&gt; C1.0e+05_1.0e+06_02.50_07_00_1          23.5      134.0      14353074
+#&gt; C1.0e+05_1.0e+06_02.50_14_00_1          26.5      134.0      14563102
+#&gt; C1.0e+05_1.0e+06_02.50_21_00            30.0      148.0      14008273
+#&gt; C1.0e+05_1.0e+06_02.50_28_00_1          33.5      136.0      14285122
+#&gt; C1.0e+05_1.0e+06_02.50_35_00_1          36.5      134.5      14827734
+#&gt; ...                                      ...        ...           ...
+#&gt; C1.0e+06_0.0e+00_00.00_00_07_1         241.5       50.0        731470
+#&gt; C1.0e+06_0.0e+00_00.00_00_14_1         244.5      368.5       5725745
+#&gt; C1.0e+06_0.0e+00_00.00_00_21_1         248.5      520.0       3477379
+#&gt; C1.0e+06_0.0e+00_00.00_00_28_1         252.5      202.5       2015615
+#&gt; C1.0e+06_0.0e+00_00.00_00_35_1         255.5      198.5       2889647
+#&gt;                                RetentionTime BasePeakMz
+#&gt;                                    &lt;numeric&gt;  &lt;numeric&gt;
+#&gt; C1.0e+05_1.0e+06_02.50_07_00_1       380.439      16943
+#&gt; C1.0e+05_1.0e+06_02.50_14_00_1       434.326      16943
+#&gt; C1.0e+05_1.0e+06_02.50_21_00         497.289      16943
+#&gt; C1.0e+05_1.0e+06_02.50_28_00_1       560.288      16943
+#&gt; C1.0e+05_1.0e+06_02.50_35_00_1       614.126      16943
+#&gt; ...                                      ...        ...
+#&gt; C1.0e+06_0.0e+00_00.00_00_07_1       4641.38   9065.461
+#&gt; C1.0e+06_0.0e+00_00.00_00_14_1       4690.68  16940.924
+#&gt; C1.0e+06_0.0e+00_00.00_00_21_1       4756.43    231.123
+#&gt; C1.0e+06_0.0e+00_00.00_00_28_1       4822.08    231.123
+#&gt; C1.0e+06_0.0e+00_00.00_00_35_1       4870.88    231.123
+#&gt;                                BasePeakIntensity.SpectraInformation     LowMz
+#&gt;                                                           &lt;numeric&gt; &lt;numeric&gt;
+#&gt; C1.0e+05_1.0e+06_02.50_07_00_1                              4867514   762.391
+#&gt; C1.0e+05_1.0e+06_02.50_14_00_1                              5007425   762.391
+#&gt; C1.0e+05_1.0e+06_02.50_21_00                                4605146   762.391
+#&gt; C1.0e+05_1.0e+06_02.50_28_00_1                              4835166   762.391
+#&gt; C1.0e+05_1.0e+06_02.50_35_00_1                              5029054   762.390
+#&gt; ...                                                             ...       ...
+#&gt; C1.0e+06_0.0e+00_00.00_00_07_1                              31445.3  1146.114
+#&gt; C1.0e+06_0.0e+00_00.00_00_14_1                             297301.0   244.634
+#&gt; C1.0e+06_0.0e+00_00.00_00_21_1                              54766.1   200.139
+#&gt; C1.0e+06_0.0e+00_00.00_00_28_1                             100368.1   200.139
+#&gt; C1.0e+06_0.0e+00_00.00_00_35_1                             249724.3   200.139
+#&gt;                                   HighMz PrecursorMz
+#&gt;                                &lt;numeric&gt;   &lt;numeric&gt;
+#&gt; C1.0e+05_1.0e+06_02.50_07_00_1   17146.1      1211.7
+#&gt; C1.0e+05_1.0e+06_02.50_14_00_1   17146.1      1211.7
+#&gt; C1.0e+05_1.0e+06_02.50_21_00     17146.1      1211.7
+#&gt; C1.0e+05_1.0e+06_02.50_28_00_1   17146.6      1211.7
+#&gt; C1.0e+05_1.0e+06_02.50_35_00_1   17146.1      1211.7
+#&gt; ...                                  ...         ...
+#&gt; C1.0e+06_0.0e+00_00.00_00_07_1  16941.01     1211.72
+#&gt; C1.0e+06_0.0e+00_00.00_00_14_1  16940.92     1211.72
+#&gt; C1.0e+06_0.0e+00_00.00_00_21_1   5468.80     1211.72
+#&gt; C1.0e+06_0.0e+00_00.00_00_28_1   1406.28     1211.72
+#&gt; C1.0e+06_0.0e+00_00.00_00_35_1   1049.08     1211.72
 #&gt;                                                                  SpectrumId
 #&gt;                                                                 &lt;character&gt;
 #&gt; C1.0e+05_1.0e+06_02.50_07_00_1  controllerType=0 controllerNumber=1 scan=33
@@ -446,96 +446,96 @@ for technical details about the coverage storage.</p></li>
 #&gt; C1.0e+06_0.0e+00_00.00_00_21_1            FTMS + p NSI Full ms2 1211.7158@hcd21.00 [100.0000-2000.0000]
 #&gt; C1.0e+06_0.0e+00_00.00_00_28_1            FTMS + p NSI Full ms2 1211.7160@hcd28.00 [100.0000-2000.0000]
 #&gt; C1.0e+06_0.0e+00_00.00_00_35_1            FTMS + p NSI Full ms2 1211.7162@hcd35.00 [100.0000-2000.0000]
-#&gt;                                SupplementalActivation     RtMin        Tic
-#&gt;                                                 &lt;Rle&gt; &lt;numeric&gt;  &lt;numeric&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1                   TRUE   6.34064  165522520
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1                   TRUE  7.238775  168781032
-#&gt; C1.0e+05_1.0e+06_02.50_21_00                     TRUE   8.28815  159144752
-#&gt; C1.0e+05_1.0e+06_02.50_28_00_1                   TRUE   9.33814  164578728
-#&gt; C1.0e+05_1.0e+06_02.50_35_00_1                   TRUE  10.23544  169997320
-#&gt; ...                                               ...       ...        ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_07_1                  FALSE  77.35626   46251106
-#&gt; C1.0e+06_0.0e+00_00.00_00_14_1                  FALSE  78.17797   36784694
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_1                  FALSE 79.273895    6848908
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1                  FALSE  80.36801 4623503.75
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1                  FALSE 81.181415    6598797
+#&gt;                                SupplementalActivation     RtMin       Tic
+#&gt;                                                 &lt;Rle&gt; &lt;numeric&gt; &lt;numeric&gt;
+#&gt; C1.0e+05_1.0e+06_02.50_07_00_1                   TRUE   6.34064 165522520
+#&gt; C1.0e+05_1.0e+06_02.50_14_00_1                   TRUE   7.23878 168781032
+#&gt; C1.0e+05_1.0e+06_02.50_21_00                     TRUE   8.28815 159144752
+#&gt; C1.0e+05_1.0e+06_02.50_28_00_1                   TRUE   9.33814 164578728
+#&gt; C1.0e+05_1.0e+06_02.50_35_00_1                   TRUE  10.23544 169997320
+#&gt; ...                                               ...       ...       ...
+#&gt; C1.0e+06_0.0e+00_00.00_00_07_1                  FALSE   77.3563  46251106
+#&gt; C1.0e+06_0.0e+00_00.00_00_14_1                  FALSE   78.1780  36784694
+#&gt; C1.0e+06_0.0e+00_00.00_00_21_1                  FALSE   79.2739   6848908
+#&gt; C1.0e+06_0.0e+00_00.00_00_28_1                  FALSE   80.3680   4623504
+#&gt; C1.0e+06_0.0e+00_00.00_00_35_1                  FALSE   81.1814   6598797
 #&gt;                                BasePeakPosition
 #&gt;                                       &lt;numeric&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1      1304.930055
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1       1304.92981
-#&gt; C1.0e+05_1.0e+06_02.50_21_00         1304.93005
-#&gt; C1.0e+05_1.0e+06_02.50_28_00_1      1304.930055
-#&gt; C1.0e+05_1.0e+06_02.50_35_00_1      1304.891415
+#&gt; C1.0e+05_1.0e+06_02.50_07_00_1          1304.93
+#&gt; C1.0e+05_1.0e+06_02.50_14_00_1          1304.93
+#&gt; C1.0e+05_1.0e+06_02.50_21_00            1304.93
+#&gt; C1.0e+05_1.0e+06_02.50_28_00_1          1304.93
+#&gt; C1.0e+05_1.0e+06_02.50_35_00_1          1304.89
 #&gt; ...                                         ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_07_1       1211.74597
-#&gt; C1.0e+06_0.0e+00_00.00_00_14_1      1211.755245
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_1       231.123265
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1        195.10709
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1       231.123185
+#&gt; C1.0e+06_0.0e+00_00.00_00_07_1         1211.746
+#&gt; C1.0e+06_0.0e+00_00.00_00_14_1         1211.755
+#&gt; C1.0e+06_0.0e+00_00.00_00_21_1          231.123
+#&gt; C1.0e+06_0.0e+00_00.00_00_28_1          195.107
+#&gt; C1.0e+06_0.0e+00_00.00_00_35_1          231.123
 #&gt;                                BasePeakIntensity.HeaderInformation
 #&gt;                                                          &lt;numeric&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1                          3773813.15
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1                           3854661.9
-#&gt; C1.0e+05_1.0e+06_02.50_21_00                             3627428.8
-#&gt; C1.0e+05_1.0e+06_02.50_28_00_1                          3772335.05
-#&gt; C1.0e+05_1.0e+06_02.50_35_00_1                           3699569.8
+#&gt; C1.0e+05_1.0e+06_02.50_07_00_1                             3773813
+#&gt; C1.0e+05_1.0e+06_02.50_14_00_1                             3854662
+#&gt; C1.0e+05_1.0e+06_02.50_21_00                               3627429
+#&gt; C1.0e+05_1.0e+06_02.50_28_00_1                             3772335
+#&gt; C1.0e+05_1.0e+06_02.50_35_00_1                             3699570
 #&gt; ...                                                            ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_07_1                            30933570
+#&gt; C1.0e+06_0.0e+00_00.00_00_07_1                          30933570.0
 #&gt; C1.0e+06_0.0e+00_00.00_00_14_1                            745855.8
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_1                            49163.05
+#&gt; C1.0e+06_0.0e+00_00.00_00_21_1                             49163.1
 #&gt; C1.0e+06_0.0e+00_00.00_00_28_1                             99657.5
 #&gt; C1.0e+06_0.0e+00_00.00_00_35_1                            222407.6
 #&gt;                                IonInjectionTimeMs ElapsedScanTimeSec HcdEnergy
 #&gt;                                         &lt;numeric&gt;          &lt;numeric&gt;     &lt;Rle&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1              4.719              17.85       NaN
+#&gt; C1.0e+05_1.0e+06_02.50_07_00_1             4.7190            17.8500       NaN
 #&gt; C1.0e+05_1.0e+06_02.50_14_00_1             4.4465            17.8405       NaN
-#&gt; C1.0e+05_1.0e+06_02.50_21_00                5.622             17.887       NaN
-#&gt; C1.0e+05_1.0e+06_02.50_28_00_1              4.979            17.8605       NaN
+#&gt; C1.0e+05_1.0e+06_02.50_21_00               5.6220            17.8870       NaN
+#&gt; C1.0e+05_1.0e+06_02.50_28_00_1             4.9790            17.8605       NaN
 #&gt; C1.0e+05_1.0e+06_02.50_35_00_1             4.2125            17.8315       NaN
 #&gt; ...                                           ...                ...       ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_07_1             41.531            16.1035         7
-#&gt; C1.0e+06_0.0e+00_00.00_00_14_1            36.3915             15.898        14
+#&gt; C1.0e+06_0.0e+00_00.00_00_07_1            41.5310            16.1035         7
+#&gt; C1.0e+06_0.0e+00_00.00_00_14_1            36.3915            15.8980        14
 #&gt; C1.0e+06_0.0e+00_00.00_00_21_1            38.7175            15.9905        21
 #&gt; C1.0e+06_0.0e+00_00.00_00_28_1            33.2765            15.7745        28
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1             34.128             15.808        35
+#&gt; C1.0e+06_0.0e+00_00.00_00_35_1            34.1280            15.8080        35
 #&gt;                                ConversionParameterB ConversionParameterC
 #&gt;                                           &lt;numeric&gt;            &lt;numeric&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1     211703103.257927    -146989183.520749
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1     211703102.662952     -146989182.69859
-#&gt; C1.0e+05_1.0e+06_02.50_21_00       211703102.056363      -146989181.8545
-#&gt; C1.0e+05_1.0e+06_02.50_28_00_1     211703101.442506    -146989181.001897
-#&gt; C1.0e+05_1.0e+06_02.50_35_00_1     211703100.812961    -146989180.128003
+#&gt; C1.0e+05_1.0e+06_02.50_07_00_1            211703103           -146989184
+#&gt; C1.0e+05_1.0e+06_02.50_14_00_1            211703103           -146989183
+#&gt; C1.0e+05_1.0e+06_02.50_21_00              211703102           -146989182
+#&gt; C1.0e+05_1.0e+06_02.50_28_00_1            211703101           -146989181
+#&gt; C1.0e+05_1.0e+06_02.50_35_00_1            211703101           -146989180
 #&gt; ...                                             ...                  ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_07_1     211702382.755101    -146988183.007599
-#&gt; C1.0e+06_0.0e+00_00.00_00_14_1       211702382.0792    -146988182.066856
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_1     211702381.311807     -146988181.00019
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1     211702380.623441    -146988180.050792
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1     211702379.937029    -146988179.095817
-#&gt;                                TemperatureCompPpm SpaceChargeCompPpm   RawOvFtt
-#&gt;                                             &lt;Rle&gt;              &lt;Rle&gt;  &lt;numeric&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1             -14.44              -0.18  778211.95
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1             -14.44              -0.18  746396.75
-#&gt; C1.0e+05_1.0e+06_02.50_21_00               -14.44              -0.18   897244.2
-#&gt; C1.0e+05_1.0e+06_02.50_28_00_1             -14.44              -0.18   810213.1
-#&gt; C1.0e+05_1.0e+06_02.50_35_00_1             -14.44              -0.18   720653.1
-#&gt; ...                                           ...                ...        ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_07_1             -14.56              -1.76  1884473.8
-#&gt; C1.0e+06_0.0e+00_00.00_00_14_1             -14.56              -1.76 1354523.75
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_1             -14.56              -1.76  275211.35
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1             -14.56              -1.76  158894.65
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1             -14.56              -1.76  229971.15
+#&gt; C1.0e+06_0.0e+00_00.00_00_07_1            211702383           -146988183
+#&gt; C1.0e+06_0.0e+00_00.00_00_14_1            211702382           -146988182
+#&gt; C1.0e+06_0.0e+00_00.00_00_21_1            211702381           -146988181
+#&gt; C1.0e+06_0.0e+00_00.00_00_28_1            211702381           -146988180
+#&gt; C1.0e+06_0.0e+00_00.00_00_35_1            211702380           -146988179
+#&gt;                                TemperatureCompPpm SpaceChargeCompPpm  RawOvFtt
+#&gt;                                             &lt;Rle&gt;              &lt;Rle&gt; &lt;numeric&gt;
+#&gt; C1.0e+05_1.0e+06_02.50_07_00_1             -14.44              -0.18    778212
+#&gt; C1.0e+05_1.0e+06_02.50_14_00_1             -14.44              -0.18    746397
+#&gt; C1.0e+05_1.0e+06_02.50_21_00               -14.44              -0.18    897244
+#&gt; C1.0e+05_1.0e+06_02.50_28_00_1             -14.44              -0.18    810213
+#&gt; C1.0e+05_1.0e+06_02.50_35_00_1             -14.44              -0.18    720653
+#&gt; ...                                           ...                ...       ...
+#&gt; C1.0e+06_0.0e+00_00.00_00_07_1             -14.56              -1.76   1884474
+#&gt; C1.0e+06_0.0e+00_00.00_00_14_1             -14.56              -1.76   1354524
+#&gt; C1.0e+06_0.0e+00_00.00_00_21_1             -14.56              -1.76    275211
+#&gt; C1.0e+06_0.0e+00_00.00_00_28_1             -14.56              -1.76    158895
+#&gt; C1.0e+06_0.0e+00_00.00_00_35_1             -14.56              -1.76    229971
 #&gt;                                InjectionT0 NrCentroids SelectedMass1
 #&gt;                                  &lt;numeric&gt;   &lt;numeric&gt;         &lt;Rle&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1           0        3283        1211.7
+#&gt; C1.0e+05_1.0e+06_02.50_07_00_1           0      3283.0        1211.7
 #&gt; C1.0e+05_1.0e+06_02.50_14_00_1           0      3428.5        1211.7
-#&gt; C1.0e+05_1.0e+06_02.50_21_00             0        3629        1211.7
+#&gt; C1.0e+05_1.0e+06_02.50_21_00             0      3629.0        1211.7
 #&gt; C1.0e+05_1.0e+06_02.50_28_00_1           0      3464.5        1211.7
 #&gt; C1.0e+05_1.0e+06_02.50_35_00_1           0      3341.5        1211.7
 #&gt; ...                                    ...         ...           ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_07_1           0        3128       1211.72
+#&gt; C1.0e+06_0.0e+00_00.00_00_07_1       0.000      3128.0       1211.72
 #&gt; C1.0e+06_0.0e+00_00.00_00_14_1      -0.048      6190.5       1211.72
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_1      -0.055        4913       1211.72
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1       0.033        2346       1211.72
+#&gt; C1.0e+06_0.0e+00_00.00_00_21_1      -0.055      4913.0       1211.72
+#&gt; C1.0e+06_0.0e+00_00.00_00_28_1       0.033      2346.0       1211.72
 #&gt; C1.0e+06_0.0e+00_00.00_00_35_1       0.035      2365.5       1211.72
 #&gt;                                Activation1 Energy1 SelectedMass2 Activation2
 #&gt;                                      &lt;Rle&gt;   &lt;Rle&gt;         &lt;Rle&gt;       &lt;Rle&gt;
@@ -656,17 +656,17 @@ for technical details about the coverage storage.</p></li>
 #&gt; C1.0e+06_0.0e+00_00.00_00_35_1 (mz=1211.7162 z=1 name=) 1211.7     14       222
 #&gt;                                MedianIonInjectionTimeMs AssignedIntensity
 #&gt;                                                   &lt;Rle&gt;         &lt;numeric&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1                    4.837  3584559.17822266
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1                    4.837  3693917.99804688
-#&gt; C1.0e+05_1.0e+06_02.50_21_00                      4.837  3590927.24267578
-#&gt; C1.0e+05_1.0e+06_02.50_28_00_1                    4.837  3935368.30688477
-#&gt; C1.0e+05_1.0e+06_02.50_35_00_1                    4.837  3773703.15234375
+#&gt; C1.0e+05_1.0e+06_02.50_07_00_1                    4.837           3584559
+#&gt; C1.0e+05_1.0e+06_02.50_14_00_1                    4.837           3693918
+#&gt; C1.0e+05_1.0e+06_02.50_21_00                      4.837           3590927
+#&gt; C1.0e+05_1.0e+06_02.50_28_00_1                    4.837           3935368
+#&gt; C1.0e+05_1.0e+06_02.50_35_00_1                    4.837           3773703
 #&gt; ...                                                 ...               ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_07_1                    43.14  105927.569519043
-#&gt; C1.0e+06_0.0e+00_00.00_00_14_1                    43.14  1786586.10116577
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_1                    43.14  400658.533752441
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1                    43.14  53932.9553222656
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1                    43.14  56438.1748046875</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>assayData</span>(<span class='no'>ncb</span>))</div><div class='output co'>#&gt; 6 x 222 sparse Matrix of class "dgCMatrix"</div><div class='output co'>#&gt; <span class='message'>   [[ suppressing 222 column names ‘C1.0e+05_1.0e+06_02.50_07_00_1’, ‘C1.0e+05_1.0e+06_02.50_14_00_1’, ‘C1.0e+05_1.0e+06_02.50_21_00’ ... ]]</span></div><div class='output co'>#&gt;                                                                                
+#&gt; C1.0e+06_0.0e+00_00.00_00_07_1                    43.14          105927.6
+#&gt; C1.0e+06_0.0e+00_00.00_00_14_1                    43.14         1786586.1
+#&gt; C1.0e+06_0.0e+00_00.00_00_21_1                    43.14          400658.5
+#&gt; C1.0e+06_0.0e+00_00.00_00_28_1                    43.14           53933.0
+#&gt; C1.0e+06_0.0e+00_00.00_00_35_1                    43.14           56438.2</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>assayData</span>(<span class='no'>ncb</span>))</div><div class='output co'>#&gt; 6 x 222 sparse Matrix of class "dgCMatrix"</div><div class='output co'>#&gt; <span class='message'>   [[ suppressing 222 column names ‘C1.0e+05_1.0e+06_02.50_07_00_1’, ‘C1.0e+05_1.0e+06_02.50_14_00_1’, ‘C1.0e+05_1.0e+06_02.50_21_00’ ... ]]</span></div><div class='output co'>#&gt;                                                                                
 #&gt; bond001 2 2 2 2 2 2 2 . . . 2 2 . . 2 2 2 2 . . . . . . . . 2 . . . . . . . . .
 #&gt; bond002 . . . . . 2 2 . . . . . . 2 . . 2 . . . . . . . . . 2 . . . . . . . . .
 #&gt; bond003 . . . . . 2 . . . . . . . . . . 2 . . . . . . . . . . . . . . . . . . .
@@ -739,9 +739,9 @@ for technical details about the coverage storage.</p></li>
 #&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
 #&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
 #&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2019-11-22 20:54:55] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
-#&gt; [2019-11-22 20:54:55] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222].
-#&gt; [2019-11-22 20:54:55] Subsetted 8234 fragments [152;222] to 4235 fragments [100;222]. </div><div class='input'>
+#&gt; [2019-12-17 19:45:06] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
+#&gt; [2019-12-17 19:45:06] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222].
+#&gt; [2019-12-17 19:45:07] Subsetted 8234 fragments [152;222] to 4235 fragments [100;222]. </div><div class='input'>
 <span class='co'># Just bond 152</span>
 <span class='no'>ncb</span>[<span class='st'>"bond152"</span>]</div><div class='output co'>#&gt; NCBSet object (0.22 Mb)
 #&gt; - - - Protein data - - -
@@ -760,9 +760,9 @@ for technical details about the coverage storage.</p></li>
 #&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
 #&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
 #&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2019-11-22 20:54:55] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
-#&gt; [2019-11-22 20:54:55] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222].
-#&gt; [2019-11-22 20:54:55] Subsetted 8234 fragments [152;222] to 96 fragments [1;222]. </div><div class='input'>
+#&gt; [2019-12-17 19:45:06] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
+#&gt; [2019-12-17 19:45:06] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222].
+#&gt; [2019-12-17 19:45:07] Subsetted 8234 fragments [152;222] to 96 fragments [1;222]. </div><div class='input'>
 <span class='co'># Condition 1 to 10</span>
 <span class='no'>ncb</span>[, <span class='fl'>1</span>:<span class='fl'>10</span>]</div><div class='output co'>#&gt; NCBSet object (0.08 Mb)
 #&gt; - - - Protein data - - -
@@ -781,9 +781,9 @@ for technical details about the coverage storage.</p></li>
 #&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
 #&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
 #&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2019-11-22 20:54:55] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
-#&gt; [2019-11-22 20:54:55] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222].
-#&gt; [2019-11-22 20:54:55] Subsetted 8234 fragments [152;222] to 368 fragments [152;10]. </div><div class='input'>
+#&gt; [2019-12-17 19:45:06] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
+#&gt; [2019-12-17 19:45:06] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222].
+#&gt; [2019-12-17 19:45:07] Subsetted 8234 fragments [152;222] to 368 fragments [152;10]. </div><div class='input'>
 <span class='co'># Plot fragmentation map</span>
 <span class='fu'>fragmentationMap</span>(<span class='no'>ncb</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Raster pixels are placed at uneven vertical intervals and will be shifted. Consider using geom_tile() instead.</span></div><div class='img'><img src='NCBSet-class-1.png' alt='' width='700' height='433' /></div></pre>
   </div>

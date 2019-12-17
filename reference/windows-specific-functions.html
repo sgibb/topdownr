@@ -206,7 +206,14 @@ https://bitbucket.org/caetera/scanheadsman</p>
     <div class='dont-index'><p><code><a href='writeMethodXmls.html'>writeMethodXmls()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>runXmlMethodChanger</span>(<span class='kw'>templateMeth</span><span class='kw'>=</span><span class='st'>"TMS2IndependentTemplate240Extended.meth"</span>,
+                    <span class='kw'>modificationXml</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='kw'>pattern</span><span class='kw'>=</span><span class='st'>"^method.*\\.xml$"</span>),
+                    <span class='kw'>executable</span><span class='kw'>=</span><span class='st'>"..\\XmlMethodChanger.exe"</span>)
+}
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>runScanHeadsman</span>(<span class='st'>"raw"</span>, <span class='kw'>executable</span><span class='kw'>=</span><span class='st'>"..\\ScanHeadsman.exe"</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
