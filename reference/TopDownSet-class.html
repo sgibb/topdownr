@@ -162,7 +162,7 @@ experiment.</p>
 <span class='fu'>normalize</span>(<span class='no'>object</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"TIC"</span>, <span class='no'>...</span>)
 
 <span class='co'># S4 method for TopDownSet,missing</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>())
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>())
 
 <span class='co'># S4 method for TopDownSet</span>
 <span class='fu'>show</span>(<span class='no'>object</span>)
@@ -839,7 +839,7 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 #&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
 #&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
 #&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2020-02-16 21:25:59] Subsetted 14518 fragments [1949;351] to 1157 fragments [100;351]. </div><div class='input'>
+#&gt; [2020-03-16 21:27:00] Subsetted 14518 fragments [1949;351] to 1157 fragments [100;351]. </div><div class='input'>
 <span class='co'># All c fragments</span>
 <span class='no'>tds</span>[<span class='st'>"c"</span>]</div><div class='output co'>#&gt; TopDownSet object (0.31 Mb)
 #&gt; - - - Protein data - - -
@@ -862,7 +862,7 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 #&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
 #&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
 #&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2020-02-16 21:25:59] Subsetted 14518 fragments [1949;351] to 338 fragments [152;351]. </div><div class='input'>
+#&gt; [2020-03-16 21:27:00] Subsetted 14518 fragments [1949;351] to 338 fragments [152;351]. </div><div class='input'>
 <span class='co'># Just c 152</span>
 <span class='no'>tds</span>[<span class='st'>"c152"</span>]</div><div class='output co'>#&gt; TopDownSet object (0.28 Mb)
 #&gt; - - - Protein data - - -
@@ -885,7 +885,7 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 #&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
 #&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
 #&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2020-02-16 21:25:59] Subsetted 14518 fragments [1949;351] to 119 fragments [1;351]. </div><div class='input'>
+#&gt; [2020-03-16 21:27:00] Subsetted 14518 fragments [1949;351] to 119 fragments [1;351]. </div><div class='input'>
 <span class='co'># Condition 1 to 10</span>
 <span class='no'>tds</span>[, <span class='fl'>1</span>:<span class='fl'>10</span>]</div><div class='output co'>#&gt; TopDownSet object (0.35 Mb)
 #&gt; - - - Protein data - - -
@@ -908,7 +908,7 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 #&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
 #&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
 #&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2020-02-16 21:25:59] Subsetted 14518 fragments [1949;351] to 524 fragments [1949;10]. </div><div class='input'>
+#&gt; [2020-03-16 21:27:00] Subsetted 14518 fragments [1949;351] to 524 fragments [1949;10]. </div><div class='input'>
 <span class='co'># Filtering</span>
 <span class='co'># Filter all intensities that don't have at least 10 % of the highest</span>
 <span class='co'># intensity per fragment.</span>
@@ -961,14 +961,14 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 #&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
 #&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
 #&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2020-02-16 21:25:59] 3579 intensity values &lt; 0.1 (relative) filtered; 10939 fragments [1949;351].
-#&gt; [2020-02-16 21:25:59] 750 fragments with CV &gt; 30% filtered; 10189 fragments [1949;351].
-#&gt; [2020-02-16 21:25:59] Subsetted 10189 fragments [1949;351] to 10158 fragments [1949;345].
-#&gt; [2020-02-16 21:25:59] 6 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 10158 fragments [1949;345].
-#&gt; [2020-02-16 21:25:59] 5604 intensity values of fragments replicated &lt; 2 times filtered; 4554 fragments [1949;345].
-#&gt; [2020-02-16 21:25:59] Intensity values normalized to TIC.
-#&gt; [2020-02-16 21:25:59] Aggregated 4554 fragments [1949;345] to 2277 fragments [1949;220].
-#&gt; [2020-02-16 21:25:59] Coerced TopDownSet into an NCBSet object; 2003 fragments [152;220]. </div><div class='input'>
+#&gt; [2020-03-16 21:27:00] 3579 intensity values &lt; 0.1 (relative) filtered; 10939 fragments [1949;351].
+#&gt; [2020-03-16 21:27:00] 750 fragments with CV &gt; 30% filtered; 10189 fragments [1949;351].
+#&gt; [2020-03-16 21:27:00] Subsetted 10189 fragments [1949;351] to 10158 fragments [1949;345].
+#&gt; [2020-03-16 21:27:00] 6 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 10158 fragments [1949;345].
+#&gt; [2020-03-16 21:27:00] 5604 intensity values of fragments replicated &lt; 2 times filtered; 4554 fragments [1949;345].
+#&gt; [2020-03-16 21:27:00] Intensity values normalized to TIC.
+#&gt; [2020-03-16 21:27:00] Aggregated 4554 fragments [1949;345] to 2277 fragments [1949;220].
+#&gt; [2020-03-16 21:27:00] Coerced TopDownSet into an NCBSet object; 2003 fragments [152;220]. </div><div class='input'>
 <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='st'>"MSnbase"</span>)) {
     <span class='fu'><a href='https://rdrr.io/pkg/MSnbase/man/mzRident2dfr.html'>as</a></span>(<span class='no'>tds</span>, <span class='st'>"MSnSet"</span>)
 }</div><div class='output co'>#&gt; <span class='message'>Loading required package: MSnbase</span></div><div class='output co'>#&gt; <span class='message'>Loading required package: Biobase</span></div><div class='output co'>#&gt; <span class='message'>Welcome to Bioconductor</span>
@@ -1000,13 +1000,13 @@ for a full documented example of an analysis using <code>topdownr</code>.</p></l
 #&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove). 
 #&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions. 
 #&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget. 
-#&gt; [2020-02-16 21:25:59] 3579 intensity values &lt; 0.1 (relative) filtered; 10939 fragments [1949;351]. 
-#&gt; [2020-02-16 21:25:59] 750 fragments with CV &gt; 30% filtered; 10189 fragments [1949;351]. 
-#&gt; [2020-02-16 21:25:59] Subsetted 10189 fragments [1949;351] to 10158 fragments [1949;345]. 
-#&gt; [2020-02-16 21:25:59] 6 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 10158 fragments [1949;345]. 
-#&gt; [2020-02-16 21:25:59] 5604 intensity values of fragments replicated &lt; 2 times filtered; 4554 fragments [1949;345]. 
-#&gt; [2020-02-16 21:25:59] Intensity values normalized to TIC. 
-#&gt; [2020-02-16 21:25:59] Aggregated 4554 fragments [1949;345] to 2277 fragments [1949;220]. 
+#&gt; [2020-03-16 21:27:00] 3579 intensity values &lt; 0.1 (relative) filtered; 10939 fragments [1949;351]. 
+#&gt; [2020-03-16 21:27:00] 750 fragments with CV &gt; 30% filtered; 10189 fragments [1949;351]. 
+#&gt; [2020-03-16 21:27:00] Subsetted 10189 fragments [1949;351] to 10158 fragments [1949;345]. 
+#&gt; [2020-03-16 21:27:00] 6 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 10158 fragments [1949;345]. 
+#&gt; [2020-03-16 21:27:00] 5604 intensity values of fragments replicated &lt; 2 times filtered; 4554 fragments [1949;345]. 
+#&gt; [2020-03-16 21:27:00] Intensity values normalized to TIC. 
+#&gt; [2020-03-16 21:27:00] Aggregated 4554 fragments [1949;345] to 2277 fragments [1949;220]. 
 #&gt;  MSnbase version: 2.13.2 </div><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># plot a single condition</span>
 <span class='co'># pseudo-code (replace topdownset with your object)</span>

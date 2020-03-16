@@ -317,8 +317,8 @@ for technical details about the coverage storage.</p></li>
 #&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
 #&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
 #&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2020-02-16 21:25:56] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
-#&gt; [2020-02-16 21:25:56] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222]. </div><div class='input'>
+#&gt; [2020-03-16 21:26:58] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
+#&gt; [2020-03-16 21:26:58] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222]. </div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>ncb</span>))</div><div class='output co'>#&gt;                                Fragments Total Min Q1 Median      Mean Q3 Max
 #&gt; C1.0e+05_1.0e+06_02.50_07_00_1        48    96   1  2      2 0.6315789  2   3
 #&gt; C1.0e+05_1.0e+06_02.50_14_00_1        47    91   1  2      2 0.5986842  2   2
@@ -328,7 +328,7 @@ for technical details about the coverage storage.</p></li>
 #&gt; C1.0e+05_1.0e+06_02.50_00_07          60   118   1  2      2 0.7763158  2   2</div><div class='input'>
 <span class='co'># Accessing slots</span>
 <span class='fu'><a href='AbstractTopDownSet-class.html'>rowViews</a></span>(<span class='no'>ncb</span>)</div><div class='output co'>#&gt; Views on a 153-letter AAString subject
-#&gt; subject: GLSDGEWQQVLNVWGKVEADIAGHGQEVLIRLFTG…HPGDFGADAQGAMTKALELFRNDIAAKYKELGFQG
+#&gt; subject: GLSDGEWQQVLNVWGKVEADIAGHGQEVLIRLFT...PGDFGADAQGAMTKALELFRNDIAAKYKELGFQG
 #&gt; views:
 #&gt;         start end width
 #&gt;     [1]     1   1     1 [G]
@@ -337,11 +337,11 @@ for technical details about the coverage storage.</p></li>
 #&gt;     [4]     1   4     4 [GLSD]
 #&gt;     [5]     1   5     5 [GLSDG]
 #&gt;     ...   ... ...   ... ...
-#&gt;   [148]     1 148   148 [GLSDGEWQQVLNVWGKVEADIAGHGQ…FGADAQGAMTKALELFRNDIAAKYKE]
-#&gt;   [149]     1 149   149 [GLSDGEWQQVLNVWGKVEADIAGHGQ…GADAQGAMTKALELFRNDIAAKYKEL]
-#&gt;   [150]     1 150   150 [GLSDGEWQQVLNVWGKVEADIAGHGQ…ADAQGAMTKALELFRNDIAAKYKELG]
-#&gt;   [151]     1 151   151 [GLSDGEWQQVLNVWGKVEADIAGHGQ…DAQGAMTKALELFRNDIAAKYKELGF]
-#&gt;   [152]     1 152   152 [GLSDGEWQQVLNVWGKVEADIAGHGQ…AQGAMTKALELFRNDIAAKYKELGFQ]</div><div class='input'><span class='fu'><a href='AbstractTopDownSet-class.html'>colData</a></span>(<span class='no'>ncb</span>)</div><div class='output co'>#&gt; DataFrame with 222 rows and 60 columns
+#&gt;   [148]     1 148   148 [GLSDGEWQQVLNVWGKVEADIAGHGQ...GADAQGAMTKALELFRNDIAAKYKE]
+#&gt;   [149]     1 149   149 [GLSDGEWQQVLNVWGKVEADIAGHGQ...ADAQGAMTKALELFRNDIAAKYKEL]
+#&gt;   [150]     1 150   150 [GLSDGEWQQVLNVWGKVEADIAGHGQ...DAQGAMTKALELFRNDIAAKYKELG]
+#&gt;   [151]     1 151   151 [GLSDGEWQQVLNVWGKVEADIAGHGQ...AQGAMTKALELFRNDIAAKYKELGF]
+#&gt;   [152]     1 152   152 [GLSDGEWQQVLNVWGKVEADIAGHGQ...QGAMTKALELFRNDIAAKYKELGFQ]</div><div class='input'><span class='fu'><a href='AbstractTopDownSet-class.html'>colData</a></span>(<span class='no'>ncb</span>)</div><div class='output co'>#&gt; DataFrame with 222 rows and 60 columns
 #&gt;                                                           File      Scan
 #&gt;                                                          &lt;Rle&gt; &lt;integer&gt;
 #&gt; C1.0e+05_1.0e+06_02.50_07_00_1 myo_1211_ETDReagentTarget_1e6_1        33
@@ -739,9 +739,9 @@ for technical details about the coverage storage.</p></li>
 #&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
 #&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
 #&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2020-02-16 21:25:56] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
-#&gt; [2020-02-16 21:25:56] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222].
-#&gt; [2020-02-16 21:25:56] Subsetted 8234 fragments [152;222] to 4235 fragments [100;222]. </div><div class='input'>
+#&gt; [2020-03-16 21:26:58] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
+#&gt; [2020-03-16 21:26:58] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222].
+#&gt; [2020-03-16 21:26:58] Subsetted 8234 fragments [152;222] to 4235 fragments [100;222]. </div><div class='input'>
 <span class='co'># Just bond 152</span>
 <span class='no'>ncb</span>[<span class='st'>"bond152"</span>]</div><div class='output co'>#&gt; NCBSet object (0.22 Mb)
 #&gt; - - - Protein data - - -
@@ -760,9 +760,9 @@ for technical details about the coverage storage.</p></li>
 #&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
 #&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
 #&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2020-02-16 21:25:56] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
-#&gt; [2020-02-16 21:25:56] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222].
-#&gt; [2020-02-16 21:25:56] Subsetted 8234 fragments [152;222] to 96 fragments [1;222]. </div><div class='input'>
+#&gt; [2020-03-16 21:26:58] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
+#&gt; [2020-03-16 21:26:58] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222].
+#&gt; [2020-03-16 21:26:58] Subsetted 8234 fragments [152;222] to 96 fragments [1;222]. </div><div class='input'>
 <span class='co'># Condition 1 to 10</span>
 <span class='no'>ncb</span>[, <span class='fl'>1</span>:<span class='fl'>10</span>]</div><div class='output co'>#&gt; NCBSet object (0.08 Mb)
 #&gt; - - - Protein data - - -
@@ -781,9 +781,9 @@ for technical details about the coverage storage.</p></li>
 #&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
 #&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
 #&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2020-02-16 21:25:56] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
-#&gt; [2020-02-16 21:25:56] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222].
-#&gt; [2020-02-16 21:25:56] Subsetted 8234 fragments [152;222] to 368 fragments [152;10]. </div><div class='input'>
+#&gt; [2020-03-16 21:26:58] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
+#&gt; [2020-03-16 21:26:58] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222].
+#&gt; [2020-03-16 21:26:58] Subsetted 8234 fragments [152;222] to 368 fragments [152;10]. </div><div class='input'>
 <span class='co'># Plot fragmentation map</span>
 <span class='fu'>fragmentationMap</span>(<span class='no'>ncb</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Raster pixels are placed at uneven vertical intervals and will be shifted. Consider using geom_tile() instead.</span></div><div class='img'><img src='NCBSet-class-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
