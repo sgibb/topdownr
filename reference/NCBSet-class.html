@@ -320,8 +320,8 @@ for technical details about the coverage storage.</p></li>
 #&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
 #&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
 #&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2020-05-16 21:28:05] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
-#&gt; [2020-05-16 21:28:05] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222]. </div><div class='input'>
+#&gt; [2020-06-16 21:29:47] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
+#&gt; [2020-06-16 21:29:47] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222]. </div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>ncb</span>))</div><div class='output co'>#&gt;                                Fragments Total Min Q1 Median      Mean Q3 Max
 #&gt; C1.0e+05_1.0e+06_02.50_07_00_1        48    96   1  2      2 0.6315789  2   3
 #&gt; C1.0e+05_1.0e+06_02.50_14_00_1        47    91   1  2      2 0.5986842  2   2
@@ -397,58 +397,32 @@ for technical details about the coverage storage.</p></li>
 #&gt; C1.0e+06_0.0e+00_00.00_00_21_1                              54766.1   200.139
 #&gt; C1.0e+06_0.0e+00_00.00_00_28_1                             100368.1   200.139
 #&gt; C1.0e+06_0.0e+00_00.00_00_35_1                             249724.3   200.139
-#&gt;                                   HighMz PrecursorMz
-#&gt;                                &lt;numeric&gt;   &lt;numeric&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1   17146.1      1211.7
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1   17146.1      1211.7
-#&gt; C1.0e+05_1.0e+06_02.50_21_00     17146.1      1211.7
-#&gt; C1.0e+05_1.0e+06_02.50_28_00_1   17146.6      1211.7
-#&gt; C1.0e+05_1.0e+06_02.50_35_00_1   17146.1      1211.7
-#&gt; ...                                  ...         ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_07_1  16941.01     1211.72
-#&gt; C1.0e+06_0.0e+00_00.00_00_14_1  16940.92     1211.72
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_1   5468.80     1211.72
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1   1406.28     1211.72
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1   1049.08     1211.72
-#&gt;                                                                  SpectrumId
-#&gt;                                                                 &lt;character&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1  controllerType=0 controllerNumber=1 scan=33
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1  controllerType=0 controllerNumber=1 scan=36
-#&gt; C1.0e+05_1.0e+06_02.50_21_00    controllerType=0 controllerNumber=1 scan=40
-#&gt; C1.0e+05_1.0e+06_02.50_28_00_1  controllerType=0 controllerNumber=1 scan=43
-#&gt; C1.0e+05_1.0e+06_02.50_35_00_1  controllerType=0 controllerNumber=1 scan=46
-#&gt; ...                                                                     ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_07_1 controllerType=0 controllerNumber=1 scan=257
-#&gt; C1.0e+06_0.0e+00_00.00_00_14_1 controllerType=0 controllerNumber=1 scan=260
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_1 controllerType=0 controllerNumber=1 scan=264
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1 controllerType=0 controllerNumber=1 scan=268
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1 controllerType=0 controllerNumber=1 scan=271
-#&gt;                                Condition
-#&gt;                                &lt;integer&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1        12
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1        14
-#&gt; C1.0e+05_1.0e+06_02.50_21_00          16
-#&gt; C1.0e+05_1.0e+06_02.50_28_00_1        18
-#&gt; C1.0e+05_1.0e+06_02.50_35_00_1        20
-#&gt; ...                                  ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_07_1       154
-#&gt; C1.0e+06_0.0e+00_00.00_00_14_1       156
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_1       158
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1       160
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1       162
-#&gt;                                                                          FilterString.HeaderInformation
-#&gt;                                                                                             &lt;character&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1  FTMS + p NSI sa Full ms2 1211.7012@etd2.50@cid7.00 [100.0000-2000.0000]
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1 FTMS + p NSI sa Full ms2 1211.7014@etd2.50@cid14.00 [100.0000-2000.0000]
-#&gt; C1.0e+05_1.0e+06_02.50_21_00   FTMS + p NSI sa Full ms2 1211.7016@etd2.50@cid21.00 [100.0000-2000.0000]
-#&gt; C1.0e+05_1.0e+06_02.50_28_00_1 FTMS + p NSI sa Full ms2 1211.7018@etd2.50@cid28.00 [100.0000-2000.0000]
-#&gt; C1.0e+05_1.0e+06_02.50_35_00_1 FTMS + p NSI sa Full ms2 1211.7020@etd2.50@cid35.00 [100.0000-2000.0000]
-#&gt; ...                                                                                                 ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_07_1             FTMS + p NSI Full ms2 1211.7154@hcd7.00 [100.0000-2000.0000]
-#&gt; C1.0e+06_0.0e+00_00.00_00_14_1            FTMS + p NSI Full ms2 1211.7156@hcd14.00 [100.0000-2000.0000]
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_1            FTMS + p NSI Full ms2 1211.7158@hcd21.00 [100.0000-2000.0000]
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1            FTMS + p NSI Full ms2 1211.7160@hcd28.00 [100.0000-2000.0000]
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1            FTMS + p NSI Full ms2 1211.7162@hcd35.00 [100.0000-2000.0000]
+#&gt;                                   HighMz PrecursorMz             SpectrumId
+#&gt;                                &lt;numeric&gt;   &lt;numeric&gt;            &lt;character&gt;
+#&gt; C1.0e+05_1.0e+06_02.50_07_00_1   17146.1      1211.7 controllerType=0 con..
+#&gt; C1.0e+05_1.0e+06_02.50_14_00_1   17146.1      1211.7 controllerType=0 con..
+#&gt; C1.0e+05_1.0e+06_02.50_21_00     17146.1      1211.7 controllerType=0 con..
+#&gt; C1.0e+05_1.0e+06_02.50_28_00_1   17146.6      1211.7 controllerType=0 con..
+#&gt; C1.0e+05_1.0e+06_02.50_35_00_1   17146.1      1211.7 controllerType=0 con..
+#&gt; ...                                  ...         ...                    ...
+#&gt; C1.0e+06_0.0e+00_00.00_00_07_1  16941.01     1211.72 controllerType=0 con..
+#&gt; C1.0e+06_0.0e+00_00.00_00_14_1  16940.92     1211.72 controllerType=0 con..
+#&gt; C1.0e+06_0.0e+00_00.00_00_21_1   5468.80     1211.72 controllerType=0 con..
+#&gt; C1.0e+06_0.0e+00_00.00_00_28_1   1406.28     1211.72 controllerType=0 con..
+#&gt; C1.0e+06_0.0e+00_00.00_00_35_1   1049.08     1211.72 controllerType=0 con..
+#&gt;                                Condition FilterString.HeaderInformation
+#&gt;                                &lt;integer&gt;                    &lt;character&gt;
+#&gt; C1.0e+05_1.0e+06_02.50_07_00_1        12         FTMS + p NSI sa Full..
+#&gt; C1.0e+05_1.0e+06_02.50_14_00_1        14         FTMS + p NSI sa Full..
+#&gt; C1.0e+05_1.0e+06_02.50_21_00          16         FTMS + p NSI sa Full..
+#&gt; C1.0e+05_1.0e+06_02.50_28_00_1        18         FTMS + p NSI sa Full..
+#&gt; C1.0e+05_1.0e+06_02.50_35_00_1        20         FTMS + p NSI sa Full..
+#&gt; ...                                  ...                            ...
+#&gt; C1.0e+06_0.0e+00_00.00_00_07_1       154         FTMS + p NSI Full ms..
+#&gt; C1.0e+06_0.0e+00_00.00_00_14_1       156         FTMS + p NSI Full ms..
+#&gt; C1.0e+06_0.0e+00_00.00_00_21_1       158         FTMS + p NSI Full ms..
+#&gt; C1.0e+06_0.0e+00_00.00_00_28_1       160         FTMS + p NSI Full ms..
+#&gt; C1.0e+06_0.0e+00_00.00_00_35_1       162         FTMS + p NSI Full ms..
 #&gt;                                SupplementalActivation     RtMin       Tic
 #&gt;                                                 &lt;Rle&gt; &lt;numeric&gt; &lt;numeric&gt;
 #&gt; C1.0e+05_1.0e+06_02.50_07_00_1                   TRUE   6.34064 165522520
@@ -644,19 +618,19 @@ for technical details about the coverage storage.</p></li>
 #&gt; C1.0e+06_0.0e+00_00.00_00_21_1                      NaN     1e+06         NaN
 #&gt; C1.0e+06_0.0e+00_00.00_00_28_1                      NaN     1e+06         NaN
 #&gt; C1.0e+06_0.0e+00_00.00_00_35_1                      NaN     1e+06         NaN
-#&gt;                                        TargetedMassList     Mz Charge    Sample
-#&gt;                                             &lt;character&gt;  &lt;Rle&gt;  &lt;Rle&gt; &lt;numeric&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1 (mz=1211.7012 z=1 name=) 1211.7     14         1
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1 (mz=1211.7014 z=1 name=) 1211.7     14         2
-#&gt; C1.0e+05_1.0e+06_02.50_21_00   (mz=1211.7016 z=1 name=) 1211.7     14         3
-#&gt; C1.0e+05_1.0e+06_02.50_28_00_1 (mz=1211.7018 z=1 name=) 1211.7     14         4
-#&gt; C1.0e+05_1.0e+06_02.50_35_00_1  (mz=1211.702 z=1 name=) 1211.7     14         5
-#&gt; ...                                                 ...    ...    ...       ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_07_1 (mz=1211.7154 z=1 name=) 1211.7     14       218
-#&gt; C1.0e+06_0.0e+00_00.00_00_14_1 (mz=1211.7156 z=1 name=) 1211.7     14       219
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_1 (mz=1211.7158 z=1 name=) 1211.7     14       220
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1  (mz=1211.716 z=1 name=) 1211.7     14       221
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1 (mz=1211.7162 z=1 name=) 1211.7     14       222
+#&gt;                                      TargetedMassList     Mz Charge    Sample
+#&gt;                                           &lt;character&gt;  &lt;Rle&gt;  &lt;Rle&gt; &lt;numeric&gt;
+#&gt; C1.0e+05_1.0e+06_02.50_07_00_1 (mz=1211.7012 z=1 na.. 1211.7     14         1
+#&gt; C1.0e+05_1.0e+06_02.50_14_00_1 (mz=1211.7014 z=1 na.. 1211.7     14         2
+#&gt; C1.0e+05_1.0e+06_02.50_21_00   (mz=1211.7016 z=1 na.. 1211.7     14         3
+#&gt; C1.0e+05_1.0e+06_02.50_28_00_1 (mz=1211.7018 z=1 na.. 1211.7     14         4
+#&gt; C1.0e+05_1.0e+06_02.50_35_00_1 (mz=1211.702 z=1 nam.. 1211.7     14         5
+#&gt; ...                                               ...    ...    ...       ...
+#&gt; C1.0e+06_0.0e+00_00.00_00_07_1 (mz=1211.7154 z=1 na.. 1211.7     14       218
+#&gt; C1.0e+06_0.0e+00_00.00_00_14_1 (mz=1211.7156 z=1 na.. 1211.7     14       219
+#&gt; C1.0e+06_0.0e+00_00.00_00_21_1 (mz=1211.7158 z=1 na.. 1211.7     14       220
+#&gt; C1.0e+06_0.0e+00_00.00_00_28_1 (mz=1211.716 z=1 nam.. 1211.7     14       221
+#&gt; C1.0e+06_0.0e+00_00.00_00_35_1 (mz=1211.7162 z=1 na.. 1211.7     14       222
 #&gt;                                MedianIonInjectionTimeMs AssignedIntensity
 #&gt;                                                   &lt;Rle&gt;         &lt;numeric&gt;
 #&gt; C1.0e+05_1.0e+06_02.50_07_00_1                    4.837           3584559
@@ -742,9 +716,9 @@ for technical details about the coverage storage.</p></li>
 #&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
 #&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
 #&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2020-05-16 21:28:05] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
-#&gt; [2020-05-16 21:28:05] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222].
-#&gt; [2020-05-16 21:28:05] Subsetted 8234 fragments [152;222] to 4235 fragments [100;222]. </div><div class='input'>
+#&gt; [2020-06-16 21:29:47] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
+#&gt; [2020-06-16 21:29:47] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222].
+#&gt; [2020-06-16 21:29:47] Subsetted 8234 fragments [152;222] to 4235 fragments [100;222]. </div><div class='input'>
 <span class='co'># Just bond 152</span>
 <span class='no'>ncb</span>[<span class='st'>"bond152"</span>]</div><div class='output co'>#&gt; NCBSet object (0.22 Mb)
 #&gt; - - - Protein data - - -
@@ -763,9 +737,9 @@ for technical details about the coverage storage.</p></li>
 #&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
 #&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
 #&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2020-05-16 21:28:05] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
-#&gt; [2020-05-16 21:28:05] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222].
-#&gt; [2020-05-16 21:28:05] Subsetted 8234 fragments [152;222] to 96 fragments [1;222]. </div><div class='input'>
+#&gt; [2020-06-16 21:29:47] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
+#&gt; [2020-06-16 21:29:47] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222].
+#&gt; [2020-06-16 21:29:47] Subsetted 8234 fragments [152;222] to 96 fragments [1;222]. </div><div class='input'>
 <span class='co'># Condition 1 to 10</span>
 <span class='no'>ncb</span>[, <span class='fl'>1</span>:<span class='fl'>10</span>]</div><div class='output co'>#&gt; NCBSet object (0.08 Mb)
 #&gt; - - - Protein data - - -
@@ -784,9 +758,9 @@ for technical details about the coverage storage.</p></li>
 #&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
 #&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
 #&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2020-05-16 21:28:05] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
-#&gt; [2020-05-16 21:28:05] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222].
-#&gt; [2020-05-16 21:28:05] Subsetted 8234 fragments [152;222] to 368 fragments [152;10]. </div><div class='input'>
+#&gt; [2020-06-16 21:29:47] Aggregated 14518 fragments [1949;351] to 11026 fragments [1949;222].
+#&gt; [2020-06-16 21:29:47] Coerced TopDownSet into an NCBSet object; 8234 fragments [152;222].
+#&gt; [2020-06-16 21:29:47] Subsetted 8234 fragments [152;222] to 368 fragments [152;10]. </div><div class='input'>
 <span class='co'># Plot fragmentation map</span>
 <span class='fu'>fragmentationMap</span>(<span class='no'>ncb</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Raster pixels are placed at uneven vertical intervals and will be shifted. Consider using geom_tile() instead.</span></div><div class='img'><img src='NCBSet-class-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
