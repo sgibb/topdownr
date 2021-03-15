@@ -1,3 +1,15 @@
+# topdownr 1.13
+- New version for Bioc 3.13 (devel)
+
+# topdownr 1.12
+- New version for Bioc 3.12 (release)
+
+# topdownr 1.11
+- New version for Bioc 3.12 (devel)
+
+# topdownr 1.10
+- New version for Bioc 3.11 (release)
+
 # topdownr 1.9
 - New version for Bioc 3.11 (devel)
 
