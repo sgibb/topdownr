@@ -4,8 +4,10 @@
 \name{tds}
 \alias{tds}
 \title{TopDownSet Example Data}
-\format{A \linkS4class{TopDownSet}
-with 14901 fragments (1949 rows, 351 columns).}
+\format{
+A \linkS4class{TopDownSet}
+with 14901 fragments (1949 rows, 351 columns).
+}
 \source{
 Subset taken from the
 \link[topdownrdata:topdownrdata-package]{topdownrdata::topdownrdata-package}

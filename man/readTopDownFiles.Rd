@@ -9,6 +9,7 @@ readTopDownFiles(
   pattern = ".*",
   type = c("a", "b", "c", "x", "y", "z"),
   modifications = c("Carbamidomethyl", "Acetyl", "Met-loss"),
+  customModifications = data.frame(),
   adducts = data.frame(),
   neutralLoss = MSnbase::defaultNeutralLoss(),
   sequenceOrder = c("original", "random", "inverse"),
@@ -47,6 +48,9 @@ http://www.unimod.org/modifications_view.php?editid1=1,
 http://www.unimod.org/modifications_view.php?editid1=4, and
 http://www.unimod.org/modifications_view.php?editid1=765 for details)).
 Use \code{NULL} to disable all modifications.}
+
+\item{customModifications}{\code{data.frame},
+with 4 columns, namely: mass, name, location, variable, see details section.}
 
 \item{adducts}{\code{data.frame},
 with 3 columns, namely: mass, name, to, see details section.}
@@ -111,6 +115,23 @@ It creates an \linkS4class{TopDownSet} object and is its only constructor.
 \item \code{.experiments.csv} (method/fragmentation conditions)
 \item \code{.txt} (scan header information)
 }
+
+\code{customModifications}: additional to the provided unimod modifications
+available through the \code{modifications} argument \code{customModifications} allow to
+apply user-definied modifications to the output of
+\code{\link[MSnbase:calculateFragments-methods]{MSnbase::calculateFragments()}}.
+The \code{customModifications} argument takes a
+\code{data.frame} with the \code{mass} to add, the \code{name} of the modification, the
+location (could be the position of the amino acid or "N-term"/"C-term"),
+whether the modification is always seen (\code{variable=FALSE}) or both, the
+modified and unmodified amino acid are present (\code{variable=TRUE}), e.g.
+for Activation (which is available via \code{modification="Acetyl"})
+\code{data.frame(mass=42.010565, name="Acetyl", location="N-term", variable=FALSE)}
+or variable one (that could be present or not):
+\code{data.frame(mass=365.132, name="Custom", location=10, variable=TRUE)}
+
+If the \code{customModifications} \code{data.frame} contains multiple columns the
+modifications are applied from row one to the last row one each time.
 
 \code{adducts}: \emph{Thermo's Xtract}
 allows some mistakes in deisotoping, mostly it
