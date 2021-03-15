@@ -1,6 +1,13 @@
 # topdownr 1.13
 - New version for Bioc 3.13 (devel)
 
+## Changes in version 1.13.1
+- `as(..., "NCBSet")` now treats neutral losses and modifications as bonds as
+  well.
+- `readTopDownFiles` gains a new argument `customModifications` to allow
+  user-defined modifications. Suggestion and first implementation by
+  Maša Babović <masab@bmb.sdu.dk> [2021-03-15].
+
 # topdownr 1.12
 - New version for Bioc 3.12 (release)
 

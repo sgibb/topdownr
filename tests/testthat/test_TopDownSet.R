@@ -386,7 +386,7 @@ test_that(".ncbMap", {
                        dimnames=list(paste0("bond", 1:3), c()))
 
     expect_equal(.ncbMap(tds), r)
-    expect_equal(.ncbMap(tds1), r1)
+    expect_equal(.ncbMap(tds1, cterm = "^x$|^y$|^z$"), r1)
 })
 
 test_that("normalize", {

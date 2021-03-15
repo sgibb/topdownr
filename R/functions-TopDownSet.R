@@ -10,6 +10,23 @@
 #' * `.experiments.csv` (method/fragmentation conditions)
 #' * `.txt` (scan header information)
 #'
+#' `customModifications`: additional to the provided unimod modifications
+#' available through the `modifications` argument `customModifications` allow to
+#' apply user-definied modifications to the output of
+#' [`MSnbase::calculateFragments()`][MSnbase::calculateFragments-methods].
+#' The `customModifications` argument takes a
+#' `data.frame` with the `mass` to add, the `name` of the modification, the
+#' location (could be the position of the amino acid or "N-term"/"C-term"),
+#' whether the modification is always seen (`variable=FALSE`) or both, the
+#' modified and unmodified amino acid are present (`variable=TRUE`), e.g.
+#' for Activation (which is available via `modification="Acetyl"`)
+#' `data.frame(mass=42.010565, name="Acetyl", location="N-term", variable=FALSE)`
+#' or variable one (that could be present or not):
+#' `data.frame(mass=365.132, name="Custom", location=10, variable=TRUE)`
+#'
+#' If the `customModifications` `data.frame` contains multiple columns the
+#' modifications are applied from row one to the last row one each time.
+#'
 #' `adducts`: *Thermo's Xtract*
 #' allows some mistakes in deisotoping, mostly it
 #' allows `+/- C13-C12` and `+/- H+`.
@@ -53,6 +70,8 @@
 #' Use `NULL` to disable all modifications.
 #' @param adducts `data.frame`,
 #' with 3 columns, namely: mass, name, to, see details section.
+#' @param customModifications `data.frame`,
+#' with 4 columns, namely: mass, name, location, variable, see details section.
 #' @param neutralLoss `list`,
 #' neutral loss that should be applied, see
 #' [`MSnbase::calculateFragments()`][MSnbase::calculateFragments-methods] and
@@ -112,6 +131,7 @@ readTopDownFiles <- function(path, pattern=".*",
                              type=c("a", "b", "c", "x", "y", "z"),
                              modifications=c("Carbamidomethyl",
                                              "Acetyl", "Met-loss"),
+                             customModifications=data.frame(),
                              adducts=data.frame(),
                              neutralLoss=MSnbase::defaultNeutralLoss(),
                              sequenceOrder=c("original", "random", "inverse"),
@@ -140,8 +160,9 @@ readTopDownFiles <- function(path, pattern=".*",
         sequence=sequence,
         type=type,
         modifications=modifications,
-        neutralLoss=neutralLoss,
+        customModifications=customModifications,
         adducts=adducts,
+        neutralLoss=neutralLoss,
         sequenceOrder=sequenceOrder,
         verbose=verbose
     )
@@ -294,15 +315,17 @@ readTopDownFiles <- function(path, pattern=".*",
 #' Create NCB Map (N-/C-terminal, or Bidirectional)
 #'
 #' @param object `TopDownSet`
+#' @param nterm `character(1)`, regular expression to match N-term
+#' @param cterm `character(1)`, regular expression to match C-term
 #' @return `Matrix`, Nterm == 1, Cterm == 2, bidirectional == 3
 #' @noRd
-.ncbMap <- function(object, nterm=c("a", "b", "c"), cterm=c("x", "y", "z")) {
+.ncbMap <- function(object, nterm="^a|^b|^c", cterm="^x|^y|^z") {
     .isTopDownSet(object)
 
     w <- width(object@rowViews)
     mn <- mc <- object@assay
-    selN <- fragmentType(object) %in% nterm
-    selC <- fragmentType(object) %in% cterm
+    selN <- grepl(nterm, fragmentType(object))
+    selC <- grepl(cterm, fragmentType(object))
     mn[!selN, ] <- 0L
     mn <- drop0(mn)
     mc[!selC, ] <- 0L
