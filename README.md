@@ -1,7 +1,8 @@
 # topdownr
 
+<!-- badges: start -->
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![build status](https://travis-ci.org/sgibb/topdownr.svg?branch=master)](https://travis-ci.org/sgibb/topdownr?branch=master)
+[![build status](https://github.com/sgibb/topdownr/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/sgibb/topdownr/actions)
 [![codecov.io](https://img.shields.io/codecov/c/github/sgibb/topdownr.svg?branch=master)](https://codecov.io/github/sgibb/topdownr/?branch=master)
 [![license](https://img.shields.io/badge/license-GPL%20%28%3E=%203%29-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/gpl-3.0.html)
 
@@ -9,6 +10,7 @@
 [![bioc downloads](https://bioconductor.org/shields/downloads/topdownr.svg)](https://bioconductor.org/packages/stats/bioc/topdownr/)
 Release: [![build release](https://bioconductor.org/shields/build/release/bioc/topdownr.svg)](https://bioconductor.org/checkResults/release/bioc-LATEST/topdownr/)
 Devel: [![build devel](https://bioconductor.org/shields/build/devel/bioc/topdownr.svg)](https://bioconductor.org/checkResults/devel/bioc-LATEST/topdownr/)
+<!-- badges: end -->
 
 ## Installation
 
