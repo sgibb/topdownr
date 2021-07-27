@@ -46,6 +46,8 @@ TopDownSet and NCBSet to provide common interface." />
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -57,9 +59,15 @@ TopDownSet and NCBSet to provide common interface." />
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -73,19 +81,13 @@ TopDownSet and NCBSet to provide common interface." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">topdownr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.15.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -110,7 +112,7 @@ TopDownSet and NCBSet to provide common interface." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/sgibb/topdownr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -137,7 +139,7 @@ TopDownSet and NCBSet to provide common interface." />
 <a href='TopDownSet-class.html'>TopDownSet</a> and <a href='NCBSet-class.html'>NCBSet</a> to provide common interface.</p>
     </div>
 
-    <pre class="usage"># S4 method for AbstractTopDownSet,ANY,ANY,ANY
+    <div class="ref-usage sourceCode"><pre><code># S4 method for AbstractTopDownSet,ANY,ANY,ANY
 [(x, i, j, ..., drop = FALSE)
 
 # S4 method for AbstractTopDownSet,ANY,missing
@@ -203,7 +205,7 @@ updateConditionNames(
 updateMedianInjectionTime(
   object,
   by = list(Mz = object$Mz, AgcTarget = object$AgcTarget)
-)</pre>
+)</code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -279,10 +281,10 @@ child class.</p>
 (missing) or <code>NULL</code> are supported.
 Subsetting is done on the fragment/bond (row) level.
 <code>character</code> indices could be names
-(e.g. <code><a href='https://rdrr.io/r/base/c.html'>c("a1", "b1", "c1", "c2", "c3")</a></code>)
-or types (e.g. <code><a href='https://rdrr.io/r/base/c.html'>c("c", "x")</a></code>) of the fragments for
+(e.g. <code>c("a1", "b1", "c1", "c2", "c3")</code>)
+or types (e.g. <code>c("c", "x")</code>) of the fragments for
 <a href='TopDownSet-class.html'>TopDownSet</a> objects,
-or names of the bonds (e.g. <code><a href='https://rdrr.io/r/base/c.html'>c("bond001")</a></code>) for
+or names of the bonds (e.g. <code>c("bond001")</code>) for
 <a href='NCBSet-class.html'>NCBSet</a> objects. <br />
 <code>j</code> could be a <code>numeric</code> or <code>logical</code> vector
 and subsetting is done on the condition/run (column) level.</p></li>
@@ -362,7 +364,7 @@ injection time differs across the runs. Use the <code>by</code> argument to prov
 
     
 
-<dl'>
+<dl>
 <dt><code>rowViews</code></dt><dd><p><a href='https://rdrr.io/pkg/Biostrings/man/XStringViews-class.html'>Biostrings::XStringViews</a>,
 information about fragments/bonds (name, type, sequence, mass, charge),
 see <a href='https://rdrr.io/pkg/Biostrings/man/XStringViews-class.html'>Biostrings::XStringViews</a> and
@@ -396,539 +398,566 @@ for the row view interface.</p></li>
 for technical details about the intensity/coverage storage.</p></li>
 </ul>
 </div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Sebastian Gibb <a href='mailto:mail@sebastiangibb.de'>mail@sebastiangibb.de</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## Because AbstractTopDownSet is a VIRTUAL class we could not create any</span>
-<span class='co'>## object of it. Here we demonstrate the usage with an TopDownSet that</span>
-<span class='co'>## implements the AbstractTopDownSet interface. See `?"TopDownSet-class"` for</span>
-<span class='co'>## more details an further examples.</span>
-
-<span class='co'>## Example data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>tds</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"topdownr"</span>)
-
-<span class='no'>tds</span></div><div class='output co'>#&gt; TopDownSet object (0.72 Mb)
-#&gt; - - - Protein data - - -
-#&gt; Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
-#&gt; Mass : 16964.96
-#&gt; Modifications (3): Carbamidomethyl, Acetyl, Met-loss
-#&gt; - - - Fragment data - - -
-#&gt; Number of theoretical fragments: 1949 
-#&gt; Theoretical fragment types (12): a, a*, b, b*, c, ..., x*, y, y*, z, z*
-#&gt; Theoretical mass range: [72.04;16925.98]
-#&gt; - - - Condition data - - -
-#&gt; Number of conditions: 222 
-#&gt; Number of scans: 351 
-#&gt; Condition variables (59): File, Scan, ..., Sample, MedianIonInjectionTimeMs
-#&gt; - - - Intensity data - - -
-#&gt; Size of array: 1949x351 (2.12% != 0)
-#&gt; Number of matched fragments: 14518 
-#&gt; Intensity range: [126.42;1454253.25]
-#&gt; - - - Processing information - - -
-#&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
-#&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
-#&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget. </div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>tds</span>))</div><div class='output co'>#&gt;                                Fragments   Total     Min       Q1   Median
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1        48 3350602 5289.57 14243.25 31047.62
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_2        46 3352669 3147.54 17875.76 29926.68
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1        46 3204442 3842.46 17372.92 29012.01
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_2        48 3320782 3848.07 11656.87 32890.28
-#&gt; C1.0e+05_1.0e+06_02.50_21_00          57 3590927 3787.77 12579.74 27829.12
-#&gt; C1.0e+05_1.0e+06_02.50_28_00_1        58 3291440 1843.09 10398.68 21424.32
-#&gt;                                    Mean       Q3      Max
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1 1719.139 59497.87 607970.2
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_2 1720.199 73423.75 641441.3
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1 1644.147 68124.07 669750.9
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_2 1703.839 54575.39 601565.8
-#&gt; C1.0e+05_1.0e+06_02.50_21_00   1842.446 51986.04 607209.7
-#&gt; C1.0e+05_1.0e+06_02.50_28_00_1 1688.784 48499.72 589361.6</div><div class='input'>
-<span class='co'># Accessing slots</span>
-<span class='fu'>rowViews</span>(<span class='no'>tds</span>)</div><div class='output co'>#&gt; FragmentViews on a 153-letter sequence:
-#&gt;   GLSDGEWQQVLNVWGKVEADIAGHGQEVLIRLFTGHPE...SKHPGDFGADAQGAMTKALELFRNDIAAKYKELGFQG
-#&gt; Mass:
-#&gt;   16964.964625
-#&gt; Modifications:
-#&gt;   Carbamidomethyl
-#&gt;   Acetyl
-#&gt;   Met-loss
-#&gt; Views:
-#&gt;        start end width     mass name  type   z                                  
-#&gt;    [1]     1   1     1    72.04 a1    a      1 [G]                              
-#&gt;    [2]     1   1     1   100.04 b1    b      1 [G]                              
-#&gt;    [3]     1   1     1   101.02 z1    z      1 [G]                              
-#&gt;    [4]     1   1     1   102.03 zpH1  z      1 [G]                              
-#&gt;    [5]     1   1     1   117.07 c1    c      1 [G]                              
-#&gt;    ...   ... ...   ...      ... ...   ...  ... ...                              
-#&gt; [1945]     2 153   152 16893.90 x152* x*     1 [LSDGEWQQVLNVWG...NDIAAKYKELGFQG]
-#&gt; [1946]     1 152   152 16908.95 b152  b      1 [GLSDGEWQQVLNVW...RNDIAAKYKELGFQ]
-#&gt; [1947]     1 152   152 16908.95 c152* c*     1 [GLSDGEWQQVLNVW...RNDIAAKYKELGFQ]
-#&gt; [1948]     2 153   152 16910.93 x152  x      1 [LSDGEWQQVLNVWG...NDIAAKYKELGFQG]
-#&gt; [1949]     1 152   152 16925.98 c152  c      1 [GLSDGEWQQVLNVW...RNDIAAKYKELGFQ]</div><div class='input'><span class='fu'>colData</span>(<span class='no'>tds</span>)</div><div class='output co'>#&gt; DataFrame with 351 rows and 59 columns
-#&gt;                                                           File      Scan
-#&gt;                                                          &lt;Rle&gt; &lt;integer&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1 myo_1211_ETDReagentTarget_1e6_1        33
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_2 myo_1211_ETDReagentTarget_1e6_1        34
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1 myo_1211_ETDReagentTarget_1e6_1        36
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_2 myo_1211_ETDReagentTarget_1e6_1        37
-#&gt; C1.0e+05_1.0e+06_02.50_21_00   myo_1211_ETDReagentTarget_1e6_1        40
-#&gt; ...                                                        ...       ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_2 myo_1211_ETDReagentTarget_1e6_1       265
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1 myo_1211_ETDReagentTarget_1e6_1       268
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_2 myo_1211_ETDReagentTarget_1e6_1       269
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1 myo_1211_ETDReagentTarget_1e6_1       271
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_2 myo_1211_ETDReagentTarget_1e6_1       272
-#&gt;                                SpectrumIndex PeaksCount TotIonCurrent
-#&gt;                                    &lt;integer&gt;  &lt;integer&gt;     &lt;numeric&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1            23        135      13727530
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_2            24        133      14978619
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1            26        124      15124274
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_2            27        144      14001930
-#&gt; C1.0e+05_1.0e+06_02.50_21_00              30        148      14008273
-#&gt; ...                                      ...        ...           ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_2           249        471       3388050
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1           252        233       2060326
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_2           253        172       1970904
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1           255        166       2918202
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_2           256        231       2861092
-#&gt;                                RetentionTime BasePeakMz
-#&gt;                                    &lt;numeric&gt;  &lt;numeric&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1       371.466      16943
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_2       389.412      16943
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1       425.397      16943
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_2       443.256      16943
-#&gt; C1.0e+05_1.0e+06_02.50_21_00         497.289      16943
-#&gt; ...                                      ...        ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_2       4764.55    231.123
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1       4814.02    231.123
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_2       4830.14    231.123
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1       4863.09    231.123
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_2       4878.68    231.123
-#&gt;                                BasePeakIntensity.SpectraInformation     LowMz
-#&gt;                                                           &lt;numeric&gt; &lt;numeric&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1                              4631841   762.391
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_2                              5103187   762.390
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1                              5346571   762.391
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_2                              4668278   762.391
-#&gt; C1.0e+05_1.0e+06_02.50_21_00                                4605146   762.391
-#&gt; ...                                                             ...       ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_2                              56502.7   200.139
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1                              96439.5   200.139
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_2                             104296.8   200.139
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1                             261401.5   200.139
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_2                             238047.0   200.139
-#&gt;                                   HighMz PrecursorMz             SpectrumId
-#&gt;                                &lt;numeric&gt;   &lt;numeric&gt;            &lt;character&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1   17146.1      1211.7 controllerType=0 con..
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_2   17146.1      1211.7 controllerType=0 con..
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1   17146.1      1211.7 controllerType=0 con..
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_2   17146.1      1211.7 controllerType=0 con..
-#&gt; C1.0e+05_1.0e+06_02.50_21_00     17146.1      1211.7 controllerType=0 con..
-#&gt; ...                                  ...         ...                    ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_2  5970.087     1211.72 controllerType=0 con..
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1  1460.807     1211.72 controllerType=0 con..
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_2  1351.744     1211.72 controllerType=0 con..
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1   959.491     1211.72 controllerType=0 con..
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_2  1138.667     1211.72 controllerType=0 con..
-#&gt;                                Condition FilterString.HeaderInformation
-#&gt;                                &lt;integer&gt;                    &lt;character&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1        12         FTMS + p NSI sa Full..
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_2        12         FTMS + p NSI sa Full..
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1        14         FTMS + p NSI sa Full..
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_2        14         FTMS + p NSI sa Full..
-#&gt; C1.0e+05_1.0e+06_02.50_21_00          16         FTMS + p NSI sa Full..
-#&gt; ...                                  ...                            ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_2       158         FTMS + p NSI Full ms..
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1       160         FTMS + p NSI Full ms..
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_2       160         FTMS + p NSI Full ms..
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1       162         FTMS + p NSI Full ms..
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_2       162         FTMS + p NSI Full ms..
-#&gt;                                SupplementalActivation     RtMin       Tic
-#&gt;                                                 &lt;Rle&gt; &lt;numeric&gt; &lt;numeric&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1                   TRUE   6.19109 159451792
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_2                   TRUE   6.49019 171593248
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1                   TRUE   7.08995 178472720
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_2                   TRUE   7.38760 159089344
-#&gt; C1.0e+05_1.0e+06_02.50_21_00                     TRUE   8.28815 159144752
-#&gt; ...                                               ...       ...       ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_2                  FALSE   79.4093   6983628
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1                  FALSE   80.2337   4512664
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_2                  FALSE   80.5023   4734344
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1                  FALSE   81.0515   6846192
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_2                  FALSE   81.3113   6351402
-#&gt;                                BasePeakPosition
-#&gt;                                       &lt;numeric&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1          1304.93
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_2          1304.93
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1          1304.93
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_2          1304.93
-#&gt; C1.0e+05_1.0e+06_02.50_21_00            1304.93
-#&gt; ...                                         ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_2          231.123
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1          231.123
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_2          159.091
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1          231.123
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_2          231.123
-#&gt;                                BasePeakIntensity.HeaderInformation
-#&gt;                                                          &lt;numeric&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1                             3762917
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_2                             3784709
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1                             3987072
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_2                             3722252
-#&gt; C1.0e+05_1.0e+06_02.50_21_00                               3627429
-#&gt; ...                                                            ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_2                             50586.9
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1                             86218.9
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_2                            113096.1
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1                            232769.3
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_2                            212045.9
-#&gt;                                IonInjectionTimeMs ElapsedScanTimeSec HcdEnergy
-#&gt;                                         &lt;numeric&gt;          &lt;numeric&gt;     &lt;Rle&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1              5.594             17.883        NA
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_2              3.844             17.817        NA
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1              3.345             17.796        NA
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_2              5.548             17.885        NA
-#&gt; C1.0e+05_1.0e+06_02.50_21_00                5.622             17.887        NA
-#&gt; ...                                           ...                ...       ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_2             33.946             15.801        21
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1             40.343             16.056        28
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_2             26.210             15.493        28
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1             27.029             15.523        35
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_2             41.227             16.093        35
-#&gt;                                ConversionParameterB ConversionParameterC
-#&gt;                                               &lt;Rle&gt;                &lt;Rle&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1     211703103.257927    -146989183.520749
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_2     211703103.257927    -146989183.520749
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1     211703102.662952     -146989182.69859
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_2     211703102.662952     -146989182.69859
-#&gt; C1.0e+05_1.0e+06_02.50_21_00       211703102.056363      -146989181.8545
-#&gt; ...                                             ...                  ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_2     211702381.311807     -146988181.00019
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1     211702380.623441    -146988180.050792
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_2     211702380.623441    -146988180.050792
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1     211702379.937029    -146988179.095817
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_2     211702379.937029    -146988179.095817
-#&gt;                                TemperatureCompPpm SpaceChargeCompPpm  RawOvFtt
-#&gt;                                             &lt;Rle&gt;              &lt;Rle&gt; &lt;numeric&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1             -14.44              -0.18    889335
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_2             -14.44              -0.18    667089
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1             -14.44              -0.18    603503
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_2             -14.44              -0.18    889291
-#&gt; C1.0e+05_1.0e+06_02.50_21_00               -14.44              -0.18    897244
-#&gt; ...                                           ...                ...       ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_2             -14.56              -1.76    247569
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1             -14.56              -1.76    187648
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_2             -14.56              -1.76    130142
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1             -14.56              -1.76    191043
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_2             -14.56              -1.76    268899
-#&gt;                                InjectionT0 NrCentroids SelectedMass1
-#&gt;                                  &lt;numeric&gt;   &lt;integer&gt;         &lt;Rle&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1           0        3513        1211.7
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_2           0        3053        1211.7
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1           0        3114        1211.7
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_2           0        3743        1211.7
-#&gt; C1.0e+05_1.0e+06_02.50_21_00             0        3629        1211.7
-#&gt; ...                                    ...         ...           ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_2      -0.054        4686       1211.72
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1       0.021        2640       1211.72
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_2       0.045        2052       1211.72
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1       0.034        2123       1211.72
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_2       0.036        2608       1211.72
-#&gt;                                Activation1 Energy1 SelectedMass2 Activation2
-#&gt;                                      &lt;Rle&gt;   &lt;Rle&gt;         &lt;Rle&gt;       &lt;Rle&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1         ETD     2.5             0         CID
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_2         ETD     2.5             0         CID
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1         ETD     2.5             0         CID
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_2         ETD     2.5             0         CID
-#&gt; C1.0e+05_1.0e+06_02.50_21_00           ETD     2.5             0         CID
-#&gt; ...                                    ...     ...           ...         ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_2         HCD      21            NA          NA
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1         HCD      28            NA          NA
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_2         HCD      28            NA          NA
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1         HCD      35            NA          NA
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_2         HCD      35            NA          NA
-#&gt;                                Energy2 EtdActivation CidActivation
-#&gt;                                  &lt;Rle&gt;         &lt;Rle&gt;         &lt;Rle&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1       7           2.5             7
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_2       7           2.5             7
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1      14           2.5            14
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_2      14           2.5            14
-#&gt; C1.0e+05_1.0e+06_02.50_21_00        21           2.5            21
-#&gt; ...                                ...           ...           ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_2      NA            NA            NA
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1      NA            NA            NA
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_2      NA            NA            NA
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1      NA            NA            NA
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_2      NA            NA            NA
-#&gt;                                HcdActivation Activation StartTime   EndTime
-#&gt;                                        &lt;Rle&gt;      &lt;Rle&gt; &lt;numeric&gt; &lt;numeric&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1            NA      ETcid      6.01       6.5
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_2            NA      ETcid      6.01       6.5
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1            NA      ETcid      7.01       7.5
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_2            NA      ETcid      7.01       7.5
-#&gt; C1.0e+05_1.0e+06_02.50_21_00              NA      ETcid      8.01       8.5
-#&gt; ...                                      ...        ...       ...       ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_2            21        HCD     79.01      79.5
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1            28        HCD     80.01      80.5
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_2            28        HCD     80.01      80.5
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1            35        HCD     81.01      81.5
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_2            35        HCD     81.01      81.5
-#&gt;                                ActivationType    Ce SteppedCe SteppedCeValue
-#&gt;                                         &lt;Rle&gt; &lt;Rle&gt;     &lt;Rle&gt;          &lt;Rle&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1            ETD    NA                       NA
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_2            ETD    NA                       NA
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1            ETD    NA                       NA
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_2            ETD    NA                       NA
-#&gt; C1.0e+05_1.0e+06_02.50_21_00              ETD    NA                       NA
-#&gt; ...                                       ...   ...       ...            ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_2            HCD    25     False              5
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1            HCD    25     False              5
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_2            HCD    25     False              5
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1            HCD    25     False              5
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_2            HCD    25     False              5
-#&gt;                                MultistageActivation Ethcd
-#&gt;                                               &lt;Rle&gt; &lt;Rle&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1                      FALSE
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_2                      FALSE
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1                      FALSE
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_2                      FALSE
-#&gt; C1.0e+05_1.0e+06_02.50_21_00                        FALSE
-#&gt; ...                                             ...   ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_2                      FALSE
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1                      FALSE
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_2                      FALSE
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1                      FALSE
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_2                      FALSE
-#&gt;                                UseCalibratedEtdParameters EtdReactionTime
-#&gt;                                                     &lt;Rle&gt;           &lt;Rle&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1                      False             2.5
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_2                      False             2.5
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1                      False             2.5
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_2                      False             2.5
-#&gt; C1.0e+05_1.0e+06_02.50_21_00                        False             2.5
-#&gt; ...                                                   ...             ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_2                                         NA
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1                                         NA
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_2                                         NA
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1                                         NA
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_2                                         NA
-#&gt;                                EtdReagentTarget EtdSupplementalActivation
-#&gt;                                           &lt;Rle&gt;                     &lt;Rle&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1          1000000                      True
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_2          1000000                      True
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1          1000000                      True
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_2          1000000                      True
-#&gt; C1.0e+05_1.0e+06_02.50_21_00            1000000                      True
-#&gt; ...                                         ...                       ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_2               NA                          
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1               NA                          
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_2               NA                          
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1               NA                          
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_2               NA                          
-#&gt;                                SupplementalActivationCe AgcTarget Activationq
-#&gt;                                                   &lt;Rle&gt;     &lt;Rle&gt;       &lt;Rle&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1                        7    100000          NA
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_2                        7    100000          NA
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1                       14    100000          NA
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_2                       14    100000          NA
-#&gt; C1.0e+05_1.0e+06_02.50_21_00                         21    100000          NA
-#&gt; ...                                                 ...       ...         ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_2                       NA   1000000          NA
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1                       NA   1000000          NA
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_2                       NA   1000000          NA
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1                       NA   1000000          NA
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_2                       NA   1000000          NA
-#&gt;                                      TargetedMassList     Mz Charge    Sample
-#&gt;                                           &lt;character&gt;  &lt;Rle&gt;  &lt;Rle&gt; &lt;integer&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1 (mz=1211.7012 z=1 na.. 1211.7     14         1
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_2 (mz=1211.7012 z=1 na.. 1211.7     14         1
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1 (mz=1211.7014 z=1 na.. 1211.7     14         2
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_2 (mz=1211.7014 z=1 na.. 1211.7     14         2
-#&gt; C1.0e+05_1.0e+06_02.50_21_00   (mz=1211.7016 z=1 na.. 1211.7     14         3
-#&gt; ...                                               ...    ...    ...       ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_2 (mz=1211.7158 z=1 na.. 1211.7     14       220
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1 (mz=1211.716 z=1 nam.. 1211.7     14       221
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_2 (mz=1211.716 z=1 nam.. 1211.7     14       221
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1 (mz=1211.7162 z=1 na.. 1211.7     14       222
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_2 (mz=1211.7162 z=1 na.. 1211.7     14       222
-#&gt;                                MedianIonInjectionTimeMs
-#&gt;                                                   &lt;Rle&gt;
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_1                    4.837
-#&gt; C1.0e+05_1.0e+06_02.50_07_00_2                    4.837
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_1                    4.837
-#&gt; C1.0e+05_1.0e+06_02.50_14_00_2                    4.837
-#&gt; C1.0e+05_1.0e+06_02.50_21_00                      4.837
-#&gt; ...                                                 ...
-#&gt; C1.0e+06_0.0e+00_00.00_00_21_2                    43.14
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_1                    43.14
-#&gt; C1.0e+06_0.0e+00_00.00_00_28_2                    43.14
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_1                    43.14
-#&gt; C1.0e+06_0.0e+00_00.00_00_35_2                    43.14</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>assayData</span>(<span class='no'>tds</span>))</div><div class='output co'>#&gt; 6 x 351 sparse Matrix of class "dgCMatrix"</div><div class='output co'>#&gt; <span class='message'>   [[ suppressing 351 column names ‘C1.0e+05_1.0e+06_02.50_07_00_1’, ‘C1.0e+05_1.0e+06_02.50_07_00_2’, ‘C1.0e+05_1.0e+06_02.50_14_00_1’ ... ]]</span></div><div class='output co'>#&gt;                                                                               
-#&gt; a1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; b1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; z1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; zpH1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; c1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; y1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt;                                                                               
-#&gt; a1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; b1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; z1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; zpH1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; c1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; y1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt;                                                                               
-#&gt; a1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; b1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; z1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; zpH1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; c1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; y1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt;                                                                               
-#&gt; a1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; b1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; z1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; zpH1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; c1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; y1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt;                                                                               
-#&gt; a1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; b1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; z1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; zpH1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; c1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; y1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt;                                                                               
-#&gt; a1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; b1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; z1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; zpH1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; c1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; y1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt;                                                                               
-#&gt; a1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; b1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; z1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; zpH1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; c1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; y1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt;                                                                               
-#&gt; a1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; b1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; z1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; zpH1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; c1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; y1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt;                                                                               
-#&gt; a1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; b1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; z1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; zpH1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; c1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt; y1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-#&gt;                                         
-#&gt; a1   . . . . . . . . . . . . . . . . . .
-#&gt; b1   . . . . . . . . . . . . . . . . . .
-#&gt; z1   . . . . . . . . . . . . . . . . . .
-#&gt; zpH1 . . . . . . . . . . . . . . . . . .
-#&gt; c1   . . . . . . . . . . . . . . . . . .
-#&gt; y1   . . . . . . . . . . . . . . . . . .</div><div class='input'>
-<span class='co'># Accessing colData</span>
-<span class='no'>tds</span>$<span class='no'>Mz</span></div><div class='output co'>#&gt; numeric-Rle of length 351 with 1 run
-#&gt;   Lengths:    351
-#&gt;   Values : 1211.7</div><div class='input'><span class='no'>tds</span>$<span class='no'>FilterString</span></div><div class='output co'>#&gt; NULL</div><div class='input'>
-<span class='co'># Subsetting</span>
-
-<span class='co'># First 100 fragments</span>
-<span class='no'>tds</span>[<span class='fl'>1</span>:<span class='fl'>100</span>]</div><div class='output co'>#&gt; TopDownSet object (0.31 Mb)
-#&gt; - - - Protein data - - -
-#&gt; Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
-#&gt; Mass : 16964.96
-#&gt; Modifications (3): Carbamidomethyl, Acetyl, Met-loss
-#&gt; - - - Fragment data - - -
-#&gt; Number of theoretical fragments: 100 
-#&gt; Theoretical fragment types (12): a, a*, b, b*, c, ..., x*, y, y*, z, z*
-#&gt; Theoretical mass range: [72.04;1142.51]
-#&gt; - - - Condition data - - -
-#&gt; Number of conditions: 222 
-#&gt; Number of scans: 351 
-#&gt; Condition variables (59): File, Scan, ..., Sample, MedianIonInjectionTimeMs
-#&gt; - - - Intensity data - - -
-#&gt; Size of array: 100x351 (3.30% != 0)
-#&gt; Number of matched fragments: 1157 
-#&gt; Intensity range: [280.27;214724.06]
-#&gt; - - - Processing information - - -
-#&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
-#&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
-#&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2020-08-16 21:30:33] Subsetted 14518 fragments [1949;351] to 1157 fragments [100;351]. </div><div class='input'>
-<span class='co'># All c fragments</span>
-<span class='no'>tds</span>[<span class='st'>"c"</span>]</div><div class='output co'>#&gt; TopDownSet object (0.31 Mb)
-#&gt; - - - Protein data - - -
-#&gt; Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
-#&gt; Mass : 16964.96
-#&gt; Modifications (3): Carbamidomethyl, Acetyl, Met-loss
-#&gt; - - - Fragment data - - -
-#&gt; Number of theoretical fragments: 152 
-#&gt; Theoretical fragment types (1): c
-#&gt; Theoretical mass range: [117.07;16925.98]
-#&gt; - - - Condition data - - -
-#&gt; Number of conditions: 222 
-#&gt; Number of scans: 351 
-#&gt; Condition variables (59): File, Scan, ..., Sample, MedianIonInjectionTimeMs
-#&gt; - - - Intensity data - - -
-#&gt; Size of array: 152x351 (0.63% != 0)
-#&gt; Number of matched fragments: 338 
-#&gt; Intensity range: [432.91;664294.75]
-#&gt; - - - Processing information - - -
-#&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
-#&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
-#&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2020-08-16 21:30:33] Subsetted 14518 fragments [1949;351] to 338 fragments [152;351]. </div><div class='input'>
-<span class='co'># Just c 152</span>
-<span class='no'>tds</span>[<span class='st'>"c152"</span>]</div><div class='output co'>#&gt; TopDownSet object (0.28 Mb)
-#&gt; - - - Protein data - - -
-#&gt; Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
-#&gt; Mass : 16964.96
-#&gt; Modifications (3): Carbamidomethyl, Acetyl, Met-loss
-#&gt; - - - Fragment data - - -
-#&gt; Number of theoretical fragments: 1 
-#&gt; Theoretical fragment types (1): c
-#&gt; Theoretical mass range: [16925.98;16925.98]
-#&gt; - - - Condition data - - -
-#&gt; Number of conditions: 222 
-#&gt; Number of scans: 351 
-#&gt; Condition variables (59): File, Scan, ..., Sample, MedianIonInjectionTimeMs
-#&gt; - - - Intensity data - - -
-#&gt; Size of array: 1x351 (33.90% != 0)
-#&gt; Number of matched fragments: 119 
-#&gt; Intensity range: [979.57;664294.75]
-#&gt; - - - Processing information - - -
-#&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
-#&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
-#&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2020-08-16 21:30:33] Subsetted 14518 fragments [1949;351] to 119 fragments [1;351]. </div><div class='input'>
-<span class='co'># Condition 1 to 10</span>
-<span class='no'>tds</span>[, <span class='fl'>1</span>:<span class='fl'>10</span>]</div><div class='output co'>#&gt; TopDownSet object (0.35 Mb)
-#&gt; - - - Protein data - - -
-#&gt; Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
-#&gt; Mass : 16964.96
-#&gt; Modifications (3): Carbamidomethyl, Acetyl, Met-loss
-#&gt; - - - Fragment data - - -
-#&gt; Number of theoretical fragments: 1949 
-#&gt; Theoretical fragment types (12): a, a*, b, b*, c, ..., x*, y, y*, z, z*
-#&gt; Theoretical mass range: [72.04;16925.98]
-#&gt; - - - Condition data - - -
-#&gt; Number of conditions: 6 
-#&gt; Number of scans: 10 
-#&gt; Condition variables (59): File, Scan, ..., Sample, MedianIonInjectionTimeMs
-#&gt; - - - Intensity data - - -
-#&gt; Size of array: 1949x10 (2.69% != 0)
-#&gt; Number of matched fragments: 524 
-#&gt; Intensity range: [1843.09;669750.88]
-#&gt; - - - Processing information - - -
-#&gt; [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).
-#&gt; [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.
-#&gt; [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.
-#&gt; [2020-08-16 21:30:33] Subsetted 14518 fragments [1949;351] to 524 fragments [1949;10]. </div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'>## Because AbstractTopDownSet is a VIRTUAL class we could not create any</span></span>
+<span class='r-in'><span class='co'>## object of it. Here we demonstrate the usage with an TopDownSet that</span></span>
+<span class='r-in'><span class='co'>## implements the AbstractTopDownSet interface. See `?"TopDownSet-class"` for</span></span>
+<span class='r-in'><span class='co'>## more details an further examples.</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Example data</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>tds</span>, package<span class='op'>=</span><span class='st'>"topdownr"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>tds</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> TopDownSet object (0.72 Mb)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - - - Protein data - - -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Mass : 16964.96</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Modifications (3): Carbamidomethyl, Acetyl, Met-loss</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - - - Fragment data - - -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Number of theoretical fragments: 1949 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Theoretical fragment types (12): a, a*, b, b*, c, ..., x*, y, y*, z, z*</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Theoretical mass range: [72.04;16925.98]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - - - Condition data - - -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Number of conditions: 222 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Number of scans: 351 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Condition variables (59): File, Scan, ..., Sample, MedianIonInjectionTimeMs</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - - - Intensity data - - -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Size of array: 1949x351 (2.12% != 0)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Number of matched fragments: 14518 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Intensity range: [126.42;1454253.25]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - - - Processing information - - -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget. </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>tds</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                Fragments   Total     Min       Q1   Median</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_1        48 3350602 5289.57 14243.25 31047.62</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_2        46 3352669 3147.54 17875.76 29926.68</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_1        46 3204442 3842.46 17372.92 29012.01</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_2        48 3320782 3848.07 11656.87 32890.28</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_21_00          57 3590927 3787.77 12579.74 27829.12</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_28_00_1        58 3291440 1843.09 10398.68 21424.32</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                    Mean       Q3      Max</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_1 1719.139 59497.87 607970.2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_2 1720.199 73423.75 641441.3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_1 1644.147 68124.07 669750.9</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_2 1703.839 54575.39 601565.8</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_21_00   1842.446 51986.04 607209.7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_28_00_1 1688.784 48499.72 589361.6</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Accessing slots</span></span>
+<span class='r-in'><span class='fu'>rowViews</span><span class='op'>(</span><span class='va'>tds</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> FragmentViews on a 153-letter sequence:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   GLSDGEWQQVLNVWGKVEADIAGHGQEVLIRLFTGHPE...SKHPGDFGADAQGAMTKALELFRNDIAAKYKELGFQG</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Mass:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   16964.964625</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Modifications:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Carbamidomethyl</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Acetyl</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Met-loss</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Views:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        start end width     mass name  type   z                                  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    [1]     1   1     1    72.04 a1    a      1 [G]                              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    [2]     1   1     1   100.04 b1    b      1 [G]                              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    [3]     1   1     1   101.02 z1    z      1 [G]                              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    [4]     1   1     1   102.03 zpH1  z      1 [G]                              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    [5]     1   1     1   117.07 c1    c      1 [G]                              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    ...   ... ...   ...      ... ...   ...  ... ...                              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1945]     2 153   152 16893.90 x152* x*     1 [LSDGEWQQVLNVWG...NDIAAKYKELGFQG]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1946]     1 152   152 16908.95 b152  b      1 [GLSDGEWQQVLNVW...RNDIAAKYKELGFQ]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1947]     1 152   152 16908.95 c152* c*     1 [GLSDGEWQQVLNVW...RNDIAAKYKELGFQ]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1948]     2 153   152 16910.93 x152  x      1 [LSDGEWQQVLNVWG...NDIAAKYKELGFQG]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1949]     1 152   152 16925.98 c152  c      1 [GLSDGEWQQVLNVW...RNDIAAKYKELGFQ]</span>
+<span class='r-in'><span class='fu'>colData</span><span class='op'>(</span><span class='va'>tds</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> DataFrame with 351 rows and 59 columns</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                  File      Scan SpectrumIndex</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                 &lt;Rle&gt; &lt;integer&gt;     &lt;integer&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_1 myo_1211_ETDReagentT..        33            23</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_2 myo_1211_ETDReagentT..        34            24</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_1 myo_1211_ETDReagentT..        36            26</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_2 myo_1211_ETDReagentT..        37            27</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_21_00   myo_1211_ETDReagentT..        40            30</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ...                                               ...       ...           ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_21_2 myo_1211_ETDReagentT..       265           249</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_1 myo_1211_ETDReagentT..       268           252</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_2 myo_1211_ETDReagentT..       269           253</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_1 myo_1211_ETDReagentT..       271           255</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_2 myo_1211_ETDReagentT..       272           256</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                PeaksCount TotIonCurrent RetentionTime</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                 &lt;integer&gt;     &lt;numeric&gt;     &lt;numeric&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_1        135      13727530       371.466</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_2        133      14978619       389.412</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_1        124      15124274       425.397</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_2        144      14001930       443.256</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_21_00          148      14008273       497.289</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ...                                   ...           ...           ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_21_2        471       3388050       4764.55</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_1        233       2060326       4814.02</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_2        172       1970904       4830.14</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_1        166       2918202       4863.09</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_2        231       2861092       4878.68</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                BasePeakMz BasePeakIntensity.SpectraInformation</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                 &lt;numeric&gt;                            &lt;numeric&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_1      16943                              4631841</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_2      16943                              5103187</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_1      16943                              5346571</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_2      16943                              4668278</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_21_00        16943                              4605146</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ...                                   ...                                  ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_21_2    231.123                              56502.7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_1    231.123                              96439.5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_2    231.123                             104296.8</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_1    231.123                             261401.5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_2    231.123                             238047.0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                    LowMz    HighMz PrecursorMz</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                &lt;numeric&gt; &lt;numeric&gt;   &lt;numeric&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_1   762.391   17146.1      1211.7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_2   762.390   17146.1      1211.7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_1   762.391   17146.1      1211.7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_2   762.391   17146.1      1211.7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_21_00     762.391   17146.1      1211.7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ...                                  ...       ...         ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_21_2   200.139  5970.087     1211.72</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_1   200.139  1460.807     1211.72</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_2   200.139  1351.744     1211.72</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_1   200.139   959.491     1211.72</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_2   200.139  1138.667     1211.72</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                            SpectrumId Condition</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                           &lt;character&gt; &lt;integer&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_1 controllerType=0 con..        12</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_2 controllerType=0 con..        12</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_1 controllerType=0 con..        14</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_2 controllerType=0 con..        14</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_21_00   controllerType=0 con..        16</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ...                                               ...       ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_21_2 controllerType=0 con..       158</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_1 controllerType=0 con..       160</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_2 controllerType=0 con..       160</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_1 controllerType=0 con..       162</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_2 controllerType=0 con..       162</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                FilterString.HeaderInformation</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                   &lt;character&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_1         FTMS + p NSI sa Full..</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_2         FTMS + p NSI sa Full..</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_1         FTMS + p NSI sa Full..</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_2         FTMS + p NSI sa Full..</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_21_00           FTMS + p NSI sa Full..</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ...                                                       ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_21_2         FTMS + p NSI Full ms..</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_1         FTMS + p NSI Full ms..</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_2         FTMS + p NSI Full ms..</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_1         FTMS + p NSI Full ms..</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_2         FTMS + p NSI Full ms..</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                SupplementalActivation     RtMin       Tic</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                 &lt;Rle&gt; &lt;numeric&gt; &lt;numeric&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_1                   TRUE   6.19109 159451792</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_2                   TRUE   6.49019 171593248</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_1                   TRUE   7.08995 178472720</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_2                   TRUE   7.38760 159089344</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_21_00                     TRUE   8.28815 159144752</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ...                                               ...       ...       ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_21_2                  FALSE   79.4093   6983628</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_1                  FALSE   80.2337   4512664</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_2                  FALSE   80.5023   4734344</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_1                  FALSE   81.0515   6846192</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_2                  FALSE   81.3113   6351402</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                BasePeakPosition</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                       &lt;numeric&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_1          1304.93</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_2          1304.93</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_1          1304.93</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_2          1304.93</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_21_00            1304.93</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ...                                         ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_21_2          231.123</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_1          231.123</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_2          159.091</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_1          231.123</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_2          231.123</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                BasePeakIntensity.HeaderInformation</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                          &lt;numeric&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_1                             3762917</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_2                             3784709</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_1                             3987072</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_2                             3722252</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_21_00                               3627429</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ...                                                            ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_21_2                             50586.9</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_1                             86218.9</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_2                            113096.1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_1                            232769.3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_2                            212045.9</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                IonInjectionTimeMs ElapsedScanTimeSec HcdEnergy</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                         &lt;numeric&gt;          &lt;numeric&gt;     &lt;Rle&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_1              5.594             17.883        NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_2              3.844             17.817        NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_1              3.345             17.796        NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_2              5.548             17.885        NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_21_00                5.622             17.887        NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ...                                           ...                ...       ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_21_2             33.946             15.801        21</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_1             40.343             16.056        28</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_2             26.210             15.493        28</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_1             27.029             15.523        35</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_2             41.227             16.093        35</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                ConversionParameterB ConversionParameterC</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                               &lt;Rle&gt;                &lt;Rle&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_1     211703103.257927    -146989183.520749</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_2     211703103.257927    -146989183.520749</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_1     211703102.662952     -146989182.69859</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_2     211703102.662952     -146989182.69859</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_21_00       211703102.056363      -146989181.8545</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ...                                             ...                  ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_21_2     211702381.311807     -146988181.00019</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_1     211702380.623441    -146988180.050792</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_2     211702380.623441    -146988180.050792</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_1     211702379.937029    -146988179.095817</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_2     211702379.937029    -146988179.095817</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                TemperatureCompPpm SpaceChargeCompPpm  RawOvFtt</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                             &lt;Rle&gt;              &lt;Rle&gt; &lt;numeric&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_1             -14.44              -0.18    889335</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_2             -14.44              -0.18    667089</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_1             -14.44              -0.18    603503</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_2             -14.44              -0.18    889291</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_21_00               -14.44              -0.18    897244</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ...                                           ...                ...       ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_21_2             -14.56              -1.76    247569</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_1             -14.56              -1.76    187648</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_2             -14.56              -1.76    130142</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_1             -14.56              -1.76    191043</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_2             -14.56              -1.76    268899</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                InjectionT0 NrCentroids SelectedMass1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                  &lt;numeric&gt;   &lt;integer&gt;         &lt;Rle&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_1           0        3513        1211.7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_2           0        3053        1211.7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_1           0        3114        1211.7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_2           0        3743        1211.7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_21_00             0        3629        1211.7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ...                                    ...         ...           ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_21_2      -0.054        4686       1211.72</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_1       0.021        2640       1211.72</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_2       0.045        2052       1211.72</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_1       0.034        2123       1211.72</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_2       0.036        2608       1211.72</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                Activation1 Energy1 SelectedMass2 Activation2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                      &lt;Rle&gt;   &lt;Rle&gt;         &lt;Rle&gt;       &lt;Rle&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_1         ETD     2.5             0         CID</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_2         ETD     2.5             0         CID</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_1         ETD     2.5             0         CID</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_2         ETD     2.5             0         CID</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_21_00           ETD     2.5             0         CID</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ...                                    ...     ...           ...         ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_21_2         HCD      21            NA          NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_1         HCD      28            NA          NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_2         HCD      28            NA          NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_1         HCD      35            NA          NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_2         HCD      35            NA          NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                Energy2 EtdActivation CidActivation</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                  &lt;Rle&gt;         &lt;Rle&gt;         &lt;Rle&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_1       7           2.5             7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_2       7           2.5             7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_1      14           2.5            14</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_2      14           2.5            14</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_21_00        21           2.5            21</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ...                                ...           ...           ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_21_2      NA            NA            NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_1      NA            NA            NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_2      NA            NA            NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_1      NA            NA            NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_2      NA            NA            NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                HcdActivation Activation StartTime   EndTime</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                        &lt;Rle&gt;      &lt;Rle&gt; &lt;numeric&gt; &lt;numeric&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_1            NA      ETcid      6.01       6.5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_2            NA      ETcid      6.01       6.5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_1            NA      ETcid      7.01       7.5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_2            NA      ETcid      7.01       7.5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_21_00              NA      ETcid      8.01       8.5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ...                                      ...        ...       ...       ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_21_2            21        HCD     79.01      79.5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_1            28        HCD     80.01      80.5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_2            28        HCD     80.01      80.5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_1            35        HCD     81.01      81.5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_2            35        HCD     81.01      81.5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                ActivationType    Ce SteppedCe SteppedCeValue</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                         &lt;Rle&gt; &lt;Rle&gt;     &lt;Rle&gt;          &lt;Rle&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_1            ETD    NA                       NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_2            ETD    NA                       NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_1            ETD    NA                       NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_2            ETD    NA                       NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_21_00              ETD    NA                       NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ...                                       ...   ...       ...            ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_21_2            HCD    25     False              5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_1            HCD    25     False              5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_2            HCD    25     False              5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_1            HCD    25     False              5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_2            HCD    25     False              5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                MultistageActivation Ethcd</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                               &lt;Rle&gt; &lt;Rle&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_1                      FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_2                      FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_1                      FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_2                      FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_21_00                        FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ...                                             ...   ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_21_2                      FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_1                      FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_2                      FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_1                      FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_2                      FALSE</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                UseCalibratedEtdParameters EtdReactionTime</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                     &lt;Rle&gt;           &lt;Rle&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_1                      False             2.5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_2                      False             2.5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_1                      False             2.5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_2                      False             2.5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_21_00                        False             2.5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ...                                                   ...             ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_21_2                                         NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_1                                         NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_2                                         NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_1                                         NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_2                                         NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                EtdReagentTarget EtdSupplementalActivation</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                           &lt;Rle&gt;                     &lt;Rle&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_1          1000000                      True</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_2          1000000                      True</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_1          1000000                      True</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_2          1000000                      True</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_21_00            1000000                      True</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ...                                         ...                       ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_21_2               NA                          </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_1               NA                          </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_2               NA                          </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_1               NA                          </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_2               NA                          </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                SupplementalActivationCe AgcTarget Activationq</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                   &lt;Rle&gt;     &lt;Rle&gt;       &lt;Rle&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_1                        7    100000          NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_2                        7    100000          NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_1                       14    100000          NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_2                       14    100000          NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_21_00                         21    100000          NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ...                                                 ...       ...         ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_21_2                       NA   1000000          NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_1                       NA   1000000          NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_2                       NA   1000000          NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_1                       NA   1000000          NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_2                       NA   1000000          NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                      TargetedMassList     Mz Charge    Sample</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                           &lt;character&gt;  &lt;Rle&gt;  &lt;Rle&gt; &lt;integer&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_1 (mz=1211.7012 z=1 na.. 1211.7     14         1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_2 (mz=1211.7012 z=1 na.. 1211.7     14         1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_1 (mz=1211.7014 z=1 na.. 1211.7     14         2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_2 (mz=1211.7014 z=1 na.. 1211.7     14         2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_21_00   (mz=1211.7016 z=1 na.. 1211.7     14         3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ...                                               ...    ...    ...       ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_21_2 (mz=1211.7158 z=1 na.. 1211.7     14       220</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_1 (mz=1211.716 z=1 nam.. 1211.7     14       221</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_2 (mz=1211.716 z=1 nam.. 1211.7     14       221</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_1 (mz=1211.7162 z=1 na.. 1211.7     14       222</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_2 (mz=1211.7162 z=1 na.. 1211.7     14       222</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                MedianIonInjectionTimeMs</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                   &lt;Rle&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_1                    4.837</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_07_00_2                    4.837</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_1                    4.837</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_14_00_2                    4.837</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+05_1.0e+06_02.50_21_00                      4.837</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ...                                                 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_21_2                    43.14</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_1                    43.14</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_28_2                    43.14</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_1                    43.14</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> C1.0e+06_0.0e+00_00.00_00_35_2                    43.14</span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>assayData</span><span class='op'>(</span><span class='va'>tds</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6 x 351 sparse Matrix of class "dgCMatrix"</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span>    [[ suppressing 351 column names ‘C1.0e+05_1.0e+06_02.50_07_00_1’, ‘C1.0e+05_1.0e+06_02.50_07_00_2’, ‘C1.0e+05_1.0e+06_02.50_14_00_1’ ... ]]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> a1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> b1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> z1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> zpH1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> c1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> y1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> a1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> b1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> z1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> zpH1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> c1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> y1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> a1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> b1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> z1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> zpH1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> c1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> y1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> a1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> b1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> z1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> zpH1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> c1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> y1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> a1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> b1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> z1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> zpH1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> c1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> y1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> a1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> b1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> z1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> zpH1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> c1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> y1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> a1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> b1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> z1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> zpH1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> c1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> y1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> a1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> b1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> z1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> zpH1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> c1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> y1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> a1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> b1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> z1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> zpH1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> c1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> y1   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                         </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> a1   . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> b1   . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> z1   . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> zpH1 . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> c1   . . . . . . . . . . . . . . . . . .</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> y1   . . . . . . . . . . . . . . . . . .</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Accessing colData</span></span>
+<span class='r-in'><span class='va'>tds</span><span class='op'>$</span><span class='va'>Mz</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> numeric-Rle of length 351 with 1 run</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Lengths:    351</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Values : 1211.7</span>
+<span class='r-in'><span class='va'>tds</span><span class='op'>$</span><span class='va'>FilterString</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> NULL</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Subsetting</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># First 100 fragments</span></span>
+<span class='r-in'><span class='va'>tds</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>100</span><span class='op'>]</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> TopDownSet object (0.31 Mb)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - - - Protein data - - -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Mass : 16964.96</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Modifications (3): Carbamidomethyl, Acetyl, Met-loss</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - - - Fragment data - - -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Number of theoretical fragments: 100 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Theoretical fragment types (12): a, a*, b, b*, c, ..., x*, y, y*, z, z*</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Theoretical mass range: [72.04;1142.51]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - - - Condition data - - -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Number of conditions: 222 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Number of scans: 351 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Condition variables (59): File, Scan, ..., Sample, MedianIonInjectionTimeMs</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - - - Intensity data - - -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Size of array: 100x351 (3.30% != 0)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Number of matched fragments: 1157 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Intensity range: [280.27;214724.06]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - - - Processing information - - -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2021-07-27 21:27:59] Subsetted 14518 fragments [1949;351] to 1157 fragments [100;351]. </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># All c fragments</span></span>
+<span class='r-in'><span class='va'>tds</span><span class='op'>[</span><span class='st'>"c"</span><span class='op'>]</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> TopDownSet object (0.31 Mb)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - - - Protein data - - -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Mass : 16964.96</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Modifications (3): Carbamidomethyl, Acetyl, Met-loss</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - - - Fragment data - - -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Number of theoretical fragments: 152 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Theoretical fragment types (1): c</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Theoretical mass range: [117.07;16925.98]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - - - Condition data - - -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Number of conditions: 222 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Number of scans: 351 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Condition variables (59): File, Scan, ..., Sample, MedianIonInjectionTimeMs</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - - - Intensity data - - -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Size of array: 152x351 (0.63% != 0)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Number of matched fragments: 338 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Intensity range: [432.91;664294.75]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - - - Processing information - - -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2021-07-27 21:27:59] Subsetted 14518 fragments [1949;351] to 338 fragments [152;351]. </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Just c 152</span></span>
+<span class='r-in'><span class='va'>tds</span><span class='op'>[</span><span class='st'>"c152"</span><span class='op'>]</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> TopDownSet object (0.28 Mb)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - - - Protein data - - -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Mass : 16964.96</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Modifications (3): Carbamidomethyl, Acetyl, Met-loss</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - - - Fragment data - - -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Number of theoretical fragments: 1 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Theoretical fragment types (1): c</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Theoretical mass range: [16925.98;16925.98]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - - - Condition data - - -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Number of conditions: 222 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Number of scans: 351 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Condition variables (59): File, Scan, ..., Sample, MedianIonInjectionTimeMs</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - - - Intensity data - - -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Size of array: 1x351 (33.90% != 0)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Number of matched fragments: 119 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Intensity range: [979.57;664294.75]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - - - Processing information - - -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2021-07-27 21:27:59] Subsetted 14518 fragments [1949;351] to 119 fragments [1;351]. </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Condition 1 to 10</span></span>
+<span class='r-in'><span class='va'>tds</span><span class='op'>[</span>, <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>]</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> TopDownSet object (0.35 Mb)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - - - Protein data - - -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Mass : 16964.96</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Modifications (3): Carbamidomethyl, Acetyl, Met-loss</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - - - Fragment data - - -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Number of theoretical fragments: 1949 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Theoretical fragment types (12): a, a*, b, b*, c, ..., x*, y, y*, z, z*</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Theoretical mass range: [72.04;16925.98]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - - - Condition data - - -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Number of conditions: 6 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Number of scans: 10 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Condition variables (59): File, Scan, ..., Sample, MedianIonInjectionTimeMs</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - - - Intensity data - - -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Size of array: 1949x10 (2.69% != 0)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Number of matched fragments: 524 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Intensity range: [1843.09;669750.88]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> - - - Processing information - - -</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2018-01-30 11:39:16] 14518 fragments [1949;351] matched (tolerance: 25 ppm, strategies ion/fragment: remove/remove).</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2018-01-30 11:39:16] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 222 conditions.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2018-01-30 11:39:16] Recalculate median injection time based on: Mz, AgcTarget.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2021-07-27 21:27:59] Subsetted 14518 fragments [1949;351] to 524 fragments [1949;10]. </span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -940,11 +969,11 @@ for technical details about the intensity/coverage storage.</p></li>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Sebastian Gibb, Pavel Shliaha, Ole Nørregaard Jensen.</p>
+  <p><p>Developed by Sebastian Gibb, Pavel Shliaha, Ole Nørregaard Jensen.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -952,6 +981,8 @@ for technical details about the intensity/coverage storage.</p></li>
 
   
 
+
+  
 
   </body>
 </html>

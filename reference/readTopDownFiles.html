@@ -45,6 +45,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -56,9 +58,15 @@
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -72,19 +80,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">topdownr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.15.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -109,7 +111,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/sgibb/topdownr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -135,23 +137,24 @@
     <p>It creates an <a href='TopDownSet-class.html'>TopDownSet</a> object and is its only constructor.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>readTopDownFiles</span>(
-  <span class='no'>path</span>,
-  <span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>".*"</span>,
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>, <span class='st'>"x"</span>, <span class='st'>"y"</span>, <span class='st'>"z"</span>),
-  <span class='kw'>modifications</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Carbamidomethyl"</span>, <span class='st'>"Acetyl"</span>, <span class='st'>"Met-loss"</span>),
-  <span class='kw'>adducts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(),
-  <span class='kw'>neutralLoss</span> <span class='kw'>=</span> <span class='kw pkg'>MSnbase</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/MSnbase/man/calculateFragments-methods.html'>defaultNeutralLoss</a></span>(),
-  <span class='kw'>sequenceOrder</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"original"</span>, <span class='st'>"random"</span>, <span class='st'>"inverse"</span>),
-  <span class='kw'>tolerance</span> <span class='kw'>=</span> <span class='fl'>5e-06</span>,
-  <span class='kw'>redundantIonMatch</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"remove"</span>, <span class='st'>"closest"</span>),
-  <span class='kw'>redundantFragmentMatch</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"remove"</span>, <span class='st'>"closest"</span>),
-  <span class='kw'>dropNonInformativeColumns</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>sampleColumns</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Mz"</span>, <span class='st'>"AgcTarget"</span>, <span class='st'>"EtdReagentTarget"</span>, <span class='st'>"EtdActivation"</span>,
-    <span class='st'>"CidActivation"</span>, <span class='st'>"HcdActivation"</span>, <span class='st'>"UvpdActivation"</span>),
-  <span class='kw'>conditions</span> <span class='kw'>=</span> <span class='st'>"ScanDescription"</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()
-)</pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>readTopDownFiles</span><span class='op'>(</span>
+  <span class='va'>path</span>,
+  pattern <span class='op'>=</span> <span class='st'>".*"</span>,
+  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/S4Vectors/man/Vector-class.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"c"</span>, <span class='st'>"x"</span>, <span class='st'>"y"</span>, <span class='st'>"z"</span><span class='op'>)</span>,
+  modifications <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/S4Vectors/man/Vector-class.html'>c</a></span><span class='op'>(</span><span class='st'>"Carbamidomethyl"</span>, <span class='st'>"Acetyl"</span>, <span class='st'>"Met-loss"</span><span class='op'>)</span>,
+  customModifications <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span><span class='op'>)</span>,
+  adducts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span><span class='op'>)</span>,
+  neutralLoss <span class='op'>=</span> <span class='fu'>MSnbase</span><span class='fu'>::</span><span class='fu'><a href='https://lgatto.github.io/MSnbase/reference/calculateFragments-methods.html'>defaultNeutralLoss</a></span><span class='op'>(</span><span class='op'>)</span>,
+  sequenceOrder <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/S4Vectors/man/Vector-class.html'>c</a></span><span class='op'>(</span><span class='st'>"original"</span>, <span class='st'>"random"</span>, <span class='st'>"inverse"</span><span class='op'>)</span>,
+  tolerance <span class='op'>=</span> <span class='fl'>5e-06</span>,
+  redundantIonMatch <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/S4Vectors/man/Vector-class.html'>c</a></span><span class='op'>(</span><span class='st'>"remove"</span>, <span class='st'>"closest"</span><span class='op'>)</span>,
+  redundantFragmentMatch <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/S4Vectors/man/Vector-class.html'>c</a></span><span class='op'>(</span><span class='st'>"remove"</span>, <span class='st'>"closest"</span><span class='op'>)</span>,
+  dropNonInformativeColumns <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  sampleColumns <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/S4Vectors/man/Vector-class.html'>c</a></span><span class='op'>(</span><span class='st'>"Mz"</span>, <span class='st'>"AgcTarget"</span>, <span class='st'>"EtdReagentTarget"</span>, <span class='st'>"EtdActivation"</span>,
+    <span class='st'>"CidActivation"</span>, <span class='st'>"HcdActivation"</span>, <span class='st'>"UvpdActivation"</span><span class='op'>)</span>,
+  conditions <span class='op'>=</span> <span class='st'>"ScanDescription"</span>,
+  verbose <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -171,7 +174,7 @@ a filename pattern, the default <code>.*</code> means all files.</p></td>
       <td><p><code>character</code>,
 type of fragments, currently <em>a-c</em> and <em>x-z</em> are
 supported, see
-<code><a href='https://rdrr.io/pkg/MSnbase/man/calculateFragments-methods.html'>MSnbase::calculateFragments()</a></code>
+<code><a href='https://lgatto.github.io/MSnbase/reference/calculateFragments-methods.html'>MSnbase::calculateFragments()</a></code>
 for details.</p></td>
     </tr>
     <tr>
@@ -190,6 +193,11 @@ http://www.unimod.org/modifications_view.php?editid1=765 for details)).
 Use <code>NULL</code> to disable all modifications.</p></td>
     </tr>
     <tr>
+      <th>customModifications</th>
+      <td><p><code>data.frame</code>,
+with 4 columns, namely: mass, name, location, variable, see details section.</p></td>
+    </tr>
+    <tr>
       <th>adducts</th>
       <td><p><code>data.frame</code>,
 with 3 columns, namely: mass, name, to, see details section.</p></td>
@@ -198,8 +206,8 @@ with 3 columns, namely: mass, name, to, see details section.</p></td>
       <th>neutralLoss</th>
       <td><p><code>list</code>,
 neutral loss that should be applied, see
-<code><a href='https://rdrr.io/pkg/MSnbase/man/calculateFragments-methods.html'>MSnbase::calculateFragments()</a></code> and
-<code><a href='https://rdrr.io/pkg/MSnbase/man/calculateFragments-methods.html'>MSnbase::defaultNeutralLoss()</a></code>
+<code><a href='https://lgatto.github.io/MSnbase/reference/calculateFragments-methods.html'>MSnbase::calculateFragments()</a></code> and
+<code><a href='https://lgatto.github.io/MSnbase/reference/calculateFragments-methods.html'>MSnbase::defaultNeutralLoss()</a></code>
 for details.</p></td>
     </tr>
     <tr>
@@ -271,6 +279,21 @@ in <code><a href='writeMethodXmls.html'>writeMethodXmls()</a></code> prior versi
 <li><p><code>.txt</code> (scan header information)</p></li>
 </ul>
 
+<p><code>customModifications</code>: additional to the provided unimod modifications
+available through the <code>modifications</code> argument <code>customModifications</code> allow to
+apply user-definied modifications to the output of
+<code><a href='https://lgatto.github.io/MSnbase/reference/calculateFragments-methods.html'>MSnbase::calculateFragments()</a></code>.
+The <code>customModifications</code> argument takes a
+<code>data.frame</code> with the <code>mass</code> to add, the <code>name</code> of the modification, the
+location (could be the position of the amino acid or "N-term"/"C-term"),
+whether the modification is always seen (<code>variable=FALSE</code>) or both, the
+modified and unmodified amino acid are present (<code>variable=TRUE</code>), e.g.
+for Activation (which is available via <code>modification="Acetyl"</code>)
+<code>data.frame(mass=42.010565, name="Acetyl", location="N-term", variable=FALSE)</code>
+or variable one (that could be present or not):
+<code>data.frame(mass=365.132, name="Custom", location=10, variable=TRUE)</code></p>
+<p>If the <code>customModifications</code> <code>data.frame</code> contains multiple columns the
+modifications are applied from row one to the last row one each time.</p>
 <p><code>adducts</code>: <em>Thermo's Xtract</em>
 allows some mistakes in deisotoping, mostly it
 allows <code>+/- C13-C12</code> and <code>+/- H+</code>.
@@ -280,36 +303,38 @@ that should assign to these
 new fragments and an information <code>to</code>
 whom the modification should be
 applied, e.g. for <code>H+</code> on <code>z</code>,
-<code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame(mass=1.008, name="zpH", to="z")</a></code>.</p>
+<code>data.frame(mass=1.008, name="zpH", to="z")</code>.</p>
 <p><em>Please note:</em> The <code>adducts</code> are added to the output of
-<code><a href='https://rdrr.io/pkg/MSnbase/man/calculateFragments-methods.html'>MSnbase::calculateFragments()</a></code>.
+<code><a href='https://lgatto.github.io/MSnbase/reference/calculateFragments-methods.html'>MSnbase::calculateFragments()</a></code>.
 That has some limitations, e.g.
 neutral loss calculation could not be done in
 <a href='topdownr-package.html'>topdownr-package</a>.
 If neutral loss should be applied on adducts you have to create
 additional rows, e.g.:
-<code><a href='https://rdrr.io/r/base/data.frame.html'>data.frame(mass=c(1.008, 1.008), name=c("cpH", "cpH_"), to=c("c", "c_"))</a></code>.</p>
+<code>data.frame(mass=c(1.008, 1.008), name=c("cpH", "cpH_"), to=c("c", "c_"))</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/MSnbase/man/calculateFragments-methods.html'>MSnbase::calculateFragments()</a></code>,
-<code><a href='https://rdrr.io/pkg/MSnbase/man/calculateFragments-methods.html'>MSnbase::defaultNeutralLoss()</a></code></p></div>
+    <div class='dont-index'><p><code><a href='https://lgatto.github.io/MSnbase/reference/calculateFragments-methods.html'>MSnbase::calculateFragments()</a></code>,
+<code><a href='https://lgatto.github.io/MSnbase/reference/calculateFragments-methods.html'>MSnbase::defaultNeutralLoss()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='st'>"topdownrdata"</span>)) {
-    <span class='co'># add H+ to z and no neutral loss of water</span>
-    <span class='no'>tds</span> <span class='kw'>&lt;-</span> <span class='fu'>readTopDownFiles</span>(
-        <span class='kw pkg'>topdownrdata</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/topdownrdata/man/topDownDataPath.html'>topDownDataPath</a></span>(<span class='st'>"myoglobin"</span>),
-        <span class='co'>## Use an artifical pattern to load just the fasta</span>
-        <span class='co'>## file and files from m/z == 1211, ETD reagent</span>
-        <span class='co'>## target 1e6 and first replicate to keep runtime</span>
-        <span class='co'>## of the example short</span>
-        <span class='kw'>pattern</span><span class='kw'>=</span><span class='st'>".*fasta.gz$|1211_.*1e6_1"</span>,
-        <span class='kw'>adducts</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>mass</span><span class='kw'>=</span><span class='fl'>1.008</span>, <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"zpH"</span>, <span class='kw'>to</span><span class='kw'>=</span><span class='st'>"z"</span>),
-        <span class='kw'>neutralLoss</span><span class='kw'>=</span><span class='kw pkg'>MSnbase</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/MSnbase/man/calculateFragments-methods.html'>defaultNeutralLoss</a></span>(
-            <span class='kw'>disableWaterLoss</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Cterm"</span>, <span class='st'>"D"</span>, <span class='st'>"E"</span>, <span class='st'>"S"</span>, <span class='st'>"T"</span>)),
-        <span class='kw'>tolerance</span><span class='kw'>=</span><span class='fl'>25e-6</span>
-   )
-}</div><div class='output co'>#&gt; <span class='message'>Loading required package: topdownrdata</span></div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://github.com/sgibb/topdownrdata/'>"topdownrdata"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>    <span class='co'># add H+ to z and no neutral loss of water</span></span>
+<span class='r-in'>    <span class='va'>tds</span> <span class='op'>&lt;-</span> <span class='fu'>readTopDownFiles</span><span class='op'>(</span></span>
+<span class='r-in'>        <span class='fu'>topdownrdata</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/topdownrdata/man/topDownDataPath.html'>topDownDataPath</a></span><span class='op'>(</span><span class='st'>"myoglobin"</span><span class='op'>)</span>,</span>
+<span class='r-in'>        <span class='co'>## Use an artifical pattern to load just the fasta</span></span>
+<span class='r-in'>        <span class='co'>## file and files from m/z == 1211, ETD reagent</span></span>
+<span class='r-in'>        <span class='co'>## target 1e6 and first replicate to keep runtime</span></span>
+<span class='r-in'>        <span class='co'>## of the example short</span></span>
+<span class='r-in'>        pattern<span class='op'>=</span><span class='st'>".*fasta.gz$|1211_.*1e6_1"</span>,</span>
+<span class='r-in'>        adducts<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>mass<span class='op'>=</span><span class='fl'>1.008</span>, name<span class='op'>=</span><span class='st'>"zpH"</span>, to<span class='op'>=</span><span class='st'>"z"</span><span class='op'>)</span>,</span>
+<span class='r-in'>        neutralLoss<span class='op'>=</span><span class='fu'>MSnbase</span><span class='fu'>::</span><span class='fu'><a href='https://lgatto.github.io/MSnbase/reference/calculateFragments-methods.html'>defaultNeutralLoss</a></span><span class='op'>(</span></span>
+<span class='r-in'>            disableWaterLoss<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/pkg/S4Vectors/man/Vector-class.html'>c</a></span><span class='op'>(</span><span class='st'>"Cterm"</span>, <span class='st'>"D"</span>, <span class='st'>"E"</span>, <span class='st'>"S"</span>, <span class='st'>"T"</span><span class='op'>)</span><span class='op'>)</span>,</span>
+<span class='r-in'>        tolerance<span class='op'>=</span><span class='fl'>25e-6</span></span>
+<span class='r-in'>   <span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Loading required package: topdownrdata</span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -321,11 +346,11 @@ additional rows, e.g.:
 
       <footer>
       <div class="copyright">
-  <p>Developed by Sebastian Gibb, Pavel Shliaha, Ole Nørregaard Jensen.</p>
+  <p><p>Developed by Sebastian Gibb, Pavel Shliaha, Ole Nørregaard Jensen.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -333,6 +358,8 @@ additional rows, e.g.:
 
   
 
+
+  
 
   </body>
 </html>

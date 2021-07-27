@@ -48,6 +48,8 @@ Orbitrap Fusion Lumos method xml file using writeMethodXmls()." />
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -59,9 +61,15 @@ Orbitrap Fusion Lumos method xml file using writeMethodXmls()." />
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -75,19 +83,13 @@ Orbitrap Fusion Lumos method xml file using writeMethodXmls()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">topdownr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.15.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -112,7 +114,7 @@ Orbitrap Fusion Lumos method xml file using writeMethodXmls()." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/sgibb/topdownr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -141,15 +143,15 @@ fragment optimisation experiment. The list could be written to an
 Orbitrap Fusion Lumos method xml file using <code><a href='writeMethodXmls.html'>writeMethodXmls()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>createExperimentsFragmentOptimisation</span>(
-  <span class='no'>ms1</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>groupBy</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"AgcTarget"</span>, <span class='st'>"replication"</span>),
-  <span class='kw'>nMs2perMs1</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>scanDuration</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>replications</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>randomise</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>createExperimentsFragmentOptimisation</span><span class='op'>(</span>
+  <span class='va'>ms1</span>,
+  <span class='va'>...</span>,
+  groupBy <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/S4Vectors/man/Vector-class.html'>c</a></span><span class='op'>(</span><span class='st'>"AgcTarget"</span>, <span class='st'>"replication"</span><span class='op'>)</span>,
+  nMs2perMs1 <span class='op'>=</span> <span class='fl'>10</span>,
+  scanDuration <span class='op'>=</span> <span class='fl'>0</span>,
+  replications <span class='op'>=</span> <span class='fl'>2</span>,
+  randomise <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -200,100 +202,103 @@ the Start/EndTimeMin are overwritten with a duration of <code>scanDuration</code
 <code><a href='expandMsConditions.html'>expandTms2Conditions()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## build experiments within R</span>
-<span class='no'>ms1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='expandMsConditions.html'>expandMs1Conditions</a></span>(
-    <span class='kw'>FirstMass</span><span class='kw'>=</span><span class='fl'>400</span>,
-    <span class='kw'>LastMass</span><span class='kw'>=</span><span class='fl'>1200</span>,
-    <span class='kw'>Microscans</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span>(<span class='fl'>10</span>)
-)
-
-<span class='no'>targetMz</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='kw'>mz</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>560.6</span>, <span class='fl'>700.5</span>, <span class='fl'>933.7</span>), <span class='kw'>z</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
-<span class='no'>common</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-    <span class='kw'>OrbitrapResolution</span><span class='kw'>=</span><span class='st'>"R120K"</span>,
-    <span class='kw'>IsolationWindow</span><span class='kw'>=</span><span class='fl'>1</span>,
-    <span class='kw'>MaxITTimeInMS</span><span class='kw'>=</span><span class='fl'>200</span>,
-    <span class='kw'>Microscans</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span>(<span class='fl'>40</span>),
-    <span class='kw'>AgcTarget</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1e5</span>, <span class='fl'>5e5</span>, <span class='fl'>1e6</span>)
-)
-
-<span class='no'>cid</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='expandMsConditions.html'>expandTms2Conditions</a></span>(
-    <span class='kw'>MassList</span><span class='kw'>=</span><span class='no'>targetMz</span>,
-    <span class='no'>common</span>,
-    <span class='kw'>ActivationType</span><span class='kw'>=</span><span class='st'>"CID"</span>,
-    <span class='kw'>CIDCollisionEnergy</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>7</span>, <span class='fl'>35</span>, <span class='fl'>7</span>)
-)
-<span class='no'>hcd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='expandMsConditions.html'>expandTms2Conditions</a></span>(
-    <span class='kw'>MassList</span><span class='kw'>=</span><span class='no'>targetMz</span>,
-    <span class='no'>common</span>,
-    <span class='kw'>ActivationType</span><span class='kw'>=</span><span class='st'>"HCD"</span>,
-    <span class='kw'>HCDCollisionEnergy</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>7</span>, <span class='fl'>35</span>, <span class='fl'>7</span>)
-)
-<span class='no'>etd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='expandMsConditions.html'>expandTms2Conditions</a></span>(
-    <span class='kw'>MassList</span><span class='kw'>=</span><span class='no'>targetMz</span>,
-    <span class='no'>common</span>,
-    <span class='kw'>ActivationType</span><span class='kw'>=</span><span class='st'>"ETD"</span>,
-    <span class='kw'>ETDReactionTime</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/double.html'>as.double</a></span>(<span class='fl'>1</span>:<span class='fl'>2</span>)
-)
-<span class='no'>etcid</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='expandMsConditions.html'>expandTms2Conditions</a></span>(
-    <span class='kw'>MassList</span><span class='kw'>=</span><span class='no'>targetMz</span>,
-    <span class='no'>common</span>,
-    <span class='kw'>ActivationType</span><span class='kw'>=</span><span class='st'>"ETD"</span>,
-    <span class='kw'>ETDReactionTime</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/double.html'>as.double</a></span>(<span class='fl'>1</span>:<span class='fl'>2</span>),
-    <span class='kw'>ETDSupplementalActivation</span><span class='kw'>=</span><span class='st'>"ETciD"</span>,
-    <span class='kw'>ETDSupplementalActivationEnergy</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/double.html'>as.double</a></span>(<span class='fl'>1</span>:<span class='fl'>2</span>)
-)
-<span class='no'>uvpd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='expandMsConditions.html'>expandTms2Conditions</a></span>(
-    <span class='kw'>MassList</span><span class='kw'>=</span><span class='no'>targetMz</span>,
-    <span class='no'>common</span>,
-    <span class='kw'>ActivationType</span><span class='kw'>=</span><span class='st'>"UVPD"</span>
-)
-
-<span class='no'>exps</span> <span class='kw'>&lt;-</span> <span class='fu'>createExperimentsFragmentOptimisation</span>(
-    <span class='kw'>ms1</span><span class='kw'>=</span><span class='no'>ms1</span>, <span class='no'>cid</span>, <span class='no'>hcd</span>, <span class='no'>etd</span>, <span class='no'>etcid</span>, <span class='no'>uvpd</span>,
-    <span class='kw'>groupBy</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"AgcTarget"</span>, <span class='st'>"replication"</span>), <span class='kw'>nMs2perMs1</span><span class='kw'>=</span><span class='fl'>10</span>, <span class='kw'>scanDuration</span><span class='kw'>=</span><span class='fl'>0.5</span>,
-    <span class='kw'>replications</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>randomise</span><span class='kw'>=</span><span class='fl'>TRUE</span>
-)
-
-<span class='co'>## use different settings for CID</span>
-<span class='no'>cid560</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='expandMsConditions.html'>expandTms2Conditions</a></span>(
-    <span class='kw'>MassList</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='fl'>560.6</span>, <span class='fl'>1</span>),
-    <span class='no'>common</span>,
-    <span class='kw'>ActivationType</span><span class='kw'>=</span><span class='st'>"CID"</span>,
-    <span class='kw'>CIDCollisionEnergy</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>7</span>, <span class='fl'>21</span>, <span class='fl'>7</span>)
-)
-<span class='no'>cid700</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='expandMsConditions.html'>expandTms2Conditions</a></span>(
-    <span class='kw'>MassList</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='fl'>700.5</span>, <span class='fl'>1</span>),
-    <span class='no'>common</span>,
-    <span class='kw'>ActivationType</span><span class='kw'>=</span><span class='st'>"CID"</span>,
-    <span class='kw'>CIDCollisionEnergy</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>21</span>, <span class='fl'>35</span>, <span class='fl'>7</span>)
-)
-
-<span class='no'>exps</span> <span class='kw'>&lt;-</span> <span class='fu'>createExperimentsFragmentOptimisation</span>(
-    <span class='kw'>ms1</span><span class='kw'>=</span><span class='no'>ms1</span>, <span class='no'>cid560</span>, <span class='no'>cid700</span>,
-    <span class='kw'>groupBy</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"AgcTarget"</span>, <span class='st'>"replication"</span>), <span class='kw'>nMs2perMs1</span><span class='kw'>=</span><span class='fl'>10</span>, <span class='kw'>scanDuration</span><span class='kw'>=</span><span class='fl'>0.5</span>,
-    <span class='kw'>replications</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>randomise</span><span class='kw'>=</span><span class='fl'>TRUE</span>
-)
-
-<span class='co'>## use a CSV (or excel) file as input</span>
-<span class='no'>myCsvContent</span> <span class='kw'>&lt;-</span> <span class='st'>"
-ActivationType, ETDReactionTime, UVPDActivationTime
-UVPD,,1000
-ETD,1000,
-"</span>
-<span class='no'>myCsvSettings</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span>(<span class='kw'>text</span><span class='kw'>=</span><span class='no'>myCsvContent</span>, <span class='kw'>stringsAsFactors</span><span class='kw'>=</span><span class='fl'>FALSE</span>)
-<span class='no'>myCsvSettings</span></div><div class='output co'>#&gt;   ActivationType ETDReactionTime UVPDActivationTime
-#&gt; 1           UVPD              NA               1000
-#&gt; 2            ETD            1000                 NA</div><div class='input'><span class='co'>#   ActivationType ETDReactionTime UVPDActivationTime</span>
-<span class='co'># 1           UVPD              NA               1000</span>
-<span class='co'># 2            ETD            1000                 NA</span>
-
-<span class='no'>exps</span> <span class='kw'>&lt;-</span> <span class='fu'>createExperimentsFragmentOptimisation</span>(
-    <span class='kw'>ms1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>FirstMass</span><span class='kw'>=</span><span class='fl'>500</span>, <span class='kw'>LastMass</span><span class='kw'>=</span><span class='fl'>1000</span>),
-    <span class='co'>## TMS2</span>
-    <span class='no'>myCsvSettings</span>,
-    <span class='co'>## other arguments</span>
-    <span class='kw'>groupBy</span><span class='kw'>=</span><span class='st'>"ActivationType"</span>
-)</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'>## build experiments within R</span></span>
+<span class='r-in'><span class='va'>ms1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='expandMsConditions.html'>expandMs1Conditions</a></span><span class='op'>(</span></span>
+<span class='r-in'>    FirstMass<span class='op'>=</span><span class='fl'>400</span>,</span>
+<span class='r-in'>    LastMass<span class='op'>=</span><span class='fl'>1200</span>,</span>
+<span class='r-in'>    Microscans<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>targetMz</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/BiocGenerics/man/cbind.html'>cbind</a></span><span class='op'>(</span>mz<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/pkg/S4Vectors/man/Vector-class.html'>c</a></span><span class='op'>(</span><span class='fl'>560.6</span>, <span class='fl'>700.5</span>, <span class='fl'>933.7</span><span class='op'>)</span>, z<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/pkg/S4Vectors/man/Vector-class.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>common</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span></span>
+<span class='r-in'>    OrbitrapResolution<span class='op'>=</span><span class='st'>"R120K"</span>,</span>
+<span class='r-in'>    IsolationWindow<span class='op'>=</span><span class='fl'>1</span>,</span>
+<span class='r-in'>    MaxITTimeInMS<span class='op'>=</span><span class='fl'>200</span>,</span>
+<span class='r-in'>    Microscans<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span><span class='op'>(</span><span class='fl'>40</span><span class='op'>)</span>,</span>
+<span class='r-in'>    AgcTarget<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/pkg/S4Vectors/man/Vector-class.html'>c</a></span><span class='op'>(</span><span class='fl'>1e5</span>, <span class='fl'>5e5</span>, <span class='fl'>1e6</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>cid</span> <span class='op'>&lt;-</span> <span class='fu'><a href='expandMsConditions.html'>expandTms2Conditions</a></span><span class='op'>(</span></span>
+<span class='r-in'>    MassList<span class='op'>=</span><span class='va'>targetMz</span>,</span>
+<span class='r-in'>    <span class='va'>common</span>,</span>
+<span class='r-in'>    ActivationType<span class='op'>=</span><span class='st'>"CID"</span>,</span>
+<span class='r-in'>    CIDCollisionEnergy<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>7</span>, <span class='fl'>35</span>, <span class='fl'>7</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>hcd</span> <span class='op'>&lt;-</span> <span class='fu'><a href='expandMsConditions.html'>expandTms2Conditions</a></span><span class='op'>(</span></span>
+<span class='r-in'>    MassList<span class='op'>=</span><span class='va'>targetMz</span>,</span>
+<span class='r-in'>    <span class='va'>common</span>,</span>
+<span class='r-in'>    ActivationType<span class='op'>=</span><span class='st'>"HCD"</span>,</span>
+<span class='r-in'>    HCDCollisionEnergy<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>7</span>, <span class='fl'>35</span>, <span class='fl'>7</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>etd</span> <span class='op'>&lt;-</span> <span class='fu'><a href='expandMsConditions.html'>expandTms2Conditions</a></span><span class='op'>(</span></span>
+<span class='r-in'>    MassList<span class='op'>=</span><span class='va'>targetMz</span>,</span>
+<span class='r-in'>    <span class='va'>common</span>,</span>
+<span class='r-in'>    ActivationType<span class='op'>=</span><span class='st'>"ETD"</span>,</span>
+<span class='r-in'>    ETDReactionTime<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/double.html'>as.double</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>etcid</span> <span class='op'>&lt;-</span> <span class='fu'><a href='expandMsConditions.html'>expandTms2Conditions</a></span><span class='op'>(</span></span>
+<span class='r-in'>    MassList<span class='op'>=</span><span class='va'>targetMz</span>,</span>
+<span class='r-in'>    <span class='va'>common</span>,</span>
+<span class='r-in'>    ActivationType<span class='op'>=</span><span class='st'>"ETD"</span>,</span>
+<span class='r-in'>    ETDReactionTime<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/double.html'>as.double</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>)</span>,</span>
+<span class='r-in'>    ETDSupplementalActivation<span class='op'>=</span><span class='st'>"ETciD"</span>,</span>
+<span class='r-in'>    ETDSupplementalActivationEnergy<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/double.html'>as.double</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>uvpd</span> <span class='op'>&lt;-</span> <span class='fu'><a href='expandMsConditions.html'>expandTms2Conditions</a></span><span class='op'>(</span></span>
+<span class='r-in'>    MassList<span class='op'>=</span><span class='va'>targetMz</span>,</span>
+<span class='r-in'>    <span class='va'>common</span>,</span>
+<span class='r-in'>    ActivationType<span class='op'>=</span><span class='st'>"UVPD"</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>exps</span> <span class='op'>&lt;-</span> <span class='fu'>createExperimentsFragmentOptimisation</span><span class='op'>(</span></span>
+<span class='r-in'>    ms1<span class='op'>=</span><span class='va'>ms1</span>, <span class='va'>cid</span>, <span class='va'>hcd</span>, <span class='va'>etd</span>, <span class='va'>etcid</span>, <span class='va'>uvpd</span>,</span>
+<span class='r-in'>    groupBy<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/pkg/S4Vectors/man/Vector-class.html'>c</a></span><span class='op'>(</span><span class='st'>"AgcTarget"</span>, <span class='st'>"replication"</span><span class='op'>)</span>, nMs2perMs1<span class='op'>=</span><span class='fl'>10</span>, scanDuration<span class='op'>=</span><span class='fl'>0.5</span>,</span>
+<span class='r-in'>    replications<span class='op'>=</span><span class='fl'>2</span>, randomise<span class='op'>=</span><span class='cn'>TRUE</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## use different settings for CID</span></span>
+<span class='r-in'><span class='va'>cid560</span> <span class='op'>&lt;-</span> <span class='fu'><a href='expandMsConditions.html'>expandTms2Conditions</a></span><span class='op'>(</span></span>
+<span class='r-in'>    MassList<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/pkg/BiocGenerics/man/cbind.html'>cbind</a></span><span class='op'>(</span><span class='fl'>560.6</span>, <span class='fl'>1</span><span class='op'>)</span>,</span>
+<span class='r-in'>    <span class='va'>common</span>,</span>
+<span class='r-in'>    ActivationType<span class='op'>=</span><span class='st'>"CID"</span>,</span>
+<span class='r-in'>    CIDCollisionEnergy<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>7</span>, <span class='fl'>21</span>, <span class='fl'>7</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>cid700</span> <span class='op'>&lt;-</span> <span class='fu'><a href='expandMsConditions.html'>expandTms2Conditions</a></span><span class='op'>(</span></span>
+<span class='r-in'>    MassList<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/pkg/BiocGenerics/man/cbind.html'>cbind</a></span><span class='op'>(</span><span class='fl'>700.5</span>, <span class='fl'>1</span><span class='op'>)</span>,</span>
+<span class='r-in'>    <span class='va'>common</span>,</span>
+<span class='r-in'>    ActivationType<span class='op'>=</span><span class='st'>"CID"</span>,</span>
+<span class='r-in'>    CIDCollisionEnergy<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>21</span>, <span class='fl'>35</span>, <span class='fl'>7</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>exps</span> <span class='op'>&lt;-</span> <span class='fu'>createExperimentsFragmentOptimisation</span><span class='op'>(</span></span>
+<span class='r-in'>    ms1<span class='op'>=</span><span class='va'>ms1</span>, <span class='va'>cid560</span>, <span class='va'>cid700</span>,</span>
+<span class='r-in'>    groupBy<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/pkg/S4Vectors/man/Vector-class.html'>c</a></span><span class='op'>(</span><span class='st'>"AgcTarget"</span>, <span class='st'>"replication"</span><span class='op'>)</span>, nMs2perMs1<span class='op'>=</span><span class='fl'>10</span>, scanDuration<span class='op'>=</span><span class='fl'>0.5</span>,</span>
+<span class='r-in'>    replications<span class='op'>=</span><span class='fl'>2</span>, randomise<span class='op'>=</span><span class='cn'>TRUE</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## use a CSV (or excel) file as input</span></span>
+<span class='r-in'><span class='va'>myCsvContent</span> <span class='op'>&lt;-</span> <span class='st'>"</span>
+<span class='r-in'>ActivationType, ETDReactionTime, UVPDActivationTime</span>
+<span class='r-in'>UVPD,,1000</span>
+<span class='r-in'>ETD,1000,</span>
+<span class='r-in'>"</span></span>
+<span class='r-in'><span class='va'>myCsvSettings</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span>text<span class='op'>=</span><span class='va'>myCsvContent</span>, stringsAsFactors<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>myCsvSettings</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   ActivationType ETDReactionTime UVPDActivationTime</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1           UVPD              NA               1000</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2            ETD            1000                 NA</span>
+<span class='r-in'><span class='co'>#   ActivationType ETDReactionTime UVPDActivationTime</span></span>
+<span class='r-in'><span class='co'># 1           UVPD              NA               1000</span></span>
+<span class='r-in'><span class='co'># 2            ETD            1000                 NA</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>exps</span> <span class='op'>&lt;-</span> <span class='fu'>createExperimentsFragmentOptimisation</span><span class='op'>(</span></span>
+<span class='r-in'>    ms1 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>FirstMass<span class='op'>=</span><span class='fl'>500</span>, LastMass<span class='op'>=</span><span class='fl'>1000</span><span class='op'>)</span>,</span>
+<span class='r-in'>    <span class='co'>## TMS2</span></span>
+<span class='r-in'>    <span class='va'>myCsvSettings</span>,</span>
+<span class='r-in'>    <span class='co'>## other arguments</span></span>
+<span class='r-in'>    groupBy<span class='op'>=</span><span class='st'>"ActivationType"</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -305,11 +310,11 @@ ETD,1000,
 
       <footer>
       <div class="copyright">
-  <p>Developed by Sebastian Gibb, Pavel Shliaha, Ole Nørregaard Jensen.</p>
+  <p><p>Developed by Sebastian Gibb, Pavel Shliaha, Ole Nørregaard Jensen.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -317,6 +322,8 @@ ETD,1000,
 
   
 
+
+  
 
   </body>
 </html>

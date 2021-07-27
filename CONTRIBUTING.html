@@ -44,6 +44,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -55,9 +57,15 @@
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-title-body">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -71,19 +79,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">topdownr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.15.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -108,7 +110,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/sgibb/topdownr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -133,30 +135,30 @@
 
 <p>You are welcome to:</p>
 <ul>
-<li>submit suggestions and bug-reports at: <a href="https://github.com/sgibb/topdownr/issues" class="uri">https://github.com/sgibb/topdownr/issues</a>
+<li>submit suggestions and bug-reports at: <a href="https://github.com/sgibb/topdownr/issues" class="external-link uri">https://github.com/sgibb/topdownr/issues</a>
 </li>
-<li>send a pull request on: <a href="https://github.com/sgibb/topdownr/compare" class="uri">https://github.com/sgibb/topdownr/compare</a>
+<li>send a pull request on: <a href="https://github.com/sgibb/topdownr/compare" class="external-link uri">https://github.com/sgibb/topdownr/compare</a>
 </li>
-<li>compose an e-mail to: <a href="mailto:mail@sebastiangibb.de">mail@sebastiangibb.de</a>
+<li>compose an e-mail to: <a href="mailto:mail@sebastiangibb.de" class="email">mail@sebastiangibb.de</a>
 </li>
 </ul>
 </div>
 <div id="how-to-contribute-code" class="section level1">
 <h1 class="hasAnchor">
-<a href="#how-to-contribute-code" class="anchor"></a>How to contribute code</h1>
-<p><a href="https://help.github.com/articles/fork-a-repo/">Fork</a>, then clone the repository:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">git clone git<span class="op">@</span>github.com<span class="op">:</span>your<span class="op">-</span>username<span class="op">/</span>topdownr.git</a></code></pre></div>
+<a href="#how-to-contribute-code" class="anchor" aria-hidden="true"></a>How to contribute code</h1>
+<p><a href="https://help.github.com/articles/fork-a-repo/" class="external-link">Fork</a>, then clone the repository:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>git clone git<span class="sc">@</span>github.com<span class="sc">:</span>your<span class="sc">-</span>username<span class="sc">/</span>topdownr.git</span></code></pre></div>
 <p>Make sure all checks and tests pass:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">R CMD build topdownr <span class="op">&amp;&amp;</span><span class="st"> </span>CMD check <span class="op">--</span>as<span class="op">-</span>cran <span class="op">--</span>no<span class="op">-</span>stop<span class="op">-</span>on<span class="op">-</span>test<span class="op">-</span>error topdownr_<span class="op">*</span>.tar.gz</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>R CMD build topdownr <span class="sc">&amp;&amp;</span> CMD check <span class="sc">--</span>as<span class="sc">-</span>cran <span class="sc">--</span>no<span class="sc">-</span>stop<span class="sc">-</span>on<span class="sc">-</span>test<span class="sc">-</span>error topdownr_<span class="sc">*</span>.tar.gz</span></code></pre></div>
 <p>Make your changes and write tests …</p>
 <p>Ensure all checks and tests pass:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">R CMD build topdownr <span class="op">&amp;&amp;</span><span class="st"> </span>CMD check <span class="op">--</span>as<span class="op">-</span>cran <span class="op">--</span>no<span class="op">-</span>stop<span class="op">-</span>on<span class="op">-</span>test<span class="op">-</span>error topdownr_<span class="op">*</span>.tar.gz</a></code></pre></div>
-<p>Push to your fork and submit a <a href="https://help.github.com/articles/about-pull-requests/">pull request</a></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>R CMD build topdownr <span class="sc">&amp;&amp;</span> CMD check <span class="sc">--</span>as<span class="sc">-</span>cran <span class="sc">--</span>no<span class="sc">-</span>stop<span class="sc">-</span>on<span class="sc">-</span>test<span class="sc">-</span>error topdownr_<span class="sc">*</span>.tar.gz</span></code></pre></div>
+<p>Push to your fork and submit a <a href="https://help.github.com/articles/about-pull-requests/" class="external-link">pull request</a></p>
 <p>Waiting for our response. We may suggest some changes and/or improvements.</p>
 <p>If you want to increase the chance that your pull request is accepted:</p>
 <ul>
-<li>Use the <a href="https://www.bioconductor.org/developers/how-to/coding-style/">Bioconductor Coding Style</a>.</li>
-<li>Write <a href="https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message">good commit messages</a>.</li>
+<li>Use the <a href="https://www.bioconductor.org/developers/how-to/coding-style/" class="external-link">Bioconductor Coding Style</a>.</li>
+<li>Write <a href="https://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message" class="external-link">good commit messages</a>.</li>
 <li>Write unit tests using the <code>testthat</code> package.</li>
 </ul>
 </div>
@@ -176,11 +178,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Sebastian Gibb, Pavel Shliaha, Ole Nørregaard Jensen.</p>
+  <p><p>Developed by Sebastian Gibb, Pavel Shliaha, Ole Nørregaard Jensen.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -188,6 +190,8 @@
 
   
 
+
+  
 
   </body>
 </html>

@@ -46,6 +46,8 @@ Thermo's XmlMethodChanger." />
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -57,9 +59,15 @@ Thermo's XmlMethodChanger." />
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -73,19 +81,13 @@ Thermo's XmlMethodChanger." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">topdownr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.15.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -110,7 +112,7 @@ Thermo's XmlMethodChanger." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/sgibb/topdownr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -137,13 +139,13 @@ Thermo's XmlMethodChanger." />
 <em>Thermo's XmlMethodChanger</em>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>validMs1Settings</span>(<span class='kw'>family</span> <span class='kw'>=</span> <span class='st'>"Calcium"</span>, <span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"3.2"</span>)
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>validMs1Settings</span><span class='op'>(</span>family <span class='op'>=</span> <span class='st'>"Calcium"</span>, version <span class='op'>=</span> <span class='st'>"3.2"</span><span class='op'>)</span>
 
-<span class='fu'>validTms2Settings</span>(
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"All"</span>, <span class='st'>"TMS2"</span>, <span class='st'>"ETD"</span>, <span class='st'>"CID"</span>, <span class='st'>"HCD"</span>, <span class='st'>"UVPD"</span>),
-  <span class='kw'>family</span> <span class='kw'>=</span> <span class='st'>"Calcium"</span>,
-  <span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"3.2"</span>
-)</pre>
+<span class='fu'>validTms2Settings</span><span class='op'>(</span>
+  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/S4Vectors/man/Vector-class.html'>c</a></span><span class='op'>(</span><span class='st'>"All"</span>, <span class='st'>"TMS2"</span>, <span class='st'>"ETD"</span>, <span class='st'>"CID"</span>, <span class='st'>"HCD"</span>, <span class='st'>"UVPD"</span><span class='op'>)</span>,
+  family <span class='op'>=</span> <span class='st'>"Calcium"</span>,
+  version <span class='op'>=</span> <span class='st'>"3.2"</span>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -172,117 +174,127 @@ Thermo's XmlMethodChanger." />
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>validMs1Settings</span>()</div><div class='output co'>#&gt;      name              class       type 
-#&gt; [1,] "FirstMass"       "double"    "MS1"
-#&gt; [2,] "LastMass"        "double"    "MS1"
-#&gt; [3,] "Microscans"      "integer"   "MS1"
-#&gt; [4,] "MaxITTimeInMS"   "double"    "MS1"
-#&gt; [5,] "AgcTarget"       "double"    "MS1"
-#&gt; [6,] "ScanDescription" "character" "MS1"</div><div class='input'><span class='fu'>validTms2Settings</span>()</div><div class='output co'>#&gt;       name                              class                                  
-#&gt;  [1,] "EnableMultiplexIons"             "logical"                              
-#&gt;  [2,] "EnableMSXIds"                    "logical"                              
-#&gt;  [3,] "MaxNoOfMultiplexIons"            "integer"                              
-#&gt;  [4,] "OrbitrapResolution"              "R15K:R30K:R50K:R60K:R120K:R240K:R500K"
-#&gt;  [5,] "AgcTarget"                       "double"                               
-#&gt;  [6,] "MinAgcTarget"                    "logical"                              
-#&gt;  [7,] "MaxITTimeInMS"                   "double"                               
-#&gt;  [8,] "Microscans"                      "integer"                              
-#&gt;  [9,] "ActivationType"                  "CID:HCD:ETD:UVPD"                     
-#&gt; [10,] "IsolationWindow"                 "double"                               
-#&gt; [11,] "ETDReactionTime"                 "double"                               
-#&gt; [12,] "ETDReagentTarget"                "double"                               
-#&gt; [13,] "MaximumETDReagentInjectionTime"  "double"                               
-#&gt; [14,] "UseInternalCalibratedETD"        "logical"                              
-#&gt; [15,] "ETDSupplementalActivationEnergy" "double"                               
-#&gt; [16,] "ETDSupplementalActivation"       "None:ETciD:EThcD"                     
-#&gt; [17,] "CIDCollisionEnergy"              "double"                               
-#&gt; [18,] "CIDActivationTime"               "double"                               
-#&gt; [19,] "CIDActivationQ"                  "double"                               
-#&gt; [20,] "HCDCollisionEnergy"              "double"                               
-#&gt; [21,] "UVPDUseCalibratedActivationTime" "logical"                              
-#&gt; [22,] "UVPDActivationTime "             "double"                               
-#&gt; [23,] "MassList"                        "MassListRecord"                       
-#&gt; [24,] "ScanDescription"                 "character"                            
-#&gt;       type  
-#&gt;  [1,] "TMS2"
-#&gt;  [2,] "TMS2"
-#&gt;  [3,] "TMS2"
-#&gt;  [4,] "TMS2"
-#&gt;  [5,] "TMS2"
-#&gt;  [6,] "TMS2"
-#&gt;  [7,] "TMS2"
-#&gt;  [8,] "TMS2"
-#&gt;  [9,] "TMS2"
-#&gt; [10,] "TMS2"
-#&gt; [11,] "ETD" 
-#&gt; [12,] "ETD" 
-#&gt; [13,] "ETD" 
-#&gt; [14,] "ETD" 
-#&gt; [15,] "ETD" 
-#&gt; [16,] "ETD" 
-#&gt; [17,] "CID" 
-#&gt; [18,] "CID" 
-#&gt; [19,] "CID" 
-#&gt; [20,] "HCD" 
-#&gt; [21,] "UVPD"
-#&gt; [22,] "UVPD"
-#&gt; [23,] "TMS2"
-#&gt; [24,] "TMS2"</div><div class='input'><span class='fu'>validTms2Settings</span>(<span class='st'>"TMS2"</span>)</div><div class='output co'>#&gt;       name                   class                                   type  
-#&gt;  [1,] "EnableMultiplexIons"  "logical"                               "TMS2"
-#&gt;  [2,] "EnableMSXIds"         "logical"                               "TMS2"
-#&gt;  [3,] "MaxNoOfMultiplexIons" "integer"                               "TMS2"
-#&gt;  [4,] "OrbitrapResolution"   "R15K:R30K:R50K:R60K:R120K:R240K:R500K" "TMS2"
-#&gt;  [5,] "AgcTarget"            "double"                                "TMS2"
-#&gt;  [6,] "MinAgcTarget"         "logical"                               "TMS2"
-#&gt;  [7,] "MaxITTimeInMS"        "double"                                "TMS2"
-#&gt;  [8,] "Microscans"           "integer"                               "TMS2"
-#&gt;  [9,] "ActivationType"       "CID:HCD:ETD:UVPD"                      "TMS2"
-#&gt; [10,] "IsolationWindow"      "double"                                "TMS2"
-#&gt; [11,] "MassList"             "MassListRecord"                        "TMS2"
-#&gt; [12,] "ScanDescription"      "character"                             "TMS2"</div><div class='input'><span class='fu'>validTms2Settings</span>(<span class='st'>"ETD"</span>)</div><div class='output co'>#&gt;      name                              class              type 
-#&gt; [1,] "ETDReactionTime"                 "double"           "ETD"
-#&gt; [2,] "ETDReagentTarget"                "double"           "ETD"
-#&gt; [3,] "MaximumETDReagentInjectionTime"  "double"           "ETD"
-#&gt; [4,] "UseInternalCalibratedETD"        "logical"          "ETD"
-#&gt; [5,] "ETDSupplementalActivationEnergy" "double"           "ETD"
-#&gt; [6,] "ETDSupplementalActivation"       "None:ETciD:EThcD" "ETD"</div><div class='input'><span class='fu'>validTms2Settings</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"TMS2"</span>, <span class='st'>"ETD"</span>))</div><div class='output co'>#&gt;       name                              class                                  
-#&gt;  [1,] "EnableMultiplexIons"             "logical"                              
-#&gt;  [2,] "EnableMSXIds"                    "logical"                              
-#&gt;  [3,] "MaxNoOfMultiplexIons"            "integer"                              
-#&gt;  [4,] "OrbitrapResolution"              "R15K:R30K:R50K:R60K:R120K:R240K:R500K"
-#&gt;  [5,] "AgcTarget"                       "double"                               
-#&gt;  [6,] "MinAgcTarget"                    "logical"                              
-#&gt;  [7,] "MaxITTimeInMS"                   "double"                               
-#&gt;  [8,] "Microscans"                      "integer"                              
-#&gt;  [9,] "ActivationType"                  "CID:HCD:ETD:UVPD"                     
-#&gt; [10,] "IsolationWindow"                 "double"                               
-#&gt; [11,] "ETDReactionTime"                 "double"                               
-#&gt; [12,] "ETDReagentTarget"                "double"                               
-#&gt; [13,] "MaximumETDReagentInjectionTime"  "double"                               
-#&gt; [14,] "UseInternalCalibratedETD"        "logical"                              
-#&gt; [15,] "ETDSupplementalActivationEnergy" "double"                               
-#&gt; [16,] "ETDSupplementalActivation"       "None:ETciD:EThcD"                     
-#&gt; [17,] "MassList"                        "MassListRecord"                       
-#&gt; [18,] "ScanDescription"                 "character"                            
-#&gt;       type  
-#&gt;  [1,] "TMS2"
-#&gt;  [2,] "TMS2"
-#&gt;  [3,] "TMS2"
-#&gt;  [4,] "TMS2"
-#&gt;  [5,] "TMS2"
-#&gt;  [6,] "TMS2"
-#&gt;  [7,] "TMS2"
-#&gt;  [8,] "TMS2"
-#&gt;  [9,] "TMS2"
-#&gt; [10,] "TMS2"
-#&gt; [11,] "ETD" 
-#&gt; [12,] "ETD" 
-#&gt; [13,] "ETD" 
-#&gt; [14,] "ETD" 
-#&gt; [15,] "ETD" 
-#&gt; [16,] "ETD" 
-#&gt; [17,] "TMS2"
-#&gt; [18,] "TMS2"</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='fu'>validMs1Settings</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      name              class       type </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,] "FirstMass"       "double"    "MS1"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] "LastMass"        "double"    "MS1"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3,] "Microscans"      "integer"   "MS1"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [4,] "MaxITTimeInMS"   "double"    "MS1"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [5,] "AgcTarget"       "double"    "MS1"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [6,] "ScanDescription" "character" "MS1"</span>
+<span class='r-in'><span class='fu'>validTms2Settings</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       name                              class                                  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] "EnableMultiplexIons"             "logical"                              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] "EnableMSXIds"                    "logical"                              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] "MaxNoOfMultiplexIons"            "integer"                              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] "OrbitrapResolution"              "R15K:R30K:R50K:R60K:R120K:R240K:R500K"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] "AgcTarget"                       "double"                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] "MinAgcTarget"                    "logical"                              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] "MaxITTimeInMS"                   "double"                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] "Microscans"                      "integer"                              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] "ActivationType"                  "CID:HCD:ETD:UVPD"                     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] "IsolationWindow"                 "double"                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [11,] "ETDReactionTime"                 "double"                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [12,] "ETDReagentTarget"                "double"                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [13,] "MaximumETDReagentInjectionTime"  "double"                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [14,] "UseInternalCalibratedETD"        "logical"                              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [15,] "ETDSupplementalActivationEnergy" "double"                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [16,] "ETDSupplementalActivation"       "None:ETciD:EThcD"                     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [17,] "CIDCollisionEnergy"              "double"                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [18,] "CIDActivationTime"               "double"                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [19,] "CIDActivationQ"                  "double"                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [20,] "HCDCollisionEnergy"              "double"                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [21,] "UVPDUseCalibratedActivationTime" "logical"                              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [22,] "UVPDActivationTime "             "double"                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [23,] "MassList"                        "MassListRecord"                       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [24,] "ScanDescription"                 "character"                            </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       type  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [11,] "ETD" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [12,] "ETD" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [13,] "ETD" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [14,] "ETD" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [15,] "ETD" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [16,] "ETD" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [17,] "CID" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [18,] "CID" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [19,] "CID" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [20,] "HCD" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [21,] "UVPD"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [22,] "UVPD"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [23,] "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [24,] "TMS2"</span>
+<span class='r-in'><span class='fu'>validTms2Settings</span><span class='op'>(</span><span class='st'>"TMS2"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       name                   class                                   type  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] "EnableMultiplexIons"  "logical"                               "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] "EnableMSXIds"         "logical"                               "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] "MaxNoOfMultiplexIons" "integer"                               "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] "OrbitrapResolution"   "R15K:R30K:R50K:R60K:R120K:R240K:R500K" "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] "AgcTarget"            "double"                                "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] "MinAgcTarget"         "logical"                               "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] "MaxITTimeInMS"        "double"                                "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] "Microscans"           "integer"                               "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] "ActivationType"       "CID:HCD:ETD:UVPD"                      "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] "IsolationWindow"      "double"                                "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [11,] "MassList"             "MassListRecord"                        "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [12,] "ScanDescription"      "character"                             "TMS2"</span>
+<span class='r-in'><span class='fu'>validTms2Settings</span><span class='op'>(</span><span class='st'>"ETD"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      name                              class              type </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1,] "ETDReactionTime"                 "double"           "ETD"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [2,] "ETDReagentTarget"                "double"           "ETD"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [3,] "MaximumETDReagentInjectionTime"  "double"           "ETD"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [4,] "UseInternalCalibratedETD"        "logical"          "ETD"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [5,] "ETDSupplementalActivationEnergy" "double"           "ETD"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [6,] "ETDSupplementalActivation"       "None:ETciD:EThcD" "ETD"</span>
+<span class='r-in'><span class='fu'>validTms2Settings</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/S4Vectors/man/Vector-class.html'>c</a></span><span class='op'>(</span><span class='st'>"TMS2"</span>, <span class='st'>"ETD"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       name                              class                                  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] "EnableMultiplexIons"             "logical"                              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] "EnableMSXIds"                    "logical"                              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] "MaxNoOfMultiplexIons"            "integer"                              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] "OrbitrapResolution"              "R15K:R30K:R50K:R60K:R120K:R240K:R500K"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] "AgcTarget"                       "double"                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] "MinAgcTarget"                    "logical"                              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] "MaxITTimeInMS"                   "double"                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] "Microscans"                      "integer"                              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] "ActivationType"                  "CID:HCD:ETD:UVPD"                     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] "IsolationWindow"                 "double"                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [11,] "ETDReactionTime"                 "double"                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [12,] "ETDReagentTarget"                "double"                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [13,] "MaximumETDReagentInjectionTime"  "double"                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [14,] "UseInternalCalibratedETD"        "logical"                              </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [15,] "ETDSupplementalActivationEnergy" "double"                               </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [16,] "ETDSupplementalActivation"       "None:ETciD:EThcD"                     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [17,] "MassList"                        "MassListRecord"                       </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [18,] "ScanDescription"                 "character"                            </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       type  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [11,] "ETD" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [12,] "ETD" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [13,] "ETD" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [14,] "ETD" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [15,] "ETD" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [16,] "ETD" </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [17,] "TMS2"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [18,] "TMS2"</span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -294,11 +306,11 @@ Thermo's XmlMethodChanger." />
 
       <footer>
       <div class="copyright">
-  <p>Developed by Sebastian Gibb, Pavel Shliaha, Ole Nørregaard Jensen.</p>
+  <p><p>Developed by Sebastian Gibb, Pavel Shliaha, Ole Nørregaard Jensen.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -306,6 +318,8 @@ Thermo's XmlMethodChanger." />
 
   
 
+
+  
 
   </body>
 </html>

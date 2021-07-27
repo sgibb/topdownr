@@ -49,6 +49,8 @@ tested)." />
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -60,9 +62,15 @@ tested)." />
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -76,19 +84,13 @@ tested)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">topdownr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.15.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -113,7 +115,7 @@ tested)." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/sgibb/topdownr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -143,21 +145,21 @@ The only work on Windows (maybe on Linux + wine as well but that was never
 tested).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>createTngFusionMethFiles</span>(
-  <span class='no'>template</span>,
-  <span class='kw'>xml</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>".*\\.xml$"</span>),
-  <span class='kw'>executable</span> <span class='kw'>=</span> <span class='st'>"XmlMethodChanger.exe"</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()
-)
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>createTngFusionMethFiles</span><span class='op'>(</span>
+  <span class='va'>template</span>,
+  xml <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span><span class='op'>(</span>pattern <span class='op'>=</span> <span class='st'>".*\\.xml$"</span><span class='op'>)</span>,
+  executable <span class='op'>=</span> <span class='st'>"XmlMethodChanger.exe"</span>,
+  verbose <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span>
 
-<span class='fu'>runXmlMethodChanger</span>(
-  <span class='no'>template</span>,
-  <span class='kw'>xml</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='kw'>pattern</span> <span class='kw'>=</span> <span class='st'>".*\\.xml$"</span>),
-  <span class='kw'>executable</span> <span class='kw'>=</span> <span class='st'>"XmlMethodChanger.exe"</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()
-)
+<span class='fu'>runXmlMethodChanger</span><span class='op'>(</span>
+  <span class='va'>template</span>,
+  xml <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span><span class='op'>(</span>pattern <span class='op'>=</span> <span class='st'>".*\\.xml$"</span><span class='op'>)</span>,
+  executable <span class='op'>=</span> <span class='st'>"XmlMethodChanger.exe"</span>,
+  verbose <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span>
 
-<span class='fu'>runScanHeadsman</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>executable</span> <span class='kw'>=</span> <span class='st'>"ScanHeadsman.exe"</span>)</pre>
+<span class='fu'>runScanHeadsman</span><span class='op'>(</span>path <span class='op'>=</span> <span class='st'>"."</span>, executable <span class='op'>=</span> <span class='st'>"ScanHeadsman.exe"</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -209,14 +211,15 @@ https://bitbucket.org/caetera/scanheadsman</p>
     <div class='dont-index'><p><code><a href='writeMethodXmls.html'>writeMethodXmls()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>runXmlMethodChanger</span>(<span class='kw'>templateMeth</span><span class='kw'>=</span><span class='st'>"TMS2IndependentTemplate240Extended.meth"</span>,
-                    <span class='kw'>modificationXml</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span>(<span class='kw'>pattern</span><span class='kw'>=</span><span class='st'>"^method.*\\.xml$"</span>),
-                    <span class='kw'>executable</span><span class='kw'>=</span><span class='st'>"..\\XmlMethodChanger.exe"</span>)
-}
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>runScanHeadsman</span>(<span class='st'>"raw"</span>, <span class='kw'>executable</span><span class='kw'>=</span><span class='st'>"..\\ScanHeadsman.exe"</span>)
-}</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='fu'>runXmlMethodChanger</span><span class='op'>(</span>templateMeth<span class='op'>=</span><span class='st'>"TMS2IndependentTemplate240Extended.meth"</span>,</span>
+<span class='r-in'>                    modificationXml<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span><span class='op'>(</span>pattern<span class='op'>=</span><span class='st'>"^method.*\\.xml$"</span><span class='op'>)</span>,</span>
+<span class='r-in'>                    executable<span class='op'>=</span><span class='st'>"..\\XmlMethodChanger.exe"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='fu'>runScanHeadsman</span><span class='op'>(</span><span class='st'>"raw"</span>, executable<span class='op'>=</span><span class='st'>"..\\ScanHeadsman.exe"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -228,11 +231,11 @@ https://bitbucket.org/caetera/scanheadsman</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Sebastian Gibb, Pavel Shliaha, Ole Nørregaard Jensen.</p>
+  <p><p>Developed by Sebastian Gibb, Pavel Shliaha, Ole Nørregaard Jensen.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -240,6 +243,8 @@ https://bitbucket.org/caetera/scanheadsman</p>
 
   
 
+
+  
 
   </body>
 </html>

@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">topdownr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.15.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -67,8 +63,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/sgibb/topdownr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/sgibb/topdownr/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -82,17 +78,17 @@
 
       
 
-      </header><div class="row">
+      </header><script src="analysis_files/header-attrs-2.9/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Fragmentation Analysis with topdownr</h1>
-                        <h4 class="author">Pavel V. Shliaha</h4>
+                        <h4 data-toc-skip class="author">Pavel V. Shliaha</h4>
             <address class="author_afil">
-      Department of Biochemistry and Molecular Biology, University of Southern Denmark, Denmark.<br><h4 class="author">Sebastian Gibb</h4>
+      Department of Biochemistry and Molecular Biology, University of Southern Denmark, Denmark.<br><h4 data-toc-skip class="author">Sebastian Gibb</h4>
             <address class="author_afil">
-      Department of Anesthesiology and Intensive Care, University Medicine Greifswald, Germany.<br><h4 class="author">Ole Nørregaard Jensen</h4>
+      Department of Anesthesiology and Intensive Care, University Medicine Greifswald, Germany.<br><h4 data-toc-skip class="author">Ole Nørregaard Jensen</h4>
             <address class="author_afil">
-      Department of Biochemistry and Molecular Biology, University of Southern Denmark, Denmark.<br><small class="dont-index">Source: <a href="https://github.com/sgibb/topdownr/blob/master/vignettes/analysis.Rmd"><code>vignettes/analysis.Rmd</code></a></small>
+      Department of Biochemistry and Molecular Biology, University of Southern Denmark, Denmark.<br><small class="dont-index">Source: <a href="https://github.com/sgibb/topdownr/blob/master/vignettes/analysis.Rmd" class="external-link"><code>vignettes/analysis.Rmd</code></a></small>
       <div class="hidden name"><code>analysis.Rmd</code></div>
 
     </address>
@@ -103,32 +99,34 @@
     
         <div class="abstract">
       <p class="abstract">Abstract</p>
-      This vignette describes the fragmentation analysis functionality of the <code>topdownr</code> package.
+      <p>This vignette describes the fragmentation analysis functionality of the <code>topdownr</code> package.</p>
     </div>
     
 <div id="foreword" class="section level1 unnumbered">
 <h1 class="hasAnchor">
-<a href="#foreword" class="anchor"></a>Foreword</h1>
-<p><em><a href="https://bioconductor.org/packages/3.12/topdownr">topdownr</a></em> is free and open-source software. If you use it, please support the project by citing it in publications:</p>
-<p>P.V. Shliaha, S. Gibb, V. Gorshkov, M.S. Jespersen, G.R. Andersen, D. Bailey, J. Schwartz, S. Eliuk, V. Schwämmle, and O.N. Jensen. 2018. Maximizing Sequence Coverage in Top-Down Proteomics By Automated Multi-modal Gas-phase Protein Fragmentation. Analytical Chemistry. DOI: <a href="https://doi.org/10.1021/acs.analchem.8b02344">10.1021/acs.analchem.8b02344</a></p>
+<a href="#foreword" class="anchor" aria-hidden="true"></a>Foreword</h1>
+<p><em><a href="https://bioconductor.org/packages/3.14/topdownr" class="external-link">topdownr</a></em> is free and open-source software. If you use it, please support the project by citing it in publications:</p>
+<p>P.V. Shliaha, S. Gibb, V. Gorshkov, M.S. Jespersen, G.R. Andersen, D. Bailey, J. Schwartz, S. Eliuk, V. Schwämmle, and O.N. Jensen. 2018. Maximizing Sequence Coverage in Top-Down Proteomics By Automated Multi-modal Gas-phase Protein Fragmentation. Analytical Chemistry. DOI: <a href="https://doi.org/10.1021/acs.analchem.8b02344" class="external-link">10.1021/acs.analchem.8b02344</a></p>
 </div>
 <div id="questions-and-bugs" class="section level1 unnumbered">
 <h1 class="hasAnchor">
-<a href="#questions-and-bugs" class="anchor"></a>Questions and bugs</h1>
-<p>For bugs, typos, suggestions or other questions, please file an issue in our tracking system (<a href="https://github.com/sgibb/topdownr/issues" class="uri">https://github.com/sgibb/topdownr/issues</a>) providing as much information as possible, a reproducible example and the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code>.</p>
-<p>If you don’t have a GitHub account or wish to reach a broader audience for general questions about proteomics analysis using R, you may want to use the Bioconductor support site: <a href="https://support.bioconductor.org/" class="uri">https://support.bioconductor.org/</a>.</p>
+<a href="#questions-and-bugs" class="anchor" aria-hidden="true"></a>Questions and bugs</h1>
+<p>For bugs, typos, suggestions or other questions, please file an issue in our tracking system (<a href="https://github.com/sgibb/topdownr/issues" class="external-link uri">https://github.com/sgibb/topdownr/issues</a>) providing as much information as possible, a reproducible example and the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo()</a></code>.</p>
+<p>If you don’t have a GitHub account or wish to reach a broader audience for general questions about proteomics analysis using R, you may want to use the Bioconductor support site: <a href="https://support.bioconductor.org/" class="external-link uri">https://support.bioconductor.org/</a>.</p>
 </div>
 <div id="introductionworking-with-topdownr" class="section level1">
 <h1 class="hasAnchor">
-<a href="#introductionworking-with-topdownr" class="anchor"></a>Introduction/Working with <code>topdownr</code>
+<a href="#introductionworking-with-topdownr" class="anchor" aria-hidden="true"></a>Introduction/Working with <code>topdownr</code>
 </h1>
 <p>Load the package.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"topdownr"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/sgibb/topdownr/" class="external-link">"topdownr"</a></span><span class="op">)</span></code></pre></div>
 <div id="importing-files" class="section level2">
 <h2 class="hasAnchor">
-<a href="#importing-files" class="anchor"></a>Importing Files</h2>
+<a href="#importing-files" class="anchor" aria-hidden="true"></a>Importing Files</h2>
 <p>Some example files are provided in the <code>topdownrdata</code> package. For a full analysis you need a <code>.fasta</code> file with the protein sequence, the <code>.experiments.csv</code> files containing the method information, the <code>.txt</code> files containing the scan header information and the <code>.mzML</code> files with the deconvoluted spectra.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r">## list.files(topdownrdata::topDownDataPath("myoglobin"))</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## list.files(topdownrdata::topDownDataPath("myoglobin"))</span></code></pre></div>
 <pre><code>$csv
 [1] ".../20170629_myo/experiments/myo_1211_ETDReagentTarget_1e6_1.experiments.csv.gz"
 [2] ".../20170629_myo/experiments/myo_1211_ETDReagentTarget_1e6_2.experiments.csv.gz"
@@ -148,31 +146,32 @@ $txt
 [2] ".../20170629_myo/header/myo_1211_ETDReagentTarget_1e6_2.txt.gz"
 [3] "..."                                                           </code></pre>
 <p>All these files have to be in a directory. You could import them via <code>readTopDownFiles</code>. This function has some arguments. The most important ones are the <code>path</code> of the directory containing the files, the protein <code>modification</code> (e.g. initiator methionine removal, <code>"Met-loss"</code>), and adducts (e.g. proton transfer often occurs from c to z-fragment after ETD reaction).</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="co">## the mass adduct for a proton</span>
-<span class="no">H</span> <span class="kw">&lt;-</span> <span class="fl">1.0078250321</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## the mass adduct for a proton</span>
+<span class="va">H</span> <span class="op">&lt;-</span> <span class="fl">1.0078250321</span>
 
-<span class="no">myoglobin</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/readTopDownFiles.html">readTopDownFiles</a></span>(
+<span class="va">myoglobin</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/readTopDownFiles.html">readTopDownFiles</a></span><span class="op">(</span>
     <span class="co">## directory path</span>
-    <span class="kw">path</span> <span class="kw">=</span> <span class="kw pkg">topdownrdata</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/topdownrdata/man/topDownDataPath.html">topDownDataPath</a></span>(<span class="st">"myoglobin"</span>),
+    path <span class="op">=</span> <span class="fu">topdownrdata</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/topdownrdata/man/topDownDataPath.html" class="external-link">topDownDataPath</a></span><span class="op">(</span><span class="st">"myoglobin"</span><span class="op">)</span>,
     <span class="co">## fragmentation types</span>
-    <span class="kw">type</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"z"</span>),
+    type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"z"</span><span class="op">)</span>,
     <span class="co">## adducts (add -H/H to c/z and name</span>
     <span class="co">## them cmH/zpH (c minus H, z plus H)</span>
-    <span class="kw">adducts</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(
-        <span class="kw">mass</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(-<span class="no">H</span>, <span class="no">H</span>),
-        <span class="kw">to</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"c"</span>, <span class="st">"z"</span>),
-        <span class="kw">name</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"cmH"</span>, <span class="st">"zpH"</span>)),
+    adducts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
+        mass<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="va">H</span>, <span class="va">H</span><span class="op">)</span>,
+        to<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"c"</span>, <span class="st">"z"</span><span class="op">)</span>,
+        name<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cmH"</span>, <span class="st">"zpH"</span><span class="op">)</span><span class="op">)</span>,
     <span class="co">## initiator methionine removal</span>
-    <span class="kw">modifications</span> <span class="kw">=</span> <span class="st">"Met-loss"</span>,
+    modifications <span class="op">=</span> <span class="st">"Met-loss"</span>,
     <span class="co">## don't use neutral loss</span>
-    <span class="kw">neutralLoss</span> <span class="kw">=</span> <span class="kw">NULL</span>,
+    neutralLoss <span class="op">=</span> <span class="cn">NULL</span>,
     <span class="co">## tolerance for fragment matching</span>
-    <span class="kw">tolerance</span> <span class="kw">=</span> <span class="fl">5e-6</span>,
+    tolerance <span class="op">=</span> <span class="fl">5e-6</span>,
     <span class="co">## topdownrdata was generate with an older version of topdownr,</span>
     <span class="co">## the method files were generated with FilterString identification,</span>
     <span class="co">## use `conditions = "ScanDescription"` (default) for recent data.</span>
-    <span class="kw">conditions</span> <span class="kw">=</span> <span class="st">"FilterString"</span>
-)</pre></body></html></div>
+    conditions <span class="op">=</span> <span class="st">"FilterString"</span>
+<span class="op">)</span></code></pre></div>
 <pre><code>## Warning in FUN(X[[i]], ...): 61 FilterString entries modified because of
 ## duplicated ID for different conditions.</code></pre>
 <pre><code>## Warning in FUN(X[[i]], ...): 63 FilterString entries modified because of
@@ -191,7 +190,8 @@ $txt
 
 ## Warning in FUN(X[[i]], ...): ID in FilterString are not sorted in ascending
 ## order. Introduce own condition ID via 'cumsum'.</code></pre>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">myoglobin</span></pre></body></html></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">myoglobin</span></code></pre></div>
 <pre><code>## TopDownSet object (7.28 Mb)
 ## - - - Protein data - - -
 ## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
@@ -210,13 +210,13 @@ $txt
 ## Number of matched fragments: 368296 
 ## Intensity range: [87.61;10704001.00]
 ## - - - Processing information - - -
-## [2020-08-16 21:31:35] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
-## [2020-08-16 21:31:35] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2020-08-16 21:31:36] Recalculate median injection time based on: Mz, AgcTarget.</code></pre>
+## [2021-07-27 21:29:02] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2021-07-27 21:29:02] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2021-07-27 21:29:02] Recalculate median injection time based on: Mz, AgcTarget.</code></pre>
 </div>
 <div id="the-topdownset-anatomy" class="section level2">
 <h2 class="hasAnchor">
-<a href="#the-topdownset-anatomy" class="anchor"></a>The <code>TopDownSet</code> Anatomy</h2>
+<a href="#the-topdownset-anatomy" class="anchor" aria-hidden="true"></a>The <code>TopDownSet</code> Anatomy</h2>
 <p>The assembled object is an <code>TopDownSet</code> object. Briefly it is composed of three interconnected tables:</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -227,18 +227,19 @@ $txt
 <code>assayData</code>: contains the intensity of assigned fragments.</li>
 </ol>
 <div class="figure">
-<img src="images/TopDownSet.svg" alt="TopDownSet anatomy, image adopted from (Morgan et al. 2017)."><p class="caption">TopDownSet anatomy, image adopted from <span class="citation">(Morgan et al. 2017)</span>.</p>
+<img src="images/TopDownSet.svg" alt=""><p class="caption">TopDownSet anatomy, image adopted from <span class="citation">(Morgan et al. 2017)</span>.</p>
 </div>
 </div>
 <div id="technical-details" class="section level2">
 <h2 class="hasAnchor">
-<a href="#technical-details" class="anchor"></a>Technical Details</h2>
+<a href="#technical-details" class="anchor" aria-hidden="true"></a>Technical Details</h2>
 <p>This section explains the implementation details of the <code>TopDownSet</code> class. It is not necessary to understand everything written here to use <code>topdownr</code> for the analysis of fragmentation data.</p>
 <p>The <code>TopDownSet</code> contains the following components: <em>Fragment data</em>, <em>Condition data</em>, <em>Assay data</em>.</p>
 <div id="fragment-data" class="section level3">
 <h3 class="hasAnchor">
-<a href="#fragment-data" class="anchor"></a>Fragment data</h3>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="../reference/AbstractTopDownSet-class.html">rowViews</a></span>(<span class="no">myoglobin</span>)</pre></body></html></div>
+<a href="#fragment-data" class="anchor" aria-hidden="true"></a>Fragment data</h3>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/AbstractTopDownSet-class.html">rowViews</a></span><span class="op">(</span><span class="va">myoglobin</span><span class="op">)</span></code></pre></div>
 <pre><code>## FragmentViews on a 153-letter sequence:
 ##   GLSDGEWQQVLNVWGKVEADIAGHGQEVLIRLFTGHPE...SKHPGDFGADAQGAMTKALELFRNDIAAKYKELGFQG
 ## Mass:
@@ -262,54 +263,43 @@ $txt
 </div>
 <div id="condition-data" class="section level3">
 <h3 class="hasAnchor">
-<a href="#condition-data" class="anchor"></a>Condition data</h3>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="../reference/AbstractTopDownSet-class.html">conditionData</a></span>(<span class="no">myoglobin</span>)[, <span class="fl">1</span>:<span class="fl">5</span>]</pre></body></html></div>
+<a href="#condition-data" class="anchor" aria-hidden="true"></a>Condition data</h3>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/AbstractTopDownSet-class.html">conditionData</a></span><span class="op">(</span><span class="va">myoglobin</span><span class="op">)</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></code></pre></div>
 <pre><code>## DataFrame with 5882 rows and 5 columns
-##                                                                    File
-##                                                                   &lt;Rle&gt;
-## C0707.30_1.0e+05_1.0e+06_02.50_07_00_1   myo_707_ETDReagentTarget_1e6_1
-## C0707.30_1.0e+05_1.0e+06_02.50_07_00_2   myo_707_ETDReagentTarget_1e6_1
-## C0707.30_1.0e+05_1.0e+06_02.50_07_00_3   myo_707_ETDReagentTarget_1e6_2
-## C0707.30_1.0e+05_1.0e+06_02.50_07_00_4   myo_707_ETDReagentTarget_1e6_2
-## C0707.30_1.0e+05_1.0e+06_02.50_14_00_1   myo_707_ETDReagentTarget_1e6_1
-## ...                                                                 ...
-## C1211.70_1.0e+06_0.0e+00_00.00_00_35_07 myo_1211_ETDReagentTarget_1e7_2
-## C1211.70_1.0e+06_0.0e+00_00.00_00_35_08 myo_1211_ETDReagentTarget_5e6_1
-## C1211.70_1.0e+06_0.0e+00_00.00_00_35_09 myo_1211_ETDReagentTarget_5e6_1
-## C1211.70_1.0e+06_0.0e+00_00.00_00_35_10 myo_1211_ETDReagentTarget_5e6_2
-## C1211.70_1.0e+06_0.0e+00_00.00_00_35_11 myo_1211_ETDReagentTarget_5e6_2
-##                                              Scan SpectrumIndex PeaksCount
-##                                         &lt;numeric&gt;     &lt;integer&gt;  &lt;integer&gt;
-## C0707.30_1.0e+05_1.0e+06_02.50_07_00_1         33            22        161
-## C0707.30_1.0e+05_1.0e+06_02.50_07_00_2         34            23        175
-## C0707.30_1.0e+05_1.0e+06_02.50_07_00_3         33            23        180
-## C0707.30_1.0e+05_1.0e+06_02.50_07_00_4         34            24        171
-## C0707.30_1.0e+05_1.0e+06_02.50_14_00_1         36            25        172
-## ...                                           ...           ...        ...
-## C1211.70_1.0e+06_0.0e+00_00.00_00_35_07       223           203        213
-## C1211.70_1.0e+06_0.0e+00_00.00_00_35_08       221           202        250
-## C1211.70_1.0e+06_0.0e+00_00.00_00_35_09       222           203        145
-## C1211.70_1.0e+06_0.0e+00_00.00_00_35_10       223           203        207
-## C1211.70_1.0e+06_0.0e+00_00.00_00_35_11       224           204        158
-##                                         TotIonCurrent
-##                                             &lt;numeric&gt;
-## C0707.30_1.0e+05_1.0e+06_02.50_07_00_1       27224937
-## C0707.30_1.0e+05_1.0e+06_02.50_07_00_2       29167765
-## C0707.30_1.0e+05_1.0e+06_02.50_07_00_3       26132872
-## C0707.30_1.0e+05_1.0e+06_02.50_07_00_4       25475501
-## C0707.30_1.0e+05_1.0e+06_02.50_14_00_1       27347105
-## ...                                               ...
-## C1211.70_1.0e+06_0.0e+00_00.00_00_35_07       2566120
-## C1211.70_1.0e+06_0.0e+00_00.00_00_35_08       2348707
-## C1211.70_1.0e+06_0.0e+00_00.00_00_35_09       2305900
-## C1211.70_1.0e+06_0.0e+00_00.00_00_35_10       2262800
-## C1211.70_1.0e+06_0.0e+00_00.00_00_35_11       2212189</code></pre>
+##                                                           File      Scan
+##                                                          &lt;Rle&gt; &lt;numeric&gt;
+## C0707.30_1.0e+05_1.0e+06_02.50_07_00_1  myo_707_ETDReagentTa..        33
+## C0707.30_1.0e+05_1.0e+06_02.50_07_00_2  myo_707_ETDReagentTa..        34
+## C0707.30_1.0e+05_1.0e+06_02.50_07_00_3  myo_707_ETDReagentTa..        33
+## C0707.30_1.0e+05_1.0e+06_02.50_07_00_4  myo_707_ETDReagentTa..        34
+## C0707.30_1.0e+05_1.0e+06_02.50_14_00_1  myo_707_ETDReagentTa..        36
+## ...                                                        ...       ...
+## C1211.70_1.0e+06_0.0e+00_00.00_00_35_07 myo_1211_ETDReagentT..       223
+## C1211.70_1.0e+06_0.0e+00_00.00_00_35_08 myo_1211_ETDReagentT..       221
+## C1211.70_1.0e+06_0.0e+00_00.00_00_35_09 myo_1211_ETDReagentT..       222
+## C1211.70_1.0e+06_0.0e+00_00.00_00_35_10 myo_1211_ETDReagentT..       223
+## C1211.70_1.0e+06_0.0e+00_00.00_00_35_11 myo_1211_ETDReagentT..       224
+##                                         SpectrumIndex PeaksCount TotIonCurrent
+##                                             &lt;integer&gt;  &lt;integer&gt;     &lt;numeric&gt;
+## C0707.30_1.0e+05_1.0e+06_02.50_07_00_1             22        161      27224937
+## C0707.30_1.0e+05_1.0e+06_02.50_07_00_2             23        175      29167765
+## C0707.30_1.0e+05_1.0e+06_02.50_07_00_3             23        180      26132872
+## C0707.30_1.0e+05_1.0e+06_02.50_07_00_4             24        171      25475501
+## C0707.30_1.0e+05_1.0e+06_02.50_14_00_1             25        172      27347105
+## ...                                               ...        ...           ...
+## C1211.70_1.0e+06_0.0e+00_00.00_00_35_07           203        213       2566120
+## C1211.70_1.0e+06_0.0e+00_00.00_00_35_08           202        250       2348707
+## C1211.70_1.0e+06_0.0e+00_00.00_00_35_09           203        145       2305900
+## C1211.70_1.0e+06_0.0e+00_00.00_00_35_10           203        207       2262800
+## C1211.70_1.0e+06_0.0e+00_00.00_00_35_11           204        158       2212189</code></pre>
 <p>Condition data is a <code>DataFrame</code> that contains the combined header information for each MS run (combined from method (<code>.experiments.csv</code> files)/scan header (<code>.txt</code> files) table and metadata from the <code>.mzML</code> files).</p>
 </div>
 <div id="assay-data" class="section level3">
 <h3 class="hasAnchor">
-<a href="#assay-data" class="anchor"></a>Assay data</h3>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="fu">assayData</span>(<span class="no">myoglobin</span>)[<span class="fl">206</span>:<span class="fl">215</span>, <span class="fl">1</span>:<span class="fl">10</span>]</pre></body></html></div>
+<a href="#assay-data" class="anchor" aria-hidden="true"></a>Assay data</h3>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/assayData.html" class="external-link">assayData</a></span><span class="op">(</span><span class="va">myoglobin</span><span class="op">)</span><span class="op">[</span><span class="fl">206</span><span class="op">:</span><span class="fl">215</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></code></pre></div>
 <pre><code>## 10 x 10 sparse Matrix of class "dgCMatrix"</code></pre>
 <pre><code>##    [[ suppressing 10 column names 'C0707.30_1.0e+05_1.0e+06_02.50_07_00_1', 'C0707.30_1.0e+05_1.0e+06_02.50_07_00_2', 'C0707.30_1.0e+05_1.0e+06_02.50_07_00_3' ... ]]</code></pre>
 <pre><code>##                                                                               
@@ -339,11 +329,12 @@ $txt
 </div>
 <div id="subsetting-a-topdownset" class="section level2">
 <h2 class="hasAnchor">
-<a href="#subsetting-a-topdownset" class="anchor"></a>Subsetting a <code>TopDownSet</code>
+<a href="#subsetting-a-topdownset" class="anchor" aria-hidden="true"></a>Subsetting a <code>TopDownSet</code>
 </h2>
 <p>A <code>TopDownSet</code> could be subsetted by the fragment and the condition data.</p>
-<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="co"># select the first 100 fragments</span>
-<span class="no">myoglobin</span>[<span class="fl">1</span>:<span class="fl">100</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># select the first 100 fragments</span>
+<span class="va">myoglobin</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span></code></pre></div>
 <pre><code>## TopDownSet object (3.56 Mb)
 ## - - - Protein data - - -
 ## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
@@ -362,12 +353,13 @@ $txt
 ## Number of matched fragments: 56955 
 ## Intensity range: [105.70;1076768.00]
 ## - - - Processing information - - -
-## [2020-08-16 21:31:35] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
-## [2020-08-16 21:31:35] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2020-08-16 21:31:36] Recalculate median injection time based on: Mz, AgcTarget.
-## [2020-08-16 21:31:36] Subsetted 368296 fragments [1216;5882] to 56955 fragments [100;5882].</code></pre>
-<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="co"># select all "c" fragments</span>
-<span class="no">myoglobin</span>[<span class="st">"c"</span>]</pre></body></html></div>
+## [2021-07-27 21:29:02] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2021-07-27 21:29:02] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2021-07-27 21:29:02] Recalculate median injection time based on: Mz, AgcTarget.
+## [2021-07-27 21:29:03] Subsetted 368296 fragments [1216;5882] to 56955 fragments [100;5882].</code></pre>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># select all "c" fragments</span>
+<span class="va">myoglobin</span><span class="op">[</span><span class="st">"c"</span><span class="op">]</span></code></pre></div>
 <pre><code>## TopDownSet object (4.51 Mb)
 ## - - - Protein data - - -
 ## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
@@ -386,12 +378,13 @@ $txt
 ## Number of matched fragments: 137461 
 ## Intensity range: [87.61;1203763.75]
 ## - - - Processing information - - -
-## [2020-08-16 21:31:35] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
-## [2020-08-16 21:31:35] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2020-08-16 21:31:36] Recalculate median injection time based on: Mz, AgcTarget.
-## [2020-08-16 21:31:36] Subsetted 368296 fragments [1216;5882] to 137461 fragments [304;5882].</code></pre>
-<div class="sourceCode" id="cb25"><html><body><pre class="r"><span class="co"># select just the 100. "c" fragment</span>
-<span class="no">myoglobin</span>[<span class="st">"c100"</span>]</pre></body></html></div>
+## [2021-07-27 21:29:02] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2021-07-27 21:29:02] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2021-07-27 21:29:02] Recalculate median injection time based on: Mz, AgcTarget.
+## [2021-07-27 21:29:03] Subsetted 368296 fragments [1216;5882] to 137461 fragments [304;5882].</code></pre>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># select just the 100. "c" fragment</span>
+<span class="va">myoglobin</span><span class="op">[</span><span class="st">"c100"</span><span class="op">]</span></code></pre></div>
 <pre><code>## TopDownSet object (2.89 Mb)
 ## - - - Protein data - - -
 ## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
@@ -410,12 +403,13 @@ $txt
 ## Number of matched fragments: 5 
 ## Intensity range: [1276.91;17056.12]
 ## - - - Processing information - - -
-## [2020-08-16 21:31:35] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
-## [2020-08-16 21:31:35] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2020-08-16 21:31:36] Recalculate median injection time based on: Mz, AgcTarget.
-## [2020-08-16 21:31:36] Subsetted 368296 fragments [1216;5882] to 5 fragments [1;5882].</code></pre>
-<div class="sourceCode" id="cb27"><html><body><pre class="r"><span class="co"># select all "a" and "b" fragments but just the first 100 "c"</span>
-<span class="no">myoglobin</span>[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"c"</span>, <span class="fl">1</span>:<span class="fl">100</span>))]</pre></body></html></div>
+## [2021-07-27 21:29:02] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2021-07-27 21:29:02] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2021-07-27 21:29:02] Recalculate median injection time based on: Mz, AgcTarget.
+## [2021-07-27 21:29:03] Subsetted 368296 fragments [1216;5882] to 5 fragments [1;5882].</code></pre>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># select all "a" and "b" fragments but just the first 100 "c"</span>
+<span class="va">myoglobin</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"c"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></code></pre></div>
 <pre><code>## TopDownSet object (4.59 Mb)
 ## - - - Protein data - - -
 ## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
@@ -434,12 +428,13 @@ $txt
 ## Number of matched fragments: 143582 
 ## Intensity range: [87.61;1630533.12]
 ## - - - Processing information - - -
-## [2020-08-16 21:31:35] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
-## [2020-08-16 21:31:35] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2020-08-16 21:31:36] Recalculate median injection time based on: Mz, AgcTarget.
-## [2020-08-16 21:31:36] Subsetted 368296 fragments [1216;5882] to 143582 fragments [404;5882].</code></pre>
-<div class="sourceCode" id="cb29"><html><body><pre class="r"><span class="co"># select condition/run 1 to 10</span>
-<span class="no">myoglobin</span>[, <span class="fl">1</span>:<span class="fl">10</span>]</pre></body></html></div>
+## [2021-07-27 21:29:02] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2021-07-27 21:29:02] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2021-07-27 21:29:02] Recalculate median injection time based on: Mz, AgcTarget.
+## [2021-07-27 21:29:03] Subsetted 368296 fragments [1216;5882] to 143582 fragments [404;5882].</code></pre>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># select condition/run 1 to 10</span>
+<span class="va">myoglobin</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span></code></pre></div>
 <pre><code>## TopDownSet object (0.26 Mb)
 ## - - - Protein data - - -
 ## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
@@ -458,12 +453,13 @@ $txt
 ## Number of matched fragments: 1019 
 ## Intensity range: [7872.05;1036892.19]
 ## - - - Processing information - - -
-## [2020-08-16 21:31:35] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
-## [2020-08-16 21:31:35] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2020-08-16 21:31:36] Recalculate median injection time based on: Mz, AgcTarget.
-## [2020-08-16 21:31:36] Subsetted 368296 fragments [1216;5882] to 1019 fragments [1216;10].</code></pre>
-<div class="sourceCode" id="cb31"><html><body><pre class="r"><span class="co"># select all conditions from one file</span>
-<span class="no">myoglobin</span>[, <span class="no">myoglobin</span>$<span class="no">File</span> <span class="kw">==</span> <span class="st">"myo_1211_ETDReagentTarget_1e+06_1"</span>]</pre></body></html></div>
+## [2021-07-27 21:29:02] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2021-07-27 21:29:02] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2021-07-27 21:29:02] Recalculate median injection time based on: Mz, AgcTarget.
+## [2021-07-27 21:29:03] Subsetted 368296 fragments [1216;5882] to 1019 fragments [1216;10].</code></pre>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># select all conditions from one file</span>
+<span class="va">myoglobin</span><span class="op">[</span>, <span class="va">myoglobin</span><span class="op">$</span><span class="va">File</span> <span class="op">==</span> <span class="st">"myo_1211_ETDReagentTarget_1e+06_1"</span><span class="op">]</span></code></pre></div>
 <pre><code>## TopDownSet object (0.24 Mb)
 ## - - - Protein data - - -
 ## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
@@ -474,12 +470,13 @@ $txt
 ## Theoretical fragment types (6): a, b, c, x, y, z
 ## Theoretical mass range: [30.03;16910.93]
 ## - - - Processing information - - -
-## [2020-08-16 21:31:35] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
-## [2020-08-16 21:31:35] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2020-08-16 21:31:36] Recalculate median injection time based on: Mz, AgcTarget.
-## [2020-08-16 21:31:36] Subsetted 368296 fragments [1216;5882] to 0 fragments [1216;0].</code></pre>
-<div class="sourceCode" id="cb33"><html><body><pre class="r"><span class="co"># select all "c" fragments from a single file</span>
-<span class="no">myoglobin</span>[<span class="st">"c"</span>, <span class="no">myoglobin</span>$<span class="no">File</span> <span class="kw">==</span> <span class="st">"myo_1211_ETDReagentTarget_1e+06_1"</span>]</pre></body></html></div>
+## [2021-07-27 21:29:02] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2021-07-27 21:29:02] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2021-07-27 21:29:02] Recalculate median injection time based on: Mz, AgcTarget.
+## [2021-07-27 21:29:03] Subsetted 368296 fragments [1216;5882] to 0 fragments [1216;0].</code></pre>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># select all "c" fragments from a single file</span>
+<span class="va">myoglobin</span><span class="op">[</span><span class="st">"c"</span>, <span class="va">myoglobin</span><span class="op">$</span><span class="va">File</span> <span class="op">==</span> <span class="st">"myo_1211_ETDReagentTarget_1e+06_1"</span><span class="op">]</span></code></pre></div>
 <pre><code>## TopDownSet object (0.11 Mb)
 ## - - - Protein data - - -
 ## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
@@ -490,55 +487,58 @@ $txt
 ## Theoretical fragment types (1): c
 ## Theoretical mass range: [74.05;16883.97]
 ## - - - Processing information - - -
-## [2020-08-16 21:31:35] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
-## [2020-08-16 21:31:35] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2020-08-16 21:31:36] Recalculate median injection time based on: Mz, AgcTarget.
-## [2020-08-16 21:31:36] Subsetted 368296 fragments [1216;5882] to 0 fragments [304;0].</code></pre>
+## [2021-07-27 21:29:02] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2021-07-27 21:29:02] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2021-07-27 21:29:02] Recalculate median injection time based on: Mz, AgcTarget.
+## [2021-07-27 21:29:04] Subsetted 368296 fragments [1216;5882] to 0 fragments [304;0].</code></pre>
 </div>
 <div id="plotting-a-topdownset" class="section level2">
 <h2 class="hasAnchor">
-<a href="#plotting-a-topdownset" class="anchor"></a>Plotting a <code>TopDownSet</code>
+<a href="#plotting-a-topdownset" class="anchor" aria-hidden="true"></a>Plotting a <code>TopDownSet</code>
 </h2>
 <p>Each condition represents one spectrum. We could plot a single condition interactively or all spectra into a <code>pdf</code> file (or any other <em>R</em> device that supports multiple pages/plots).</p>
-<div class="sourceCode" id="cb35"><html><body><pre class="r"><span class="co"># plot a single condition</span>
-<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">myoglobin</span>[, <span class="st">"C0707.30_1.0e+05_1.0e+06_10.00_00_28_3"</span>])</pre></body></html></div>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># plot a single condition</span>
+<span class="fu"><a href="https://lgatto.github.io/MSnbase/reference/plot-methods.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">myoglobin</span><span class="op">[</span>, <span class="st">"C0707.30_1.0e+05_1.0e+06_10.00_00_28_3"</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <pre><code>## [[1]]</code></pre>
 <p><img src="analysis_files/figure-html/plotting-1.png" width="700"></p>
-<div class="sourceCode" id="cb37"><html><body><pre class="r">## # example to plot the first ten conditions into a pdf
-## # (not evaluated in the vignette)
-## pdf("topdown-conditions.pdf", paper="a4r", width=12)
-## plot(myoglobin[, 1:10])
-## dev.off()</pre></body></html></div>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## # example to plot the first ten conditions into a pdf</span>
+<span class="co">## # (not evaluated in the vignette)</span>
+<span class="co">## pdf("topdown-conditions.pdf", paper="a4r", width=12)</span>
+<span class="co">## plot(myoglobin[, 1:10])</span>
+<span class="co">## dev.off()</span></code></pre></div>
 <p><code>plot</code> returns a <code>list</code> (an item per condition) of <code>ggplot</code> objects which could further modified or investigated interactively by calling <code>plotly::ggplotly()</code>.</p>
 </div>
 </div>
 <div id="fragmentation-data-analysis-of-myoglobin" class="section level1">
 <h1 class="hasAnchor">
-<a href="#fragmentation-data-analysis-of-myoglobin" class="anchor"></a>Fragmentation Data Analysis of Myoglobin</h1>
+<a href="#fragmentation-data-analysis-of-myoglobin" class="anchor" aria-hidden="true"></a>Fragmentation Data Analysis of Myoglobin</h1>
 <p>We follow the following workflow:</p>
 <div class="figure">
-<img src="images/workflow/analysis.mmd.png" alt="topdownr workflow"><p class="caption">topdownr workflow</p>
+<img src="images/workflow/analysis.mmd.png" alt=""><p class="caption">topdownr workflow</p>
 </div>
 <p>We use the example data loaded in <a href="analysis.html#21_importing_files">Importing Files</a>.</p>
 <p>The data contains several replicates for each fragmentation condition. Before aggregation can be performed we need to remove scans with inadequate injection times and fragments with low intensity or poor intensity reproducibility.</p>
 <div id="filter-conditions-on-injection-times" class="section level2">
 <h2 class="hasAnchor">
-<a href="#filter-conditions-on-injection-times" class="anchor"></a>Filter Conditions on Injection Times</h2>
+<a href="#filter-conditions-on-injection-times" class="anchor" aria-hidden="true"></a>Filter Conditions on Injection Times</h2>
 <p>Injection times should be consistent for a particular <em>m/z</em> and particular AGC target. High or low injection times indicate problems with on-the-flight AGC calculation or spray instability for a particular scan. Hence the <code>topdownr</code> automatically calculates median injection time for a given <em>m/z</em> and AGC target combination. The user can choose to remove all scans that deviate more than a certain amount from the corresponding median and/or choose to keep <code>N</code> scans with the lowest deviation from the median for every condition.</p>
 <p>Here we show an example of such filtering and the effect on the distribution of injection times.</p>
-<div class="sourceCode" id="cb38"><html><body><pre class="r"><span class="no">injTimeBefore</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/AbstractTopDownSet-class.html">colData</a></span>(<span class="no">myoglobin</span>)
-<span class="no">injTimeBefore</span>$<span class="no">Status</span> <span class="kw">&lt;-</span> <span class="st">"before filtering"</span>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">injTimeBefore</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/AbstractTopDownSet-class.html">colData</a></span><span class="op">(</span><span class="va">myoglobin</span><span class="op">)</span>
+<span class="va">injTimeBefore</span><span class="op">$</span><span class="va">Status</span> <span class="op">&lt;-</span> <span class="st">"before filtering"</span>
 
 <span class="co">## filtering on max deviation and just keep the</span>
 <span class="co">## 2 technical replicates per condition with the</span>
 <span class="co">## lowest deviation</span>
-<span class="no">myoglobin</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/TopDownSet-class.html">filterInjectionTime</a></span>(
-    <span class="no">myoglobin</span>,
-    <span class="kw">maxDeviation</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log2</a></span>(<span class="fl">3</span>),
-    <span class="kw">keepTopN</span> <span class="kw">=</span> <span class="fl">2</span>
-)
+<span class="va">myoglobin</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/TopDownSet-class.html">filterInjectionTime</a></span><span class="op">(</span>
+    <span class="va">myoglobin</span>,
+    maxDeviation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log2</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,
+    keepTopN <span class="op">=</span> <span class="fl">2</span>
+<span class="op">)</span>
 
-<span class="no">myoglobin</span></pre></body></html></div>
+<span class="va">myoglobin</span></code></pre></div>
 <pre><code>## TopDownSet object (5.11 Mb)
 ## - - - Protein data - - -
 ## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
@@ -557,33 +557,35 @@ $txt
 ## Number of matched fragments: 252897 
 ## Intensity range: [109.29;8493567.00]
 ## - - - Processing information - - -
-## [2020-08-16 21:31:35] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
-## [2020-08-16 21:31:35] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2020-08-16 21:31:36] Recalculate median injection time based on: Mz, AgcTarget.
-## [2020-08-16 21:31:37] Subsetted 368296 fragments [1216;5882] to 252897 fragments [1216;3696].
-## [2020-08-16 21:31:37] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 252897 fragments [1216;3696].</code></pre>
-<div class="sourceCode" id="cb40"><html><body><pre class="r"><span class="no">injTimeAfter</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/AbstractTopDownSet-class.html">colData</a></span>(<span class="no">myoglobin</span>)
-<span class="no">injTimeAfter</span>$<span class="no">Status</span> <span class="kw">&lt;-</span> <span class="st">"after filtering"</span>
+## [2021-07-27 21:29:02] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2021-07-27 21:29:02] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2021-07-27 21:29:02] Recalculate median injection time based on: Mz, AgcTarget.
+## [2021-07-27 21:29:04] Subsetted 368296 fragments [1216;5882] to 252897 fragments [1216;3696].
+## [2021-07-27 21:29:04] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 252897 fragments [1216;3696].</code></pre>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">injTimeAfter</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/AbstractTopDownSet-class.html">colData</a></span><span class="op">(</span><span class="va">myoglobin</span><span class="op">)</span>
+<span class="va">injTimeAfter</span><span class="op">$</span><span class="va">Status</span> <span class="op">&lt;-</span> <span class="st">"after filtering"</span>
 
-<span class="no">injTime</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span>(<span class="no">injTimeBefore</span>, <span class="no">injTimeAfter</span>))
+<span class="va">injTime</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">injTimeBefore</span>, <span class="va">injTimeAfter</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co">## use ggplot for visualisation</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"ggplot2"</span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://ggplot2.tidyverse.org" class="external-link">"ggplot2"</a></span><span class="op">)</span>
 
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">injTime</span>,
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(<span class="no">AgcTarget</span>),
-        <span class="kw">y</span> <span class="kw">=</span> <span class="no">IonInjectionTimeMs</span>,
-        <span class="kw">group</span> <span class="kw">=</span> <span class="no">AgcTarget</span>)) +
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span>() +
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span>(<span class="no">Status</span> ~ <span class="no">Mz</span>)</pre></body></html></div>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">injTime</span>,
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">AgcTarget</span><span class="op">)</span>,
+        y <span class="op">=</span> <span class="va">IonInjectionTimeMs</span>,
+        group <span class="op">=</span> <span class="va">AgcTarget</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html" class="external-link">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span><span class="va">Status</span> <span class="op">~</span> <span class="va">Mz</span><span class="op">)</span></code></pre></div>
 <p><img src="analysis_files/figure-html/filterInjectionTimes-1.png" width="700"></p>
 </div>
 <div id="filter-fragments-on-cv" class="section level2">
 <h2 class="hasAnchor">
-<a href="#filter-fragments-on-cv" class="anchor"></a>Filter Fragments on CV</h2>
+<a href="#filter-fragments-on-cv" class="anchor" aria-hidden="true"></a>Filter Fragments on CV</h2>
 <p>High CV of intensity for a fragment suggests either fragment contamination by another <em>m/z</em> species or problems with deisotoping and we recommend removing all fragments with CV &gt; 30, as shown below.</p>
-<div class="sourceCode" id="cb41"><html><body><pre class="r"><span class="no">myoglobin</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/TopDownSet-class.html">filterCv</a></span>(<span class="no">myoglobin</span>, <span class="kw">threshold</span><span class="kw">=</span><span class="fl">30</span>)
-<span class="no">myoglobin</span></pre></body></html></div>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">myoglobin</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/TopDownSet-class.html">filterCv</a></span><span class="op">(</span><span class="va">myoglobin</span>, threshold<span class="op">=</span><span class="fl">30</span><span class="op">)</span>
+<span class="va">myoglobin</span></code></pre></div>
 <pre><code>## TopDownSet object (4.68 Mb)
 ## - - - Protein data - - -
 ## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
@@ -602,20 +604,21 @@ $txt
 ## Number of matched fragments: 215569 
 ## Intensity range: [109.29;8493567.00]
 ## - - - Processing information - - -
-## [2020-08-16 21:31:35] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
-## [2020-08-16 21:31:35] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2020-08-16 21:31:36] Recalculate median injection time based on: Mz, AgcTarget.
-## [2020-08-16 21:31:37] Subsetted 368296 fragments [1216;5882] to 252897 fragments [1216;3696].
-## [2020-08-16 21:31:37] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 252897 fragments [1216;3696].
-## [2020-08-16 21:31:38] 37328 fragments with CV &gt; 30% filtered; 215569 fragments [1216;3696].</code></pre>
+## [2021-07-27 21:29:02] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2021-07-27 21:29:02] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2021-07-27 21:29:02] Recalculate median injection time based on: Mz, AgcTarget.
+## [2021-07-27 21:29:04] Subsetted 368296 fragments [1216;5882] to 252897 fragments [1216;3696].
+## [2021-07-27 21:29:04] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 252897 fragments [1216;3696].
+## [2021-07-27 21:29:05] 37328 fragments with CV &gt; 30% filtered; 215569 fragments [1216;3696].</code></pre>
 </div>
 <div id="filter-fragments-on-intensity" class="section level2">
 <h2 class="hasAnchor">
-<a href="#filter-fragments-on-intensity" class="anchor"></a>Filter Fragments on Intensity</h2>
+<a href="#filter-fragments-on-intensity" class="anchor" aria-hidden="true"></a>Filter Fragments on Intensity</h2>
 <p>When optimizing protein fragmentation we also want to focus on the most intense fragments, hence we recommend removing all low intensity fragments from analysis.</p>
 <p>Low intensity is defined relatively to the most intense observation for this fragment (i.e. relatively to the maximum value in an <code>assayData</code> row). In the example below all intensity values, which have less than 10% intensity of the highest intensity to their corresponding fragment (in their corresponding row) are removed.</p>
-<div class="sourceCode" id="cb43"><html><body><pre class="r"><span class="no">myoglobin</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/TopDownSet-class.html">filterIntensity</a></span>(<span class="no">myoglobin</span>, <span class="kw">threshold</span><span class="kw">=</span><span class="fl">0.1</span>)
-<span class="no">myoglobin</span></pre></body></html></div>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">myoglobin</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/TopDownSet-class.html">filterIntensity</a></span><span class="op">(</span><span class="va">myoglobin</span>, threshold<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span>
+<span class="va">myoglobin</span></code></pre></div>
 <pre><code>## TopDownSet object (3.82 Mb)
 ## - - - Protein data - - -
 ## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
@@ -634,20 +637,21 @@ $txt
 ## Number of matched fragments: 140483 
 ## Intensity range: [219.52;8493567.00]
 ## - - - Processing information - - -
-## [2020-08-16 21:31:35] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
-## [2020-08-16 21:31:35] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2020-08-16 21:31:36] Recalculate median injection time based on: Mz, AgcTarget.
-## [2020-08-16 21:31:37] Subsetted 368296 fragments [1216;5882] to 252897 fragments [1216;3696].
-## [2020-08-16 21:31:37] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 252897 fragments [1216;3696].
-## [2020-08-16 21:31:38] 37328 fragments with CV &gt; 30% filtered; 215569 fragments [1216;3696].
-## [2020-08-16 21:31:38] 75086 intensity values &lt; 0.1 (relative) filtered; 140483 fragments [1216;3696].</code></pre>
+## [2021-07-27 21:29:02] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2021-07-27 21:29:02] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2021-07-27 21:29:02] Recalculate median injection time based on: Mz, AgcTarget.
+## [2021-07-27 21:29:04] Subsetted 368296 fragments [1216;5882] to 252897 fragments [1216;3696].
+## [2021-07-27 21:29:04] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 252897 fragments [1216;3696].
+## [2021-07-27 21:29:05] 37328 fragments with CV &gt; 30% filtered; 215569 fragments [1216;3696].
+## [2021-07-27 21:29:06] 75086 intensity values &lt; 0.1 (relative) filtered; 140483 fragments [1216;3696].</code></pre>
 </div>
 <div id="data-aggregation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#data-aggregation" class="anchor"></a>Data Aggregation</h2>
+<a href="#data-aggregation" class="anchor" aria-hidden="true"></a>Data Aggregation</h2>
 <p>The next step of analysis is aggregating technical replicates of fragmentation conditions (columns of <code>assayData</code>).</p>
-<div class="sourceCode" id="cb45"><html><body><pre class="r"><span class="no">myoglobin</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aggregate.html">aggregate</a></span>(<span class="no">myoglobin</span>)
-<span class="no">myoglobin</span></pre></body></html></div>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">myoglobin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/aggregate-methods.html" class="external-link">aggregate</a></span><span class="op">(</span><span class="va">myoglobin</span><span class="op">)</span>
+<span class="va">myoglobin</span></code></pre></div>
 <pre><code>## TopDownSet object (2.25 Mb)
 ## - - - Protein data - - -
 ## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
@@ -666,24 +670,25 @@ $txt
 ## Number of matched fragments: 89230 
 ## Intensity range: [219.52;8492743.50]
 ## - - - Processing information - - -
-## [2020-08-16 21:31:35] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
-## [2020-08-16 21:31:35] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2020-08-16 21:31:36] Recalculate median injection time based on: Mz, AgcTarget.
-## [2020-08-16 21:31:37] Subsetted 368296 fragments [1216;5882] to 252897 fragments [1216;3696].
-## [2020-08-16 21:31:37] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 252897 fragments [1216;3696].
-## [2020-08-16 21:31:38] 37328 fragments with CV &gt; 30% filtered; 215569 fragments [1216;3696].
-## [2020-08-16 21:31:38] 75086 intensity values &lt; 0.1 (relative) filtered; 140483 fragments [1216;3696].
-## [2020-08-16 21:31:39] Aggregated 140483 fragments [1216;3696] to 89230 fragments [1216;1852].</code></pre>
+## [2021-07-27 21:29:02] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2021-07-27 21:29:02] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2021-07-27 21:29:02] Recalculate median injection time based on: Mz, AgcTarget.
+## [2021-07-27 21:29:04] Subsetted 368296 fragments [1216;5882] to 252897 fragments [1216;3696].
+## [2021-07-27 21:29:04] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 252897 fragments [1216;3696].
+## [2021-07-27 21:29:05] 37328 fragments with CV &gt; 30% filtered; 215569 fragments [1216;3696].
+## [2021-07-27 21:29:06] 75086 intensity values &lt; 0.1 (relative) filtered; 140483 fragments [1216;3696].
+## [2021-07-27 21:29:06] Aggregated 140483 fragments [1216;3696] to 89230 fragments [1216;1852].</code></pre>
 </div>
 <div id="random-forest" class="section level2">
 <h2 class="hasAnchor">
-<a href="#random-forest" class="anchor"></a>Random Forest</h2>
+<a href="#random-forest" class="anchor" aria-hidden="true"></a>Random Forest</h2>
 <p>To examine which of the features (fragmentation parameters) have the highest overall impact for a protein we perform random forest machine learning using the <code>ranger</code> <span class="citation">(Wright and Ziegler 2017)</span> <code>R</code>-package.</p>
 <p>Before we compute some fragmentation statistics (number of assigned fragments, total assigned intensity, etc.).</p>
-<div class="sourceCode" id="cb47"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"ranger"</span>)
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/imbs-hl/ranger" class="external-link">"ranger"</a></span><span class="op">)</span>
 
 <span class="co">## statistics</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">myoglobin</span>))</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">myoglobin</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>##   Fragments    Total      Min       Q1   Median     Mean       Q3      Max
 ## 1       114 20287547 15477.93 50676.35 117379.4 16683.84 284206.6 889160.9
 ## 2       112 20647046  9950.82 52033.36 130829.6 16979.48 280873.9 880548.7
@@ -691,55 +696,57 @@ $txt
 ## 4       112 20148236 13521.25 50698.44 118552.1 16569.27 280191.6 874603.0
 ## 5       113 19598593 11322.55 53494.00 113005.6 16117.26 272462.7 882041.0
 ## 6       110 19913901 15506.45 65573.98 119684.7 16376.56 265715.7 950459.8</code></pre>
-<div class="sourceCode" id="cb49"><html><body><pre class="r"><span class="co">## number of fragments</span>
-<span class="no">nFragments</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">myoglobin</span>)$<span class="no">Fragments</span>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## number of fragments</span>
+<span class="va">nFragments</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">myoglobin</span><span class="op">)</span><span class="op">$</span><span class="va">Fragments</span>
 
 <span class="co">## features of interest</span>
-<span class="no">foi</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
+<span class="va">foi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/S4Vectors/man/Vector-class.html" class="external-link">c</a></span><span class="op">(</span>
     <span class="st">"AgcTarget"</span>,
     <span class="st">"EtdReagentTarget"</span>,
     <span class="st">"EtdActivation"</span>,
     <span class="st">"CidActivation"</span>,
     <span class="st">"HcdActivation"</span>,
     <span class="st">"Charge"</span>
-)
+<span class="op">)</span>
 
-<span class="no">rfTable</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="fu"><a href="../reference/AbstractTopDownSet-class.html">colData</a></span>(<span class="no">myoglobin</span>)[<span class="no">foi</span>])
+<span class="va">rfTable</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="../reference/AbstractTopDownSet-class.html">colData</a></span><span class="op">(</span><span class="va">myoglobin</span><span class="op">)</span><span class="op">[</span><span class="va">foi</span><span class="op">]</span><span class="op">)</span>
 
 <span class="co">## set NA to zero</span>
-<span class="no">rfTable</span>[<span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(<span class="no">rfTable</span>)] <span class="kw">&lt;-</span> <span class="fl">0</span>
+<span class="va">rfTable</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">rfTable</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span>
 
-<span class="no">rfTable</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span>(
-    <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span>(<span class="no">rfTable</span>),
-    <span class="kw">Fragments</span> <span class="kw">=</span> <span class="no">nFragments</span>
-))
+<span class="va">rfTable</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/cbind.html" class="external-link">cbind</a></span><span class="op">(</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a></span><span class="op">(</span><span class="va">rfTable</span><span class="op">)</span>,
+    Fragments <span class="op">=</span> <span class="va">nFragments</span>
+<span class="op">)</span><span class="op">)</span>
 
-<span class="no">featureImportance</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ranger/man/ranger.html">ranger</a></span>(
-    <span class="no">Fragments</span> ~ <span class="no">.</span>,
-    <span class="kw">data</span> <span class="kw">=</span> <span class="no">rfTable</span>,
-    <span class="kw">importance</span> <span class="kw">=</span> <span class="st">"impurity"</span>
-)$<span class="no">variable.importance</span>
+<span class="va">featureImportance</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ranger/man/ranger.html" class="external-link">ranger</a></span><span class="op">(</span>
+    <span class="va">Fragments</span> <span class="op">~</span> <span class="va">.</span>,
+    data <span class="op">=</span> <span class="va">rfTable</span>,
+    importance <span class="op">=</span> <span class="st">"impurity"</span>
+<span class="op">)</span><span class="op">$</span><span class="va">variable.importance</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span>(
-    <span class="no">featureImportance</span>/<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">featureImportance</span>),
-    <span class="kw">cex.names</span> <span class="kw">=</span> <span class="fl">0.7</span>
-)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span>
+    <span class="va">featureImportance</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">featureImportance</span><span class="op">)</span>,
+    cex.names <span class="op">=</span> <span class="fl">0.7</span>
+<span class="op">)</span></code></pre></div>
 <p><img src="analysis_files/figure-html/randomForest-1.png" width="700"></p>
 <p>The two parameters having the lowest overall impact in the <code>myoglobin</code> dataset across all conditions are ETD reagent target (<code>EtdReagentTarget</code>), CID activation energy (<code>CidActivation</code>) and AGC target (<code>AgcTarget</code>), while ETD reaction energy (<code>EtdActivation</code>) and HCD activation energy (<code>HcdActivation</code>) demonstrate the highest overall impact.</p>
 </div>
 <div id="combining-fragmentation-conditions-to-maximize-coverage" class="section level2">
 <h2 class="hasAnchor">
-<a href="#combining-fragmentation-conditions-to-maximize-coverage" class="anchor"></a>Combining Fragmentation Conditions to Maximize Coverage</h2>
+<a href="#combining-fragmentation-conditions-to-maximize-coverage" class="anchor" aria-hidden="true"></a>Combining Fragmentation Conditions to Maximize Coverage</h2>
 <p>The purpose of <code>topdownr</code> is to investigate how maximum coverage with high intensity fragments can be achieved with minimal instrument time. Therefore <code>topdownr</code> reports the best combination of fragmentation conditions (with user specified number of conditions) that covers the highest number of different bonds.</p>
 <p>Different fragmentation methods predominantly generate different types of fragments (e.g. b and y for HCD and CID, c and z for ETD, a and x for UVPD).</p>
 <p>However N-terminal (a, b and c) as well as C-terminal (x, y and z) fragments originating from the same bond, cover the same number of amino acid sidechains. Hence different types of N-terminal (a, b and c) or C-terminal (x, y and z) fragments from the same bond add no extra sequence information.</p>
 <p>Before we compute combinations all the fragments are converted to either N- or C-terminal, as shown in the image below.</p>
 <div class="figure">
-<img src="images/ncb.svg" alt="Schema of N-/C-terminal fragments or bidirectional"><p class="caption">Schema of N-/C-terminal fragments or bidirectional</p>
+<img src="images/ncb.svg" alt=""><p class="caption">Schema of N-/C-terminal fragments or bidirectional</p>
 </div>
 <p>In <code>topdownr</code> we convert the <code>TopDownSet</code> into an <code>NCBSet</code> object (<em>N</em>-terminal/<em>C</em>-terminal/<em>B</em>idirectional).</p>
-<div class="sourceCode" id="cb50"><html><body><pre class="r"><span class="no">myoglobinNcb</span> <span class="kw">&lt;-</span> <span class="fu">as</span>(<span class="no">myoglobin</span>, <span class="st">"NCBSet"</span>)
-<span class="no">myoglobinNcb</span></pre></body></html></div>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">myoglobinNcb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/methods/as.html" class="external-link">as</a></span><span class="op">(</span><span class="va">myoglobin</span>, <span class="st">"NCBSet"</span><span class="op">)</span>
+<span class="va">myoglobinNcb</span></code></pre></div>
 <pre><code>## NCBSet object (2.07 Mb)
 ## - - - Protein data - - -
 ## Amino acid sequence (153): GLSDGEWQQVLNVWGKVEADIAGHGQ...GAMTKALELFRNDIAAKYKELGFQG 
@@ -754,18 +761,19 @@ $txt
 ## - - - Assay data - - -
 ## Size of array: 152x1852 (24.71% != 0)
 ## - - - Processing information - - -
-## [2020-08-16 21:31:35] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
-## [2020-08-16 21:31:35] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
-## [2020-08-16 21:31:36] Recalculate median injection time based on: Mz, AgcTarget.
-## [2020-08-16 21:31:37] Subsetted 368296 fragments [1216;5882] to 252897 fragments [1216;3696].
-## [2020-08-16 21:31:37] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 252897 fragments [1216;3696].
-## [2020-08-16 21:31:38] 37328 fragments with CV &gt; 30% filtered; 215569 fragments [1216;3696].
-## [2020-08-16 21:31:38] 75086 intensity values &lt; 0.1 (relative) filtered; 140483 fragments [1216;3696].
-## [2020-08-16 21:31:39] Aggregated 140483 fragments [1216;3696] to 89230 fragments [1216;1852].
-## [2020-08-16 21:31:40] Coerced TopDownSet into an NCBSet object; 69554 fragments [152;1852].</code></pre>
+## [2021-07-27 21:29:02] 368296 fragments [1216;5882] matched (tolerance: 5 ppm, strategies ion/fragment: remove/remove).
+## [2021-07-27 21:29:02] Condition names updated based on: Mz, AgcTarget, EtdReagentTarget, EtdActivation, CidActivation, HcdActivation. Order of conditions changed. 1852 conditions.
+## [2021-07-27 21:29:02] Recalculate median injection time based on: Mz, AgcTarget.
+## [2021-07-27 21:29:04] Subsetted 368296 fragments [1216;5882] to 252897 fragments [1216;3696].
+## [2021-07-27 21:29:04] 2186 scans filtered with injection time deviation &gt;= 1.58496250072116 or rank &gt;= 3; 252897 fragments [1216;3696].
+## [2021-07-27 21:29:05] 37328 fragments with CV &gt; 30% filtered; 215569 fragments [1216;3696].
+## [2021-07-27 21:29:06] 75086 intensity values &lt; 0.1 (relative) filtered; 140483 fragments [1216;3696].
+## [2021-07-27 21:29:06] Aggregated 140483 fragments [1216;3696] to 89230 fragments [1216;1852].
+## [2021-07-27 21:29:07] Coerced TopDownSet into an NCBSet object; 69554 fragments [152;1852].</code></pre>
 <p>An <code>NCBSet</code> is very similar to a <code>TopDownSet</code> but instead of an <code>FragmentViews</code> the <code>rowViews</code> are an <code>XStringViews</code> for the former. Another difference is that the <code>NCBSet</code> has one row per bond instead one row per fragment. Also the <code>assayData</code> contains no intensity information but a <code>1</code> for an <em>N</em>-terminal, a <code>2</code> for a <em>C</em>-terminal and a <code>3</code> for bidirectional fragments.</p>
 <p>The <code>NCBSet</code> can be used to select the combination of conditions that provide the best fragment coverage. While computing coverage <code>topdownr</code> awards 1 point for every fragment going from every bond in either <em>N</em> or <em>C</em> directions. This means that bonds covered in both directions increase the score of a condition by 2 points. For the myoglobin fragmentation example we get the following table for the best three conditions:</p>
-<div class="sourceCode" id="cb52"><html><body><pre class="r"><span class="fu"><a href="../reference/NCBSet-class.html">bestConditions</a></span>(<span class="no">myoglobinNcb</span>, <span class="kw">n</span><span class="kw">=</span><span class="fl">3</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/NCBSet-class.html">bestConditions</a></span><span class="op">(</span><span class="va">myoglobinNcb</span>, n<span class="op">=</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
 <pre><code>##                                         Index FragmentsAddedToCombination
 ## C0893.10_1.0e+06_1.0e+06_05.00_14_00_1   1049                         143
 ## C1211.70_1.0e+05_0.0e+00_00.00_28_00_05  1431                          62
@@ -785,21 +793,22 @@ $txt
 </div>
 <div id="building-a-fragmentation-map" class="section level2">
 <h2 class="hasAnchor">
-<a href="#building-a-fragmentation-map" class="anchor"></a>Building a Fragmentation Map</h2>
+<a href="#building-a-fragmentation-map" class="anchor" aria-hidden="true"></a>Building a Fragmentation Map</h2>
 <p>Fragmentation maps allow visualising the type of fragments produced by fragmentation conditions and their overall distribution along the protein backbone. It also illustrates how the combination of conditions results in a cumulative increase in fragment coverage. Shown below is a fragmentation map for myoglobin <em>m/z</em> 707.3, AGC target <code>1e6</code> and ETD reagent target of <code>1e7</code> for ETD (plotting more conditions is not practical for the vignette):</p>
-<div class="sourceCode" id="cb54"><html><body><pre class="r"><span class="no">sel</span> <span class="kw">&lt;-</span>
-    <span class="no">myoglobinNcb</span>$<span class="no">Mz</span> <span class="kw">==</span> <span class="fl">707.3</span> <span class="kw">&amp;</span>
-    <span class="no">myoglobinNcb</span>$<span class="no">AgcTarget</span> <span class="kw">==</span> <span class="fl">1e6</span> <span class="kw">&amp;</span>
-    (<span class="no">myoglobinNcb</span>$<span class="no">EtdReagentTarget</span> <span class="kw">==</span> <span class="fl">1e7</span> <span class="kw">&amp;</span>
-     !<span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(<span class="no">myoglobinNcb</span>$<span class="no">EtdReagentTarget</span>))
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sel</span> <span class="op">&lt;-</span>
+    <span class="va">myoglobinNcb</span><span class="op">$</span><span class="va">Mz</span> <span class="op">==</span> <span class="fl">707.3</span> <span class="op">&amp;</span>
+    <span class="va">myoglobinNcb</span><span class="op">$</span><span class="va">AgcTarget</span> <span class="op">==</span> <span class="fl">1e6</span> <span class="op">&amp;</span>
+    <span class="op">(</span><span class="va">myoglobinNcb</span><span class="op">$</span><span class="va">EtdReagentTarget</span> <span class="op">==</span> <span class="fl">1e7</span> <span class="op">&amp;</span>
+     <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">myoglobinNcb</span><span class="op">$</span><span class="va">EtdReagentTarget</span><span class="op">)</span><span class="op">)</span>
 
-<span class="no">myoglobinNcbSub</span> <span class="kw">&lt;-</span> <span class="no">myoglobinNcb</span>[, <span class="no">sel</span>]
+<span class="va">myoglobinNcbSub</span> <span class="op">&lt;-</span> <span class="va">myoglobinNcb</span><span class="op">[</span>, <span class="va">sel</span><span class="op">]</span>
 
-<span class="fu"><a href="../reference/NCBSet-class.html">fragmentationMap</a></span>(
-    <span class="no">myoglobinNcbSub</span>,
-    <span class="kw">nCombinations</span> <span class="kw">=</span> <span class="fl">10</span>,
-    <span class="kw">labels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(<span class="no">myoglobinNcbSub</span>))
-)</pre></body></html></div>
+<span class="fu"><a href="../reference/NCBSet-class.html">fragmentationMap</a></span><span class="op">(</span>
+    <span class="va">myoglobinNcbSub</span>,
+    nCombinations <span class="op">=</span> <span class="fl">10</span>,
+    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">myoglobinNcbSub</span><span class="op">)</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
 <pre><code>## Warning: Raster pixels are placed at uneven vertical intervals and will be
 ## shifted. Consider using geom_tile() instead.</code></pre>
 <p><img src="analysis_files/figure-html/fragmentationMap-1.png" width="700"></p>
@@ -807,67 +816,72 @@ $txt
 </div>
 <div id="session-information" class="section level1">
 <h1 class="hasAnchor">
-<a href="#session-information" class="anchor"></a>Session Information</h1>
-<div class="sourceCode" id="cb56"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span>()</pre></body></html></div>
-<pre><code>## R version 4.0.0 (2020-04-24)
+<a href="#session-information" class="anchor" aria-hidden="true"></a>Session Information</h1>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre><code>## R version 4.1.0 (2021-05-18)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 14.04.5 LTS
+## Running under: Ubuntu 20.04.2 LTS
 ## 
 ## Matrix products: default
-## BLAS:   /home/travis/R-bin/lib/R/lib/libRblas.so
-## LAPACK: /home/travis/R-bin/lib/R/lib/libRlapack.so
+## BLAS/LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.8.so
 ## 
 ## locale:
 ##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
 ##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
-##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=C             
 ##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
 ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 ## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 ## 
 ## attached base packages:
-## [1] stats4    parallel  stats     graphics  grDevices utils     datasets 
-## [8] methods   base     
+## [1] stats4    stats     graphics  grDevices utils     datasets  methods  
+## [8] base     
 ## 
 ## other attached packages:
-##  [1] ggplot2_3.3.2       ranger_0.12.1       topdownrdata_1.7.0 
-##  [4] topdownr_1.9.4      Biostrings_2.57.2   XVector_0.29.3     
-##  [7] IRanges_2.23.10     S4Vectors_0.27.12   ProtGenerics_1.21.0
-## [10] BiocGenerics_0.35.4 BiocStyle_2.17.0   
+##  [1] ggplot2_3.3.5       ranger_0.13.1       topdownrdata_1.7.0 
+##  [4] topdownr_1.15.1     Biostrings_2.61.1   GenomeInfoDb_1.29.3
+##  [7] XVector_0.33.0      IRanges_2.27.0      S4Vectors_0.31.0   
+## [10] ProtGenerics_1.25.1 BiocGenerics_0.39.1 BiocStyle_2.21.3   
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_1.0.5            lattice_0.20-41       assertthat_0.2.1     
-##  [4] rprojroot_1.3-2       digest_0.6.25         foreach_1.5.0        
-##  [7] R6_2.4.1              plyr_1.8.6            backports_1.1.8      
-## [10] mzID_1.27.0           evaluate_0.14         highr_0.8            
-## [13] pillar_1.4.6          zlibbioc_1.35.0       rlang_0.4.7          
-## [16] Matrix_1.2-18         preprocessCore_1.51.0 rmarkdown_2.3        
-## [19] mzR_2.23.0            pkgdown_1.5.1         labeling_0.3         
-## [22] desc_1.2.0            BiocParallel_1.23.2   stringr_1.4.0        
-## [25] munsell_0.5.0         compiler_4.0.0        xfun_0.16            
-## [28] pkgconfig_2.0.3       pcaMethods_1.81.0     htmltools_0.5.0      
-## [31] tibble_3.0.3          bookdown_0.20         codetools_0.2-16     
-## [34] XML_3.99-0.5          withr_2.2.0           crayon_1.3.4         
-## [37] MASS_7.3-51.5         grid_4.0.0            gtable_0.3.0         
-## [40] lifecycle_0.2.0       affy_1.67.0           magrittr_1.5         
-## [43] scales_1.1.1          ncdf4_1.17            stringi_1.4.6        
-## [46] impute_1.63.0         farver_2.0.3          fs_1.5.0             
-## [49] affyio_1.59.0         doParallel_1.0.15     limma_3.45.10        
-## [52] ellipsis_0.3.1        vctrs_0.3.2           iterators_1.0.12     
-## [55] tools_4.0.0           Biobase_2.49.0        MSnbase_2.15.3       
-## [58] glue_1.4.1            yaml_2.2.1            colorspace_1.4-1     
-## [61] BiocManager_1.30.10   vsn_3.57.0            MALDIquant_1.19.3    
-## [64] memoise_1.1.0         knitr_1.29</code></pre>
+##  [1] Biobase_2.53.0         sass_0.4.0             vsn_3.61.0            
+##  [4] foreach_1.5.1          jsonlite_1.7.2         bslib_0.2.5.1         
+##  [7] highr_0.9              BiocManager_1.30.16    affy_1.71.0           
+## [10] GenomeInfoDbData_1.2.6 yaml_2.2.1             impute_1.67.0         
+## [13] pillar_1.6.1           lattice_0.20-44        glue_1.4.2            
+## [16] limma_3.49.1           digest_0.6.27          colorspace_2.0-2      
+## [19] Matrix_1.3-4           htmltools_0.5.1.1      preprocessCore_1.55.2 
+## [22] plyr_1.8.6             MALDIquant_1.19.3      XML_3.99-0.6          
+## [25] pkgconfig_2.0.3        bookdown_0.22          zlibbioc_1.39.0       
+## [28] scales_1.1.1           affyio_1.63.1          BiocParallel_1.27.2   
+## [31] tibble_3.1.3           farver_2.1.0           ellipsis_0.3.2        
+## [34] withr_2.4.2            cachem_1.0.5           magrittr_2.0.1        
+## [37] crayon_1.4.1           memoise_2.0.0          evaluate_0.14         
+## [40] fs_1.5.0               ncdf4_1.17             fansi_0.5.0           
+## [43] doParallel_1.0.16      MASS_7.3-54            mzR_2.27.1            
+## [46] textshaping_0.3.5      tools_4.1.0            lifecycle_1.0.0       
+## [49] stringr_1.4.0          MSnbase_2.19.1         munsell_0.5.0         
+## [52] cluster_2.1.2          pcaMethods_1.85.0      compiler_4.1.0        
+## [55] pkgdown_1.6.1.9001     jquerylib_0.1.4        mzID_1.31.0           
+## [58] systemfonts_1.0.2      rlang_0.4.11           grid_4.1.0            
+## [61] RCurl_1.98-1.3         iterators_1.0.13       MsCoreUtils_1.5.0     
+## [64] labeling_0.4.2         bitops_1.0-7           rmarkdown_2.9         
+## [67] gtable_0.3.0           codetools_0.2-18       R6_2.5.0              
+## [70] knitr_1.33             fastmap_1.1.0          utf8_1.2.2            
+## [73] clue_0.3-59            rprojroot_2.0.2        ragg_1.1.3            
+## [76] desc_1.3.0             stringi_1.7.3          parallel_4.1.0        
+## [79] Rcpp_1.0.7             vctrs_0.3.8            xfun_0.24</code></pre>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h1>
-<div id="refs" class="references">
-<div id="ref-SummarizedExperiment">
-<p>Morgan, Martin, Valerie Obenchain, Jim Hester, and Hervé Pagès. 2017. <em>SummarizedExperiment: SummarizedExperiment Container</em>.</p>
+<a href="#references" class="anchor" aria-hidden="true"></a>References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-SummarizedExperiment" class="csl-entry">
+Morgan, Martin, Valerie Obenchain, Jim Hester, and Hervé Pagès. 2017. <em>SummarizedExperiment: SummarizedExperiment Container</em>.
 </div>
-<div id="ref-ranger">
-<p>Wright, Marvin N., and Andreas Ziegler. 2017. “ranger: A Fast Implementation of Random Forests for High Dimensional Data in C++ and R.” <em>Journal of Statistical Software</em> 77 (1): 1–17. <a href="https://doi.org/10.18637/jss.v077.i01" class="uri">https://doi.org/10.18637/jss.v077.i01</a>.</p>
+<div id="ref-ranger" class="csl-entry">
+Wright, Marvin N., and Andreas Ziegler. 2017. <span>“<span class="nocase">ranger</span>: A Fast Implementation of Random Forests for High Dimensional Data in <span>C++</span> and <span>R</span>.”</span> <em>Journal of Statistical Software</em> 77 (1): 1–17. <a href="https://doi.org/10.18637/jss.v077.i01" class="external-link">https://doi.org/10.18637/jss.v077.i01</a>.
 </div>
 </div>
 </div>
@@ -884,11 +898,13 @@ $txt
 
 
       <footer><div class="copyright">
-  <p>Developed by Sebastian Gibb, Pavel Shliaha, Ole Nørregaard Jensen.</p>
+  <p></p>
+<p>Developed by Sebastian Gibb, Pavel Shliaha, Ole Nørregaard Jensen.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9001.</p>
 </div>
 
       </footer>
@@ -896,6 +912,8 @@ $txt
 
   
 
+
+  
 
   </body>
 </html>

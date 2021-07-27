@@ -47,6 +47,8 @@ MethodModification.xml file." />
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -58,9 +60,15 @@ MethodModification.xml file." />
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -74,19 +82,13 @@ MethodModification.xml file." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">topdownr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.9.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.15.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -111,7 +113,7 @@ MethodModification.xml file." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/sgibb/topdownr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -139,15 +141,15 @@ It ensures that just arguments are applied that yield a valid
 MethodModification.xml file.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>expandMs1Conditions</span>(<span class='no'>...</span>, <span class='kw'>family</span> <span class='kw'>=</span> <span class='st'>"Calcium"</span>, <span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"3.2"</span>)
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>expandMs1Conditions</span><span class='op'>(</span><span class='va'>...</span>, family <span class='op'>=</span> <span class='st'>"Calcium"</span>, version <span class='op'>=</span> <span class='st'>"3.2"</span><span class='op'>)</span>
 
-<span class='fu'>expandTms2Conditions</span>(
-  <span class='kw'>ActivationType</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"CID"</span>, <span class='st'>"HCD"</span>, <span class='st'>"ETD"</span>, <span class='st'>"UVPD"</span>),
-  <span class='no'>...</span>,
-  <span class='kw'>MassList</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>family</span> <span class='kw'>=</span> <span class='st'>"Calcium"</span>,
-  <span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"3.2"</span>
-)</pre>
+<span class='fu'>expandTms2Conditions</span><span class='op'>(</span>
+  ActivationType <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/S4Vectors/man/Vector-class.html'>c</a></span><span class='op'>(</span><span class='st'>"CID"</span>, <span class='st'>"HCD"</span>, <span class='st'>"ETD"</span>, <span class='st'>"UVPD"</span><span class='op'>)</span>,
+  <span class='va'>...</span>,
+  MassList <span class='op'>=</span> <span class='cn'>NULL</span>,
+  family <span class='op'>=</span> <span class='st'>"Calcium"</span>,
+  version <span class='op'>=</span> <span class='st'>"3.2"</span>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -183,57 +185,61 @@ or <code>NULL</code> (default) to not overwrite targeted mass.</p></td>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='validMsSettings.html'>validMs1Settings()</a></code></p>
-<p><code><a href='validMsSettings.html'>validTms2Settings()</a></code>, <code><a href='https://rdrr.io/r/base/expand.grid.html'>expand.grid()</a></code></p></div>
+<p><code><a href='validMsSettings.html'>validTms2Settings()</a></code>, <code><a href='https://rdrr.io/pkg/S4Vectors/man/Vector-class.html'>expand.grid()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>expandMs1Conditions</span>(<span class='kw'>FirstMass</span><span class='kw'>=</span><span class='fl'>100</span>, <span class='kw'>LastMass</span><span class='kw'>=</span><span class='fl'>400</span>)</div><div class='output co'>#&gt;   FirstMass LastMass
-#&gt; 1       100      400</div><div class='input'><span class='fu'>expandTms2Conditions</span>(
-     <span class='kw'>ActivationType</span><span class='kw'>=</span><span class='st'>"CID"</span>,
-     <span class='kw'>OrbitrapResolution</span><span class='kw'>=</span><span class='st'>"R120K"</span>,
-     <span class='kw'>IsolationWindow</span><span class='kw'>=</span><span class='fl'>1</span>,
-     <span class='kw'>MaxITTimeInMS</span><span class='kw'>=</span><span class='fl'>200</span>,
-     <span class='kw'>Microscans</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span>(<span class='fl'>40</span>),
-     <span class='kw'>AgcTarget</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1e5</span>, <span class='fl'>5e5</span>, <span class='fl'>1e6</span>),
-     <span class='kw'>CIDCollisionEnergy</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>7</span>, <span class='fl'>35</span>, <span class='fl'>7</span>)),
-     <span class='kw'>MassList</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='kw'>mz</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>560.6</span>, <span class='fl'>700.5</span>, <span class='fl'>933.7</span>), <span class='kw'>z</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>, <span class='fl'>3</span>))
-)</div><div class='output co'>#&gt;                   MassList ActivationType OrbitrapResolution IsolationWindow
-#&gt; 1  560.6/1 700.5/1 933.7/1            CID              R120K               1
-#&gt; 2  560.6/1 700.5/1 933.7/1            CID              R120K               1
-#&gt; 3  560.6/1 700.5/1 933.7/1            CID              R120K               1
-#&gt; 4  560.6/1 700.5/1 933.7/1            CID              R120K               1
-#&gt; 5  560.6/1 700.5/1 933.7/1            CID              R120K               1
-#&gt; 6  560.6/1 700.5/1 933.7/1            CID              R120K               1
-#&gt; 7  560.6/1 700.5/1 933.7/1            CID              R120K               1
-#&gt; 8  560.6/1 700.5/1 933.7/1            CID              R120K               1
-#&gt; 9  560.6/1 700.5/1 933.7/1            CID              R120K               1
-#&gt; 10 560.6/1 700.5/1 933.7/1            CID              R120K               1
-#&gt; 11 560.6/1 700.5/1 933.7/1            CID              R120K               1
-#&gt; 12 560.6/1 700.5/1 933.7/1            CID              R120K               1
-#&gt; 13 560.6/1 700.5/1 933.7/1            CID              R120K               1
-#&gt; 14 560.6/1 700.5/1 933.7/1            CID              R120K               1
-#&gt; 15 560.6/1 700.5/1 933.7/1            CID              R120K               1
-#&gt; 16 560.6/1 700.5/1 933.7/1            CID              R120K               1
-#&gt; 17 560.6/1 700.5/1 933.7/1            CID              R120K               1
-#&gt; 18 560.6/1 700.5/1 933.7/1            CID              R120K               1
-#&gt;    MaxITTimeInMS Microscans AgcTarget CIDCollisionEnergy
-#&gt; 1            200         40     1e+05                 NA
-#&gt; 2            200         40     5e+05                 NA
-#&gt; 3            200         40     1e+06                 NA
-#&gt; 4            200         40     1e+05                  7
-#&gt; 5            200         40     5e+05                  7
-#&gt; 6            200         40     1e+06                  7
-#&gt; 7            200         40     1e+05                 14
-#&gt; 8            200         40     5e+05                 14
-#&gt; 9            200         40     1e+06                 14
-#&gt; 10           200         40     1e+05                 21
-#&gt; 11           200         40     5e+05                 21
-#&gt; 12           200         40     1e+06                 21
-#&gt; 13           200         40     1e+05                 28
-#&gt; 14           200         40     5e+05                 28
-#&gt; 15           200         40     1e+06                 28
-#&gt; 16           200         40     1e+05                 35
-#&gt; 17           200         40     5e+05                 35
-#&gt; 18           200         40     1e+06                 35</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='fu'>expandMs1Conditions</span><span class='op'>(</span>FirstMass<span class='op'>=</span><span class='fl'>100</span>, LastMass<span class='op'>=</span><span class='fl'>400</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   FirstMass LastMass</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1       100      400</span>
+<span class='r-in'><span class='fu'>expandTms2Conditions</span><span class='op'>(</span></span>
+<span class='r-in'>     ActivationType<span class='op'>=</span><span class='st'>"CID"</span>,</span>
+<span class='r-in'>     OrbitrapResolution<span class='op'>=</span><span class='st'>"R120K"</span>,</span>
+<span class='r-in'>     IsolationWindow<span class='op'>=</span><span class='fl'>1</span>,</span>
+<span class='r-in'>     MaxITTimeInMS<span class='op'>=</span><span class='fl'>200</span>,</span>
+<span class='r-in'>     Microscans<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span><span class='op'>(</span><span class='fl'>40</span><span class='op'>)</span>,</span>
+<span class='r-in'>     AgcTarget<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/pkg/S4Vectors/man/Vector-class.html'>c</a></span><span class='op'>(</span><span class='fl'>1e5</span>, <span class='fl'>5e5</span>, <span class='fl'>1e6</span><span class='op'>)</span>,</span>
+<span class='r-in'>     CIDCollisionEnergy<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/pkg/S4Vectors/man/Vector-class.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>7</span>, <span class='fl'>35</span>, <span class='fl'>7</span><span class='op'>)</span><span class='op'>)</span>,</span>
+<span class='r-in'>     MassList<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/pkg/BiocGenerics/man/cbind.html'>cbind</a></span><span class='op'>(</span>mz<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/pkg/S4Vectors/man/Vector-class.html'>c</a></span><span class='op'>(</span><span class='fl'>560.6</span>, <span class='fl'>700.5</span>, <span class='fl'>933.7</span><span class='op'>)</span>, z<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/pkg/S4Vectors/man/Vector-class.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                   MassList ActivationType OrbitrapResolution IsolationWindow</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1  560.6/1 700.5/1 933.7/1            CID              R120K               1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2  560.6/1 700.5/1 933.7/1            CID              R120K               1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3  560.6/1 700.5/1 933.7/1            CID              R120K               1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4  560.6/1 700.5/1 933.7/1            CID              R120K               1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5  560.6/1 700.5/1 933.7/1            CID              R120K               1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6  560.6/1 700.5/1 933.7/1            CID              R120K               1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7  560.6/1 700.5/1 933.7/1            CID              R120K               1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8  560.6/1 700.5/1 933.7/1            CID              R120K               1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9  560.6/1 700.5/1 933.7/1            CID              R120K               1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10 560.6/1 700.5/1 933.7/1            CID              R120K               1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11 560.6/1 700.5/1 933.7/1            CID              R120K               1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12 560.6/1 700.5/1 933.7/1            CID              R120K               1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 13 560.6/1 700.5/1 933.7/1            CID              R120K               1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 14 560.6/1 700.5/1 933.7/1            CID              R120K               1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 15 560.6/1 700.5/1 933.7/1            CID              R120K               1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 16 560.6/1 700.5/1 933.7/1            CID              R120K               1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 17 560.6/1 700.5/1 933.7/1            CID              R120K               1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 18 560.6/1 700.5/1 933.7/1            CID              R120K               1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    MaxITTimeInMS Microscans AgcTarget CIDCollisionEnergy</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1            200         40     1e+05                 NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2            200         40     5e+05                 NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3            200         40     1e+06                 NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4            200         40     1e+05                  7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5            200         40     5e+05                  7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6            200         40     1e+06                  7</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7            200         40     1e+05                 14</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8            200         40     5e+05                 14</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9            200         40     1e+06                 14</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10           200         40     1e+05                 21</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11           200         40     5e+05                 21</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12           200         40     1e+06                 21</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 13           200         40     1e+05                 28</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 14           200         40     5e+05                 28</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 15           200         40     1e+06                 28</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 16           200         40     1e+05                 35</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 17           200         40     5e+05                 35</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 18           200         40     1e+06                 35</span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -245,11 +251,11 @@ or <code>NULL</code> (default) to not overwrite targeted mass.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Sebastian Gibb, Pavel Shliaha, Ole Nørregaard Jensen.</p>
+  <p><p>Developed by Sebastian Gibb, Pavel Shliaha, Ole Nørregaard Jensen.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -257,6 +263,8 @@ or <code>NULL</code> (default) to not overwrite targeted mass.</p></td>
 
   
 
+
+  
 
   </body>
 </html>
