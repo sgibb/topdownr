@@ -1,3 +1,13 @@
+# topdownr 1.15
+- New version for Bioc 3.15 (devel)
+
+## Changes in version 1.15.1
+- Add `rmarkdown` to `Suggests:`;
+  see https://github.com/yihui/knitr/issues/1864 for details [2021-07-27].
+
+# topdownr 1.14
+- New version for Bioc 3.14 (release)
+
 # topdownr 1.13
 - New version for Bioc 3.13 (devel)
 
