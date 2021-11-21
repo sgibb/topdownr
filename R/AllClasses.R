@@ -118,7 +118,7 @@ setClass(
     ),
     prototype=prototype(
         rowViews=new("XStringViews"),
-        colData=new("DataFrame"),
+        colData=new("DFrame"),
         assay=new("dgCMatrix"),
         files=character(),
         processing=character()),
