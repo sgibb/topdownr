@@ -1,6 +1,6 @@
 Package: topdownr
 Title: Investigation of Fragmentation Conditions in Top-Down Proteomics
-Version: 1.17.1
+Version: 1.17.2
 Authors@R: c(person("Sebastian", "Gibb", role=c("aut", "cre"),
                     email="mail@sebastiangibb.de",
                     comment=c(ORCID="0000-0001-7406-4443")),
@@ -46,6 +46,6 @@ BugReports: https://github.com/sgibb/topdownr/issues/
 LazyData: true
 VignetteBuilder: knitr
 Roxygen: list(markdown=TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 biocViews: ImmunoOncology, Infrastructure, Proteomics, MassSpectrometry, Coverage
 Encoding: UTF-8
