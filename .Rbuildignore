@@ -4,6 +4,7 @@
 ^SUPPORT\.md$
 ^\.editorconfig$
 ^\.git$
+^\.github$
 ^\.gitignore$
 ^\.lintr$
 ^\.travis.yml$
