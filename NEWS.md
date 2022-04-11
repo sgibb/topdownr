@@ -2,6 +2,7 @@
 
 ## Changes in version 1.17.3
 
+- Depending on `mzR` 2.27.5.
 - Fix unit test for `.readSpectrum` to adapt to new `mzR` 2.27.5.
 
 ## Changes in version 1.17.2

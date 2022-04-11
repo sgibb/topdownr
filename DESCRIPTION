@@ -31,7 +31,7 @@ Imports:
     Matrix (>= 1.2.10),
     MSnbase (>= 2.3.10),
     ggplot2 (>= 2.2.1),
-    mzR (>= 2.11.4)
+    mzR (>= 2.27.5)
 Suggests:
     topdownrdata (>= 0.2),
     knitr,
