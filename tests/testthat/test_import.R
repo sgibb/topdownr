@@ -172,7 +172,11 @@ test_that(".readSpectrum", {
     expect_error(.readSpectrum(f, 0L), "Invalid .* 1:351")
     expect_error(.readSpectrum(f, 1e3L), "Invalid .* 1:351")
     expect_equal(.readSpectrum(f, 1L),
-                 matrix(c(16941.06087, 18979506.00), nrow=1))
+                 matrix(
+                    c(16941.06087, 18979506.00),
+                    nrow=1, dimnames = list(c(), c("mz", "intensity"))
+                 )
+    )
 })
 
 test_that(".mergeScanConditionAndHeaderInformation", {

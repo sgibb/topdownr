@@ -1,5 +1,9 @@
 # topdownr 1.17
 
+## Changes in version 1.17.3
+
+- Fix unit test for `.readSpectrum` to adapt to new `mzR` 2.27.5.
+
 ## Changes in version 1.17.2
 
 - Fix `roxygen2` warnings.
