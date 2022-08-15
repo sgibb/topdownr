@@ -85,12 +85,12 @@ location on a sequence, an
 }
 \section{Functions}{
 \itemize{
-\item \code{FragmentViews}: Constructor
+\item \code{FragmentViews()}: Constructor
 
 In general it is not necessary to call the constructor manually. See
 \code{\link[=readTopDownFiles]{readTopDownFiles()}} instead.
-}}
 
+}}
 \section{Coercion}{
 
 

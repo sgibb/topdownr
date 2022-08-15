@@ -103,7 +103,7 @@ for a detailed example how to work with
 }
 \section{Methods (by generic)}{
 \itemize{
-\item \code{aggregate}: Aggregate conditions/runs.
+\item \code{aggregate(TopDownSet)}: Aggregate conditions/runs.
 
 Aggregates conditions/runs (columns) in an
 \linkS4class{TopDownSet} object
@@ -115,7 +115,7 @@ It combines intensity values and numeric metadata of the grouped
 conditions/runs (columns) by \code{mean} and returns a reduced
 \linkS4class{TopDownSet} object.
 
-\item \code{combine}: Combine \code{TopDownSet} objects.
+\item \code{combine(x = TopDownSet, y = TopDownSet)}: Combine \code{TopDownSet} objects.
 
 \code{combine} allows to combine two or more \code{TopDownSet} objects.
 Please note that it uses the default
@@ -126,7 +126,7 @@ after \code{combine} by calling \code{\link[=updateConditionNames]{updateConditi
 \code{sampleColumns} argument) and \code{\link[=updateMedianInjectionTime]{updateMedianInjectionTime()}} (with modified
 \code{by} argument).
 
-\item \code{filterCv}: Filter by CV.
+\item \code{filterCv(TopDownSet)}: Filter by CV.
 
 Filtering is done by coefficient of variation across technical replicates
 (defined by the \code{by} argument).
@@ -134,43 +134,43 @@ All fragments below a given \code{threshold}
 are removed. The \code{threshold} is the maximal allowed CV in percent
 (\code{sd/mean * 100 < threshold}).
 
-\item \code{filterInjectionTime}: Filter by ion injection time.
+\item \code{filterInjectionTime(TopDownSet)}: Filter by ion injection time.
 
 Filtering is done by maximal allowed deviation and just the technical
 \code{keepTopN} replicates with the lowest deviation from the median ion
 injection time are kept.
 
-\item \code{filterIntensity}: Filter by intensity.
+\item \code{filterIntensity(TopDownSet)}: Filter by intensity.
 
 Filtering is done by removing all fragments that are below a given
 (absolute/relative) intensity \code{threshold}.
 
-\item \code{filterNonReplicatedFragments}: Filter by non-replicated fragments.
+\item \code{filterNonReplicatedFragments(TopDownSet)}: Filter by non-replicated fragments.
 
 Filtering is done by removing all fragments that don't replicate across
 technical replicates.
 
-\item \code{normalize}: Normalise.
+\item \code{normalize(TopDownSet)}: Normalise.
 
 Applies \emph{T}otal \emph{I}on \emph{C}urrent normalisation to a
 \linkS4class{TopDownSet} object.
 The normalisation ist done per scans/conditions (column-wise normalisation).
 
-\item \code{plot}: Plotting.
+\item \code{plot(x = TopDownSet, y = missing)}: Plotting.
 
 Plots an \linkS4class{TopDownSet} object. The function returns a \code{list}
 of \code{ggplot} objects (one item per condtion).
 Use \code{pdf} or another non-interactive device to plot the list of \code{ggplot}
 objects (see example section).
 
-\item \code{summary}: Summary statistics.
+\item \code{summary(TopDownSet)}: Summary statistics.
 
 Returns a \code{matrix}
 with some statistics: number of fragments,
 total/min/first quartile/median/mean/third quartile/maximum of
 intensity values.
-}}
 
+}}
 \section{Slots}{
 
 \describe{

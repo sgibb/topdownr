@@ -76,7 +76,7 @@ and/or bidirectional fragments (encoded as \code{3}).
 }
 \section{Methods (by generic)}{
 \itemize{
-\item \code{bestConditions}: Best combination of conditions.
+\item \code{bestConditions(NCBSet)}: Best combination of conditions.
 
 Finds the best combination of conditions for highest coverage of fragments or
 bonds. If there are two (or more conditions) that would add the same number
@@ -92,7 +92,7 @@ or bonds in the condition (\code{FragmentsInCondition}, \code{BondsInCondition})
 the cumulative coverage fragments or bonds (\code{FragmentCoverage},
 \code{BondCoverage}).
 
-\item \code{fragmentationMap}: Plot fragmentation map.
+\item \code{fragmentationMap(NCBSet)}: Plot fragmentation map.
 
 Plots a fragmentation map of the Protein.
 Use \code{nCombinations} to add another
@@ -100,13 +100,13 @@ plot with \code{nCombinations} combined conditions.
 If \code{cumCoverage} is \code{TRUE} (default)
 these combinations increase the coverage cumulatively.
 
-\item \code{summary}: Summary statistics.
+\item \code{summary(NCBSet)}: Summary statistics.
 
 Returns a \code{matrix} with some statistics: number of fragments,
 total/min/first quartile/median/mean/third quartile/maximum of intensity
 values.
-}}
 
+}}
 \section{Slots}{
 
 \describe{

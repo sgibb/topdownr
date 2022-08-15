@@ -23,7 +23,9 @@ dataset available in
 }
 \details{
 It was created as
-follows:\preformatted{tds <- readTopDownFiles(
+follows:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{tds <- readTopDownFiles(
    topdownrdata::topDownDataPath("myoglobin"),
    ## Use an artifical pattern to load just the fasta
    ## file and files from m/z == 1211, ETD reagent
@@ -34,6 +36,6 @@ follows:\preformatted{tds <- readTopDownFiles(
    neutralLoss=MSnbase::defaultNeutralLoss(
        disableWaterLoss=c("Cterm", "D", "E", "S", "T")),
    tolerance=25e-6)
-}
+}\if{html}{\out{</div>}}
 }
 \keyword{datasets}

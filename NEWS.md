@@ -1,3 +1,12 @@
+# topdownr 1.19
+
+## Changes in version 1.19.1
+- New version for Bioc 3.17 (devel)
+- Rerun latest roxygen2
+
+# topdownr 1.18
+- New version for Bioc 3.14 (release)
+
 # topdownr 1.17
 
 ## Changes in version 1.17.3

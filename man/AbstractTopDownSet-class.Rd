@@ -131,7 +131,7 @@ child class.
 }
 \section{Methods (by generic)}{
 \itemize{
-\item \code{[}: Subset operator.
+\item \code{x[i}: Subset operator.
 
 For \code{i} \code{numeric}, \code{logical} or \code{character} vectors or empty
 (missing) or \code{NULL} are supported.
@@ -145,12 +145,12 @@ or names of the bonds (e.g. \code{c("bond001")}) for
 \code{j} could be a \code{numeric} or \code{logical} vector
 and subsetting is done on the condition/run (column) level.
 
-\item \code{[[}: Subset operator.
+\item \code{x[[i}: Subset operator.
 
 \code{i} could be a \code{numeric} or \code{logical} vector and
 subsetting is done on the condition/run (column) level.
 
-\item \code{[[<-}: Setter for a column in the \code{colData} slot.
+\item \code{`[[`(x = AbstractTopDownSet, i = ANY, j = missing) <- value}: Setter for a column in the \code{colData} slot.
 
 The \verb{[[<-} operator is used to add/replace
 a single column of the \code{colData} \code{DataFrame}.
@@ -161,30 +161,30 @@ The \code{$} simplifies the accession of a single column
 of the \code{colData}.
 It is identical to the \code{[[} operator.
 
-\item \code{$<-}: Setter for a column in the \code{colData} slot.
+\item \code{`$`(AbstractTopDownSet) <- value}: Setter for a column in the \code{colData} slot.
 
 The \verb{$<-} operator is used to add/replace a single column
 of the \code{colData} \code{DataFrame}.
 It is identical to the \verb{[[<-} operator.
 
-\item \code{assayData}: Accessor for the \code{assay} slot.
+\item \code{assayData(AbstractTopDownSet)}: Accessor for the \code{assay} slot.
 
 Returns a \link[Matrix:dgCMatrix-class]{Matrix::dgCMatrix} that stores the
 intensity/coverage information of \linkS4class{AbstractTopDownSet}
 object.
 
-\item \code{colData}: Accessor for the \code{colData} slot.
+\item \code{colData(AbstractTopDownSet)}: Accessor for the \code{colData} slot.
 
 Returns a \link[S4Vectors:DataFrame-class]{S4Vectors::DataFrame} that stores
 metadata for the conditons/runs (columns) of the
 \linkS4class{AbstractTopDownSet} object.
 
-\item \code{colData<-}: Setter for the \code{colData} slot.
+\item \code{colData(AbstractTopDownSet) <- value}: Setter for the \code{colData} slot.
 
 Replaces metadata for the conditons/runs (columns) of the
 \linkS4class{AbstractTopDownSet} object.
 
-\item \code{combine}: Combine \code{AbstractTopDownSet} objects.
+\item \code{combine(x = AbstractTopDownSet, y = AbstractTopDownSet)}: Combine \code{AbstractTopDownSet} objects.
 
 \code{combine} allows to combine two or more \code{AbstractTopDownSet} objects.
 Please note that it uses the default
@@ -195,35 +195,35 @@ after \code{combine} by calling \code{\link[=updateConditionNames]{updateConditi
 \code{sampleColumns} argument) and \code{\link[=updateMedianInjectionTime]{updateMedianInjectionTime()}} (with modified
 \code{by} argument).
 
-\item \code{conditionData}: Accessor for the \code{colData} slot.
+\item \code{conditionData(AbstractTopDownSet)}: Accessor for the \code{colData} slot.
 
 An alias for \code{colData}.
 
-\item \code{conditionData<-}: Setter for the \code{colData} slot.
+\item \code{conditionData(AbstractTopDownSet) <- value}: Setter for the \code{colData} slot.
 
 An alias for \verb{colData<-}.
 
-\item \code{conditionNames}: Accessor for condition names.
+\item \code{conditionNames(AbstractTopDownSet)}: Accessor for condition names.
 
 Returns a \code{character} with names for the conditions/runs (columns).
 
-\item \code{dim}: Accessor for dimensions.
+\item \code{dim(AbstractTopDownSet)}: Accessor for dimensions.
 
 Returns a \code{numeric} with number of fragments/bonds (rows) and
 conditions/runs (columns).
 
-\item \code{dimnames}: Accessor for dimension names.
+\item \code{dimnames(AbstractTopDownSet)}: Accessor for dimension names.
 
 Returns a \code{list} with names for the fragments/bonds (rows) and for the
 conditions/runs (columns).
 
-\item \code{removeEmptyConditions}: Remove empty conditions/runs.
+\item \code{removeEmptyConditions(AbstractTopDownSet)}: Remove empty conditions/runs.
 
 Removes conditions/runs (columns) without any intensity/coverage
 information from the \linkS4class{AbstractTopDownSet} object.
 It returns a modified \linkS4class{AbstractTopDownSet} object.
 
-\item \code{rowViews}: Accessor for the \code{rowViews} slot.
+\item \code{rowViews(AbstractTopDownSet)}: Accessor for the \code{rowViews} slot.
 
 Depending on the implementation it returns an
 \linkS4class{FragmentViews} object for
@@ -231,28 +231,28 @@ Depending on the implementation it returns an
 or an \link[Biostrings:XStringViews-class]{Biostrings::XStringViews} object for
 \linkS4class{NCBSet} objects.
 
-\item \code{summary}: Summary statistics.
+\item \code{summary(AbstractTopDownSet)}: Summary statistics.
 
 Returns a \code{matrix} with some statistics: number of fragments,
 total/min/first quartile/median/mean/third quartile/maximum of intensity
 values.
 
-\item \code{updateConditionNames}: Update condition names.
+\item \code{updateConditionNames(AbstractTopDownSet)}: Update condition names.
 
 Updates condition names based on \code{sampleColumns} from
 \code{conditionData}/\code{colData}. Columns with just identical entries are ignored.
 This method will create/update the \code{colData(object)$Sample} column that
 identifies technical replicates and could be used in other methods.
 
-\item \code{updateMedianInjectionTime}: Update median ion injection times.
+\item \code{updateMedianInjectionTime(AbstractTopDownSet)}: Update median ion injection times.
 
 Recalculates median ion injection times by a user given grouping variable
 (default: Mz, AgcTarget). This is useful if you acquire new data and the ion
 injection time differs across the runs. Use the \code{by} argument to provide a
 \code{list}/\code{data.frame} of grouping variables, e.g.
 \code{by=colData(object)[, c("Mz", "AgcTarget", "File")]}.
-}}
 
+}}
 \section{Slots}{
 
 \describe{
