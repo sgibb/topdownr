@@ -2,7 +2,9 @@
 
 ## Changes in version 1.19.1
 - New version for Bioc 3.17 (devel)
-- Rerun latest roxygen2
+- Rerun latest `roxygen2`.
+- Remove `if (getGeneric(...))` statements in `AllGenerics.R` do avoid problems
+  while reloading the package.
 
 # topdownr 1.18
 - New version for Bioc 3.14 (release)
