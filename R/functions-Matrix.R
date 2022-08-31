@@ -91,8 +91,8 @@
 #'
 #' Used for visualization in the `fragmentationMap`
 #'
-#' @param x `dgcMatrix`
-#' @return `dgcMatrix`
+#' @param x `dgCMatrix`
+#' @return `dgCMatrix`
 #' @noRd
 .cumComb <- function(x) {
     stopifnot(is(x, "dgCMatrix") || is.matrix(x))
@@ -117,7 +117,7 @@
 #' @param x `dgCMatrix`
 #' @return `data.frame`
 #' @noRd
-.dgcMatrix2data.frame <- function(x) {
+.dgCMatrix2data.frame <- function(x) {
     data.frame(row=.row(x), col=.col(x), x=x@x, stringsAsFactors=FALSE)
 }
 

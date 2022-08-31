@@ -62,17 +62,17 @@ test_that(".cumComb", {
     a2 <- sparseMatrix(i=c(1:3),
                        j=rep(1, 3),
                        x=c(1, 2, 3))
-    expect_error(.cumComb(1:10))
+    expect_error(.cumComb(1:10), "is not of class 'dgCMatrix'")
     expect_equal(.cumComb(a), r)
     expect_equal(.cumComb(a2), a2)
 })
 
-test_that(".dgcMatrix2data.frame", {
+test_that(".dgCMatrix2data.frame", {
     d <- data.frame(row=c(rep(c(1, 3), 5), rep(c(2, 4), 5)),
                     col=rep(1:10, each=2), x=rep(1:10, each=2) + c(0, 10),
                     stringsAsFactors=FALSE)
-    expect_error(.dgcMatrix2data.frame(matrix(1:10, nrow=2)))
-    expect_equal(.dgcMatrix2data.frame(m), d)
+    expect_error(.dgCMatrix2data.frame(matrix(1:10, nrow=2)))
+    expect_equal(.dgCMatrix2data.frame(m), d)
 })
 
 test_that(".drop0rowLe/Lt", {

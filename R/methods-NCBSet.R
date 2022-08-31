@@ -89,7 +89,7 @@ setMethod("fragmentationMap", "NCBSet",
         stop("The number of elements in 'labels' has to be the same as ",
             "the number of columns in 'object'.")
     }
-    d <- .dgcMatrix2data.frame(object@assay)
+    d <- .dgCMatrix2data.frame(object@assay)
     d$Activation <- as.character(object$Activation[d$col])
     d$AssignedIntensity <- object$AssignedIntensity[d$col]
 
@@ -100,11 +100,11 @@ setMethod("fragmentationMap", "NCBSet",
         labels <- c(labels, labels[i])
 
         if (cumCoverage) {
-            cmb <- .dgcMatrix2data.frame(.cumComb(combinations@assay))
+            cmb <- .dgCMatrix2data.frame(.cumComb(combinations@assay))
         } else {
-            cmb <- .dgcMatrix2data.frame(combinations@assay)
+            cmb <- .dgCMatrix2data.frame(combinations@assay)
         }
-        ## overwrite col (.dgcMatrix2data.frame creates 1:nCombinations)
+        ## overwrite col (.dgCMatrix2data.frame creates 1:nCombinations)
         i <- i[cmb$col]
         cmb$AssignedIntensity <- object$AssignedIntensity[i]
         ## ggplot doesn't accept duplicated col for a facet
