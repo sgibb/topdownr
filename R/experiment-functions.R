@@ -123,12 +123,14 @@ createExperimentsFragmentOptimisation <-
              nMs2perMs1=10, scanDuration=0,
              replications=2, randomise=TRUE) {
 
-    stopifnot(
-        is.numeric(nMs2perMs1), length(nMs2perMs1) == 1,
-        is.numeric(scanDuration), length(scanDuration) == 1,
-        is.numeric(replications), length(replications) == 1,
-        is.logical(randomise), length(randomise) == 1
-    )
+    if (!is.numeric(nMs2perMs1) || length(nMs2perMs1) != 1)
+        stop("'nMs2perMs1' has to be a 'numeric' of length one.")
+    if (!is.numeric(scanDuration) || length(scanDuration) != 1)
+        stop("'scanDuration' has to be a 'numeric' of length one.")
+    if (!is.numeric(replications) || length(replications) != 1)
+        stop("'replications' has to be a 'numeric' of length one.")
+    if (!is.logical(randomise) || length(randomise) != 1)
+        stop("'randomise' has to be a 'logical' of length one.")
 
     ms2 <- do.call(.rbind, .flatten(list(...)))
     nr <- nrow(ms2)
@@ -305,7 +307,8 @@ createExperimentsFragmentOptimisation <-
 #' @return `character`
 #' @noRd
 .collapseMassList <- function(x) {
-    stopifnot(is.matrix(x), ncol(x) == 2L)
+    if (!is.matrix(x) || ncol(x) != 2L)
+        stop("'x' has to be a 'matrix' with two columns.")
     paste0(apply(x, 1L, paste0, collapse="/"), collapse=" ")
 }
 
@@ -315,7 +318,8 @@ createExperimentsFragmentOptimisation <-
 #' @return `matrix`
 #' @noRd
 .expandMassList <- function(x) {
-    stopifnot(is.character(x))
+    if (!is.character(x))
+        stop("'x' has to be a 'character'.")
     x <- strsplit(x, " |/")[[1L]]
     matrix(
         as.numeric(x),
@@ -438,12 +442,13 @@ validTms2Settings <- function(type=c("All", "TMS2", "ETD", "CID", "HCD", "UVPD")
 #' @return `matrix`
 #' @noRd
 .validMsSettings <- function(type, family="Calcium", version="3.2") {
-    stopifnot(
-        is.character(type),
-        is.character(family) && family %in% names(.validMsSettingsXsd),
-        is.character(version) &&
-            version %in% names(.validMsSettingsXsd[[family]])
-    )
+    if (!is.character(type))
+        stop("'type' has to be a 'character'.")
+    if (!is.character(family) || !family %in% names(.validMsSettingsXsd))
+        stop("'family' has to be a 'character' and a valid family name.")
+    if (!is.character(version) ||
+        !version %in% names(.validMsSettingsXsd[[family]]))
+        stop("'version' has to be a 'character' and a valid version.")
     m <- .validMsSettingsXsd[[family]][[version]]
     m[m[, "type"] %in% type,, drop=FALSE]
 }

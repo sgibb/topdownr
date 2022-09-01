@@ -52,7 +52,8 @@
 #' @return data.frame
 #' @noRd
 .readExperimentCsv <- function(file, verbose=interactive()) {
-    stopifnot(.fileExt(file) == "csv")
+    if (.fileExt(file) != "csv")
+        stop("'file' has to be a csv file with the extension '.csv'")
     d <- read.csv(file, na.strings=c("NA", "N/A"), stringsAsFactors=FALSE)
     colnames(d) <- .camelCase(colnames(d))
 
@@ -100,7 +101,8 @@
 #' @noRd
 .readScanHeadsTable <- function(file, conditions="ScanDescription",
                                 verbose=interactive()) {
-    stopifnot(.fileExt(file) == "txt")
+    if (.fileExt(file) != "txt")
+        stop("'file' has to be a txt file with the extension '.txt'")
     d <- read.csv(
         file,
         na.strings=c("NA", "N/A"), stringsAsFactors=FALSE, strip.white=TRUE
@@ -283,8 +285,8 @@
 #' @return data.frame
 #' @noRd
 .mergeScanConditionAndHeaderInformation <- function(sc, hi) {
-    stopifnot(is(sc, "data.frame"))
-    stopifnot(is(hi, "data.frame"))
+    if (!is(sc, "data.frame") || !is(hi, "data.frame"))
+        stop("'sc' and 'hi' have to be of class 'data.frame'.")
     d <- merge(
         sc, hi,
         by=c("File", "Condition"),

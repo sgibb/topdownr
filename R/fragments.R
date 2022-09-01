@@ -258,7 +258,8 @@
 #' @return `character`
 #' @noRd
 .reorderSequence <- function(x, method=c("original", "random", "inverse")) {
-    stopifnot(is.character(x))
+    if (!is.character(x))
+        stop("'x' has to be a 'character'.")
     method <- match.arg(method)
 
     if (method != "original") {

@@ -46,7 +46,9 @@ cat0 <- function(...) {
 #' @return `logical`/`character`
 #' @noRd
 .characterToLogical <- function(x, na.strings=c("NA", "N/A")) {
-    stopifnot(is.character(x) || (is(x, "Rle") && is.character(runValue(x))))
+    if ((!is.character(x) && !is(x, "Rle")) ||
+        (is(x, "Rle") && !is.character(runValue(x))))
+        stop("'x' has to be a 'character'.")
     y <- gsub("^[[:space:]]*on[[:space:]]*$", "TRUE", decode(x),
               ignore.case=TRUE)
     y <- gsub("^[[:space:]]*off[[:space:]]*$", "FALSE", y, ignore.case=TRUE)
@@ -55,11 +57,7 @@ cat0 <- function(...) {
 
     if (all(
         grepl(paste0(na.strings, collapse="|"), y) | is.na(y) == is.na(l))
-    ) {
-        l
-    } else {
-        x
-    }
+    ) l else x
 }
 
 #' file extension
@@ -69,9 +67,8 @@ cat0 <- function(...) {
 #' @return `character`
 #' @noRd
 .fileExt <- function(x, compression=TRUE) {
-    if (compression) {
+    if (compression)
         x <- sub("[.](gz|bz2|xz|zip)$", "", x)
-    }
     file_ext(x)
 }
 
@@ -84,7 +81,8 @@ cat0 <- function(...) {
 #' @return `double`
 #' @noRd
 .filterStringToId <- function(x) {
-    stopifnot(is.character(x))
+    if (!is.character(x))
+        stop("'x' has to be a 'character'.")
     .massLabelToId(gsub("^.*ms2 ([^@]+)\\@.*$", "\\1", x))
 }
 
@@ -156,7 +154,7 @@ cat0 <- function(...) {
 #' @return `list`
 #' @noRd
 .flatten <- function(x) {
-    .is.list <- function(x)class(x) == "list"
+    .is.list <- function(x)inherits(x, "list")
     while(any(.vapply1l(x, .is.list))) {
         x <- unlist(
             lapply(x, function(y) { if (.is.list(y)) { y } else { list(y) } }),
@@ -215,7 +213,8 @@ cat0 <- function(...) {
     )
     v <- c(EtdActivation=1L, CidActivation=2L, HcdActivation=4L,
            UvpdActivation=8L)
-    stopifnot(all(colnames(x) %in% names(v)))
+    if (!all(colnames(x) %in% names(v)))
+        stop("Unknown activation in 'x'")
     x <- x[, names(v)]
     apply(x, 1L, function(i)methods[sum(v[as.logical(i)], na.rm=TRUE) + 1L])
 }
@@ -257,7 +256,8 @@ cat0 <- function(...) {
 #' @return `integer`
 #' @noRd
 .groupId <- function(x, cols) {
-    stopifnot(is.data.frame(x) || inherits(x, "DataFrame"))
+    if (!is.data.frame(x) && !inherits(x, "DataFrame"))
+        stop("'x' has to be a 'data.frame' or 'DataFrame'")
     groups <- .groupByLabels(x, cols)
     ugroups <- unique(groups)
     match(groups, ugroups)
@@ -286,8 +286,10 @@ cat0 <- function(...) {
 #' @return TRUE/FALSE
 #' @noRd
 .isEqual <- function(x, y, tolerance=1e-3) {
-    stopifnot(is.numeric(x) && is.numeric(y))
-    stopifnot(length(x) == length(y) || length(x) == 1L || length(y) == 1L)
+    if (!is.numeric(x) || !is.numeric(y))
+        stop("Both 'x' and 'y' have to be 'numeric'")
+    if (length(x) != length(y) && length(x) != 1L && length(y) != 1L)
+        stop("Both 'x' and 'y' have to have the same length or length of one.")
     isTRUE(all(abs(y - x) < tolerance))
 }
 
@@ -393,7 +395,8 @@ cat0 <- function(...) {
 #' @param x `list` of `data.frames`/`matrices`
 #' @noRd
 .nrows <- function(x) {
-    stopifnot(class(x) == "list")
+    if (!inherits(x, "list"))
+        stop("'x' has to b a 'list'")
     .vapply1d(x, nrow)
 }
 
@@ -417,25 +420,30 @@ cat0 <- function(...) {
 #' @return unique names
 #' @noRd
 .scanDescription <- function(n, replications=1L, prefix="C") {
-    stopifnot(
-        is.numeric(n), length(n) == 1L,
-        is.numeric(replications), length(replications) == 1L, replications > 0L,
-        is.character(prefix), length(prefix) == 1L || length(prefix) == n,
-        nzchar(prefix)
-    )
+    if (!is.numeric(n) || length(n) != 1L)
+        stop("'n' has to be a 'numeric' of length one.")
+    if (!is.numeric(replications) || length(replications) != 1L ||
+        replications <= 0L)
+        stop(
+            "'replications' has to be a 'numeric' of length one and ",
+            "greater than 0.")
+    if (!is.character(prefix) ||
+        (length(prefix) != 1L && length(prefix) != n) ||
+        any(!nzchar(prefix)))
+        stop(
+            "'prefix' has to be a 'character' of length one or ",
+            "equal the length of 'n'."
+        )
     desc <- paste0(
         prefix,
         rep.int(.formatNumbers(seq_len(n)), replications)
     )
-    if (replications > 1L) {
+    if (replications > 1L)
         desc <- paste0(desc, "R", rep(seq_len(replications), each=n))
-    }
-    if (any(nchar(desc) > 16L)) {
+    if (any(nchar(desc) > 16L))
         stop("Calcium devices accept just 16 characters for 'ScanDescription'.")
-    }
-    if (anyDuplicated(desc)) {
+    if (anyDuplicated(desc))
         stop("Duplicated 'ScanDescription' are not allowed.")
-    }
     desc
 }
 
@@ -469,10 +477,10 @@ cat0 <- function(...) {
     ## use decode to turn Rle into native vectors, does nothing if i is
     ## already a native vector
     i <- decode(i)
-    if (anyNA(i)) {
+    if (anyNA(i))
         stop("Subsetting by 'NA' is not supported.")
-    }
-    stopifnot(is.null(nms) || length(nms) == n)
+    if (!is.null(nms) && length(nms) != n)
+        stop("If 'nms' is given it has to have the same length as 'n'")
     switch(
         class(i),
         "character" = .subsetByCharacter(i, nms),
@@ -491,17 +499,17 @@ cat0 <- function(...) {
 #' @return `numeric`
 #' @noRd
 .subsetByCharacter <- function(i, nms=NULL) {
-    if (is.null(nms)) {
+    if (is.null(nms))
         return(integer())
-    }
-    stopifnot(is.character(i))
-    stopifnot(is.character(nms))
+    if (!is.character(i))
+        stop("'i' has to be a 'character'.")
+    if (!is.character(nms))
+        stop("'nms' has to be a 'character'.")
 
     ii <- match(i, nms)
-    if (anyNA(ii)) {
+    if (anyNA(ii))
         stop("Subscript out of bound: ", paste0("'", i[is.na(ii)], "'",
                                                 collapse=", "))
-    }
     ii
 }
 
@@ -512,8 +520,10 @@ cat0 <- function(...) {
 #' @return `numeric`
 #' @noRd
 .subsetByLogical <- function(i, n) {
-    stopifnot(is.logical(i))
-    stopifnot(is.numeric(n))
+    if (!is.logical(i))
+        stop("'i' has to be a 'logical'.")
+    if (!is.numeric(n))
+        stop("'n' has to be a 'numeric'.")
 
     which(rep_len(i, n))
 }
@@ -525,13 +535,14 @@ cat0 <- function(...) {
 #' @return `numeric`
 #' @noRd
 .subsetByNumeric <- function(i, n) {
-    stopifnot(is.numeric(i))
-    stopifnot(is.numeric(n))
+    if (!is.numeric(i))
+        stop("'i' has to be a 'numeric'.")
+    if (!is.numeric(n))
+        stop("'n' has to be a 'numeric'.")
 
-    if (any(n < i)) {
+    if (any(n < i))
         stop("Subscript out of bound: ",
             paste0("'", i[n < i], "'", collapse=", "))
-    }
     i
 }
 
@@ -563,7 +574,8 @@ cat0 <- function(...) {
 #' @return `double`
 #' @noRd
 .targetedMassListToMz <- function(x) {
-    stopifnot(is.character(x))
+    if (!is.character(x))
+        stop("'x' has to be a 'character'.")
     trunc(as.double(gsub("^.*mz=([^ ]+) z.*$", "\\1", x)) * 10L) / 10L
 }
 

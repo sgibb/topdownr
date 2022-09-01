@@ -12,11 +12,15 @@
 .bestNcbCoverageCombination <- function(x, intensity=NULL,
                                         n=ncol(x), minN=0L,
                                         maximise=c("fragments", "bonds")) {
-    stopifnot(is(x, "dgCMatrix"))
-    if (is.null(intensity)) {
+    if (!is(x, "dgCMatrix"))
+        stop("'x' is not of class 'dgCMatrix'.")
+    if (is.null(intensity))
         intensity <- rep(0L, ncol(x))
-    }
-    stopifnot(ncol(x) == length(intensity))
+    if (ncol(x) != length(intensity))
+        stop(
+            "Number of columns in 'x' doesn't match the length of",
+            "'intensity'."
+        )
     maximise <- match.arg(maximise)
     m <- matrix(NA_real_, nrow=n, ncol=3L,
                 dimnames=list(NULL, c("index", "fragments", "bonds")))
@@ -105,8 +109,10 @@
 #' @return `dgCMatrix`, coverage reduced
 #' @noRd
 .removeNcbCombinations <- function(x, i) {
-    stopifnot(is(x, "dgCMatrix"))
-    stopifnot(!any(x@x > 3L))
+    if (!is(x, "dgCMatrix"))
+        stop("'x' is not of class 'dgCMatrix'.")
+    if (any(x@x > 3L))
+        stop("Unknown fragment id.")
     r <- .row(x[, i, drop=FALSE])
     hc <- x[r, i]
     r <- r - 1L

@@ -3,8 +3,8 @@ context("Matrix")
 m <- sparseMatrix(i=rep(1:4, each=5), j=rep(1:10, 2), x=1:20)
 
 test_that(".cbind", {
-    expect_error(.cbind(m, matrix(1:10, ncol=2)))
-    expect_error(.cbind(m, m))
+    expect_error(.cbind(m, matrix(1:10, ncol=2)), "of class 'Matrix'")
+    expect_error(.cbind(m, m), "rownames")
     m1 <- sparseMatrix(i=1:4, j=1:4, x=1:4,
                        dimnames=list(LETTERS[1:4], NULL))
     expect_equal(.cbind(m1, m1), cbind(m1, m1))
@@ -16,12 +16,12 @@ test_that(".cbind", {
 })
 
 test_that(".col", {
-    expect_error(.col(matrix(1:10, ncol=2)))
+    expect_error(.col(matrix(1:10, ncol=2)), "of class 'CsparseMatrix'")
     expect_equal(.col(m), rep(1:10, each=2))
 })
 
 test_that(".colCounts", {
-    expect_error(.colCounts(matrix(1:10, ncol=2)))
+    expect_error(.colCounts(matrix(1:10, ncol=2)), "of class 'CsparseMatrix'")
     expect_equal(.colCounts(m), rep(2, 10))
 })
 
@@ -32,14 +32,16 @@ test_that(".colSumsGroup", {
     r2 <- sparseMatrix(i=rep(1:2, 2),
                        j=1:4,
                        x=c(15, 40, 65, 90))
-    expect_error(.colSumsGroup(matrix(1:10, ncol=2), group=1:2))
-    expect_error(.colSumsGroup(m, group=1:2))
+    expect_error(
+        .colSumsGroup(matrix(1:10, ncol=2), group=1:2), "of class 'Matrix'"
+    )
+    expect_error(.colSumsGroup(m, group=1:2), "Length")
     expect_equal(.colSumsGroup(m, group=rep(1:2, 2)), r)
     expect_equal(.colSumsGroup(t(m), group=rep(1:2, each=5)), r2)
 })
 
 test_that(".countFragments", {
-    expect_error(.countFragments(matrix(1:10, ncol=2)))
+    expect_error(.countFragments(matrix(1:10, ncol=2)), "class 'dgCMatrix'")
     expect_error(.countFragments(m))
     expect_equal(.countFragments(drop0(m %% 4)), rep(c(3, 1), 5))
 })

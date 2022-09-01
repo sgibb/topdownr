@@ -8,9 +8,14 @@
         l <- l[[1L]]
     }
 
-    stopifnot(all(.vapply1l(l, function(ll)inherits(ll, "Matrix"))))
+    if (any(!.vapply1l(l, function(ll)inherits(ll, "Matrix"))))
+        stop(
+            "Could not 'cbind' because not all list members are of ",
+            "class 'Matrix'."
+    )
     nms <- lapply(l, rownames)
-    stopifnot(all(lengths(nms)))
+    if (!all(lengths(nms)))
+        stop("Not all matrices have rownames.")
     allrn <- unique(unlist(nms))
 
     for (i in seq(along=l)) {
@@ -36,7 +41,8 @@
 #' @return `numeric`, column index
 #' @noRd
 .col <- function(x) {
-    stopifnot(is(x, "CsparseMatrix"))
+    if (!is(x, "CsparseMatrix"))
+        stop("'x' is not of class 'CsparseMatrix'.")
     dp <- diff(x@p)
     rep(seq_along(dp), dp)
 }
@@ -57,8 +63,10 @@
 #' @return `sparseMatrix`
 #' @noRd
 .colSumsGroup <- function(x, group) {
-    stopifnot(is(x, "Matrix"))
-    stopifnot(nrow(x) == length(group))
+    if (!is(x, "Matrix"))
+        stop("'x' is not of class 'Matrix'.")
+    if (nrow(x) != length(group))
+        stop("Length of 'group' doesn't match number of rows.")
     crossprod(.createMaskMatrix(group), x)
 }
 
@@ -68,8 +76,10 @@
 #' @return `integer`, number of fragments per column
 #' @noRd
 .countFragments <- function(x) {
-    stopifnot(is(x, "dgCMatrix"))
-    stopifnot(!any(x@x > 3L))
+    if (!is(x, "dgCMatrix"))
+        stop("'x' is not of class 'dgCMatrix'.")
+    if (any(x@x > 3L))
+        stop("Unknown fragment id.")
     i <- x@x > 1L
     x@x[i] <- x@x[i] - 1L
     Matrix::colSums(x)
@@ -95,7 +105,8 @@
 #' @return `dgCMatrix`
 #' @noRd
 .cumComb <- function(x) {
-    stopifnot(is(x, "dgCMatrix") || is.matrix(x))
+    if (!is(x, "dgCMatrix") && !is.matrix(x))
+        stop("'x' is not of class 'dgCMatrix'.")
     m <- x
     x1 <- x == 1L
     x2 <- x == 2L
@@ -128,15 +139,19 @@
 #' @return `dgCMatrix`
 #' @noRd
 .drop0rowLe <- function(x, tol) {
-    stopifnot(is(x, "dgCMatrix"))
-    stopifnot(length(tol) == nrow(x))
+    if (!is(x, "dgCMatrix"))
+        stop("'x' is not of class 'dgCMatrix'.")
+    if (nrow(x) != length(tol))
+        stop("Number of rows in 'x' doesn't match length of 'tol'.")
     x@x[x@x <= as.vector(tol)[.row(x)]] <- 0L
     drop0(x, tol=0L, is.Csparse=TRUE)
 }
 
 .drop0rowLt <- function(x, tol) {
-    stopifnot(is(x, "dgCMatrix"))
-    stopifnot(length(tol) == nrow(x))
+    if (!is(x, "dgCMatrix"))
+        stop("'x' is not of class 'dgCMatrix'.")
+    if (nrow(x) != length(tol))
+        stop("Number of rows in 'x' doesn't match length of 'tol'.")
     x@x[x@x < as.vector(tol)[.row(x)]] <- 0L
     drop0(x, tol=0L, is.Csparse=TRUE)
 }
@@ -149,9 +164,12 @@
 #' @return `dgCMatrix`
 #' @noRd
 .drop0rowReplicates <- function(x, group, minN) {
-    stopifnot(is(x, "dgCMatrix"))
-    stopifnot(length(group) == ncol(x))
-    stopifnot(is.integer(minN) && length(minN) == 1L)
+    if (!is(x, "dgCMatrix"))
+        stop("'x' is not of class 'dgCMatrix'.")
+    if (ncol(x) != length(group))
+        stop("Number of columns in 'x' doesn't match length of 'group'.")
+    if (!is.integer(minN) || length(minN) != 1L)
+        stop("'minN' has to be an integer of length one.")
     m <- .createMaskMatrix(group)
     l <- x
     l@x[] <- 1L
@@ -169,7 +187,8 @@
 #' @return `dgCMatrix`
 #' @noRd
 .dropNA <- function(x) {
-    stopifnot(is(x, "dgCMatrix"))
+    if (!is(x, "dgCMatrix"))
+        stop("'x' is not of class 'dgCMatrix'.")
     x@x[is.na(x@x)] <- 0L
     drop0(x, tol=0L, is.Csparse=TRUE)
 }
@@ -191,11 +210,14 @@
 #' @return `dgCMatrix`
 #' @noRd
 .normaliseRows <- function(x, scale=.rowMax(x)) {
-    stopifnot(is(x, "dgCMatrix"))
-    stopifnot(
-        (is.numeric(scale) || is(scale, "sparseVector")) &&
-        (length(scale) == 1L || length(scale) == nrow(x))
-    )
+    if (!is(x, "dgCMatrix"))
+        stop("'x' is not of class 'dgCMatrix'.")
+    if ((!is.numeric(scale) && !is(scale, "sparseVector")) ||
+        (length(scale) != 1L && length(scale) != nrow(x)))
+        stop(
+            "'scale' has to be a 'numeric' or 'sparseVector' which length ",
+            "matches the number of rows in 'x'"
+        )
     x@x <- x@x / scale[.row(x)]
     x
 }
@@ -206,7 +228,8 @@
 #' @return `numeric`, row index
 #' @noRd
 .row <- function(x) {
-    stopifnot(is(x, "CsparseMatrix"))
+    if (!is(x, "CsparseMatrix"))
+        stop("'x' is not of class 'CsparseMatrix'.")
     x@i + 1L
 }
 
@@ -242,7 +265,8 @@
 #' @return `sparseVector`
 #' @noRd
 .rowMax <- function(x, na.rm=TRUE) {
-    stopifnot(is(x, "dgCMatrix"))
+    if (!is(x, "dgCMatrix"))
+        stop("'x' is not of class 'dgCMatrix'.")
     sparseVector(
         .vapply1d(split(x@x, .row(x)), max, na.rm=na.rm),
         i=sort.int(unique(.row(x))), length=nrow(x)
@@ -257,8 +281,10 @@
 #' @return `sparseMatrix`
 #' @noRd
 .rowMeansGroup <- function(x, group, na.rm=TRUE) {
-    stopifnot(is(x, "Matrix"))
-    stopifnot(ncol(x) == length(group))
+    if (!is(x, "Matrix"))
+        stop("'x' is not of class 'Matrix'.")
+    if (ncol(x) != length(group))
+        stop("Number of columns in 'x' doesn't match length of 'group'.")
     if (na.rm) {
         x <- .dropNA(x)
     }
@@ -276,8 +302,10 @@
 #' @return `sparseMatrix`
 #' @noRd
 .rowSdsGroup <- function(x, group, na.rm=TRUE) {
-    stopifnot(is(x, "Matrix"))
-    stopifnot(ncol(x) == length(group))
+    if (!is(x, "Matrix"))
+        stop("'x' is not of class 'Matrix'.")
+    if (ncol(x) != length(group))
+        stop("Number of columns in 'x' doesn't match length of 'group'.")
 
     if (na.rm) {
         nna <- .dropNA(x)
@@ -304,8 +332,10 @@
 #' @return `sparseMatrix`
 #' @noRd
 .rowSumsGroup <- function(x, group, na.rm=TRUE) {
-    stopifnot(is(x, "Matrix"))
-    stopifnot(ncol(x) == length(group))
+    if (!is(x, "Matrix"))
+        stop("'x' is not of class 'Matrix'.")
+    if (ncol(x) != length(group))
+        stop("Number of columns in 'x' doesn't match length of 'group'.")
     if (na.rm) {
         x <- .dropNA(x)
     }

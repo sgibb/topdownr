@@ -115,7 +115,8 @@
 #' @return `character`
 #' @noRd
 .makeRowNames <- function(x, prefix="C") {
-    stopifnot(is.data.frame(x) || inherits(x, "DataFrame"))
+    if (!is.data.frame(x) && !inherits(x, "DataFrame"))
+        stop("'x' has to be a 'data.frame' or 'DataFrame'")
     x <- .dropNonInformativeColumns(x, keep=character())
 
     if (ncol(x)) {
@@ -134,8 +135,10 @@
 #' @return `integer`
 #' @noRd
 .orderByColumns <- function(x, cols) {
-    stopifnot(is.data.frame(x) || inherits(x, "DataFrame"))
-    stopifnot(all(cols %in% colnames(x)))
+    if (!is.data.frame(x) && !inherits(x, "DataFrame"))
+        stop("'x' has to be a 'data.frame' or 'DataFrame'")
+    if (!all(cols %in% colnames(x)))
+        stop("Some 'cols' are not valid column names of 'x'")
     do.call(order, x[cols])
 }
 
@@ -156,11 +159,12 @@
         return(l)
     }
 
-    stopifnot(
-        all(.vapply1l(l, function(ll) {
+    if (
+        any(!.vapply1l(l, function(ll) {
             is.data.frame(ll) || inherits(ll, "DFrame")
         }))
     )
+        stop("One or more elments of 'l' are not a 'data.frame' or 'DFrame'")
 
     ## If `l` contains `data.frame` and `DataFrame`, and the first is a
     ## `data.frame` the following error is thrown:
