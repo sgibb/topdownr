@@ -138,15 +138,19 @@ test_that(".normaliseCols", {
 })
 
 test_that(".normaliseRows", {
+    .as.dgCM <- function(from)
+        as(as(as(from, "dMatrix"), "generalMatrix"), "CsparseMatrix")
     expect_error(.normaliseRows(matrix(1:10, nrow=2)))
     expect_error(.normaliseRows(m, "A"))
     expect_error(.normaliseRows(m, 1:2))
-    expect_equal(.normaliseRows(m),
-                 as((t(scale(t(m), center=FALSE, scale=c(5, 10, 15, 20)))),
-                    "dgCMatrix"))
-    expect_equal(.normaliseRows(m, 1:4),
-                 as((t(scale(t(m), center=FALSE, scale=1:4))),
-                    "dgCMatrix"))
+    expect_equal(
+        .normaliseRows(m),
+        .as.dgCM((t(scale(t(m), center=FALSE, scale=c(5, 10, 15, 20)))))
+    )
+    expect_equal(
+        .normaliseRows(m, 1:4),
+        .as.dgCM((t(scale(t(m), center=FALSE, scale=1:4))))
+    )
 })
 
 test_that(".row", {

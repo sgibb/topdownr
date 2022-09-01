@@ -331,8 +331,8 @@ readTopDownFiles <- function(path, pattern=".*",
     mc[!selC, ] <- 0L
     mc <- drop0(mc)
 
-    mn <- as(.colSumsGroup(mn, w) > 0L, "dgCMatrix")
-    mc <- as(.colSumsGroup(mc, max(w) + 1L - w) > 0L, "dgCMatrix")
+    mn <- as(.colSumsGroup(mn, w) > 0L, "dMatrix")
+    mc <- as(.colSumsGroup(mc, max(w) + 1L - w) > 0L, "dMatrix")
     mc@x[] <- 2L
     m <- drop0(mn + mc)
     colnames(m) <- colnames(object)

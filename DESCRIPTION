@@ -28,7 +28,7 @@ Imports:
     tools,
     utils,
     Biobase,
-    Matrix (>= 1.2.10),
+    Matrix (>= 1.4-2),
     MSnbase (>= 2.3.10),
     ggplot2 (>= 2.2.1),
     mzR (>= 2.27.5)
