@@ -1,5 +1,9 @@
 # topdownr 1.19
 
+## Changes in version 1.19.2
+- Avoid coercion methods that will be deprecated in Matrix 1.4-2.
+- Replace `stopifnot` calls with `if (...) stop` calls.
+
 ## Changes in version 1.19.1
 - New version for Bioc 3.17 (devel)
 - Rerun latest `roxygen2`.
