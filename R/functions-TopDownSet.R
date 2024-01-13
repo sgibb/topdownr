@@ -13,7 +13,7 @@
 #' `customModifications`: additional to the provided unimod modifications
 #' available through the `modifications` argument `customModifications` allow to
 #' apply user-definied modifications to the output of
-#' [`MSnbase::calculateFragments()`].
+#' [`PSMatch::calculateFragments()`].
 #' The `customModifications` argument takes a
 #' `data.frame` with the `mass` to add, the `name` of the modification, the
 #' location (could be the position of the amino acid or "N-term"/"C-term"),
@@ -39,7 +39,7 @@
 #' `data.frame(mass=1.008, name="zpH", to="z")`.
 #'
 #' *Please note:* The `adducts` are added to the output of
-#' [`MSnbase::calculateFragments()`].
+#' [`PSMatch::calculateFragments()`].
 #' That has some limitations, e.g.
 #' neutral loss calculation could not be done in
 #' [topdownr-package].
@@ -54,7 +54,7 @@
 #' @param type `character`,
 #' type of fragments, currently *a-c* and *x-z* are
 #' supported, see
-#' [`MSnbase::calculateFragments()`]
+#' [`PSMatch::calculateFragments()`]
 #' for details.
 #' @param modifications `character`,
 #' unimod names of modifications that should be applied.
@@ -74,8 +74,8 @@
 #' with 4 columns, namely: mass, name, location, variable, see details section.
 #' @param neutralLoss `list`,
 #' neutral loss that should be applied, see
-#' [`MSnbase::calculateFragments()`] and
-#' [`MSnbase::defaultNeutralLoss()`]
+#' [`PSMatch::calculateFragments()`] and
+#' [`PSMatch::defaultNeutralLoss()`]
 #' for details.
 #' @param sequenceOrder `character`,
 #' order of the sequence before fragment calculation and matching is done.
@@ -109,8 +109,8 @@
 #' @param verbose `logical`, verbose output?
 #' @return A `TopDownSet` object.
 #' @export
-#' @seealso [`MSnbase::calculateFragments()`],
-#' [`MSnbase::defaultNeutralLoss()`]
+#' @seealso [`PSMatch::calculateFragments()`],
+#' [`PSMatch::defaultNeutralLoss()`]
 #' @examples
 #' if (require("topdownrdata")) {
 #'     # add H+ to z and no neutral loss of water
@@ -122,7 +122,7 @@
 #'         ## of the example short
 #'         pattern=".*fasta.gz$|1211_.*1e6_1",
 #'         adducts=data.frame(mass=1.008, name="zpH", to="z"),
-#'         neutralLoss=MSnbase::defaultNeutralLoss(
+#'         neutralLoss=PSMatch::defaultNeutralLoss(
 #'             disableWaterLoss=c("Cterm", "D", "E", "S", "T")),
 #'         tolerance=25e-6
 #'    )
@@ -133,7 +133,7 @@ readTopDownFiles <- function(path, pattern=".*",
                                              "Acetyl", "Met-loss"),
                              customModifications=data.frame(),
                              adducts=data.frame(),
-                             neutralLoss=MSnbase::defaultNeutralLoss(),
+                             neutralLoss=PSMatch::defaultNeutralLoss(),
                              sequenceOrder=c("original", "random", "inverse"),
                              tolerance=5e-6,
                              redundantIonMatch=c("remove", "closest"),

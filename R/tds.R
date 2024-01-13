@@ -16,7 +16,7 @@
 #'    ## of the example short
 #'    pattern=".*fasta.gz$|1211_.*1e6_1",
 #'    adducts=data.frame(mass=1.008, name="zpH", to="z"),
-#'    neutralLoss=MSnbase::defaultNeutralLoss(
+#'    neutralLoss=PSMatch::defaultNeutralLoss(
 #'        disableWaterLoss=c("Cterm", "D", "E", "S", "T")),
 #'    tolerance=25e-6)
 #' ```

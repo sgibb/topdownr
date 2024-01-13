@@ -30,6 +30,7 @@ Imports:
     Biobase,
     Matrix (>= 1.4-2),
     MSnbase (>= 2.3.10),
+    PSMatch (>= 1.6.0),
     ggplot2 (>= 2.2.1),
     mzR (>= 2.27.5)
 Suggests:

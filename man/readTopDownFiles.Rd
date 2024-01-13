@@ -11,7 +11,7 @@ readTopDownFiles(
   modifications = c("Carbamidomethyl", "Acetyl", "Met-loss"),
   customModifications = data.frame(),
   adducts = data.frame(),
-  neutralLoss = MSnbase::defaultNeutralLoss(),
+  neutralLoss = PSMatch::defaultNeutralLoss(),
   sequenceOrder = c("original", "random", "inverse"),
   tolerance = 5e-06,
   redundantIonMatch = c("remove", "closest"),
@@ -33,7 +33,7 @@ a filename pattern, the default \verb{.*} means all files.}
 \item{type}{\code{character},
 type of fragments, currently \emph{a-c} and \emph{x-z} are
 supported, see
-\code{\link[MSnbase:calculateFragments-methods]{MSnbase::calculateFragments()}}
+\code{\link[PSMatch:calculateFragments]{PSMatch::calculateFragments()}}
 for details.}
 
 \item{modifications}{\code{character},
@@ -57,8 +57,8 @@ with 3 columns, namely: mass, name, to, see details section.}
 
 \item{neutralLoss}{\code{list},
 neutral loss that should be applied, see
-\code{\link[MSnbase:calculateFragments-methods]{MSnbase::calculateFragments()}} and
-\code{\link[MSnbase:calculateFragments-methods]{MSnbase::defaultNeutralLoss()}}
+\code{\link[PSMatch:calculateFragments]{PSMatch::calculateFragments()}} and
+\code{\link[PSMatch:calculateFragments]{PSMatch::defaultNeutralLoss()}}
 for details.}
 
 \item{sequenceOrder}{\code{character},
@@ -119,7 +119,7 @@ It creates an \linkS4class{TopDownSet} object and is its only constructor.
 \code{customModifications}: additional to the provided unimod modifications
 available through the \code{modifications} argument \code{customModifications} allow to
 apply user-definied modifications to the output of
-\code{\link[MSnbase:calculateFragments-methods]{MSnbase::calculateFragments()}}.
+\code{\link[PSMatch:calculateFragments]{PSMatch::calculateFragments()}}.
 The \code{customModifications} argument takes a
 \code{data.frame} with the \code{mass} to add, the \code{name} of the modification, the
 location (could be the position of the amino acid or "N-term"/"C-term"),
@@ -145,7 +145,7 @@ applied, e.g. for \verb{H+} on \code{z},
 \code{data.frame(mass=1.008, name="zpH", to="z")}.
 
 \emph{Please note:} The \code{adducts} are added to the output of
-\code{\link[MSnbase:calculateFragments-methods]{MSnbase::calculateFragments()}}.
+\code{\link[PSMatch:calculateFragments]{PSMatch::calculateFragments()}}.
 That has some limitations, e.g.
 neutral loss calculation could not be done in
 \link{topdownr-package}.
@@ -164,13 +164,13 @@ if (require("topdownrdata")) {
         ## of the example short
         pattern=".*fasta.gz$|1211_.*1e6_1",
         adducts=data.frame(mass=1.008, name="zpH", to="z"),
-        neutralLoss=MSnbase::defaultNeutralLoss(
+        neutralLoss=PSMatch::defaultNeutralLoss(
             disableWaterLoss=c("Cterm", "D", "E", "S", "T")),
         tolerance=25e-6
    )
 }
 }
 \seealso{
-\code{\link[MSnbase:calculateFragments-methods]{MSnbase::calculateFragments()}},
-\code{\link[MSnbase:calculateFragments-methods]{MSnbase::defaultNeutralLoss()}}
+\code{\link[PSMatch:calculateFragments]{PSMatch::calculateFragments()}},
+\code{\link[PSMatch:calculateFragments]{PSMatch::defaultNeutralLoss()}}
 }

@@ -36,7 +36,7 @@
 #' scale_x_discrete scale_y_continuous theme theme_classic
 #' @importFrom grDevices pdf dev.off
 #' @importFrom mzR openMSfile close header peaks runInfo
-#' @importFrom MSnbase calculateFragments defaultNeutralLoss get.amino.acids
+#' @importFrom PSMatch calculateFragments defaultNeutralLoss getAminoAcids
 #' @importClassesFrom MSnbase MSnSet
 #' @importFrom stats ave median setNames quantile
 #' @importFrom tools file_ext file_path_sans_ext
