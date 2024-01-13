@@ -1,3 +1,11 @@
+# topdownr 1.25
+
+## Changes in version 1.25.1
+- New version for Bioc 3.19 (devel)
+- Adapt to fragment functions that are moved from `MSnbase` to `PSMatch`.
+
+## Changes in version 1.19.2
+
 # topdownr 1.19
 
 ## Changes in version 1.19.2
