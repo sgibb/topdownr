@@ -119,7 +119,7 @@
     d <- calculateFragments(
         csequence,
         type=type,
-        modifications=NULL,
+        fixed_modifications=NULL,
         neutralLoss=neutralLoss,
         verbose=FALSE
     )
