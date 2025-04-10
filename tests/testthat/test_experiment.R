@@ -83,8 +83,8 @@ test_that("createExperimentsFragmentOptimisation", {
     exps[[2]]$MethodModifications[[4]]$Experiment$TMSnScan$ScanDescription  <-
         list("C2R2")
     ## No Start/EndTime
-    for (i in seq(along=exps)) {
-        for (j in seq(along=exps[[i]]$MethodModifications)) {
+    for (i in seq_along(exps)) {
+        for (j in seq_along(exps[[i]]$MethodModifications)) {
             exps[[i]]$MethodModifications[[j]]$Experiment$StartTimeMin <- NULL
             exps[[i]]$MethodModifications[[j]]$Experiment$EndTimeMin <- NULL
         }
@@ -92,7 +92,7 @@ test_that("createExperimentsFragmentOptimisation", {
     expect_equal(createExperimentsFragmentOptimisation(ms1, ms2,
                     groupBy="replication", randomise=FALSE), exps)
     ## No MassList
-    for (i in seq(along=exps)) {
+    for (i in seq_along(exps)) {
         exps[[i]]$MethodModifications[[3]]$Experiment$TMSnScan$MassList <- NULL
         exps[[i]]$MethodModifications[[4]]$Experiment$TMSnScan$MassList <- NULL
     }

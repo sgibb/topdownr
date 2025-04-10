@@ -137,7 +137,7 @@ test_that(".rbind", {
     )
     expect_error(.rbind(1:10, x))
     expect_error(.rbind(x, 1:10))
-    for (i in seq(along=y)) {
+    for (i in seq_along(y)) {
         expect_equal(.rbind(x, y[[i]]), r[[i]])
     }
     expect_equal(.rbind(x), x)

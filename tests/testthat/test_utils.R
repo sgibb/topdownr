@@ -370,12 +370,12 @@ test_that(".topIdx", {
     g <- rep_len(LETTERS[1:3], 10)
     expect_error(.topIdx(logical(10)),
                  "'x' has to be of type")
-    expect_error(.topIdx(d, groupBy=g, n=-1),
+    expect_error(.topIdx(d, groupByLabels=g, n=-1),
                  "'n' has to be greater or equal than 1.")
-    expect_error(.topIdx(d, groupBy=1:3, n=3), "have to be equal.")
-    expect_equal(.topIdx(d, groupBy=g, n=3),
+    expect_error(.topIdx(d, groupByLabels=1:3, n=3), "have to be equal.")
+    expect_equal(.topIdx(d, groupByLabels=g, n=3),
                  c(10, 7, 4, 8, 5, 2, 9, 6, 3))
-    expect_equal(.topIdx(d, groupBy=g, n=2),
+    expect_equal(.topIdx(d, groupByLabels=g, n=2),
                  c(10, 7, 8, 5, 9, 6))
 })
 

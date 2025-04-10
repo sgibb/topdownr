@@ -177,7 +177,7 @@
     nms <- lapply(l, names)
     allcn <- unique(unlist(nms))
 
-    for (i in seq(along=l)) {
+    for (i in seq_along(l)) {
         diffcn <- setdiff(allcn, nms[[i]])
         if (length(diffcn)) {
             l[[i]][, diffcn] <- NA

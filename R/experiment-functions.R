@@ -160,7 +160,7 @@ createExperimentsFragmentOptimisation <-
     l <- vector(mode="list", length(ms2))
     names(l) <- names(ms2)
 
-    for (i in seq(along=l)) {
+    for (i in seq_along(l)) {
         nMs1 <- ceiling(nrs[i] * 1L/nMs2perMs1)
         nMs2 <- nrs[i]
         n <- nMs1 + nMs2
@@ -295,7 +295,7 @@ createExperimentsFragmentOptimisation <-
     x <- unname(.expandMassList(x))
     l <- vector(mode="list", length=nrow(x))
     names(l) <- rep("MassListRecord", length(l))
-    for (i in seq(along=l)) {
+    for (i in seq_along(l)) {
         l[[i]] <- list(MOverZ=list(x[i, 1L]), Z=list(x[i, 2L]))
     }
     l

@@ -18,7 +18,7 @@
         stop("Not all matrices have rownames.")
     allrn <- unique(unlist(nms))
 
-    for (i in seq(along=l)) {
+    for (i in seq_along(l)) {
         diffrn <- setdiff(allrn, nms[[i]])
         if (length(diffrn)) {
             l[[i]] <- rbind(

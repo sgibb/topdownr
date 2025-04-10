@@ -163,7 +163,7 @@
     activationColumns <- .camelCase(paste0(activation, "Activation"))
     d[, activationColumns] <- NA_real_
 
-    for (i in seq(along=activation)) {
+    for (i in seq_along(activation)) {
         ## first activation
         sel <- d$Activation1 == activation[i]
         if (sum(sel)) {
