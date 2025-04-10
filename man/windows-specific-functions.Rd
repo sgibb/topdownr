@@ -42,7 +42,7 @@ Nothing. Used for its side effects.
 The functions \code{runXmlMethodChanger} and \code{runScanHeadsman} call
 \code{XmlMethodChanger.exe} and \code{ScanHeadsman.exe}
 with the corresponding arguments.
-The only work on Windows (maybe on Linux + wine as well but that was never
+This only work on Windows (maybe on Linux + wine as well but that was never
 tested).
 }
 \details{

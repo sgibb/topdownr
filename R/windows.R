@@ -3,7 +3,7 @@
 #' The functions `runXmlMethodChanger` and `runScanHeadsman` call
 #' `XmlMethodChanger.exe` and `ScanHeadsman.exe`
 #' with the corresponding arguments.
-#' The only work on Windows (maybe on Linux + wine as well but that was never
+#' This only work on Windows (maybe on Linux + wine as well but that was never
 #' tested).
 #'
 #' @details
