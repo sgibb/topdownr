@@ -131,7 +131,7 @@
             ion="none", type="protein", pos=0, z=0,
             seq=csequence
         ),
-        d
+        d[c("mz", "ion", "type", "pos", "z", "seq")]
     )
 
     ## TODO: replace by unimod package

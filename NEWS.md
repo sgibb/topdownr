@@ -1,3 +1,12 @@
+# topdownr 1.29
+
+# topdownr 1.29.1
+
+- Adapt `.calculateFragments` to changes in `PSMatch::calculateFragments`
+  introduced in
+  [PSMatch:PR19](https://github.com/rformassspectrometry/PSMatch/pull/19).
+- Replace partial matching arguments with complete argument names.
+
 # topdownr 1.25
 
 ## Changes in version 1.25.1
